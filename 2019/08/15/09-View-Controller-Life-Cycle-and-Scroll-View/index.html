@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="View Controller Life CycleThe Start of View Controller Creation.  MVCs are most often instantiated out of a storyboard.  There are ways to do it in code (rare), such as segue.   After Start, What Can">
+<meta property="og:type" content="article">
+<meta property="og:title" content="09. View Controller Life Cycle and Scroll View">
+<meta property="og:url" content="http://yoursite.com/2019/08/15/09-View-Controller-Life-Cycle-and-Scroll-View/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="View Controller Life CycleThe Start of View Controller Creation.  MVCs are most often instantiated out of a storyboard.  There are ways to do it in code (rare), such as segue.   After Start, What Can">
+<meta property="article:published_time" content="2019-08-15T10:08:39.000Z">
+<meta property="article:modified_time" content="2020-04-04T04:17:09.530Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Application">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/08/15/09-View-Controller-Life-Cycle-and-Scroll-View/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>09. View Controller Life Cycle and Scroll View | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/09-View-Controller-Life-Cycle-and-Scroll-View/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          09. View Controller Life Cycle and Scroll View
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-15 18:08:39" itemprop="dateCreated datePublished" datetime="2019-08-15T18:08:39+08:00">2019-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 12:17:09" itemprop="dateModified" datetime="2020-04-04T12:17:09+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="View-Controller-Life-Cycle"><a href="#View-Controller-Life-Cycle" class="headerlink" title="View Controller Life Cycle"></a>View Controller Life Cycle</h1><h2 id="The-Start-of-View-Controller"><a href="#The-Start-of-View-Controller" class="headerlink" title="The Start of View Controller"></a>The Start of View Controller</h2><ol>
+<li>Creation. </li>
+<li>MVCs are most often instantiated out of a storyboard. </li>
+<li>There are ways to do it in code (rare), such as segue. </li>
+</ol>
+<h2 id="After-Start-What-Can-We-Do"><a href="#After-Start-What-Can-We-Do" class="headerlink" title="After Start, What Can We Do"></a>After Start, What Can We Do</h2><h3 id="Preparation-If-Being-Segued-to-and-Outlet-Setting"><a href="#Preparation-If-Being-Segued-to-and-Outlet-Setting" class="headerlink" title="Preparation If Being Segued to and Outlet Setting"></a>Preparation If Being Segued to and Outlet Setting</h3><ol>
+<li>To do so, we override <code>viewDidLoad</code>. </li>
+<li>When this is called, all of outlets have been connected but the view is not on-screen yet, and the bounds is not set either. So in this method we cannot do anything invovled with geometry. <a id="more"></a></li>
+<li>It will and only will be called at the beginning, so this is a great place to do all the one-time initialization. </li>
+<li>Here we usually do the primary setup of MVC, update my View using my Model. </li>
+</ol>
+<h3 id="Appearing-and-Disappearing"><a href="#Appearing-and-Disappearing" class="headerlink" title="Appearing and Disappearing"></a>Appearing and Disappearing</h3><h4 id="Will-Appear"><a href="#Will-Appear" class="headerlink" title="Will Appear"></a>Will Appear</h4><ol>
+<li>This method will be sent just before your MVC appears (or re-appears) on screen. </li>
+<li>This method can be called repeatedly</li>
+<li>It can catch my View up to date with what went on while it was off-screen. </li>
+</ol>
+<h4 id="Did-Appear"><a href="#Did-Appear" class="headerlink" title="Did Appear"></a>Did Appear</h4><ol>
+<li>This method will be called after MVC appeared on screen, so here will not update view from model, because it’s too late. </li>
+<li>Here maybe start a timer or an animation or start observing something like GPS or camera. </li>
+<li>This is a good place to start something expensive(for time or battery) like network fetch. Because we know we’re on screen so it won’t be a waste.</li>
+<li>We must never block our UI from user interaction (thus background fetching, etc.). Our UI might need to come up incomplete and later fill in when expensive operation is done. We use “spinning wheels” and such to let the user know we’re fetching something expensive.</li>
+</ol>
+<h4 id="Will-Disappear"><a href="#Will-Disappear" class="headerlink" title="Will Disappear"></a>Will Disappear</h4><ol>
+<li>This method is called when MVC is still on screen, but it’s about to go off screen.</li>
+<li>This may happen when the user hit “back” in a UINavigationController or they switched to another tab in a UITabBarController. </li>
+<li>Here often undo what you did in viewDidAppear, for example, stop a timer that you started there or stop observing something. </li>
+</ol>
+<h4 id="Did-Disappear"><a href="#Did-Disappear" class="headerlink" title="Did Disappear"></a>Did Disappear</h4><ol>
+<li>This method is called when MVC went off screen. </li>
+<li>Somewhat rare to do something here, but occasionally you might want to “clean up” your MVC. For example, you could save some state or release some large, recreatable resource. </li>
+</ol>
+<h3 id="Geometry-Changes"><a href="#Geometry-Changes" class="headerlink" title="Geometry Changes."></a>Geometry Changes.</h3><h4 id="Geometry-Related-Setup"><a href="#Geometry-Related-Setup" class="headerlink" title="Geometry-Related Setup"></a>Geometry-Related Setup</h4><ol>
+<li>We do it in two methods: <code>viewWillLayoutSubviews</code> and <code>viewDidLayoutSubviews</code></li>
+<li>Usually we don’t need to do anything here because of Autolayout. </li>
+<li>But if you do have geometry-related setup to do, this is the place to do it (not in viewDidLoad!).</li>
+<li>These can be called often (just as layoutSubviews() in UIView can be called often). So don’t do anything here that can’t be properly (and efficiently) done repeatedly.</li>
+<li>It doesn’t always mean your view’s bounds actually changed.</li>
+</ol>
+<h4 id="Autorotation"><a href="#Autorotation" class="headerlink" title="Autorotation"></a>Autorotation</h4><ol>
+<li>When device rotates, view’s bounds change (and thus you’ll get viewWill/DidLayoutSubviews), and the resultant changes are also automatically animated.</li>
+<li>You get to find out about that and even participate in the animation in <code>viewWillTransition</code></li>
+</ol>
+<h3 id="Low-memory-Situations"><a href="#Low-memory-Situations" class="headerlink" title="Low-memory Situations"></a>Low-memory Situations</h3><ol>
+<li>It is rare, but occasionally your device will run low on memory.</li>
+<li>This usually means a buildup of very large videos, images or maybe sounds.</li>
+<li>When a low-memory situation occurs, iOS will call <code>didReceiveMemoryWarning</code> in your Controller. </li>
+<li>It will stop pointing to any large-memory things (let them go from my heap) that I am not currently using (e.g. displaying on screen or processing somehow) and that I can recreate as needed (by refetching from network, for example)</li>
+<li>If your application persists in using an unfair amount of memory, you can get killed by iOS.</li>
+</ol>
+<h3 id="Waking-up-from-an-storyboard"><a href="#Waking-up-from-an-storyboard" class="headerlink" title="Waking up from an storyboard"></a>Waking up from an storyboard</h3><ol>
+<li><code>awakeFromNib</code> is sent to all objects that come out of a storyboard (including your Controller) . </li>
+<li>It can initialize stuff here, but it’s VERY early, before almost all things.  It happens way before outlets are set and before you’re prepared as part of a segue</li>
+<li>It’s primarily for situations where code has to be executed VERY EARLY in the lifecycle.</li>
+</ol>
+<h1 id="UIScrollView"><a href="#UIScrollView" class="headerlink" title="UIScrollView"></a>UIScrollView</h1><h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><ol>
+<li>The size of the whole UIScrollView is content, we can set it at any time. </li>
+<li>All other view appeared in scroll view is the subview of scroll view. </li>
+<li>It also has a property called <code>contentOffset</code> type of <code>CGPoint</code> that tells the coordinate of origin current visible area in the coordinate system of content. </li>
+<li>It is importan to understand that the <code>bounds</code> of an instance of UIScrollView is not the content. That bounds if only the current visible part. </li>
+<li>To acquire the current visible area in the subview, we need to use a function of UIView called conver: <code>viewInstance1.convert(aCGRect, from: viewInstance2)</code>. This method will return a CGRect converted from aCGRect in viewInstance2’s coordinate system to the viewInstance1’s coordinate system. viewInstance2 can be nil, then It will convert from the window. So we only need to get the <code>subview.convert(scrollView.bounds, from: scrollView)</code></li>
+<li>You can use <code>func scrollRectToVisible(CGRect, animated: Bool)</code> to scroll to show a rectangle into screen. </li>
+<li><code>flashScrollIndicators</code> controls the flash scroll indicator. If we don’t want it, just set it false. </li>
+</ol>
+<h2 id="Create-a-UIScrollView"><a href="#Create-a-UIScrollView" class="headerlink" title="Create a UIScrollView"></a>Create a UIScrollView</h2><h2 id="Set-the-content"><a href="#Set-the-content" class="headerlink" title="Set the content"></a>Set the content</h2><ol>
+<li>Drag out in a storyboard or use UIScrollView(frame:). Or select a UIView in your storyboard and choose “Embed In -&gt; Scroll View” from Editor menu. If go with the second way, remember to tight the ImageView with the ScrollView and set size inspect -&gt; Intrinsic Size to Placeholder which will hold a place until we set it in the code. </li>
+<li>To edit its content, we need to add some views as its subview. For example, we create a UIImage then create a UIImageView with that UIImage. After that, we can add the UIImageView as the UIScrollView’s subview. </li>
+<li>The contentSize if (0, 0) by default, so remember to set the contentSize</li>
+</ol>
+<h2 id="Set-Zooming"><a href="#Set-Zooming" class="headerlink" title="Set Zooming"></a>Set Zooming</h2><ol>
+<li>Zooming is going to affect the scroll view’s affine transform, contentSize and contentOffset. The unit of coordinate system will not change. </li>
+<li>First we need to set the range of zooming by setting <code>minimumZoomScale</code> and <code>maximumZoomScale</code></li>
+<li>Then we need to delegate method to specify view to zoom. To do so, we need to make the class a <code>UIScrollViewDelegate</code> and set <code>scrollView.delegate = self</code></li>
+<li>The last thing to do is implement function <code>viewForZooming(in scrollView: UIScrollView) -&gt; UIView</code>. If your scroll view only has one subview, you return it here. If more than one it’s up to you. </li>
+<li>Some zooming propertyies and methods<br> <code>var zoomScale: CGFloat</code><br> <code>func setZoomScale(CGFloat, animated: Bool)</code><br> <code>func zoom(to rect: CGRect, animated: Bool)</code> It can zoom to make that rectangle fit the screen(at least width or height is the same as the window). </li>
+<li>When zoom in, we can let the image stays centered. First, we need to center the scroll view. Second, we set its constrains with the left, right, up and down be <code>greater or equals</code>. Third, we fix the scroll view’s size and set the size constrains’ priority low. Then, we create outlet of the height and width constrains. Finally, any time we zoom, we set the value of those two variables to the content size.  </li>
+</ol>
+<h1 id="UIImage"><a href="#UIImage" class="headerlink" title="UIImage"></a>UIImage</h1><ol>
+<li>To get an image, we need an “address” type of URL. </li>
+<li>Then, we can fetch the image with Data like <code>Data(contentsOf: URL)</code>. This initializer throws errors so we need try-catch or try?</li>
+<li>With the Data, we can create a UIImage with syntax <code>UIImage(data: Data)</code></li>
+<li>URL is a type, not a String. We can create URL to fetch local pictures with syntax like <code>Bundle.main.url(forResource: String?, withExtension: String?)</code> the first parameter is file name, the second one is the extension. Use this way, we need to drag the picture into the project file. </li>
+<li>However, we can also get a URL from String <code>URL(string: String)</code></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Application/" rel="tag"><i class="fa fa-tag"></i> Application</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/12/08-Animation/" rel="prev" title="08. Animation">
+      <i class="fa fa-chevron-left"></i> 08. Animation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/17/10-Multithreading-and-Autolayout/" rel="next" title="10. Multithreading and Autolayout">
+      10. Multithreading and Autolayout <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#View-Controller-Life-Cycle"><span class="nav-number">1.</span> <span class="nav-text">View Controller Life Cycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Start-of-View-Controller"><span class="nav-number">1.1.</span> <span class="nav-text">The Start of View Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#After-Start-What-Can-We-Do"><span class="nav-number">1.2.</span> <span class="nav-text">After Start, What Can We Do</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preparation-If-Being-Segued-to-and-Outlet-Setting"><span class="nav-number">1.2.1.</span> <span class="nav-text">Preparation If Being Segued to and Outlet Setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appearing-and-Disappearing"><span class="nav-number">1.2.2.</span> <span class="nav-text">Appearing and Disappearing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Will-Appear"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Will Appear</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Did-Appear"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Did Appear</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Will-Disappear"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Will Disappear</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Did-Disappear"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Did Disappear</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geometry-Changes"><span class="nav-number">1.2.3.</span> <span class="nav-text">Geometry Changes.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Geometry-Related-Setup"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Geometry-Related Setup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Autorotation"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">Autorotation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Low-memory-Situations"><span class="nav-number">1.2.4.</span> <span class="nav-text">Low-memory Situations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Waking-up-from-an-storyboard"><span class="nav-number">1.2.5.</span> <span class="nav-text">Waking up from an storyboard</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIScrollView"><span class="nav-number">2.</span> <span class="nav-text">UIScrollView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-UIScrollView"><span class="nav-number">2.2.</span> <span class="nav-text">Create a UIScrollView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-the-content"><span class="nav-number">2.3.</span> <span class="nav-text">Set the content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Zooming"><span class="nav-number">2.4.</span> <span class="nav-text">Set Zooming</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIImage"><span class="nav-number">3.</span> <span class="nav-text">UIImage</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

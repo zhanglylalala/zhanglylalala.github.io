@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Exponential y&#x3D;a^x, a is a constant, and a&gt;0.  \displaystyle\frac{d}{dx}y&#x3D;\lim_{\Delta x\to 0}\frac{a^{x+\Delta x}-a^x}{\Delta x}&#x3D;\lim_{\Delta x\to 0}{\frac{a^x\cdot a^{\Delta x}-a^x}{\Delta x}}&#x3D;a^x\li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05. Exponential and Logarithm">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/05-Exponential-and-Logarithm/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Exponential y&#x3D;a^x, a is a constant, and a&gt;0.  \displaystyle\frac{d}{dx}y&#x3D;\lim_{\Delta x\to 0}\frac{a^{x+\Delta x}-a^x}{\Delta x}&#x3D;\lim_{\Delta x\to 0}{\frac{a^x\cdot a^{\Delta x}-a^x}{\Delta x}}&#x3D;a^x\li">
+<meta property="article:published_time" content="2020-02-10T03:38:22.000Z">
+<meta property="article:modified_time" content="2020-03-07T08:05:16.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Theories">
+<meta property="article:tag" content="Mathematics">
+<meta property="article:tag" content="Calculus">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/10/05-Exponential-and-Logarithm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>05. Exponential and Logarithm | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/05-Exponential-and-Logarithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          05. Exponential and Logarithm
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-10 11:38:22" itemprop="dateCreated datePublished" datetime="2020-02-10T11:38:22+08:00">2020-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:05:16" itemprop="dateModified" datetime="2020-03-07T16:05:16+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Exponential"><a href="#Exponential" class="headerlink" title="Exponential"></a>Exponential</h1><ol>
+<li><script type="math/tex">y=a^x</script>, <script type="math/tex">a</script> is a constant, and <script type="math/tex">a>0</script>. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dx}y=\lim_{\Delta x\to 0}\frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim_{\Delta x\to 0}{\frac{a^x\cdot a^{\Delta x}-a^x}{\Delta x}}=a^x\lim_{\Delta x\to 0}{\frac{a^{\Delta x}-1}{\Delta x}}</script></li>
+<li>The limit <script type="math/tex">\displaystyle\lim_{\Delta x\to 0}\frac{a^{\Delta x}-1}{\Delta x}</script> is not easy to calculate. We can know that this is a constant associate with <script type="math/tex">a</script> only and assign <script type="math/tex">M(a)</script> equals that limit. </li>
+<li>Plug in <script type="math/tex">x=0</script>, <script type="math/tex">\displaystyle\frac{d}{dx}y\bigg|_{x=0}=a^0M(a)=M(a)</script>. So <script type="math/tex">M(a)</script> is the slope of graph at <script type="math/tex">x=0</script>. </li>
+<li>Assume there exists an <script type="math/tex">e</script> that <script type="math/tex">M(e)=1</script>. <br />&emsp;Proof: <script type="math/tex">\displaystyle\frac{d}{dx}a^{kx}=\frac{d}{dx}(a^k)^x=M(a^k)a^{kx}=kM(a)a^{kx}</script><br />&emsp;Assign <script type="math/tex">a^k=e</script>, <script type="math/tex">M(e)a^{kx}=kM(a)a^{kx}</script>, so <script type="math/tex">k=\displaystyle\frac{1}{M(a)}</script>. </li>
+<li>So when <script type="math/tex">a=e</script>, <script type="math/tex">\displaystyle\frac{d}{dx}y=e^xM(e)=e^x</script>. Use this, we can define the inverse function of exponential, logarithm, and find its inverse easily. </li>
+<li>With the help of logarithm (see below), we have two way to get the derivative of exponential. <br />&emsp;Method 1 (<code>base e</code>): <script type="math/tex">\displaystyle\frac{d}{dx}a^x=\frac{d}{dx}(e^{ln\ a})^x=\frac{d}{dx}e^{xln\ a}=ln\ a\cdot e^{xln\ a}=ln\ a\cdot a^x</script><br />&emsp;Method 2 (<code>logarithm differentialtion</code>): <script type="math/tex">\displaystyle\frac{d}{dx}ln\ y=\frac{1}{y}\frac{dy}{dx}</script>. So <script type="math/tex">(ln\ y)'=(ln\ a^x)'=(xln\ a)'=ln\ a=\displaystyle\frac{y'}{y}</script>. <br />&emsp;&emsp;So <script type="math/tex">y'=yln\ a=a^xln\ a</script><br />These two methods always work together. </li>
+<li><script type="math/tex; mode=display">y=x^x$$<br />So $$ln\ y=ln\ x^x=xln\ x$$<br />$$\begin{equation}\begin{split}\displaystyle\frac{d}{dx}ln\ y&=\frac{d}{dx}xln\ x\\\frac{y'}{y}&=ln\ x+1\\y'&=x^x(ln\ x+1)\end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">y=x^n\ \ (n\in R)$$<br />$$\displaystyle\frac{d}{dx}x^n=\frac{d}{dx}(e^{ln\ x})^n=\frac{d}{dx}e^{nln\ x}=\frac{n}{x}e^{nln\ x}=nx^{n-1}$$<br />$$\displaystyle\frac{d}{dx}x^n=\frac{d}{dx}e^{ln\ x^n}=\frac{d}{dx}e^{nln\ x}=nx^{n-1}</script></li>
+</ol>
+<h1 id="Logarithm"><a href="#Logarithm" class="headerlink" title="Logarithm"></a>Logarithm</h1><ol>
+<li>Logarithm is the inverse function of exponential. </li>
+<li>The inverse of <script type="math/tex">y=e^x</script> is <script type="math/tex">u=ln\ x</script>. </li>
+<li>So <script type="math/tex">x=e^u</script>. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}e^u&=\frac{d}{dx}x\\\frac{d}{du}e^u\frac{du}{dx}&=1\\e^u\frac{du}{dx}&=1\\u'&=\frac{1}{e^u} \end{split}\end{equation}</script><br />Conclusion, <script type="math/tex">\displaystyle\frac{d}{dx}ln\ x=\frac{1}{x}</script></li>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\lim_{x\to\infty}(1+\frac{1}{x})^x \end{split}\end{equation}$$<br />$$\begin{equation}\begin{split}\displaystyle\lim_{x\to\infty}ln(1+\frac{1}{x})^x&=\lim_{x\to\infty}{xln(1+\frac{1}{x})}\\&=\lim_{\Delta x\to 0}\frac{ln(1+\Delta x)-ln\ 1}{\Delta x}\\&=\frac{d}{dx}ln\ x\bigg|_{x=1}\\&=1 \end{split}\end{equation}$$<br />And $$\displaystyle\lim_{x\to\infty}(1+\frac{1}{x})^x=e^{ln\ \lim_{x\to\infty}(1+\frac{1}{x})^x}=e^{\lim_{x\to\infty}ln(1+\frac{1}{x})^x}=e^1=e</script></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Theories/" rel="tag"><i class="fa fa-tag"></i> Theories</a>
+              <a href="/tags/Mathematics/" rel="tag"><i class="fa fa-tag"></i> Mathematics</a>
+              <a href="/tags/Calculus/" rel="tag"><i class="fa fa-tag"></i> Calculus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/10/04-Implicit-differentiation-inverses/" rel="prev" title="04. Implicit differentiation, inverses">
+      <i class="fa fa-chevron-left"></i> 04. Implicit differentiation, inverses
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/11/06-Linear-Approximation/" rel="next" title="06. Linear Approximation">
+      06. Linear Approximation <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Exponential"><span class="nav-number">1.</span> <span class="nav-text">Exponential</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logarithm"><span class="nav-number">2.</span> <span class="nav-text">Logarithm</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

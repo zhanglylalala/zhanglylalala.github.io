@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Activation FunctionsSigmoid Function Form: $\sigma(x)&#x3D;\displaystyle\frac{1}{1+e^{-x}}$ It squashes numbers to range $[0,1]$.  It has excellent interpretation as a saturating “firing rate” of a neuron.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05. Training Neural Networks">
+<meta property="og:url" content="http://yoursite.com/2020/04/05/05-Training-Neural-Networks/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Activation FunctionsSigmoid Function Form: $\sigma(x)&#x3D;\displaystyle\frac{1}{1+e^{-x}}$ It squashes numbers to range $[0,1]$.  It has excellent interpretation as a saturating “firing rate” of a neuron.">
+<meta property="article:published_time" content="2020-04-05T10:19:58.000Z">
+<meta property="article:modified_time" content="2020-04-08T00:50:12.570Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Computer Vision">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/05/05-Training-Neural-Networks/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>05. Training Neural Networks | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/05-Training-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          05. Training Neural Networks
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 18:19:58" itemprop="dateCreated datePublished" datetime="2020-04-05T18:19:58+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-08 08:50:12" itemprop="dateModified" datetime="2020-04-08T08:50:12+08:00">2020-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h1><h2 id="Sigmoid-Function"><a href="#Sigmoid-Function" class="headerlink" title="Sigmoid Function"></a>Sigmoid Function</h2><ol>
+<li>Form: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$</li>
+<li>It squashes numbers to range $[0,1]$. </li>
+<li>It has excellent interpretation as a saturating “firing rate” of a neuron. </li>
+<li>However, when $x$ is very negative or very positive, the gradient of the sigmoid gate is zero, which kills the gradient flow. </li>
+<li>The Sigmoid outputs are not zero-centred. When the input of a neuron is always positive, the gradients on $W$ are always all positive or negative. This might cause an insufficiency update of $W$. (Same reason we want zero-mean data)</li>
+<li>Moreover, the exponential calculation is a bit compute expensively. </li>
+</ol>
+<h2 id="tanh-x"><a href="#tanh-x" class="headerlink" title="tanh(x)"></a>tanh(x)</h2><ol>
+<li>It squashes numbers to range $[-1,1]$. </li>
+<li>It is zero-centred. </li>
+<li>Nevertheless, it still kills the gradient when saturated. </li>
+</ol>
+<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><ol>
+<li>Form: $f(x)=max(0,x)$. </li>
+<li>It does not saturate in the positive regime and computationally efficient. </li>
+<li>In practice, It converges about $6$ times faster than sigmoid/tanh. </li>
+<li>Furthermore, it is more biologically plausible than sigmoid. </li>
+<li>However, it is not zero-centred output, and it also kills the gradient in the negative region. </li>
+<li>At some particular situation called dead ReLU, ReLU will never activate and never update. This happens when the initialization is bad or when the learning rate is too high. So people may initial ReLU neurons will slightly positive biases to increase the likelihood of being active ReLU. </li>
+</ol>
+<h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky_ReLU"></a>Leaky_ReLU</h2><ol>
+<li>Form: $f(x)=max(0.01x,x)$. </li>
+<li>It does not saturate and is computationally efficient. It converges as fast as ReLU. </li>
+<li>More importantly, it will not die. </li>
+<li>Another form is the parametric rectifier (PReLU) $f(x)=max(\alpha x, x)$, where $\alpha$ can be learned in backpropagation. </li>
+</ol>
+<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><ol>
+<li>Exponential Linear Units: <script type="math/tex">f(x)=\left\{\begin{array}{}x&if\ x>0\\\alpha(e^x-1)&if\ x≤0 \end{array}\right.</script>. </li>
+<li>It has all benefits of ReLU except its computation requires exponential. </li>
+<li>It is closer to zero mean outputs. </li>
+<li>It has a negative saturation regime compared with Leaky_ReLU. </li>
+<li>It adds some robustness to noise with flex parameter $\alpha$. </li>
+</ol>
+<h2 id="Maxout-Neuron"><a href="#Maxout-Neuron" class="headerlink" title="Maxout Neuron"></a>Maxout Neuron</h2><ol>
+<li>Form: $f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$. </li>
+<li>It can generalize the ReLU and the Leaky_ReLU. </li>
+<li>It has a linear regime and does not die and does not saturate. </li>
+<li>Nevertheless, it doubles the number of parameters per neuron. </li>
+</ol>
+<h2 id="In-practice"><a href="#In-practice" class="headerlink" title="In practice"></a>In practice</h2><ol>
+<li>Use ReLU. Be careful with the learning rates. </li>
+<li>Sometimes try out Leaky ReLU / Maxout / ELU. </li>
+<li>Maybe even try out tanh but do not expect much. </li>
+<li>Do not use sigmoid. </li>
+</ol>
+<h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><ol>
+<li>In data preprocessing, we usually want to zero-mean them by subtracting the mean from them and normalize them by dividing them with the standard deviation. </li>
+<li>In practice, we may also see the PCA and Whitening of the data. </li>
+<li>We do not normalize the data much when dealing with images. Moreover, we do not do PCA and Whitening for images. </li>
+<li>Sometimes we also subtract per-channel mean to create zero-mean data. </li>
+<li>The mean subtracted is the mean of all training data. </li>
+<li>We do not do these things to each batch later once more. </li>
+</ol>
+<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><ol>
+<li>When the initialization with all elements being zeros is used, the gradient of earlier layers in backpropagation will become all zeros. </li>
+<li>The first idea is to start with small random numbers. This works for small networks. However, with deeper networks, all activations become zero. </li>
+<li>Furthermore, if we initiate $W$ with too large numbers, the gradient will be all zero and the update will stop. </li>
+<li>Xavier initialization: This works all well, but when using the ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in)</span><br></pre></td></tr></table></figure></li>
+<li>He et al. fixed the break of ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><ol>
+<li>This operation tries to make the input of each layer unit gaussian activations. </li>
+<li>First, compute the empirical mean and variance independently for each dimension.<br />Second, normalize $\hat{x}^{(k)}=\displaystyle\frac{x^{(k)}-E[x^{(k)}]}{\sqrt{var(x^{(k)})}}$. </li>
+<li>This layer is usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. </li>
+<li>We also can allow the network to squash the range if it wants to. $y^{(k)}=\gamma^{(k)}\hat{x}^{(k)}+\beta^{(k)}$. Note that the network can learn $\gamma^{(k)}=\sqrt{var(x^{(k)})}$ and $\beta^{k}=E[x^{(k)}]$ to recover the identity mapping, but not definitely. </li>
+<li>It improves gradient flow through the network, allows higher learning rates, reduces the strong dependence on initialization, acts as a form of regularization, and slightly reduces the need for dropout, maybe. </li>
+<li>At test time, we use the mean and standard deviation calculated at training. So we skip the step of calculation at test time. </li>
+</ol>
+<h1 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h1><ol>
+<li>The first step is to preprocess the data, as mentioned above. </li>
+<li>The second step is to choose the architecture with which we want to start. </li>
+<li>The third step is to double-check the loss is reasonable. Do the forward process without regularization once and see if the loss is reasonable. Do it again with regularization and see if the loss is larger. </li>
+<li>Then make sure that it can overfit a tiny portion of the training data. Namely, the loss goes to $0$, and the accuracy goes to $1$. </li>
+<li>After that, use the full training set, and start with small regularization and find learning rate that makes the loss go down. If the loss is not going down, the learning rate is too low. If the loss is $NaN$, the learning rate is too high. <br />Do not focus on accuracy. Because when the accuracy is low, the distribution of loss is very dense. The raise of accuracy due to luck. </li>
+</ol>
+<h1 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h1><ol>
+<li>In cross-validation strategy, we first take a coarse search with a few epochs, to narrow down the range of parameters. </li>
+<li>Then we can do a finer search with longer running time at the rough range we get to find the specific best hyperparameter. </li>
+<li>We had better keep the best hyperparameters in the middle of the searching range. </li>
+<li>It is best to optimize in log space. </li>
+<li>Another two strategies are the random search and the grid search. If the loss is more sensitive to one of the hyperparameters, the random search can cover the situation better. </li>
+<li>If the loss curve: <br />&emsp;exploded: very high learning rate<br />&emsp;decrease slowly: very low learning rate<br />&emsp;decrease rapidly first, then barely changed: very high learning rate<br />&emsp;barely changed first, but begin to decay after a while: bad initialization<br />&emsp;has big gap between training and test: overfitting, try to increase the regularization strength<br />&emsp;has no gap between: increase model capability. </li>
+</ol>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="Problems-with-gradient-descend"><a href="#Problems-with-gradient-descend" class="headerlink" title="Problems with gradient descend"></a>Problems with gradient descend</h2><ol>
+<li>Some loss function changes quickly in one direction and slowly in another. Namely, loss function has a high condition number: the ratio of the largest to the smallest singular value of the Hessian matrix is massive. </li>
+<li>If the loss function has a local minimum or a saddle point, the gradient near it will be zero, and the gradient descend will get stuck. </li>
+<li>The data may contain noise, which will cause the gradient to descend inaccurately. </li>
+</ol>
+<h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><ol>
+<li>A straightforward strategy is to use the <code>SGD + momentum</code>. </li>
+<li>The SGD has the formula: $x_{t+1}=x_t-\alpha\triangledown f(x_t)$. We can preserve a velocity as a running mean of gradients. <br />Velocity: $v_{t+1}=\rho v_t+\triangledown f(x_t)$<br />Descend: $x_{t+1}=x_t-\alpha v_{t+1}$. </li>
+<li>Rho gives “friction”; typically <script type="math/tex">\rho=0.9\ or\ 0.99</script>. </li>
+<li>So we update the parameters at the direction of speed instead of the gradient of the gradient. </li>
+<li>Another kind of momentum is the Nesterov momentum. It updates the speed with the gradient at the endpoint of current speed. <br />Velocity: $v_{t+1}=\rho v_t-\alpha\triangledown f(x_t+\rho v_t)$. <br />Parameters: $x_{t+1}=x_t+v_{t+1}$. </li>
+<li>In Nesterov momentum, we can substitute $\tilde{x}_t=x_t+\rho v_t$. So that $v_{t+1}=\rho v_t-\alpha\triangledown f(\tilde{x})$ and $\tilde{x}_{t+1}=\tilde{x}_t+v_{t+1}+\rho(v_{t+1}-v_t)$. </li>
+<li>Add a momentum solved all the problems we have above. <br />&emsp;At local minima or saddle points, the velocity will maintain the update instead of stuck there. <br />&emsp;If the loss function is poor conditioning, the zig-zag gradients will cancel out by the velocity fast since the velocity is the mean of gradients. <br />&emsp;Moreover, the velocity is less sensitive to the noise. </li>
+</ol>
+<h2 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h2><ol>
+<li><p>AdaGrad scales the update step size by the square root of the accumulative of the square the gradient. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">grad_square += dx * dx</span><br><span class="line">x -= learning_rate * dx / (np.sqrt(grad_square) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The $1e-7$ is only to make sure we will not divide by zero. </p>
+</li>
+<li>However, as the training time goes by, the grad_square grows larger and larger, so the step size of the update becomes smaller. </li>
+<li>A better form of AdaGrad is RMSProp. This method allows the grad_square to decay to prevent it from getting too large. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_square = decay_rate * grad_square + (<span class="number">1</span> - decay_rate) * dx * dx</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><ol>
+<li>What the momentum does is to replace the gradient with the velocity when updating the parameters. What the AdaGrad does is to scale the update step size. </li>
+<li><p>In Adam, we do them both. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx</span><br><span class="line">second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx</span><br><span class="line">x -= learning_rate * first_moment / (np.sqrt(second_moment) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Usually, we set betas some number close to $1$. This will cause the second_moment too small at first, which will lead to a giant step at the beginning. </p>
+</li>
+<li>To solve the problem, we scale the moments before the update by a size decaying as time goes by. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first_unbias = first_moment / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">second_unbias = second_moment / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line"><span class="comment"># t means this is the t-th epoch of iterate</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h2><ol>
+<li>No matter which optimization strategy is used, the learning rate is always a hyperparameter. </li>
+<li>In practice, we do not have to stick to one constant learning rate to the end. We can change the learning rate as training goes deeper. </li>
+<li>One strategy is to decay the learning rate every few epochs. </li>
+<li>Alternatively, we can decay it exponentially. $\alpha = \alpha_0e^{-kt}$</li>
+<li>What’ more, we can decay it as $\alpha=\displaystyle\frac{\alpha_0}{1+kt}$. </li>
+<li>The change of learning rate can cause an underivable point on the graph of the loss function. </li>
+</ol>
+<h2 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h2><ol>
+<li>What we discussed before is all first-order optimization, which uses the gradient form linear approximation ($\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)$) to step to minimize the approximation. </li>
+<li>In second-order optimization, we use the gradient and the Hessian matrix to form a quadratic approximation <br />$\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)+\sum_{x_i}\sum_{x_j}\frac{1}{2}f_{x_ix_j}(x-x_i)(x-x_j)$</li>
+<li>The $(i,j)$ element of the Hessian matrix is $f_{x_ix_j}$. </li>
+<li>In the vector form, $J(\vec{\theta})=J(\vec{\theta_0})+(\vec{\theta}-\vec{\theta_0})^T\triangledown_{\vec{\theta}}J(\vec{\theta_0})+\displaystyle\frac{1}{2}(\theta-\theta_0)^TH(\theta-\theta_0)$</li>
+<li>Solve for the critical point, and we obtain the Newton parameter update: $\vec{\theta}^*=\vec{\theta_0}-H^{-1}\triangledown_{\vec{\theta}}J(\vec{\theta_0})$. </li>
+<li>This method avoids the hyperparameters. It does not contain the learning rate. </li>
+<li>Nevertheless, the Hessian matrix has $N^2$ elements. To invert it requires $O(N^3)$. </li>
+<li>Quasi-Newton methods (BGFS most popular): instead of inverting the Hessian ($O(n^3)$), approximate inverse Hessian with rank $1$ updates over time ($O(n^2)$ each). </li>
+<li>L-BFGS (Limited memory BFGS): Does not form/store the full inverse Hessian. It cannot handle stochastic problems well.</li>
+</ol>
+<h2 id="In-Practice"><a href="#In-Practice" class="headerlink" title="In Practice"></a>In Practice</h2><ol>
+<li>Adam optimization is often the best choice. </li>
+<li>If full batch updates can be afforded then maybe try out L-BFGS (and do not forget to disable all sources of noise). </li>
+</ol>
+<h1 id="Decrease-the-Gap"><a href="#Decrease-the-Gap" class="headerlink" title="Decrease the Gap"></a>Decrease the Gap</h1><p>Usually, there will exist a gap between the loss functions of the training set and the test set. </p>
+<h2 id="Model-Ensembles"><a href="#Model-Ensembles" class="headerlink" title="Model Ensembles"></a>Model Ensembles</h2><ol>
+<li>The first strategy to decrease the gap is to train multiple independent models and average their results at test time. </li>
+<li>This will have a slight improvement at test. </li>
+<li>Instead of training independent models, use multiple snapshots of a single model during training. Cyclic learning rate schedules can make this work even better. </li>
+<li>Instead of using the actual parameter vector, keep a moving average of the parameter vector and use that at test time (Polyak averaging)</li>
+</ol>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><ol>
+<li>This strategy can improve single-model performance. </li>
+<li>Using dropout, we randomly set some neurons to zero in each forward pass. Probability of dropping is a hyperparameter $p$, which is typical $0.5$. </li>
+<li>By the mean of setting to zero, we set the input of activation to zero. </li>
+<li>It forces the network to have a redundant representation and prevents co-adaptation of features. Dropout often happens at fully-connected layers, but sometimes convolution layers. </li>
+<li>Dropout is training a large ensemble of models that share parameters. </li>
+<li>Each dropout decision is called a dropout mask, and each binary mask is one model. </li>
+<li>Nevertheless, dropout makes our output random with $y=f(x,z)$, where $z$ is the random dropout mask. </li>
+<li>In order to average out the randomness at test-time, we want $y=E_z[f(x,z)]=\displaystyle\int p(z)f(x,z)dz$. </li>
+<li>However, the integral is hard to calculate, so we want an approximation of it by consider it discrete. Funnily, the approximation is to scale each activation with the probability $p$. </li>
+<li>With dropout, we might need  a bit longer time to train, but after training, the model will have a better generalization. </li>
+</ol>
+<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><ol>
+<li>This strategy creates new images from the old ones with some operations. </li>
+<li>The common operations for data augmentation: <br />&emsp;Horizontal flips<br />&emsp;Random crops and scales<br />&emsp;Color jitter</li>
+</ol>
+<h2 id="Common-Pattern"><a href="#Common-Pattern" class="headerlink" title="Common Pattern"></a>Common Pattern</h2><ol>
+<li>The common strategy is to add random noise at training and marginalize over the noise at test. </li>
+<li>Batch normalization fits this common pattern, too. In training, it normalizes using stats from random minibatches, while in the test, it uses fixed stats to normalize. </li>
+<li>Another strategy which is similar to the dropout is drop-connect. Instead of dropout neurons before activation, it drops connections between layers by setting part of the weight matrix to zero. </li>
+<li>Two more unusual strategies are the fractional max pooling and the stochastic depth. </li>
+</ol>
+<h1 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h1><ol>
+<li>This is a backup plan when the dataset is not large. </li>
+<li>First, train the network at another dataset on the internet. Then finetune the linear classifier with our dataset. </li>
+<li>If our dataset is tiny, then we can use linear classifier on top layer and train with some very similar dataset. If our dataset is quite large, then we can finetune a few layers. </li>
+<li>With more similar datasets, the layer needed to finetune is less. </li>
+<li>Transfer learning with CNNs is pervasive. This is the norm, not an exception. e</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
+              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+              <a href="/tags/Computer-Vision/" rel="tag"><i class="fa fa-tag"></i> Computer Vision</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/05/04-Convolutional-Neural-Networks/" rel="prev" title="04. Convolutional Neural Networks">
+      <i class="fa fa-chevron-left"></i> 04. Convolutional Neural Networks
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/08/06-Deep-Learning-Software/" rel="next" title="06. Deep Learning Software">
+      06. Deep Learning Software <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activation-Functions"><span class="nav-number">1.</span> <span class="nav-text">Activation Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid-Function"><span class="nav-number">1.1.</span> <span class="nav-text">Sigmoid Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tanh-x"><span class="nav-number">1.2.</span> <span class="nav-text">tanh(x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLU"><span class="nav-number">1.3.</span> <span class="nav-text">ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Leaky-ReLU"><span class="nav-number">1.4.</span> <span class="nav-text">Leaky_ReLU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">1.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout-Neuron"><span class="nav-number">1.6.</span> <span class="nav-text">Maxout Neuron</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#In-practice"><span class="nav-number">1.7.</span> <span class="nav-text">In practice</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">2.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">3.</span> <span class="nav-text">Weight Initialization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">4.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Babysitting-the-Learning-Process"><span class="nav-number">5.</span> <span class="nav-text">Babysitting the Learning Process</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hyperparameter-Optimization"><span class="nav-number">6.</span> <span class="nav-text">Hyperparameter Optimization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimization"><span class="nav-number">7.</span> <span class="nav-text">Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-gradient-descend"><span class="nav-number">7.1.</span> <span class="nav-text">Problems with gradient descend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Momentum"><span class="nav-number">7.2.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AdaGrad"><span class="nav-number">7.3.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam"><span class="nav-number">7.4.</span> <span class="nav-text">Adam</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">7.5.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Optimization"><span class="nav-number">7.6.</span> <span class="nav-text">Second-Order Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#In-Practice"><span class="nav-number">7.7.</span> <span class="nav-text">In Practice</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Decrease-the-Gap"><span class="nav-number">8.</span> <span class="nav-text">Decrease the Gap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Ensembles"><span class="nav-number">8.1.</span> <span class="nav-text">Model Ensembles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">8.2.</span> <span class="nav-text">Dropout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Augmentation"><span class="nav-number">8.3.</span> <span class="nav-text">Data Augmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Pattern"><span class="nav-number">8.4.</span> <span class="nav-text">Common Pattern</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transfer-Learning"><span class="nav-number">9.</span> <span class="nav-text">Transfer Learning</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

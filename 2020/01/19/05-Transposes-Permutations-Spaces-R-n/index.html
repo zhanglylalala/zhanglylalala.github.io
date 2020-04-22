@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Transpose Definition: The transpose of a matrix is to put the columns of the original matrix in the row of the new matrix. In another words, flip the matrix over its main diagonal. We denote the trans">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05. Transposes, Permutations, Spaces Rⁿ">
+<meta property="og:url" content="http://yoursite.com/2020/01/19/05-Transposes-Permutations-Spaces-R-n/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Transpose Definition: The transpose of a matrix is to put the columns of the original matrix in the row of the new matrix. In another words, flip the matrix over its main diagonal. We denote the trans">
+<meta property="article:published_time" content="2020-01-19T00:47:59.000Z">
+<meta property="article:modified_time" content="2020-04-02T02:26:57.770Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Theories">
+<meta property="article:tag" content="Mathematics">
+<meta property="article:tag" content="Linear Algebra">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/19/05-Transposes-Permutations-Spaces-R-n/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>05. Transposes, Permutations, Spaces Rⁿ | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/19/05-Transposes-Permutations-Spaces-R-n/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          05. Transposes, Permutations, Spaces Rⁿ
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-19 08:47:59" itemprop="dateCreated datePublished" datetime="2020-01-19T08:47:59+08:00">2020-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-02 10:26:57" itemprop="dateModified" datetime="2020-04-02T10:26:57+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Transpose"><a href="#Transpose" class="headerlink" title="Transpose"></a>Transpose</h1><ol>
+<li>Definition: The <code>transpose</code> of a matrix is to put the columns of the original matrix in the row of the new matrix. In another words, flip the matrix over its main diagonal. We denote the transpose of matrix as <script type="math/tex">A^T</script></li>
+<li>$(A^T)_{ij}=A_{ji}$</li>
+<li>The <code>dot product (inner product)</code> of vectors can be written as the transposed form <script type="math/tex">x\cdot y = x^Ty</script></li>
+<li>The <code>outer product</code> of vectors can be written as <script type="math/tex">xy^T</script></li>
+<li>An essential property of transpose is that <script type="math/tex">Ax\cdot y=x\cdot A^Ty</script></li>
+<li>$(A+B)^T = A^T +B^T$</li>
+<li><script type="math/tex">(AB)^T=B^TA^T</script>. <script type="math/tex">AB</script> is the combination of columns of <script type="math/tex">A</script> while <script type="math/tex">B^TA^T</script> is the combination of rows of <script type="math/tex">A^T</script>. They are the same numbers but in different directions. So after transpose of <script type="math/tex">AB</script>, they are the same. </li>
+<li><script type="math/tex">(A^{-1})^T=(A^T)^{-1}</script>. <script type="math/tex">AA^{-1}=T\ \Rightarrow\ (AA^{-1})^T=I^T=I\ \Rightarrow\ (A^{-1})^TA^T=I</script>. <script type="math/tex">A^T</script> is invertible exactly when <script type="math/tex">A</script> is invertible. </li>
+</ol>
+<h2 id="Transpose-of-Derivative"><a href="#Transpose-of-Derivative" class="headerlink" title="Transpose of Derivative"></a>Transpose of Derivative</h2><ol>
+<li>The inner product of functions are <script type="math/tex">x(t)^Ty(t)=(x,\ y)=\displaystyle \int^{\infty}_{-\infty}{x(t)y(t)\ dt}</script></li>
+<li>$A$ is the derivative, $A=\displaystyle\frac{d}{dt}$</li>
+<li><script type="math/tex">(Ax)^Ty=\displaystyle \int^{\infty}_{-\infty}{\frac{dx}{dt}y(t)\ dt}=\displaystyle \int^{\infty}_{-\infty}{x(t)(-\frac{dy}{dt})\ dt}=-x^T(A^Ty)</script> （Integration by parts）</li>
+<li>So <script type="math/tex">A^T=-\displaystyle\frac{d}{dt}=-A</script></li>
+</ol>
+<h1 id="Symmetric-Matrix"><a href="#Symmetric-Matrix" class="headerlink" title="Symmetric Matrix"></a>Symmetric Matrix</h1><ol>
+<li>A <code>symmetric matrix</code> is a matrix that transpose does not change, i.e. <script type="math/tex">S^T=S</script></li>
+<li>The inverse of a symmetric matrix is also symmetric. </li>
+<li>To create a symmetric matrix, we can multiply <script type="math/tex">A</script> and <script type="math/tex">A^T</script>. <br />$S = AA^T$, i.e. <script type="math/tex">S_{ij}=(row\ i\ of\ A)\cdot (column\ j\ of\ A^T)</script><br />also <script type="math/tex">(row\ i\ of\ A)^T=column\ i\ of\ A^T</script> and <script type="math/tex">(column\ j\ of\ A^T)^T=row\ j\ of\ A</script><br />So <script type="math/tex">S_{ij}=(column\ i\ of\ A^T)^T\cdot(row\ j\ of A)^T=((row\ j\ of A)\cdot (column\ i\ of A^T))^T=S_{ji}^T=S_{ji}</script></li>
+<li>A symmetric matrix can be factorized into <script type="math/tex">LDL^T</script>. We do half operations to calculate because we only have to eliminate half of the matrix, so in the first stage, multiplication can be reduced by half. Naturally, only half of the storage is needed to store. </li>
+<li>For symmetric, <script type="math/tex">A^T=A</script><br />For <code>antisymmetric</code>, <script type="math/tex">A^T=-A</script></li>
+</ol>
+<h1 id="Permutation-Matrix"><a href="#Permutation-Matrix" class="headerlink" title="Permutation Matrix"></a>Permutation Matrix</h1><ol>
+<li>A <code>permutation matrix</code> is an identity matrix in different row orders. </li>
+<li>There are <script type="math/tex">n!</script> permutation matrices. </li>
+<li><script type="math/tex">P^T</script> is also a permutation matrix. Any product <script type="math/tex">P_1P_2</script> is a permutation matrix, too. </li>
+<li>Permutation matrix can be used to do row exchanges, which makes the elimination with row exchanges <script type="math/tex">PA=LU</script></li>
+<li>For a permutation matrix, <script type="math/tex">P^{-1}=P^T</script></li>
+</ol>
+<h1 id="Vector-Space"><a href="#Vector-Space" class="headerlink" title="Vector Space"></a>Vector Space</h1><ol>
+<li>A vector space is a space where <script type="math/tex">\forall \vec{x},\ \vec{y}\in S,\forall c,\ d\in R,\ (c\vec{x}+d\vec{y})\in S</script></li>
+<li><script type="math/tex">R^n</script> is a vector space which contains all real column vectors with <script type="math/tex">n</script> components. </li>
+<li>A vector whose <script type="math/tex">n</script> components are complex numbers lies in the space <script type="math/tex">C^n</script>. </li>
+<li>Whatever it is in the vector space, they must obey these rules: <br />&emsp;We can add any vectors in <script type="math/tex">S</script> and multiply by any scalar. <br />&emsp;The result stays in the space. <br />&emsp;Commutative law and distributive law are valid. <br />&emsp;Exist a unique “zero vector”, that <script type="math/tex">\vec{0}+\vec{v}=\vec{v}</script>. <br />The “vectors” in a vector space can be matrices or functions of <script type="math/tex">\vec{x}</script>, too. </li>
+<li>The vector space with only <script type="math/tex">\vec{0}</script> is noted as <script type="math/tex">Z</script>. <script type="math/tex">Z</script> is zero-dimensional and the smallest possible vector space. </li>
+<li>A subspace is another space that holds no more vectors then the superspace. </li>
+<li>The Subspace of <script type="math/tex">R^n</script> still has <script type="math/tex">n</script> components, so they are not <script type="math/tex">R^m\ (m < n)</script>. </li>
+<li>The union of two subspace is not always another subspace. <br />&emsp;If the two vectors are not from the same subspace, their combination could go out of the two subspace. <br />&emsp;Nevertheless, the intersection of two subspace is another subspace.<br />&emsp;If <script type="math/tex">\vec{x}</script> and <script type="math/tex">\vec{y}</script> are in the intersection of subspace <script type="math/tex">S</script> and <script type="math/tex">T</script>, all the linear combination of <script type="math/tex">\vec{x}</script> and <script type="math/tex">\vec{y}</script> is in <script type="math/tex">S</script> and <script type="math/tex">T</script>, i.e. all the linear combination is in the intersection of <script type="math/tex">S</script> and <script type="math/tex">T</script>.  </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Theories/" rel="tag"><i class="fa fa-tag"></i> Theories</a>
+              <a href="/tags/Mathematics/" rel="tag"><i class="fa fa-tag"></i> Mathematics</a>
+              <a href="/tags/Linear-Algebra/" rel="tag"><i class="fa fa-tag"></i> Linear Algebra</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/14/04-Factorization-into-A-LU/" rel="prev" title="04. Factorization into A = LU">
+      <i class="fa fa-chevron-left"></i> 04. Factorization into A = LU
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/26/06-Column-Space-and-Nullspace/" rel="next" title="06. Column Space and Nullspace">
+      06. Column Space and Nullspace <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Transpose"><span class="nav-number">1.</span> <span class="nav-text">Transpose</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transpose-of-Derivative"><span class="nav-number">1.1.</span> <span class="nav-text">Transpose of Derivative</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symmetric-Matrix"><span class="nav-number">2.</span> <span class="nav-text">Symmetric Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Permutation-Matrix"><span class="nav-number">3.</span> <span class="nav-text">Permutation Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vector-Space"><span class="nav-number">4.</span> <span class="nav-text">Vector Space</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

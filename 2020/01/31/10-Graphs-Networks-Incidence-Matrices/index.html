@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Graph Graph is a model consisting of nodes connected by edges.  A graph where every pair of nodes is connected by an edge is called complete.  A graph without closed loop is a tree.  The complete grap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. Graphs, Networks, Incidence Matrices">
+<meta property="og:url" content="http://yoursite.com/2020/01/31/10-Graphs-Networks-Incidence-Matrices/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Graph Graph is a model consisting of nodes connected by edges.  A graph where every pair of nodes is connected by an edge is called complete.  A graph without closed loop is a tree.  The complete grap">
+<meta property="article:published_time" content="2020-01-31T06:08:23.000Z">
+<meta property="article:modified_time" content="2020-04-02T14:00:27.100Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Theories">
+<meta property="article:tag" content="Mathematics">
+<meta property="article:tag" content="Linear Algebra">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/31/10-Graphs-Networks-Incidence-Matrices/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>10. Graphs, Networks, Incidence Matrices | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/10-Graphs-Networks-Incidence-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10. Graphs, Networks, Incidence Matrices
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-31 14:08:23" itemprop="dateCreated datePublished" datetime="2020-01-31T14:08:23+08:00">2020-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-02 22:00:27" itemprop="dateModified" datetime="2020-04-02T22:00:27+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><ol>
+<li><code>Graph</code> is a model consisting of <code>nodes</code> connected by <code>edges</code>. </li>
+<li>A graph where every pair of nodes is connected by an edge is called <code>complete</code>. </li>
+<li>A graph without closed loop is a <code>tree</code>. </li>
+<li>The complete graph has a maximum number of edges <script type="math/tex">\displaystyle\frac{1}{2}n(n-1)</script>. <br />The tree has a minimum number of edges <script type="math/tex">n-1</script>. </li>
+</ol>
+<h1 id="Incidence-Matrix"><a href="#Incidence-Matrix" class="headerlink" title="Incidence Matrix"></a>Incidence Matrix</h1><ol>
+<li><code>Incidence matrix</code> is a $m$ by $n$ matrix that tells how the <script type="math/tex">n</script> nodes are connected by the <script type="math/tex">m</script> edges. </li>
+<li>Every entry of an incidence matrix is <script type="math/tex">0</script>, <script type="math/tex">1</script>, or <script type="math/tex">-1</script>. <script type="math/tex">0</script> represents that that node has nothing to do with that edge. If the $i$th edge starts from the $j_1$th node and ends at the $j_2$th node, $(i,j_1)=-1$ while $(i,j_2)=1$. </li>
+<li>Elimination of the incidence matrix reduces every graph to a tree. </li>
+<li>Loops produce dependent rows in the matrix and zero rows in the echelon form <script type="math/tex">U</script> and <script type="math/tex">R</script>. </li>
+<li>When <script type="math/tex">\vec{x}</script> is the voltage at the nodes, <script type="math/tex">A\vec{x}</script> gives the differences along all edges. </li>
+<li>The nullspace of <script type="math/tex">A</script> means all differences between the voltage of <script type="math/tex">A</script> are $0$. So The nullspace of <script type="math/tex">A</script> contains all vectors with all components equal. <script type="math/tex">dim(N(A))=1</script></li>
+<li>The dimension of row space of <script type="math/tex">A</script> is the number of edges of a tree <script type="math/tex">n-1</script>. A vector <script type="math/tex">\vec{v}</script> is in the row space if and only if it is perpendicular to any vectors in the nullspace, i.e. the sum of all components equals to zero. </li>
+<li>If we add differences around a closed loop in the graph, they cancel to leave zero. <br /><code>Kirchhoff&#39;s Voltage Law</code>: The components of <script type="math/tex">A\vec{x}=\vec{b}</script> add to zero around every loop. For example, for every triangle, <script type="math/tex">b_1+b_2-b_3=0</script><br />We can use this law to test if a vector is in the column space. </li>
+<li><code>Kirchhoff&#39;s Current Law</code>: <script type="math/tex">A^T\vec{y}=\vec{0}</script>, flow in equals flow out at each node. <br />Now each component in <script type="math/tex">\vec{y}</script> means the flow in each edge. <br />Every equation in <script type="math/tex">A^T\vec{y}</script> stands for the sum of in (<script type="math/tex">1</script>) and out (<script type="math/tex">-1</script>) of each node in the flow net, i.e. the value of each nodes gain (positive) or loss (negative). <br />The easiest way to satisfy this law is to flow around a loop. Each loop is a special solution to <script type="math/tex">A^T\vec{y}=\vec{0}</script> (backward edge is <script type="math/tex">-1</script>). <br />So <script type="math/tex">dim(N(A^T))=m-r=m-n+1</script> is the number of small independent loops in the graph. </li>
+<li><code>Euler&#39;s formula</code>: <code>(number of nodes) - (number of edges) + (number of small loops) = n - m + (m-n+1) = 1​</code></li>
+</ol>
+<h1 id="With-Sources"><a href="#With-Sources" class="headerlink" title="With Sources"></a>With Sources</h1><ol>
+<li>As is known, when the resistances on the edges are all <script type="math/tex">1</script>, the <code>Ohm&#39;s Law</code> gives <script type="math/tex">\vec{y}=-A\vec{x}</script>. Substituting this to the Current Law, we get <script type="math/tex">A^T\vec{y}=-A^TA\vec{y}=\vec{0}</script>. </li>
+<li><script type="math/tex">A^TA</script> is called the <code>Laplacian matrix</code>. </li>
+<li>Without any sources, the solution will be no flow: <script type="math/tex">\vec{x}=\vec{0}</script>, <script type="math/tex">\vec{y}=\vec{0}</script>. </li>
+<li>With sources, we need to solve the <script type="math/tex">-A^TA\vec{x}=\vec{f}</script>. Each component of <script type="math/tex">\vec{f}</script> is the source of nodes. </li>
+<li>The Laplacian matrix is not invertible. It shares the same nullspace with <script type="math/tex">A</script>. So one node has to be grounded by setting it to <script type="math/tex">0</script>. </li>
+</ol>
+<h1 id="With-Resistances"><a href="#With-Resistances" class="headerlink" title="With Resistances"></a>With Resistances</h1><ol>
+<li>If the resistances on the edges are not all <script type="math/tex">1</script>, the Ohm’s Law will be <script type="math/tex">R\vec{y}=-A\vec{x}</script>. The <code>conductances</code> are <script type="math/tex">C=R^{-1}</script>. So <script type="math/tex">\vec{y}=-CA\vec{x}</script>. </li>
+<li><script type="math/tex">C</script> is the <code>conductances matrix</code>. It is a diagonal matrix with conductances in its diagonal. </li>
+<li>For every conductance, <script type="math/tex">c=\displaystyle\frac{1}{resistance}</script>. </li>
+<li><code>Ohm&#39;s Law</code>: <code>Current along with edge = conductance ✕ voltage difference​</code>. </li>
+<li>Combining Ohm’s Law with Kirchhoff’s Current Law, we get <script type="math/tex">A^TCA\vec{x}=\vec{0}</script>. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Theories/" rel="tag"><i class="fa fa-tag"></i> Theories</a>
+              <a href="/tags/Mathematics/" rel="tag"><i class="fa fa-tag"></i> Mathematics</a>
+              <a href="/tags/Linear-Algebra/" rel="tag"><i class="fa fa-tag"></i> Linear Algebra</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/30/09-The-Four-Fundamental-Subspaces/" rel="prev" title="09. The Four Fundamental Subspaces">
+      <i class="fa fa-chevron-left"></i> 09. The Four Fundamental Subspaces
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/" rel="next" title="11. Orthogonal Vectors and Subspaces">
+      11. Orthogonal Vectors and Subspaces <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Graph"><span class="nav-number">1.</span> <span class="nav-text">Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Incidence-Matrix"><span class="nav-number">2.</span> <span class="nav-text">Incidence Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#With-Sources"><span class="nav-number">3.</span> <span class="nav-text">With Sources</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#With-Resistances"><span class="nav-number">4.</span> <span class="nav-text">With Resistances</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

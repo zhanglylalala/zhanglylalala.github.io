@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="React to touches We can react to touches with raw touch events. (touches, moves, up, etc.) But, we can also react to certain, predefined “gestures”. Gestures are recognized by instances of UIGestureRe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06. Multi-touch">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/06.Multi-touch/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="React to touches We can react to touches with raw touch events. (touches, moves, up, etc.) But, we can also react to certain, predefined “gestures”. Gestures are recognized by instances of UIGestureRe">
+<meta property="og:image" content="https://i.loli.net/2019/08/07/mnxd4PJXk95wBLN.png">
+<meta property="article:published_time" content="2019-08-08T02:46:57.000Z">
+<meta property="article:modified_time" content="2020-04-04T04:17:34.740Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Application">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/07/mnxd4PJXk95wBLN.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/08/08/06.Multi-touch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>06. Multi-touch | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/06.Multi-touch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          06. Multi-touch
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-08 10:46:57" itemprop="dateCreated datePublished" datetime="2019-08-08T10:46:57+08:00">2019-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 12:17:34" itemprop="dateModified" datetime="2020-04-04T12:17:34+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="React-to-touches"><a href="#React-to-touches" class="headerlink" title="React to touches"></a>React to touches</h1><ol>
+<li>We can react to touches with raw touch events. (touches, moves, up, etc.)</li>
+<li>But, we can also react to certain, predefined “gestures”. Gestures are recognized by instances of <code>UIGestureRecognizer</code>. </li>
+<li>There are two sides to using a gesture recognizer.<br>First, add a gesture recognizer to a UIView<br>Second, provide a method to “handle” that gesture</li>
+<li>Usually the first is done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence. </li>
+<li>The second is provided either by the UIView or a Controller. </li>
+</ol>
+<h1 id="Create-one"><a href="#Create-one" class="headerlink" title="Create one"></a>Create one</h1><h2 id="Adding-a-gesture-recognizer-to-a-UIView"><a href="#Adding-a-gesture-recognizer-to-a-UIView" class="headerlink" title="Adding a gesture recognizer to a UIView"></a>Adding a gesture recognizer to a UIView</h2><ol>
+<li>In this way, we ask the UIView to “recognize” that gesture. Usually it’s done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence</li>
+<li>First, we need to create a outlet of the view and add a property observer “didset” to it. <a id="more"></a></li>
+<li>In the property observer, we define an instance of subclass of UIGestureRecogonizer. The initializer has two parameters. </li>
+<li>The first one is target that is the thing which will handle the gesture. </li>
+<li>The second one is action, which is what we are going to do with that gesture. </li>
+<li>The action is a selector, and in the selector is an <code>@objc</code> function that takes either no parameter or one UIGestureRecognizer parameter</li>
+<li>After that instance is created, we need to add it to the view. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> pannableView: <span class="type">UIView</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">didSet</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">let</span> panGestureRecognizer = <span class="type">UIPanGestureRecognizer</span>(</span><br><span class="line">    target: <span class="keyword">self</span>, action: #selector(aOBJCFuncForSelector)</span><br><span class="line">	)</span><br><span class="line">	pannableView.addGestureRecognizer(panGestureRecognizer) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">aOBJCFuncForSelector</span><span class="params">()</span></span> &#123; … &#125; <span class="comment">// without parameter</span></span><br><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">aOBJCFuncForSelector</span><span class="params">(<span class="number">_</span> sender: UIGectureRecognizer)</span></span> &#123; … &#125; <span class="comment">// with one parameter</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Providing-a-method-to-“handle”-that-gesture"><a href="#Providing-a-method-to-“handle”-that-gesture" class="headerlink" title="Providing a method to “handle” that gesture"></a>Providing a method to “handle” that gesture</h2><ol>
+<li>This is not necessarily handled by the UIView</li>
+<li>We only need to create a function take a UIGestureRecognizer as a parameter. </li>
+<li>Use it as a selector of a UIGestureRecognizer. </li>
+</ol>
+<h2 id="Do-these-in-main-storyboard"><a href="#Do-these-in-main-storyboard" class="headerlink" title="Do these in main.storyboard"></a>Do these in main.storyboard</h2><ol>
+<li>First, we need to drag a gesture from the library to the view we want. </li>
+<li>Then select the view, ctrl drag from the gesture at the top of phone in the main.storyboard to the controller. </li>
+<li>Create it as an action takes a UIGestureRecognizer as a parameter. </li>
+</ol>
+<p><img src="https://i.loli.net/2019/08/07/mnxd4PJXk95wBLN.png" width="50%"></p>
+<h1 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h1><h2 id="UIGestureRecognizer"><a href="#UIGestureRecognizer" class="headerlink" title="UIGestureRecognizer"></a>UIGestureRecognizer</h2><ol>
+<li>UIGestureRecognizer is an “abstract” class. So we only create its subclasses. </li>
+<li>It provides one variable <code>var state: UIGestureRecognizerState { get }</code></li>
+<li>This variable sits around in .possible until recognition starts. </li>
+<li>For a continuous gesture (e.g. pan), it moves from .began through repeated .changed to .ended</li>
+<li>For a discrete (e.g. a swipe) gesture, it goes straight to .ended or .recognized.</li>
+<li>It can go to .failed or .cancelled too, so watch out for those!</li>
+</ol>
+<h2 id="UIPinchGestureRecognizer"><a href="#UIPinchGestureRecognizer" class="headerlink" title="UIPinchGestureRecognizer"></a>UIPinchGestureRecognizer</h2><ol>
+<li><code>var scale: CGFloat</code><br>This is a settable variable. Its value is between 0.0 and 1.0 depending on how much did the pinch go</li>
+<li><code>var velocity: CGFloat { get }</code><br>This is a read-only variable. It’s the scale per sec</li>
+</ol>
+<h2 id="UIRotationGestureRecognizer"><a href="#UIRotationGestureRecognizer" class="headerlink" title="UIRotationGestureRecognizer"></a>UIRotationGestureRecognizer</h2><ol>
+<li><code>var rotation: CGFloat</code><br>This is a settable variable. Its an angle based on radians</li>
+<li><code>var velocity: CGFloat { get }</code><br>This is a read-only variable. It’s the rotation per sec</li>
+</ol>
+<h2 id="UISwipeGestureRecognizer"><a href="#UISwipeGestureRecognizer" class="headerlink" title="UISwipeGestureRecognizer"></a>UISwipeGestureRecognizer</h2><ol>
+<li><code>var direction: UISwipeGestureRecoginzerDirection</code><br>It’s a bit like an enum. You can set it with <code>.left / .right / .down / .up</code>. If multiple direction is all  ok, it can also be setted as an array of those four values. </li>
+<li><code>var numberOfTouchesRequired: Int</code><br>This is the number of fingers we want to trigger this gesture. </li>
+</ol>
+<h2 id="UITapGestureRecognizer"><a href="#UITapGestureRecognizer" class="headerlink" title="UITapGestureRecognizer"></a>UITapGestureRecognizer</h2><ol>
+<li>This is discrete, but you should check for .ended to actually do something.</li>
+<li><code>var numberOfTapsRequired: Int</code><br>This is the number of tap we want to trigger this gesture. </li>
+<li><code>var numberOfTouchesRequired: Int</code></li>
+</ol>
+<h2 id="UILongPressRecognizer"><a href="#UILongPressRecognizer" class="headerlink" title="UILongPressRecognizer"></a>UILongPressRecognizer</h2><ol>
+<li>This is a continuous (not discrete) gesture (i.e. you’ll get .changed if the finger moves)</li>
+<li><code>var minimumPressDuration: TimeInterval</code><br>The least time we need to hold to trigger this gesture. </li>
+<li><code>var numberOfTouchesRequired: Int</code></li>
+<li><code>var allowableMovement: CGFloat</code><br>The length of movement allowed before its recognized as a swipe. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Application/" rel="tag"><i class="fa fa-tag"></i> Application</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/03/05.Drawing/" rel="prev" title="05. Drawing">
+      <i class="fa fa-chevron-left"></i> 05. Drawing
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/10/07-Multiple-MVCs-and-Timer/" rel="next" title="07. Multiple MVCs and Timer">
+      07. Multiple MVCs and Timer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-to-touches"><span class="nav-number">1.</span> <span class="nav-text">React to touches</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-one"><span class="nav-number">2.</span> <span class="nav-text">Create one</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adding-a-gesture-recognizer-to-a-UIView"><span class="nav-number">2.1.</span> <span class="nav-text">Adding a gesture recognizer to a UIView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Providing-a-method-to-“handle”-that-gesture"><span class="nav-number">2.2.</span> <span class="nav-text">Providing a method to “handle” that gesture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Do-these-in-main-storyboard"><span class="nav-number">2.3.</span> <span class="nav-text">Do these in main.storyboard</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gestures"><span class="nav-number">3.</span> <span class="nav-text">Gestures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIGestureRecognizer"><span class="nav-number">3.1.</span> <span class="nav-text">UIGestureRecognizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIPinchGestureRecognizer"><span class="nav-number">3.2.</span> <span class="nav-text">UIPinchGestureRecognizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIRotationGestureRecognizer"><span class="nav-number">3.3.</span> <span class="nav-text">UIRotationGestureRecognizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UISwipeGestureRecognizer"><span class="nav-number">3.4.</span> <span class="nav-text">UISwipeGestureRecognizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UITapGestureRecognizer"><span class="nav-number">3.5.</span> <span class="nav-text">UITapGestureRecognizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UILongPressRecognizer"><span class="nav-number">3.6.</span> <span class="nav-text">UILongPressRecognizer</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
