@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="LaughingTree">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="article:author" content="LiyunZhang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/07-CNN-Architectures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/10/07-CNN-Architectures/" class="post-title-link" itemprop="url">07. CNN Architectures</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-10 10:47:07" itemprop="dateCreated datePublished" datetime="2020-04-10T10:47:07+08:00">2020-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-12 20:04:51" itemprop="dateModified" datetime="2020-04-12T20:04:51+08:00">2020-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>When we say how many layers a network has, we mean how many layers in that network has weight. Namely, the sum of fully-connected layers and convolution layers. </li>
+<li>The rule of naming a layer: <br />&emsp;If it is a fully-connected layer, its name will begin with “FC”. Behind “FC” is a number that stands for the number of neurons in this layer. Namely, the dimension of the output vector. <br />&emsp;If it is a convolution layer, its name begins with the size of the filter. In the middle is “conv”. At the end is the number of filters. <br />&emsp;Pooling layers write “Pool”. </li>
+</ol>
+<h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><ol>
+<li>Published at 2012, AlexNet has many features: <br />&emsp;It is the first network using ReLU. <br />&emsp;It uses norm layers (not common now). <br />&emsp;It has heavy data augmentation. <br />&emsp;It uses the dropout with the probability of $0.5$. <br />&emsp;Its batch size is $128$, SGD momentum is $0.9$. <br />&emsp;The learning rate is $1e-2$, reduced by $10$ manually when validation accuracy plateaus. <br />&emsp;$L2$ weight decay is $5e-4$. <br />&emsp;$7$ models ensemble to create about $3%$ better accuracy. </li>
+<li>Architecture: <br /><img src="https://i.loli.net/2020/04/10/8uBvQ1gKk7wndIC.png" width="10%"></li>
+<li>AlexNet was trained on <script type="math/tex">GTX\ 580</script> GPU with only $3$ GB of memory. However, the output of its first convolution layer is $55\times55\times96$. So the network has to spread across $2$ GPUs, half the neurons (feature maps) on each GPU. </li>
+<li>$CONV1$, $CONV2$, $CONV4$, $CONV5$ in AlexNet only have connections with feature maps on the same GPU. $CONV3$, $FC6$, $FC7$, $FC8$ have connections with all feature maps in the preceding layer; They communicate across GPUs. </li>
+<li>ZFNect is AlexNet, except that $CONV1$ changed to $7\times7$ with stride $2$, and $CONV3, 4, 5$ uses $512, 1024, 512$ filters. </li>
+</ol>
+<h1 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h1><ol>
+<li>The main feature of VGG is small filters and deeper networks. </li>
+<li>VGG has many architectures with $16\sim19$ layers. The structure of VGG can be divided into blocks. So in VGG, we can name the convolution layers like $conv-x-y$, where $x$ is the number of blocks and $y$ is its position in that block. </li>
+<li>All three fully-connected layers of VGG are in the last as AlexNet. </li>
+<li>VGG only uses small filters of $3\times3,CONV$ stride $1$, pad $1$, and <script type="math/tex">2\times2,MAX\ POOL</script> stride $2$. Stack of three $3\times3 conv$ (stride $1$) layers has the same effective receptive field as one $7\times7 conv$ layer. However, a stack of three $3\times3$ convolution layer is deeper, more nonlinearities and fewer parameters than one $7\times7$ layer and <br />The size of the receptive field is the size of pixels that affect one pixel of the last layer. In this case, $3\times3$ pixels affect one pixel of the first convolution layer. Since the stride is $1$, we pad the receptive field of last layer with $1$, which makes the receptive field of the second convolution layer $5\times5$. Finally, the receptive field of the last layer is $7\times7$. </li>
+<li>Most memory is spent on early convolution layers while most parameters are in late fully-connected layers. </li>
+</ol>
+<h1 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h1><ol>
+<li>GoogLeNet replaced fully-connected layer with average pooling layer. Nevertheless, in order to finetune hyperparameters, it still added one fully-connected layer at the end. </li>
+<li>GoogLeNet first used the inception module. The naive version of inception module is as followed. <br /><img src="https://i.loli.net/2020/04/11/whfvrYcQHAlX9Gj.png" width="30%"><br />It applied parallel filter operations on the input from the previous layer. With padding to make the output of four layers in the same size, the output of this inception module merely stacks them up. <br />However, its computational complexity is too high, not to mention that the pooling layer preserves feature depth, which means total depth after concatenation can only grow at every layer. </li>
+<li>Hence, we use the bottleneck to reduce feature depth as followed. <br /><img src="https://i.loli.net/2020/04/11/vwTshdjVL8GxbR2.png" width="30%"><br />It uses less $1\times1$ filters then the depth of the input to reduce the complexity of calculation. </li>
+<li>GoogLeNet stacks inception modules with dimension reduce on top of each other. <br /><img src="https://i.loli.net/2020/04/12/Xy2o5njCTNmrRLi.png" width='30%'><br />At the beginning is the stem network and at the end is the classifier output. <br />Nevertheless, it added some auxiliary classification outputs to inject additional gradient at lower layers. </li>
+</ol>
+<h1 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h1><ol>
+<li>ResNet is so deep that it has $152$ layers. </li>
+<li>The problem is that when continue stacking deeper layers on a “plain” convolutional neural network, the performance will become even worse. </li>
+<li>The team assumed that the problem is an <em>optimization</em> problem; deeper models are harder to optimize. </li>
+<li>Their solution is to use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping. Namely, learn a function $H(x)$ to be the output to the next layer. <br /><img src="https://i.loli.net/2020/04/12/RsBWlNigcMGXmCV.png" width="10%"></li>
+<li>They also assumed that learning a $H(x) = F(x)+x$ is much easier than learning a completely unknown $H(x)$. <br /><img src="https://i.loli.net/2020/04/12/6LclPyOuVZ7fs2Y.png" width="20%"></li>
+<li>ResNet stacks residual blocks together, and every residual block has two $3\times3$ convolutional layers. <br />It also periodically double the number of filters and downsample spatially using stride $2$. <br />The ResNet begins with an additional convolutional layer and ends with a fully-connected layer. <br /></li>
+<li>For deeper networks, they also use the bottleneck layer to improve efficiency as GoogLeNet. </li>
+<li>To train a ResNet in practice: <br />&emsp;Add a BN layer after each convolutional layer. <br />&emsp;Use $Xavier/2$ initialization. <br />&emsp;Some hyperparameters: <br />&emsp;&emsp;Momentum: $0.9$<br />&emsp;&emsp;Learning rate: $0.1$, divided by $10$ when validation error plateaus. <br />&emsp;&emsp;Mini-batch size: 256<br />&emsp;&emsp;Weight decay: $1e-5$<br />&emsp;No dropout used. </li>
+</ol>
+<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ol>
+<li>AlexNet: small compute, still memory heavy, lower accuracy</li>
+<li>VGG: highest memory, most operations</li>
+<li>GoogLeNet: most efficient</li>
+<li>ResNet: Moderate efficiency depending on model, highest accuracy</li>
+<li>ResNet, with inception, has the highest accuracy. </li>
+</ol>
+<h1 id="Other-Architectures"><a href="#Other-Architectures" class="headerlink" title="Other Architectures"></a>Other Architectures</h1><ol>
+<li>NiN (Network in Network): <br />&emsp;Multiple convolutional layers with “micro-network” within each convolutional layer to compute more abstract features for local patches. <br />&emsp;The micro-network uses multilayer perceptron, like fully-connected layer. <br />&emsp;This is the precursor to GoogLeNet and ResNet bottleneck layers. </li>
+<li>Identity Mappings in Deep Residual Networks: Creates a more direct path for propagating information throughout the network (moves activation to residual mapping pathway)</li>
+<li>Wide residual network: <br />&emsp;Residuals are the critical factor, not depth. <br />&emsp;Use wider residual blocks ($F\times k$ filters instead of $F$ filters in each layer)<br />&emsp;$50$-layer wide ResNet outperforms $152$-layer original ResNet. <br />&emsp;Increasing width instead of depth is more computationally efficient. The computation can be easily parallelized. </li>
+<li>ResNeXt: increase the width of theresidual block through multiple parallel pathways. <br /><img src="https://i.loli.net/2020/04/12/f4Z2KiEk7GA39bB.png" width="30%"></li>
+<li>Stochastic depth: <br />&emsp;Motivation: reduce vanishing gradients and training time through short networks during training. <br />&emsp;Randomly drop a subset of layers during each training pass. <br />&emsp;Bypass with identity function. <br />&emsp;Use the full network at test time. </li>
+<li>FractalNet: <br />&emsp;The key is transitioning efficiently from shallow to deep and residual representation is not necessary. <br />&emsp;It has both shallow and deep paths to output. <br />&emsp;It is trained with dropout, and test with full network. <br />&emsp;<img src="https://i.loli.net/2020/04/12/kMj2eBg5Wmwt1LG.png" width="50%"></li>
+<li>Densely Connected Convolutional Networks: <br />&emsp;In dense block, each layer is connected to every other layer in a feedforward fashion. <br />&emsp;<img src="https://i.loli.net/2020/04/12/ygOFzE97AadnGpT.png" width="30%"><br />&emsp;It alleviates vanishing gradients, strengths feature propagation, encourages feature reuse. <br />&emsp;<img src="https://i.loli.net/2020/04/12/duc4WP7UifrAbOy.png" width="15%"></li>
+<li>SqueezeNet: <br />&emsp;It has AlexNet-level accuracy with $50$ times fewer parameters and less than $0.5$ Mb model size. <br />&emsp;Fire modules consisting of a ‘squeeze’ layer with $1\times1$ filters feeding an ‘expand’ layer with $1\times1$ and $3\times3$ filters. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/06-Deep-Learning-Software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/06-Deep-Learning-Software/" class="post-title-link" itemprop="url">06. Deep Learning Software</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-09 05:23:27 / Modified: 19:45:39" itemprop="dateCreated datePublished" datetime="2020-04-09T05:23:27+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CPU-and-GPU"><a href="#CPU-and-GPU" class="headerlink" title="CPU and GPU"></a>CPU and GPU</h1><ol>
+<li>GPU has way more cores than CPU. Most CUP has no more than $10$ cores, while the GPU can contain thousands of cores. </li>
+<li>Nevertheless, the clock speed of each core of CPU is a lot faster than the GPU. </li>
+<li>Furthermore, the CPU does not have its own memory. CPU has to share the memory with the system. However, GPU can have a large amount of memory of its own. </li>
+<li>So GPU is better when doing the tedious parallel tasks, like the multiplication of matrices. CPU is better at sequential tasks. </li>
+<li>When it comes to machine learning, the GPU can be about $70$ times faster than CPU, and CUDA can be $3$ times faster than none-CUDAs. </li>
+<li>When training, to synchronize the speed of GPU and reading data, we have three solutions: <br />&emsp;Read all data into RAM. <br />&emsp;Use SSD instead of HDD. <br />&emsp;Use multiple CPU threads to prefetch data. </li>
+</ol>
+<h1 id="Deep-Learning-Software"><a href="#Deep-Learning-Software" class="headerlink" title="Deep Learning Software"></a>Deep Learning Software</h1><ol>
+<li>The networks build with NumPy can only run on the CPU, and it is hard to compute the gradients. </li>
+<li>The point of deep learning frameworks: <br />&emsp;Quickly build big computational graphs. <br />&emsp;Efficiently compute gradients in computational graphs. <br />&emsp;Run it all efficiently on GPU. </li>
+</ol>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ol>
+<li>The main structure of TensorFlow is to define a computational graph first without doing any calculation. Then run the graph over and over. </li>
+<li>If we want to run the code on GPU, define the graph under the tf.device. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">'/gpu:0'</span>):</span><br></pre></td></tr></table></figure>
+Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
+<li>A placeholder is an array ran on CPU while a Variable is another kind of array ran on GPU. Usually, we declare the input and output as placeholders and weights as Variables. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(tf.float32, shape = (N, D))</span><br><span class="line"></span><br><span class="line">W = tf.Variable(tf.random_normal(D, H))</span><br></pre></td></tr></table></figure></li>
+<li>Then we define the the process of forward pass with some functions. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.maximum(matrix, number) <span class="comment">#a matrix of which each entry is the maximum of corresponding entry and the number</span></span><br><span class="line">tf.matmul(x, w) <span class="comment"># a matrix represents the product of the matrices</span></span><br><span class="line">tf.reduce_mean(matrix) <span class="comment"># a number represents the mean of all entries of that matrix</span></span><br><span class="line">tf.reduce_sum(matrix, axis) <span class="comment"># a vector whose each entry is the sum of that matrix along that axis.</span></span><br></pre></td></tr></table></figure></li>
+<li>The loss can be defined automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loss = tf.losses.mean_squared_error(y_pred, y)</span><br></pre></td></tr></table></figure></li>
+<li>The gradients can be calculated automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(loss, [variables]) <span class="comment"># multiple gradients of loss with respect to each variables</span></span><br></pre></td></tr></table></figure></li>
+<li>If we defined the weights as Variables, then we need to update weights here. Otherwise, we do it in the session. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_w = w.assign(w - learning_rate * grad_w)</span><br></pre></td></tr></table></figure></li>
+<li>There is no computation until here, only building the graph. </li>
+<li>With the graph done, we enter the session so we can actually run the graph. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br></pre></td></tr></table></figure></li>
+<li>In the session, we can initialize the placeholders in value. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">values = &#123;placeholder_name: np.random.randn(N, D), …&#125;</span><br></pre></td></tr></table></figure></li>
+<li>If we defined the weights as Variables, we need to run graph once to initialize the weights. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess.run(tf.global_variables_initializer())</span><br></pre></td></tr></table></figure></li>
+<li>After all those things, we can now enter the for-loop to run many times to train. In each iteration, we run the graph once. The loss in the parameter is defined above in the graph. <br />&emsp;If weights are defined as Variables, we need to group the gradients before entering the session and put the group in the parameter. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">updates = tf.group(new_w, …)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = value)</span><br></pre></td></tr></table></figure>
+&emsp;If weights are defined as Placeholder, we need to update the weights here. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_val, grad_w_val, … = sess.run([loss, grad_w, …], feed_dict = values)</span><br><span class="line">values[w] -= learning_rate * grad_w_val</span><br></pre></td></tr></table></figure></li>
+<li>If we are using optimizer, <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">1e-5</span>)</span><br><span class="line">updates = optimizer.minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = values)</span><br></pre></td></tr></table></figure></li>
+<li>We can also use the predefined layers, which automatically set up weight and bias for us. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">init = tf.contrib.layers.xavier_initializer() <span class="comment"># use Xavier initializer</span></span><br><span class="line">h = tf.layers.dense(inputs = x, </span><br><span class="line">                    units = H, </span><br><span class="line">                    activation = tf.nn.relu, </span><br><span class="line">                    kernel_initializer = init)</span><br><span class="line">y_pred = tf.layers.dense(inputs = h,</span><br><span class="line">                         units = D,</span><br><span class="line">                         kernel_initializer = init)</span><br></pre></td></tr></table></figure></li>
+<li>Furthermore, we can use Keras. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = keras.models.Sequential()</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = D, output_dim = H))</span><br><span class="line">model.add(keras.layers.core.Activation(<span class="string">'relu'</span>))</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = H, output_dim = D))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define optimizer</span></span><br><span class="line">optimizer = keras.optimizers.SGD(lr = <span class="number">1e0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the model, specify loss function</span></span><br><span class="line">model.compile(loss = <span class="string">'mean_squared_error'</span>, optimizer = optimizer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Train model</span></span><br><span class="line">history = model.fit(x, y, nb_epoch = <span class="number">50</span>, batch_size = N, verbose = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><ol>
+<li>Three levels of abstraction: <br />&emsp;Tensor: Imperative array, but runs on GPU. This is almost a Numpy array. <br />&emsp;Variable: Node in a computational graph; stores data and gradient. This is the Tensor, Variable, Placeholder on TensorFlow. <br />&emsp;Module: A neural network layer; may store state or learnable weights. </li>
+<li><p>To run on GPU, cast tensors to a CUDA datatype. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype = torch.cuda.FloatTensor</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A Pytorch Variable is a node in a computational graph. All Variables have two essential properties. Data is a Tensor while grad is a Variable of gradients with the same shape as data. Naturally, grad.data is a Tensor of gradients. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = torch.autograd.Variable(torch.randn(N, D_in), requires_grad = <span class="literal">False</span> / <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pytorch Tensors and Variables have the same API. Variables remember how they were created for backpropagation. </p>
+</li>
+<li><p>After defined all matrices, we enter the for-loop to train the network directly. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = x.mm(w1) <span class="comment"># matrices multiplication</span></span><br><span class="line">h_relu = h.clamp(h, min = <span class="number">0</span>) <span class="comment"># squash h into [min, max]</span></span><br><span class="line">loss = (y_pred - y).pow(<span class="number">2</span>).sum() <span class="comment"># the sum of the square of (y_pred - y)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compute the gradient of the loss with respect to weights. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> w.grad:</span><br><span class="line">  w.grad.data.zero_() <span class="comment"># zero out grad first</span></span><br><span class="line">loss.backward()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Update the weights. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w.data -= learning_rate * w.grad.data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can define our own autograd functions by writing forward and backward for Tensors. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLayer</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    self.save_for_backward(x)</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self, grad_y)</span>:</span></span><br><span class="line">    x, = self.saved_tensors</span><br><span class="line">    grad_input = grad_y.clone()</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> gradMatrix</span><br><span class="line">  </span><br><span class="line"> <span class="comment"># in forward process in the for-loop</span></span><br><span class="line">myLayer = MyLayer()</span><br><span class="line">y_pred = … <span class="comment"># some operations involve myLayer</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The predefined layers and loss functions are stored in <code>nn</code>. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = torch.nn.Sequential(</span><br><span class="line">  torch.nn.Linear(D_in, H), </span><br><span class="line">  torch.nn.ReLU(), </span><br><span class="line">  torch.nn.Linear(H, D_out))</span><br><span class="line">loss_fn = torch.nn.MSELoss(size_average = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train model</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  <span class="comment"># Feed data</span></span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = loss_fn(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Backward</span></span><br><span class="line">  model.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.data -= learning_rate * param.grad.data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>There also exist predefined optimizers. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Before training</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters, lr = learning_rate)</span><br><span class="line"></span><br><span class="line"><span class="comment"># In training</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can also define our own Models. Models can contain weight as variables or other Modules. We only need to implement the initialization and forward function. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, D_in, H, D_out)</span>:</span></span><br><span class="line">    super(MyModule, self).__init__()</span><br><span class="line">    self.linear1 = torch.nn.Linear(D_in, H)</span><br><span class="line">    self.linear2 = torch.nn.Linear(H, D_out)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Define model, then all is the same</span></span><br><span class="line">model = MyModule(D_in, H, D_out)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A DataLoader wraps a Dataset and provides mini-batching, shuffling, multithreading. When custom data is needed, write a Dataset class. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> TensorDataset, DataLoader</span><br><span class="line">loader = DataLoader(TensorDataset(x, y), batch_size = <span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> loader:</span><br><span class="line">    y_pred = model(x_batch)</span><br><span class="line">    loss = loss_fn(y_pred, y_batch)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PyTorch has some pre-trained models which can be used immediately. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line">alexnet = torchvision.models.alexnet(pretrained = <span class="literal">True</span>)</span><br><span class="line">vgg16 = torchvision.models.vgg<span class="number">.16</span>(pretrained = <span class="literal">True</span>)</span><br><span class="line">resnet101 = torchvision.models.resnet101(pretrained = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><ol>
+<li>Tensorflow is static graphs, while PyTorch is dynamic graphs. </li>
+<li>A static graph is built at the beginning, and the graph is never changed while a dynamic graph is new each iteration. </li>
+<li>With static graphs, the framework can optimize the graph before it runs. Furthermore, when one graph is built, we can serialize the static graph and run it without the code that built that graph. We can even change other language to run it. </li>
+<li>However, to build dynamic graphs  has less code to write. Moreover, conditional and loops can be easily written with dynamic graphs. </li>
+<li>Dynamic graphs are usually used on recurrent networks, recursive networks and modular networks. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/05-Training-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/06/05-Training-Neural-Networks/" class="post-title-link" itemprop="url">05. Training Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-06 09:19:58" itemprop="dateCreated datePublished" datetime="2020-04-06T09:19:58+08:00">2020-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-08 08:50:12" itemprop="dateModified" datetime="2020-04-08T08:50:12+08:00">2020-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h1><h2 id="Sigmoid-Function"><a href="#Sigmoid-Function" class="headerlink" title="Sigmoid Function"></a>Sigmoid Function</h2><ol>
+<li>Form: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$</li>
+<li>It squashes numbers to range $[0,1]$. </li>
+<li>It has excellent interpretation as a saturating “firing rate” of a neuron. </li>
+<li>However, when $x$ is very negative or very positive, the gradient of the sigmoid gate is zero, which kills the gradient flow. </li>
+<li>The Sigmoid outputs are not zero-centred. When the input of a neuron is always positive, the gradients on $W$ are always all positive or negative. This might cause an insufficiency update of $W$. (Same reason we want zero-mean data)</li>
+<li>Moreover, the exponential calculation is a bit compute expensively. </li>
+</ol>
+<h2 id="tanh-x"><a href="#tanh-x" class="headerlink" title="tanh(x)"></a>tanh(x)</h2><ol>
+<li>It squashes numbers to range $[-1,1]$. </li>
+<li>It is zero-centred. </li>
+<li>Nevertheless, it still kills the gradient when saturated. </li>
+</ol>
+<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><ol>
+<li>Form: $f(x)=max(0,x)$. </li>
+<li>It does not saturate in the positive regime and computationally efficient. </li>
+<li>In practice, It converges about $6$ times faster than sigmoid/tanh. </li>
+<li>Furthermore, it is more biologically plausible than sigmoid. </li>
+<li>However, it is not zero-centred output, and it also kills the gradient in the negative region. </li>
+<li>At some particular situation called dead ReLU, ReLU will never activate and never update. This happens when the initialization is bad or when the learning rate is too high. So people may initial ReLU neurons will slightly positive biases to increase the likelihood of being active ReLU. </li>
+</ol>
+<h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky_ReLU"></a>Leaky_ReLU</h2><ol>
+<li>Form: $f(x)=max(0.01x,x)$. </li>
+<li>It does not saturate and is computationally efficient. It converges as fast as ReLU. </li>
+<li>More importantly, it will not die. </li>
+<li>Another form is the parametric rectifier (PReLU) $f(x)=max(\alpha x, x)$, where $\alpha$ can be learned in backpropagation. </li>
+</ol>
+<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><ol>
+<li>Exponential Linear Units: <script type="math/tex">f(x)=\left\{\begin{array}{}x&if\ x>0\\\alpha(e^x-1)&if\ x≤0 \end{array}\right.</script>. </li>
+<li>It has all benefits of ReLU except its computation requires exponential. </li>
+<li>It is closer to zero mean outputs. </li>
+<li>It has a negative saturation regime compared with Leaky_ReLU. </li>
+<li>It adds some robustness to noise with flex parameter $\alpha$. </li>
+</ol>
+<h2 id="Maxout-Neuron"><a href="#Maxout-Neuron" class="headerlink" title="Maxout Neuron"></a>Maxout Neuron</h2><ol>
+<li>Form: $f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$. </li>
+<li>It can generalize the ReLU and the Leaky_ReLU. </li>
+<li>It has a linear regime and does not die and does not saturate. </li>
+<li>Nevertheless, it doubles the number of parameters per neuron. </li>
+</ol>
+<h2 id="In-practice"><a href="#In-practice" class="headerlink" title="In practice"></a>In practice</h2><ol>
+<li>Use ReLU. Be careful with the learning rates. </li>
+<li>Sometimes try out Leaky ReLU / Maxout / ELU. </li>
+<li>Maybe even try out tanh but do not expect much. </li>
+<li>Do not use sigmoid. </li>
+</ol>
+<h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><ol>
+<li>In data preprocessing, we usually want to zero-mean them by subtracting the mean from them and normalize them by dividing them with the standard deviation. </li>
+<li>In practice, we may also see the PCA and Whitening of the data. </li>
+<li>We do not normalize the data much when dealing with images. Moreover, we do not do PCA and Whitening for images. </li>
+<li>Sometimes we also subtract per-channel mean to create zero-mean data. </li>
+<li>The mean subtracted is the mean of all training data. </li>
+<li>We do not do these things to each batch later once more. </li>
+</ol>
+<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><ol>
+<li>When the initialization with all elements being zeros is used, the gradient of earlier layers in backpropagation will become all zeros. </li>
+<li>The first idea is to start with small random numbers. This works for small networks. However, with deeper networks, all activations become zero. </li>
+<li>Furthermore, if we initiate $W$ with too large numbers, the gradient will be all zero and the update will stop. </li>
+<li>Xavier initialization: This works all well, but when using the ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in)</span><br></pre></td></tr></table></figure></li>
+<li>He et al. fixed the break of ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><ol>
+<li>This operation tries to make the input of each layer unit gaussian activations. </li>
+<li>First, compute the empirical mean and variance independently for each dimension.<br />Second, normalize $\hat{x}^{(k)}=\displaystyle\frac{x^{(k)}-E[x^{(k)}]}{\sqrt{var(x^{(k)})}}$. </li>
+<li>This layer is usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. </li>
+<li>We also can allow the network to squash the range if it wants to. $y^{(k)}=\gamma^{(k)}\hat{x}^{(k)}+\beta^{(k)}$. Note that the network can learn $\gamma^{(k)}=\sqrt{var(x^{(k)})}$ and $\beta^{k}=E[x^{(k)}]$ to recover the identity mapping, but not definitely. </li>
+<li>It improves gradient flow through the network, allows higher learning rates, reduces the strong dependence on initialization, acts as a form of regularization, and slightly reduces the need for dropout, maybe. </li>
+<li>At test time, we use the mean and standard deviation calculated at training. So we skip the step of calculation at test time. </li>
+</ol>
+<h1 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h1><ol>
+<li>The first step is to preprocess the data, as mentioned above. </li>
+<li>The second step is to choose the architecture with which we want to start. </li>
+<li>The third step is to double-check the loss is reasonable. Do the forward process without regularization once and see if the loss is reasonable. Do it again with regularization and see if the loss is larger. </li>
+<li>Then make sure that it can overfit a tiny portion of the training data. Namely, the loss goes to $0$, and the accuracy goes to $1$. </li>
+<li>After that, use the full training set, and start with small regularization and find learning rate that makes the loss go down. If the loss is not going down, the learning rate is too low. If the loss is $NaN$, the learning rate is too high. <br />Do not focus on accuracy. Because when the accuracy is low, the distribution of loss is very dense. The raise of accuracy due to luck. </li>
+</ol>
+<h1 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h1><ol>
+<li>In cross-validation strategy, we first take a coarse search with a few epochs, to narrow down the range of parameters. </li>
+<li>Then we can do a finer search with longer running time at the rough range we get to find the specific best hyperparameter. </li>
+<li>We had better keep the best hyperparameters in the middle of the searching range. </li>
+<li>It is best to optimize in log space. </li>
+<li>Another two strategies are the random search and the grid search. If the loss is more sensitive to one of the hyperparameters, the random search can cover the situation better. </li>
+<li>If the loss curve: <br />&emsp;exploded: very high learning rate<br />&emsp;decrease slowly: very low learning rate<br />&emsp;decrease rapidly first, then barely changed: very high learning rate<br />&emsp;barely changed first, but begin to decay after a while: bad initialization<br />&emsp;has big gap between training and test: overfitting, try to increase the regularization strength<br />&emsp;has no gap between: increase model capability. </li>
+</ol>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="Problems-with-gradient-descend"><a href="#Problems-with-gradient-descend" class="headerlink" title="Problems with gradient descend"></a>Problems with gradient descend</h2><ol>
+<li>Some loss function changes quickly in one direction and slowly in another. Namely, loss function has a high condition number: the ratio of the largest to the smallest singular value of the Hessian matrix is massive. </li>
+<li>If the loss function has a local minimum or a saddle point, the gradient near it will be zero, and the gradient descend will get stuck. </li>
+<li>The data may contain noise, which will cause the gradient to descend inaccurately. </li>
+</ol>
+<h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><ol>
+<li>A straightforward strategy is to use the <code>SGD + momentum</code>. </li>
+<li>The SGD has the formula: $x_{t+1}=x_t-\alpha\triangledown f(x_t)$. We can preserve a velocity as a running mean of gradients. <br />Velocity: $v_{t+1}=\rho v_t+\triangledown f(x_t)$<br />Descend: $x_{t+1}=x_t-\alpha v_{t+1}$. </li>
+<li>Rho gives “friction”; typically <script type="math/tex">\rho=0.9\ or\ 0.99</script>. </li>
+<li>So we update the parameters at the direction of speed instead of the gradient of the gradient. </li>
+<li>Another kind of momentum is the Nesterov momentum. It updates the speed with the gradient at the endpoint of current speed. <br />Velocity: $v_{t+1}=\rho v_t-\alpha\triangledown f(x_t+\rho v_t)$. <br />Parameters: $x_{t+1}=x_t+v_{t+1}$. </li>
+<li>In Nesterov momentum, we can substitute $\tilde{x}_t=x_t+\rho v_t$. So that $v_{t+1}=\rho v_t-\alpha\triangledown f(\tilde{x})$ and $\tilde{x}_{t+1}=\tilde{x}_t+v_{t+1}+\rho(v_{t+1}-v_t)$. </li>
+<li>Add a momentum solved all the problems we have above. <br />&emsp;At local minima or saddle points, the velocity will maintain the update instead of stuck there. <br />&emsp;If the loss function is poor conditioning, the zig-zag gradients will cancel out by the velocity fast since the velocity is the mean of gradients. <br />&emsp;Moreover, the velocity is less sensitive to the noise. </li>
+</ol>
+<h2 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h2><ol>
+<li><p>AdaGrad scales the update step size by the square root of the accumulative of the square the gradient. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">grad_square += dx * dx</span><br><span class="line">x -= learning_rate * dx / (np.sqrt(grad_square) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The $1e-7$ is only to make sure we will not divide by zero. </p>
+</li>
+<li>However, as the training time goes by, the grad_square grows larger and larger, so the step size of the update becomes smaller. </li>
+<li>A better form of AdaGrad is RMSProp. This method allows the grad_square to decay to prevent it from getting too large. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_square = decay_rate * grad_square + (<span class="number">1</span> - decay_rate) * dx * dx</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><ol>
+<li>What the momentum does is to replace the gradient with the velocity when updating the parameters. What the AdaGrad does is to scale the update step size. </li>
+<li><p>In Adam, we do them both. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx</span><br><span class="line">second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx</span><br><span class="line">x -= learning_rate * first_moment / (np.sqrt(second_moment) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Usually, we set betas some number close to $1$. This will cause the second_moment too small at first, which will lead to a giant step at the beginning. </p>
+</li>
+<li>To solve the problem, we scale the moments before the update by a size decaying as time goes by. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first_unbias = first_moment / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">second_unbias = second_moment / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line"><span class="comment"># t means this is the t-th epoch of iterate</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h2><ol>
+<li>No matter which optimization strategy is used, the learning rate is always a hyperparameter. </li>
+<li>In practice, we do not have to stick to one constant learning rate to the end. We can change the learning rate as training goes deeper. </li>
+<li>One strategy is to decay the learning rate every few epochs. </li>
+<li>Alternatively, we can decay it exponentially. $\alpha = \alpha_0e^{-kt}$</li>
+<li>What’ more, we can decay it as $\alpha=\displaystyle\frac{\alpha_0}{1+kt}$. </li>
+<li>The change of learning rate can cause an underivable point on the graph of the loss function. </li>
+</ol>
+<h2 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h2><ol>
+<li>What we discussed before is all first-order optimization, which uses the gradient form linear approximation ($\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)$) to step to minimize the approximation. </li>
+<li>In second-order optimization, we use the gradient and the Hessian matrix to form a quadratic approximation <br />$\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)+\sum_{x_i}\sum_{x_j}\frac{1}{2}f_{x_ix_j}(x-x_i)(x-x_j)$</li>
+<li>The $(i,j)$ element of the Hessian matrix is $f_{x_ix_j}$. </li>
+<li>In the vector form, $J(\vec{\theta})=J(\vec{\theta_0})+(\vec{\theta}-\vec{\theta_0})^T\triangledown_{\vec{\theta}}J(\vec{\theta_0})+\displaystyle\frac{1}{2}(\theta-\theta_0)^TH(\theta-\theta_0)$</li>
+<li>Solve for the critical point, and we obtain the Newton parameter update: $\vec{\theta}^*=\vec{\theta_0}-H^{-1}\triangledown_{\vec{\theta}}J(\vec{\theta_0})$. </li>
+<li>This method avoids the hyperparameters. It does not contain the learning rate. </li>
+<li>Nevertheless, the Hessian matrix has $N^2$ elements. To invert it requires $O(N^3)$. </li>
+<li>Quasi-Newton methods (BGFS most popular): instead of inverting the Hessian ($O(n^3)$), approximate inverse Hessian with rank $1$ updates over time ($O(n^2)$ each). </li>
+<li>L-BFGS (Limited memory BFGS): Does not form/store the full inverse Hessian. It cannot handle stochastic problems well.</li>
+</ol>
+<h2 id="In-Practice"><a href="#In-Practice" class="headerlink" title="In Practice"></a>In Practice</h2><ol>
+<li>Adam optimization is often the best choice. </li>
+<li>If full batch updates can be afforded then maybe try out L-BFGS (and do not forget to disable all sources of noise). </li>
+</ol>
+<h1 id="Decrease-the-Gap"><a href="#Decrease-the-Gap" class="headerlink" title="Decrease the Gap"></a>Decrease the Gap</h1><p>Usually, there will exist a gap between the loss functions of the training set and the test set. </p>
+<h2 id="Model-Ensembles"><a href="#Model-Ensembles" class="headerlink" title="Model Ensembles"></a>Model Ensembles</h2><ol>
+<li>The first strategy to decrease the gap is to train multiple independent models and average their results at test time. </li>
+<li>This will have a slight improvement at test. </li>
+<li>Instead of training independent models, use multiple snapshots of a single model during training. Cyclic learning rate schedules can make this work even better. </li>
+<li>Instead of using the actual parameter vector, keep a moving average of the parameter vector and use that at test time (Polyak averaging)</li>
+</ol>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><ol>
+<li>This strategy can improve single-model performance. </li>
+<li>Using dropout, we randomly set some neurons to zero in each forward pass. Probability of dropping is a hyperparameter $p$, which is typical $0.5$. </li>
+<li>By the mean of setting to zero, we set the input of activation to zero. </li>
+<li>It forces the network to have a redundant representation and prevents co-adaptation of features. Dropout often happens at fully-connected layers, but sometimes convolution layers. </li>
+<li>Dropout is training a large ensemble of models that share parameters. </li>
+<li>Each dropout decision is called a dropout mask, and each binary mask is one model. </li>
+<li>Nevertheless, dropout makes our output random with $y=f(x,z)$, where $z$ is the random dropout mask. </li>
+<li>In order to average out the randomness at test-time, we want $y=E_z[f(x,z)]=\displaystyle\int p(z)f(x,z)dz$. </li>
+<li>However, the integral is hard to calculate, so we want an approximation of it by consider it discrete. Funnily, the approximation is to scale each activation with the probability $p$. </li>
+<li>With dropout, we might need  a bit longer time to train, but after training, the model will have a better generalization. </li>
+</ol>
+<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><ol>
+<li>This strategy creates new images from the old ones with some operations. </li>
+<li>The common operations for data augmentation: <br />&emsp;Horizontal flips<br />&emsp;Random crops and scales<br />&emsp;Color jitter</li>
+</ol>
+<h2 id="Common-Pattern"><a href="#Common-Pattern" class="headerlink" title="Common Pattern"></a>Common Pattern</h2><ol>
+<li>The common strategy is to add random noise at training and marginalize over the noise at test. </li>
+<li>Batch normalization fits this common pattern, too. In training, it normalizes using stats from random minibatches, while in the test, it uses fixed stats to normalize. </li>
+<li>Another strategy which is similar to the dropout is drop-connect. Instead of dropout neurons before activation, it drops connections between layers by setting part of the weight matrix to zero. </li>
+<li>Two more unusual strategies are the fractional max pooling and the stochastic depth. </li>
+</ol>
+<h1 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h1><ol>
+<li>This is a backup plan when the dataset is not large. </li>
+<li>First, train the network at another dataset on the internet. Then finetune the linear classifier with our dataset. </li>
+<li>If our dataset is tiny, then we can use linear classifier on top layer and train with some very similar dataset. If our dataset is quite large, then we can finetune a few layers. </li>
+<li>With more similar datasets, the layer needed to finetune is less. </li>
+<li>Transfer learning with CNNs is pervasive. This is the norm, not an exception. e</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/04-Convolutional-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/06/04-Convolutional-Neural-Networks/" class="post-title-link" itemprop="url">04. Convolutional Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-06 00:29:06" itemprop="dateCreated datePublished" datetime="2020-04-06T00:29:06+08:00">2020-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-05 16:33:23" itemprop="dateModified" datetime="2020-04-05T16:33:23+08:00">2020-04-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Convolution-Layer"><a href="#Convolution-Layer" class="headerlink" title="Convolution Layer"></a>Convolution Layer</h1><ol>
+<li>Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image. </li>
+<li>In the convolution layer, we convolve a smaller filter with the image; namely, we slide it over the image spatially, computing dot products. </li>
+<li>The size of the matrix of an image is usually $N\times N\times z$. The filter we choose can have random $F$, but the $z$ must be maintained. So the filter can be anything in the form of $F\times F\times z$. </li>
+<li>Every filter is a weighted matrix. We use it to cover up some location of the image, then calculate the sum of the products of the corresponding numbers. <br />This process is the same as we stretch the filter and the covered area into two one-dimensional vectors and calculate the dot product of these two vectors. </li>
+<li>After each dot product, we get a number $w^Tx+b$ instead of a vector. So each filter can produce an $F’\times F’\times1$ activation map. Furthermore, we can use multiple filters to create multiple activation maps. With $k$ filters, the activation matrix will be $F’\times F’\times k$. </li>
+<li>The earlier convolution layers will learn lower-level features while the later ones will learn higher-level features. </li>
+<li>One thing that will affect the size of the activation map is the stride we choose when the filter is slid around the image. If the stride is $S$, the size will be $\displaystyle(\frac{N-F}{S}+1)\times(\frac{N-F}{S}+1)\times n$. <br />Stride can be any integer as long as $N-F$ is dividable by it. </li>
+<li>Another common phenomenon is padding. When we say “zero pad with $P$”, we mean that add $a$ laps zero bounds around the original matrix. <br />So the actual size of a matrix which pad with $P$ we need to slide is $(N+2P)\times (N+2P)\times z$. <br />The padding is used to maintain the input size. So in convolution layer, we often pad the image with $\displaystyle\frac{F-1}{2}$ laps of zero pixel border. Nevertheless, the pad is not necessary; sometimes we do not use padding; sometimes we pad less, sometimes we pad more. </li>
+</ol>
+<h1 id="Other-layers"><a href="#Other-layers" class="headerlink" title="Other layers"></a>Other layers</h1><ol>
+<li>Pooling layer makes the representations smaller and more manageable. It operates over each activation map independently and downsamples them. </li>
+<li>The pooling layer also has a filter, but instead of doing a dot product, it may take the maximum of the numbers (Max Pooling Layer). </li>
+<li>In convention, we do not want any overlap in pooling layer, unlike in the convolution layer. </li>
+<li>Typically, the last layer of a convolution neural network will be a fully-connected layer, which connects the class labels to the input. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/03-Backpropagation-and-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/03-Backpropagation-and-Neural-Networks/" class="post-title-link" itemprop="url">03. Backpropagation and Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-05 10:16:49 / Modified: 09:14:25" itemprop="dateCreated datePublished" datetime="2020-04-05T10:16:49+08:00">2020-04-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><ol>
+<li>Backpropagation is used for calculating the gradient. </li>
+<li>In each gradient, we need to calculate the derivative of $f$ with respect to each component. </li>
+<li>Any function $f$ can be decomposed into a computational graph, which contains several nodes. Each node represents one single simple calculation with some inputs and one output. </li>
+<li>We can easily calculate the local gradient for each node function $q$, $\displaystyle\frac{\partial q}{\partial x_i}$. </li>
+<li>With the chain rule, we can multiply each local gradient to get $\displaystyle\frac{\partial f}{\partial x_i}$. </li>
+<li>In programming, we usually start from the end of the computational graph, namely $f=f$. Its local gradient is $\displaystyle\frac{\partial f}{\partial f}=1$. <br />Then we calculate backwardly the last but one node. <br />Each node except the last one multiplies the previously calculated gradient to get the global gradient. <br />The global gradients of the leaf nodes are the gradient we want. <br /><img src="https://i.loli.net/2020/04/04/SkKaNmUrb184Dtp.png" width="40%">$\displaystyle\frac{\partial f}{\partial q},\frac{\partial q}{\partial W},\frac{\partial q}{\partial X},\frac{\partial f}{\partial b}$ are all local gradients, while $\displaystyle1.0,\frac{\partial f}{\partial q}\times1.0,\frac{\partial q}{\partial W}\frac{\partial f}{\partial q},\frac{\partial q}{\partial X}\frac{\partial f}{\partial q},\frac{\partial f}{\partial b}\times1.0$ are all global gradients. </li>
+<li>We can also group some nodes to form a complicated node as long as we can write down the local gradient. </li>
+<li>Add gate distributes the global gradient of the output as the global gradient of each input. <br />Max gate gives the output local gradient to the larger input as its global gradient and gives $0$ to another input. <br />Multiplication gate switches the values of inputs as their local gradient. </li>
+<li>If inputs are vectors, the local gradients are the Jacobian matrices; namely, we need to calculate each element of the output with respect to each element of the input. Given the property of partial derivative, the Jacobian matrices are diagonal. </li>
+<li>Always check: The gradient with respect to a variable should have the same shape as the variable. </li>
+<li>In implement, we can make each gate a class with a forward function and a backward function. The forward function takes in the inputs and returns the forward calculation output. The backward function takes in the previous gradient and returns the gradients with respect to each component. </li>
+</ol>
+<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><ol>
+<li>Instead of using a single linear score function, we use multiple linear functions in neural networks with nonlinear functions in between. </li>
+<li>The nonlinear functions are called the activation function. </li>
+<li>There are many kinds of activation functions: <br />&emsp;Sigmoid: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$<br />&emsp;tanh: $tanh(x)$<br />&emsp;ReLu: $max(0,x)$<br />&emsp;Leaky ReLu: $max(0.1x,x)$<br />&emsp;Maxout: $max(w_1^Tx+b_1,w^T_2x+b_2)$<br />&emsp;ELU: $\left\{\begin{array}{}x&amp;x≥0\\\alpha(e^x-1)&amp;x&lt;0 \end{array}\right.$</li>
+<li>The layers which take in the output of the previous layer and do one linear calculation and one nonlinear calculation is called fully-connected layers. </li>
+<li>The first layer is the input layer, which takes in the input and calculate. So it is a fully-connected layer. <br />The last layer is the output layer, which does no calculation, simply outputs the result. So it is not a fully-connected layer. <br />All layers except these two layers are hidden layers. </li>
+<li>What we called “$2$-layer Neural Network” is “$2$-fully-connected-layer Neural Network” or “$1$-hidden-layer Neural Network”. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/02-Loss-Functions-and-Optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/02-Loss-Functions-and-Optimization/" class="post-title-link" itemprop="url">02. Loss Functions and Optimization</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 06:30:24" itemprop="dateCreated datePublished" datetime="2020-04-05T06:30:24+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 19:15:51" itemprop="dateModified" datetime="2020-04-04T19:15:51+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>A loss function tells how good our current classifier is. </p>
+<h2 id="Data-Loss"><a href="#Data-Loss" class="headerlink" title="Data Loss"></a>Data Loss</h2><ol>
+<li>Given a dataset of examples $\{(x_i,y_i)\}^N_{i=1}$ where $x_i$ is an image and $y_i$ is an integer label. Loss over the dataset is a sum of loss over examples: $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)$. </li>
+<li>There are infinitely many $W$ to make $L=0$. </li>
+</ol>
+<h3 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h3><ol>
+<li>Multiclass SVM loss (Hinge loss): $L_i=\displaystyle\sum_{j≠y_i}max(0,s_j-s_{y_i}+1)$. $s_i$ is the score of the $i$th class. </li>
+<li>The minimum loss of SVM is $0$ when all prediction is correct. The maximum loss is infinity when the prediction is as wrong as possible. </li>
+<li>If at initialization $W$ is small, so all $s\approx 0$, the loss will be <script type="math/tex">the\ number\ of\ class-1</script>. </li>
+</ol>
+<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><ol>
+<li>We can use the scores to calculate the probabilities of all labels given the condition of the image is $x_i$. </li>
+<li>We exponentiate scores to make every term positive. So the probability of the actual label being $k$ is $P(Y=k|X=x_i)=\displaystyle\frac{e^{s_k}}{\sum_je^{s_j}}$, which is called the softmax function. </li>
+<li>To maximize the log-likelihood, or to minimize the negative log-likelihood of the correct class. <script type="math/tex">L_i=-log\ P(Y=y_i|X=x_i)=-log\ \displaystyle\frac{e^{s_{y_i}}}{\sum_je^{s_j}}</script>. </li>
+<li>The goal is to maximize the probability of the right label. It is easier to maximize the log function than the raw probability. Also, the loss function is describing how bad the model is, so we take the negative of it. </li>
+<li>Three steps for softmax classifier: exponentiate the scores; normalize them; take the negative log of the correct label. </li>
+<li>The minimum possible loss is $0$ when the model is totally right (the probability of the accurate label is $1$). The maximum is infinity when the model is entirely wrong (the probability of the correct label is $0$). However, these two situations will occur. </li>
+<li>A slight change in a datapoint might when changing the loss of SVM if the label is right, but it will change the loss of softmax in any situation. </li>
+</ol>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><ol>
+<li>The only thing we care about is the performance on the test set. So we need to tell our algorithm more than the performance on the training data. </li>
+<li>To avoid overfitting the training data, we should add regularization to the loss, which will punish when the model is complicated. So the loss becomes $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$. $\lambda$ is a hyperparameter called regularization strength. </li>
+<li>$L2$ regularization: $R(W)=\displaystyle\sum_k\sum_lW_{k,l}^2$<br />$L1$ regularization: $R(W)=\displaystyle\sum_k\sum_l|W_{k,l}|$<br />Elastic net $(L1+L2)$: $R(W)=\displaystyle\sum_k\sum_l\beta W_{k,l}^2+|W_{k,l}|$</li>
+<li>The idea of regularization is to penalize the complexity of model rather than trying to fit the training data. </li>
+<li>$L2$ regularization also corresponds MAP inference using a Gaussian prior on $W$. </li>
+<li>The regularization function is a problem-dependent hyperparameter. </li>
+<li>If at initialization $W$ is small so all $s\approx 0$, the loss will be <script type="math/tex">-log\ c</script>. $c$ is the number of classes. </li>
+</ol>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><ol>
+<li>The strategy here is to follow the gradient of $f$. The opposite direction of the gradient is the greatest decrease in the function. </li>
+<li>The numerical way to calculate the gradient to increase one component of $W$ a little bit, then use the formula $\displaystyle\frac{df}{dx}=\frac{f(x+h)-f(x)}{h}$ to get the corresponding component in the gradient. </li>
+<li>The faster way to get the gradient is the analytic way. In practice, always use the analytic gradient, but check implementation with numerical gradient. This is called a gradient check. </li>
+<li>Gradient descent: first calculate the gradient, then subtract the multiplication of learning rate and the gradient from the weight. </li>
+<li>Calculation of the gradient can be slow, so in practice, we usually use the stochastic gradient descent, which only calculates the gradient of part of the training set. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/01-Image-Classification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/01-Image-Classification/" class="post-title-link" itemprop="url">01. Image Classification</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 03:11:23" itemprop="dateCreated datePublished" datetime="2020-04-05T03:11:23+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 16:35:39" itemprop="dateModified" datetime="2020-04-04T16:35:39+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>The conventional way to solve image classification problem: <br />Data-driven Approach: <br />&emsp;Collect a dataset of images and labels<br />&emsp;Use Machine Learning to train a classifier<br />&emsp;Evaluate the classifier on new images</li>
+<li>The API has two main functions: <br />&emsp;”Train” function: input images and labels then output a model. <br />&emsp;”Predict” function: input model and images then output predictions. </li>
+</ol>
+<h1 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h1><h2 id="Train-and-Predict"><a href="#Train-and-Predict" class="headerlink" title="Train and Predict"></a>Train and Predict</h2><ol>
+<li>In the training function, we memorize all data and labels. </li>
+<li>In the prediction function, we predict the label of the most similar training image. </li>
+<li>More specific, in prediction, we find the closest image and predict the label of the nearest image. </li>
+<li>With $N$ example, the complexity of training is $O(1)$ and prediction is $O(N)$. This is bad because we want classifiers that are fast at prediction even if the training is slow</li>
+<li>Another problem with this algorithm is the curse of dimensionality. As the data enter the higher dimension, they become sparse. So we need a lot more datas to make space dense, which is possibly out of control. </li>
+</ol>
+<h2 id="Compare-Images"><a href="#Compare-Images" class="headerlink" title="Compare Images"></a>Compare Images</h2><ol>
+<li>In order to select the most similar image, we need to compare each image. So it is necessary to choose a compare function. </li>
+<li>The first choice is the <code>L1 distance</code> or <code>Manhattan distance</code>. $d_1(I_1,I_2)=\displaystyle\sum_p|I_1^p-I_2^p|$. </li>
+<li>Another choice is the <code>L2 distance</code> or <code>Euclidean distance</code>. $d_2(I_1,I_2)=\sqrt{\sum_p(I_1^p-I_2^p)^2}$. </li>
+<li>The difference between the two choices is that $L1$ distance is coordinate-dependent wile $L2$ distance is coordinate-independent. If we rotate the coordinate frame, $L1$ distance will be changed while $L2$ distance remains the same. </li>
+<li>Actually, distance matrices on pixels are not informative. </li>
+</ol>
+<h2 id="K-Nearest-Neighbors"><a href="#K-Nearest-Neighbors" class="headerlink" title="K-Nearest Neighbors"></a>K-Nearest Neighbors</h2><ol>
+<li>The algorithm above determines the result with only one data. Therefore it is easily affected by noise. </li>
+<li>To reduce the affection of noise, we use the more “democratic” way. We take majority vote from $K$-nearest neighbours. </li>
+<li>The algorithm mentioned earlier is a $K=1$ algorithm. </li>
+<li>We often take $K$ some odd number instead of an even number. </li>
+<li>When $K$ is smaller than the number of classes of labels, some image may be unpredictable if the vote of all $K$-nearest neighbours is a tie. So we will make a random guess among the majority winners. </li>
+</ol>
+<h1 id="Hyperparameter"><a href="#Hyperparameter" class="headerlink" title="Hyperparameter"></a>Hyperparameter</h1><ol>
+<li>Hyperparameter is choices about the algorithm that we set rather than learn. As the number of $K$ above, which distance we are using, they are both hyperparameters. </li>
+<li>Hyperparameter is very problem-dependent. We must try them all out and see what works best. </li>
+</ol>
+<h2 id="Setting-Hyperparameters"><a href="#Setting-Hyperparameters" class="headerlink" title="Setting Hyperparameters"></a>Setting Hyperparameters</h2><ol>
+<li>Mark that when setting hyperparameters, we never touch a finger on the test set. The test must be unseen from model and us. </li>
+<li>So we must split data into a training set, a validation set and a test set. Choose hyperparameters on the validation set and evaluate on the test set. </li>
+<li>Furthermore, we can use the cross-validation by splitting data into folds. Try each fold as validation and average the results. This is useful but takes much time. So we mostly use it on small datasets and seldom use it on large datasets. </li>
+<li>In order to avoid bias on each dataset, we usually split data randomly. </li>
+</ol>
+<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><ol>
+<li>The parametric approach takes in the image as a vertical vector $\vec{x}$, and a parameter matrix (weight matrix) $W$ then outputs scores of each class. <br />For $\vec{x}$, we take the numbers in each image out in order and put them into a vertical vector. </li>
+<li>In linear classification, $f(\vec{x},W)=W\vec{x}$. Sometimes, we might want to add a bias vector $\vec{b}$, which makes the function $f(\vec{x}, W)=W\vec{x}+\vec{b}$. </li>
+<li>Each row of $W$ is a template of how each pixel in the image will affect each class. </li>
+<li>The linear classification model splits the space into pieces with linear decision boundaries. Each class takes one piece. </li>
+<li>We predict the label as the label of the highest class score. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/23/15-Classical-Statistical-Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/23/15-Classical-Statistical-Inference/" class="post-title-link" itemprop="url">15. Classical Statistical Inference</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-23 01:11:49" itemprop="dateCreated datePublished" datetime="2020-03-23T01:11:49+08:00">2020-03-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-02 16:52:07" itemprop="dateModified" datetime="2020-04-02T16:52:07+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>In classical statistics, we see the unknowns as constants instead of random variables in Bayesian statistics. </li>
+<li>The distribution of $X$ depends on $\theta$. This is not a conditional distribution $p_{X|\Theta}$ or $f_{X|\Theta}$ in the Bayesian statistics but only a common distribution $p_X(x;\theta)$ or $f_X(x;\theta)$. </li>
+<li>For vectors $X$ and $\theta$: $p_{X_1,…X_2}(x_1,…,x_n;\theta_1,…,\theta_m)$. </li>
+<li>Problem types: <br />&emsp;Hypothesis testing: choose the correct model from several discrete model. Each model contains only one model. <br />&emsp;Composite hypotheses: some models might consist of more than one models. <br />&emsp;Estimation: design an estimator $\hat\Theta$ to keep estimation error $\hat\Theta-\theta$ small. </li>
+</ol>
+<h1 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h1><ol>
+<li>Pick $\theta$ that makes data most likely. <script type="math/tex">\hat\theta_{ML}=arg\ max_\theta\ p_X(x;\theta)</script>. </li>
+<li>In Bayesian MAP estimation, we actually only need to maximize <script type="math/tex">\hat\theta_{MAP}=arg\ max_\theta\ p_{X|\Theta}(x|\theta)p_\Theta(\theta)</script>. If $p_\Theta(\theta)$ is a constant, these two is going to maximize the same thing. </li>
+<li>The estimate $\theta$ is the realized value of estimator $\hat\Theta$. </li>
+<li>In many applications, the observations $X_i$ are assumed to be independent, in which case, the likelihood function is of the form $p_X(x_1,…,x_n;\theta)=\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)$. <br />In this case, it is often use the logarithm form, which is called log-likelihood function, to find the maximum. <script type="math/tex">log\ p_X(x_1,…,x_n;\theta)=log\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)=\sum^n_{i=1}log\ p_{X_i}(x_i;\theta)</script></li>
+</ol>
+<h2 id="Desired-Properties-of-Estimators"><a href="#Desired-Properties-of-Estimators" class="headerlink" title="Desired Properties of Estimators"></a>Desired Properties of Estimators</h2><ol>
+<li>Unbiased: $E_\theta[\hat\Theta]=\displaystyle\int f_{\hat\Theta}(\hat\theta;\theta)\hat\theta d\hat\theta =\theta$. $\theta$ is the true value. </li>
+<li>Consistent: $\hat\Theta_n\to\theta$. </li>
+<li>Small mean squared error: $E_\theta[(\hat\Theta-\theta)^2]=var_\theta(\hat\Theta-\theta)+(E_\theta[\hat\Theta-\theta])^2=var_\theta(\hat\Theta)+(bias_\theta)^2$</li>
+</ol>
+<h1 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h1><ol>
+<li>An estimate $\hat\Theta_n$ may not be informative enough. </li>
+<li>An $(1-\alpha)$ confidence interval is a random interval $[\Theta_n^-,\Theta_n^+]$, such that $P(\Theta^-_n≤\theta≤\Theta^+_n)≥1-\alpha,\forall\alpha$. </li>
+<li>We usually use the normal table to calculate the confidence interval of sample mean. <br />&emsp;According to the central limit theorem, $P\left(\displaystyle\frac{|\hat\Theta_n-\theta|}{\displaystyle\frac{\sigma}{\sqrt{n}}}≤z \right)\approx\Phi(z)$. <br />&emsp;So $P\left(\hat\Theta_n-\displaystyle\frac{z\sigma}{\sqrt{n}}≤\theta≤\hat\Theta_n+\frac{z\sigma}{\sqrt{n}} \right)\approx1-\alpha$<br />&emsp;$\Phi(z)=1-\displaystyle\frac{\alpha}{2}$. </li>
+<li>If we don’t know about $\sigma$. <br />&emsp;Option $1$: use the upper bound on $\sigma$. <br />&emsp;Option $2$: use ad hoc estimate of $\sigma$. <br />&emsp;Option $3$: use the generic estimate of variance<br />&emsp;&emsp;$\sigma^2=E[(X_i-\theta)^2]$, so $\hat\sigma^2=\displaystyle\frac{1}{n}\sum^n_{i=1}(X_i-\theta)^2$. But $\theta$ is still unknown, so we use the estimator instead. <br />&emsp;&emsp;$\hat{S}_n^2=\displaystyle\frac{1}{n-1}\sum^n_{i=1}(X_i-\hat\Theta_n)^2$. And $E[\hat{S}^2_n]=\hat\sigma^2\to\sigma^2$. </li>
+</ol>
+<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><ol>
+<li>Model: $y\approx\theta_0+\theta_1x$ to minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>Interpretation: $Y_i=\theta_0+\theta_1x_i+W_i$, $W_i\sim N(0,\sigma^2)$. </li>
+<li>Likelihood function $f_{X,Y|\theta}(x,y;\theta)=c\cdot exp\{\displaystyle-\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2\}$. So we need to maximize it. </li>
+<li>Take the logs, maximize <script type="math/tex">-log\ c\cdot\displaystyle\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2</script>. The same as minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>The solution is $\hat\theta_1=\displaystyle\frac{\displaystyle\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum^n_{i=1}(x_i-\bar{x})^2}$ and $\hat\theta_0=\bar{y}-\hat\theta_1\bar{x}$. </li>
+<li>This form can be interpreted as estimates of $\hat\theta_1=\displaystyle\frac{cov(X,Y)}{var(X)}$ and $\hat\theta_0=E[Y]-\hat\theta_1E[X]$. </li>
+<li>Multiple linear regression: <br />&emsp;Model: $y\approx\theta_0+\theta_1x_1+\theta_2x_2+…$. <br />&emsp;Formulation: <script type="math/tex">min_{\theta_0,\theta_1,…}\ \displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_1-\theta_2x_2-…)^2</script>. </li>
+<li>General method: set the derivative to zero. </li>
+<li>We can also choose different variables $y\approx\theta_0+\theta_1h(x)$. Since $\theta_0$ and $\theta_1$ are the unknowns, this is still a linear function. </li>
+<li>Some concerns: <br />&emsp;noise might affect the result<br />&emsp;multiple variables have different correlation<br />&emsp;the regression function only shows the prediction based on other variables, but says nothing about the causal relations. </li>
+</ol>
+<h1 id="Binary-Hypothesis-Testing"><a href="#Binary-Hypothesis-Testing" class="headerlink" title="Binary Hypothesis Testing"></a>Binary Hypothesis Testing</h1><ol>
+<li>Null hypothesis $H_0$: $X\sim p_X(x;H_0)$ or $X\sim f_X(x;H_0)$<br />Alternative hypothesis $H_1$: $X\sim p_X(x;H_1)$ or $X\sim f_X(x;H_1)$. </li>
+<li>Partition the space of possible data vectors Rejection region R: reject $H_0$ if and only if $x\in R$. </li>
+<li>Types of errors: <br />&emsp;False rejection: $H_0$ is true but rejected: $\alpha(R)=P(X\in R;H_0)$. <br />&emsp;False acceptance: $H_0$ is false but accepted: $\beta(R)=P(X\notin R;H_1)$. <br />&emsp;$\alpha$ and $\beta$ have a trade off relation. When $\alpha$ increases, $\beta$ decreases and vice versa. </li>
+<li>Likelihood ratio test of Bayesian test: choose $H_1$ if <br />$P(H_1|X=x)&gt;P(H_0|X=x)$ or $\displaystyle\frac{P(X=x|H_1)P(H_1)}{P(X=x)}&gt;\frac{P(X=x|H_0)P(H_0)}{P(X=x)}$ or $\displaystyle\frac{P(X=x|H_1)}{P(X=x|H_0)}&gt;\frac{P(H_0)}{P(H_1)}$. </li>
+<li>Likelihood ratio test of Nonbayesian test: choose $H_1$ if <br />$L(x)=\displaystyle\frac{P(X=x;H_1)}{P(X=x;H_0)}&gt;\epsilon$ when $X$ is discrete and if $\displaystyle\frac{f_X(x;H_1)}{f_X(x;H_0)}&gt;\epsilon$ when $X$ is continuous. <br />Normally, we can concise the inequality to $\displaystyle\sum_if(X_i)&gt;\epsilon’$, which is called the statistic. <br />Then fix the false rejection probability $\alpha$, and choose $\epsilon$ so that <script type="math/tex">P(reject\ H_0;H0)=\alpha</script>, or $P\left(\displaystyle\sum_if(X_i)&gt;\epsilon’;H_0\right)=\alpha$. <br />Usually, we can solve the later equation with CLT when statistic is large. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/22/14-Bayesian-Statistical-Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/22/14-Bayesian-Statistical-Inference/" class="post-title-link" itemprop="url">14. Bayesian Statistical Inference</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-22 07:38:18" itemprop="dateCreated datePublished" datetime="2020-03-22T07:38:18+08:00">2020-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-21 23:39:20" itemprop="dateModified" datetime="2020-03-21T23:39:20+08:00">2020-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
+<li>In probability, every unambiguous question has a unique correct answer. </li>
+<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unlees one makes several assumptions and imposes additional constraints on the inference problem. </li>
+<li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
+<li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
+<li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
+<li>In parameter estimation, we want to generate estimates that are close to the true values of the parameters in some probabilistic sense. </li>
+<li>In hypothesis testing, the unknown parameter takes one of a finite number of values, corresponding to competing hypotheses; we want to choose one of the hypotheses, aiming to achieve a small probability of error. </li>
+</ol>
+<h1 id="Bayesian-Inference-and-the-Posterior-Distribution"><a href="#Bayesian-Inference-and-the-Posterior-Distribution" class="headerlink" title="Bayesian Inference and the Posterior Distribution"></a>Bayesian Inference and the Posterior Distribution</h1><ol>
+<li>In Bayesian inference, the unknown quantity of interest, which we denote by $\Theta$, is modeled as a random variable or as a finite collection of random variables. </li>
+<li>We aim to extract information about $\Theta$, based on observing a collection $X=(X_1,…,X_n)$ of related random variables, called observations, measurements, or an observation vector. </li>
+<li>In Bayesian Inference, we start with a prior distribution $p_\Theta$ or $f_\Theta$ for the unknown random variable $\Theta$. We have a model $p_{X|\Theta}$ or $f_{X|\Theta}$ of the observation vector $X$. After observing the value $x$ of $X$, we form the posterior distribution $p_{\Theta|X}$ or $f_{\Theta|X}$, using the appropriate version of Bayes’s rule. </li>
+<li>Once a particular value $x$ of $X$ has been ovserved, a complete answer to the Bayesian inference problem is provided by the posterior distribution of $\Theta$. </li>
+<li>The case of multiple unknown parameters is entirely similar. </li>
+<li>After getting the posterior distribution, we are certainly to make some decision with it to minimize the probability of error. </li>
+</ol>
+<h1 id="Hypothesis-and-Estimate"><a href="#Hypothesis-and-Estimate" class="headerlink" title="Hypothesis and Estimate"></a>Hypothesis and Estimate</h1><ol>
+<li>An estimator is a random variable of the form $\hat\Theta=g(X)$, for some function $g$. Different choices of $g$ correspond to different estimators. </li>
+<li>An estimate is the value $\hat\theta$ of an estimator, as determined by the realized value $x$ of observation $X$. </li>
+<li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
+</ol>
+<h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
+<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ continuous \end{array}\right.</script></li>
+<li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
+<li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
+<li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>
+</ol>
+<h2 id="LMS"><a href="#LMS" class="headerlink" title="LMS"></a>LMS</h2><ol>
+<li>This rule tries to minimize $E[(\Theta-c)^2]$, where $c$ is the estimate. <br />Expand this to get $E[\Theta^2]-2cE[\Theta]+c^2$. The minimum is achieved at $c=E[\Theta]$. </li>
+<li>So the optimal estimate is $E[\Theta]$. And the error is $E[(\Theta-E[\Theta])^2]=var(\Theta)$. </li>
+<li>The conditional case is the same. Minimize $E[(\Theta-c)^2|X=x]$ is minimized by $c=[\Theta|X=x]$. </li>
+<li>$E[\Theta|X]$ minimizes $E[(\Theta-g(X))^2]$ over all estimators $g(\cdot)$. </li>
+<li>If we have multiple observations, $\hat\theta=E[\Theta|X_1,…,X_n]$, $E[(\Theta-E[\Theta|X_1,…,X_n])^2]≤E[(\Theta-g(X_1,…,X_n))^2]$ for all estimators $g(X_1,…,X_n)$. </li>
+<li>If we have multiple parameters, we need to minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$. The result is $\hat\Theta_i=E[\Theta_i|X_1,…,X_n]$. </li>
+</ol>
+<h3 id="Estimation-Error"><a href="#Estimation-Error" class="headerlink" title="Estimation Error"></a>Estimation Error</h3><ol>
+<li>Let $\hat\Theta=E[\Theta|X]$ be the LMS estimator and $\tilde\Theta=\hat\Theta-\Theta$ be the associated estimation error. </li>
+<li>The estimation error $\tilde\Theta$ is unbiased, i.e. it has zero unconditional and conditional mean $E[\tilde\Theta]=0$ and $E[\tilde\Theta|X=x]=0$ for all $x$. </li>
+<li>The estimation error $\tilde\Theta$ is uncorrelated with the estimate $\hat\Theta$: $cov(\hat\Theta, \tilde\Theta)=0$. </li>
+<li>The variance of $\Theta$ can be decomposed as $var(\Theta)=var(\hat\Theta)+var(\tilde\Theta)$. </li>
+</ol>
+<h3 id="Linear-LMS"><a href="#Linear-LMS" class="headerlink" title="Linear LMS"></a>Linear LMS</h3><ol>
+<li>The calculation for multiple observations and multiple parameters might be hard. So we might choose another way to estimate. </li>
+<li>A linear estimator of a random variable $\Theta$, based on observations $X_1,…,X_n$ has form $\hat\Theta=a_1X_1+…+a_nX_n+b$. </li>
+<li>Given a particular choice of the scalars $a_1,…,a_n,b$, the corresponding mean squared error is $E[(\Theta-a_1X_1-…-a_nX_n-b)^2]$. </li>
+</ol>
+<h4 id="Single-Observation"><a href="#Single-Observation" class="headerlink" title="Single Observation"></a>Single Observation</h4><ol>
+<li>Suppose that $a$ has already been chosen. This is the same as choosing a constant $b$ to estimate the random variable $\Theta-aX$. The best choice is $b=E[\Theta-aX]=E[\Theta]-aE[X]$. </li>
+<li>Now we only need to minimize $E[(\Theta-aX-E[\Theta]+aE[X])^2]$. </li>
+<li>Rewrite this expression as $var(\Theta-aX)=\sigma_\Theta^2+a^2\sigma_X^2+2cov(\Theta,-aX)=\sigma_\Theta^2+a^2\sigma_X-2a\cdot cov(\Theta,X)$. </li>
+<li>To minimize $var(\Theta-aX)$, we set its derivative to zero and solve for $a$. This yields $a=\displaystyle\frac{cov(\Theta,X)}{\sigma^2_X}=\frac{\rho\sigma_\Theta\sigma_X}{\sigma^2_X}=\rho\frac{\sigma_\Theta}{\sigma_X}$, where $\rho=\displaystyle\frac{cov(\Theta,X)}{\sigma_\Theta\sigma_X}$. </li>
+<li>The mean squared estimation error of the resulting linear estimator $\hat\Theta$ is given by $var(\Theta-\hat\Theta)=(1-\rho^2)\sigma^2_\Theta$. </li>
+</ol>
+<h4 id="Multiple-Observations-and-Multiple-Parameters"><a href="#Multiple-Observations-and-Multiple-Parameters" class="headerlink" title="Multiple Observations and Multiple Parameters"></a>Multiple Observations and Multiple Parameters</h4><ol>
+<li>To minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$, only need to minmize each $E[(\Theta_1-\hat\Theta_i)^2]$. So we are essentially dealing with $m$ decoupled linear estimation problems, one for each unknown parameter. </li>
+<li>For every observation, we have $X_i=\Theta+W_i$, where the $W_i$ are random variables with mean $0$ and variance $\sigma_i^2$, which represent observation errors. </li>
+<li>The linear LMS estimator of $\Theta$ based on the observations $X_1,…,X_n$ turns out to be $\hat\Theta_i=\displaystyle\frac{\displaystyle\frac{\mu_i}{\sigma_{0i}^2}+\displaystyle\sum^n_{i=1}\frac{X_i}{\sigma^2_i}}{\displaystyle\sum^n_{i=0}\frac{1}{\sigma^2_i}}$. $\mu_i$ is the mean of $\Theta_i$ while $\sigma_{0i}^2$ is the variance of $\Theta_i$. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/21/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/21/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/" class="post-title-link" itemprop="url">13. Central Limit Theorem and Strong Law of Large Numbers</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-21 08:52:34 / Modified: 10:36:32" itemprop="dateCreated datePublished" datetime="2020-03-21T08:52:34+08:00">2020-03-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="The-Central-Limit-Theorem"><a href="#The-Central-Limit-Theorem" class="headerlink" title="The Central Limit Theorem"></a>The Central Limit Theorem</h1><ol>
+<li>While $M_n=\displaystyle\frac{X_1+…+X_n}{n}$ converges to the true mean $\mu$, $S_n=nM_n$ increases to infinity. </li>
+<li>Consider the deviation $S_n-n\mu$ of $S_n$ from its mean $n\mu$, and scaling it by a factor proportional to $\displaystyle\frac{1}{\sqrt{n}}$ to keep the variance at a constant level. <br />We define $Z_n=\displaystyle\frac{S_n-n\mu}{\sigma\sqrt{n}}$. <br />So $E[Z_n]=\displaystyle\frac{E[X_1+…+E_n]-n\mu}{\sigma\sqrt{n}}$ and $var(Z_n)=\displaystyle\frac{var(X_1+…+X_n)}{\sigma^2n}=\frac{var(X_1)+…+var(X_n)}{\sigma^2n}=\frac{n\sigma^2}{n\sigma^2}=1$. </li>
+<li>The central limit theorem: The CDF of $Z_n$ converges to the standard normal CDF in the sense that $\displaystyle\lim_{n\to\infty}P(Z_n≤z)=\Phi(z)$, for all $z$. </li>
+<li>This law indicates that the sum of a large number of independent random variables is approximately normal. </li>
+<li>This law eliminates the need for detailed probabilistic models, and for tedious manipulations of PMFs and PDFs. </li>
+<li>Since normality is preserved uner linear transformations, this is equal to treating $S_n$ as a normal random variable with mean $n\mu$ and variance $\sigma^2$. </li>
+<li>Let $z=\displaystyle\frac{c-n\mu}{\sigma\sqrt{n}}$. $P(S_n≤c)\approx\Phi(z)$. </li>
+</ol>
+<h1 id="De-Moivre-Laplace-Approximation-to-the-Binomial"><a href="#De-Moivre-Laplace-Approximation-to-the-Binomial" class="headerlink" title="De Moivre-Laplace Approximation to the Binomial"></a>De Moivre-Laplace Approximation to the Binomial</h1><ol>
+<li>A binomial random variable $S_n$ with parameters $n$ and $p$ can be viewed as the sum of $n$ independent Bernoulli random variables $X_1,…,X_n$, with common parameter $p$. </li>
+<li>$k≤S_n≤l\Longleftrightarrow\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}$. <br />$\displaystyle P(k≤S_n≤l)=P\left(\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}\right)\approx\Phi\left(\frac{l-np}{\sqrt{np(1-p)}}\right)-\Phi\left(\frac{k-np}{\sqrt{np(1-p)}}\right)$</li>
+<li>An approximation of this form is equivalent to treat $S_n$ as a normal random variable with mean $np$ and variance $np(1-p)$. </li>
+<li>A little bug in this approximation is that the approximation of $P(S_n=k)=P(k≤S_n≤k)$ is always zero. So we can fix by calculating with $k-\displaystyle\frac12$ and $l+\displaystyle\frac12$. This is the DeMoivre-Laplace approximation to the Binomial: <br />$\displaystyle P(k≤S_n≤l)\approx\Phi\left(\frac{l+\frac12-np}{\sqrt{np(1-p)}} \right)-\Phi\left(\frac{k-\frac12-np}{\sqrt{np(1-p)}} \right)$</li>
+</ol>
+<h1 id="The-Strong-Law-of-Large-Numbers"><a href="#The-Strong-Law-of-Large-Numbers" class="headerlink" title="The Strong Law of Large Numbers"></a>The Strong Law of Large Numbers</h1><ol>
+<li>Let $X_1,X_2,…$ be a sequence of independent identically distributed random variables with mean $\mu$. Then the sequence of sample means converges to $\mu$, with probability $1$, in the sense that $P\left(\displaystyle\lim_{n\to\infty}\frac{X_1+…X_2}{n}=\mu\right)=1$. </li>
+<li>Consider the experiment is infinitely long , so the sample space is a set of infinite sequences of real number. Let set $A$ consist of those sequences whose long-term average is $\mu$. The strong law of large numbers states that all of the probability is concentrated on this particular subset of the sample space. </li>
+<li>The collection of outcomes that do not belong to $A$ has probability zero. </li>
+<li>The weak law provides no conclusive information on the number of deviations between $M_n$ and $\mu$ as $n$ tends to infinity. The strong law implies that  for any given $\epsilon&gt;0$, the probability that the difference $|M_n-\mu|$ will exceed $\epsilon$ an infintie number of times is equal to zero. </li>
+<li>Convergence with probability: $Y_1,Y_2,…$ are a sequence of random variables (not necessarily independent). $c$ is a real number. $Y_n$ converges to $c$ with probability $1$ if $P\left(\displaystyle\lim_{n\to\infty}Y_n=c\right)=1$. </li>
+<li>Convergence WITH probabiltiy is different from convergence IN probability. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

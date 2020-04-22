@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="What is MVCConception MVC is a design paradigm, which divid all objects in program into 3 camps M: Model,  UI independent, define what the app is, contain the knowledge of the app ( e.g. in the concen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02. MVC">
+<meta property="og:url" content="http://yoursite.com/2019/07/17/02-MVC/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="What is MVCConception MVC is a design paradigm, which divid all objects in program into 3 camps M: Model,  UI independent, define what the app is, contain the knowledge of the app ( e.g. in the concen">
+<meta property="og:image" content="https://i.loli.net/2019/07/16/5d2d8d3d4127443712.jpg">
+<meta property="article:published_time" content="2019-07-16T21:44:10.000Z">
+<meta property="article:modified_time" content="2020-04-04T04:17:31.560Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Application">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/16/5d2d8d3d4127443712.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2019/07/17/02-MVC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>02. MVC | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/02-MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          02. MVC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-17 05:44:10" itemprop="dateCreated datePublished" datetime="2019-07-17T05:44:10+08:00">2019-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 12:17:31" itemprop="dateModified" datetime="2020-04-04T12:17:31+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="What-is-MVC"><a href="#What-is-MVC" class="headerlink" title="What is MVC"></a>What is MVC</h1><h2 id="Conception"><a href="#Conception" class="headerlink" title="Conception"></a>Conception</h2><ol>
+<li>MVC is a design paradigm, which divid all objects in program into 3 camps</li>
+<li>M: Model,  UI independent, define <code>what the app is</code>, contain the knowledge of the app ( e.g. in the concentration demo, it’s how cards get chosen and matched)</li>
+<li>V: View, Controller’s minions. </li>
+<li>C: Controller, <code>how the Model is presented</code> to the user (UI logic)<a id="more"></a>
+</li>
+</ol>
+<h2 id="Relationship-between-three-camps"><a href="#Relationship-between-three-camps" class="headerlink" title="Relationship between three camps"></a>Relationship between three camps</h2><ol>
+<li>Controller can connect to Model, because Controller presents Model</li>
+<li>Controller can also connect to View by outlet properties, because Controller needs to control what shows in the View</li>
+<li>Model and View cannot connect to each other, because Model is UI independent while View is UI only (buttons and labels)</li>
+<li>View can connect to Controller only if the Controller has dropped a target (Action button function) on itself</li>
+<li>View can also delegate the Controller to controll the scroll view in the View by the property observer(will, did, should)</li>
+<li>View does not own the data they display, so View has to get data from the Controller, Controller is the data source of View</li>
+<li>Controller interpret / format Model information for the View</li>
+<li>Model cannot connect to Controller directly, but Model can have a KVO(Key Value Observing), which will send a message to the Controller when one key value is changed, then Controller will connect to Model to get the data to update<br><img src="https://i.loli.net/2019/07/16/5d2d8d3d4127443712.jpg"></li>
+</ol>
+<h2 id="Multiple-MVCs"><a href="#Multiple-MVCs" class="headerlink" title="Multiple MVCs"></a>Multiple MVCs</h2><ol>
+<li>One set of MVC can only control one screen, if there are multiple screens, it needs multiple MVCs</li>
+<li>When one MVC is going to talk to other MVCs, it always sees others as its View</li>
+</ol>
+<h1 id="Build-a-Model"><a href="#Build-a-Model" class="headerlink" title="Build a Model"></a>Build a Model</h1><h2 id="What-does-it-need-in-the-Model"><a href="#What-does-it-need-in-the-Model" class="headerlink" title="What does it need in the Model?"></a>What does it need in the Model?</h2><p>Since Model defines the app, in the game Concentration, Model needs to know how to flip the card, and how to match two cards. To do so, we also need a type of card to record the status of each card, so we’ll creat another <code>struct</code> to record. Conclusively, in this game, Model has two files, Concentration and Card. </p>
+<h2 id="What’s-in-the-Card"><a href="#What’s-in-the-Card" class="headerlink" title="What’s in the Card?"></a>What’s in the Card?</h2><p>Card is going to record a card’s status, so we should mark if it is face up, if it is matched, and its identifier. Specifically, we don’t add emoji at this position, becaus Model is UI independent and emoji is what shows in the screen.</p>
+<h2 id="What’s-in-the-Concentration"><a href="#What’s-in-the-Concentration" class="headerlink" title="What’s in the Concentration?"></a>What’s in the Concentration?</h2><ol>
+<li>We need an array of Card to record the status of every card. Specifically, we need to use syntax <code>var card = [Card]()</code> to initialize an array. </li>
+<li>In Concentration, we need to creat card status by using Card initializer in a for-loop. So the initializer of Concentration will have a parametre of the number of cards</li>
+<li>Concentration also needs to do something when a card is chosen. When a card is chosen, there are three situations, no card is face up, one card is face up or two cards are face up, to distinguish the three situation, we have to declare an <code>Int?</code> to record the one and only card that is faced up. If there is only one card faced up, we set it as the index of that card, and if there is no card or more than two cards faced up, we set it as nil. In the method <code>chooseCard</code>, if that value is nil, than we will flip all cards face down and flip the chosen card face up. If it’s not nil, we will try to match the faced-up card with the chosen card, and flip it over then set its value to nil </li>
+</ol>
+<h1 id="Build-a-Controller"><a href="#Build-a-Controller" class="headerlink" title="Build a Controller"></a>Build a Controller</h1><p>First of all, we need to connect to the Model by Creating an instance of Concentration class (This shows why the relationship between 3 camps is directed instead of undirected). </p>
+<h2 id="How-are-we-going-to-present-the-Model-in-the-View"><a href="#How-are-we-going-to-present-the-Model-in-the-View" class="headerlink" title="How are we going to present the Model in the View?"></a>How are we going to present the Model in the View?</h2><ol>
+<li>The chooseCard function of instance of Concentration will be called in the button function. </li>
+<li>We build a function named <code>updateViewFromModel</code>, which will be called in the button function after the chooseCard function is called.  </li>
+<li>In that update function, we need to iterate all cards’ status in the Concentration instance, and update the buttons to correspond them</li>
+<li>In order to make the emoji showed in every button be random, we creat a Dictionary of emoji, which associates the emoji with the card identifier in each card in the Model. </li>
+<li>To make it happen, we first creat a String array of emojis, and a function to get the corresponding emoji with a parametre of Card. Every time we call this function with a new index, we assign a random emoji to the card’s identifier with a random function <code>arc4random_uniform</code></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Application/" rel="tag"><i class="fa fa-tag"></i> Application</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/16/%E7%BB%AA%E8%AE%BA/" rel="prev" title="绪论">
+      <i class="fa fa-chevron-left"></i> 绪论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/17/%E5%90%91%E9%87%8F/" rel="next" title="向量">
+      向量 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-MVC"><span class="nav-number">1.</span> <span class="nav-text">What is MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conception"><span class="nav-number">1.1.</span> <span class="nav-text">Conception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relationship-between-three-camps"><span class="nav-number">1.2.</span> <span class="nav-text">Relationship between three camps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-MVCs"><span class="nav-number">1.3.</span> <span class="nav-text">Multiple MVCs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-a-Model"><span class="nav-number">2.</span> <span class="nav-text">Build a Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-does-it-need-in-the-Model"><span class="nav-number">2.1.</span> <span class="nav-text">What does it need in the Model?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-in-the-Card"><span class="nav-number">2.2.</span> <span class="nav-text">What’s in the Card?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-in-the-Concentration"><span class="nav-number">2.3.</span> <span class="nav-text">What’s in the Concentration?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-a-Controller"><span class="nav-number">3.</span> <span class="nav-text">Build a Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-are-we-going-to-present-the-Model-in-the-View"><span class="nav-number">3.1.</span> <span class="nav-text">How are we going to present the Model in the View?</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

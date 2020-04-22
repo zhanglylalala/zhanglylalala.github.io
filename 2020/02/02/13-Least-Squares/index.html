@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Minimizing the Error When $A\vec{x}&#x3D;\vec{b}$ has no solution, we solve $A\hat{\vec{x}}&#x3D;\vec{b}’$. And $\vec{e}&#x3D;\vec{b}-A\hat{\vec{x}}$ is the error vector stands for the difference between $\vec{b}$ a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13. Least Squares">
+<meta property="og:url" content="http://yoursite.com/2020/02/02/13-Least-Squares/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Minimizing the Error When $A\vec{x}&#x3D;\vec{b}$ has no solution, we solve $A\hat{\vec{x}}&#x3D;\vec{b}’$. And $\vec{e}&#x3D;\vec{b}-A\hat{\vec{x}}$ is the error vector stands for the difference between $\vec{b}$ a">
+<meta property="article:published_time" content="2020-02-02T00:00:15.000Z">
+<meta property="article:modified_time" content="2020-02-02T04:24:46.500Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Theories">
+<meta property="article:tag" content="Mathematics">
+<meta property="article:tag" content="Linear Algebra">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/02/13-Least-Squares/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>13. Least Squares | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/02/13-Least-Squares/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          13. Least Squares
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-02 08:00:15 / Modified: 12:24:46" itemprop="dateCreated datePublished" datetime="2020-02-02T08:00:15+08:00">2020-02-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Minimizing-the-Error"><a href="#Minimizing-the-Error" class="headerlink" title="Minimizing the Error"></a>Minimizing the Error</h1><ol>
+<li>When $A\vec{x}=\vec{b}$ has no solution, we solve $A\hat{\vec{x}}=\vec{b}’$. And $\vec{e}=\vec{b}-A\hat{\vec{x}}$ is the error vector stands for the difference between $\vec{b}$ and the $\vec{b}’$ we use instead. </li>
+<li>$\hat{\vec{x}}$ is called the <code>least squares solution</code>. </li>
+<li>Because $\hat{\vec{x}}$ is the best solution, $\hat{\vec{x}}$ makes $E=||e||^2$ as small as possible. </li>
+<li>By geometry, to minimize $E$, we only need to make $\vec{e}$ perpendicular to $C(A)$. So the best solution to $A\hat{\vec{x}}$ is $\vec{p}$. </li>
+<li>By algebra, $\vec{b}$ splits into two parts. The part in the column space is $\vec{p}$. The perpendicular part is $\vec{e}$. So remove $\vec{e}$ and solve $A\hat{\vec{x}}=\vec{p}$. </li>
+<li>For any vector $\vec{x}$, $||A\vec{x}-\vec{b}||^2=||A\vec{x}-\vec{p}||^2+||\vec{e}||^2$. $A\vec{x}-\vec{p}$ which stands for the defference between $\vec{b}’$ and $\vec{p}$ is in $C(A)$ and $\vec{e}$ is in $N(A^T)$. We set $A\vec{x}-\vec{p}$ $\vec{0}$ by choosing $\vec{x}=\hat{\vec{x}}$ to minimize $||A\vec{x}-\vec{b}||$. </li>
+<li>By calculus, we need to minimize the function $E=\displaystyle{\sum^n_{i=1}{e_i^2}}$. To do that, we need to solve $\frac{\partial E}{\partial x_i}=0$. After that, we can get a new system of equations $A’\vec{x}=\vec{c}$. Here $A’$ happens to be $A^TA$ and $\vec{c}$ happens to be $A^T\vec{b}$. </li>
+<li>The shortage of least squares is that it cannot ignore the wrong data. If a data is wrong, it will be far a way from others and the solution will shift to it. </li>
+</ol>
+<h1 id="Dependent-Columns-in-A"><a href="#Dependent-Columns-in-A" class="headerlink" title="Dependent Columns in A"></a>Dependent Columns in A</h1><ol>
+<li>If A has dependent columns, $A^TA$ isn’t invertible, we cannot use the aforementioned way to get the best solution. </li>
+<li>If we insist the projection way, we can change an equation without solution to an equation with infinitely many solutions. </li>
+<li>The pseudoinverse will choose the shortest solution to $A\hat{\vec{x}}=\vec{p}$. </li>
+</ol>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Fitting-a-Straight-Line"><a href="#Fitting-a-Straight-Line" class="headerlink" title="Fitting a Straight Line"></a>Fitting a Straight Line</h2><ol>
+<li>We have $m$ dots and want to find a line go through all dots. When we cannot, we want a best line. </li>
+<li>If we suppose that line is $C+Dt=b$, we can have the equation $A\left[\begin{matrix}C\\D\end{matrix}\right]=\vec{b}$. $A=\left[\begin{matrix}1&amp;t_1\\1&amp;t_2\\\vdots&amp;\vdots\\1&amp;t_m\end{matrix}\right]$ $\vec{b}=\left[\begin{matrix}b_1\\b_2\\\vdots\\b_m\end{matrix}\right]$</li>
+<li>$A^TA=\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]$<br />$A^T\vec{b}=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$<br />The final equation is $\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$</li>
+<li>If two columns of $A$ is orthogonal, i.e. $\sum{t_i}=0$, the final equation becomes $\left[\begin{matrix}m&amp;0\\0&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$ which is a lot easier to solve. So we can orthognize columns of $A$ first by subtracting the average time $\hat{t}=\frac{\sum{t_i}}{m}$ from the last column of $A$. </li>
+</ol>
+<h2 id="Fitting-by-a-Parabola"><a href="#Fitting-by-a-Parabola" class="headerlink" title="Fitting by a Parabola"></a>Fitting by a Parabola</h2><ol>
+<li>Suppose $C+Dt+Et^2=b$. </li>
+<li>$A=\left[\begin{matrix}1&amp;t_1&amp;t_1^2\\1&amp;t_2&amp;t_2^2\\\vdots&amp;\vdots&amp;\vdots\\1&amp;t_m&amp;t_m^2\end{matrix}\right]$</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Theories/" rel="tag"><i class="fa fa-tag"></i> Theories</a>
+              <a href="/tags/Mathematics/" rel="tag"><i class="fa fa-tag"></i> Mathematics</a>
+              <a href="/tags/Linear-Algebra/" rel="tag"><i class="fa fa-tag"></i> Linear Algebra</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/02/12-Projections-onto-Subspaces/" rel="prev" title="12. Projections onto Subspaces">
+      <i class="fa fa-chevron-left"></i> 12. Projections onto Subspaces
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/03/14-Orthogonal-Matrices-and-Gram-Schmidt/" rel="next" title="14. Orthogonal Matrices and Gram-Schmidt">
+      14. Orthogonal Matrices and Gram-Schmidt <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Minimizing-the-Error"><span class="nav-number">1.</span> <span class="nav-text">Minimizing the Error</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dependent-Columns-in-A"><span class="nav-number">2.</span> <span class="nav-text">Dependent Columns in A</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Applications"><span class="nav-number">3.</span> <span class="nav-text">Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fitting-a-Straight-Line"><span class="nav-number">3.1.</span> <span class="nav-text">Fitting a Straight Line</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fitting-by-a-Parabola"><span class="nav-number">3.2.</span> <span class="nav-text">Fitting by a Parabola</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

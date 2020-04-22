@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Alerts and Action SheetsDifferenceThe two mechanisms are all used to pop up and ask the user something.  Alerts It pops up in the middle of the screen. Usually ask questions with only two answers (e.g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15. Alert, Notification, Application Lifecycle">
+<meta property="og:url" content="http://yoursite.com/2019/08/25/15-Alert-Notification-Application-Lifecycle/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Alerts and Action SheetsDifferenceThe two mechanisms are all used to pop up and ask the user something.  Alerts It pops up in the middle of the screen. Usually ask questions with only two answers (e.g">
+<meta property="article:published_time" content="2019-08-25T06:58:09.000Z">
+<meta property="article:modified_time" content="2020-04-04T04:17:49.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Application">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/08/25/15-Alert-Notification-Application-Lifecycle/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>15. Alert, Notification, Application Lifecycle | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/15-Alert-Notification-Application-Lifecycle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          15. Alert, Notification, Application Lifecycle
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-25 14:58:09" itemprop="dateCreated datePublished" datetime="2019-08-25T14:58:09+08:00">2019-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-04 12:17:49" itemprop="dateModified" datetime="2020-04-04T12:17:49+08:00">2020-04-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Alerts-and-Action-Sheets"><a href="#Alerts-and-Action-Sheets" class="headerlink" title="Alerts and Action Sheets"></a>Alerts and Action Sheets</h1><h2 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h2><p>The two mechanisms are all used to pop up and ask the user something. </p>
+<h3 id="Alerts"><a href="#Alerts" class="headerlink" title="Alerts"></a>Alerts</h3><ol>
+<li>It pops up in the middle of the screen.</li>
+<li>Usually ask questions with only two answers (e.g. OK/Cancel, Yes/No, etc.).</li>
+<li>Can be disruptive to your user-interface, so use carefully.</li>
+<li>Often used for “asynchronous” problems (“connection reset” or “network fetch failed”). </li>
+<li>Can have a text field to get a quick answer (e.g. password)</li>
+<li>Example, sometimes when Settings needs to reconfirm your Apple ID. </li>
+</ol>
+<a id="more"></a>
+<h3 id="Action-Sheets"><a href="#Action-Sheets" class="headerlink" title="Action Sheets"></a>Action Sheets</h3><ol>
+<li>Usually slides in from the bottom of the screen on iPhone/iPod Touch, and in a popover on iPad.  </li>
+<li>Can be displayed from bar button item or from any rectangular area in a view. </li>
+<li>Generally asks questions that have more than two answers.</li>
+<li>Think of action sheets as presenting “branching decisions” to the user (i.e. what next?). </li>
+<li>Example, in Safari, long press a website or use the 3D-Touch and slide up. </li>
+</ol>
+<h2 id="Create-One"><a href="#Create-One" class="headerlink" title="Create One"></a>Create One</h2><ol>
+<li>First, declare an alert type of <code>UIAlertController</code>. Its initializer has three parameters.<br><code>title</code> is the text at the top which describes the usage of the alert.<br><code>message</code> is a smaller-font text beneath the title to explain the title explicitly.<br><code>preferredStyle</code> is which kind of alert you want. It can be <code>.actionSheet</code> or <code>.alert</code>. </li>
+<li>Then we can add actions to that alert with instance method <code>addAction</code>. It only takes a UIAlertAction as a parameter. </li>
+<li>To initialize a UIAlertAction, we need to pass three parameters.<br><code>title</code> is the name of the action showed on screen.<br><code>style</code> is The way we show that label of the action. It can be <code>.cancel</code>, <code>.default</code> and <code>.destructive</code>. The <code>.cancel</code> style is a bold blue one at the bottom of Action Sheets and left of Alert. <code>.default</code> is normal blue one arranged according to the order in which they were added. <code>.destructive</code> is a normal red one usually to close or delete something.<br><code>handler</code> is what will happen when user hit this button. This closure takes one UIAlertAction as its parameter and returns nothing. </li>
+<li>We can also add a text field with another instance method <code>addTextField</code> which takes one parameter called <code>configurationHandler</code>. It’s a closure takes a UITextField as parameter and returns nothing. In that closure, we can configure the added text field. Such as add a placeholder which we represented grayish and disappear after user typed something in. Also we can set if it’s a secure text (password or something), then it will appear each character as a dot. </li>
+<li>We can present the alert with the <code>present</code> method. In Action sheet of iPad, we can configure it to make it show close to the button instead of in the center. We don’t need to do these things only when the device is iPad, iPhone will automatically ignore it. And on iPad, there will be no more cancel button.<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 1</span></span><br><span class="line"><span class="keyword">var</span> alert = <span class="type">UIAlertController</span>(</span><br><span class="line">title: <span class="type">String</span>,</span><br><span class="line">message: <span class="type">String</span>,</span><br><span class="line">preferredStyle: <span class="type">UIAlertController</span>.<span class="type">Style</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 2</span></span><br><span class="line">alert.addAction(<span class="type">UIAlertAction</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="type">UIAlertAction</span>(</span><br><span class="line">title: <span class="type">String</span>,</span><br><span class="line">style: <span class="type">UIAlertAction</span>.<span class="type">Style</span>,</span><br><span class="line">handler: ((<span class="type">UIAlertAction</span>) -&gt; <span class="type">Void</span>)?</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 4</span></span><br><span class="line">alert.addTextField(configurationHandler: ((<span class="type">UITextField</span>) -&gt; <span class="type">Void</span>)?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 5</span></span><br><span class="line">alert.modalPresentationStyle = .popover</span><br><span class="line"><span class="keyword">let</span> ppc = alert.popoverPresentationController</span><br><span class="line">ppc?.barButtonItem = theButtonPresentIt</span><br><span class="line"></span><br><span class="line">present(alert, animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h1><ol>
+<li>Model can use Notification to communicate with Controller. </li>
+<li>Using Notification, we can find out what’s going on. </li>
+<li>For example, it can detect keyboard appeared or Document State changed or User Font Size changed. </li>
+</ol>
+<h2 id="Listen-to-One-of-Radio-Station"><a href="#Listen-to-One-of-Radio-Station" class="headerlink" title="Listen to One of Radio Station"></a>Listen to One of Radio Station</h2><ol>
+<li>The type of observer is <code>NSObjectProtocol</code>. </li>
+<li>We can create an observer with <code>NotificationCenter.default.addObserver</code>. It has four parameters <code>forName</code>, <code>object</code>, <code>queue</code> and a closure. </li>
+<li><code>forName</code> is the name of the radio station, it can specify the radio station we want to hear. Its type is <code>Notification.Name</code>. All the radio station is a static variable of Notification.Name. </li>
+<li><code>object</code> is the broadcaster we want to hear. Even if something else broadcast on the same radio station, we won’t hear it. </li>
+<li><code>queue</code> is <code>OperationQueue</code>. We can use it just like DispatchQueue, <code>OperationQueue.main</code> and <code>OperationQueue.globel</code>. It can be nil, that means that the closure will be run at the same queue as the broadcaster. We hardly assign it nil. </li>
+<li>The closure takes one parameter type of <code>Notificatioin</code>, it contains everything it’s broadcasting. It’s whole information is contained at the <code>userInfo</code> property. This closure will be push into the proper queue when broadcasts occurs. </li>
+<li>When we’re done listening, we can remove observer to stop listening. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 1 ~ 6</span></span><br><span class="line"><span class="keyword">var</span> observer: <span class="type">NSObjectProtocol?</span></span><br><span class="line">observer = <span class="type">NotificationCenter</span>.<span class="keyword">default</span>.addObserver(</span><br><span class="line">	forName: <span class="type">Notification</span>.<span class="type">Name</span>,</span><br><span class="line">	object: <span class="type">Any?</span>,</span><br><span class="line">	queue: <span class="type">OperationQueue?</span></span><br><span class="line">) &#123; (notification: <span class="type">Notification</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">      <span class="keyword">let</span> info: <span class="type">Any?</span> = notification.userInfo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 7</span></span><br><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.removeObserver(observer)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Post-A-Radio-Station"><a href="#Post-A-Radio-Station" class="headerlink" title="Post A Radio Station"></a>Post A Radio Station</h2><ol>
+<li>Besides the predefined radio station, we can post our own radio station. </li>
+<li>First, we need to extense a static variable at Notification.Name. We can use its initializer <code>Notification.Name(String)</code> to create one. </li>
+<li>Then we need to post the radio when we want to whith <code>NotificationCenter.default.post</code>. It has three parameters, <code>name</code>, just like the <code>forName</code> aforementioned, is the radio station we want to post on. <code>object</code> is the broadcaster, usually self. <code>userInfo</code> is <code>[AnyHashable : Any]?</code> where contains any information want to pass to listeners. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 2</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Notificatioin</span>.<span class="title">Name</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">let</span> theNameOfRadioStation = <span class="type">Notification</span>.<span class="type">Name</span>(<span class="string">"Any String, no matter"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="type">NotificationCenter</span>.<span class="keyword">default</span>.post(</span><br><span class="line">	name: <span class="type">Notification</span>.<span class="type">Name</span>,</span><br><span class="line">	object: <span class="type">Any?</span>,</span><br><span class="line">	userInfo: [<span class="type">AnyHashable</span>:<span class="type">Any</span>]? = <span class="literal">nil</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="KVO-Key-Value-Observer"><a href="#KVO-Key-Value-Observer" class="headerlink" title="KVO (Key Value Observer)"></a>KVO (Key Value Observer)</h1><ol>
+<li>KVO is also one kind of Notification. However the Notification we introduced above has a limitation. When we want to observe our own properties, sometimes we have to write our posting code several times. That’s kind of annoying. KVO is here to fix that. </li>
+<li>It’s usually used by a Controller to observe either its Model or its View. </li>
+<li>Not every property works with KVO. Only objects that inherit from <code>NSObject</code> can participate. </li>
+<li>To use KVO, we just need to use our instance method <code>observe</code>, i.e. <code>instance.observe</code>. It has two parameters. The first one is the property we want to observe, type of <code>KeyPath</code>. Its form is <code>\Type.property</code> or even <code>\Type.property1.property2…</code>. The second one is a closure, which will be excuted when that observed property is changed. It takes two parameters, the observed instance and an <code>NSKeyValueObservedChange&lt;Value&gt;</code> which contains the old value and the new value. This method returns an <code>NSKeyValueObservation</code> as a cookie. </li>
+<li>In KVO, we don’t removeObserver like in Notification, as long as the observation remains in the heap, the closure will stay active. </li>
+<li>Some common used KVO: UIView’s frame and center, CALayer underneath UIView, CoreData. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observation = observedInstance.observe(keyPath: <span class="type">KeyPath</span>, changeHandler: (<span class="type">Value</span>, <span class="type">NSKeyValueObseredChange</span>&lt;<span class="type">Value</span>&gt;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// For example</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line"><span class="keyword">var</span> observation = label.observe(keyPath: \<span class="type">UILabel</span>.center) &#123; (<span class="number">_</span>, <span class="number">_</span>) <span class="keyword">in</span> <span class="built_in">print</span>(<span class="string">"Hello"</span>) &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Application-Lifecycle"><a href="#Application-Lifecycle" class="headerlink" title="Application Lifecycle"></a>Application Lifecycle</h1><h2 id="Some-Status"><a href="#Some-Status" class="headerlink" title="Some Status"></a>Some Status</h2><ol>
+<li><code>Foreground Inactive</code>: Run code without UI events. Only do something preparation. </li>
+<li><code>Foreground Active</code>: Run code with receiving and processing UI events. </li>
+<li><code>Background</code>: Run code without UI events for a limited time. </li>
+<li><code>Suspended</code>: No code is running. Could be killed. </li>
+</ol>
+<h2 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h2><ol>
+<li><code>Launch</code>: Not running -&gt; Foreground Inactive(for a short time) -&gt; Foreground Active. </li>
+<li><code>Switch to another application</code>: Foreground Active -&gt; Foreground Inactive -&gt; Background -&gt; Suspended. </li>
+<li><code>Killed</code>: Suspended -&gt; Not Running, no code runs between suspended and killed. </li>
+</ol>
+<h2 id="Get-Notified"><a href="#Get-Notified" class="headerlink" title="Get Notified"></a>Get Notified</h2><ol>
+<li>All the method mentioned is at <code>AppDelegate</code>. </li>
+<li><code>Not Running -&gt; Foreground Inactive</code>, <code>application-will/didFinishLaunching</code> will get called. And we can observe with <code>UIApplicationDidFinishLaunching</code>. </li>
+<li>The passed dictionary (also in notification.userInfo) tells you why your application was launched. For example, someone wants you to open a URL, you entered a certain place in the world, you are continuing an activity started on another device, a notification arrived for you (push or local), Bluetooth attached device wants to interact with you. </li>
+<li>It used to be that you would build your UI here. But nowadays we use storyboards for all that. So often you do not implement this method at all. </li>
+<li><code>Foreground Active -&gt; Foreground Inactive</code>, <code>applicationWillResignActive</code> will get called. And we can observe with <code>UIApplicationWillResignActive</code>. We can pause the UI here. </li>
+<li><code>Foreground Inactive -&gt; Foreground Active</code>, <code>applicationDidBecomeActive</code> will get called. And we can observe with <code>UIApplicationDidBecomeActive</code>. If you have paused your UI previously, here’s where you would reactivate things. </li>
+<li><code>Foreground Inactive -&gt; Background</code>, <code>applicationDidEnterBackground</code> will get called. And we can observe with <code>UIApplicationDidEnterBackground</code>. </li>
+<li>Here you want to (quickly) batten down the hatches. You only get to run for 30s or so. You can request more time, but don’t abuse this (or the system will start killing you instead). Prepare yourself to be eventually killed her (probably won’t happen, but be ready anyway).</li>
+<li><code>Background -&gt; Foreground Inactive</code>, <code>applicationWillEnterForeground</code> will get called. And we can observe with <code>UIApplicationWillEnterForeground</code>. Time to un-batten the hatches. Maybe undo what you did in DidEnterBackground.</li>
+</ol>
+<h1 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h1><h2 id="Other-AppDelegate-Items-of-Interest"><a href="#Other-AppDelegate-Items-of-Interest" class="headerlink" title="Other AppDelegate Items of Interest"></a>Other AppDelegate Items of Interest</h2><ol>
+<li>State Restoration (saving the state of your UI so that you can restore it even if you are killed). </li>
+<li>Data Protection (files can be set to be protected when a user’s device’s screen is locked).</li>
+<li>Open URL (in Xcode’s Info tab of Project Settings, you can register for certain URLs). </li>
+<li>Background Fetching (you can fetch and receive results while in the background).</li>
+</ol>
+<h2 id="UIApplication"><a href="#UIApplication" class="headerlink" title="UIApplication"></a>UIApplication</h2><ol>
+<li>Open a URL in another application. </li>
+<li>Register to receive Push Notifications. Notifications, both local and push, are handled by the UNNotification framework. </li>
+<li>Set the fetch interval for background fetching. Usually you will set this to UIApplicationBackgroundFetchIntervalMinimum</li>
+<li>Asking for more time when backgrounded. Do NOT forget to call <code>endBackgroundTask</code> when you’re done!</li>
+<li>Turning on the “network in use” spinner (status bar upper left). </li>
+<li>Finding out about things. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 1</span></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">open</span><span class="params">(URL)</span></span></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">canOpenURL</span><span class="params">(URL)</span></span> -&gt; <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 2</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(un)</span></span>registerForRemoteNotifications()</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMinimumBackgroundFetchInterval</span><span class="params">(TimeInterval)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 4</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">beginBackgroundTask</span><span class="params">(withExpirationHandler: <span class="params">(<span class="params">()</span></span></span></span> -&gt; <span class="type">Void</span>)?) -&gt; <span class="type">UIBackgroundTaskIdentifier</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">endBackgroundTask</span><span class="params">(UIBackgroundTaskIdentifier)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 5</span></span><br><span class="line"><span class="keyword">var</span> isNetworkActivityIndicatorVisible: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 6</span></span><br><span class="line"><span class="keyword">var</span> backgroundTimeRemaining: <span class="type">TimeInterval</span> &#123; <span class="keyword">get</span> &#125; <span class="comment">// until you are suspended</span></span><br><span class="line"><span class="keyword">var</span> preferredContentSizeCategory: <span class="type">UIContentSizeCategory</span> &#123; <span class="keyword">get</span> &#125; <span class="comment">// big fonts or small fonts </span></span><br><span class="line"><span class="keyword">var</span> applicationState: <span class="type">UIApplicationState</span> &#123; <span class="keyword">get</span> &#125; <span class="comment">// foreground, background, active</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Info-plist"><a href="#Info-plist" class="headerlink" title="Info.plist"></a>Info.plist</h2><ol>
+<li>You can edit this file (in Xcode’s property list editor) by clicking on Info.plist</li>
+<li>Or you can even edit it as raw XML!</li>
+<li>But usually you edit Info.plist settings by clicking on your project in the Navigator. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Application/" rel="tag"><i class="fa fa-tag"></i> Application</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/22/13&14-Persistence-and-Documents/" rel="prev" title="13&14. Persistence and Documents">
+      <i class="fa fa-chevron-left"></i> 13&14. Persistence and Documents
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/28/16-More-Segue/" rel="next" title="16. More Segue">
+      16. More Segue <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Alerts-and-Action-Sheets"><span class="nav-number">1.</span> <span class="nav-text">Alerts and Action Sheets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.1.</span> <span class="nav-text">Difference</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alerts"><span class="nav-number">1.1.1.</span> <span class="nav-text">Alerts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-Sheets"><span class="nav-number">1.1.2.</span> <span class="nav-text">Action Sheets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-One"><span class="nav-number">1.2.</span> <span class="nav-text">Create One</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Notification"><span class="nav-number">2.</span> <span class="nav-text">Notification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Listen-to-One-of-Radio-Station"><span class="nav-number">2.1.</span> <span class="nav-text">Listen to One of Radio Station</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Post-A-Radio-Station"><span class="nav-number">2.2.</span> <span class="nav-text">Post A Radio Station</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KVO-Key-Value-Observer"><span class="nav-number">3.</span> <span class="nav-text">KVO (Key Value Observer)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Application-Lifecycle"><span class="nav-number">4.</span> <span class="nav-text">Application Lifecycle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Status"><span class="nav-number">4.1.</span> <span class="nav-text">Some Status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transition"><span class="nav-number">4.2.</span> <span class="nav-text">Transition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-Notified"><span class="nav-number">4.3.</span> <span class="nav-text">Get Notified</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Something-Else"><span class="nav-number">5.</span> <span class="nav-text">Something Else</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-AppDelegate-Items-of-Interest"><span class="nav-number">5.1.</span> <span class="nav-text">Other AppDelegate Items of Interest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIApplication"><span class="nav-number">5.2.</span> <span class="nav-text">UIApplication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Info-plist"><span class="nav-number">5.3.</span> <span class="nav-text">Info.plist</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#000000"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#000000;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
