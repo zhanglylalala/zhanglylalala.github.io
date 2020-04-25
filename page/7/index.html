@@ -191,6 +191,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/18-Eigenvalues-and-Eigenvectors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/18-Eigenvalues-and-Eigenvectors/" class="post-title-link" itemprop="url">18. Eigenvalues and Eigenvectors</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-03 17:29:46" itemprop="dateCreated datePublished" datetime="2020-02-03T17:29:46+08:00">2020-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:08:13" itemprop="dateModified" datetime="2020-03-07T16:08:13+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Eigenvalues-and-Eigenvectors"><a href="#Eigenvalues-and-Eigenvectors" class="headerlink" title="Eigenvalues and Eigenvectors"></a>Eigenvalues and Eigenvectors</h1><ol>
+<li>An <code>eigenvector</code> is a vector doesn’t change direction even when multiplied by <script type="math/tex">A</script>. </li>
+<li>So the basis equation is <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. The number <script type="math/tex">\lambda</script> is an <code>eigenvalue</code> of <script type="math/tex">A</script>. </li>
+<li><script type="math/tex">\lambda=0</script> means the eigenvector is in <script type="math/tex">N(A)</script>. <br /><script type="math/tex">\lambda=1</script> means the eigenvector is a steady state that doesn’t change. </li>
+<li>If <script type="math/tex">\lambda</script> is the eigenvalue and <script type="math/tex">\vec{x}</script> is the eigenvector of <script type="math/tex">A</script>, for <script type="math/tex">B=A^n</script>, its eigenvector stays the same while its eigenvalue <script type="math/tex">\lambda'=\lambda^n</script>. And the eigenvalue of <script type="math/tex">A^{-1}</script> is <script type="math/tex">\lambda^{-1}</script>. </li>
+<li>For the projection matrix <script type="math/tex">P</script>, <script type="math/tex">P\vec{x}=\vec{x}</script>. Its eigenvalue is <script type="math/tex">1</script> and <script type="math/tex">0</script>. The eigenvectors for <script type="math/tex">\lambda=1</script> and <script type="math/tex">\lambda=0</script> fill the column space (in the projection plane) and nullspace (perpendicular to the projection plane). </li>
+<li>If each column of a matrix adds to <script type="math/tex">1</script>, that martix is <code>Markov matrix</code>. <script type="math/tex">\lambda=1</script> is its largest eigenvalue. </li>
+<li>The reflection matrix <script type="math/tex">R=\left[\begin{matrix}0&1\\1&0\end{matrix}\right]</script> has eigenvalues <script type="math/tex">1</script> and <script type="math/tex">-1</script>. </li>
+<li>When a matrix is shifted by <script type="math/tex">I</script>, each <script type="math/tex">\lambda</script> is shifted by <script type="math/tex">1</script>. NO change in eigenvectors. </li>
+<li>If <script type="math/tex">A</script> is singular, <script type="math/tex">0</script> must be one of the eigenvalues. </li>
+<li>The eigenvalues might not be real numbers. </li>
+<li>An orthogonal martix (<script type="math/tex">Q^TQ=I</script>) corresponds to a complex number with <script type="math/tex">|\lambda|=1</script>. </li>
+<li><script type="math/tex">A</script> and <script type="math/tex">A^T</script> share the same eigenvalues. </li>
+</ol>
+<h1 id="Equation-for-the-Eigenvalues"><a href="#Equation-for-the-Eigenvalues" class="headerlink" title="Equation for the Eigenvalues"></a>Equation for the Eigenvalues</h1><ol>
+<li>For projection matrices we found <script type="math/tex">\lambda</script>‘s and <script type="math/tex">\vec{x}</script>‘s by geometry: <script type="math/tex">P\vec{x}=\vec{x}</script> and <script type="math/tex">P\vec{x}=\vec{0}</script>. </li>
+<li>For others, we need to solve the equation <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. <br />First move <script type="math/tex">\lambda\vec{x}</script> to the left side, to get <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script>. <br />This means that eigenvectors make up <script type="math/tex">N(A-\lambda I)</script>. <br />If that new equation has a nonzero solution, <script type="math/tex">A-\lambda I</script> must be singular, which leads us to its determinant is zero. </li>
+<li>The equation we really need to solve is <script type="math/tex">|A-\lambda I|=0</script>. This is called the <code>eigenequation</code> or <code>characteristic equation</code>. </li>
+<li>When <script type="math/tex">A</script> is <script type="math/tex">n</script> by <script type="math/tex">n</script>, <script type="math/tex">A</script> has <script type="math/tex">n</script> eigenvalues (they might repeat). Each <script type="math/tex">\lambda</script> leads to one <script type="math/tex">\vec{x}</script>. We can solve <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script> or <script type="math/tex">A\vec{x}=\lambda \vec{x}</script> to find eigenvectors. </li>
+</ol>
+<h1 id="Determinant-and-Trace"><a href="#Determinant-and-Trace" class="headerlink" title="Determinant and Trace"></a>Determinant and Trace</h1><ol>
+<li>Elimination does noe preserve the <script type="math/tex">\lambda</script>‘s. </li>
+<li>The product of the <script type="math/tex">n</script> eigenvalues equals the determinant. </li>
+<li>The sum of the <script type="math/tex">n</script> eigenvalues equals the sum of the <script type="math/tex">n</script> diagonal entries. We can the sum <code>trance of martix</code>. </li>
+<li>The diagonal of triangualr martix is the eigenvalues. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1128,123 +1235,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/08-Independence-Basis-and-Dimension/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/28/08-Independence-Basis-and-Dimension/" class="post-title-link" itemprop="url">08. Independence, Basis, and Dimension</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-28 23:26:57" itemprop="dateCreated datePublished" datetime="2020-01-28T23:26:57+08:00">2020-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-02 14:22:32" itemprop="dateModified" datetime="2020-04-02T14:22:32+08:00">2020-04-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>The columns of <script type="math/tex">A</script> are <code>linearly independent</code> when the only solution to <script type="math/tex">A\vec{x}=\vec{0}</script> is <script type="math/tex">\vec{x}=\vec{0}</script>, i.e. the nullspace <script type="math/tex">N(A)</script> contains only the zero vector. No other combination <script type="math/tex">A\vec{x}</script> of the columns gives the zero vector. </li>
-<li>Another definition of independence: <script type="math/tex">x_1\vec{v}_1+x_2\vec{v}_2+…+x_n\vec{v}_n=\vec{0}</script> only happens when all <script type="math/tex">x</script>‘s are zero. </li>
-<li>Independence is a relationship among vectors instead of matrices. </li>
-<li>The columns of <script type="math/tex">A</script> are independent exactly when <script type="math/tex">A</script> has full column rank. </li>
-<li>Any set of <script type="math/tex">n</script> vectors in <script type="math/tex">R^m</script> must be linearly dependent if <script type="math/tex">n > m</script>. </li>
-<li><code>Linear dependence</code> can also be described as follows. <br />&emsp;One vector is a combination of other vectors. <br />&emsp;Some combination gives the zero vector, other than the trivial combination with every <script type="math/tex">x=0</script>. </li>
-</ol>
-<h1 id="Basis-for-a-Vector-Space"><a href="#Basis-for-a-Vector-Space" class="headerlink" title="Basis for a Vector Space"></a>Basis for a Vector Space</h1><ol>
-<li>A set of vectors <code>spans</code> a space if their linear combinations fill the space. </li>
-<li>The vectors which span a space could be dependent or independent. </li>
-<li>A <code>basis for a vector space</code> is a sequence of vectors that are linearly independent and span the space. </li>
-<li>There is only one way to write a vector <script type="math/tex">\vec{v}</script> as a combination of the basis vectors. <br />Prove: <br />&emsp;Suppose <script type="math/tex">\vec{v}=a_1\vec{v_1}+a_2\vec{v_2}+…+a_n\vec{v_n}</script> and <script type="math/tex">\vec{v}=b_1\vec{v_1}+b_2\vec{v_2}+…+b_n\vec{v_n}</script>. <br />&emsp;Subtract those two equations to get <script type="math/tex">\vec{0}=(a_1-b_1)\vec{v_1}+(a_2-b_2)\vec{v_2}+…+(a_n-b_n)\vec{v_n}</script><br />&emsp;So <script type="math/tex">a_i-b_i=0(\forall \ i≤n)</script>, i.e. <script type="math/tex">a_i=b_i(\forall \ i ≤ n)</script>. </li>
-<li>The columns of the <script type="math/tex">n</script> by <script type="math/tex">n</script> identity matrix give the <code>standard basis</code> for <script type="math/tex">R^n</script>. </li>
-<li>The basis is not unique. </li>
-<li>The vectors are a basis for <script type="math/tex">R^n</script> exactly when they are the columns of an <script type="math/tex">n</script> by <script type="math/tex">n</script> invertible matrix. </li>
-<li>The pivot columns (row) of <script type="math/tex">A</script> <strong>(not <script type="math/tex">R</script>)</strong> are a basis for its column (row) space. </li>
-<li>Two way to find a basis from a sequence of vectors: <br />&emsp;Make them the rows of <script type="math/tex">A</script> , and eliminate to find the nonzero rows of <script type="math/tex">R</script>. <br />&emsp;Put the vectors into the columns of <script type="math/tex">A</script>. Eliminate to find the pivot columns of <script type="math/tex">A</script>. </li>
-<li>The zero vector will never be allowed into any basis because then linear independence is lost. </li>
-<li>Every basis of the space has the same number of vectors. </li>
-<li>The special solutions are a basis of $N(A)$. </li>
-</ol>
-<h1 id="Dimension-of-a-Vectors-Space"><a href="#Dimension-of-a-Vectors-Space" class="headerlink" title="Dimension of a Vectors Space"></a>Dimension of a Vectors Space</h1><ol>
-<li>The number of vectors, in any and every basis, is the <code>dimension</code> of the space. </li>
-<li>All basis of the same space has the same number. </li>
-<li>The dimension of the column space equals the rank of the matrix. </li>
-<li>The dimension of <script type="math/tex">Z</script> is zero. The empty set (containing no vectors) is a basis for <script type="math/tex">Z</script>. </li>
-<li>The dimension of the column space: $dim(C(A))=rank(A)$</li>
-<li>The dimension of the nullspace: <script type="math/tex">dim(N(A))=number\ of\ free\ variables=n-rank(A)</script></li>
-</ol>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><ol>
-<li>The idea of independence, basis and dimension are not restricted to column vectors. Matrix and functions can also have these. </li>
-<li>In matrices, it is much like in column space, except components in different rows. </li>
-<li>In function, space usually is given by differential equation. It is also quite like <script type="math/tex">A\vec{x}=\vec{b}</script>. However, we solve it with calculus. </li>
-<li>In function spaces, it also has nullspace and particular solution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1316,7 +1306,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
