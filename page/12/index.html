@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">16</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">17</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">25</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">26</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,90 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">并查集应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:24:04 / Modified: 00:25:51" itemprop="dateCreated datePublished" datetime="2019-11-09T00:24:04+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Data-Structure/Union-Find/" itemprop="url" rel="index">
+                    <span itemprop="name">Union Find</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目1-带权并查集"><a href="#题目1-带权并查集" class="headerlink" title="题目1 (带权并查集)"></a>题目1 (带权并查集)</h1><p><a href="https://vjudge.net/problem/HDU-3038" target="_blank" rel="noopener">HDOJ 3038</a><br>这题是带权并查集的模版题。我们定义，如果询问到了区间[x, y]，我们就把y所在的树变为x所在的树的根节点的子树连起来。权值sum[maxn]，判断是否有矛盾的方法：1、询问的区间两个端点必须是在同一棵树上的，即之前有被询问过，否则不能判断；2、<code>sum[x] + val != sum[y]</code>。注意定义的并查集向量的方向是父节点指向孩子节点的，所以判断时是sum[x] + val而不是sum[y] + val，合并的顺序也要注意<br>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">200000</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> unionFind[maxn], sum[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(unionFind[x] == x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">    unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">    sum[x] = sum[x] + sum[oldFather];</span><br><span class="line">    <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTrue</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">    <span class="keyword">if</span>(fx == fy)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(sum[x] + val != sum[y])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        unionFind[fx] = fy;</span><br><span class="line">        sum[fx] = sum[y] + val - sum[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            unionFind[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x, y, val;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;val);</span><br><span class="line">            x--; <span class="comment">//为了把形如[1, 5]和[6, 10]这样的区间连接起来</span></span><br><span class="line">            <span class="keyword">if</span>(!isTrue(x, y, val))</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题目2-种类并查集"><a href="#题目2-种类并查集" class="headerlink" title="题目2 (种类并查集)"></a>题目2 (种类并查集)</h1><p><a href="https://vjudge.net/problem/POJ-1182" target="_blank" rel="noopener">POJ 1182</a><br>这题的状态比较难定义，我们定义：0表示和父节点同类，1表示吃父节点，2表示被父节点吃，而0、1也和题中的1、2对应起来</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100000</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> unionFind[maxn], val[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">        unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">        val[x] = (val[x] + val[oldFather]) % <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span>(val));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            unionFind[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x, y, relation;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(k--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;relation, &amp;x, &amp;y);</span><br><span class="line">            <span class="keyword">if</span>(x &gt; n || (x == y &amp;&amp; relation == <span class="number">2</span>) || y &gt; n)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">                <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">                <span class="keyword">if</span>(fx == fy &amp;&amp; (val[x] - val[y] + <span class="number">3</span>) % <span class="number">3</span> != relation - <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(fx != fy)</span><br><span class="line">                &#123;</span><br><span class="line">                    unionFind[fx] = fy;</span><br><span class="line">                    val[fx] = (val[y] + relation - val[x] + <span class="number">2</span>) % <span class="number">3</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -976,96 +1060,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95DFS%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95DFS%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">二分图匹配(匈牙利算法DFS实现)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 00:06:54 / Modified: 00:08:57" itemprop="dateCreated datePublished" datetime="2019-11-09T00:06:54+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Graph/" itemprop="url" rel="index">
-                    <span itemprop="name">Graph</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Graph/Bipartite-Graph/" itemprop="url" rel="index">
-                    <span itemprop="name">Bipartite Graph</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>相关内容：<br>二分图：可以分成毫无相关的两个子图<br>二分图匹配就是在二分图中依某种关系将两个图中的元素匹配起来。和稳定婚姻匹配的差别就是二分图匹配的榜单<code>没有优先关系之分</code>，即不会私奔</p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>1、路：<br>&emsp;交替路：从<code>未匹配点</code>出发，依次经过非匹配边，匹配边，非匹配边……的路<br>&emsp;增广路：经过另一个未匹配点的交替路<br>2、增广路的特性：非匹配边比匹配边多一条<br>3、增广路定理：把增广路里的匹配边和非匹配边交换，即匹配边变为非匹配边，非匹配边变为非匹配边；就可以在点集无内边的前提下多一条匹配边，得以改进匹配<br>4、极大匹配：无法在只添加未匹配边的情况下增加匹配<br>5、最大匹配：极大匹配中匹配边最大的情况<br>6、完美(完备)匹配：所有点都是匹配点的匹配<br>7、二分图最小顶点覆盖：使用最少的顶点就覆盖所有边。<code>二分图最小顶点覆盖数 = 最大匹配数</code><br>8、最小路径覆盖：用最少的边组成路径，使得这个路径经过所有点。<code>最小路径覆盖数 = 顶点数 - 最大匹配数</code><br>9、最大独立集：一个点集，使得点集内的所有点与点集外的所有点都没有连边。一般图的最大独立集是NP完全问题，但二分图中<code>最大独立集 = 最小路径覆盖数</code></p>
-<h1 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h1><p>思想：先定一个点集A，让A里的点去“追”另一个点集B里的点。对A里的每一个点利用增广路定理改进匹配，直到无法改进，就得到最大匹配<br><strong>数据存储</strong>：一个二维数组graph来存储点集之间的选择，一个一维数组mark来标记被追点集中的点在该次查询中是否被访问过，两个一维数组BoyMatched和GirlMatched来表示两个点集中的匹配情况</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> graph[maxn][maxn], mark[maxn], BoyMatched[maxn], GirlMatched[maxn];</span><br></pre></td></tr></table></figure>
-<p><strong>初始化</strong>：graph初始化为0，若i和j愿意在一起，则<code>graph[i][j] = graph[j][I] = 1</code>；mark在每次开始搜索增广路的时候都要全部初始化为0。BoyMatched和GirlMatched都初始化为一个点集里没有的值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(graph, <span class="number">0</span>, <span class="keyword">sizeof</span>(graph));</span><br><span class="line"><span class="built_in">memset</span>(boyMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(boyMatched));</span><br><span class="line"><span class="built_in">memset</span>(girlMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(girlMatched));</span><br></pre></td></tr></table></figure>
-<p><strong>处理</strong>：<br>搜索增广路：用DFS搜索(假设Girl追Boy，他们的标号都是从1开始)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)   <span class="comment">//n：Boy的个数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!mark[i] &amp;&amp; graph[i][u])  <span class="comment">//判断是否这条路在之前有没有经过这个点以及这个点与u是否来电</span></span><br><span class="line">		&#123;</span><br><span class="line">			mark[i] = <span class="number">1</span>;     <span class="comment">//标记这条路已经走过这个点了</span></span><br><span class="line">			<span class="keyword">if</span>(!BoyMatched[i] || DFS(BoyMatched[i]))<span class="comment">//若这个点就是未匹配点或这个点往下走有未匹配点</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//匹配边和未匹配边状态交换</span></span><br><span class="line">				BoyMatched[i] = u;</span><br><span class="line">				GirlMarched[u] = i;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximumMatch</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;   <span class="comment">//最大匹配数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) <span class="comment">//遍历所有女生，m：女生个数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!GirlMatched[i])   <span class="comment">//增广路要求从未匹配点开始</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));    <span class="comment">//开始遍历一条新的路，之前的标记要清除</span></span><br><span class="line">			ans += DFS(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1137,20 +1131,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">158</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

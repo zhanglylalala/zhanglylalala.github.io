@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>01. 概述</title>
+      <link href="/2020/04/24/01-%E6%A6%82%E8%BF%B0/"/>
+      <url>/2020/04/24/01-%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<ol><li>计算机是什么：<br />&emsp;一种高速运行的电子设备<br />&emsp;用于进行数据的算术或逻辑运算<br />&emsp;可接受输入信息<br />&emsp;根据用户要求对信息进行加工<br />&emsp;输出结果</li><li>冯诺依曼机<br />&emsp;存储程序<br />&emsp;用二进制编码数据<br />&emsp;体系结构：控制器、运算器、存储器、输入、输出设备<br />&emsp;以运算器 (logic unit，LU)为核心</li><li>现代计算机<br />&emsp;功能部件：CPU (数据通道、控制器)、存储器、输入输出设备<br />&emsp;VLSI<br />&emsp;体系结构：流水技术 (PIPELINE)、层次存储系统、并行</li><li>计算机运行机制<br />&emsp;数据通道：完成算术和逻辑运算，通常包括其中的寄存器<br />&emsp;控制器：CPU的组成成分，它根据程序指令来指挥数据通道、存储器和输入输出设备运行，共同完成程序功能<br />&emsp;存储器：存放运行时程序及其所需要的数据的场所<br />&emsp;输入设备：信息进入计算机的设备<br />&emsp;输出设备：讲计算机结果展示给用户的设备</li><li>计算机的层次结构<br />&emsp;可运行高级语言的计算机 = 可运行汇编语言的计算机 + 编译器<br />&emsp;可运行汇编语言的计算机 = 可运行机器语言的计算机 + 汇编器<br />&emsp;可运行机器语言的计算机可以生成控制信号，由硬件实现</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer Science </category>
+          
+          <category> Computer Organization (Tsinghua) </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hardware </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>07. CNN Architectures</title>
       <link href="/2020/04/09/07-CNN-Architectures/"/>
       <url>/2020/04/09/07-CNN-Architectures/</url>
