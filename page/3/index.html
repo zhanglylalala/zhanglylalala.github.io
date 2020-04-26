@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">18</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">26</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">27</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,238 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/" class="post-title-link" itemprop="url">06. Multiple Continuous Random Variables and Conditional PDFs</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-14 19:35:04" itemprop="dateCreated datePublished" datetime="2020-03-14T19:35:04+08:00">2020-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-15 16:20:17" itemprop="dateModified" datetime="2020-03-15T16:20:17+08:00">2020-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Joint-PDFs"><a href="#Joint-PDFs" class="headerlink" title="Joint PDFs"></a>Joint PDFs</h1><ol>
+<li>Two continuous random variables associated with the same experiment are jointly continuous and can be described in terms of a joint PDF $f_{X,Y}$. </li>
+<li>$f_{X,Y}$ is a nonnegative function that satisfies $P((X,Y)\in B)=\displaystyle\iint\limits_{(x,y)\in B}f_{X,Y}(x,y)dxdy$, for every subset $B$ of the two-dimensional plane. </li>
+<li>If $B=\{(x,y)|a≤x≤b,c≤y≤d\}$, $P(a≤X≤b,c≤Y≤d)=\displaystyle\int^d_c\int^b_af_{X,Y}(x,y)dxdy$<br />If $B$ is the entire two-dimensional plane, $P((X,Y)\in B)=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}f_{X,Y}(x,y)dxdy=1$</li>
+<li>Like PDF of single random variable, the joint PDF can be viewed as the probability per unit area in the vicinity of a point. </li>
+<li>$P(X\in A)=P(X\in A and Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx$</li>
+<li>The marginal PDF $f_X(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y}(x,y)dy$. </li>
+<li>The uniform model: <br />PDF: $f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area of S}&amp;if (x,y)\in S\\0&amp;otherwise \end{array}\right.$<br /><br />Probability: $P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area of S}\iint\limits_{(x,y)\in A}dxdy=\frac{area of A}{area of S}$</li>
+<li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{_\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
+<li>$f_{X,Y}(x,y)=\displaystyle\frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$</li>
+<li>For expectation: $E[g(X,Y)]=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}g(x,y)f_{X,Y}(x,y)dxdy$</li>
+<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
+</ol>
+<h1 id="Conditioning"><a href="#Conditioning" class="headerlink" title="Conditioning"></a>Conditioning</h1><ol>
+<li>Given an event $A$ with $P(A)&gt;0$, the conditional PDF is $P(X\in B|A)=\displaystyle\int_Bf_{X|A}(x)dx$ for any subset $B$ of the real line. </li>
+<li>If $P(x\in A)&gt;0$, $P(X\in B|X\in A)=\displaystyle\frac{P(X\in B,X\in A)}{P(X\in A)}=\frac{\int_{A\cap B}f_X(x)dx}{P(X\in A)}$. So $f_{X|\{X\in A\}}(x)=\left\{\begin{array}{}\displaystyle\frac{f_X(x)}{P(X\in A)}&amp;if x\in A\\0&amp;otherwise \end{array}\right.$</li>
+<li>If two random variables $X$ and $Y$, event $C=\{(X,Y)\in A\}$, $f_{X,Y|C}(x,y)=\left\{\begin{array}{}\displaystyle\frac{f_{X,Y}(x,y)}{P(C)}&amp;if (x,y)\in A\\0&amp;otherwise \end{array}\right.$ and $f_{X|C}(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y|C}(x)dy$</li>
+<li>Total probability theorem: If disjoint sets $A_1,A_2,…,A_n$ form a partition of the sample space, $f_X(x)=\displaystyle\sum^n_{i=1}P(A_i)f_{X|A_i}(x)$. </li>
+<li>If $X$ and $Y$ are continuous random variables with joint PDF $f_{X,Y}$. For any $y$ with $f_Y(y)&gt;0$, the conditional PDF of $X$ given that $Y=y$ is $f_{X|Y}(x|y)=\displaystyle\frac{f_{X,Y}(x,y)}{f_Y(y)}$. </li>
+<li>Total probability theorem based on another continuous random variable: $f_X(x)=\displaystyle\int^\infty_{-\infty}f_Y(y)f_{X|Y}(x|y)dy$</li>
+<li>It’s best to view $y$ as a fixed number and consider $f_{X|Y}(x|y)$ as a function of the single variable $x$. Viewed as a function of $x$, $f_{X|Y}(x|y)$ has the same shape as the joint PDF $f_{X,Y}$, because the denominator $f_Y$ does not depend on $x$. </li>
+<li>$f_{X,Y|Z}(x,y|z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_Z(z)}$ and $f_{X|Y,Z}(x|y,z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_{Y,Z}(y,z)}$</li>
+<li>$E[X|A]=\displaystyle\int^\infty_{-\infty}xf_{X|A}(x)dx$ and $E[X|Y=y]=\displaystyle\int^\infty_{-\infty}xf_{X|Y}(x|y)dx$</li>
+<li>$E[g(X)|A]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|A}(x)dx$ and $E[g(X)|Y=y]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|Y}(x|y)dx$</li>
+<li>If disjoint sets $A_1,A_2,…,A_n$ form a partition of sample space, $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$. </li>
+<li>$E[X]=\displaystyle\int^\infty_{-\infty}E[X|Y=y]f_Y(y)dy$</li>
+</ol>
+<h1 id="Continuous-Bayes-Rule"><a href="#Continuous-Bayes-Rule" class="headerlink" title="Continuous Bayes Rule"></a>Continuous Bayes Rule</h1><ol>
+<li>Since $f_Xf_{Y|X}=f_{X,Y}=f_Yf_{X|Y}$, $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{f_Y(y)}$. </li>
+<li>We can also plug in the total probability theorem: $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{\int^\infty_{-\infty}f_X(x)f_{Y|X}(y|x)}$</li>
+<li>A discrete event $A$ and a continuous random variable $Y$<br />$\begin{equation}\begin{split}P(A|Y=y)&amp;\approx P(A|y≤Y≤y+\delta)\\&amp;=\displaystyle\frac{P(A)P(y≤Y≤y+\delta|A)}{P(y≤Y≤y+\delta)}\\&amp;\approx\frac{P(A)f_{Y|A}(y)\delta}{f_Y(y)\delta}\\&amp;=\frac{P(A)f_{Y|A}(y)}{f_Y(y)} \end{split}\end{equation}$<br />Substitute $f_Y(y)$, $P(A|Y=y)=\displaystyle\frac{P(A)f_{Y|A}(y)}{P(A)f_{Y|A}(y)+P(A^c)f_{Y|A^c}(y)}$<br />Let $A=\{N=n\}$ and $p_N$ be the PMF of $N$. $P(A|Y=y)=P(N=n|Y=y)=\displaystyle\frac{p_N(n)f_{Y|N}(y|n)}{f_Y(y)}=\frac{p_N(n)f_{Y|N}(y|n)}{\sum_ip_N(i)f_{Y|N}(y|i)}$</li>
+<li>$A$ is still a discrete event and $Y$ is a continuous random variable<br />$f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{P(A)}$<br />Also plug in the total probability theorem: $f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{\int^\infty_{-\infty}f_Y(t)P(A|Y=t)dt}$</li>
+</ol>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li>Two continuous random variables $X$ and $Y$ are independent if their joint PDF is the product of the marginal PDFs: $f_{X,Y}(x,y)=f_X(x)f_Y(y)$, for all $x,y$. </li>
+<li>Also $f_{X|Y}(x|y)=f_X(x)$, for all $y$ with $f_Y(y)&gt;0$ and all $x$. </li>
+<li>$P(X\in A and Y\in B)=P(X\in A)P(Y\in B)$. </li>
+<li>$F_{X,y}(x,y)=F_X(x)F_Y(y)$, for all $x, y$. </li>
+<li>$E[g(X)h(Y)]=E[g(X)]E[h(Y)]$</li>
+<li>$var(X+Y)=var(X)+var(y)$. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/14/05-Continuous-Random-Variables/" class="post-title-link" itemprop="url">05. Continuous Random Variables</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-14 15:46:33 / Modified: 18:13:24" itemprop="dateCreated datePublished" datetime="2020-03-14T15:46:33+08:00">2020-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h1><ol>
+<li>A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)=\displaystyle\int_Bf_X(x)dx$ for every subset $B$  of the real line. </li>
+<li>In particular, the probability that the value of $X$ falls within an interval is $P(a≤X≤b)=\displaystyle\int^b_af_X(x)dx$. </li>
+<li>The probability can be interpreted as the area under the graph of the PDF. </li>
+<li>For any single value $a$, we have $P(X=a)=\displaystyle\int^a_af_X(x)dx=0$. <br />So including or excluding the nedpoints of an interval has no effect on its probability. $P(a≤X≤b)=P(a≤X&lt;b)=P(a&lt;X≤b)=P(a&lt;X&lt;b)$</li>
+<li>$P(a≤X≤b)=P(X≤b)-P(X≤a)$</li>
+<li>$\displaystyle\int^\infty_{-\infty}f_X(x)dx=1$</li>
+<li>$P([x,x+\delta])=\displaystyle\int^{x+\delta}_xf_X(t)dt\approx f_X(x)\cdot\delta$. So we can view f_X(X) as the probability mass per unit length near $x$. Even though a PDF is used to calculate event probabilities, $f_X(x)$ is not the probability of any particular event. </li>
+<li>$f_X(x)$ is not restricted to be less than or equal to one. </li>
+<li>If a random variable $X$ takes values in an interval $[a,b]$ and any two subintervals of the same length have the same probability, we refer to this type of random variable as uniform or uniformly distributed. <br />$f_X(x)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a}&amp;if a≤x≤b\\0&amp;otherwise \end{array}\right.$</li>
+<li>The expected value of a continuous random variable $X$ is defined by $E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx$. </li>
+<li>If $X$ is a continuous random variable, $Y=g(X)$ is also a random variable but may be a decrete one. But $E[g(X)]=\displaystyle\int^\infty_{-\infty}g(x)f_X(x)dx$ is true for any kind of $Y$, descrete or continuous. </li>
+<li>The variance is still $var(X)=E[(X-E[X])^2]=\displaystyle\int_{-\infty}^\infty(x-E[X])^2f_X(x)dx$. <br />And $var(X)=E[(X-E[X])^2]$ still stands. </li>
+<li>For uniform random variable: <br />$E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx=\int^b_ax\frac{1}{b-a}dx=\frac{a+b}{2}$<br />$E[X^2]=\displaystyle\int^\infty_{-\infty}x^2f_X(x)dx=\int^b_a\frac{x^2}{b-a}dx=\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{a^2+ab+b^2}{3}-\frac{(a+b)^2}{4}=\frac{(b-a)^2}{12}$</li>
+<li>Exponential random variable: <br />PDF: $f_X(x)=\left\{\begin{array}{}\lambda e^{-\lambda x}&amp;if x≥0\\0&amp;otherwise \end{array}\right.$<br />$P(X≥a)=\displaystyle\int^\infty_a\lambda e^{-\lambda x}dx=e^{-\lambda a}$<br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\int^\infty_0x\lambda e^{-\lambda x}dx\\&amp;=(-xe^{-\lambda x})\Big|^\infty_0+\int^\infty_0e^{-\lambda x}dx\\&amp;=\frac{1}{\lambda} \end{split}\end{equation}$<br />$\begin{equation}\begin{split}E[X^2]&amp;=\displaystyle\int^\infty_0x^2\lambda e^{-\lambda x}dx\\&amp;=(-x^2e^{-\lambda x})\Big|^\infty_0+\int^\infty_02xe^{-\lambda x}dx\\&amp;=0+\frac{2}{\lambda}E[X]\\&amp;=\frac{2}{\lambda^2} \end{split}\end{equation}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1}{\lambda^2}$</li>
+</ol>
+<h1 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h1><ol>
+<li>The cumulative distribution function (CDF) of a random variable $X$ is denoted by $F_X$ and provides probability $P(X≤x)$. <br />$F_X(x)=P(X≤x)=\left\{\begin{array}{}\displaystyle\sum_{k≤x}p_X(k)&amp;if X is discrete\\\int^x_{-\infty}f_X(t)dt&amp;if X is continuous \end{array}\right.$</li>
+<li>CDF accumulates probability up to the value $x$. </li>
+<li>The graph of CDF of a descrete random variable has a staircase form at the values of probability mass. At the points where a jump occurs, the value of $F_X$ is the larger of the two corresponding value, i.e. $F_X$ is continuous from the right. </li>
+<li>$F_X$ is monotonically nondecreasing: if $x≤y$, then $F_X(x)≤F_X(y)$. </li>
+<li>$\displaystyle\lim_{x\to-\infty}F_X=0$ and $\displaystyle\lim_{x\to\infty}F_X=1$</li>
+<li>If $X$ is discrete, then $F_X(x)$ is a piecewise constant function of $x$. If $X$ is continuous, then $F_X(x)$ is a continuous function of $x$. </li>
+<li>If $X$ is descrete, $p_X(k)=P(X≤k)-P(X≤k-1)=F_X(k)-F_X(k-1)$. If $X$ is continuous, $f_X(x)=\displaystyle\frac{dF_X}{dx}(x)$. </li>
+<li>If $X_1,X_2,…,X_n$ are independent, $F_X(x)=F_{X_1}(x)…F_{X_n}(x)$</li>
+<li>For geometric random variable, $F_{geo}(n)=\displaystyle\sum^n_{k=1}p(1-p)^{k-1}=1-(1-p)^2$<br />For exponential random variable, $F_{exp}(x)=\displaystyle\int^x_0\lambda e^{-\lambda t}dt=1-e^{-\lambda x}$ for $x&gt;0$ and $F_X(x)=0$, for $x≤0$. <br />$F_{geo}=F_{exp}$ when $x=n\delta$ ($\delta=-\displaystyle\frac{-ln(1-p)}{\lambda}$), with $n=1,2,…$. </li>
+</ol>
+<h1 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h1><ol>
+<li>A continuous random variable $X$ is said to be normal or Gaussian if it has a PDF of the form $f_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, where $\mu$ and $\sigma$ are two scalar parameters characterizing the PDF with $\sigma&gt;0$. </li>
+<li>The PDF is symmetric around $\mu$. So its mean $E[X]$ has to be $\mu$. </li>
+<li><br />$\begin{equation}\begin{split}var(X)&amp;=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}\int^\infty_{-\infty}(x-\mu)^2e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\int^\infty_{-\infty}y^2e^{-\frac{y^2}{2}}dy                         y=\frac{x-\mu}{\sigma}\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\Bigg[(-ye^{-\frac{y^2}{2}})\bigg|^\infty_{-\infty}+\int^\infty_{-\infty}e^{-\frac{y^2}{2}}dy\Bigg]\\&amp;=\sigma^2 \end{split}\end{equation}$</li>
+<li>The standard normal random variable is a normal random variable with zero mean and unit variance. CDF: $\Phi(y)=P(Y≤y)=\displaystyle\frac{1}{\sqrt{2\pi}}\int^y_{-\infty}e^{-\frac{t^2}{2}}dt$</li>
+<li>In standard normal random variable, for $y&lt;0$, $\Phi(y)=P(Y≤y)=P(Y≥-y)=1-P(Y≤-y)=1-\Phi(-y)$</li>
+<li>For any $X$, we can standardize by $Y=\displaystyle\frac{X-\mu}{\sigma}$. And in reverse, any $X=\sigma Y+\mu$. So $P(X≤x)=P(\displaystyle\frac{X-\mu}{\sigma}≤\frac{x-\mu}{\sigma})=P(Y≤\frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma})$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1106,205 +1338,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/28/07-Change-of-Variables-and-Vector-Fields/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/28/07-Change-of-Variables-and-Vector-Fields/" class="post-title-link" itemprop="url">07. Change of Variables and Vector Fields</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-28 23:13:59" itemprop="dateCreated datePublished" datetime="2020-02-28T23:13:59+08:00">2020-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:05:46" itemprop="dateModified" datetime="2020-03-07T16:05:46+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Multivariable-Calculus-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">Multivariable Calculus (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Change-of-Variables"><a href="#Change-of-Variables" class="headerlink" title="Change of Variables"></a>Change of Variables</h1><ol>
-<li>Let <script type="math/tex">u=u(x,y)</script> and <script type="math/tex">v=v(x,y)</script>. <br />Approximation: <script type="math/tex">\left\{\begin{array}{}\Delta u\approx u_x\Delta x+u_y\Delta y\\\Delta v\approx v_x\Delta x+v_y\Delta y\end{array}\right.</script><br />Linear tranformation: <script type="math/tex">\left[\begin{matrix}\Delta u\\\Delta v\end{matrix}\right]\approx\left[\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right]\left[\begin{matrix}\Delta x\\\Delta y\end{matrix}\right]</script><br />So new area is <script type="math/tex">\Delta A'=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|\Delta x\Delta y</script>. <br /><code>Jacobbian</code>: <script type="math/tex">J=\displaystyle\frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|</script><br />So <script type="math/tex">dA'=du\ dv=|J|dx\ dy=|J|dA</script></li>
-<li>Mark that <script type="math/tex">\displaystyle\frac{\partial(u,v)}{\partial(x,y)}\cdot\frac{\partial(x,y)}{\partial(u,v)}=1</script>. So <script type="math/tex">J_{(u,v)/(x,y)}=\displaystyle\frac{1}{J_{(x,y)/(u,v)}}</script>, namely their determinants are inverse, which implies their matrices are inverse. </li>
-<li>We also need to change the bounds from <script type="math/tex">x,y</script> to <script type="math/tex">u,v</script>. Draw the original region <script type="math/tex">x-y</script>. Then try to change each sides in that region to <script type="math/tex">u-v</script> graph to get the <script type="math/tex">u-v</script> region. </li>
-</ol>
-<h1 id="Vector-Fields"><a href="#Vector-Fields" class="headerlink" title="Vector Fields"></a>Vector Fields</h1><ol>
-<li>At each point <script type="math/tex">(x,y)</script> in a plane, we have <script type="math/tex">\vec{F}</script> a vector that depends on <script type="math/tex">(x,y)</script>. </li>
-<li><script type="math/tex">\vec{F}=M\vec{i}+N\vec{j}</script> Where <script type="math/tex">M</script> and <script type="math/tex">N</script> are function of <script type="math/tex">x,y</script>.  </li>
-<li>Each <script type="math/tex">\vec{F}</script> is a vector which starts from point <script type="math/tex">(x,y)</script> and points to a certain direction. For example, <script type="math/tex">\vec{F}=x\vec{i}+y\vec{j}</script> starts from <script type="math/tex">(x,y)</script> and points to <script type="math/tex">(2x,2y)</script>. </li>
-<li>Work (line integral): <script type="math/tex">W=\vec{F}\cdot\vec{\Delta r}</script>. Along a trajectory <script type="math/tex">C</script>, work adds up to <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>. <script type="math/tex">W=\displaystyle\lim_{|\vec{\Delta r}|\to 0}\sum\vec{F}\cdot\vec{\Delta r_i}=\lim_{\Delta t\to 0}\sum\vec{F}\cdot(\displaystyle\frac{\vec{\Delta r}}{\Delta t}\Delta t)</script>. <br />So <script type="math/tex">W=\displaystyle\int_{t_1}^{t_2}\vec{F}\cdot\frac{d\vec{r}}{dt}dt=\int^{t_2}_{t_1}\vec{F}\cdot\vec{v}\ dt</script></li>
-<li>Another way to calculate work: <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_C<M,N>\cdot<dx,dy>=\int_cMdx+Ndy</script>. Then express <script type="math/tex">x</script> and <script type="math/tex">y</script> in terms of the same thing. Normally we’ll use parametric equation of <script type="math/tex">C</script>. </li>
-<li>Geometric approach: <script type="math/tex">\vec{\Delta r}</script> is in the direction of <script type="math/tex">\vec{T}</script> with size of <script type="math/tex">ds</script>. So <script type="math/tex">\displaystyle\frac{d\vec{r}}{dt}=\vec{v}=\vec{T}\frac{ds}{dt}</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and <script type="math/tex">\displaystyle\frac{ds}{dt}</script> is its size. <br /><script type="math/tex">W =\displaystyle\int_C\vec{F}\cdot\vec{T}ds</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/27/06-Double-Integrals/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/27/06-Double-Integrals/" class="post-title-link" itemprop="url">06. Double Integrals</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-27 16:11:44" itemprop="dateCreated datePublished" datetime="2020-02-27T16:11:44+08:00">2020-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:05:33" itemprop="dateModified" datetime="2020-03-07T16:05:33+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Multivariable-Calculus-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">Multivariable Calculus (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Double-Integral"><a href="#Double-Integral" class="headerlink" title="Double Integral"></a>Double Integral</h1><ol>
-<li>Double integral is calculating the volumn below graph of <script type="math/tex">f</script> on a certain region <script type="math/tex">R</script>. It’s denoted by <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>. <script type="math/tex">dA</script> stands for area. </li>
-<li>Like in the one variable integral, we cut <script type="math/tex">R</script> into small pieces of area <script type="math/tex">\Delta A</script>. Mark each pieces with its center <script type="math/tex">(x_i,y_i)</script>. <br />Then answer is <script type="math/tex">\displaystyle\lim_{\Delta A\to 0}\sum f(x_i,y_i)\Delta A</script>. </li>
-<li>To compute <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>, take slices let <script type="math/tex">S(x)</script> is area of slice by plane parallel to <script type="math/tex">yoz</script> plane. Then the volumn is <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}} S(x)dx</script>. For given <script type="math/tex">x</script>, <script type="math/tex">S(x)=\displaystyle\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy</script>. <br />Conclusion, <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{x_{max}}_{x_{min}}\bigg[\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\bigg]dx</script></li>
-<li>The bounds of outer integral are pure constants while the bounds of inner integral may contain <script type="math/tex">x</script>. However in inner integrals <script type="math/tex">x</script> is set constant. </li>
-<li>When exchanging order of integration, remember to change the bounds. Draw <script type="math/tex">y_{max}(x)</script> and <script type="math/tex">y_{min}(x)</script> in the inteval <script type="math/tex">[x_{min},x_{max}]</script> to find the new bounds. Normally <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}}\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\ dx</script> becomes <script type="math/tex">\displaystyle\int^{y_{max}}_{x_{min}}\int^{x_{max}(y)}_{x_{min}(y)}f(x,y)dx\ dy</script> (<script type="math/tex">x_{max}(y)\ is\ y^{-1}_{min}(x)</script> and <script type="math/tex">x_{min}(y)\ is\ y^{-1}_{max}(x)</script>). </li>
-</ol>
-<h1 id="Polar-Coordination"><a href="#Polar-Coordination" class="headerlink" title="Polar Coordination"></a>Polar Coordination</h1><ol>
-<li>In polar coordination, we substitute <script type="math/tex">\left\{\begin{array}{}x=rcos\ \theta\\y=rsin\ \theta\end{array}\right.</script> to get the function <script type="math/tex">f(r,\theta)</script>. </li>
-<li>In perpendicular coordination, we can do all those things because <script type="math/tex">\Delta A=\Delta x\cdot \Delta y</script>. But in polar coordination, cut <script type="math/tex">R</script> into small pieces of fan-shaped area with straight lines from origin and circles. So <script type="math/tex">\Delta A=width\ between\ rings\cdot\ arclength=\Delta r\cdot r\Delta\theta</script>, namely <script type="math/tex">da=rdr\ d\theta</script></li>
-<li>So <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{\theta_{max}}_{\theta_{min}}\int^{r_{max}(\theta)}_{r_{min}(\theta)}f(r,\theta)rdr\ d\theta</script></li>
-</ol>
-<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><ol>
-<li>The area of given region <script type="math/tex">R</script> in two dimension is <script type="math/tex">\displaystyle Area(R)=\iint_R1\ dA</script>. </li>
-<li>The density of a flat matter in a unit area is <script type="math/tex">\delta</script>, then the mass is <script type="math/tex">m=\displaystyle\iint_R\delta\ dA</script>. </li>
-<li>Average value of <script type="math/tex">f</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{Area(R)}\iint_RfdA</script><br />Weighted average of <script type="math/tex">f</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{\iint_R\delta dA}\iint_Rf\delta dA</script>. </li>
-<li>Center of mass of a planer object with density <script type="math/tex">\delta</script>: <script type="math/tex">\left\{\begin{array}{}\overline{x}=\displaystyle\frac{1}{mass}\iint_Rx\delta\ dA\\\overline y= \displaystyle\frac{1}{mass}\iint_Ry\delta\ dA\end{array}\right.</script></li>
-<li>Moment of inertia about an axis: <script type="math/tex">I=\displaystyle\iint_Rr^2\delta\ dA</script> (<script type="math/tex">r</script> is the spin radius)</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1371,20 +1409,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

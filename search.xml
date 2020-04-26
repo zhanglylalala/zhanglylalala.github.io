@@ -18840,6 +18840,7 @@ table th:first-of-type {
       </categories>
       <tags>
         <tag>Hardware</tag>
+        <tag>Foundation</tag>
       </tags>
   </entry>
   <entry>
@@ -18901,6 +18902,45 @@ table th:first-of-type {
       </categories>
       <tags>
         <tag>Hardware</tag>
+        <tag>Foundation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01. 编译概述</title>
+    <url>/2020/04/26/01-%E7%BC%96%E8%AF%91%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<ol>
+<li>编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一个翻译系统，把源语言翻译成目标语言的等价程序</li>
+<li>源程序先经过预处理变为修改后的源程序<br />修改后的源程序经过编译器变为汇编代码<br />汇编代码经过汇编器变为可重定位的机器代码<br />可重定位的机器代码最后经过连接器变为目标机器代码</li>
+<li>源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出</li>
+<li>编译程序将源程序全部翻译成机器语言程序后，再执行机器语言程序。一次编译可以多次执行<br />解释程序将源程序的一条语句翻译成机器语言程序，并立即执行，在接着翻译。解释程序可交互，易于调试，可移植性好，编译一次执行一次，但是效率低</li>
+<li>Java先经Java编译器编译得到一个字节码，再在JVM上解释</li>
+<li>编译步骤<br />&emsp;词法分析：输入源程序，输出单词符号序列 (二元组序列)<br />&emsp;语法分析：输入单词符号序列，输出语法分析树<br />&emsp;语义分析：输入语法分析树，输出带语义的树<br />&emsp;中间代码生成：输入带语义的树，输出中间代码<br />&emsp;代码优化：输入原始中间代码，输出优化后的中间代码<br />&emsp;目标代码生成：输入优化后的中间代码，输出目标程序代码</li>
+<li>词法分析把字符序列切分为有意义的单词。<br />识别关键字、标识符、数字等，并对每一个单词给出其类型，生成单词符号，表示为$&lt;单词词类, 单词值&gt;$。如果一个词类里只有一个单词，则可以省略单词词类<br />空格指示作为分隔符，忽略。过滤注释部分代码<br />每一个单词词类都有一个符号表，单词值指向符号表中的某一项</li>
+<li>语法分析分析表达式、语句等。语法树体现了单词符号序列的语法结。分析树的节点是单词符号或语法单元。语法树的节点通常是操作符，而其子节点则是操作数</li>
+<li>语义分析分析表达式或语句的操作内容。收集语义信息，类型检查和类型转换。验证语法结构合法的程序是否存在语义错误</li>
+<li>中间代码每一条指令只执行一个操作。中间代码是一种面向抽象机器的代码结构，易于产生且易于翻译成目标语言</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>Compilers (HDU / Stanford)</category>
+      </categories>
+      <tags>
+        <tag>Foundation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03. 数据表示和检查纠错</title>
+    <url>/2020/04/26/03-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%92%8C%E6%A3%80%E6%9F%A5%E7%BA%A0%E9%94%99/</url>
+    <content><![CDATA[<h1 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h1><p>1. </p>
+]]></content>
+      <categories>
+        <category>Computer Science</category>
+        <category>Computer Organization (Tsinghua)</category>
+      </categories>
+      <tags>
+        <tag>Hardware</tag>
+        <tag>Foundation</tag>
       </tags>
   </entry>
   <entry>
