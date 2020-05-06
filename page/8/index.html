@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">27</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">28</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,110 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/" class="post-title-link" itemprop="url">11. Orthogonal Vectors and Subspaces</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-31 21:44:03" itemprop="dateCreated datePublished" datetime="2020-01-31T21:44:03+08:00">2020-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:06:45" itemprop="dateModified" datetime="2020-03-07T16:06:45+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Orthogonality"><a href="#Orthogonality" class="headerlink" title="Orthogonality"></a>Orthogonality</h1><ol>
+<li>Two vectors are <code>orthogonal</code> when their dot product is zero: <script type="math/tex">\vec{v}\cdot \vec{w}=\vec{v}^T\vec{w}=0</script>. </li>
+<li>If two vectors are orthogonal, <script type="math/tex">||\vec{v}||^2+||\vec{w}||^2=||\vec{v}+\vec{w}||^2=||\vec{v}-\vec{w}||^2</script>. </li>
+<li>For two subspaces <script type="math/tex">V</script> and <script type="math/tex">W</script>, if <script type="math/tex">\forall\ \vec{v}\ \forall\ \vec{w},\ \vec{v}^T\vec{w}=0</script>, we say <script type="math/tex">V</script> and <script type="math/tex">W</script> are <code>orthogonal</code> or <code>perpendicular</code>. </li>
+<li>The row space is perpendicular to the nullsapce. Every row of <script type="math/tex">A</script> is perpendicular to every solution of <script type="math/tex">A\vec{x}=\vec{0}</script><br />The column space is perpendicular to the left nullspace. Every row of <script type="math/tex">A^T</script> is perpendicular to every solution of <script type="math/tex">A^T\vec{y}=\vec{0}</script> </li>
+<li>If two orthogonal subspaces have intersection, the intersection can and only can contain <script type="math/tex">\vec{0}</script>, or the vector in the intersection cannot be perpendicular to itself. </li>
+</ol>
+<h1 id="Orthogonal-Complements"><a href="#Orthogonal-Complements" class="headerlink" title="Orthogonal Complements"></a>Orthogonal Complements</h1><ol>
+<li>The orthogonal complements of a subspace <script type="math/tex">V</script> contains every vector that is perpendicular to <script type="math/tex">V</script>. It’s denoted by <script type="math/tex">V^\perp</script>. </li>
+<li>Both row space and nullspace are the orhogonal complement of the other. <br />Both column space and left nullspace are the orhogonal complement of the other. </li>
+<li><script type="math/tex">\forall\ \vec{x_r}\in C(A^T),\ \forall\ \vec{x_n}\in\ N(A),\ A(\vec{x_r}+\vec{x_n})=A\vec{x_r}+A\vec{x_n}=A\vec{x}+\vec{0}=A\vec{x}=\vec{b}</script>. Every <script type="math/tex">\vec{b}</script> (a vector in <script type="math/tex">C(A)</script>) corresponds to one <script type="math/tex">\vec{x_r}</script>. </li>
+</ol>
+<h1 id="Combining-Basis"><a href="#Combining-Basis" class="headerlink" title="Combining Basis"></a>Combining Basis</h1><ol>
+<li>Any <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script> must span <script type="math/tex">R^n</script>. Any n vectors that span <script type="math/tex">R^n</script> must be independent. </li>
+<li>If the <script type="math/tex">n</script> columns of <script type="math/tex">A</script> are independent, they span <script type="math/tex">R^n</script>. So <script type="math/tex">A\vec{x}=\vec{b}</script> is solvable. <br />If the n columns of <script type="math/tex">A</script> span <script type="math/tex">R^n</script>, they are independent. So <script type="math/tex">A\vec{x}=\vec{b}</script> has only one solution. </li>
+<li>The <script type="math/tex">r</script> basis of <script type="math/tex">C(A^T)</script> combine <script type="math/tex">n-r</script> basis of <script type="math/tex">N(A)</script> is <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script>. So each <script type="math/tex">\vec{x}</script> is the sum <script type="math/tex">\vec{x_r}+\vec{x_n}</script>. <br />Prove of independence: <br />If a combination of all <script type="math/tex">n</script> vectors gives <script type="math/tex">\vec{x_r}+\vec{x_n}=\vec{0}</script>, then <script type="math/tex">\vec{x_r}=-\vec{x_n}</script> is in both subspaces. So <script type="math/tex">\vec{x_r}=\vec{x_n}=\vec{0}</script>. </li>
+</ol>
+<h1 id="When-Ax-b-fails"><a href="#When-Ax-b-fails" class="headerlink" title="When Ax=b fails"></a>When Ax=b fails</h1><ol>
+<li>In application, <script type="math/tex">A\vec{x}=\vec{b}</script> is usually unsovable, especially when there are way more equations then the unknowns, the <script type="math/tex">\vec{b}</script> often has noise. </li>
+<li>In order to make good use of data, we usually multiply two side with <script type="math/tex">A^T</script> to solve <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script>. </li>
+<li><script type="math/tex">N(A^TA)=N(A)</script>, and <script type="math/tex">rank\ of\ A^TA=rank\ of\ A</script>. </li>
+<li><script type="math/tex">A^TA</script> is invertible when <script type="math/tex">A</script> has independent columns and this is when <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> has a solution. <br />Prove independence: <br />To find <script type="math/tex">N(A^TA)</script>, we find the solution space of <script type="math/tex">A^TA\vec{x}=\vec{0}</script>. <br />Multiply by <script type="math/tex">\vec{x}^T</script>, we get <script type="math/tex">\vec{x}^TA^TA\vec{x}=(A\vec{x})^T(A\vec{x})=\vec{0}</script>. <br />This means <script type="math/tex">A\vec{x}=\vec{0}</script>. <br />If <script type="math/tex">A</script> has independent columns, that equation leads to <script type="math/tex">\vec{x}=0</script>, i.e. <script type="math/tex">N(A^TA)=Z</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -2710,804 +2814,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/24/day-13/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/24/day-13/" class="post-title-link" itemprop="url">day 13</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-24 23:40:22" itemprop="dateCreated datePublished" datetime="2019-11-24T23:40:22+08:00">2019-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-11 12:14:00" itemprop="dateModified" datetime="2020-01-11T12:14:00+08:00">2020-01-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/" itemprop="url" rel="index">
-                    <span itemprop="name">English</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/10000-Words/" itemprop="url" rel="index">
-                    <span itemprop="name">10000 Words</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ruthless</td>
-<td style="text-align:center">adj. 无情的，残忍的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">relentless</td>
-<td style="text-align:center">adj. 无情的，残忍的</td>
-<td style="text-align:center">不再借东西lent给他</td>
-<td style="text-align:center">re·lent·less</td>
-</tr>
-<tr>
-<td style="text-align:center">brutal</td>
-<td style="text-align:center">adj. 残忍的，凶残的</td>
-<td style="text-align:center"><code>br - break</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ferocious</td>
-<td style="text-align:center">adj. 凶残的；激烈的</td>
-<td style="text-align:center">fierce<br />去i插o</td>
-<td style="text-align:center">feroc·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">bestial</td>
-<td style="text-align:center">adj. 畜生般的</td>
-<td style="text-align:center">来自beast</td>
-<td style="text-align:center">best·ial</td>
-</tr>
-<tr>
-<td style="text-align:center">lenient</td>
-<td style="text-align:center">adj. 宽厚的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">clement</td>
-<td style="text-align:center">adj. 宽厚的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vociferous</td>
-<td style="text-align:center">adj. 嘈杂的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">boisterous</td>
-<td style="text-align:center">adj. 喧闹的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cacophonous</td>
-<td style="text-align:center">adj. 嘈杂的</td>
-<td style="text-align:center"><code>caco - 丑，恶，不良</code><br /><code>phon - sound</code></td>
-<td style="text-align:center">caco·phon·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">rowdy</td>
-<td style="text-align:center">adj. 喧闹的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tranquil</td>
-<td style="text-align:center">adj. 宁静的</td>
-<td style="text-align:center">trans + quiet</td>
-<td style="text-align:center">tran·quil</td>
-</tr>
-<tr>
-<td style="text-align:center">tranquilize</td>
-<td style="text-align:center">v. 使平静</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">serene</td>
-<td style="text-align:center">adj. 宁静的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bleak</td>
-<td style="text-align:center">adj. 荒凉的；令人沮丧的</td>
-<td style="text-align:center">black</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bleach</td>
-<td style="text-align:center">v. 漂白</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blanch</td>
-<td style="text-align:center">v. 使变白</td>
-<td style="text-align:center">blank</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blur</td>
-<td style="text-align:center">v. 使模糊</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blear</td>
-<td style="text-align:center">v. 使模糊</td>
-<td style="text-align:center">clear的反义词</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blunt</td>
-<td style="text-align:center">v. 使变钝，迟钝</td>
-<td style="text-align:center">blind</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blunder</td>
-<td style="text-align:center">n./v. 大错误；蹒跚</td>
-<td style="text-align:center">blind</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">castigate</td>
-<td style="text-align:center">v. 斥责，惩罚</td>
-<td style="text-align:center"><code>cast - pure</code><br />通过惩罚净化行为</td>
-<td style="text-align:center">cast·ig·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">chaste</td>
-<td style="text-align:center">adj. 纯洁的</td>
-<td style="text-align:center">c → ch<br />同上</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">chasten</td>
-<td style="text-align:center">v. 惩罚</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">chastise</td>
-<td style="text-align:center">v. 惩罚</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">chast·ise</td>
-</tr>
-<tr>
-<td style="text-align:center">caste</td>
-<td style="text-align:center">n. 等级制度</td>
-<td style="text-align:center">越阶级要受到惩罚</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">enmity</td>
-<td style="text-align:center">n. 敌意</td>
-<td style="text-align:center">enemy</td>
-<td style="text-align:center">enmi·ty</td>
-</tr>
-<tr>
-<td style="text-align:center">lucid</td>
-<td style="text-align:center">adj. 清晰的；神志清楚的</td>
-<td style="text-align:center"><code>luc/lucid - bright</code></td>
-<td style="text-align:center">luc·id</td>
-</tr>
-<tr>
-<td style="text-align:center">elucidate</td>
-<td style="text-align:center">v. 阐明</td>
-<td style="text-align:center">向外照亮秘密</td>
-<td style="text-align:center">e·lucid·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">pellucid</td>
-<td style="text-align:center">adj. 透明的；明晰的</td>
-<td style="text-align:center"><code>pel - per - through</code><br />光可以直接透过去</td>
-<td style="text-align:center">pel·lucid</td>
-</tr>
-<tr>
-<td style="text-align:center">translucent</td>
-<td style="text-align:center">adj. 半透明的</td>
-<td style="text-align:center"><code>trans - 进入</code></td>
-<td style="text-align:center">trans·luc·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">obscure</td>
-<td style="text-align:center">adj. 模糊的</td>
-<td style="text-align:center"><code>scu - sky</code></td>
-<td style="text-align:center">ob·scu·re</td>
-</tr>
-<tr>
-<td style="text-align:center">perpendicular</td>
-<td style="text-align:center">adj. 垂直的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sagacity</td>
-<td style="text-align:center">n. 睿智；聪敏</td>
-<td style="text-align:center"><code>sag - to know</code></td>
-<td style="text-align:center">saga·city</td>
-</tr>
-<tr>
-<td style="text-align:center">sage</td>
-<td style="text-align:center">n. 圣人<br />adj. 睿智的</td>
-<td style="text-align:center">什么都知道的人</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">saga</td>
-<td style="text-align:center">n. 传说</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sagacious</td>
-<td style="text-align:center">adj. 睿智的</td>
-<td style="text-align:center">知道得多的</td>
-<td style="text-align:center">sag·acious</td>
-</tr>
-<tr>
-<td style="text-align:center">presage</td>
-<td style="text-align:center">n./v. 预感</td>
-<td style="text-align:center">提前知道</td>
-<td style="text-align:center">pre·sage</td>
-</tr>
-<tr>
-<td style="text-align:center">sapience</td>
-<td style="text-align:center">n. 智慧</td>
-<td style="text-align:center"><code>sap - sag</code></td>
-<td style="text-align:center">sap·i·ence</td>
-</tr>
-<tr>
-<td style="text-align:center">judicious</td>
-<td style="text-align:center">adj. 明智的</td>
-<td style="text-align:center">judge的判断一般是明智的</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">canny</td>
-<td style="text-align:center">adj. 精明的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacious</td>
-<td style="text-align:center">adj. 有洞察力的</td>
-<td style="text-align:center">看得多且透的</td>
-<td style="text-align:center">per·spic·acious</td>
-</tr>
-<tr>
-<td style="text-align:center">urbane</td>
-<td style="text-align:center">adj. 文雅的</td>
-<td style="text-align:center">城市urban里的</td>
-<td style="text-align:center">urban·e</td>
-</tr>
-<tr>
-<td style="text-align:center">courteous</td>
-<td style="text-align:center">adj. 彬彬有礼的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">refined</td>
-<td style="text-align:center">adj. 有教养的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vulgar</td>
-<td style="text-align:center">adj. 下流的；平庸的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ardent</td>
-<td style="text-align:center">adj. 热心的；热情的</td>
-<td style="text-align:center"><code>ard/ars - to burn</code></td>
-<td style="text-align:center">ard·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">ardor</td>
-<td style="text-align:center">n. 热情</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ard·or</td>
-</tr>
-<tr>
-<td style="text-align:center">arson</td>
-<td style="text-align:center">n. 纵火罪</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ars·on</td>
-</tr>
-<tr>
-<td style="text-align:center">arsonist</td>
-<td style="text-align:center">n. 纵火犯</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">arson·ist</td>
-</tr>
-<tr>
-<td style="text-align:center">zeal</td>
-<td style="text-align:center">n. 热情</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">derogatory</td>
-<td style="text-align:center">adj. 损毁的，诽谤的</td>
-<td style="text-align:center"><code>rog - to ask</code></td>
-<td style="text-align:center">de·rog·atory</td>
-</tr>
-<tr>
-<td style="text-align:center">derogate</td>
-<td style="text-align:center">v. 贬损</td>
-<td style="text-align:center">无理要求</td>
-<td style="text-align:center">de·rog·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">abrogate</td>
-<td style="text-align:center">v. 取消</td>
-<td style="text-align:center">没有要求</td>
-<td style="text-align:center">ab·rog·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">interrogate</td>
-<td style="text-align:center">v. 审问</td>
-<td style="text-align:center">互相问</td>
-<td style="text-align:center">inter·rog·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">surrogate</td>
-<td style="text-align:center">n./v. 代理，代理品</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">prerogative</td>
-<td style="text-align:center">n. 特权</td>
-<td style="text-align:center">提前要求</td>
-<td style="text-align:center">pre·rog·at·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">calumniate</td>
-<td style="text-align:center">v. 诽谤</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">disparage</td>
-<td style="text-align:center">v. 诽谤</td>
-<td style="text-align:center"><code>par - 平等</code><br />不平等</td>
-<td style="text-align:center">dis·par·age</td>
-</tr>
-<tr>
-<td style="text-align:center">pejorative</td>
-<td style="text-align:center">adj. 贬损的，诽谤的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">secrete</td>
-<td style="text-align:center">v. 分泌；藏匿</td>
-<td style="text-align:center">create(crete)并分出去(se)</td>
-<td style="text-align:center">se·crete</td>
-</tr>
-<tr>
-<td style="text-align:center">excrete</td>
-<td style="text-align:center">v. 分泌</td>
-<td style="text-align:center">create(crete)并分出去(ex)</td>
-<td style="text-align:center">ex·crete</td>
-</tr>
-<tr>
-<td style="text-align:center">hilarious</td>
-<td style="text-align:center">adj. 高兴地；好笑有趣的</td>
-<td style="text-align:center"><code>hilar - glad</code></td>
-<td style="text-align:center">hilar·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">exhilarate</td>
-<td style="text-align:center">v. 使高兴</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ex·hilar·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">hilarity</td>
-<td style="text-align:center">n. 高兴</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">hilar·ity</td>
-</tr>
-<tr>
-<td style="text-align:center">paramount</td>
-<td style="text-align:center">adj. 最重要的</td>
-<td style="text-align:center"><code>para - above</code><br /><code>mount - 登上</code></td>
-<td style="text-align:center">para·mound</td>
-</tr>
-<tr>
-<td style="text-align:center">mount</td>
-<td style="text-align:center">v. 增加</td>
-<td style="text-align:center">登上更高的一层</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dismount</td>
-<td style="text-align:center">v. 下车，下马</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">dis·mount</td>
-</tr>
-<tr>
-<td style="text-align:center">surmount</td>
-<td style="text-align:center">v. 征服，超越</td>
-<td style="text-align:center">骑在下面</td>
-<td style="text-align:center">sur·mount</td>
-</tr>
-<tr>
-<td style="text-align:center">regress</td>
-<td style="text-align:center">v. 倒退，后退</td>
-<td style="text-align:center"><code>gress - to go</code><br />向后走</td>
-<td style="text-align:center">re·gress</td>
-</tr>
-<tr>
-<td style="text-align:center">compulsive</td>
-<td style="text-align:center">adj. 强制的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tenuous</td>
-<td style="text-align:center">adj. 细的</td>
-<td style="text-align:center"><code>tenu - thin</code></td>
-<td style="text-align:center">tenu·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">tenuity</td>
-<td style="text-align:center">n. 稀薄</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">tenu·ity</td>
-</tr>
-<tr>
-<td style="text-align:center">attenuate</td>
-<td style="text-align:center">v. 使变薄；减轻</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">at·tenu·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">extenuate</td>
-<td style="text-align:center">v. 减轻(罪行)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ex·tenu·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">acme</td>
-<td style="text-align:center">n. 顶点</td>
-<td style="text-align:center"><code>ac/acr/acerb - sharp/sour</code></td>
-<td style="text-align:center">ac·me</td>
-</tr>
-<tr>
-<td style="text-align:center">acne</td>
-<td style="text-align:center">n. 粉刺</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ac·ne</td>
-</tr>
-<tr>
-<td style="text-align:center">acrid</td>
-<td style="text-align:center">adj. 尖刻的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">acr·id</td>
-</tr>
-<tr>
-<td style="text-align:center">acrimony</td>
-<td style="text-align:center">n. 尖刻</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">acr·imony</td>
-</tr>
-<tr>
-<td style="text-align:center">acerbic</td>
-<td style="text-align:center">adj. 酸的，尖刻的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">acerb·ic</td>
-</tr>
-<tr>
-<td style="text-align:center">exacerbate</td>
-<td style="text-align:center">v. 恶化</td>
-<td style="text-align:center">形势越来越尖锐</td>
-<td style="text-align:center">ex·acerb·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">acumen</td>
-<td style="text-align:center">n. 敏锐</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">culmination</td>
-<td style="text-align:center">n. 顶峰</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">zenith</td>
-<td style="text-align:center">n. 顶峰</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">crest</td>
-<td style="text-align:center">n. 顶峰</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nadir</td>
-<td style="text-align:center">n. 最低点</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">candor</td>
-<td style="text-align:center">n. 坦白</td>
-<td style="text-align:center"><code>cand - white</code></td>
-<td style="text-align:center">cand·or</td>
-</tr>
-<tr>
-<td style="text-align:center">candid</td>
-<td style="text-align:center">adj. 坦白的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">cand·id</td>
-</tr>
-<tr>
-<td style="text-align:center">incandescent</td>
-<td style="text-align:center">adj. 白热的，白炽的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">in·cand·escent</td>
-</tr>
-<tr>
-<td style="text-align:center">feint</td>
-<td style="text-align:center">n./v. 假装</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">feign</td>
-<td style="text-align:center">v. 假装</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissuade</td>
-<td style="text-align:center">v. 劝阻</td>
-<td style="text-align:center">persuade<br />dissuade … from…<br />persuade … to …</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gratuitous</td>
-<td style="text-align:center">adj. 无端的；免费的；无偿的</td>
-<td style="text-align:center"><code>grat - to please</code><br /></td>
-<td style="text-align:center">grat·uitous</td>
-</tr>
-<tr>
-<td style="text-align:center">gratuity</td>
-<td style="text-align:center">n. 赏钱，小费</td>
-<td style="text-align:center">对服务员服务满意的报酬</td>
-<td style="text-align:center">grat·uity</td>
-</tr>
-<tr>
-<td style="text-align:center">gratify</td>
-<td style="text-align:center">v. 使满足</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">grat·ify</td>
-</tr>
-<tr>
-<td style="text-align:center">ingratiate</td>
-<td style="text-align:center">v. 讨好</td>
-<td style="text-align:center">让他人对自己满意</td>
-<td style="text-align:center">in·grat·iate</td>
-</tr>
-<tr>
-<td style="text-align:center">ingrate</td>
-<td style="text-align:center">n. 忘恩负义者</td>
-<td style="text-align:center">不感恩</td>
-<td style="text-align:center">in·grate</td>
-</tr>
-<tr>
-<td style="text-align:center">impeach</td>
-<td style="text-align:center">v. 弹劾；指责</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paltry</td>
-<td style="text-align:center">adj. 无价值的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">trivial</td>
-<td style="text-align:center">adj. 无价值的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">trifle</td>
-<td style="text-align:center">n. 琐事</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nugatory</td>
-<td style="text-align:center">adj. 琐碎的，无价值的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sordid</td>
-<td style="text-align:center">adj. 污秽的；肮脏的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">squalid</td>
-<td style="text-align:center">adj. 污秽的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">squalor</td>
-<td style="text-align:center">n. 极其肮脏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">natty</td>
-<td style="text-align:center">adj. (衣着外表)整洁的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dapper</td>
-<td style="text-align:center">adj. 衣冠楚楚的</td>
-<td style="text-align:center">de + appear</td>
-<td style="text-align:center">d·apper</td>
-</tr>
-<tr>
-<td style="text-align:center">trim</td>
-<td style="text-align:center">adj. 整齐的<br />v. 修剪</td>
-<td style="text-align:center">tree</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">aloof</td>
-<td style="text-align:center">adv. 远离；冷漠</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">frigid</td>
-<td style="text-align:center">adj. 冷淡的</td>
-<td style="text-align:center">fridge 冰箱</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">offish</td>
-<td style="text-align:center">adj. 冷淡</td>
-<td style="text-align:center">远离</td>
-<td style="text-align:center">off·ish</td>
-</tr>
-<tr>
-<td style="text-align:center">detached</td>
-<td style="text-align:center">adj. 冷淡的</td>
-<td style="text-align:center">不touch</td>
-<td style="text-align:center">de·tach·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">drab</td>
-<td style="text-align:center">adj. 土褐色的；单调的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">monotonous</td>
-<td style="text-align:center">adj. 单调的</td>
-<td style="text-align:center"><code>mono - single</code><br />single tone</td>
-<td style="text-align:center">mono·ton·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">dreary</td>
-<td style="text-align:center">adj. 枯燥无味的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">humdrum</td>
-<td style="text-align:center">adj./n. 单调的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -3579,20 +2885,20 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
