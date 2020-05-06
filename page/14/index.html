@@ -191,6 +191,145 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E5%BF%AB%E9%80%9F%E7%9F%A9%E9%98%B5%E5%B9%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/08/%E5%BF%AB%E9%80%9F%E7%9F%A9%E9%98%B5%E5%B9%82/" class="post-title-link" itemprop="url">快速矩阵幂</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-08 23:33:20" itemprop="dateCreated datePublished" datetime="2019-11-08T23:33:20+08:00">2019-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-09 00:09:12" itemprop="dateModified" datetime="2019-11-09T00:09:12+08:00">2019-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="引入：数幂"><a href="#引入：数幂" class="headerlink" title="引入：数幂"></a>引入：数幂</h1><p>a<sup>n</sup>一般的朴素算法的复杂度是O(n)，但有办法让其变为O(log n)，方法就是不断平方底数<br>原理：每一个整数指数都写为2进制的形式，从右往左算出每一位代表的数的幂， 再相乘。如11 = (1011)~2~，故3<sup>11</sup> = 3<sup>1011</sup> = 3<sup>(1000)+(10)+(1)</sup> = 3<sup>(1000)</sup> <em> 3<sup>(10)</sup> </em> 3<sup>(1)</sup> = 3<sup>8</sup> <em> 3<sup>2</sup> </em> 3<br>我们每平方一次，幂都右移一位，故当前值的最后一位就是我们正在求的那一位代表的幂值，若那位为1，则表明这个值包含在最后的答案中，否则就跳过。利用二进制的特性，我们只需要判断奇偶性就可以得知<br>分解3<sup>11</sup>求解过程：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">base</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3<sup>2</sup></td>
+<td style="text-align:center">3<sup>4</sup></td>
+<td style="text-align:center">3<sup>8</sup></td>
+<td style="text-align:center">3<sup>16</sup></td>
+</tr>
+<tr>
+<td style="text-align:center">pow</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">ans</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3<sup>1+2</sup></td>
+<td style="text-align:center">3<sup>1+2</sup></td>
+<td style="text-align:center">3<sup>1+2+8</sup></td>
+</tr>
+<tr>
+<td style="text-align:center">使ans更新的pow</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">quickPow</span><span class="params">(<span class="keyword">int</span> base, <span class="keyword">int</span> <span class="built_in">pow</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)   <span class="comment">//判断奇偶性</span></span><br><span class="line">			ans *= base;    <span class="comment">//若为奇数就乘给ans</span></span><br><span class="line">		base = base * base;    <span class="comment">//平方底数</span></span><br><span class="line">		<span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="进一步：矩阵幂"><a href="#进一步：矩阵幂" class="headerlink" title="进一步：矩阵幂"></a>进一步：矩阵幂</h1><p>返回值：定义一个结构体存放二维数组，直接返回结构体。注意，结构体可以定义一个初始化函数，初始化为单位矩阵</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> matrix[maxn][maxn];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span>    <span class="comment">//初始化为单位矩阵</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++)</span><br><span class="line">			matrix[i][i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>矩阵乘法：第i行的元素和第j行的元素对应相加，得到结果的第i行第j列元素</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">mul</span><span class="params">(Matrix a, Matrix b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix ans;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)    <span class="comment">//n为矩阵行列数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			ans.matrix[i][j] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">			&#123;</span><br><span class="line">				ans.matrix[i][j] += a.matrix[i][k] * b.matrix[k][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>矩阵幂：原理同数幂，单要先构造的是单位矩阵</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">quickPow</span><span class="params">(Matrix base, <span class="keyword">int</span> <span class="built_in">pow</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix ans;</span><br><span class="line">	ans.init();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)</span><br><span class="line">			ans = mul(ans, base);</span><br><span class="line">		base = mul(base, base);</span><br><span class="line">		<span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>矩阵的构造：<br>首先一点，只有方阵才可以使用快速矩阵幂，故我们的目标就是构造出方阵<br>我们先得有一个递推式，然后就可以根据这个递推式来构造出矩阵<br>&emsp;矩阵乘法的另一视角：操作矩阵和基础矩阵<br>&emsp;&emsp;操作矩阵在右边就是对列进行操作，在左边就是对行进行操作。以在左边对行操作为例，操作矩阵的第i行操作后的结果就是结果矩阵的第i行，操作矩阵第i行的第j个元素就是基础矩阵的第j行乘以该元素的数值，再把基础矩阵所有行如此操作后相加得到结果矩阵的第i行<br>&emsp;如：<br><img src="https://img-blog.csdnimg.cn/20190322093600607.png" alt="以左矩阵为操作矩阵为例"><br>我们可以利用递推式，把要求的放在结果矩阵中，需要用到的放在基础矩阵中，在凑出其余项。如我们要求斐波那契数列，已知f(n) = f(n-1) + f(n-2)，则f(n)一定在结果矩阵中，f(n-1)、f(n-2)一定在基础矩阵中。得到<br> <img src="https://img-blog.csdnimg.cn/20190322094136176.png" width="20%"><br>又由递推式得<br><img src="https://img-blog.csdnimg.cn/20190322094916478.png" width="25%"><br>此时还不能用快速矩阵幂，故我们要凑出方阵得<br><img src="https://img-blog.csdnimg.cn/20190322095239174.png" width="25%"><br>再递推下去得到<br><img src="https://img-blog.csdnimg.cn/2019032209561527.png" width="25%"><br>然后就可以用矩阵幂在O(log n)内解得斐波那契数列的第n项</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/05/day-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2644,102 +2783,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/17/11&12-Drag-and-Drop-Table-View-and-Collection-View/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/17/11&12-Drag-and-Drop-Table-View-and-Collection-View/" class="post-title-link" itemprop="url">11&12. Drag and Drop, Table View, and Collection View, and Text Field</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-17 19:45:59" itemprop="dateCreated datePublished" datetime="2019-08-17T19:45:59+08:00">2019-08-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:16:59" itemprop="dateModified" datetime="2020-04-04T12:16:59+08:00">2020-04-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Science</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
-                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h1><ol>
-<li>Drag and drop can transit data within an app in both iPhone and iPad, and can even transit from one app to the other when iPad is in multitask mode. </li>
-<li>Your app continues to work normally while drag and drop is going on. </li>
-<li>Multitouch allows some fingers to be doing drag and drop and other fingers working your app. </li>
-</ol>
-<h2 id="Create-Drag"><a href="#Create-Drag" class="headerlink" title="Create Drag"></a>Create Drag</h2><ol>
-<li>It’s kind of like a “gesture recognizer” for drag and drop.</li>
-<li>We can make a view support drag and drop interaction by add an Interaction type of DragInteraction, the delegate is a subclass of <code>UIDragInteractionDelegate</code> that will handle the interaction, normally speaking it’s self.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/17/11&12-Drag-and-Drop-Table-View-and-Collection-View/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2811,7 +2854,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

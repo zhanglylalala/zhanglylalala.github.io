@@ -48,21 +48,20 @@
   };
 </script>
 
-  <meta name="description" content="Convolution Layer Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image.  In the convolu">
-<meta property="og:type" content="article">
-<meta property="og:title" content="04. Convolutional Neural Networks">
-<meta property="og:url" content="http://http//www.laughingtree.cn/2020/04/05/04-Convolutional-Neural-Networks/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="GTD">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2020/05/06/GTD/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="Convolution Layer Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image.  In the convolu">
-<meta property="article:published_time" content="2020-04-05T01:29:06.000Z">
-<meta property="article:modified_time" content="2020-04-05T08:33:23.670Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/06/5vSQKgwkslmWtzM.png">
+<meta property="article:published_time" content="2020-05-06T15:37:37.000Z">
+<meta property="article:modified_time" content="2020-05-06T15:39:34.336Z">
 <meta property="article:author" content="LiyunZhang">
-<meta property="article:tag" content="Machine Learning">
-<meta property="article:tag" content="Deep Learning">
-<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="Learn Better">
+<meta property="article:tag" content="Books">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/06/5vSQKgwkslmWtzM.png">
 
-<link rel="canonical" href="http://http//www.laughingtree.cn/2020/04/05/04-Convolutional-Neural-Networks/">
+<link rel="canonical" href="http://http//www.laughingtree.cn/2020/05/06/GTD/">
 
 
 <script id="page-configurations">
@@ -74,7 +73,7 @@
   };
 </script>
 
-  <title>04. Convolutional Neural Networks | LaughingTree</title>
+  <title>GTD | LaughingTree</title>
   
 
 
@@ -198,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/05/04-Convolutional-Neural-Networks/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/06/GTD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          04. Convolutional Neural Networks
+          GTD
         </h1>
 
         <div class="post-meta">
@@ -222,7 +221,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-05 09:29:06 / Modified: 16:33:23" itemprop="dateCreated datePublished" datetime="2020-04-05T09:29:06+08:00">2020-04-05</time>
+              <time title="Created: 2020-05-06 23:37:37 / Modified: 23:39:34" itemprop="dateCreated datePublished" datetime="2020-05-06T23:37:37+08:00">2020-05-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,14 +229,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Science</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/Computer-Vision-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Vision (Stanford CS231n)</span>
+                  <a href="/categories/Books/" itemprop="url" rel="index">
+                    <span itemprop="name">Books</span>
                   </a>
                 </span>
             </span>
@@ -253,22 +246,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Convolution-Layer"><a href="#Convolution-Layer" class="headerlink" title="Convolution Layer"></a>Convolution Layer</h1><ol>
-<li>Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image. </li>
-<li>In the convolution layer, we convolve a smaller filter with the image; namely, we slide it over the image spatially, computing dot products. </li>
-<li>The size of the matrix of an image is usually $N\times N\times z$. The filter we choose can have random $F$, but the $z$ must be maintained. So the filter can be anything in the form of $F\times F\times z$. </li>
-<li>Every filter is a weighted matrix. We use it to cover up some location of the image, then calculate the sum of the products of the corresponding numbers. <br />This process is the same as we stretch the filter and the covered area into two one-dimensional vectors and calculate the dot product of these two vectors. </li>
-<li>After each dot product, we get a number $w^Tx+b$ instead of a vector. So each filter can produce an $F’\times F’\times1$ activation map. Furthermore, we can use multiple filters to create multiple activation maps. With $k$ filters, the activation matrix will be $F’\times F’\times k$. </li>
-<li>The earlier convolution layers will learn lower-level features while the later ones will learn higher-level features. </li>
-<li>One thing that will affect the size of the activation map is the stride we choose when the filter is slid around the image. If the stride is $S$, the size will be $\displaystyle(\frac{N-F}{S}+1)\times(\frac{N-F}{S}+1)\times n$. <br />Stride can be any integer as long as $N-F$ is dividable by it. </li>
-<li>Another common phenomenon is padding. When we say “zero pad with $P$”, we mean that add $a$ laps zero bounds around the original matrix. <br />So the actual size of a matrix which pad with $P$ we need to slide is $(N+2P)\times (N+2P)\times z$. <br />The padding is used to maintain the input size. So in convolution layer, we often pad the image with $\displaystyle\frac{F-1}{2}$ laps of zero pixel border. Nevertheless, the pad is not necessary; sometimes we do not use padding; sometimes we pad less, sometimes we pad more. </li>
-</ol>
-<h1 id="Other-layers"><a href="#Other-layers" class="headerlink" title="Other layers"></a>Other layers</h1><ol>
-<li>Pooling layer makes the representations smaller and more manageable. It operates over each activation map independently and downsamples them. </li>
-<li>The pooling layer also has a filter, but instead of doing a dot product, it may take the maximum of the numbers (Max Pooling Layer). </li>
-<li>In convention, we do not want any overlap in pooling layer, unlike in the convolution layer. </li>
-<li>Typically, the last layer of a convolution neural network will be a fully-connected layer, which connects the class labels to the input. </li>
-</ol>
+        <p><img src="https://i.loli.net/2020/05/06/5vSQKgwkslmWtzM.png"></p>
 
     </div>
 
@@ -279,9 +257,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
-              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
-              <a href="/tags/Computer-Vision/" rel="tag"><i class="fa fa-tag"></i> Computer Vision</a>
+              <a href="/tags/Learn-Better/" rel="tag"><i class="fa fa-tag"></i> Learn Better</a>
+              <a href="/tags/Books/" rel="tag"><i class="fa fa-tag"></i> Books</a>
           </div>
 
         
@@ -290,13 +267,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/04/03-Backpropagation-and-Neural-Networks/" rel="prev" title="03. Backpropagation and Neural Networks">
-      <i class="fa fa-chevron-left"></i> 03. Backpropagation and Neural Networks
+    <a href="/2020/05/06/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/" rel="prev" title="如何高效学习">
+      <i class="fa fa-chevron-left"></i> 如何高效学习
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/05/05-Training-Neural-Networks/" rel="next" title="05. Training Neural Networks">
-      05. Training Neural Networks <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -356,7 +330,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Convolution-Layer"><span class="nav-number">1.</span> <span class="nav-text">Convolution Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-layers"><span class="nav-number">2.</span> <span class="nav-text">Other layers</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -476,54 +449,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
