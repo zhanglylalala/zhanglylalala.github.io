@@ -1800,7 +1800,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 <h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><ol>
 <li>Published at 2012, AlexNet has many features: <br />&emsp;It is the first network using ReLU. <br />&emsp;It uses norm layers (not common now). <br />&emsp;It has heavy data augmentation. <br />&emsp;It uses the dropout with the probability of $0.5$. <br />&emsp;Its batch size is $128$, SGD momentum is $0.9$. <br />&emsp;The learning rate is $1e-2$, reduced by $10$ manually when validation accuracy plateaus. <br />&emsp;$L2$ weight decay is $5e-4$. <br />&emsp;$7$ models ensemble to create about $3%$ better accuracy. </li>
-<li>Architecture: <br /><img src="07.CNNArchitectures01.png01" width="10%"></li>
+<li>Architecture: <br /><img src="07.CNNArchitectures01.png" width="10%"></li>
 <li>AlexNet was trained on <script type="math/tex">GTX\ 580</script> GPU with only $3$ GB of memory. However, the output of its first convolution layer is $55\times55\times96$. So the network has to spread across $2$ GPUs, half the neurons (feature maps) on each GPU. </li>
 <li>$CONV1$, $CONV2$, $CONV4$, $CONV5$ in AlexNet only have connections with feature maps on the same GPU. $CONV3$, $FC6$, $FC7$, $FC8$ have connections with all feature maps in the preceding layer; They communicate across GPUs. </li>
 <li>ZFNect is AlexNet, except that $CONV1$ changed to $7\times7$ with stride $2$, and $CONV3, 4, 5$ uses $512, 1024, 512$ filters. </li>
