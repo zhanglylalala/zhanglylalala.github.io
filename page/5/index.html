@@ -191,6 +191,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/16-Series/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/20/16-Series/" class="post-title-link" itemprop="url">16. Series</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-20 23:01:26" itemprop="dateCreated datePublished" datetime="2020-02-20T23:01:26+08:00">2020-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:08:04" itemprop="dateModified" datetime="2020-03-07T16:08:04+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Infinite-Series"><a href="#Infinite-Series" class="headerlink" title="Infinite Series"></a>Infinite Series</h1><ol>
+<li><script type="math/tex">S_N=\displaystyle\sum^N_{n=0}a_n</script>. <script type="math/tex">S=\displaystyle\sum^\infty_{n= 0}a_n=\lim_{N\to\infty}\sum^N_{n=0}a_n</script>. <script type="math/tex">S</script> converges if limit exists. </li>
+<li><script type="math/tex">S_N</script> is larger than the lower Riemann sum of <script type="math/tex">\displaystyle\int^N_1f(x)dx</script> when <script type="math/tex">\Delta x=1</script> and is less than the upper Riemann sum of when <script type="math/tex">\Delta x=1</script>. </li>
+<li><code>Integral comparison</code>: If <script type="math/tex">f(x)</script> is decreasing, <script type="math/tex">f(x)>0</script>, then <script type="math/tex">\Bigg|\displaystyle\sum^\infty_{n=0}f(n)-\int^\infty_1f(x)dx\Bigg|<f(1)</script>. <script type="math/tex">\displaystyle\sum^\infty_{n=0}f(n)</script> and <script type="math/tex">\int^\infty_1f(x)dx</script> either both converge or both diverge. </li>
+<li>If <script type="math/tex">f(n)\sim g(n)</script>, and <script type="math/tex">g(n)>0</script> as <script type="math/tex">n\to\infty</script> for all <script type="math/tex">n</script> then <script type="math/tex">\displaystyle\sum^\infty_{n=0} f(n),\sum^\infty_{n=0} g(n)</script> either both converge or both diverge. </li>
+</ol>
+<h1 id="Power-Series"><a href="#Power-Series" class="headerlink" title="Power Series"></a>Power Series</h1><ol>
+<li>Geometric series: <script type="math/tex">1+x+x^2+x^3+…=\displaystyle\frac{1}{1-x}</script> when <script type="math/tex">|x|<1</script>. <br />&emsp;Proof: Assume <script type="math/tex">1+x+x^2+…=S</script>. Multiply with <script type="math/tex">x</script>, <script type="math/tex">x+x^2+x^2+…=Sx</script>. <br />&emsp;Subtract the second equation from the first one <script type="math/tex">1=S(1-x)</script>. So <script type="math/tex">S=\displaystyle\frac{1}{1-x}</script>. </li>
+<li>General power series: <script type="math/tex">a_0+a_1x+a_2x^2+…=\displaystyle\sum^\infty_{n=0}a_nx^n</script>. </li>
+<li><script type="math/tex">|x|<R</script> (<script type="math/tex">R</script> is the radius of convergence <script type="math/tex">0≤R≤\infty</script>) where seriese converges and <script type="math/tex">|a_nx^n|</script> tends to zero exponentially fast. <script type="math/tex">|x|>R,\  \displaystyle\sum^\infty_{n=0}a_nx^n</script> diverges, and <script type="math/tex">|a_nx^n|</script> doesn’t tend to zero at all. <script type="math/tex">|x|=R</script> is a very delicate borderline. </li>
+<li>Rules for convergent power series are just like polynomials. We can do add, multiplication, division, substitution, differentiation and integrate them. </li>
+<li><code>Taylor&#39;s formula</code>: <script type="math/tex">f(x)=\displaystyle\sum^\infty_{n=0}\frac{f^{(n)}(0)}{n!}x^n</script>, for any <script type="math/tex">f(x)</script>. </li>
+<li><script type="math/tex; mode=display">e^x=\displaystyle\sum^\infty_{n=0}\frac{1}{n!}x^n$$<br />So $$e=e^x\Big|_{x=1}=\displaystyle\sum^\infty_{x=0}\frac{1}{n!}</script></li>
+<li>Another expresion of Taylor’s formula is <script type="math/tex">a_n=\displaystyle\frac{f^{(n)}(0)}{n!}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1084,103 +1180,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/11/06-Linear-Approximation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/11/06-Linear-Approximation/" class="post-title-link" itemprop="url">06. Linear Approximation</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-11 09:30:18" itemprop="dateCreated datePublished" datetime="2020-02-11T09:30:18+08:00">2020-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:05:37" itemprop="dateModified" datetime="2020-03-07T16:05:37+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linear-Approximation"><a href="#Linear-Approximation" class="headerlink" title="Linear Approximation"></a>Linear Approximation</h1><ol>
-<li>Formula: <script type="math/tex">f(x)\approx f(x_0)+f'(x_0)(x-x_0)</script>. </li>
-<li>Another expression: the curve is linearly approximate to its tangent line. </li>
-<li>This formula has another form: <script type="math/tex">\displaystyle\frac{f(x)-f(x_0)}{x-x_0}\approx f'(x_0)</script>. </li>
-<li>If <script type="math/tex">f(x)</script> and <script type="math/tex">f'(x)</script> both has define at <script type="math/tex">x_0=0</script>, <script type="math/tex">f(x)\approx f(0)+f'(0)x</script>. </li>
-<li>This linear approximation only works when <script type="math/tex">x\approx x_0</script>. </li>
-<li>With the help of linear approximation, we can calculate the approximation of the value of some hard functions. </li>
-<li>If <script type="math/tex">f(x)\approx y_1</script> and <script type="math/tex">g(x)\approx y_2</script> both work at <script type="math/tex">x\approx x_0</script>, then <script type="math/tex">f(x)g(x)\approx y_1y_2</script> at <script type="math/tex">x\approx x_0</script>. After decomposition, we can throw away the higher order terms, namely <script type="math/tex">x^2, x^3,…</script></li>
-</ol>
-<h1 id="Quadratic-Approximation"><a href="#Quadratic-Approximation" class="headerlink" title="Quadratic Approximation"></a>Quadratic Approximation</h1><ol>
-<li>Formula: <script type="math/tex">f(x)\approx f(x_0)+f'(x_0)(x-x_0)+\displaystyle\frac{f''(x_0)}{2}(x-x_0)^2</script></li>
-<li>This one step more accuracy than the linear approximation. Use this when the linear approximation is not enough. </li>
-<li>And <script type="math/tex">f(x)\approx f(0)+f'(0)x+\displaystyle\frac{f''(0)}{2}x^2</script>. </li>
-<li>With quadratic approximation, we can know the rate of convergence. </li>
-<li>Assume <script type="math/tex">f(x)\approx a+bx+cx^2</script>, then <script type="math/tex">f'(x)=b+2cx</script> and <script type="math/tex">f''(x)=2c</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1252,7 +1251,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
