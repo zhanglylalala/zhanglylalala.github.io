@@ -54,15 +54,15 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2020/04/04/03-Backpropagation-and-Neural-Networks/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Backpropagation Backpropagation is used for calculating the gradient.  In each gradient, we need to calculate the derivative of $f$ with respect to each component.  Any function $f$ can be decomposed">
-<meta property="og:image" content="https://i.loli.net/2020/04/04/SkKaNmUrb184Dtp.png">
+<meta property="og:image" content="http://http/img/03.BackpropagationandNeuralNetworks01.png">
 <meta property="article:published_time" content="2020-04-04T11:16:49.000Z">
-<meta property="article:modified_time" content="2020-04-05T01:14:25.870Z">
+<meta property="article:modified_time" content="2020-05-07T05:28:53.197Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Computer Vision">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/04/04/SkKaNmUrb184Dtp.png">
+<meta name="twitter:image" content="http://http/img/03.BackpropagationandNeuralNetworks01.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2020/04/04/03-Backpropagation-and-Neural-Networks/">
 
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-05 09:14:25" itemprop="dateModified" datetime="2020-04-05T09:14:25+08:00">2020-04-05</time>
+                <time title="Modified: 2020-05-07 13:28:53" itemprop="dateModified" datetime="2020-05-07T13:28:53+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
 <li>Any function $f$ can be decomposed into a computational graph, which contains several nodes. Each node represents one single simple calculation with some inputs and one output. </li>
 <li>We can easily calculate the local gradient for each node function $q$, $\displaystyle\frac{\partial q}{\partial x_i}$. </li>
 <li>With the chain rule, we can multiply each local gradient to get $\displaystyle\frac{\partial f}{\partial x_i}$. </li>
-<li>In programming, we usually start from the end of the computational graph, namely $f=f$. Its local gradient is $\displaystyle\frac{\partial f}{\partial f}=1$. <br />Then we calculate backwardly the last but one node. <br />Each node except the last one multiplies the previously calculated gradient to get the global gradient. <br />The global gradients of the leaf nodes are the gradient we want. <br /><img src="https://i.loli.net/2020/04/04/SkKaNmUrb184Dtp.png" width="40%">$\displaystyle\frac{\partial f}{\partial q},\frac{\partial q}{\partial W},\frac{\partial q}{\partial X},\frac{\partial f}{\partial b}$ are all local gradients, while $\displaystyle1.0,\frac{\partial f}{\partial q}\times1.0,\frac{\partial q}{\partial W}\frac{\partial f}{\partial q},\frac{\partial q}{\partial X}\frac{\partial f}{\partial q},\frac{\partial f}{\partial b}\times1.0$ are all global gradients. </li>
+<li>In programming, we usually start from the end of the computational graph, namely $f=f$. Its local gradient is $\displaystyle\frac{\partial f}{\partial f}=1$. <br />Then we calculate backwardly the last but one node. <br />Each node except the last one multiplies the previously calculated gradient to get the global gradient. <br />The global gradients of the leaf nodes are the gradient we want. <br /><img src="/img/03.BackpropagationandNeuralNetworks01.png" width="40%">$\displaystyle\frac{\partial f}{\partial q},\frac{\partial q}{\partial W},\frac{\partial q}{\partial X},\frac{\partial f}{\partial b}$ are all local gradients, while $\displaystyle1.0,\frac{\partial f}{\partial q}\times1.0,\frac{\partial q}{\partial W}\frac{\partial f}{\partial q},\frac{\partial q}{\partial X}\frac{\partial f}{\partial q},\frac{\partial f}{\partial b}\times1.0$ are all global gradients. </li>
 <li>We can also group some nodes to form a complicated node as long as we can write down the local gradient. </li>
 <li>Add gate distributes the global gradient of the output as the global gradient of each input. <br />Max gate gives the output local gradient to the larger input as its global gradient and gives $0$ to another input. <br />Multiplication gate switches the values of inputs as their local gradient. </li>
 <li>If inputs are vectors, the local gradients are the Jacobian matrices; namely, we need to calculate each element of the output with respect to each element of the input. Given the property of partial derivative, the Jacobian matrices are diagonal. </li>

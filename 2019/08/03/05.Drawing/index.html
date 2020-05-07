@@ -54,16 +54,16 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/08/03/05.Drawing/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="View The View of “MVC”, contains a lot of views. These are two different “view”s A view is a subclass of UIView, which represents a rectangle area. That rectangle area defines a coordinate space for d">
-<meta property="og:image" content="https://i.loli.net/2019/08/05/j4zVyWxsFlRh8dZ.png">
-<meta property="og:image" content="https://i.loli.net/2019/08/05/ocQ4jHvkMBE6XGV.png">
+<meta property="og:image" content="http://http/img/05.Drawing01.png">
+<meta property="og:image" content="http://http/img/05.Drawing02.png">
 <meta property="article:published_time" content="2019-08-03T09:14:50.000Z">
-<meta property="article:modified_time" content="2020-04-04T04:17:17.560Z">
+<meta property="article:modified_time" content="2020-05-07T05:36:00.891Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Application">
 <meta property="article:tag" content="Swift">
 <meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/08/05/j4zVyWxsFlRh8dZ.png">
+<meta name="twitter:image" content="http://http/img/05.Drawing01.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/08/03/05.Drawing/">
 
@@ -231,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:17:17" itemprop="dateModified" datetime="2020-04-04T12:17:17+08:00">2020-04-04</time>
+                <time title="Modified: 2020-05-07 13:36:00" itemprop="dateModified" datetime="2020-05-07T13:36:00+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,10 +283,10 @@
 <li>The origin point is in the upper left, and the y-axis vertically point down while the x-axis horizontally point to the right</li>
 <li>Pixels are the minimum-sized unit of drawing your device is capable of<br>Points are the units in the coordinate system<br>Most of the time there are 2 pixels per point, but it could be only 1 or even 3<br>We can know how many pixels are there by accessing <code>contentScaleFactor: CGFloat</code> in UIView</li>
 <li>In each UIView, there is a <code>var bounds: CGRech</code> that limits where drawing happens.<br>This rectangle contains its own coordinate system of this view</li>
-<li>There is also two variables that might be confused with the bounds: center and frame<br>These two variables are not in the coordinate of this view, but in the coordinate of its superview.<br>They are used to tell us where is this view, instead of where should we draw.<br>Given that the view may be rotated in the superview, the origin and size of frame is different. In the coordinate system of the superview, we take the lowest(smallest x) point X and the most left(smallest y) point Y. The origin of frame is (X.y, Y.x), and the size of frame is (X.x, Y.y)<br><img src="https://i.loli.net/2019/08/05/j4zVyWxsFlRh8dZ.png" width="40%"><br>For view B, <code>bounds = ((0, 0), (200, 250))</code>, <code>frame = ((140, 65), (320, 320))</code>, <code>center = (300, 225)</code></li>
+<li>There is also two variables that might be confused with the bounds: center and frame<br>These two variables are not in the coordinate of this view, but in the coordinate of its superview.<br>They are used to tell us where is this view, instead of where should we draw.<br>Given that the view may be rotated in the superview, the origin and size of frame is different. In the coordinate system of the superview, we take the lowest(smallest x) point X and the most left(smallest y) point Y. The origin of frame is (X.y, Y.x), and the size of frame is (X.x, Y.y)<br><img src="/img/05.Drawing01.png" width="40%"><br>For view B, <code>bounds = ((0, 0), (200, 250))</code>, <code>frame = ((140, 65), (320, 320))</code>, <code>center = (300, 225)</code></li>
 </ol>
 <h2 id="Creat-A-View"><a href="#Creat-A-View" class="headerlink" title="Creat A View"></a>Creat A View</h2><ol>
-<li>The first way to creat one is dragging. First drag a view to the main.storyboard, then in the identifier inspector, we select the class we need in the class label<br><img src="https://i.loli.net/2019/08/05/ocQ4jHvkMBE6XGV.png" width="30%"></li>
+<li>The first way to creat one is dragging. First drag a view to the main.storyboard, then in the identifier inspector, we select the class we need in the class label<br><img src="/img/05.Drawing02.png" width="30%"></li>
 <li>The second way is code. Use <code>let newView = UIView(frame:)</code> to creat a UIView.  We can use the addSubview method to assign this new view a superview</li>
 </ol>
 <h2 id="Draw-In-Views"><a href="#Draw-In-Views" class="headerlink" title="Draw In Views"></a>Draw In Views</h2><h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw"></a>Draw</h3><ol>

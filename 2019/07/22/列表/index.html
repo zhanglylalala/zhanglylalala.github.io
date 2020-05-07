@@ -54,16 +54,16 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/22/%E5%88%97%E8%A1%A8/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="动态和静态操作  动态操作：需写入，改变元素个数，如：insert、remove 静态操作：仅读取，不改变元素个数">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d3530ad53ee271670.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d3567076201563611.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35691aa4a0934971.png">
+<meta property="og:image" content="http://http/img/%E5%88%97%E8%A1%A801.png">
+<meta property="og:image" content="http://http/img/%E5%88%97%E8%A1%A802.png">
+<meta property="og:image" content="http://http/img/%E5%88%97%E8%A1%A803.png">
 <meta property="article:published_time" content="2019-07-22T03:22:29.000Z">
-<meta property="article:modified_time" content="2020-04-04T04:19:36.630Z">
+<meta property="article:modified_time" content="2020-05-07T01:41:01.234Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theory">
 <meta property="article:tag" content="Data Structure">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d3530ad53ee271670.png">
+<meta name="twitter:image" content="http://http/img/%E5%88%97%E8%A1%A801.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/22/%E5%88%97%E8%A1%A8/">
 
@@ -231,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:19:36" itemprop="dateModified" datetime="2020-04-04T12:19:36+08:00">2020-04-04</time>
+                <time title="Modified: 2020-05-07 09:41:01" itemprop="dateModified" datetime="2020-05-07T09:41:01+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,18 +274,18 @@
 <li>动态存储：为各元素动态分配和回收物理空间，逻辑上相邻的元素记录彼此的物理地址，逻辑上形成整体，比如列表</li>
 <li>动态存储可支持高效的动态操作，但静态操作极其低效；静态存储可支持高效的静态操作，但动态操作极其低效</li>
 </ol>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>元素称为节点，各节点利用指针或引用彼此连接，在逻辑上构成一个线性序列<br>相邻节点彼此互称前驱、后继，前驱或后继若存在，必唯一。没有前驱或后继的唯一节点称作首/末节点<br>列表各个元素物理位置不在与逻辑位置相关，所以用循位置访问，利用节点间的互相引用访问元素<br>ADT接口<br><img src="https://i.loli.net/2019/07/22/5d3530ad53ee271670.png" alt="列表接口"><br>为了方便实现，在首节点之前插入一个头节点，在末节点之后插入一个尾节点作为哨兵节点<br>构造方式：新建一个头节点和一个尾节点，把他们相互连接起来</p>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>元素称为节点，各节点利用指针或引用彼此连接，在逻辑上构成一个线性序列<br>相邻节点彼此互称前驱、后继，前驱或后继若存在，必唯一。没有前驱或后继的唯一节点称作首/末节点<br>列表各个元素物理位置不在与逻辑位置相关，所以用循位置访问，利用节点间的互相引用访问元素<br>ADT接口<br><img src="/img/列表01.png" alt="列表接口"><br>为了方便实现，在首节点之前插入一个头节点，在末节点之后插入一个尾节点作为哨兵节点<br>构造方式：新建一个头节点和一个尾节点，把他们相互连接起来</p>
 <h1 id="静态操作"><a href="#静态操作" class="headerlink" title="静态操作"></a>静态操作</h1><p>访问元素：重载<code>[r]</code>，从首节点(注意，不是头节点)开始，顺数第r个元素(取r次后继)<br>查找：某一个元素p的n个真前驱中查找某个可能存在的元素e。从p开始，不断取前驱，与e比较。相等返回，没找到返回NULL</p>
 <h1 id="动态操作"><a href="#动态操作" class="headerlink" title="动态操作"></a>动态操作</h1><p>插入</p>
 <ol>
 <li>以插入在一个元素的前面为例，插在后面类似</li>
 <li>步骤：新建节点   -&gt;  设置新节点的前驱后继  -&gt;  更新两个旧节点的前驱后继</li>
 <li>得益于哨兵节点的存在，插入操作永远合法，首节点也一定有前驱，末节点也一定有后继</li>
-<li>基于插入的复制构造：依据另一个列表，不断插入<br><img src="https://i.loli.net/2019/07/22/5d3567076201563611.png" alt="插入元素"></li>
+<li>基于插入的复制构造：依据另一个列表，不断插入<br><img src="/img/列表02.png" alt="插入元素"></li>
 </ol>
 <p>删除</p>
 <ol>
-<li>步骤：备份节点   -&gt;  将p的前驱作为p的后继的前驱   -&gt;  将p的后继作为p的前驱的后继   -&gt;  delete p<br><img src="https://i.loli.net/2019/07/22/5d35691aa4a0934971.png" alt="删除元素"></li>
+<li>步骤：备份节点   -&gt;  将p的前驱作为p的后继的前驱   -&gt;  将p的后继作为p的前驱的后继   -&gt;  delete p<br><img src="/img/列表03.png" alt="删除元素"></li>
 <li>析构：不断删除可见节点，再释放头尾节点</li>
 <li>唯一化：和向量类似，向前找是否存在和当前元素一样的节点，但是要注意，删除的是前面的节点而不是当前正在访问的节点，因为删除时要释放节点，如果删除当前节点会使当前指针变为野指针</li>
 </ol>

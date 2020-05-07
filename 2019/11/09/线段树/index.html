@@ -54,13 +54,13 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/11/09/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="介绍线段树就是把一个区间(线段)二分，依据第几次分，把各个部分存储在树的不同层，直到区间内只剩下一个元素。线段树的实现是利用数组实现的完全二叉树，其所需节点个数不会超过原始数组的4倍 完全二叉树(满树)1、定义：只有最后一层才有的叶子节点的二叉树2、性质：完全二叉树可以用数组简单表示。若根节点是数组的0号元素，则对每一个节点k，如果有左右孩子，则左孩子是2k+1，右孩子是2k+2 &#x3D; 2(k+1)">
-<meta property="og:image" content="https://i.loli.net/2019/11/09/vQAVgBJXjG91RLo.jpg">
+<meta property="og:image" content="http://http/img/%E7%BA%BF%E6%AE%B5%E6%A0%9101.jpg">
 <meta property="article:published_time" content="2019-11-08T16:29:05.000Z">
-<meta property="article:modified_time" content="2019-11-09T03:06:28.360Z">
+<meta property="article:modified_time" content="2020-05-07T02:03:50.863Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Algorithms">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/11/09/vQAVgBJXjG91RLo.jpg">
+<meta name="twitter:image" content="http://http/img/%E7%BA%BF%E6%AE%B5%E6%A0%9101.jpg">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/11/09/%E7%BA%BF%E6%AE%B5%E6%A0%91/">
 
@@ -220,10 +220,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-11-09 00:29:05 / Modified: 11:06:28" itemprop="dateCreated datePublished" datetime="2019-11-09T00:29:05+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-09 00:29:05" itemprop="dateCreated datePublished" datetime="2019-11-09T00:29:05+08:00">2019-11-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-07 10:03:50" itemprop="dateModified" datetime="2020-05-07T10:03:50+08:00">2020-05-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -260,7 +266,7 @@
 
       
         <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>线段树就是把一个区间(线段)二分，依据第几次分，把各个部分存储在树的不同层，直到区间内只剩下一个元素。线段树的实现是利用数组实现的完全二叉树，其所需节点个数不会超过原始数组的4倍</p>
-<h1 id="完全二叉树-满树"><a href="#完全二叉树-满树" class="headerlink" title="完全二叉树(满树)"></a>完全二叉树(满树)</h1><p>1、<strong>定义</strong>：只有最后一层才有的叶子节点的二叉树<br>2、<strong>性质</strong>：完全二叉树可以用数组简单表示。若根节点是数组的0号元素，则对每一个节点k，如果有左右孩子，则左孩子是2k+1，右孩子是2k+2 = 2(k+1)<br>3、在线段树的实现中，若不幸地叶子节点出现在非最后一层，则一般会给其补两个虚拟的孩子，即直接跳过属于它的孩子的两个单元<br><img src="https://i.loli.net/2019/11/09/vQAVgBJXjG91RLo.jpg" alt="20190328214250727.jpeg"></p>
+<h1 id="完全二叉树-满树"><a href="#完全二叉树-满树" class="headerlink" title="完全二叉树(满树)"></a>完全二叉树(满树)</h1><p>1、<strong>定义</strong>：只有最后一层才有的叶子节点的二叉树<br>2、<strong>性质</strong>：完全二叉树可以用数组简单表示。若根节点是数组的0号元素，则对每一个节点k，如果有左右孩子，则左孩子是2k+1，右孩子是2k+2 = 2(k+1)<br>3、在线段树的实现中，若不幸地叶子节点出现在非最后一层，则一般会给其补两个虚拟的孩子，即直接跳过属于它的孩子的两个单元<br><img src="/img/线段树01.jpg" alt="20190328214250727.jpeg"></p>
 <h1 id="线段树的建立"><a href="#线段树的建立" class="headerlink" title="线段树的建立"></a>线段树的建立</h1><p>由于二叉树天然的递归特性，故我们常常用递归来构建线段树(以下以求区间最大值为例)</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> segment[maxn &lt;&lt; <span class="number">2</span>], ori[maxn]; <span class="comment">//第一个为线段树，定义大小为原始数组的4倍，第二个为原始数组</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span>    <span class="comment">//rt为当前建立区间的根节点，即当前区间存储的下标，l、r为区间范围</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		segment[rt] = ori[l];</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		build((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, l, mid);    <span class="comment">//更新左子树</span></span><br><span class="line">		build((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, mid + <span class="number">1</span>, r);     <span class="comment">//更新右子树</span></span><br><span class="line">		segment[rt] = <span class="built_in">max</span>(segment[(rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>], segment[(rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>]);</span><br><span class="line">		<span class="comment">//根据左右子树就可以确定当前区间的值，则句根据线段树的作用不同而改变，例如求和，则改为左右子树和</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="单点修改，区间查询"><a href="#单点修改，区间查询" class="headerlink" title="单点修改，区间查询"></a>单点修改，区间查询</h1><p>单点修改则需要修改所有包含该点的区间，由于不知道该点的单点区间到底是几号，故可以从上往下，采用和建树类似的方式递归求解</p>

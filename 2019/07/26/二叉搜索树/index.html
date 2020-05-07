@@ -54,19 +54,19 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/26/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="原理二叉搜索树(BST)借鉴于列表和有序向量BST的每个节点又关键码和数据组成，整个节点内的信息封装成一个词条类。这里要求关键码可以比较在数据也可以比较的情况下，有时也直接把数据拿来做关键码BST处处满足顺序性：一个节点的所有左后代的关键码都不大于该节点的关键码，一个节点的所有右后代的关键码都不小于该节点的关键码BST的中序遍历序列就是由所有的节点组成的一个有序向量，中序遍历就是树的垂直投影的序列">
-<meta property="og:image" content="https://i.loli.net/2019/07/26/5d3b1636c8b7f92255.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3d761a947d288948.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3d76b94f87679220.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3d8dfbba00698038.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3d90094693874575.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3d949ca2bce24210.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9101.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9102.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9103.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9104.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9105.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9106.png">
 <meta property="article:published_time" content="2019-07-26T03:15:50.000Z">
-<meta property="article:modified_time" content="2020-04-04T04:19:33.740Z">
+<meta property="article:modified_time" content="2020-05-07T01:07:44.237Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theory">
 <meta property="article:tag" content="Data Structure">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/26/5d3b1636c8b7f92255.png">
+<meta name="twitter:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%9101.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/26/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/">
 
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:19:33" itemprop="dateModified" datetime="2020-04-04T12:19:33+08:00">2020-04-04</time>
+                <time title="Modified: 2020-05-07 09:07:44" itemprop="dateModified" datetime="2020-05-07T09:07:44+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -286,7 +286,7 @@
 <li>如果待删除节点既有左孩子又有右孩子，就找出它的中序序列中的直接后继(右子树中左侧链的最末端，转向右子树，一路向左走到不能走)，交换之，转化为前两种情况</li>
 </ol>
 <p>这三种算法的时间复杂度都是O(h)，h为树高</p>
-<h1 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h1><p>当BST的每个节点的出度都至多为1时，BST退化为一条单链，树高就是节点树，较为低效<br>节点数目固定时，兄弟子树高度越接近，全树也将倾向于更低<br>理想平衡：n个节点组成的二叉树，高度恰为最小值<code>log₂n</code>，出现的可能性极低，且极难维护，成本极高<br>适度平衡：高度渐进地不超过O(log n)<br>平衡二叉搜索树(BBST)：保持适度平衡的二叉树<br>中序遍历序列具有歧义性，同一个中序遍历序列可能会由两个不同二叉树组成<br>等价BST：中序遍历序列相同的二叉树<br>等价BST转换规则：上下可变，左右不变。节点之间的上下关系可以发生变换，但是垂直投影的左右关系不能变<br>等价BST转换方式：zig(绕节点v顺时针旋转其左右子树)、zag(绕节点v逆时针旋转其左右子树)<br><img src="https://i.loli.net/2019/07/26/5d3b1636c8b7f92255.png" alt="zig、zag"><br>要控制每次等价转换的规模在某一个局部，而且要控制操作次数至多O(log n)</p>
+<h1 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h1><p>当BST的每个节点的出度都至多为1时，BST退化为一条单链，树高就是节点树，较为低效<br>节点数目固定时，兄弟子树高度越接近，全树也将倾向于更低<br>理想平衡：n个节点组成的二叉树，高度恰为最小值<code>log₂n</code>，出现的可能性极低，且极难维护，成本极高<br>适度平衡：高度渐进地不超过O(log n)<br>平衡二叉搜索树(BBST)：保持适度平衡的二叉树<br>中序遍历序列具有歧义性，同一个中序遍历序列可能会由两个不同二叉树组成<br>等价BST：中序遍历序列相同的二叉树<br>等价BST转换规则：上下可变，左右不变。节点之间的上下关系可以发生变换，但是垂直投影的左右关系不能变<br>等价BST转换方式：zig(绕节点v顺时针旋转其左右子树)、zag(绕节点v逆时针旋转其左右子树)<br><img src="/img/二叉搜索树01.png" alt="zig、zag"><br>要控制每次等价转换的规模在某一个局部，而且要控制操作次数至多O(log n)</p>
 <h1 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h1><p><code>平衡因子balFac(v) = 左子树高度height(lc(v)) - 右子树高度height(rc(v))</code><br>AVL树：对任意的节点v，<code>|balFac(v)| ≤ 1</code><br>AVL树高度证明</p>
 <ol>
 <li>设AVL树高度为h时，最小节点数为S(h)</li>
@@ -298,17 +298,17 @@
 <ol>
 <li>插入一个节点可能会导致多个祖先失衡，但不会影响到其他任何非祖先节点失衡，只要修改了一个失衡，其余失衡会自动修正</li>
 <li>如果插入操作导致了祖先的失衡，那么失衡的最深祖先不会深于它的祖父节点</li>
-<li>单旋<br>1) p是g的右孩子，v是p的右孩子，插入节点是v的孩子：绕g做一次zag<br>2) p是g的左孩子，v是p的左孩子，插入节点是v的孩子：绕g做一次zig<br><img src="https://i.loli.net/2019/07/28/5d3d761a947d288948.png" alt="单旋"></li>
-<li>双旋<br>1) p是g的右孩子，v是p的左孩子，插入节点是v的孩子：先绕p做一次zig，再绕g做一次zag<br>2) p是g的左孩子，v是p的右孩子，插入节点是v的孩子：先绕p做一次zag，再绕g做一次zig<br><img src="https://i.loli.net/2019/07/28/5d3d76b94f87679220.png" alt="双旋"></li>
+<li>单旋<br>1) p是g的右孩子，v是p的右孩子，插入节点是v的孩子：绕g做一次zag<br>2) p是g的左孩子，v是p的左孩子，插入节点是v的孩子：绕g做一次zig<br><img src="/img/二叉搜索树02.png" alt="单旋"></li>
+<li>双旋<br>1) p是g的右孩子，v是p的左孩子，插入节点是v的孩子：先绕p做一次zig，再绕g做一次zag<br>2) p是g的左孩子，v是p的右孩子，插入节点是v的孩子：先绕p做一次zag，再绕g做一次zig<br><img src="/img/二叉搜索树03.png" alt="双旋"></li>
 <li>在局部修改之后的局部子树的高度恢复到和原本一样，所以g节点的祖先节点的失衡也就自动修复</li>
 </ol>
 <p>删除</p>
 <ol>
 <li>删除一个节点之后至多只会导致1个祖先失衡，但是在局部修改之后可能会导致另一个更高级的祖先节点失衡</li>
-<li>单旋<br><img src="https://i.loli.net/2019/07/28/5d3d8dfbba00698038.png" alt="单旋"><br>删除的是T<sub>3</sub>的底层节点，T<sub>2</sub>的底层可能有节点，也可能没有节点，T<sub>0</sub>、T<sub>1</sub>中至少有一个节点<br>1) p是g的右孩子，v是p的右孩子，插入节点是v的孩子：绕g做一次zag<br>2) p是g的左孩子，v是p的左孩子，插入节点是v的孩子：绕g做一次zig<br>3) 如果T<sub>2</sub>的底层有节点，那一次修改之后整棵树就回归平衡，否则失衡会向上传播</li>
-<li>双旋<br><img src="https://i.loli.net/2019/07/28/5d3d90094693874575.png" alt="双旋"><br>删除的是T<sub>3</sub>的底层节点，T<sub>1</sub>、T<sub>2</sub>中至少有一个节点<br>1) p是g的右孩子，v是p的左孩子，插入节点是v的孩子：先绕p做一次zig，再绕g做一次zag<br>2) p是g的左孩子，v是p的右孩子，插入节点是v的孩子：先绕p做一次zag，再绕g做一次zig<br>3) 修改之后失衡一定会向上传播</li>
+<li>单旋<br><img src="/img/二叉搜索树04.png" alt="单旋"><br>删除的是T<sub>3</sub>的底层节点，T<sub>2</sub>的底层可能有节点，也可能没有节点，T<sub>0</sub>、T<sub>1</sub>中至少有一个节点<br>1) p是g的右孩子，v是p的右孩子，插入节点是v的孩子：绕g做一次zag<br>2) p是g的左孩子，v是p的左孩子，插入节点是v的孩子：绕g做一次zig<br>3) 如果T<sub>2</sub>的底层有节点，那一次修改之后整棵树就回归平衡，否则失衡会向上传播</li>
+<li>双旋<br><img src="/img/二叉搜索树05.png" alt="双旋"><br>删除的是T<sub>3</sub>的底层节点，T<sub>1</sub>、T<sub>2</sub>中至少有一个节点<br>1) p是g的右孩子，v是p的左孩子，插入节点是v的孩子：先绕p做一次zig，再绕g做一次zag<br>2) p是g的左孩子，v是p的右孩子，插入节点是v的孩子：先绕p做一次zag，再绕g做一次zig<br>3) 修改之后失衡一定会向上传播</li>
 </ol>
-<p>3+4重构<br>把三个节点v、p、g按中序遍历次序依次命名为a、b、c，三棵子树依次记为T<sub>0</sub>、T<sub>1</sub>、T<sub>2</sub>、T<sub>3</sub>，则最终需要的必然如下图所示<br><img src="https://i.loli.net/2019/07/28/5d3d949ca2bce24210.png" alt="3+4重构"><br>则我们可以避免了繁琐的旋转操作，直接利用一系列的赋值就得到需要的树型</p>
+<p>3+4重构<br>把三个节点v、p、g按中序遍历次序依次命名为a、b、c，三棵子树依次记为T<sub>0</sub>、T<sub>1</sub>、T<sub>2</sub>、T<sub>3</sub>，则最终需要的必然如下图所示<br><img src="/img/二叉搜索树06.png" alt="3+4重构"><br>则我们可以避免了繁琐的旋转操作，直接利用一系列的赋值就得到需要的树型</p>
 
     </div>
 

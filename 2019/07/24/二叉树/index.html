@@ -54,19 +54,19 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/24/%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="树需求：无论是向量还是列表，都只能较为高效地进行静态或动态中的一种操作树是按层次关系组织一系列数据项的方式 节点 树是特殊的图T &#x3D; (V, E) 指定一个节点r作为根后，T即称作有根树 若T1、T2、……、Td为有根数，则新引入一个节点r，并引入这个节点和各个有根树的根的连边，还是一颗有根树T">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d3807c54e2c398690.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d38274435c3719710.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d3846abe512374294.jpeg">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d38526adb58583989.jpeg">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d3859f92195177571.jpeg">
-<meta property="og:image" content="https://i.loli.net/2019/07/24/5d385ba0654ca69436.jpeg">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9101.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9102.png">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9103.jpeg">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9104.jpeg">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9105.jpeg">
+<meta property="og:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9106.jpeg">
 <meta property="article:published_time" content="2019-07-24T03:43:14.000Z">
-<meta property="article:modified_time" content="2020-04-04T04:20:03.390Z">
+<meta property="article:modified_time" content="2020-05-07T01:30:48.844Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theory">
 <meta property="article:tag" content="Data Structure">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/24/5d3807c54e2c398690.png">
+<meta name="twitter:image" content="http://http/img/%E4%BA%8C%E5%8F%89%E6%A0%9101.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/24/%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
@@ -234,7 +234,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:20:03" itemprop="dateModified" datetime="2020-04-04T12:20:03+08:00">2020-04-04</time>
+                <time title="Modified: 2020-05-07 09:30:48" itemprop="dateModified" datetime="2020-05-07T09:30:48+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -307,7 +307,7 @@
 <h2 id="长子兄弟表示法"><a href="#长子兄弟表示法" class="headerlink" title="长子兄弟表示法"></a>长子兄弟表示法</h2><ol>
 <li>对每个节点，都只存储它的父节点、长子节点、向右的一个兄弟节点</li>
 <li>所需的空间也只是常数</li>
-<li>可以把一个多叉树转换为一个二叉树<br><img src="https://i.loli.net/2019/07/24/5d3807c54e2c398690.png" width="30%"></li>
+<li>可以把一个多叉树转换为一个二叉树<br><img src="/img/二叉树01.png" width="30%"></li>
 </ol>
 <h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><ol>
 <li>定义：所有节点度数都不超过2的树</li>
@@ -337,7 +337,7 @@
 <li>先序遍历：先遍历<code>根节点</code>，再遍历左子树，最后是右子树</li>
 <li>中序遍历：先遍历左子树，再遍历<code>根节点</code>，最后是右子树</li>
 <li>后序遍历：先遍历左子树，再遍历右子树，最后是<code>根节点</code></li>
-<li>层次遍历：从深度为1的节点开始遍历到最深的节点<br><img src="https://i.loli.net/2019/07/24/5d38274435c3719710.png" alt="遍历规则"></li>
+<li>层次遍历：从深度为1的节点开始遍历到最深的节点<br><img src="/img/二叉树02.png" alt="遍历规则"></li>
 </ol>
 <h2 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a>递归遍历</h2><p>遍历算法为dfs，对节点操作为函数visit的话，除层次遍历外的三种遍历只有顺序的区别。visit在前的是先序，中的是中序，后的是后序</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先序遍历</span></span><br><span class="line">visit(x);</span><br><span class="line">dfs(lc);</span><br><span class="line">dfs(rc);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中序遍历</span></span><br><span class="line">dfs(lc);</span><br><span class="line">visit(x);</span><br><span class="line">dfs(rc);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后序遍历</span></span><br><span class="line">dfs(lc);</span><br><span class="line">dfs(rc);</span><br><span class="line">visit(x);</span><br></pre></td></tr></table></figure>
@@ -346,10 +346,10 @@
 <li>观察：先序遍历在每一个局部都是先从上到下遍历所有的左孩子，再从下到上遍历所有的右子树</li>
 <li>迭代遍历2：每从栈中取出一个节点，就沿着这个节点的左孩子一路向下访问，并沿途把他们的右孩子推入栈中。当没有左孩子的时候，就从栈里取出一个元素继续遍历</li>
 </ol>
-<p><img src="https://i.loli.net/2019/07/24/5d3846abe512374294.jpeg" width="30%"></p>
-<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><p>先沿该节点一路向左孩子走，将左孩子依次入栈，并不访问。当走到尽头的时候，取出栈顶元素并访问，再转向其右孩子，重复上述过程，直到栈变空<br><img src="https://i.loli.net/2019/07/24/5d38526adb58583989.jpeg" width="30%"></p>
-<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><p>先将根节点入栈，当前节点x也记为根节点。每次循环中，如果栈顶元素不是x的父节点，就对每一个栈顶元素进行遍历，一次推入栈顶元素的右孩子和左孩子，直到栈顶元素没有左孩子。再让x变为栈顶元素并访问，重复上述过程<br><img src="https://i.loli.net/2019/07/24/5d3859f92195177571.jpeg" width="30%"></p>
-<h2 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h2><p>先将根节点入队，之后在每次访问的时候都取出队头元素，并将该元素的左右孩子依次推入队列，并访问节点<br><img src="https://i.loli.net/2019/07/24/5d385ba0654ca69436.jpeg" width="30%"></p>
+<p><img src="/img/二叉树03.jpeg" width="30%"></p>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><p>先沿该节点一路向左孩子走，将左孩子依次入栈，并不访问。当走到尽头的时候，取出栈顶元素并访问，再转向其右孩子，重复上述过程，直到栈变空<br><img src="/img/二叉树04.jpeg" width="30%"></p>
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><p>先将根节点入栈，当前节点x也记为根节点。每次循环中，如果栈顶元素不是x的父节点，就对每一个栈顶元素进行遍历，一次推入栈顶元素的右孩子和左孩子，直到栈顶元素没有左孩子。再让x变为栈顶元素并访问，重复上述过程<br><img src="/img/二叉树05.jpeg" width="30%"></p>
+<h2 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h2><p>先将根节点入队，之后在每次访问的时候都取出队头元素，并将该元素的左右孩子依次推入队列，并访问节点<br><img src="/img/二叉树06.jpeg" width="30%"></p>
 <h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><ol>
 <li>先序/后序序列 + 中序序列：先序的第一个/后序的最后一个都是根节点，在中序序列中找到根节点，其前面的序列必是左子树遍历序列，后面的序列必是右子树的遍历序列，再利用得到的左右子树序列长度就可以在先序/后序序列中找到对应的左右子树的序列，从而递归得到整棵树</li>
 <li>不依靠中序序列就不能排除左右子树一棵为空的情况，所以得不到确定的树型</li>

@@ -54,16 +54,16 @@
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/18/03&04.Swift-Programming-Language/index.html">
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Teaser of AutolayoutHow to set constraints of a button or label in the View?Hold on Ctrl and drag from the button or label to the View, and select the kind of constraints we need. How to keep a group">
-<meta property="og:image" content="https://i.loli.net/2019/07/23/5d37030dec35020143.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/23/5d37047fe1b4187111.png">
+<meta property="og:image" content="http://http/img/03&04.SwiftProgrammingLanguage.png">
+<meta property="og:image" content="http://http/img/03&04.SwiftProgrammingLanguage02.png">
 <meta property="article:published_time" content="2019-07-18T08:32:49.000Z">
-<meta property="article:modified_time" content="2020-04-04T04:17:45.930Z">
+<meta property="article:modified_time" content="2020-05-07T05:31:06.359Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Application">
 <meta property="article:tag" content="Swift">
 <meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/23/5d37030dec35020143.png">
+<meta name="twitter:image" content="http://http/img/03&04.SwiftProgrammingLanguage.png">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/18/03&04.Swift-Programming-Language/">
 
@@ -231,7 +231,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:17:45" itemprop="dateModified" datetime="2020-04-04T12:17:45+08:00">2020-04-04</time>
+                <time title="Modified: 2020-05-07 13:31:06" itemprop="dateModified" datetime="2020-05-07T13:31:06+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,11 +266,11 @@
 <h2 id="How-to-keep-a-group-of-members-change-their-sizes-to-adopt-the-change-of-screen-size"><a href="#How-to-keep-a-group-of-members-change-their-sizes-to-adopt-the-change-of-screen-size" class="headerlink" title="How to keep a group of members change their sizes to adopt the change of screen size?"></a>How to keep a group of members change their sizes to adopt the change of screen size?</h2><ol>
 <li>Embed them into a stack view. Mark thar a stack view cannot fix in both axises, so we usually creat stack in one direction and create a stack of those stacks in a different axises.</li>
 <li>After that, we can set some datas of the stacks. The window just like below.<a id="more"></a>
-The first selection is the way to keep members in order, to lie them all horizantally or vertically.<br>The second selection is the way the whole stack view shows, fill the whole allowed space or in a peticular space.<br>The third one is the way to distribute the size of the members.<br>The forth one is the space between each members<br><img src="https://i.loli.net/2019/07/23/5d37030dec35020143.png" width="30%"><br>How to choose what kind of constraint we want?</li>
+The first selection is the way to keep members in order, to lie them all horizantally or vertically.<br>The second selection is the way the whole stack view shows, fill the whole allowed space or in a peticular space.<br>The third one is the way to distribute the size of the members.<br>The forth one is the space between each members<br><img src="/img/03&04.SwiftProgrammingLanguage.png" width="30%"><br>How to choose what kind of constraint we want?</li>
 <li>Pin to the top: Top space to safe area<br>Pin to the buttom: Buttom space to safe area<br>Pin to the left: Leading space to safe area<br>Pin to the right: Trailing space to safe area</li>
 <li>If want to keep in the center, choose “Center xxx in safe area”</li>
 <li>If want to keep a certain distance between to members, drag to the other member and choose the vertical spacing or horizantal spacing</li>
-<li>We can even change the parameter of the constraints by click the blue line represents the constraint. There are two important parameters, the Relation(second one) and the Constant(the forth one). They mark the constraint between the First Item and the Second Item<br><img src="https://i.loli.net/2019/07/23/5d37047fe1b4187111.png" width="30%"></li>
+<li>We can even change the parameter of the constraints by click the blue line represents the constraint. There are two important parameters, the Relation(second one) and the Constant(the forth one). They mark the constraint between the First Item and the Second Item<br><img src="/img/03&04.SwiftProgrammingLanguage02.png" width="30%"></li>
 </ol>
 <h1 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h1><h2 id="When-will-we-use-the-Computed-Properties"><a href="#When-will-we-use-the-Computed-Properties" class="headerlink" title="When will we use the Computed Properties?"></a>When will we use the Computed Properties?</h2><p>If one property is derived(calculated) from other state, then we will make it Computed Property. We do that to make sure those properties are synced, to prevent we forget to sync them. For example, the <code>Int?</code> we used in the Consentrationg to record if there is one and only card that is faced up. Its value is derived from the Card array.</p>
 <h2 id="Access-Control"><a href="#Access-Control" class="headerlink" title="Access Control"></a>Access Control</h2><ol>
