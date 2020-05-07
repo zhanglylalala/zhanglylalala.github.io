@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一个翻译系统，把源语言翻译成目标语言的等价程序 源程序先经过预处理变为修改后的源程序修改后的源程序经过编译器变为汇编代码汇编代码经过汇编器变为可重定位的机器代码可重定位的机器代码最后经过连接器变为目标机器代码 源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出 编译程序">
+  <meta name="description" content="程序的执行 编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一种翻译系统，把源语言翻译成目标语言的等价程序 源程序先经过预处理变为修改后的源程序修改后的源程序经过编译器变为汇编代码汇编代码经过汇编器变为可重定位的机器代码可重定位的机器代码最后经过连接器变为目标机器代码 源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="01. 编译概述">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2020/04/26/01-%E7%BC%96%E8%AF%91%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一个翻译系统，把源语言翻译成目标语言的等价程序 源程序先经过预处理变为修改后的源程序修改后的源程序经过编译器变为汇编代码汇编代码经过汇编器变为可重定位的机器代码可重定位的机器代码最后经过连接器变为目标机器代码 源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出 编译程序">
+<meta property="og:description" content="程序的执行 编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一种翻译系统，把源语言翻译成目标语言的等价程序 源程序先经过预处理变为修改后的源程序修改后的源程序经过编译器变为汇编代码汇编代码经过汇编器变为可重定位的机器代码可重定位的机器代码最后经过连接器变为目标机器代码 源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出">
 <meta property="article:published_time" content="2020-04-26T13:56:45.000Z">
-<meta property="article:modified_time" content="2020-04-29T15:19:25.789Z">
+<meta property="article:modified_time" content="2020-05-07T13:14:08.680Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-29 23:19:25" itemprop="dateModified" datetime="2020-04-29T23:19:25+08:00">2020-04-29</time>
+                <time title="Modified: 2020-05-07 21:14:08" itemprop="dateModified" datetime="2020-05-07T21:14:08+08:00">2020-05-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,17 +257,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ol>
-<li>编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一个翻译系统，把源语言翻译成目标语言的等价程序</li>
-<li>源程序先经过预处理变为修改后的源程序<br />修改后的源程序经过编译器变为汇编代码<br />汇编代码经过汇编器变为可重定位的机器代码<br />可重定位的机器代码最后经过连接器变为目标机器代码</li>
+        <h1 id="程序的执行"><a href="#程序的执行" class="headerlink" title="程序的执行"></a>程序的执行</h1><ol>
+<li>编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一种翻译系统，把源语言翻译成目标语言的等价程序</li>
+<li><strong>源程序</strong>先经过<code>预处理</code>变为<strong>修改后的源程序</strong><br /><strong>修改后的源程序</strong>经过<code>编译器</code>变为<strong>汇编代码</strong><br /><strong>汇编代码</strong>经过<code>汇编器</code>变为<strong>可重定位的机器代码</strong><br /><strong>可重定位的机器代码</strong>最后经过<code>连接器</code>变为<strong>目标机器代码</strong></li>
 <li>源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出</li>
 <li>编译程序将源程序全部翻译成机器语言程序后，再执行机器语言程序。一次编译可以多次执行<br />解释程序将源程序的一条语句翻译成机器语言程序，并立即执行，在接着翻译。解释程序可交互，易于调试，可移植性好，编译一次执行一次，但是效率低</li>
 <li>Java先经Java编译器编译得到一个字节码，再在JVM上解释</li>
+</ol>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
 <li>编译步骤<br />&emsp;词法分析：输入源程序，输出单词符号序列 (二元组序列)<br />&emsp;语法分析：输入单词符号序列，输出语法分析树<br />&emsp;语义分析：输入语法分析树，输出带语义的树<br />&emsp;中间代码生成：输入带语义的树，输出中间代码<br />&emsp;代码优化：输入原始中间代码，输出优化后的中间代码<br />&emsp;目标代码生成：输入优化后的中间代码，输出目标程序代码</li>
-<li>词法分析把字符序列切分为有意义的单词。<br />识别关键字、标识符、数字等，并对每一个单词给出其类型，生成单词符号，表示为$&lt;单词词类, 单词值&gt;$。如果一个词类里只有一个单词，则可以省略单词词类<br />空格指示作为分隔符，忽略。过滤注释部分代码<br />每一个单词词类都有一个符号表，单词值指向符号表中的某一项</li>
-<li>语法分析分析表达式、语句等。语法树体现了单词符号序列的语法结。分析树的节点是单词符号或语法单元。语法树的节点通常是操作符，而其子节点则是操作数</li>
-<li>语义分析分析表达式或语句的操作内容。收集语义信息，类型检查和类型转换。验证语法结构合法的程序是否存在语义错误</li>
-<li>中间代码每一条指令只执行一个操作。中间代码是一种面向抽象机器的代码结构，易于产生且易于翻译成目标语言</li>
+<li>词法分析把字符序列切分为有意义的单词。词法分析器的主要功能就是识别单词<br />识别关键字、标识符、数字等，并对每一个单词给出其类型，生成单词符号，表示为$&lt;单词词类, 单词值&gt;$。如果一个词类里只有一个单词，则可以省略单词词类<br />空格指示作为分隔符，忽略。过滤注释部分代码<br />每一个单词词类都有一个符号表，单词值指向符号表中的某一项</li>
+<li>语法分析分析表达式、语句等。语法分析器的任务就是分析单词符号序列是如何构成语法单位的<br />语法树体现了单词符号序列的语法结。分析树的节点是单词符号或语法单元。<br />语法树的节点通常是操作符，而其子节点则是操作数<br>4 语义分析分析表达式或语句的操作内容。收集语义信息，类型检查和类型转换。验证语法结构合法的程序是否存在语义错误<br>5 中间代码称为三地址代码，每一条指令只执行一个操作。中间代码是一种面向抽象机器的代码结构，易于产生且易于翻译成目标语言<br>6 编译程序前三个阶段是分析过程，后三个阶段是综合过程</li>
 </ol>
 
     </div>
@@ -354,6 +354,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#程序的执行"><span class="nav-number">1.</span> <span class="nav-text">程序的执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译"><span class="nav-number">2.</span> <span class="nav-text">编译</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
