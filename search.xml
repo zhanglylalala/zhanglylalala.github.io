@@ -19103,11 +19103,11 @@ table th:first-of-type {
 </ol>
 <h2 id="从正规式到NFA的转换"><a href="#从正规式到NFA的转换" class="headerlink" title="从正规式到NFA的转换"></a>从正规式到NFA的转换</h2><ol>
 <li>直接从正规式的定义出发来定义正规式对应的NFA</li>
-<li>对$r=\epsilon$<br /><img src="/img/03.词法分析01.png"></li>
-<li>对$r=a$<br /><img src="/img/03.词法分析02.png"></li>
-<li>对$r=s|t$<br /><img src="/img/03.词法分析03.png"></li>
-<li>对$r=st$，$s$和$t$有一个公用节点，表示$s$的接受状态和$t$的开始状态<br /><img src="/img/03.词法分析04.png"></li>
-<li>对$r=(s)^*$<br /><img src="/img/03.词法分析05.png"></li>
+<li>对$r=\epsilon$<br /><img src="/img/03.词法分析01.png" width="30%"></li>
+<li>对$r=a$<br /><img src="/img/03.词法分析02.png" width="30%"></li>
+<li>对$r=s|t$<br /><img src="/img/03.词法分析03.png" width="30%"></li>
+<li>对$r=st$，$s$和$t$有一个公用节点，表示$s$的接受状态和$t$的开始状态<br /><img src="/img/03.词法分析04.png" width="30%"></li>
+<li>对$r=(s)^*$<br /><img src="/img/03.词法分析05.png" width="30%"></li>
 <li>$r=(s)$的NFA和$r=s$的一样</li>
 <li>得到的NFA的性质<br />&emsp;$N(r)$的状态数最多是$r$中符号和算符总数的两倍<br />&emsp;$N(r)$只有一个开始状态和一个接受状态，接受状态没有向外的转换<br />&emsp;$N(r)$的每个状态有一个不是$\epsilon$边的指向其他状态的边，或者最多只有两条$\epsilon$边</li>
 </ol>
@@ -19123,12 +19123,12 @@ table th:first-of-type {
 <li>每一个状态代表一个非终结符号</li>
 <li>如果状态$i$是一个接受状态，则设规则$A_i\to\epsilon$</li>
 <li>如果状态$i$是一个开始状态，则$A_i$是开始符号</li>
-<li>其他情况，如下图，则设规则$A_i\to aA_j$<br /><img src="/img/03.词法分析06.png"></li>
+<li>其他情况，如下图，则设规则$A_i\to aA_j$<br /><img src="/img/03.词法分析06.png" width="30%"></li>
 </ol>
 <h1 id="词法分析器的自动构造"><a href="#词法分析器的自动构造" class="headerlink" title="词法分析器的自动构造"></a>词法分析器的自动构造</h1><ol>
 <li>先用正规式表示出单词的结构，再由正规式生成NFA，最后再化简得到最简DFA</li>
 <li>给每个正规式构造相应的NFA，将所有的NFA用或运算并联起来</li>
-<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺序</li>
+<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺 序</li>
 </ol>
 ]]></content>
       <categories>
