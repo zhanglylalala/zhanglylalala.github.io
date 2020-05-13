@@ -191,6 +191,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/2-sat%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/2-sat%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">2-sat算法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:45:46 / Modified: 00:46:21" itemprop="dateCreated datePublished" datetime="2019-11-09T00:45:46+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Graph</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Graph/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>2-sat算法为可满足算法中的特例，对于k-sat算法，若k &gt; 2，则问题是一个NP完全问题，但2-sat不是。2-sat问题一般是：每一个集合里都有两个元素，不同集合里的元素之间可能有矛盾，现在要从每一个集合里都取出一个元素作为代表，且取出的元素两两之间没有矛盾</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p><strong>构图</strong>：记i和i’是同一个集合里的两个元素，则易得如果i和j有矛盾，则选了i就必选j’，选了j就必选i’。如果选了i就必选j’我们就连一条从i到j’的有向边<br><strong>主体思想</strong>：从一个点出发沿着有向边一直走，选择路过的每一个点<br><strong>失败判断</strong>：走到一个点，那个点所在的集合内的两个点都被标记了<br><strong>失败后的处理</strong>：先清空标记，把失败这次的开始节点换成该集合内的另一个节点，如果还失败就说明无解<br><strong>代码</strong>(假设2i - 1和2i是在同一个集合里)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; mp[MAXN];</span><br><span class="line"><span class="keyword">int</span> mark[MAXN], ans[MAXN];</span><br><span class="line"><span class="comment">//mark记录在该次遍历中经过的点，用于清除记录(如果失败)，ans就标记的是选中的点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getAnother</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//获得该集合内另一点的标号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> ? x + <span class="number">1</span> : x - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//建图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> m)</span>   <span class="comment">//m：矛盾对的个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        mp[arr[i].x].push_back(getAnother(arr[i].y));</span><br><span class="line">        mp[arr[i].y].push_back(getAnother(arr[i].x));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n, <span class="keyword">int</span> &amp; len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ans[getAnother(x)]) <span class="comment">//一个集合内有两个点被标记</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[x] = <span class="number">1</span>;</span><br><span class="line">    mark[len++] = x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mp[x].<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfs(mp[x][i], n, len))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">two_sat</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="comment">//遍历所有的集合</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!ans[i &lt;&lt; <span class="number">1</span>] &amp;&amp; !ans[(i &lt;&lt; <span class="number">1</span>) - <span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            len = <span class="number">0</span>; <span class="comment">//在这次遍历中直到失败/结束访问的节点的个数</span></span><br><span class="line">            <span class="keyword">if</span>(!dfs((i &lt;&lt; <span class="number">1</span>) - <span class="number">1</span>, n, len)) <span class="comment">//失败</span></span><br><span class="line">            &#123;</span><br><span class="line">            	<span class="comment">//先清除记录</span></span><br><span class="line">                <span class="keyword">while</span>(len)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans[mark[--len]] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//再从集合内另一个点开始遍历</span></span><br><span class="line">                <span class="keyword">if</span>(!dfs((i &lt;&lt; <span class="number">1</span>), n, len))</span><br><span class="line">                &#123;</span><br><span class="line">                	<span class="comment">//再失败就说明无解</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>有向图中经常会有环，根据上面对边的定义，可以发现环中的每一个元素要么都选要么都不选，而且这个问题中的环都是对称的，我们就可以利用强连通分量把多个形成环的点缩成一个点，减少点数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%90%9C%E7%B4%A2%E4%B9%8B%E6%9E%9A%E4%B8%BE-%E7%86%84%E7%81%AF%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -966,96 +1051,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/DP%E4%B9%8B%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/DP%E4%B9%8B%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">DP之子序列问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 00:35:47 / Modified: 00:37:35" itemprop="dateCreated datePublished" datetime="2019-11-09T00:35:47+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Dynamic-Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Dynamic Programming</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="最大m段子序列和"><a href="#最大m段子序列和" class="headerlink" title="最大m段子序列和"></a>最大m段子序列和</h1><p><strong>问题描述</strong>：给定一个数列，从中选取m段互不重叠的子段，使那m个子段的和最大</p>
-<p><strong>解决</strong>：定义状态dp[i][j]表示由前j个元素分成i段的最优解且是以num[j]结尾。因为是以num[j]结尾，所以只有两种可能，即num[j]属于最后一个子段或独立成为一个子段。又若独立称为一个子段的话前面至少要有i - 1个元素，要不然就做不到i - 1个互不重叠的子段。则有状态转移方程<code>dp[i][j] = max(dp[i][j - 1] + num[j], dp[i - 1][k] + num[j](i - 1 ≤ k &lt; j))</code></p>
-<p><strong>优化</strong>：<br>&emsp;时间优化：在规划过程中，时间主要消耗在寻找dp[i - 1][k]的最大值，我们可以在计算dp[i - 1]那行的时候就把这个最大值算好，记录在preMax数组中<br>&emsp;空间优化：我们发现和背包问题类似，preMax数组只对一行有效，故我们可以用完一次就更新一次，使之适用于下一行，这样我们就只需要一个一维数组就可以解决问题，因此dp数组也可以缩小到一维</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num[maxn], dp[maxn], preMax[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> <span class="comment">//n为数字个数，m为子段数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="built_in">memset</span>(preMax, <span class="number">0</span>, <span class="keyword">sizeof</span>(preMax));</span><br><span class="line">	<span class="keyword">int</span> maxmun;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		maxmun = -INF;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[j] = <span class="built_in">max</span>(dp[j - <span class="number">1</span>], preMax[j - <span class="number">1</span>]) + num[j]; </span><br><span class="line">			preMax[j - <span class="number">1</span>] = maxmun;</span><br><span class="line">			maxmun = <span class="built_in">max</span>(dp[j], mx);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> maxmun;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最大连续子序列和"><a href="#最大连续子序列和" class="headerlink" title="最大连续子序列和"></a>最大连续子序列和</h1><p><strong>问题描述</strong>：给定一个数列，求其中连续的一段子序列的和的最大值。和上一题的区别就是子序列要求连续<br><strong>暴力求解</strong>：枚举所有的连续子序列，找出其中的最大值。这种解法要枚举所有的区间开始i和结束j，还要把他们都加起来，复杂度是O(n^3^)，有一个优化的方法：定一个数组sum，sum[i]表示的是前i个元素的和。这样区间[i, j]的和就可以表示为<code>sum[j] - sum[i - 1]</code>，就只需要枚举所有的i和j，只要O(n^2^)的时间<br><strong>DP求解</strong>：定义状态dp[i]表示的是以第i个元素结尾的最大连续子序列和。所以对于第i个元素只有两种情况<br>&emsp;单独成为一个子序列，和为num[i]<br>&emsp;和前面的一起组成一个子序列，因为num[i]是固定的，所以要最大和就要之前的子序列和最大，又要连续的子序列，所以就要以num[i - 1]结尾，即dp[i - 1] + num[i]<br>所以有状态转移方程：<code>dp[i] = max(num[i], dp[i - 1] + num[i])</code><br>初始时只需要使<code>dp[0] = num[0]</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num[maxn], dp[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	ans = dp[<span class="number">0</span>] = num[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i] = <span class="built_in">max</span>(num[i], dp[i - <span class="number">1</span>] + num[i]);</span><br><span class="line">		<span class="keyword">if</span>(dp[i] &gt; ans)</span><br><span class="line">		&#123;</span><br><span class="line">			ans = dp[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h1><p><strong>问题描述</strong>：给定一个数列，求出一个子序列，使这个子序列中后一个元素都比之前的数大。求这样的子序列的长度最大值<br><strong>解决</strong>：<br>维护一维数组dp[i]表示以num[i]结尾的最长上升子序列的长度。易知，dp数组应该初始化为1.<br>&emsp;<strong>暴力枚举法O(n^2^)</strong>：对每一个结尾，枚举之前的所有可能长度，取其中最大值加一。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num[maxn], dp[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LIS</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">1</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(num[j] &lt; num[i] &amp;&amp; dp[i] &lt; dp[j] + <span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i] = dp[j] + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>暴力枚举虽然暴力，但在有些题中必须得用这种方式，如：<a href="https://vjudge.net/problem/HDU-1069" target="_blank" rel="noopener">HDOJ 1069</a><br>这题把每块砖都按长宽高不同排序分割为六个不同状态，并按长宽中某一种排序。排序后不管怎么选，那一种一定是满足要求的。但排好之后的另一种还是无序的，所以就要从中选出权值最大的递增数列。因为要求两维都是单调的，所以只能暴力枚举。</p>
-<p>&emsp;<strong>优化O(nlogn)</strong>：定义dp[i]的含义为长度为i的递增序列的最小结尾元素。这时dp数组的初始化就要为INF，dp数组的第一个元素就是num原数组的第一个元素。因为是最长上升子序列，所以dp数组一定有序，所以我们就可以利用二分法查找不大于num[i]的最长序列</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LIS</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fill</span>(dp, dp + n, INF);</span><br><span class="line">    dp[<span class="number">1</span>] = num[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; dp[len])</span><br><span class="line">        &#123;</span><br><span class="line">            dp[++len] = num[i];</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">1</span>, r = len + <span class="number">1</span>, mid;</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)</span><br><span class="line">        &#123;</span><br><span class="line">            mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(dp[mid] &gt; num[i])</span><br><span class="line">            &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[l] = <span class="built_in">min</span>(num[i], dp[l]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&emsp;<strong>路径记录</strong>：每次更新的时候都记录一下前一个被选择的数字，然后递归输出即可</p>
-<h1 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h1><p>定义一个二维数组dp，第一维表示第一个数组的前i位，第二维表示第二个数组的前j位，即dp[i][j]表示的是第一个数组的前i位和第二个数组的前j位的最长公共子序列。这时就有两种情况：<br>&emsp;如果<code>num1[I] == num2[j]</code>，那<code>dp[i][j] = dp[i - 1][j - 1] + 1</code>，即如果相等的话，dp[i][j]就是把这两个元素不考虑的第一个数列的前i - 1项和第二个数列的前j - 1项的公共子序列加1<br>&emsp;如果<code>num1[i] != num2[j]</code>，那<code>dp[i][j] = max(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1])</code>，即不相等的话dp[i][j]就是把第一个数列的第i项裁掉或把第二个数列的第j项裁掉或都裁掉的最大值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1[maxn], num2[maxn], dp[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LCS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(num1[i] == num2[j])</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], <span class="built_in">max</span>(dp[i][j - <span class="number">1</span>], dp[i - <span class="number">1</span>][j - <span class="number">1</span>]));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dp[n][m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最长单调子序列"><a href="#最长单调子序列" class="headerlink" title="最长单调子序列"></a>最长单调子序列</h1><p><a href="https://vjudge.net/problem/HDU-1257" target="_blank" rel="noopener">HDOJ 1257</a><br>这题就是最长递减子序列的一个变形：定义dp数组，使dp[i]表示的是第i个发射台发射的上一个炮弹的高度。对于每一枚导弹，要找到可以拦截且前一个导弹高度最小的系统去拦截。我们初始只用一个系统，每次无法拦截的时候就新增一个系统，由此可知dp数组一定是单调增长的，所以只需要从前往后遍历，第一个可以拦截的系统即可</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        dp[<span class="number">0</span>] = INF;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> inp;</span><br><span class="line">        <span class="keyword">while</span>(n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(j &lt; cnt)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] &gt;= inp)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j] = inp;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j == cnt)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[cnt] = inp;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, cnt);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1127,7 +1122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
