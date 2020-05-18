@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="方法：从输入串开始，逐步进行归约，直到归约到文法的开始符号 边扫描输入串，边把输入符号移入分析者，边检查位于栈顶的一串符号是否与某个产生式的右部相同。如果相同，就把串归约为相应左部非终结符，否则继续移入输入符号。重复直到栈内符号为开始符号 构造分析树时从叶节点 (句子)开始，(以单位为单位)向根节点前进 问题：如何合适地选择归约串。一个串是多个不同左部产生式的右部；可以看成多种不同的串分别都是不">
 <meta property="article:published_time" content="2020-05-13T14:03:25.000Z">
-<meta property="article:modified_time" content="2020-05-18T14:38:03.333Z">
+<meta property="article:modified_time" content="2020-05-18T14:41:45.489Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-18 22:38:03" itemprop="dateModified" datetime="2020-05-18T22:38:03+08:00">2020-05-18</time>
+                <time title="Modified: 2020-05-18 22:41:45" itemprop="dateModified" datetime="2020-05-18T22:41:45+08:00">2020-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,7 +272,7 @@
 <li>状态栈的栈顶元素用$s_m$表示，当前输入符号用$a_i$表示</li>
 <li>$action$表根据当前状态和输入符号唯一确定是移进、归约、接受、报错</li>
 <li>$goto$表根据压入的非终结符号和当前状态确定下一个状态</li>
-<li>把栈中符号序列和剩余输入串看书一个二元格局，初始格局为$(s_0,a_1a_2…a_n\$)$<br />假设当前格局为$(s_0X_1s_1X_2s_2…X_ms_m,a_ia_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=shift\ s</script>，二元式变为$(s_0X_1s_1X_2s_2…X_ms_ma_is,a_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=reduce\ a\to\beta</script>，$|\beta|=r$，二元式变为$(s_0X_1s_1X_2s_2…X_{m-r}s_{m-r}As,a_ia_{i+1}…a_n\$)$，$s=goto[s_{m-r},A]$，$\beta=X_{m-r+1}X_{m-r+2}…X_m$</li>
+<li>把栈中符号序列和剩余输入串看书一个二元格局，初始格局为$(s_0,a_1a_2…a_n\$)$<br />假设当前格局为$(s_0X_1s_1X_2s_2…X_ms_m,a_ia_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=shift\ s</script>，二元式变为$(s_0X_1s_1X_2s_2…X_ms_ma_is,a_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=reduce\ A\to\beta</script>，$|\beta|=r$，二元式变为$(s_0X_1s_1X_2s_2…X_{m-r}s_{m-r}As,a_ia_{i+1}…a_n\$)$<br />&emsp;&emsp;$s=goto[s_{m-r},A]$，$\beta=X_{m-r+1}X_{m-r+2}…X_m$</li>
 </ol>
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ol>
 <li>活前缀：归约前栈内的所有符号。即，句柄的前缀。<br />严格定义：若$S’\Rightarrow^*_{rm}\alpha Aw\Rightarrow_{rm}\alpha\beta w$是文法$G$的拓广文法$G’$的一个规范推导，符号$\gamma$是$\alpha\beta$的前缀，则称$\gamma$是$G$的一个活前缀。<br />在$w$的任何一个符号被压入栈前，$\alpha\beta$就必然形成可归约串，并立即运用产生式$A\to\beta$归约，就不可能和$\beta$的任何一个符号同时出现在栈中，就不是活前缀</li>
@@ -310,7 +310,7 @@
 <h1 id="SLR-1-文法"><a href="#SLR-1-文法" class="headerlink" title="SLR(1)文法"></a>SLR(1)文法</h1><ol>
 <li>如果有冲突，我们可以提前看下一个输入非终结符号，把移进和归约、归约和归约分离开来制作$action$表</li>
 <li>$LR(0)$文法中归约的优先级过高，在$LR(1)$文法中，我们通过限定归约的前提条件来解决冲突</li>
-<li>$n$个归约$A_i\to\gamma_i\cdot$，若$FOLLOW(A_1)\cap FOLLOW(A_0)\cap…\cap FOLLOW(A_n)=\emptyset$，则当$I$面临输入符号$a$时<br />&emsp;若$a\notin FOLLOW(A_1)\cup FOLLOW(A_0)\cup…\cup FOLLOW(A_n)$，移进<br />&emsp;若$a\in FOLLOW(A_1)$，用$A_1\to\gamma_1$归约<br />&emsp;若$a\in FOLLOW(A_2)$，用$A_2\to\gamma_2$归约<br /><br />&emsp;$…$<br />&emsp;否则，报错</li>
+<li>$n$个归约$A_i\to\gamma_i\cdot$，若$FOLLOW(A_1)\cap FOLLOW(A_0)\cap…\cap FOLLOW(A_n)=\emptyset$，则当$I$面临输入符号$a$时<br />&emsp;若$a\notin FOLLOW(A_1)\cup FOLLOW(A_0)\cup…\cup FOLLOW(A_n)$，移进<br />&emsp;若$a\in FOLLOW(A_1)$，用$A_1\to\gamma_1$归约<br />&emsp;若$a\in FOLLOW(A_2)$，用$A_2\to\gamma_2$归约<br />&emsp;$…$<br />&emsp;否则，报错</li>
 <li>$action$表的生成中唯一的不同就是在填入归约操作时要提前展望下一输入</li>
 </ol>
 <h1 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h1><ol>
