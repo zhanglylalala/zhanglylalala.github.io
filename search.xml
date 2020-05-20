@@ -19170,7 +19170,7 @@ table th:first-of-type {
 <li>假设$A\to\alpha$，$a\in FIRST(\alpha)$，那么当输入符号是$a$时，将待推导非终结符号替换为$\alpha$</li>
 </ol>
 <h2 id="FOLLOW集"><a href="#FOLLOW集" class="headerlink" title="FOLLOW集"></a>FOLLOW集</h2><ol>
-<li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
+<li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。<br />$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
 <li>$FOLLOW$集中的元素是终结符号或$\$$</li>
 <li>如果$X\to AB$<br />&emsp;则$FIRST(B)\subseteq FOLLOW(A)$且$FOLLOW(X)\subseteq FOLLOW(B)$<br />&emsp;如果$B\Rightarrow^*\epsilon$，则$FOLLOW(X)\subseteq FOLLOW(A)$</li>
 <li>$\$$在$开始符号的$FOLLOW$集中</li>
