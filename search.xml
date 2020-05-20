@@ -19203,7 +19203,7 @@ table th:first-of-type {
 <li>一个栈存储待处理符号，栈顶元素$X$和当前输入符号$a$表示程序状态$(X,a)$，称为一个格局<br />若$X\in V_T$，判断$X$和$a$是否相同，若相同则弹出$X$，输入指针往后移，否则为出错<br />若$X\in V_N$，查得分析表$M$的元素$M[X,a]$。若查得$M[X,a]=X\to Y_1Y_2…Y_k$，则$X$弹出，依次将$Y_k,Y_{k-1},…,Y_1$压入栈中。若$M[X,a]=error$，错误分析<br />若<script type="math/tex">X=\$ </script>，如果<script type="math/tex">a=\$ </script>，分析停止，成功分析，否则失败</li>
 </ol>
 <h2 id="预测分析的错误恢复"><a href="#预测分析的错误恢复" class="headerlink" title="预测分析的错误恢复"></a>预测分析的错误恢复</h2><ol>
-<li>错误种类<br />&emsp;栈顶的终结符与当前输入符不匹配<br />&emsp;非终结符$A$在栈顶，面临输入符$a$，分析表$M[A,a]$为空<br />&emsp;$X=\<script type="math/tex">但$a≠\</script></li>
+<li>错误种类<br />&emsp;栈顶的终结符与当前输入符不匹配<br />&emsp;非终结符$A$在栈顶，面临输入符$a$，分析表$M[A,a]$为空<br />&emsp;$X=\$ $但$a≠\$ $</li>
 <li>应急恢复策略：跳过输入串中的一些符号，直到遇到同步符号把栈顶元素弹出为止</li>
 <li>同步符号：$FOLLOW(A)$中的所有符号作为$A$的同步符号</li>
 <li>若栈顶为终结符号，但与输入符号不符，弹出栈顶终结符号</li>
