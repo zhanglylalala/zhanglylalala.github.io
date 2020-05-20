@@ -191,6 +191,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/14/10-Definite-Integrals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/14/10-Definite-Integrals/" class="post-title-link" itemprop="url">10. Definite Integrals</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-14 13:54:36" itemprop="dateCreated datePublished" datetime="2020-02-14T13:54:36+08:00">2020-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:06:27" itemprop="dateModified" datetime="2020-03-07T16:06:27+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Definite-Integrals"><a href="#Definite-Integrals" class="headerlink" title="Definite Integrals"></a>Definite Integrals</h1><ol>
+<li>The area under a curve in interval <script type="math/tex">[a,b]</script> can be calculated as <script type="math/tex">\displaystyle\int^a_bf(x)dx</script>. </li>
+<li>To compute the area: <br />&emsp;Divide into rectangles<br />&emsp;Add up areas. <br />&emsp;Take the limits as the number of rectangle goes to infinite. </li>
+<li>Riemann sums (general procedure for definite integrals): <br />&emsp;Divide the big inteval into <script type="math/tex">n</script> pieces, each has the length <script type="math/tex">\Delta x=\displaystyle\frac{b-a}{n}</script><br />&emsp;Pick any height of <script type="math/tex">f</script> in each interval<br />&emsp;Add them up <code>Riemann sum</code>: <script type="math/tex">\displaystyle\sum^n_{i=1}f(c_i)\Delta x</script> as <script type="math/tex">\Delta x</script> approaching zero. </li>
+<li><script type="math/tex; mode=display">lower\ Riemann\ sum\ (\displaystyle\sum^n_{i=1}f_{min}\Delta x) ≤ actual\ integral ≤ upper\ Riemann\ sum\ (\displaystyle\sum^n_{i=1}f_{max}\Delta x)</script></li>
+<li>Integrals is cumulative sums. </li>
+<li><code>Fundamental Theorem of Calculus</code>: If <script type="math/tex">F'(x)=f(x)</script>, then <script type="math/tex">\displaystyle\int^b_af(x)dx=F(x)\Big|^b_a=F(b)-F(a)</script>. </li>
+<li>Intuitive interpretation of Fundamental Theorem: <script type="math/tex">x(t)</script> is the position at time <script type="math/tex">t</script>, <script type="math/tex">x'(t)=v(t)</script> is the speed. <script type="math/tex">\displaystyle\int^b_a v(t)dt=x(b)-x(a)</script> is the distance travelled. </li>
+<li>According to Fundamental Theorem of Calculus, <script type="math/tex">\displaystyle\frac{F(b)-F(a)}{b-a}=\frac{1}{b-a}\int^b_af(x)dx</script> which is the average of <script type="math/tex">f</script>. So we can write <script type="math/tex">\Delta F=Ave(F')\Delta x</script>. </li>
+<li><code>Second Fundamental Theorem</code>: If <script type="math/tex">f</script> is continuous, and <script type="math/tex">G(x)=\displaystyle\int^x_af(t)dt\ \ (a≤t≤x)</script>, then <script type="math/tex">G'(x)=f(x)</script>. </li>
+<li><script type="math/tex">G(x)</script> solves the differential equation <script type="math/tex">y'=f</script> with condition <script type="math/tex">y(a)=0</script>. </li>
+<li><script type="math/tex">G'(x)</script> is actually the derivative of the antiderivative of <script type="math/tex">f</script>, so it’s <script type="math/tex">f</script> itself. </li>
+<li>It can be written as <script type="math/tex">\displaystyle\frac{d}{dx}\int^x_af(t)dt=f(x)</script> or <script type="math/tex">G(x)=\displaystyle\int^x_aG'(t)dt</script>. </li>
+<li>The true geometric interpretation of definite integral is  plus the area above x-axis and minus the area below x-axis. </li>
+<li>The total distance <script type="math/tex">=\displaystyle\int^b_a |f(x)|dx</script> while the net distance <script type="math/tex">=\displaystyle\int^b_af(x)dx</script>. </li>
+</ol>
+<h1 id="Properties-of-Integrals"><a href="#Properties-of-Integrals" class="headerlink" title="Properties of Integrals"></a>Properties of Integrals</h1><ol>
+<li><script type="math/tex; mode=display">\displaystyle\int^b_a(f(x)+g(x))dx=\int^b_af(x)dx+\int^b_ag(x)dx</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\int^b_acf(x)dx=c\int^b_af(x)dx</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\int^b_af(x)dx+\int^c_bf(x)dx=\int^c_af(x)dx</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\int^a_af(x)dx=0</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\int^b_af(x)dx=-\int^a_bf(x)dx</script></li>
+<li>Estimation: If <script type="math/tex">f(x)≤g(x)</script>, then <script type="math/tex">\displaystyle\int^b_af(x)dx≤\int^b_ag(x)dx</script>. </li>
+<li>Change of variables (substitution): <script type="math/tex">\displaystyle\int^{u_2}_{u_1}g(u)du=\int^{x_2}_{x_1}g(u)u'(x)dx</script>. Here <script type="math/tex">u_1=u(x_1)</script> and <script type="math/tex">u_2=u(x_2)</script>. <br /><code>IMPORTANT</code>: <strong>This only works when <script type="math/tex">u'(x)</script> has the same sign in the whole interval. </strong></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/12/09-Differentials-and-antiderivatives/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1064,101 +1170,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/" class="post-title-link" itemprop="url">27. Left and Right Inverses; Pseudoinverse</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-07 12:28:16" itemprop="dateCreated datePublished" datetime="2020-02-07T12:28:16+08:00">2020-02-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:08:55" itemprop="dateModified" datetime="2020-03-07T16:08:55+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Inverse-of-Rectangular-Matrices"><a href="#Inverse-of-Rectangular-Matrices" class="headerlink" title="Inverse of Rectangular Matrices"></a>Inverse of Rectangular Matrices</h1><ol>
-<li><script type="math/tex">A</script> is an <script type="math/tex">m</script> by <script type="math/tex">n</script> matrix. If <script type="math/tex">m=n</script>, it’s nature to get an inverse of <script type="math/tex">A</script>. </li>
-<li>But if <script type="math/tex">m≠n</script>, <script type="math/tex">A</script> can have two different inverses, right inverse and left inverse. </li>
-<li><script type="math/tex">AA^T(AA^T)^{-1}=I</script>. So the right inverse of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{right}=A^T(AA^T)^{-1}</script>. <br />Similarity, <script type="math/tex">(A^TA)^{-1}A^TA=I</script>. So the left inver of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{left}=(A^TA)^{-1}A^T</script>. </li>
-<li><script type="math/tex">A^{-1}_{right}A=A^T(AA^T)^{-1}A=P_{row\ space}</script>. This is the projection matrix to row space. <br /><script type="math/tex">AA^{-1}_{left}=A(A^TA)^{-1}A^T=P_{column\ space}</script>. This is the projection matrix to column space. </li>
-</ol>
-<h1 id="Pseudoinverse"><a href="#Pseudoinverse" class="headerlink" title="Pseudoinverse"></a>Pseudoinverse</h1><ol>
-<li>If <script type="math/tex">\vec{x}≠\vec{y}</script> both in row space, then <script type="math/tex">A\vec{x}≠ A\vec{y}</script> both in column space. <br />&emsp;Proof: Suppose <script type="math/tex">A\vec{x}=A\vec{y}</script>. Then <script type="math/tex">A\vec{x}-A\vec{y}=A(\vec{x}-\vec{y})</script>. <script type="math/tex">\vec{x}-\vec{y}</script> is in the row space, So <script type="math/tex">A(\vec{x}-\vec{y})</script> is also in the column space. But <script type="math/tex">A\vec{x}-A\vec{y}=\vec{0}</script>. So <script type="math/tex">\vec{x}-\vec{y}</script> is also in nullspace. So <script type="math/tex">\vec{x}-\vec{y}=\vec{0}</script>, i.e. <script type="math/tex">\vec{x}=\vec{y}</script>. </li>
-<li>So every vector in row space has and only has one vector in column space that is <script type="math/tex">A\vec{x}</script>. </li>
-<li><script type="math/tex">A</script> is a map from row space to column space. And the pseudoinverse <script type="math/tex">A^+</script> is the map from columns space to row space. For every <script type="math/tex">\vec{x}</script> in row space, <script type="math/tex">A^+(A\vec{y})=\vec{y}</script>. </li>
-<li><script type="math/tex">A^+</script> on the left brings projection to the row space while on the right brings the projection to the columns. </li>
-<li>The pseudoinverse of <script type="math/tex">\Sigma</script> in the SVD is <script type="math/tex">\Sigma^+=\left[\begin{matrix}\frac{1}{\sigma_1}\\&\ddots\\&&\frac{1}{\sigma_r}&&\\&\end{matrix}\right]</script>. <script type="math/tex">\Sigma\Sigma^+</script> gives <script type="math/tex">\left[\begin{matrix}1\\&\ddots\\&&1\\&&&\end{matrix}\right]</script> not <script type="math/tex">I</script>. </li>
-<li>Any vector <script type="math/tex">A=U\Sigma V^T</script>, <script type="math/tex">A^+=V\Sigma^+U^T</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1230,7 +1241,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">168</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

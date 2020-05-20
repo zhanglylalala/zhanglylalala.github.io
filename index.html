@@ -191,6 +191,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-20 21:51:55" itemprop="dateModified" datetime="2020-05-20T21:51:55+08:00">2020-05-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Compilers-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">Compilers (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
+<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
+<li>语法正确的程序不一定语义正确</li>
+<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
+</ol>
+<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
+<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
+<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
+<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
+<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
+<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承节点：由该节点的兄弟节点及父节点的属性值计算出来</li>
+<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
+<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
+<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
+<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合符号，一般由词法分析器提供</li>
+<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
+<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
+<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
+<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
+<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
+</ol>
+<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
+<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
+<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
+<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
+<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
+</ol>
+<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
+<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
+<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
+<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有</li>
+<li>每一个$S-$属性定义都是$L-$属性定义</li>
+<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
+<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
+<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
+<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +340,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-18 22:41:45" itemprop="dateModified" datetime="2020-05-18T22:41:45+08:00">2020-05-18</time>
+                <time title="Modified: 2020-05-18 22:42:47" itemprop="dateModified" datetime="2020-05-18T22:42:47+08:00">2020-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1243,96 +1361,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/24/01-%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/01-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">01. 概述</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-24 22:35:12" itemprop="dateCreated datePublished" datetime="2020-04-24T22:35:12+08:00">2020-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 17:24:03" itemprop="dateModified" datetime="2020-04-26T17:24:03+08:00">2020-04-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Science</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/Computer-Organization-Tsinghua/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Organization (Tsinghua)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>计算机是什么：<br />&emsp;一种高速运行的电子设备<br />&emsp;用于进行数据的算术或逻辑运算<br />&emsp;可接受输入信息<br />&emsp;根据用户要求对信息进行加工<br />&emsp;输出结果</li>
-<li>冯诺依曼机<br />&emsp;存储程序<br />&emsp;用二进制编码数据<br />&emsp;体系结构：控制器、运算器、存储器、输入、输出设备<br />&emsp;以运算器 (logic unit，LU)为核心</li>
-<li>现代计算机<br />&emsp;功能部件：CPU (数据通道、控制器)、存储器、输入输出设备<br />&emsp;VLSI<br />&emsp;体系结构：流水技术 (PIPELINE)、层次存储系统、并行</li>
-<li>计算机运行机制<br />&emsp;数据通道：完成算术和逻辑运算，通常包括其中的寄存器<br />&emsp;控制器：CPU的组成成分，它根据程序指令来指挥数据通道、存储器和输入输出设备运行，共同完成程序功能<br />&emsp;存储器：存放运行时程序及其所需要的数据的场所<br />&emsp;输入设备：信息进入计算机的设备<br />&emsp;输出设备：讲计算机结果展示给用户的设备</li>
-<li>计算机的层次结构<br />&emsp;可运行高级语言的计算机 = 可运行汇编语言的计算机 + 编译器<br />&emsp;可运行汇编语言的计算机 = 可运行机器语言的计算机 + 汇编器<br />&emsp;可运行机器语言的计算机可以生成控制信号，由硬件实现</li>
-<li>计算机系统<br />&emsp;硬件：中央处理器、存储器、外围设备<br />&emsp;软件：为了使用计算机而编写的各种系统的和用户的程序</li>
-<li>评价计算机性能的指标<br />&emsp;吞吐率：单位时间内完成的任务数量，即完成的指令条数<br />&emsp;响应时间：完成任务的时间<br />&emsp;衡量性能的指标<br />&emsp;&emsp;MIPS (吞吐率 Million Instructions per Second，注意与指令系统区分)<br />&emsp;&emsp;CPI (每条指令完成的平均周期数，相对于周期长度)<br />&emsp;&emsp;CPU时间 (绝对时间)、CPU时钟 (绝对时间)<br />&emsp;综合测试程序</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1404,7 +1432,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">168</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
