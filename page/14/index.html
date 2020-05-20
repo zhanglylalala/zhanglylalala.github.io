@@ -191,6 +191,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">二分图匹配(匈牙利算法的优化—— Hopcroft-Karp算法)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:08:35 / Modified: 00:09:39" itemprop="dateCreated datePublished" datetime="2019-11-09T00:08:35+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Graph</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Graph/Bipartite-Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Bipartite Graph</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="匈牙利算法的不足"><a href="#匈牙利算法的不足" class="headerlink" title="匈牙利算法的不足"></a>匈牙利算法的不足</h1><p>匈牙利算法在进行DFS时，没次都最多只能找到一条增广路，导致了我们要遍历所有的点和边才可以找到最大匹配。而Hopcroft-Karp算法就从这里开始改进——每次先通过BFS标出层次，再通过DFS验证增广路，可以一次找到多条路</p>
+<h1 id="Hopcroft-Karp算法"><a href="#Hopcroft-Karp算法" class="headerlink" title="Hopcroft-Karp算法"></a>Hopcroft-Karp算法</h1><p>1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化<br>&emsp;增广路都是从一个未匹配点开始，我们就只需要在开始的时候把所有的未匹配点推入队列<br>&emsp;增广路都是在另一个未匹配点结束，我们就只需标记到另一个未匹配点所在的那层即可<br>&emsp;<strong>数据存储</strong>：map存边，dN和dM分别表示N点集和M点集中各个点的层次，matchN、matchM分别存储点集N和点集M的匹配情况，整型全局变量dist表示当前遍历的最大层次同时标记还有没有增广路</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxN][maxM], dN[maxN], dM[maxM], matchN[maxN], matchM[maxM];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span>  <span class="comment">//n是点集N的个数，m是点集M的个数，这里假设从点集N去匹配点集M</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	dist = INF;</span><br><span class="line">	<span class="built_in">memset</span>(dN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dN));</span><br><span class="line">	<span class="built_in">memset</span>(dM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dM));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//所以未匹配点都加入队列</span></span><br><span class="line">		<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			que.push(i);</span><br><span class="line">			dN[i] = <span class="number">0</span>;  <span class="comment">//这些未匹配点都是起点，所以是第0层</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> dotN = que.front();</span><br><span class="line">		que.pop();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//根据BFS的性质，当出现第一个超出遍历层数的点出现，之后的点都会超出，不必再继续遍历</span></span><br><span class="line">		<span class="keyword">if</span>(dN[dotN] &gt; dist)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == <span class="number">-1</span>) <span class="comment">//相连且没有遍历过</span></span><br><span class="line">			&#123;</span><br><span class="line">				dM[dotM] = dN[dotN] + <span class="number">1</span>; <span class="comment">//dotN再走一步就可以到dotM，所以dotM的层数就是dotN加一</span></span><br><span class="line">				<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span>) <span class="comment">//如果是未匹配点，遍历到这层就结束</span></span><br><span class="line">				&#123;</span><br><span class="line">					dist = dM[dotM]; <span class="comment">//这次遍历到最大层数</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="comment">//如果是匹配点</span></span><br><span class="line">				&#123;</span><br><span class="line">					dN[matchM[dotM]] = dM[dotM] + <span class="number">1</span>;</span><br><span class="line">					que.push(matchM[dotM]); <span class="comment">//队列里装的永远都是点集N里的点</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dist != INF; <span class="comment">//如果dist == INF就说明没有增广路路，可以结束循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、DFS验证增广路：和匈牙利算法的DFS差不多，但是要求长度在dist以内，且是连续层次的点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vis[maxM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == dN[dotN] + <span class="number">1</span>) <span class="comment">//连边且层次连续</span></span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] != <span class="number">-1</span> &amp;&amp; dM[dotM] &gt; dist) <span class="comment">//长度超过dist还没找到未匹配点即路未结束</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span> || DFS(matchM[dotM], m))</span><br><span class="line">			&#123;</span><br><span class="line">				matchM[dotM] = dotN;</span><br><span class="line">				matchN[dotN] = dotM;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、主算法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxMatch</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(matchN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchN));</span><br><span class="line">	<span class="built_in">memset</span>(matchM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchM));</span><br><span class="line">	<span class="keyword">while</span>(BFS(n, m))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				ans += DFS(i, m);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/HDU-2389" target="_blank" rel="noopener">HDOJ 2389</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95DFS%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2643,111 +2732,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/23/02-Elimination-with-Matrices/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/23/02-Elimination-with-Matrices/" class="post-title-link" itemprop="url">02. Elimination with Matrices</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-23 20:38:36" itemprop="dateCreated datePublished" datetime="2019-10-23T20:38:36+08:00">2019-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-01 23:50:03" itemprop="dateModified" datetime="2020-04-01T23:50:03+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Elimination"><a href="#Elimination" class="headerlink" title="Elimination"></a>Elimination</h1><ol>
-<li>To solve a system, we can eliminate it to make it an upper-triangular form. The goal of elimination is to produce an upper triangular system. </li>
-<li>Before every elimination, choose a pivot. <code>Zero will never be accepted as a pivot</code>.  Pivots are the coefficients in the diagonal of the system. </li>
-<li>We can <code>multiply</code> a specific multiplier to the main equation and <code>subtract</code> it from another equation to eliminate. </li>
-<li>Pivot is the first nonzero in the row that does the elimination. <br />The multiplier is the entry to eliminate divided by pivot. </li>
-<li>When solving the system, right-hand side vector and the coefficients act the same. So it is convenient to add it to the coefficient matrix. The matrix with the right-hand side vector is called <code>the augmented matrix</code>, written as <script type="math/tex">[E\ \vec{b}]</script>. </li>
-<li>After elimination, we <code>back substitute</code> from bottom to top to solve each unknowns. </li>
-<li>Elimination can fail when we do not get $n$ pivots. This could lead to either no solution or infinitely many solutions. However, if there is  a nonzero below the zero in the pivot, we can exchange them to correct the system. </li>
-</ol>
-<h1 id="Matrix-Elimination"><a href="#Matrix-Elimination" class="headerlink" title="Matrix Elimination"></a>Matrix Elimination</h1><h2 id="Operation-by-Rows-or-Columns"><a href="#Operation-by-Rows-or-Columns" class="headerlink" title="Operation by Rows or Columns"></a>Operation by Rows or Columns</h2><ol>
-<li>Every matrix is a series of row vectors or column vectors. When multiplying two matrices, we can multiply them separately. We can multiply the first matrix to every column vector in the second matrix or multiply the second matrix to every row vector in the first matrix</li>
-<li>This gives us a hint of row operations and column operations. The first matrix can change the second matrix on rows while the second matrix changes the first matrix on columns. </li>
-<li>In the multiplication of $LR = A$, the $i$th row of $A$ is $L$ times the $i$th row of $R$ while the $i$th column of $A$ is the $i$th column of $L$ times $R$. </li>
-<li>More specifically, the $i$th row of $A$ is the linear combination of all row vectors in $R$ whose coefficients are the $i$th row of $L$. The $i$th column of $A$ is the linear combination of all column vectors in $L$ whose coefficients are the $i$th column of $R$. </li>
-</ol>
-<h2 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h2><ol>
-<li>With the basic of matrices multiplication, we can eliminate the system with that. </li>
-<li>Based on the identity matrix, we make the elimination matrix <script type="math/tex">E</script>. <script type="math/tex">E_{ij}</script> is to produce a zero in the <script type="math/tex">(i,\ j)</script> position of the matrix. Furthermore, <script type="math/tex">the\ (i,\ j)\ entry\ of\ E_{ij}=-l</script> (<script type="math/tex">l</script> is the multiplier to do the elimination). </li>
-<li>We usually do the row operations when eliminating. So <script type="math/tex">E</script> is usually the left matrix. </li>
-<li>When multiple eliminations are necessary, we write those elimination matrices from right to left opposite to the sequence of elimination. </li>
-<li>Though we can move parentheses, we cannot change the relative position of the matrices. </li>
-<li>The elimination matrices will not change the solution, because the final equation will be <script type="math/tex">EA\vec{x}=E\vec{b}</script>. For augmented matrix the final result is <script type="math/tex">[EA\ E\vec{b}]</script></li>
-<li>When we need a row exchange, a permutation matrix is multiplied. The permutation matrix <script type="math/tex">P_{ij}</script> is the identity matrix with rows <script type="math/tex">i</script> and <script type="math/tex">j</script> reversed to exchange rows <script type="math/tex">i</script> and <script type="math/tex">j</script> of the original matrix.  </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2819,7 +2803,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

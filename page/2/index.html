@@ -191,6 +191,136 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/25/02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/25/02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">02. 计算机的指令系统</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-25 16:11:16" itemprop="dateCreated datePublished" datetime="2020-04-25T16:11:16+08:00">2020-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-26 17:23:59" itemprop="dateModified" datetime="2020-04-26T17:23:59+08:00">2020-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Science</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Science/Computer-Organization-Tsinghua/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Organization (Tsinghua)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="计算机程序"><a href="#计算机程序" class="headerlink" title="计算机程序"></a>计算机程序</h1><ol>
+<li>计算机程序是程序员和计算机硬件之间交互的语言</li>
+<li>分类：高级语言程序、汇编语言程序、机器语言程序</li>
+<li>高级语言 (算法语言)为了让程序员着重注意在解决实际问题所用的算法，更贴近自然语言，让程序设计更为高效。且高级语言通用性更好，可移植性强</li>
+<li>计算机硬件是由逻辑门组成的，而逻辑门是由信号驱动的，信号以高低电平区分。所以计算机硬件只能理解$01$二进制串</li>
+<li>机器语言是计算机硬件能直接识别和运行的指令的集合，是二进制码组成的指令，用机器语言设计程序基本不可行，可读性几乎为零</li>
+<li>汇编语言用英文单词或其缩写替代二进制的指令代码，更容易记忆和理解。存储单元由汇编程序分配而非程序员，达到基本可用标准</li>
+<li>高级语言设计出来的程序，需要经过编译程序或解释程序，才能在计算机的硬件系统上予以执行。汇编程序要经过汇编器翻译成机器语言后方可运行</li>
+</ol>
+<h1 id="计算机指令"><a href="#计算机指令" class="headerlink" title="计算机指令"></a>计算机指令</h1><p>冯诺依曼计算机<br />&emsp;存储程序计算机：程序由指令构成，程序功能通过指令序列描述，指令在内存中顺序存放<br />&emsp;顺序执行指令：用PC指示当前被执行的指令，从存储器中读出指令执行，PC指向下一条指令(程序指定的下一条指令，若没指定，默认为物理地址上的下一条)</p>
+<h2 id="指令是什么"><a href="#指令是什么" class="headerlink" title="指令是什么"></a>指令是什么</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ol>
+<li>指令用于程序设计人员告知计算机执行一个最基本运算、处理功能。程序由一个序列的计算机指令组成，程序的最小单元是指令</li>
+<li>指令是指挥计算机硬件运行的命令，是计算机硬件执行程序的最小单位</li>
+<li>指令是由多个二进制位组成的位串，是计算机硬件可以直接识别和执行的信息体</li>
+<li>指令中应指明指令所完成的操作，并明确操作对象</li>
+</ol>
+<h3 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h3><ol>
+<li>指令系统：一台计算机提供的全部指令</li>
+<li>指令系统层处在硬件系统和软件系统之间，是硬、软件间的接口部分<br />硬件系统：实现指令，解决指令间衔接关系。包括数字逻辑层和微体系结构层<br />软件系统：按一定规则组织起来的指令，完成一定的功能。包括操作系统层、汇编语言层、高级语言层</li>
+<li>指令系统的优劣势一个计算机系统是否成功的关键因素</li>
+</ol>
+<h2 id="指令的分类"><a href="#指令的分类" class="headerlink" title="指令的分类"></a>指令的分类</h2><ol>
+<li>数据运算指令：算数运算、逻辑运算</li>
+<li>数据传输指令：内存到寄存器、寄存器到寄存器</li>
+<li>输入输出指令：与输入输出端口的数据传输，这是一种特殊的数据传输指令</li>
+<li>控制指令：无条件跳转、条件跳转、子程序的支持 (调用和返回)</li>
+<li>其他指令：停机、开/关中断、空操作、特权指令、设置条件码</li>
+</ol>
+<h2 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h2><ol>
+<li>指令格式指的是操作码、操作数地址的二进制分配方案</li>
+<li>操作码：指令的操作功能，每条指令都有一个确定的操作码</li>
+<li>操作数地址：操作数存放的地址，或操作数本身</li>
+<li>指令字：完整的一条指令的二进制表示</li>
+<li>指令字长：指令中二进制的代码的位数<br />机器字长：计算机能够直接处理的二进制数据的位数<br />指令字长为一个字节的倍数</li>
+<li>根据指令字长是否固定，指令还可以分为定长指令字结构和变长指令字结构 (现在少用)<br />根据操作码长度是否固定，分为定长操作码和扩展操作码</li>
+</ol>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><ol>
+<li>寻址方式 (编址方式)：确定本条指令的操作数地址和下一条要执行的指令的地址的方法</li>
+<li>寻址方式的数目和功能依不同的计算机系统而定。不同的寻址方式实现的复杂程度和运行性能各不同</li>
+<li>通常指令中每一个操作数都有一个地址字段表示其来源或去向的地址</li>
+<li>形式地址：在指令中给出的操作数或指令的地址<br />实际地址：依据形式地址及一定的规则得到的一个数值</li>
+<li>操作数地址字段可能要指出：<br />&emsp;运算器中累加器的编号或专用寄存器名称 (编号)<br />&emsp;输入/输出指令中用到的I/O设备的入出端口地址<br />&emsp;内存储器的一个存储单元 (或一个I/O设备)的地址</li>
+</ol>
+<h2 id="MIPS指令系统"><a href="#MIPS指令系统" class="headerlink" title="MIPS指令系统"></a>MIPS指令系统</h2><ol>
+<li>MIPS：Microprocessor without interlocked piped stages 无内部互锁流水级的微处理器</li>
+<li>为RISC芯片设计的指令系统</li>
+<li>MIPS32所有的指令都是32位字长，有3种指令格式：寄存器型，立即数型，和转移型<br />MIPS64是面向54位处理器的指令系统</li>
+<li>操作数寻址：基址加16位偏移的访存寻址、立即数寻址和寄存器寻址</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/24/01-%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1369,140 +1499,6 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/21/14-Bayesian-Statistical-Inference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/21/14-Bayesian-Statistical-Inference/" class="post-title-link" itemprop="url">14. Bayesian Statistical Inference</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-03-21 16:38:18 / Modified: 23:39:20" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">Probability (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
-<li>In probability, every unambiguous question has a unique correct answer. </li>
-<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unlees one makes several assumptions and imposes additional constraints on the inference problem. </li>
-<li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
-<li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
-<li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
-<li>In parameter estimation, we want to generate estimates that are close to the true values of the parameters in some probabilistic sense. </li>
-<li>In hypothesis testing, the unknown parameter takes one of a finite number of values, corresponding to competing hypotheses; we want to choose one of the hypotheses, aiming to achieve a small probability of error. </li>
-</ol>
-<h1 id="Bayesian-Inference-and-the-Posterior-Distribution"><a href="#Bayesian-Inference-and-the-Posterior-Distribution" class="headerlink" title="Bayesian Inference and the Posterior Distribution"></a>Bayesian Inference and the Posterior Distribution</h1><ol>
-<li>In Bayesian inference, the unknown quantity of interest, which we denote by $\Theta$, is modeled as a random variable or as a finite collection of random variables. </li>
-<li>We aim to extract information about $\Theta$, based on observing a collection $X=(X_1,…,X_n)$ of related random variables, called observations, measurements, or an observation vector. </li>
-<li>In Bayesian Inference, we start with a prior distribution $p_\Theta$ or $f_\Theta$ for the unknown random variable $\Theta$. We have a model $p_{X|\Theta}$ or $f_{X|\Theta}$ of the observation vector $X$. After observing the value $x$ of $X$, we form the posterior distribution $p_{\Theta|X}$ or $f_{\Theta|X}$, using the appropriate version of Bayes’s rule. </li>
-<li>Once a particular value $x$ of $X$ has been ovserved, a complete answer to the Bayesian inference problem is provided by the posterior distribution of $\Theta$. </li>
-<li>The case of multiple unknown parameters is entirely similar. </li>
-<li>After getting the posterior distribution, we are certainly to make some decision with it to minimize the probability of error. </li>
-</ol>
-<h1 id="Hypothesis-and-Estimate"><a href="#Hypothesis-and-Estimate" class="headerlink" title="Hypothesis and Estimate"></a>Hypothesis and Estimate</h1><ol>
-<li>An estimator is a random variable of the form $\hat\Theta=g(X)$, for some function $g$. Different choices of $g$ correspond to different estimators. </li>
-<li>An estimate is the value $\hat\theta$ of an estimator, as determined by the realized value $x$ of observation $X$. </li>
-<li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
-</ol>
-<h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
-<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ continuous \end{array}\right.</script></li>
-<li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
-<li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
-<li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>
-</ol>
-<h2 id="LMS"><a href="#LMS" class="headerlink" title="LMS"></a>LMS</h2><ol>
-<li>This rule tries to minimize $E[(\Theta-c)^2]$, where $c$ is the estimate. <br />Expand this to get $E[\Theta^2]-2cE[\Theta]+c^2$. The minimum is achieved at $c=E[\Theta]$. </li>
-<li>So the optimal estimate is $E[\Theta]$. And the error is $E[(\Theta-E[\Theta])^2]=var(\Theta)$. </li>
-<li>The conditional case is the same. Minimize $E[(\Theta-c)^2|X=x]$ is minimized by $c=[\Theta|X=x]$. </li>
-<li>$E[\Theta|X]$ minimizes $E[(\Theta-g(X))^2]$ over all estimators $g(\cdot)$. </li>
-<li>If we have multiple observations, $\hat\theta=E[\Theta|X_1,…,X_n]$, $E[(\Theta-E[\Theta|X_1,…,X_n])^2]≤E[(\Theta-g(X_1,…,X_n))^2]$ for all estimators $g(X_1,…,X_n)$. </li>
-<li>If we have multiple parameters, we need to minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$. The result is $\hat\Theta_i=E[\Theta_i|X_1,…,X_n]$. </li>
-</ol>
-<h3 id="Estimation-Error"><a href="#Estimation-Error" class="headerlink" title="Estimation Error"></a>Estimation Error</h3><ol>
-<li>Let $\hat\Theta=E[\Theta|X]$ be the LMS estimator and $\tilde\Theta=\hat\Theta-\Theta$ be the associated estimation error. </li>
-<li>The estimation error $\tilde\Theta$ is unbiased, i.e. it has zero unconditional and conditional mean $E[\tilde\Theta]=0$ and $E[\tilde\Theta|X=x]=0$ for all $x$. </li>
-<li>The estimation error $\tilde\Theta$ is uncorrelated with the estimate $\hat\Theta$: $cov(\hat\Theta, \tilde\Theta)=0$. </li>
-<li>The variance of $\Theta$ can be decomposed as $var(\Theta)=var(\hat\Theta)+var(\tilde\Theta)$. </li>
-</ol>
-<h3 id="Linear-LMS"><a href="#Linear-LMS" class="headerlink" title="Linear LMS"></a>Linear LMS</h3><ol>
-<li>The calculation for multiple observations and multiple parameters might be hard. So we might choose another way to estimate. </li>
-<li>A linear estimator of a random variable $\Theta$, based on observations $X_1,…,X_n$ has form $\hat\Theta=a_1X_1+…+a_nX_n+b$. </li>
-<li>Given a particular choice of the scalars $a_1,…,a_n,b$, the corresponding mean squared error is $E[(\Theta-a_1X_1-…-a_nX_n-b)^2]$. </li>
-</ol>
-<h4 id="Single-Observation"><a href="#Single-Observation" class="headerlink" title="Single Observation"></a>Single Observation</h4><ol>
-<li>Suppose that $a$ has already been chosen. This is the same as choosing a constant $b$ to estimate the random variable $\Theta-aX$. The best choice is $b=E[\Theta-aX]=E[\Theta]-aE[X]$. </li>
-<li>Now we only need to minimize $E[(\Theta-aX-E[\Theta]+aE[X])^2]$. </li>
-<li>Rewrite this expression as $var(\Theta-aX)=\sigma_\Theta^2+a^2\sigma_X^2+2cov(\Theta,-aX)=\sigma_\Theta^2+a^2\sigma_X-2a\cdot cov(\Theta,X)$. </li>
-<li>To minimize $var(\Theta-aX)$, we set its derivative to zero and solve for $a$. This yields $a=\displaystyle\frac{cov(\Theta,X)}{\sigma^2_X}=\frac{\rho\sigma_\Theta\sigma_X}{\sigma^2_X}=\rho\frac{\sigma_\Theta}{\sigma_X}$, where $\rho=\displaystyle\frac{cov(\Theta,X)}{\sigma_\Theta\sigma_X}$. </li>
-<li>The mean squared estimation error of the resulting linear estimator $\hat\Theta$ is given by $var(\Theta-\hat\Theta)=(1-\rho^2)\sigma^2_\Theta$. </li>
-</ol>
-<h4 id="Multiple-Observations-and-Multiple-Parameters"><a href="#Multiple-Observations-and-Multiple-Parameters" class="headerlink" title="Multiple Observations and Multiple Parameters"></a>Multiple Observations and Multiple Parameters</h4><ol>
-<li>To minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$, only need to minmize each $E[(\Theta_1-\hat\Theta_i)^2]$. So we are essentially dealing with $m$ decoupled linear estimation problems, one for each unknown parameter. </li>
-<li>For every observation, we have $X_i=\Theta+W_i$, where the $W_i$ are random variables with mean $0$ and variance $\sigma_i^2$, which represent observation errors. </li>
-<li>The linear LMS estimator of $\Theta$ based on the observations $X_1,…,X_n$ turns out to be $\hat\Theta_i=\displaystyle\frac{\displaystyle\frac{\mu_i}{\sigma_{0i}^2}+\displaystyle\sum^n_{i=1}\frac{X_i}{\sigma^2_i}}{\displaystyle\sum^n_{i=0}\frac{1}{\sigma^2_i}}$. $\mu_i$ is the mean of $\Theta_i$ while $\sigma_{0i}^2$ is the variance of $\Theta_i$. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1574,7 +1570,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

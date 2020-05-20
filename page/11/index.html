@@ -191,6 +191,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E4%BD%8D%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">位运算</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:50:45 / Modified: 00:51:05" itemprop="dateCreated datePublished" datetime="2019-11-09T00:50:45+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>常识(32位编译器下)：<br>1字节································8bit<br>char / unsigned char·········1字节<br>char *································4字节<br>short int·····························2字节<br>bool / int / unsigned int·····4字节<br>long int······························4字节<br>float···································4字节<br>double·······························8字节<br>long long···························8字节<br>long double······················12字节</p>
+<h1 id="记录一个数字的两个状态"><a href="#记录一个数字的两个状态" class="headerlink" title="记录一个数字的两个状态"></a>记录一个数字的两个状态</h1><p>假如数字较多，且只关心两个状态，即可以用0/1表示，可以开一个unsigned int，4个字节，32个bit就可以表示32个数<br>修改：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN &gt;&gt; <span class="number">5</span>]; <span class="comment">// MAXN是所有的数，右移5位 = 除以32</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> status)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (status == <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] |= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把0调成1要用或运算，num &amp; 0x1f = num % 32，把1挪到num管的那位上</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] ^= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把1调成0用异或</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> arr[num &gt;&gt; <span class="number">5</span>] &amp; ((<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%9C%80%E5%B0%8F%E6%94%AF%E6%92%91%E6%A0%91-Kruskal%E7%AE%97%E6%B3%95%E3%80%81Prim%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -943,94 +1022,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%95%B0%E4%BD%8DDP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E6%95%B0%E4%BD%8DDP/" class="post-title-link" itemprop="url">数位DP</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:39:03" itemprop="dateCreated datePublished" datetime="2019-11-09T00:39:03+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-29 19:34:34" itemprop="dateModified" datetime="2020-02-29T19:34:34+08:00">2020-02-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Dynamic-Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Dynamic Programming</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>从数a到数b之间，满足一定要求的数的个数，这里的要求指数的组成的要求，例如包含4的数的个数等。这种问题最简单的思路就是从a到b一一枚举，对每个数的每一位一一判断，如果满足就加一。但问题是这种问题中的b-a一般会非常大，所以这样会超时。解决方法就是记忆化搜索</p>
-<h1 id="记忆化搜索"><a href="#记忆化搜索" class="headerlink" title="记忆化搜索"></a>记忆化搜索</h1><p>暴力枚举的方法其实是从低位往高位枚举的过程，这不利于定义状态和记忆化。数位DP的本质其实也是暴力枚举，但是因为枚举的方法不同，就很容易定义出状态。数位DP就是从高位往低位枚举，从最高的那位开始，例如要求不含69的数，如果XXX满足要求的有n个，则1XXX、2XXX…的满足要求的数的个数分别都是n个，但6XXX还要判断一下，这时就可以少了很多的判断。我们使用一个二维数组，存储数字(减去前导0)长度为len时此前符合要求和不符合要求时的结果</p>
-<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><p>搜索算法采用的是DFS，在函数的参数中要包含多种参数，当前枚举的是第几位和是否有上限是必须要的，其次还有判断是否合法的变量，例如判断不包含4的数就要加一个变量判断是否在更高位出现过4，如果要判断不包含69的数，就要加一个参数判断是否在上一位包含了6，如果是，那这一位就不能包含9。<br /><br><strong>搜索返回条件</strong>：<br /><br>&emsp;1、当前枚举的是第0位的时候就退出循环，因为这时确认且只确认一个有效数，所以返回1<br /><br>&emsp;2、如果此前符合要求且搜索过当前长度，就直接返回dp二维数组的值</p>
-<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> number[maxn], dp[maxn][<span class="number">2</span>]; <span class="comment">//number是最大数字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">bool</span> preIlegal, <span class="keyword">bool</span> hasLimit)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos &lt; <span class="number">0</span>) <span class="comment">//数字确定只有一个，直接返回1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="comment">//当前枚举位没有数字限制，则个数就是之前算过的那个个数。易知，之前没有非法数字的话之后的枚举和之前的数字是没有关系的，都相等；有非法数字的话一般只有一种情况。且这里为了普遍性，dp数组里存储的是没有最大数字限制的种数，如果当次枚举有数字限制就不符合dp数组的定义，就不能使用值</span></span><br><span class="line">    <span class="keyword">if</span> (!hasLimit &amp;&amp; dp[pos][preIlegal])</span><br><span class="line">        <span class="keyword">return</span> dp[pos][preIlegal];</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>, <span class="built_in">max</span> = (hasLimit ? number[pos] : <span class="number">9</span>); <span class="comment">//当前位的最大值，有限制就是被原最大数限制</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="built_in">max</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (preIlegal &amp;&amp; i == <span class="number">9</span>)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        cnt += dfs(pos - <span class="number">1</span>, i == <span class="number">4</span>, hasLimit &amp;&amp; i == <span class="built_in">max</span>); <span class="comment">//只有在之前就有最大数字限制且当前枚举数为可枚举的最大值时才会在下一轮中有最大数字限制</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hasLimit ? cnt : dp[pos][preIlegal] = cnt; <span class="comment">//没有限制就记忆，否则不具备普遍性。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="主算法"><a href="#主算法" class="headerlink" title="主算法"></a>主算法</h1><p>计算方法就是把a的值和b的值做差</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x)</span><br><span class="line">	&#123;</span><br><span class="line">		number[k++] = x % <span class="number">10</span>;</span><br><span class="line">		x /= <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dfs(k - <span class="number">1</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">finalSolve</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> solve(b) - solve(a - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：数位dp不能解决包含某种结构的问题，只能解决不包含，所以包含的问题要转化成不包含做</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1102,7 +1093,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -191,6 +191,115 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/14/11-Application-of-Integrals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/14/11-Application-of-Integrals/" class="post-title-link" itemprop="url">11. Application of Integrals</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-14 19:39:22" itemprop="dateCreated datePublished" datetime="2020-02-14T19:39:22+08:00">2020-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:06:41" itemprop="dateModified" datetime="2020-03-07T16:06:41+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Areas-Between-Curves"><a href="#Areas-Between-Curves" class="headerlink" title="Areas Between Curves"></a>Areas Between Curves</h1><ol>
+<li>The area between <script type="math/tex">f(x)</script> and <script type="math/tex">g(x)</script> (<script type="math/tex">f(x) > g(x)</script>) is <script type="math/tex">\displaystyle\int^b_a(f(x)-g(x))dx</script>. </li>
+<li>When calculating this kind of question, always draw a picture to figure out the order. </li>
+<li>Sometimes we can also integrate on y-axis instead of x-axis. </li>
+</ol>
+<h1 id="Volumn"><a href="#Volumn" class="headerlink" title="Volumn"></a>Volumn</h1><ol>
+<li>Slice the object and the function of its area is <script type="math/tex">A(x)</script>, then <script type="math/tex">\Delta V=A(x)\Delta X</script>. So <script type="math/tex">V=\displaystyle\int A(x)dx</script>. </li>
+<li>Solids of revolution: graph of function <script type="math/tex">y=f(x)</script> revolve around x-axis to form a solid object. Slice the object into disks, then we can get <script type="math/tex">V=\displaystyle\int\pi y^2dx</script>. </li>
+<li>The volumn of portion of width <script type="math/tex">x\ (0≤x≤a)</script> of a ball is <script type="math/tex">V(x)=\pi(a^3-\displaystyle\frac{x^3}{3})</script></li>
+<li>Another way to calculate the volumn of revolution instead of disks is shells. See the volumn as thin column shells, the volumn is the sum of areas of columns. </li>
+<li>When calculate the volumn, beware of the limits of integrals. Remember the symmetric of revolution. Don’t over calculate the volumns. </li>
+<li><strong>Beaware of the units!!!!!</strong> The x and y values has to be both the same. In <script type="math/tex">y=x^2</script>, <script type="math/tex">x=100\ cm</script> and <script type="math/tex">x=1\ m</script> is different since the first has <script type="math/tex">y=10000\ cm</script> while the second has <script type="math/tex">y=1\ m</script>. </li>
+</ol>
+<h1 id="Average-Value"><a href="#Average-Value" class="headerlink" title="Average Value"></a>Average Value</h1><ol>
+<li><code>Continuous average Ave(f)</code>: <script type="math/tex">\displaystyle\frac{1}{b-a}\int^b_af(x)dx</script>. </li>
+<li>Riemann sum: <script type="math/tex">\begin{equation}(y_1+\dots+y_n)\Delta x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\int^b_af(x)dx\end{equation}</script>. <br />Divide by <script type="math/tex">b-a</script>, <script type="math/tex">\begin{equation}\displaystyle\frac{(y_1+…+y_n)\Delta x}{b-a}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script>. <br />And <script type="math/tex">\Delta x=\displaystyle\frac{b-a}{n}</script>. So <script type="math/tex">\begin{equation}\displaystyle\frac{y_1+…+y_n}{n}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script></li>
+<li>Even calculate the same thing, if we respect to different variables, the result can be different. </li>
+<li>Weighted average: <script type="math/tex">\displaystyle\frac{\int^b_af(x)w(x)dx}{\int^b_aw(x)dx}</script>. <script type="math/tex">w(x)</script> is the weigh function</li>
+<li>Probability: <script type="math/tex">a<x_1<x_2<b</script>, <script type="math/tex">P(x_1<x<x_2)=\displaystyle\frac{\int^{x_2}_{x_1}w(x)dx}{\int^b_aw(x)dx}</script>. </li>
+</ol>
+<h1 id="Numerical-Integration"><a href="#Numerical-Integration" class="headerlink" title="Numerical Integration"></a>Numerical Integration</h1><ol>
+<li>Riemann sums: Add up rectangulars. The sum is <script type="math/tex">\Delta x(y_0+y_1+\dots+y_{n-1})</script>. </li>
+<li>Trapezoidal rule: Add up trapezoids. The upper base is <script type="math/tex">y_i</script>, lower base is <script type="math/tex">y_{i-1}</script>, the height is <script type="math/tex">\Delta x</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\Delta x(\displaystyle\frac{y_0+y_1}{2}+\frac{y_1+y_2}{2}+\dots+\frac{y_{n-1}+y_{n}}{2})\\=&\Delta x(\frac{y_0}{2}+y_2+\dots+y_{n-1}+\frac{y_n}{2})\end{split}\end{equation}</script></li>
+<li>The trapezoidal rule is <script type="math/tex">\displaystyle\frac{left\ Riemann\ sum(y_0\ to\ y_{n-1})+right\ Riemann\ sum(y_n\ to\ y_1)}{2}</script></li>
+<li>Simpson’s rule: Deal with two chunks one time. Add up parabolas cover two chunks together. The area is base times average height. The average heights turn out to be <script type="math/tex">\displaystyle\frac{y_{n-1}+4y_n+y_{n+1}}{6}</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\displaystyle\frac{2\Delta x}{6}((y_0+4y_1+y2)+(y_2+4y_3+y_4)+…+(y_{n-2}+4y_{n-1}+y_n))\\=&\frac{\Delta x}{3}(y_0+4y_1+2y_2+4y_3+2y_4+…+2y_{n-2}+4y_{n-1}+y_n)\end{split}\end{equation}</script> </li>
+<li>Simpson’s rule is amazingly accuracy, <script type="math/tex">|Simpson's\ rule-Exact\ answer|\approx(\Delta x)^4</script></li>
+<li>Simpson’s rule is derived using the exact answer for all degree <script type="math/tex">2</script> polynomials. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/14/10-Definite-Integrals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1080,96 +1189,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/08/01-Derivative-Slope/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/08/01-Derivative-Slope/" class="post-title-link" itemprop="url">01. Derivative, Slope</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-08 11:32:38" itemprop="dateCreated datePublished" datetime="2020-02-08T11:32:38+08:00">2020-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:02:45" itemprop="dateModified" datetime="2020-03-07T16:02:45+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h1><ol>
-<li>Geomatric interpretation is to find the <code>tangent line</code> to <script type="math/tex">y=f(x)</script> at point <script type="math/tex">P=(x_0,y_0)</script>. </li>
-<li>To find that tangent line, we have to find the equation <script type="math/tex">y-y_0=m(x-x_0)</script>. <br />This contains two part to solve: <br />&emsp;Point <script type="math/tex">y_0=f(x_0)</script><br />&emsp;Slope: <script type="math/tex">m=f'(x_0)</script>. </li>
-<li>Definition of <code>derivative</code>: the slope of the tangent line. </li>
-<li>As another point <script type="math/tex">Q</script> approaches the fixed point <script type="math/tex">P</script>, the slope of <script type="math/tex">QP</script> is approaching the slope of that tangent line. <br />So tangent line = limit of <code>secant line</code> <script type="math/tex">PQ</script> as <script type="math/tex">Q \rightarrow P</script> while <script type="math/tex">P</script> is fixed. </li>
-<li>The slope of <script type="math/tex">PQ</script> is <script type="math/tex">\displaystyle\frac{\Delta f}{\Delta x}</script> (<script type="math/tex">\Delta f</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in y-axis, <script type="math/tex">\Delta x</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in x-axis). <br />So we get the <code>difference quotient</code>:  <script type="math/tex">m=f'(x_0)=\displaystyle\lim_{\Delta x\to 0}{\frac{\Delta f}{\Delta x}}=\displaystyle\lim_{\Delta x \to 0}{\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}}</script>. </li>
-<li><code>Binomial theorem</code>: <script type="math/tex">(x+\Delta x)^n=x^n+nx^{n-1}\Delta+O((\Delta x)^2)</script>. <script type="math/tex">O((\Delta x)^2)</script> means terms with <script type="math/tex">(\Delta x)^2</script> or higher. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}x^n&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x+\Delta x)^n-x^n}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x^n+nx^{n-1}\Delta x+O((\Delta x)^2))-x^n}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{nx^{n-1}\Delta x+O((\Delta x)^2)}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{nx^{n-1}+\displaystyle\frac{O((\Delta x)^2)}{\Delta x}}\\&=nx^{n-1}\end{split}\end{equation}</script><br />This extends to polynomials. </li>
-<li>Physical Interpretation is that <script type="math/tex">\displaystyle\frac{\Delta y}{\Delta x}</script> is the average rate of change while <script type="math/tex">\displaystyle\frac{dy}{dx}</script> is the instantaneous rate of change. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1241,7 +1260,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">169</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
