@@ -566,7 +566,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-20 22:26:49" itemprop="dateModified" datetime="2020-05-20T22:26:49+08:00">2020-05-20</time>
+                <time title="Modified: 2020-05-20 22:27:40" itemprop="dateModified" datetime="2020-05-20T22:27:40+08:00">2020-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -621,7 +621,7 @@
 <li>$FIRST$集中的元素是终结符号或$\epsilon$</li>
 <li>如果$X$是一个终结符号，$FIRST(X)=\{X\}$</li>
 <li>如果$X\to\epsilon$是一个产生式，则被$\epsilon$加到$FIRST(X)$</li>
-<li>如果$X\to Y_1Y_2…Y_k$是一个产生式，<br />则把$FIRST{(Y_1)}\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_{i-1}\Rightarrow^<em>\epsilon$，则把$FIRST(Y_i)\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_k\Rightarrow^</em>\epsilon$，则把$\epsilon$加入$FIRST(X)$</li>
+<li>如果$X\to Y_1Y_2…Y_k$是一个产生式，<br />则把$FIRST{(Y_1)}\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果<script type="math/tex">Y_1…Y_{i-1}\Rightarrow^*\epsilon</script>，则把$FIRST(Y_i)\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_k\Rightarrow^*\epsilon$，则把$\epsilon$加入$FIRST(X)$</li>
 <li>假设$A\to\alpha$，$a\in FIRST(\alpha)$，那么当输入符号是$a$时，将待推导非终结符号替换为$\alpha$</li>
 </ol>
 <h2 id="FOLLOW集"><a href="#FOLLOW集" class="headerlink" title="FOLLOW集"></a>FOLLOW集</h2><ol>
