@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="自顶向下分析法构造语法分析树是从根节点开始构造 其本质是寻找文法的推导过程，一般采用最左推导  不确定的自顶向下分析 (递归下降法) 利用回溯法遍历可能情况，当没有终结符号时就回溯 为每个非终结符号设计一个函数，在函数中遍历所有该非终结符号的产生式，利用DFS实现 优点：对文法限制小，易于实现 缺点：回溯效率低，文法左递归导致死循环，出错时难以缺点出错位置  消除左递归 三种类型的左递归&amp;ems">
 <meta property="article:published_time" content="2020-05-12T03:57:11.000Z">
-<meta property="article:modified_time" content="2020-05-13T14:02:50.564Z">
+<meta property="article:modified_time" content="2020-05-20T14:26:49.897Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 22:02:50" itemprop="dateModified" datetime="2020-05-13T22:02:50+08:00">2020-05-13</time>
+                <time title="Modified: 2020-05-20 22:26:49" itemprop="dateModified" datetime="2020-05-20T22:26:49+08:00">2020-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,7 +277,7 @@
 <li>对第一种情况，只需要提取左公共因子。$A\to\delta\beta_1|\delta\beta_2|…|\gamma_1|\gamma_2|…$变为$A\to\delta A’|\gamma_1|\gamma_2|…,A’\to\beta_1|\beta_2|…$</li>
 </ol>
 <h1 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h1><h2 id="FIRST集"><a href="#FIRST集" class="headerlink" title="FIRST集"></a>FIRST集</h2><ol>
-<li>$FIRST$集 (首符集)：$FIRST(\alpha)$是由任意文法符号串$\alpha$推导出的所有的文法符号串的第一个终结符号组成的集合。$FIRST(\alpha)=\{a|\alpha\Rightarrow^<em>a…,a\in V_T\}$，如果$\alpha\Rightarrow^</em>\epsilon$，则$\epsilon\in FIRST(\alpha)$</li>
+<li>$FIRST$集 (首符集)：$FIRST(\alpha)$是由任意文法符号串$\alpha$推导出的所有的文法符号串的第一个终结符号组成的集合。<script type="math/tex">FIRST(\alpha)=\{a|\alpha\Rightarrow^*a…,a\in V_T\}</script>，如果$\alpha\Rightarrow^*\epsilon$，则$\epsilon\in FIRST(\alpha)$</li>
 <li>$FIRST$集中的元素是终结符号或$\epsilon$</li>
 <li>如果$X$是一个终结符号，$FIRST(X)=\{X\}$</li>
 <li>如果$X\to\epsilon$是一个产生式，则被$\epsilon$加到$FIRST(X)$</li>
