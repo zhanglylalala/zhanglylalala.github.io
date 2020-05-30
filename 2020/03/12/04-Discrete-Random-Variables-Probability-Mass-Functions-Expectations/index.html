@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Random Variables Sometimes we can use a random variable to associate the (numerical) value with each outcome.  A random variable is a real valued function of the experimental outcome.  A function of a">
 <meta property="article:published_time" content="2020-03-12T10:14:27.000Z">
-<meta property="article:modified_time" content="2020-03-14T05:36:46.350Z">
+<meta property="article:modified_time" content="2020-05-30T15:10:32.845Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-14 13:36:46" itemprop="dateModified" datetime="2020-03-14T13:36:46+08:00">2020-03-14</time>
+                <time title="Modified: 2020-05-30 23:10:32" itemprop="dateModified" datetime="2020-05-30T23:10:32+08:00">2020-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,12 +272,12 @@
 <li>Probability mass function (PMF) of a discrete random variable $X$ can capture the probabilities of the values that it can take. PMF of $X$ is denoted $p_X$. </li>
 <li>If $x$ is any possible value of $X$, the probability mass of $x$ denoted $p_X(x)$ is the probability of the event $\{X=x\}$ consisting of all outcomes that give rise to a value of $X$ equal to $x$: $p_X(x)=P(\{X=x\})$ or $p_X(x)=P(X=x)$. </li>
 <li>Convention: upper case characters denote random variables and lower case characters denote real numbers such as the numerical values of a random variable. </li>
-<li>The events $\{X=x\}$ are disjoint and form a partition of the sample space. So: $\displaystyle\sum_xp_X(x)=1$ and $P(X\in S)=\displaystyle\sum_{x\in S}pX(x)$. </li>
+<li>The events $\{X=x\}$ are disjoint and form a partition of the sample space. So: $\displaystyle\sum_xp_X(x)=1$ and $P(X\in S)=\displaystyle\sum_{x\in S}p_X(x)$. </li>
 <li>$p_X(x)$ equals the sum of the probabilities of all outcomes that give rise to event $\{X=x\}$. </li>
 <li>If $Y=g(X)$, $p_Y(y)=\displaystyle\sum_{\{x|g(x)=y\}}p_X(x)$. </li>
 </ol>
 <h1 id="Special-Random-Variable"><a href="#Special-Random-Variable" class="headerlink" title="Special Random Variable"></a>Special Random Variable</h1><ol>
-<li>The Bernoulli random variable takes the two values $1$ and $0$. And its PMF is $p_X(x)=\left\{\begin{array}{}p&amp;if x=1\\1-p&amp;if x=0 \end{array}\right.$</li>
+<li>The Bernoulli random variable takes the two values $1$ and $0$. And its PMF is <script type="math/tex">p_X(x)=\left\{\begin{array}{}p&if\ x=1\\1-p&if\ x=0 \end{array}\right.</script></li>
 <li>The Binomial random variable: In $n$ times of Bernoulli experiment, $x=1$ has happened $k$ times. Its PMF is $p_X(k)=P(X=k)=\big(^n_k\big)p^k(1-p)^{n-k}$. </li>
 <li>The geometric random variable: In $n$ times of Bernoulli experiment, $x=1$ haven’t occurred until $k$th time. Its PMF is $p_X(k)=(1-p)^{k-1}p$. </li>
 <li>The Poisson random variable has PMF of $p_X(k)=e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}$. This is a binomial random variable with very small $p$ and very large $n$. $e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}\approx\big(^n_k\big)p^k(1-p)^{n-k}$. $\lambda=np$</li>
@@ -302,6 +302,7 @@
 <li>For discrete uniform over $[a,b]$: <br />$p_X(k)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a+1}&amp;if k=a,a+1,…b\\0&amp;otherwise \end{array}\right.$<br />$E[X]=\displaystyle\frac{a+b}{2}$, $var(X)=\displaystyle\frac{(b-a)(b-a+2)}{12}$</li>
 <li>For Bernoulli random variable: <br />$E[X]=1\cdot p+0\cdot(1-p)=p$<br />$E[X^2]=1^2\cdot p+0^2\cdot(1-p)=p$<br />$var(X)=E[X^2]-(E[X])^2=p-p^2=p(1-p)$</li>
 <li>For Poisson random variable: <br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\sum^\infty_{k=1}ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}e^{-\lambda}\frac{\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}e^{-\lambda}\frac{\lambda^m}{m!}\\&amp;=\lambda \end{split}\end{equation}$</li>
+<li>For Binomial random variable:  $E[X]=\displaystyle\sum_{i=1}^nE[X_i]=\sum^n_{i=1}p=np$</li>
 </ol>
 <h1 id="Other-PMF-Models"><a href="#Other-PMF-Models" class="headerlink" title="Other PMF Models"></a>Other PMF Models</h1><h2 id="Joint-PMF"><a href="#Joint-PMF" class="headerlink" title="Joint PMF"></a>Joint PMF</h2><ol>
 <li>The probability of the values that $X$ and $Y$ can take are captured by the joint PMF of $X$ and $Y$, denoted $p_{X,Y}$. $p_{X,Y}(x,y)=P(X=x,Y=y)$. </li>
@@ -310,7 +311,6 @@
 <li>If $Z=g(X,Y)$, $p_Z(z)=\displaystyle\sum_{\{(x,y)|g(x,y=z)\}}p_{X,Y}(x,y)$</li>
 <li>The expected value rule: $E[g(X,Y)]=\displaystyle\sum_x\sum_yg(x,y)p_{X,Y}(x,y)$</li>
 <li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
-<li>For Binomial random variable: <br />$E[X]=\displaystyle\sum_{i=1}^nE[X_i]=\sum^n_{i=1}p=np$</li>
 </ol>
 <h2 id="Conditional-PMF"><a href="#Conditional-PMF" class="headerlink" title="Conditional PMF"></a>Conditional PMF</h2><ol>
 <li>$p_{X|A}(x)=P(X=x|A)=\displaystyle\frac{P(\{X=x\}\cap A)}{P(A)}=\frac{P(\{X=x\}\cap A)}{\sum_xP(\{X=x\}\cap A)}$</li>
@@ -323,8 +323,8 @@
 <li>Geometric random variable: <br />$E[X]=P(X=1)E[X|X=1]+P(X&gt;1)E[X|X&gt;1]$<br />$E[X|X&gt;1]=E[X-1|X-1&gt;0]+1=E[X]+1$<br />So $E[X]=p\cdot 1+(1-p)(E(x)+1)$. <br />$E[X]=\displaystyle\frac{1}{p}$<br />Similarly, we can obtain $E[X^2|X&gt;1]=E[(1+X)^2|X+1&gt;1]=E[(1+X)^2]=1+2E[X]+E[X^2]$<br />So that $E[X^2]=p\cdot 1+(1-p)(1+2E[X]+E[X^2])$ from which we obtain $E[X^2]=\displaystyle\frac{2}{p^2}-\frac{1}{p}$. <br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1-p}{p^2}$</li>
 </ol>
 <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>The random variable $X$ is independent of the event $A$ if $P(X=x and A)=P(X=x)P(A)=p_X(x)P(A)$ for all $x$. </li>
-<li>$P(X=x and A)=p_{X|A}(x)P(A)$</li>
+<li>The random variable $X$ is independent of the event $A$ if <script type="math/tex">P(X=x\ and\ A)=P(X=x)P(A)=p_X(x)P(A)</script> for all $x$. </li>
+<li><script type="math/tex; mode=display">P(X=x\ and\ A)=p_{X|A}(x)P(A)</script></li>
 <li>$p_{X|A}(x)=p_X(x)$ for all $x$</li>
 <li>Two random variables $X$ and $Y$ are independent if $p_{X,Y}(x,y)=p_X(x)p_Y(y)$, for all $x,y$. </li>
 <li>$X$ and $Y$ are said to be conditionally independent, given a positive probability event $A$, if $P(X=x,Y=y|A)=P(X=x|A)P(Y=y|A)$ or $p_{X,Y|A}(x,y)=p_{X|A}(x)p_{Y|A}(y)$, for all $x$ and $y$. </li>
