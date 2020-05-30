@@ -191,6 +191,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/30/09-The-Four-Fundamental-Subspaces/" class="post-title-link" itemprop="url">09. The Four Fundamental Subspaces</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-30 19:53:40" itemprop="dateCreated datePublished" datetime="2020-01-30T19:53:40+08:00">2020-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-02 14:35:09" itemprop="dateModified" datetime="2020-04-02T14:35:09+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>The four fundamental subspaces are: </p>
+<ol>
+<li>The <code>row space</code>: <script type="math/tex">C(A^T)</script>, a subspace of <script type="math/tex">R^n</script></li>
+<li>The <code>column space</code>: <script type="math/tex">C(A)</script>, a subspace of <script type="math/tex">R^m</script></li>
+<li>The <code>nullspace</code>: <script type="math/tex">N(A)</script>, a subspace of <script type="math/tex">R^n</script></li>
+<li>The <code>left nullspace</code>: <script type="math/tex">N(A^T)</script>, a subspace of <script type="math/tex">R^m</script>. This is the solution space of <script type="math/tex">\vec{y}^TA=A^Ty=\vec{0}^T</script></li>
+</ol>
+<h1 id="The-Four-Subspaces-for-R"><a href="#The-Four-Subspaces-for-R" class="headerlink" title="The Four Subspaces for R"></a>The Four Subspaces for R</h1><ol>
+<li>The dimension of the row space is the rank <script type="math/tex">r</script>. The nonzero rows of <script type="math/tex">R</script> form a basis. </li>
+<li>The dimension of the column space is the rank <script type="math/tex">r</script>. The pivot columns of <script type="math/tex">R</script> form a basis. </li>
+<li>The nullspace has dimension <script type="math/tex">n-r</script>. The special solutions form a basis. </li>
+<li>The left nullspace has dimension <script type="math/tex">m-r</script>. <br /><script type="math/tex">\vec{y}^TR</script> is the row linear combination of <script type="math/tex">R</script>. To make the combination <script type="math/tex">\vec{0}^T</script>, we can only use the last <script type="math/tex">m-r</script> zero rows because the pivots can never be eliminated again. <br />So the left nullspace is a space with vectors containing the first <script type="math/tex">r</script> $0$s and then  <script type="math/tex">m-r</script> free variables. </li>
+</ol>
+<h1 id="The-Four-Subspaces-for-A"><a href="#The-Four-Subspaces-for-A" class="headerlink" title="The Four Subspaces for A"></a>The Four Subspaces for A</h1><ol>
+<li><script type="math/tex">A</script> has the same row space as <script type="math/tex">R</script>. Same dimension <script type="math/tex">r</script> and same basis. We can choose the <script type="math/tex">r</script> rows that end up nonzero rows in <script type="math/tex">R</script>. </li>
+<li>The column space of <script type="math/tex">A</script> has dimension <script type="math/tex">r</script>. Nevertheless, <script type="math/tex">A</script> and <script type="math/tex">R</script> have different column space. The <script type="math/tex">r</script> pivot columns of <script type="math/tex">A</script> form basis of <script type="math/tex">C(A)</script>. </li>
+<li><script type="math/tex">A</script> has the same nullspace as  <script type="math/tex">R</script>. </li>
+<li>The left nullspace of <script type="math/tex">A</script> has dimension <script type="math/tex">m-r</script>. The basis vectors are the vectors that create zero rows. </li>
+<li>The Counting Theorem<br />&emsp;In <script type="math/tex">R^n</script>, <script type="math/tex">dim(row\ space)+dim(nullspace)=n</script><br />&emsp;In <script type="math/tex">R^m</script>, <script type="math/tex">dim(column\ space)+dim(left\ nullspace)=m</script></li>
+<li>For any matrix <script type="math/tex">A</script>, we can eliminate to get <script type="math/tex">EA=R</script>. If we take <script type="math/tex">C=E^{-1}</script>, then <script type="math/tex">A=CR</script>. <br />Furthermore, the basis of <script type="math/tex">N(A^T)</script> is the rows of <script type="math/tex">E</script> that is zero rows in <script type="math/tex">R</script>. <br />Since identity matrix is in pivot columns of <script type="math/tex">R</script>, we know that the pivot columns of <script type="math/tex">C</script> is the same as <script type="math/tex">A</script>. <br />Also, we can write <script type="math/tex">A=\left[\begin{matrix}\vec{u_1}&\vec{u_2}&…&\vec{u_n}\end{matrix}\right]\left[\begin{matrix}\vec{v_1}^T\\\vec{v_2}^T\\…\\\vec{v_r}^T\\zero\ rows\end{matrix}\right]=\vec{u_1}\vec{v_1}^T+\vec{u_2}\vec{v_2}^T+…+\vec{u_r}\vec{v_r}^T</script><br />Every <script type="math/tex">\vec{u_i}\vec{v_i}^T</script> is a rank <script type="math/tex">1</script> matrix. So every rank <script type="math/tex">r</script> matrix can be the sum of <script type="math/tex">r</script> rank <script type="math/tex">1</script> matrices. <br />So the basis of <script type="math/tex">C(A)</script> is pivot columns. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/08-Independence-Basis-and-Dimension/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4103,815 +4205,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/24/day-11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/24/day-11/" class="post-title-link" itemprop="url">day 11</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-24 16:46:22" itemprop="dateCreated datePublished" datetime="2019-11-24T16:46:22+08:00">2019-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-11 00:18:21" itemprop="dateModified" datetime="2020-01-11T00:18:21+08:00">2020-01-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/" itemprop="url" rel="index">
-                    <span itemprop="name">English</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/10000-Words/" itemprop="url" rel="index">
-                    <span itemprop="name">10000 Words</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">dwindle</td>
-<td style="text-align:center">v. 减少，逐渐减弱</td>
-<td style="text-align:center"><code>dw - down</code></td>
-<td style="text-align:center">dw·indle</td>
-</tr>
-<tr>
-<td style="text-align:center">dwell</td>
-<td style="text-align:center">v. 居住</td>
-<td style="text-align:center">定居下来</td>
-<td style="text-align:center">dw·ell</td>
-</tr>
-<tr>
-<td style="text-align:center">subside</td>
-<td style="text-align:center">v. (情绪或噪声)逐渐减弱</td>
-<td style="text-align:center">sub下side边</td>
-<td style="text-align:center">sub·side</td>
-</tr>
-<tr>
-<td style="text-align:center">curtail</td>
-<td style="text-align:center">v. 减少；削减</td>
-<td style="text-align:center">cut tail</td>
-<td style="text-align:center">cur·tail</td>
-</tr>
-<tr>
-<td style="text-align:center">diminish</td>
-<td style="text-align:center">v. 减少</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">haphazard</td>
-<td style="text-align:center">adj. 偶然的，随便的</td>
-<td style="text-align:center"><code>hap - luck</code><br /><code>hazard - 危险</code><br />幸运和危险都是偶然的</td>
-<td style="text-align:center">hap·hazard</td>
-</tr>
-<tr>
-<td style="text-align:center">mishap</td>
-<td style="text-align:center">n. 不幸</td>
-<td style="text-align:center">没有幸运</td>
-<td style="text-align:center">mis·hap</td>
-</tr>
-<tr>
-<td style="text-align:center">hapless</td>
-<td style="text-align:center">adj. 不幸的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">hap·less</td>
-</tr>
-<tr>
-<td style="text-align:center">systematic</td>
-<td style="text-align:center">adj. 系统性的</td>
-<td style="text-align:center">random的反义词</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fortuitous</td>
-<td style="text-align:center">adj. 偶然的，意外的</td>
-<td style="text-align:center">fortune偶然的幸运</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">obvious</td>
-<td style="text-align:center">adj. 显然的，明显的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blatant</td>
-<td style="text-align:center">adj. 公然的，明显的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">flagrant</td>
-<td style="text-align:center">adj. 明目张胆的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rebuff</td>
-<td style="text-align:center">v. 拒绝</td>
-<td style="text-align:center"><code>buff - puff喷</code><br />喷回去</td>
-<td style="text-align:center">re·buff</td>
-</tr>
-<tr>
-<td style="text-align:center">repudiate</td>
-<td style="text-align:center">v. 拒绝</td>
-<td style="text-align:center"><code>pud - to feel ashamed</code><br />反过来让对方不好意思</td>
-<td style="text-align:center">re·pud·iate</td>
-</tr>
-<tr>
-<td style="text-align:center">impudent</td>
-<td style="text-align:center">adj. 无耻的；放肆无理的</td>
-<td style="text-align:center">没有感到耻辱</td>
-<td style="text-align:center">im·pud·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">somber</td>
-<td style="text-align:center">adj. 闷闷不乐的；阴沉的</td>
-<td style="text-align:center"><code>umbr - shadow</code><br />sub + umbr</td>
-<td style="text-align:center">s·omber</td>
-</tr>
-<tr>
-<td style="text-align:center">adumbrate</td>
-<td style="text-align:center">v. 预示</td>
-<td style="text-align:center">add umbr<br />出现一个阴影，预示</td>
-<td style="text-align:center">ad·umbr·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">lugubrious</td>
-<td style="text-align:center">adj. 忧郁的，悲伤的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sullen</td>
-<td style="text-align:center">adj. 闷闷不乐的</td>
-<td style="text-align:center">sole → sull</td>
-<td style="text-align:center">sull·en</td>
-</tr>
-<tr>
-<td style="text-align:center">saturnine</td>
-<td style="text-align:center">adj. 忧郁的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">melancholy</td>
-<td style="text-align:center">adj. 忧郁的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vehement</td>
-<td style="text-align:center">adj. 热烈的</td>
-<td style="text-align:center">好多vehicle，热烈欢迎</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">benign</td>
-<td style="text-align:center">adj. 亲切的；良性的；温和的</td>
-<td style="text-align:center"><code>bene - good(benefit)</code></td>
-<td style="text-align:center">beni·gn</td>
-</tr>
-<tr>
-<td style="text-align:center">benefactor</td>
-<td style="text-align:center">n. 捐助人；恩人</td>
-<td style="text-align:center">做好事的人</td>
-<td style="text-align:center">bene·fact·or</td>
-</tr>
-<tr>
-<td style="text-align:center">beneficiary</td>
-<td style="text-align:center">n. 受益人</td>
-<td style="text-align:center">受到好事的人</td>
-<td style="text-align:center">bene·fic·iary</td>
-</tr>
-<tr>
-<td style="text-align:center">balmy</td>
-<td style="text-align:center">adj. 温和的；芳香的</td>
-<td style="text-align:center"><code>palm - 手掌</code></td>
-<td style="text-align:center">balm·y</td>
-</tr>
-<tr>
-<td style="text-align:center">ephemeral</td>
-<td style="text-align:center">adj. 朝生暮死的；短命的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">transitory</td>
-<td style="text-align:center">adj. 临时的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">transient</td>
-<td style="text-align:center">adj. 临时的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">evanescent</td>
-<td style="text-align:center">adj. 转瞬即逝的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">perennial</td>
-<td style="text-align:center">adj. 永久的</td>
-<td style="text-align:center"><code>ennial - annual</code><br />trough annual<br />经过了一年又一年</td>
-<td style="text-align:center">per·ennial</td>
-</tr>
-<tr>
-<td style="text-align:center">illiterate</td>
-<td style="text-align:center">adj. 文盲的</td>
-<td style="text-align:center"><code>liter - letter</code><br /><code>il - 无，没有</code><br />认识的字母一个都没有</td>
-<td style="text-align:center">il·liter·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">literate</td>
-<td style="text-align:center">adj. 有文化的</td>
-<td style="text-align:center">字母的</td>
-<td style="text-align:center">liter·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">lavish</td>
-<td style="text-align:center">adj. 浪费的<br />v. 浪费</td>
-<td style="text-align:center"><code>lav/lau - wash(laundry)</code><br />花钱如流水</td>
-<td style="text-align:center">lav·ish</td>
-</tr>
-<tr>
-<td style="text-align:center">dilute</td>
-<td style="text-align:center">v. 稀释</td>
-<td style="text-align:center"><code>di - apart</code><br />lau把a脱落<br />把东西用水洗开分开</td>
-<td style="text-align:center">di·lu·te</td>
-</tr>
-<tr>
-<td style="text-align:center">deluge</td>
-<td style="text-align:center">n. 大洪水</td>
-<td style="text-align:center">圣经里用洪水把罪孽洗掉</td>
-<td style="text-align:center">de·lu·ge</td>
-</tr>
-<tr>
-<td style="text-align:center">stingy</td>
-<td style="text-align:center">adj. 吝啬的，小气的</td>
-<td style="text-align:center">做人像sting一样</td>
-<td style="text-align:center">sting·y</td>
-</tr>
-<tr>
-<td style="text-align:center">niggardly</td>
-<td style="text-align:center">adj. 小气的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">niggard</td>
-<td style="text-align:center">n. 吝啬鬼</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">parsimonious</td>
-<td style="text-align:center">adj. 吝啬的</td>
-<td style="text-align:center">谐音：怕失money</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">parsimony</td>
-<td style="text-align:center">n. 吝啬</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">peddle</td>
-<td style="text-align:center">v. 兜售；沿街叫卖</td>
-<td style="text-align:center"><code>ped - foot</code><br />边走变卖</td>
-<td style="text-align:center">ped·dle</td>
-</tr>
-<tr>
-<td style="text-align:center">expedite</td>
-<td style="text-align:center">v. 加速</td>
-<td style="text-align:center">用脚快速走出去</td>
-<td style="text-align:center">ex·ped·ite</td>
-</tr>
-<tr>
-<td style="text-align:center">pedestrian</td>
-<td style="text-align:center">n. 行人<br />adj. 单调的</td>
-<td style="text-align:center">用脚走路的人</td>
-<td style="text-align:center">ped·estrian</td>
-</tr>
-<tr>
-<td style="text-align:center">bipedal</td>
-<td style="text-align:center">adj. 两足的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">bi·ped·al</td>
-</tr>
-<tr>
-<td style="text-align:center">wholesale</td>
-<td style="text-align:center">n./v./adj. 批发</td>
-<td style="text-align:center">一起卖掉</td>
-<td style="text-align:center">whole·sale</td>
-</tr>
-<tr>
-<td style="text-align:center">reprimand</td>
-<td style="text-align:center">v. 谴责</td>
-<td style="text-align:center">不服从command的</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">reprehend</td>
-<td style="text-align:center">v. 谴责</td>
-<td style="text-align:center">不理解(comprehend)</td>
-<td style="text-align:center">re·prehend</td>
-</tr>
-<tr>
-<td style="text-align:center">rebuke</td>
-<td style="text-align:center">v. 谴责</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">commend</td>
-<td style="text-align:center">v. (公开)赞扬</td>
-<td style="text-align:center">recommend</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">extol</td>
-<td style="text-align:center">v. 赞美</td>
-<td style="text-align:center"><code>ex - to</code><br /><code>tol - tall</code><br />抬高一个人</td>
-<td style="text-align:center">ex·tol</td>
-</tr>
-<tr>
-<td style="text-align:center">exalt</td>
-<td style="text-align:center">v. 赞美</td>
-<td style="text-align:center"><code>alt - high</code></td>
-<td style="text-align:center">ex·alt</td>
-</tr>
-<tr>
-<td style="text-align:center">hail</td>
-<td style="text-align:center">v. 赞扬</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rave</td>
-<td style="text-align:center">v. 极力赞扬</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eulogize</td>
-<td style="text-align:center">v. 歌颂</td>
-<td style="text-align:center"><code>eu - well</code><br /><code>log - to speak</code><br />说好话</td>
-<td style="text-align:center">eu·log·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">laud</td>
-<td style="text-align:center">v. 颂扬</td>
-<td style="text-align:center">大声赞扬领主<br />loud laud lord</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">laudatory</td>
-<td style="text-align:center">n. 颂扬</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">synthetic</td>
-<td style="text-align:center">adj. 人造的，合成的</td>
-<td style="text-align:center"><code>thet - put</code><br /><code>syn - same</code></td>
-<td style="text-align:center">syn·thet·ic</td>
-</tr>
-<tr>
-<td style="text-align:center">synthesize</td>
-<td style="text-align:center">v. 合成</td>
-<td style="text-align:center">放到同一个地方</td>
-<td style="text-align:center">syn·thes·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">unbounded</td>
-<td style="text-align:center">adj. 无限制的</td>
-<td style="text-align:center">没有界限的</td>
-<td style="text-align:center">un·bound·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">boundless</td>
-<td style="text-align:center">adj. 无限制的</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center">bound·less</td>
-</tr>
-<tr>
-<td style="text-align:center">wretched</td>
-<td style="text-align:center">adj. 可怜的；令人痛苦的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wretch</td>
-<td style="text-align:center">n. 可怜的人</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wrench</td>
-<td style="text-align:center">n. 扳手</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blithe</td>
-<td style="text-align:center">adj. 欢乐的</td>
-<td style="text-align:center">bliss</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">morose</td>
-<td style="text-align:center">adj. 郁闷的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">despondent</td>
-<td style="text-align:center">adj. 沮丧的</td>
-<td style="text-align:center">没有回应</td>
-<td style="text-align:center">de·spond·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">exuberant</td>
-<td style="text-align:center">adj. 兴高采烈的；生机勃勃的</td>
-<td style="text-align:center"><code>e - out</code><br />sob (s → x)</td>
-<td style="text-align:center">e·xub·erant</td>
-</tr>
-<tr>
-<td style="text-align:center">ebullient</td>
-<td style="text-align:center">adj. 兴高采烈的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">erratic</td>
-<td style="text-align:center">adj. 不稳定的，奇怪的</td>
-<td style="text-align:center"><code>err - wander</code><br />状态走来走去不稳定在一个地方</td>
-<td style="text-align:center">err·atic</td>
-</tr>
-<tr>
-<td style="text-align:center">errand</td>
-<td style="text-align:center">n. 差事，跑腿</td>
-<td style="text-align:center">出去跑</td>
-<td style="text-align:center">err·and</td>
-</tr>
-<tr>
-<td style="text-align:center">errant</td>
-<td style="text-align:center">adj. 错误的</td>
-<td style="text-align:center"><code>err - mistake</code></td>
-<td style="text-align:center">err·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">inerrancy</td>
-<td style="text-align:center">n. 正确</td>
-<td style="text-align:center">不错的</td>
-<td style="text-align:center">in·err·ancy</td>
-</tr>
-<tr>
-<td style="text-align:center">erroneous</td>
-<td style="text-align:center">adj. 错误的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">err·oneous</td>
-</tr>
-<tr>
-<td style="text-align:center">maculated</td>
-<td style="text-align:center">adj. 有污点的</td>
-<td style="text-align:center">有mark的</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">immaculate</td>
-<td style="text-align:center">adj. 无暇的，洁净的</td>
-<td style="text-align:center">来自maculated</td>
-<td style="text-align:center">im·maculate</td>
-</tr>
-<tr>
-<td style="text-align:center">peccable</td>
-<td style="text-align:center">n. 小罪</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">impeccable</td>
-<td style="text-align:center">adj. 无暇的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">retard</td>
-<td style="text-align:center">v. 妨碍；阻碍</td>
-<td style="text-align:center"><code>tard - slow</code><br />向后拖延</td>
-<td style="text-align:center">re·tard</td>
-</tr>
-<tr>
-<td style="text-align:center">tardy</td>
-<td style="text-align:center">adj. 迟缓的，迟到的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">tard·y</td>
-</tr>
-<tr>
-<td style="text-align:center">retardant</td>
-<td style="text-align:center">adj./n. 延缓的；延缓</td>
-<td style="text-align:center">被阻碍的结果</td>
-<td style="text-align:center">retard·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">stalwart</td>
-<td style="text-align:center">adj. 强壮的</td>
-<td style="text-align:center">stone wall</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">brawny</td>
-<td style="text-align:center">adj. 强壮的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">brawn</td>
-<td style="text-align:center">n. 发达的肌肉</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">feeble</td>
-<td style="text-align:center">adj. 虚弱的</td>
-<td style="text-align:center">脚都站不住</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">frail</td>
-<td style="text-align:center">adj. 脆弱的</td>
-<td style="text-align:center">fragile</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">decrepit</td>
-<td style="text-align:center">adj. 衰弱的；破旧的</td>
-<td style="text-align:center">向下create</td>
-<td style="text-align:center">de·cre·pit</td>
-</tr>
-<tr>
-<td style="text-align:center">shun</td>
-<td style="text-align:center">v. 回避，避开</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dodge</td>
-<td style="text-align:center">v. 避开</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eschew</td>
-<td style="text-align:center">v. 避开</td>
-<td style="text-align:center"><code>e - to</code><br />to shy</td>
-<td style="text-align:center">e·schew</td>
-</tr>
-<tr>
-<td style="text-align:center">circumvent</td>
-<td style="text-align:center">v. (利用小聪明)回避</td>
-<td style="text-align:center">went (w → v)<br />绕圈走开</td>
-<td style="text-align:center">circum·vent</td>
-</tr>
-<tr>
-<td style="text-align:center">audible</td>
-<td style="text-align:center">adj. 听得见的</td>
-<td style="text-align:center"><code>audi - to listen</code></td>
-<td style="text-align:center">audi·ble</td>
-</tr>
-<tr>
-<td style="text-align:center">audition</td>
-<td style="text-align:center">n./v. 试听，试音</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">audi·tion</td>
-</tr>
-<tr>
-<td style="text-align:center">audit</td>
-<td style="text-align:center">v. 审计；旁听</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">audi·t</td>
-</tr>
-<tr>
-<td style="text-align:center">auditory</td>
-<td style="text-align:center">adj. 听觉的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">audi·tory</td>
-</tr>
-<tr>
-<td style="text-align:center">aviation</td>
-<td style="text-align:center">n. 航空</td>
-<td style="text-align:center"><code>au/avi - bird</code></td>
-<td style="text-align:center">avi·ation</td>
-</tr>
-<tr>
-<td style="text-align:center">aviary</td>
-<td style="text-align:center">n. 大鸟舍</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">avi·ary</td>
-</tr>
-<tr>
-<td style="text-align:center">aviator</td>
-<td style="text-align:center">n. 飞行员</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">avi·ator</td>
-</tr>
-<tr>
-<td style="text-align:center">augury</td>
-<td style="text-align:center">n. 预兆，预言</td>
-<td style="text-align:center">天上来的</td>
-<td style="text-align:center">au·gury</td>
-</tr>
-<tr>
-<td style="text-align:center">propitious</td>
-<td style="text-align:center">adj. 吉兆的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ominous</td>
-<td style="text-align:center">adj. 凶兆的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">unfavorable</td>
-<td style="text-align:center">adj. 不利的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">elation</td>
-<td style="text-align:center">n. 得意洋洋</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">exultancy</td>
-<td style="text-align:center">n. 得意</td>
-<td style="text-align:center">被exalt之后飘了<br />a → u</td>
-<td style="text-align:center">exult·ancy</td>
-</tr>
-<tr>
-<td style="text-align:center">haughty</td>
-<td style="text-align:center">adj. 傲慢的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">jeopardy</td>
-<td style="text-align:center">n. 危险</td>
-<td style="text-align:center"><code>jeo - joy</code><br /><code>pard - part</code><br />远离欢乐</td>
-<td style="text-align:center">jeo·pard·y</td>
-</tr>
-<tr>
-<td style="text-align:center">jeopardize</td>
-<td style="text-align:center">v. 危及</td>
-<td style="text-align:center">来自jeopardy</td>
-<td style="text-align:center">jeo·pard·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">precarious</td>
-<td style="text-align:center">adj. 危险的</td>
-<td style="text-align:center">在车前面危险</td>
-<td style="text-align:center">pre·car·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">peril</td>
-<td style="text-align:center">n. 危险</td>
-<td style="text-align:center">through ill</td>
-<td style="text-align:center">per·il</td>
-</tr>
-<tr>
-<td style="text-align:center">mandatory</td>
-<td style="text-align:center">adj. 命令的；必须的</td>
-<td style="text-align:center"><code>mand - command</code></td>
-<td style="text-align:center">mand·at·ory</td>
-</tr>
-<tr>
-<td style="text-align:center">mandate</td>
-<td style="text-align:center">v. 命令</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">mand·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">countermand</td>
-<td style="text-align:center">v. 撤销(命令)</td>
-<td style="text-align:center">against command</td>
-<td style="text-align:center">counter·mand</td>
-</tr>
-<tr>
-<td style="text-align:center">remand</td>
-<td style="text-align:center">v. 召回；还押候审</td>
-<td style="text-align:center">命令回去</td>
-<td style="text-align:center">re·mand</td>
-</tr>
-<tr>
-<td style="text-align:center">compulsory</td>
-<td style="text-align:center">adj. 义务的，有责任的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">compel</td>
-<td style="text-align:center">v. 强迫</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">obligatory</td>
-<td style="text-align:center">adj. 命令的</td>
-<td style="text-align:center">执行命令是义务obligation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">imperative</td>
-<td style="text-align:center">adj. 命令的</td>
-<td style="text-align:center">来自emperor的话</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -4983,7 +4276,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">169</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

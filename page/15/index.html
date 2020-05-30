@@ -191,6 +191,123 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/29/03-Multiplication-and-Inverse-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/29/03-Multiplication-and-Inverse-Matrices/" class="post-title-link" itemprop="url">03. Multiplication and Inverse Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-29 14:37:48" itemprop="dateCreated datePublished" datetime="2019-10-29T14:37:48+08:00">2019-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-02 00:01:26" itemprop="dateModified" datetime="2020-04-02T00:01:26+08:00">2020-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication"></a>Multiplication</h1><ol>
+<li>$A_{m\times n}B_{n\times p}=C_{m\times p}$</li>
+<li>Dot Product: <script type="math/tex">(AB)_{ij} = (row \ i \ of \ A) \cdot (column \ j \ of \ B) = \displaystyle \sum^{n}_{k=1}A_{ik}B_{kj}</script></li>
+<li>Matrix multiplies columns: $AB=\left[\begin{matrix}Ab_1&amp;Ab_2&amp;…&amp;Ab_n\end{matrix}\right]$<br />It can also be seen as matrix $A$ times every column of $B$. So columns of $C$ are combinations of columns of $A$. </li>
+<li>Rows multiply matrix: <script type="math/tex">AB=\left[\begin{matrix}a_1B\\a_2B\\…\\a_nB\end{matrix}\right]</script><br />And naturally, it can be seen as rows of $A$ times matrix $B$. So rows of $C$ are combinations of rows of $B$.  </li>
+<li>Sum of matrices: <script type="math/tex">AB = \displaystyle \sum^{n}_{k = 1}(column \ k \ of \ A) \cdot (row \ k \ of \ B)</script> <br />It can also be columns times rows. The sum of each column of $A$ times corresponding rows of $B$. </li>
+<li>Multiplication can also be done by blocks. </li>
+<li>In matrices multiplication, <br />&emsp;Associative law is valid: <script type="math/tex">A(BC)=(AB)C</script><br />&emsp;Distributive law is correct: <script type="math/tex">A(B+C)=AB+AC\ \ (A+B)C=AC+BC</script>   <br />&emsp;Commutative law is false: <script type="math/tex">AB≠BA</script></li>
+<li>The complexity of matrix multiplication is <script type="math/tex">O(nmp)</script>. The result is an <script type="math/tex">n\times p</script> matrix and to get each entry, we need <script type="math/tex">m</script> multiplications and add them together. </li>
+<li>Matrices have exponents too. <script type="math/tex">A^p=AAA…A\ (p\ factors)</script></li>
+<li>$(A^p)(A^q)=A^{p+q}$<br /><script type="math/tex">(A^p)^q=A^{pq}</script><br /><script type="math/tex">A^0=I</script><br /><script type="math/tex">A^{-p}=(A^{-1})^p\ \ \ (p > 0)</script></li>
+<li>Matrices can be cut into blocks (smaller matrices). When addition or multiplication (both with scalar or another matrix) happen, the blocks act as numbers. </li>
+<li>Block elimination: <script type="math/tex">\left[\begin{matrix}I & 0 \\ -CA^{-1} & I\end{matrix}\right] \left[\begin{matrix}A&B\\C&D\end{matrix}\right]=\left[\begin{matrix}A&B\\0&D-CA^{-1}B\end{matrix}\right]</script><br /><script type="math/tex">D-CA^{-1}B</script> is called <code>Schur complement</code>. </li>
+<li>For square matrices, we can do better by breaking <script type="math/tex">n</script> by <script type="math/tex">n</script> matrices into $2$ by $2$ blocks. Instead of <script type="math/tex">O(n^3)</script>, this complexity is <script type="math/tex">O(n^{2.376})</script></li>
+</ol>
+<h1 id="Inverses"><a href="#Inverses" class="headerlink" title="Inverses"></a>Inverses</h1><h2 id="Does-It-Have-Inverse"><a href="#Does-It-Have-Inverse" class="headerlink" title="Does It Have Inverse"></a>Does It Have Inverse</h2><ol>
+<li>Define the <code>inverse</code> of $A$ is <script type="math/tex">AA^{-1}=A^{-1}A = I</script>. Here <script type="math/tex">A^{-1}</script>is the inverse of $A$. </li>
+<li>Only square matrices have inverses. </li>
+<li>Those with inverses are called invertible while the ones without inverses are called singular. </li>
+<li>A matrix is invertible <strong>if and only if</strong><br />&emsp;elimination produces $n$ pivots<br />&emsp;the only solution to <script type="math/tex">A\vec{x}=\vec{b}</script> is <script type="math/tex">\vec{x}=A^{-1}\vec{b}</script><br />&emsp;<script type="math/tex">A\vec{x}=\vec{0}</script> can only have the zero solution <script type="math/tex">\vec{x}=\vec{0}</script><br />&emsp;the determinant of <script type="math/tex">A</script> is not zero, because we need to divide it</li>
+<li>A $2$ by $2$ matrix is invertible if and only if <script type="math/tex">ad-bc</script> is not zero. <br /><script type="math/tex">\left[\begin{matrix}a&b\\c&d\end{matrix}\right]^{-1}=\displaystyle\frac{1}{ad-bc}\left[\begin{matrix}d&-b\\-c&a\end{matrix}\right]</script></li>
+<li>A diagonal matrix has an inverse if and only if  no diagonal entries are zero. <br /><script type="math/tex">\left[\begin{matrix}d_1\\&d_2\\&&\ddots\\&&&d_n\end{matrix}\right]^{-1}=\left[\begin{matrix}\frac{1}{d_1}\\&\frac{1}{d_2}\\&&\ddots\\&&&\frac{1}{d_n}\end{matrix}\right]</script><br />Furthermore, a triangular matrix is invertible if and only if no diagonal entries are zero. </li>
+<li><script type="math/tex">AB</script> is invertible if and only if <script type="math/tex">A</script> and <script type="math/tex">B</script> are separately invertible and have the same size. </li>
+<li>Diagonally dominant matrices are invertible. Each $a_{ii}$ on the diagonal is larger than the total sum along the rest of row $i$. On every row, $|a_{ii}|&gt;\displaystyle\sum_{j≠i}|a_{ij}|$. </li>
+</ol>
+<h2 id="What-Is-The-Inverse"><a href="#What-Is-The-Inverse" class="headerlink" title="What Is The Inverse"></a>What Is The Inverse</h2><ol>
+<li>To get the inverse, we need to solve the system of <script type="math/tex">AE = I</script>. <script type="math/tex">E</script> is completely unknown. So we can use the Gauss elimination to solve all entries of $E$ at the same time, which makes us solve <script type="math/tex">\left[\begin{matrix}A&I\end{matrix}\right]</script> as a “super” augmented matrix. </li>
+<li>In the end, we can eliminate to get <script type="math/tex">\left[\begin{matrix}I&E\end{matrix}\right]</script>. As is known to all that only <script type="math/tex">A^{-1} \left[\begin{matrix}A&I\end{matrix}\right] = \left[\begin{matrix}I&A^{-1}\end{matrix}\right]</script>, so we can know that $E$ is the inverse. </li>
+<li>This is the <code>Gauss-Jordan</code> way. </li>
+<li>$(AB)^{-1}=B^{-1}A^{-1}$. <br />$(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AIA^{-1}=AA^{-1}=I$</li>
+<li>For square matrices, an inverse on one side is automatically the inverse on the other side. </li>
+<li>Because inverse undoes whatever the original matrix does, for elimination matrices, the entry of <script type="math/tex">(i,\ j)</script> in the inverse matrix is <script type="math/tex">l</script> while in the original matrix <script type="math/tex">-l</script></li>
+<li>If the original matrix is symmetric, so is its inverse. </li>
+<li>The inverse of a band matrix is generally a dense matrix. </li>
+<li>If <script type="math/tex">A</script> is invertible and upper triangular, so is <script type="math/tex">A^{-1}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/23/02-Elimination-with-Matrices/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1090,100 +1207,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/12/08-Animation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/12/08-Animation/" class="post-title-link" itemprop="url">08. Animation</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-12 10:47:49" itemprop="dateCreated datePublished" datetime="2019-08-12T10:47:49+08:00">2019-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-04 12:17:38" itemprop="dateModified" datetime="2020-04-04T12:17:38+08:00">2020-04-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Science</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Science/Developing-iOS-App-with-Swift-Stanford-CS193p/" itemprop="url" rel="index">
-                    <span itemprop="name">Developing iOS App with Swift (Stanford CS193p)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="UIView-Property-Animation"><a href="#UIView-Property-Animation" class="headerlink" title="UIView Property Animation"></a>UIView Property Animation</h1><h2 id="UIView-Animation-Properties"><a href="#UIView-Animation-Properties" class="headerlink" title="UIView Animation Properties"></a>UIView Animation Properties</h2><ol>
-<li>frame/center</li>
-<li>bounds (transient size, does not conflict with animating center)transform (translation, </li>
-<li>rotation and scale)</li>
-<li>alpha (opacity)</li>
-<li>backgroundColor
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/12/08-Animation/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1255,7 +1278,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">169</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
