@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Iterated Expectation $E[X|Y]$ is a random variable that takes the value $E[X|Y&#x3D;y]$ when $Y$ takes the value $y$. Since $E[X|Y&#x3D;y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$.  The distribution">
 <meta property="article:published_time" content="2020-03-16T00:51:43.000Z">
-<meta property="article:modified_time" content="2020-03-16T08:12:20.480Z">
+<meta property="article:modified_time" content="2020-05-31T07:45:32.900Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -220,10 +220,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-03-16 08:51:43 / Modified: 16:12:20" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
+              <time title="Created: 2020-03-16 08:51:43" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-31 15:45:32" itemprop="dateModified" datetime="2020-05-31T15:45:32+08:00">2020-05-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -256,7 +262,7 @@
         <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
 <li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
 <li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by change $y$ in $E[X|Y=y]$ into $Y$. </li>
-<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br />$E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&amp;Y discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&amp;Y continuous \end{array}\right.=E[X]$</li>
+<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
 <li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
 <li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
 <li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>

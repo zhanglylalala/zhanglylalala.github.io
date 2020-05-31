@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Joint PDFs Two continuous random variables associated with the same experiment are jointly continuous and can be described in terms of a joint PDF $f_{X,Y}$.  $f_{X,Y}$ is a nonnegative function that">
 <meta property="article:published_time" content="2020-03-14T11:35:04.000Z">
-<meta property="article:modified_time" content="2020-05-31T05:31:26.934Z">
+<meta property="article:modified_time" content="2020-05-31T06:56:14.833Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-31 13:31:26" itemprop="dateModified" datetime="2020-05-31T13:31:26+08:00">2020-05-31</time>
+                <time title="Modified: 2020-05-31 14:56:14" itemprop="dateModified" datetime="2020-05-31T14:56:14+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,15 +267,15 @@
 <li><script type="math/tex; mode=display">P(X\in A)=P(X\in A\ and\ Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx</script></li>
 <li>The marginal PDF $f_X(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y}(x,y)dy$. </li>
 <li>The uniform model: <br />PDF: <script type="math/tex">f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area\ of\ S}&if\ (x,y)\in S\\0&otherwise \end{array}\right.</script><br /><br />Probability: <script type="math/tex">P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area\ of\ S}\iint\limits_{(x,y)\in A}dxdy=\frac{area\ of\ A}{area\ of\ S}</script></li>
-<li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{_\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
+<li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{-\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
 <li>$f_{X,Y}(x,y)=\displaystyle\frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$</li>
 <li>For expectation: $E[g(X,Y)]=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}g(x,y)f_{X,Y}(x,y)dxdy$</li>
 <li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
 </ol>
 <h1 id="Conditioning"><a href="#Conditioning" class="headerlink" title="Conditioning"></a>Conditioning</h1><ol>
 <li>Given an event $A$ with $P(A)&gt;0$, the conditional PDF is $P(X\in B|A)=\displaystyle\int_Bf_{X|A}(x)dx$ for any subset $B$ of the real line. </li>
-<li>If $P(x\in A)&gt;0$, $P(X\in B|X\in A)=\displaystyle\frac{P(X\in B,X\in A)}{P(X\in A)}=\frac{\int_{A\cap B}f_X(x)dx}{P(X\in A)}$. So $f_{X|\{X\in A\}}(x)=\left\{\begin{array}{}\displaystyle\frac{f_X(x)}{P(X\in A)}&amp;if x\in A\\0&amp;otherwise \end{array}\right.$</li>
-<li>If two random variables $X$ and $Y$, event $C=\{(X,Y)\in A\}$, $f_{X,Y|C}(x,y)=\left\{\begin{array}{}\displaystyle\frac{f_{X,Y}(x,y)}{P(C)}&amp;if (x,y)\in A\\0&amp;otherwise \end{array}\right.$ and $f_{X|C}(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y|C}(x)dy$</li>
+<li>If $P(x\in A)&gt;0$, $P(X\in B|X\in A)=\displaystyle\frac{P(X\in B,X\in A)}{P(X\in A)}=\frac{\int_{A\cap B}f_X(x)dx}{P(X\in A)}$. So <script type="math/tex">f_{X|\{X\in A\}}(x)=\left\{\begin{array}{}\displaystyle\frac{f_X(x)}{P(X\in A)}&if\ x\in A\\0&otherwise \end{array}\right.</script></li>
+<li>If two random variables $X$ and $Y$, event $C=\{(X,Y)\in A\}$, <script type="math/tex">f_{X,Y|C}(x,y)=\left\{\begin{array}{}\displaystyle\frac{f_{X,Y}(x,y)}{P(C)}&if\ (x,y)\in A\\0&otherwise \end{array}\right.</script> and $f_{X|C}(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y|C}(x)dy$</li>
 <li>Total probability theorem: If disjoint sets $A_1,A_2,…,A_n$ form a partition of the sample space, $f_X(x)=\displaystyle\sum^n_{i=1}P(A_i)f_{X|A_i}(x)$. </li>
 <li>If $X$ and $Y$ are continuous random variables with joint PDF $f_{X,Y}$. For any $y$ with $f_Y(y)&gt;0$, the conditional PDF of $X$ given that $Y=y$ is $f_{X|Y}(x|y)=\displaystyle\frac{f_{X,Y}(x,y)}{f_Y(y)}$. </li>
 <li>Total probability theorem based on another continuous random variable: $f_X(x)=\displaystyle\int^\infty_{-\infty}f_Y(y)f_{X|Y}(x|y)dy$</li>
@@ -296,7 +296,7 @@
 <li>Two continuous random variables $X$ and $Y$ are independent if their joint PDF is the product of the marginal PDFs: $f_{X,Y}(x,y)=f_X(x)f_Y(y)$, for all $x,y$. </li>
 <li>Also $f_{X|Y}(x|y)=f_X(x)$, for all $y$ with $f_Y(y)&gt;0$ and all $x$. </li>
 <li>$P(X\in A and Y\in B)=P(X\in A)P(Y\in B)$. </li>
-<li>$F_{X,y}(x,y)=F_X(x)F_Y(y)$, for all $x, y$. </li>
+<li>$F_{X,Y}(x,y)=F_X(x)F_Y(y)$, for all $x, y$. </li>
 <li>$E[g(X)h(Y)]=E[g(X)]E[h(Y)]$</li>
 <li>$var(X+Y)=var(X)+var(y)$. </li>
 </ol>

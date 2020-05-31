@@ -1191,10 +1191,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-03-16 08:51:43 / Modified: 16:12:20" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
+              <time title="Created: 2020-03-16 08:51:43" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-31 15:45:32" itemprop="dateModified" datetime="2020-05-31T15:45:32+08:00">2020-05-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -1227,7 +1233,7 @@
           <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
 <li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
 <li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by change $y$ in $E[X|Y=y]$ into $Y$. </li>
-<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br />$E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&amp;Y discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&amp;Y continuous \end{array}\right.=E[X]$</li>
+<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
 <li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
 <li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
 <li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>
@@ -1306,7 +1312,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-16 08:52:37" itemprop="dateModified" datetime="2020-03-16T08:52:37+08:00">2020-03-16</time>
+                <time title="Modified: 2020-05-31 15:10:29" itemprop="dateModified" datetime="2020-05-31T15:10:29+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1355,7 +1361,7 @@
 <li>$cov(X,aY+b)=a\cdot cov(X,Y)$</li>
 <li>$cov(X,Y+Z)=cov(X,Y)+cov(X,Z)$</li>
 <li>If $X$ and $Y$ are independent, $E[XY]=E[X]E[Y]$, so $cov(X,Y)=0$. Thus, if $X$ and $Y$ are independent, they are also uncorrelated. But two uncorrelated random variables are not alway independent. </li>
-<li>If $E[X|Y=y]=E[X]$, $E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&amp;X and Y are discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&amp;X and Y are continuous \end{array}\right.$<br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
+<li>If $E[X|Y=y]=E[X]$, <script type="math/tex">E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&X\ and\ Y\ are\ discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&X\ and\ Y\ are\ continuous \end{array}\right.</script><br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
 <li>The correlation coefficient of two random variables $X$ and $Y$ that have nonzero variances: $\rho(X,Y)=\displaystyle\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$</li>
 <li>The correlation coefficient is a normalized version of the covariance. It ranges from $-1$ to $1$. </li>
 <li>If $\rho&gt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the same sign. if $\rho&lt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the opposite sign. </li>
