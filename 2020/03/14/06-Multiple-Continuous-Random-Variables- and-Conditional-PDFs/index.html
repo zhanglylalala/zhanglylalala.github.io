@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Joint PDFs Two continuous random variables associated with the same experiment are jointly continuous and can be described in terms of a joint PDF $f_{X,Y}$.  $f_{X,Y}$ is a nonnegative function that">
 <meta property="article:published_time" content="2020-03-14T11:35:04.000Z">
-<meta property="article:modified_time" content="2020-03-15T08:20:17.230Z">
+<meta property="article:modified_time" content="2020-05-31T05:31:26.934Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-15 16:20:17" itemprop="dateModified" datetime="2020-03-15T16:20:17+08:00">2020-03-15</time>
+                <time title="Modified: 2020-05-31 13:31:26" itemprop="dateModified" datetime="2020-05-31T13:31:26+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,9 +264,9 @@
 <li>$f_{X,Y}$ is a nonnegative function that satisfies $P((X,Y)\in B)=\displaystyle\iint\limits_{(x,y)\in B}f_{X,Y}(x,y)dxdy$, for every subset $B$ of the two-dimensional plane. </li>
 <li>If $B=\{(x,y)|a≤x≤b,c≤y≤d\}$, $P(a≤X≤b,c≤Y≤d)=\displaystyle\int^d_c\int^b_af_{X,Y}(x,y)dxdy$<br />If $B$ is the entire two-dimensional plane, $P((X,Y)\in B)=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}f_{X,Y}(x,y)dxdy=1$</li>
 <li>Like PDF of single random variable, the joint PDF can be viewed as the probability per unit area in the vicinity of a point. </li>
-<li>$P(X\in A)=P(X\in A and Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx$</li>
+<li><script type="math/tex; mode=display">P(X\in A)=P(X\in A\ and\ Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx</script></li>
 <li>The marginal PDF $f_X(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y}(x,y)dy$. </li>
-<li>The uniform model: <br />PDF: $f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area of S}&amp;if (x,y)\in S\\0&amp;otherwise \end{array}\right.$<br /><br />Probability: $P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area of S}\iint\limits_{(x,y)\in A}dxdy=\frac{area of A}{area of S}$</li>
+<li>The uniform model: <br />PDF: <script type="math/tex">f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area\ of\ S}&if\ (x,y)\in S\\0&otherwise \end{array}\right.</script><br /><br />Probability: <script type="math/tex">P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area\ of\ S}\iint\limits_{(x,y)\in A}dxdy=\frac{area\ of\ A}{area\ of\ S}</script></li>
 <li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{_\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
 <li>$f_{X,Y}(x,y)=\displaystyle\frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$</li>
 <li>For expectation: $E[g(X,Y)]=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}g(x,y)f_{X,Y}(x,y)dxdy$</li>
