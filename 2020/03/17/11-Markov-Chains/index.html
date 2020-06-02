@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="Discrete-Time Markov Chains The effect of the past on the future is summarized by state, which changes over time according to given probabilities.  In discrete-time markoc chains, state changes ar cer">
+  <meta name="description" content="Discrete-Time Markov Chains The effect of the past on the future is summarized by state, which changes over time according to given probabilities.  In discrete-time Markoc chains, state changes at cer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="11. Markov Chains">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2020/03/17/11-Markov-Chains/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="Discrete-Time Markov Chains The effect of the past on the future is summarized by state, which changes over time according to given probabilities.  In discrete-time markoc chains, state changes ar cer">
+<meta property="og:description" content="Discrete-Time Markov Chains The effect of the past on the future is summarized by state, which changes over time according to given probabilities.  In discrete-time Markoc chains, state changes at cer">
 <meta property="article:published_time" content="2020-03-17T07:43:13.000Z">
-<meta property="article:modified_time" content="2020-03-19T10:36:14.810Z">
+<meta property="article:modified_time" content="2020-06-01T11:18:53.391Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-19 18:36:14" itemprop="dateModified" datetime="2020-03-19T18:36:14+08:00">2020-03-19</time>
+                <time title="Modified: 2020-06-01 19:18:53" itemprop="dateModified" datetime="2020-06-01T19:18:53+08:00">2020-06-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,7 +261,7 @@
       
         <h1 id="Discrete-Time-Markov-Chains"><a href="#Discrete-Time-Markov-Chains" class="headerlink" title="Discrete-Time Markov Chains"></a>Discrete-Time Markov Chains</h1><ol>
 <li>The effect of the past on the future is summarized by state, which changes over time according to given probabilities. </li>
-<li>In discrete-time markoc chains, state changes ar certain discrete time instants, indexed by an integer variable $n$. </li>
+<li>In discrete-time Markoc chains, state changes at certain discrete time instants, indexed by an integer variable $n$. </li>
 <li>At each time step $n$, the state of the chain is denoted by $X_n$ and belongs to a finite set $S$ of possible states, called the state space. <br />We assume that $S=\{1,…,m\}$, for some positive integer $m$. </li>
 <li>The Markov chain is described in terms of its transition probabilities $p_{ij}$: whenever the state happens to be $i$, there is a probability $p_{ij}$ that the next state is equal to $j$. Mathematically, $p_{ij}=P(X_{n+1}=j|X_n=i), (i,j\in S)$. </li>
 <li>The transition probabilities apply whenever state $i$ is visited, no matter what happened in the past and no matter how state $i$ was reached. <br />The Markov property requires $P(X_{n+1}=j|X_n=i,X_{n-1}=i_n-1,…,X_0=i_0)=P(X_{n+1}=j|X_n=i)=p_{ij}$, for all time $n$, all states $i,j\in S$ and all sequences $i_0,…,i_{n-1}$ of earlier states. <br />Thus, the probability law of the next state $X_{n-1}$ depends on the past only through the value of the present state $X_n$. </li>

@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Statistics In probability, every unambiguous question has a unique correct answer.  But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers.">
 <meta property="article:published_time" content="2020-03-21T08:38:18.000Z">
-<meta property="article:modified_time" content="2020-03-21T15:39:20.660Z">
+<meta property="article:modified_time" content="2020-06-01T12:28:11.586Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -220,10 +220,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-03-21 16:38:18 / Modified: 23:39:20" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
+              <time title="Created: 2020-03-21 16:38:18" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-01 20:28:11" itemprop="dateModified" datetime="2020-06-01T20:28:11+08:00">2020-06-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -255,7 +261,7 @@
       
         <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
 <li>In probability, every unambiguous question has a unique correct answer. </li>
-<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unlees one makes several assumptions and imposes additional constraints on the inference problem. </li>
+<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unless one makes several assumptions and imposes additional constraints on the inference problem. </li>
 <li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
 <li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
 <li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
@@ -276,7 +282,7 @@
 <li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
 </ol>
 <h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
-<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ continuous \end{array}\right.</script></li>
+<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ is\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ is\ continuous \end{array}\right.</script></li>
 <li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
 <li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
 <li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>

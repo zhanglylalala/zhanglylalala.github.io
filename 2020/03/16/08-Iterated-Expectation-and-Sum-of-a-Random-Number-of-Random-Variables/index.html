@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Iterated Expectation $E[X|Y]$ is a random variable that takes the value $E[X|Y&#x3D;y]$ when $Y$ takes the value $y$. Since $E[X|Y&#x3D;y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$.  The distribution">
 <meta property="article:published_time" content="2020-03-16T00:51:43.000Z">
-<meta property="article:modified_time" content="2020-05-31T07:45:32.900Z">
+<meta property="article:modified_time" content="2020-06-01T07:42:09.386Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Theories">
 <meta property="article:tag" content="Mathematics">
@@ -228,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-31 15:45:32" itemprop="dateModified" datetime="2020-05-31T15:45:32+08:00">2020-05-31</time>
+                <time title="Modified: 2020-06-01 15:42:09" itemprop="dateModified" datetime="2020-06-01T15:42:09+08:00">2020-06-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,13 +261,13 @@
       
         <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
 <li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
-<li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by change $y$ in $E[X|Y=y]$ into $Y$. </li>
+<li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by changing $y$ in $E[X|Y=y]$ into $Y$. </li>
 <li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
 <li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
 <li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
 <li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>
 <li>The random variable $E[\tilde{X}|Y]$ is identically zero: $E[\tilde{X}|Y=y]=0$ for all values of $y$. <br />The law of iterated expectation also tells us $E[\tilde{X}]=E[E[\tilde{X}|Y]]=0$. <br />It indicates that the estimation error doesn’t have a systematic upward or downward bias. </li>
-<li>$E[\hat{X}\tilde{X}]=E[E[\hat{X}\tilde{X}|Y]]$. Since $\hat{X}$ is complete determined by $Y$. So $E[E[\hat{X}\tilde{X}|Y]]=E[\hat{X}E[\tilde{X}|Y]]=E[\hat{X}0]=0$<br />It follows that $cov(\hat{X},\tilde{X})=E[\hat{X}\tilde{X}]-E[\hat{X}]E[\tilde{X}]=0-E[X]\cdot0=0$<br />So $\hat{X}$ and $\tilde{X}$ are uncorrelated. <br />So $var(X)=var(\tilde{X})+var(\hat{X})$. </li>
+<li>$E[\hat{X}\tilde{X}]=E[E[\hat{X}\tilde{X}|Y]]$. Since $\hat{X}$ is complete determined by $Y$, $E[E[\hat{X}\tilde{X}|Y]]=E[\hat{X}E[\tilde{X}|Y]]=E[\hat{X}0]=0$<br />It follows that $cov(\hat{X},\tilde{X})=E[\hat{X}\tilde{X}]-E[\hat{X}]E[\tilde{X}]=0-E[X]\cdot0=0$<br />So $\hat{X}$ and $\tilde{X}$ are uncorrelated. <br />So $var(X)=var(\tilde{X})+var(\hat{X})$. </li>
 <li>The conditional variance: $var(X|Y)=E[(X-E{X|Y})^2|Y]=E[\tilde{X}^2|Y]$</li>
 <li>This is the function of $Y$ whose value is the conditional variance of $X$ when $Y$ takes the value $y$. </li>
 <li>Using $E[\tilde{X}]=0$, $var(\tilde{X})=E[\tilde{X}^2]=E[E[\tilde{X}^2|Y]]=E[var(X|Y)]$. <br />Since $var(X)=var(\tilde{X})+var{\hat{X}}$, we have the law of total variance: $var(X)=E[var(X|Y)]+var(E[X|Y])$</li>
