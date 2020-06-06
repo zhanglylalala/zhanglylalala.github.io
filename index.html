@@ -379,7 +379,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-06 17:42:27" itemprop="dateModified" datetime="2020-06-06T17:42:27+08:00">2020-06-06</time>
+                <time title="Modified: 2020-06-06 20:16:30" itemprop="dateModified" datetime="2020-06-06T20:16:30+08:00">2020-06-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -441,7 +441,7 @@
 <li>通常用变量名代替抽象地址</li>
 <li>三地址代码是语法树或DAG的线性表示，用临时变量代替语法树中的节点</li>
 <li>三地址代码的类型<br />&emsp;赋值语句：<script type="math/tex">x\ :=\ y\ op\ z</script>    <script type="math/tex">x\ :=\ op\ y</script><br />&emsp;无条件转移语句：<script type="math/tex">goto\ L</script><br />&emsp;条件转移语句：<script type="math/tex">if\ x\ relop\ y\ goto\ L</script>，关系运算符号<script type="math/tex">relop(<,\ =, 等等)</script><br />&emsp;复制语句：<script type="math/tex">x\ :=\ y</script><br />&emsp;过程调用语句：先用$n$次<script type="math/tex">param\ x</script>依次调用各个参数，再用<script type="math/tex">call\ p,\ n</script>表示调用的函数和参数个数<br />&emsp;过程返回语句：<script type="math/tex">return\ y</script><br />&emsp;索引赋值语句：$x := y[i]$，<script type="math/tex">x[i]\ :=\ y</script><br />&emsp;地址和指针赋值语句：<script type="math/tex">x\ :=\ \&y</script>，<script type="math/tex">x\ :=\ *y</script>，<script type="math/tex">*x\ :=\ y</script></li>
-<li>语法制导翻译的属性<br />&emsp;$E.place$表示存放$E$值的名字<br />&emsp;$E.code$表示对$E$求值的三地址语句序列。先计算涉及到的计算对象，再用计算当前对象。如<script type="math/tex">E.code=E_1.code||E_2.code||gen(E.place':='E_1.place'+'E_2.place)</script><br />&emsp;$newtemp$是个函数，产生一个新的临时变量</li>
+<li>语法制导翻译的属性<br />&emsp;$E.place$表示存放$E$值的名字<br />&emsp;$E.code$表示对$E$求值的三地址语句序列。先计算涉及到的计算对象，再用计算当前对象。如<br />&emsp;<script type="math/tex">E.code=E_1.code||E_2.code||gen(E.place':='E_1.place'+'E_2.place)</script><br />&emsp;$newtemp$是个函数，产生一个新的临时变量</li>
 <li>实际实现中，三地址语句序列往往是被放到一个输出文件中，而不是将三地址语句序列置入$code$属性之中</li>
 <li>具体实现<br />&emsp;四元式：<script type="math/tex">op,\ arg1,\ arg2,\ result</script><br />&emsp;三元式：<script type="math/tex">op,\ arg1,\ arg2</script>。结果就存放在当前三元式的地方，要调用是直接调用当前三元式的编号<br />&emsp;间接三元式：间接码表+三元式表。三元式放在一个单独的表中，间接码表中每一行都指向不同的三元式<br />&emsp;涉及到单目运算的不使用$arg2$<br />&emsp;$param$只用$arg1$<br />&emsp;转移指令将目标标号放入$result$</li>
 <li>实现方式的比较<br />&emsp;四元式调整顺序方便，引入的临时变量多，所需存储空间大<br />&emsp;三元式所需存储空间小，但调整顺序不变，调整后还需改变其余行对当前行的引用指针<br />&emsp;间接三元式调整顺序和四元式差不多方便，所需的存储空间也和四元式差不多多</li>
