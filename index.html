@@ -1135,7 +1135,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 10:53:47" itemprop="dateModified" datetime="2020-06-07T10:53:47+08:00">2020-06-07</time>
+                <time title="Modified: 2020-06-07 11:02:31" itemprop="dateModified" datetime="2020-06-07T11:02:31+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1176,7 +1176,7 @@
 <li>符号串的长度表示符号串中包含符号的个数。$|\epsilon|=0$</li>
 <li>子串：符号串中的连续子序列</li>
 <li>前缀：符号串中从第一位开始的子序列<br />后缀：符号串中以最后一位结尾的子序列<br />真前/后缀：与原串不同的前/后缀</li>
-<li>符号串集合<br />并集：<script type="math/tex">A+B=\{w|w\in A\ or\ w\in B\}</script><br />连接：<script type="math/tex">A\cdot B=\{xy|x\in A\ and\ y\in B\}</script><br />幂次：$A^0=\{\epsilon\}$，$A^n=A^{n-1}A$<br />Kleene闭包 (星闭包)：$\Sigma^* $表示由字母表中的符号组成的符号串集合。<br />正闭包：$\Sigma^+=\Sigma^*-\{\epsilon\}$，即长度大于$1$的符号串的集合</li>
+<li>符号串集合<br />并集：<script type="math/tex">A+B=\{w|w\in A\ or\ w\in B\}</script><br />连接：<script type="math/tex">A\cdot B=\{xy|x\in A\ and\ y\in B\}</script><br />幂次：$A^0=\{\epsilon\}$，$A^n=A^{n-1}A$<br />$Kleene$闭包 (星闭包)：$\Sigma^* $表示由字母表中的符号组成的符号串集合。<br />正闭包：$\Sigma^+=\Sigma^*-\{\epsilon\}$，即长度大于$1$的符号串的集合</li>
 </ol>
 <h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><ol>
 <li>定义：某个字母表上的符号串的集合</li>
@@ -1197,7 +1197,7 @@
 </ol>
 <h2 id="语言-1"><a href="#语言-1" class="headerlink" title="语言"></a>语言</h2><ol>
 <li>句型：若存在$S\Rightarrow^*\alpha$，则$\alpha$是一个句型。必须从开始符号出发推导<br />句子：$\alpha$是一个句型，且$\alpha$只包含终结符号</li>
-<li>文法产生的语言$L(G)=\{\alpha|\alpha是G的句子\}$。即语言是文法$G$推导出的所有句子组成的集合。$L(G)=\{\alpha|S\Rightarrow^<em>\alpha且\alpha\in V_T^</em>\}$</li>
+<li>文法产生的语言$L(G)=\{\alpha|\alpha是G的句子\}$。即语言是文法$G$推导出的所有句子组成的集合。$L(G)=\{\alpha|S\Rightarrow^*\alpha且\alpha\in V_T^*\}$</li>
 <li>文法产生的语言只有一个，但是一个语言可以由多种文法产生。如果两个文法生成同一个语言，则这两个文法等价</li>
 <li>产生式集合、终结符号、非终结符号有限，但是在有递归的情况下可以导出无穷多个句子</li>
 </ol>
