@@ -48,12 +48,12 @@
   };
 </script>
 
-  <meta name="description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器何在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
+  <meta name="description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
 <meta property="og:type" content="article">
 <meta property="og:title" content="03. 词法分析">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器何在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
+<meta property="og:description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9001.png">
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9002.png">
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9003.png">
@@ -61,7 +61,7 @@
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9005.png">
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9006.png">
 <meta property="article:published_time" content="2020-05-10T06:59:42.000Z">
-<meta property="article:modified_time" content="2020-05-12T03:51:08.445Z">
+<meta property="article:modified_time" content="2020-06-07T03:20:32.436Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-12 11:51:08" itemprop="dateModified" datetime="2020-05-12T11:51:08+08:00">2020-05-12</time>
+                <time title="Modified: 2020-06-07 11:20:32" itemprop="dateModified" datetime="2020-06-07T11:20:32+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,19 +270,19 @@
 <li>识别源程序中的单词，创建符号表并在相应的符号表中登录信息</li>
 <li>把单词和行号关联，以便编译器将错误信息与源程序位置联系起来</li>
 <li>输出单词序列</li>
-<li>组织：<br />&emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件<br />&emsp;与语法分析器何在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式</li>
+<li>组织：<br />&emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件<br />&emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式</li>
 </ol>
 <h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><ol>
 <li>单词：具有独立含义的最小语法单位</li>
 <li>分类：标识符 (变量名)、关键字、常数、运算符、分界符、字符串</li>
-<li>词法分析程序根据词类划分源码，输出二元式$&lt;类别,单词属性值&gt;$ (称为单词符号)。一类一码可以吧类别省略，但本质还是二元组</li>
+<li>词法分析程序根据词类划分源码，输出二元式$&lt;类别,单词属性值&gt;$ (称为单词符号)。一类一码可以把类别省略，但本质还是二元组</li>
 <li>模式：一个单词的可能形式，定义类别为某一个类的单词的形式</li>
 <li>词素：源程序的一个字符序列，是单词符号的实例。单词属性值不一定是词素。比如源码中的变量名就是一个词素，但是在二元组中，单词属性值可能是$1$</li>
 </ol>
 <h2 id="正规表达式"><a href="#正规表达式" class="headerlink" title="正规表达式"></a>正规表达式</h2><ol>
 <li>正规表达式是表示字符串格式的模式，可以用来描述单词的结构</li>
 <li>正规集：正规式$(r)$所匹配的所有字符串的集合，实际上是一个正规语言，记为$L(r)$</li>
-<li>正则表达式定义：<br />&emsp;$\epsilon$是正规式，其匹配语言是$L(\epsilon)=\{\epsilon\}$<br />&emsp;如果$a\in\Sigma$，则$a$是一个正规式，其匹配语言是$L(a)=\{a\}$<br />&emsp;如果$r$和$s$都是正规式，则有：<br />&emsp;&emsp;$(r)|(s)$也是正规式，表示语言$L(r)\displaystyle\cup L(s)$<br />&emsp;&emsp;$(r)(s)$也是正规式，表示语言$L(r)\cdot L(s)$<br />&emsp;&emsp;$(r)^<em>$也是正规式，表示语言$(L(r))^</em>$<br />&emsp;&emsp;$(r)$也是正规式，表示语言$L(r)$</li>
+<li>正则表达式定义：<br />&emsp;$\epsilon$是正规式，其匹配语言是$L(\epsilon)=\{\epsilon\}$<br />&emsp;如果$a\in\Sigma$，则$a$是一个正规式，其匹配语言是$L(a)=\{a\}$<br />&emsp;如果$r$和$s$都是正规式，则有：<br />&emsp;&emsp;$(r)|(s)$也是正规式，表示语言$L(r)\displaystyle\cup L(s)$<br />&emsp;&emsp;$(r)(s)$也是正规式，表示语言$L(r)\cdot L(s)$<br />&emsp;&emsp;$(r)^*$也是正规式，表示语言$(L(r))^*$<br />&emsp;&emsp;$(r)$也是正规式，表示语言$L(r)$</li>
 <li>运算符号优先级：$*=+&gt;\cdot&gt;|$</li>
 <li>或运算具有交换律和结合律，连接运算具有结合律和对或运算的分配律</li>
 <li>$\epsilon$是连接运算的单位元</li>
