@@ -61,7 +61,7 @@
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9005.png">
 <meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9006.png">
 <meta property="article:published_time" content="2020-05-10T06:59:42.000Z">
-<meta property="article:modified_time" content="2020-06-07T03:20:32.436Z">
+<meta property="article:modified_time" content="2020-06-07T03:31:32.467Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Foundation">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 11:20:32" itemprop="dateModified" datetime="2020-06-07T11:20:32+08:00">2020-06-07</time>
+                <time title="Modified: 2020-06-07 11:31:32" itemprop="dateModified" datetime="2020-06-07T11:31:32+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,11 +313,11 @@
 <li>正规表达式直接转化成DFA比较难，一般是先转化为NFA，再把NFA转化为DFA</li>
 </ol>
 <h2 id="NFA到DFA的转换"><a href="#NFA到DFA的转换" class="headerlink" title="NFA到DFA的转换"></a>NFA到DFA的转换</h2><ol>
-<li>将NFA中一个状态输入同一个符号的所有下一状态左右DFA中的一个集合，以消除第一种不确定性</li>
+<li>将NFA中一个状态输入同一个符号的所有下一状态作为DFA中的一个集合，以消除第一种不确定性</li>
 <li>$\epsilon$闭包：$t$是一个状态，则$\epsilon-closure(t)$是从状态$t$只经过$\epsilon$转换可以到达的状态集；$T$是一个状态集，$\epsilon-closure(T)$是从$T$中任一状态只经过$\epsilon$边就可以达到的状态集<br />$t$本身以及$T$中的所有状态都属于他们的$\epsilon$闭包<br />利用$\epsilon$闭包可以消除第二种不确定性</li>
 <li>定义$move(t,a)$表示从状态$t$经过$a$边能到达的状态集；$move(T,a)$表示从状态集$T$中的状态经非空的$a$转换可达到的状态集</li>
 <li>子集构造法<br />&emsp;DFA的开始状态是$\epsilon-closure(s_0)$，这就是第一个稳定的状态<br />&emsp;其余状态由$\epsilon-closure(move(T,a))$生成<br />&emsp;DFA的终态是包含原来终态的状态</li>
-<li>子集构造算法流程<br />&emsp;先获得开始状态$\epsilon-closure(s_0)$<br />&emsp;对每一个状态，先找到它在每一个输入下的稳定次态，即，枚举$\epsilon-colosure(move(T,a))$，对每一个可能的$a$<br />&emsp;每次找到一个新的状态，就加入DFA的状态集中，并在未来也对这个心状态进行枚举</li>
+<li>子集构造算法流程<br />&emsp;先获得开始状态$\epsilon-closure(s_0)$<br />&emsp;对每一个状态，先找到它在每一个输入下的稳定次态，即，枚举$\epsilon-colosure(move(T,a))$，对每一个可能的$a$<br />&emsp;每次找到一个新的状态，就加入DFA的状态集中，并在未来也对这个新状态进行枚举</li>
 </ol>
 <h2 id="从正规式到NFA的转换"><a href="#从正规式到NFA的转换" class="headerlink" title="从正规式到NFA的转换"></a>从正规式到NFA的转换</h2><ol>
 <li>直接从正规式的定义出发来定义正规式对应的NFA</li>
@@ -333,7 +333,7 @@
 <li>任何DFA或NFA都存在唯一一个最简DFA与之等价，且任何DFA或NFA都可以转换为该最简DFA</li>
 <li>等价状态<br />&emsp;一致性：两个状态必须同为接受状态或非接受状态<br />&emsp;蔓延性：对所有输入符号，两个状态转移到等价状态</li>
 <li>寻找等价状态：隐含表法 (求同法)<br />&emsp;横少尾，纵少头的阶梯表<br />&emsp;可以直接确定等价的打钩，直接确定不等价的画叉<br />&emsp;取决于次态的写上次态，第一轮比完后再一一比较次态，直至全部判断完毕<br />&emsp;如果遇到相互依赖，循环不定的情况，默认他们都等价</li>
-<li>寻找等价状态：求异法<br />&emsp;先将状态划分为接受状态和非接受状态，再逐步划分精细化，最后得到不可在细分的划分<br />&emsp;考察每一个划分，要求其中的每一个元素在所有输入的情况下的次态组成的集合是该划分的子集<br />&emsp;如果有元素存在某一个输入对应的次态不是原划分的元素，就把该元素从原划分中剥离出去，知道没有元素应该被剥离</li>
+<li>寻找等价状态：求异法<br />&emsp;先将状态划分为接受状态和非接受状态，再逐步划分精细化，最后得到不可在细分的划分<br />&emsp;考察每一个划分，要求其中的每一个元素在所有输入的情况下的次态组成的集合是该划分的子集<br />&emsp;如果有元素存在某一个输入对应的次态不是原划分的元素，就把该元素从原划分中剥离出去，直到没有元素应该被剥离</li>
 <li>在找到了等价状态之后，重新命名各个等效状态集，并把转移函数的输入中的状态改为原输入状态所属的等效状态，把输出状态改为原输出状态所属的等效状态</li>
 </ol>
 <h2 id="有限自动机到正规文法"><a href="#有限自动机到正规文法" class="headerlink" title="有限自动机到正规文法"></a>有限自动机到正规文法</h2><ol>
@@ -346,7 +346,7 @@
 <h1 id="词法分析器的自动构造"><a href="#词法分析器的自动构造" class="headerlink" title="词法分析器的自动构造"></a>词法分析器的自动构造</h1><ol>
 <li>先用正规式表示出单词的结构，再由正规式生成NFA，最后再化简得到最简DFA</li>
 <li>给每个正规式构造相应的NFA，将所有的NFA用或运算并联起来</li>
-<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺 序</li>
+<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺序</li>
 </ol>
 
     </div>
