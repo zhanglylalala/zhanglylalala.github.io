@@ -823,7 +823,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-20 22:34:15" itemprop="dateModified" datetime="2020-05-20T22:34:15+08:00">2020-05-20</time>
+                <time title="Modified: 2020-06-07 19:52:44" itemprop="dateModified" datetime="2020-06-07T19:52:44+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -885,7 +885,7 @@
 <li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
 <li>$FOLLOW$集中的元素是终结符号或$\$$</li>
 <li>如果$X\to AB$<br />&emsp;则$FIRST(B)\subseteq FOLLOW(A)$且$FOLLOW(X)\subseteq FOLLOW(B)$<br />&emsp;如果$B\Rightarrow^*\epsilon$，则$FOLLOW(X)\subseteq FOLLOW(A)$</li>
-<li>$\$$在$开始符号的$FOLLOW$集中</li>
+<li>$\$$在开始符号的$FOLLOW$集中</li>
 <li>如果$A\to\alpha B\beta$是产生式，则$FIRST(\beta)\backslash\{\epsilon\}$在$FOLLOW(B)$中</li>
 <li>如果$A\to\alpha B$或$A\to\alpha B\beta$且$\beta\Rightarrow^*\epsilon$，$FOLLOW(A)\subseteq FOLOOW(B)$</li>
 <li>算法实现<br />先把$\$$加入开始符号的$FOLLOW$集中<br />循环直到没有$FOLLOW$集改变<br />&emsp;对每一条产生式$X\to X_1X_2…X_m$，对其中的每一个非终结符号$X_j$<br />&emsp;$FOLLOW(X_j)=FOLLOW(X_j)\cup(FIRST(X_{j+1}…X_m)\backslash\{\epsilon\})$<br />&emsp;如果$\epsilon\in FIRST(X_{j+1}…X_m)$，$FOLLOW(X_j)=FOLLOW(X_j)\cup FOLLOW(X)$</li>
