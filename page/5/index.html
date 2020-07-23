@@ -132,7 +132,7 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">21</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">22</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -187,6 +187,107 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/09-Flux-and-Green-s-Theorem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/01/09-Flux-and-Green-s-Theorem/" class="post-title-link" itemprop="url">09. Flux and Green's Theorem</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-01 09:18:41" itemprop="dateCreated datePublished" datetime="2020-03-01T09:18:41+08:00">2020-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:06:16" itemprop="dateModified" datetime="2020-03-07T16:06:16+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Multivariable-Calculus-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">Multivariable Calculus (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
+<li>This is another kind of line integral. </li>
+<li><script type="math/tex">C</script> is the plane curve with unit normal vector <script type="math/tex">\vec{n}</script> at each point and <script type="math/tex">\vec{F}</script> is a vector field. </li>
+<li>If break <script type="math/tex">C</script> into small pieces <script type="math/tex">\Delta s</script>, <script type="math/tex">Flux=\displaystyle\lim_{\Delta s\to 0}(\sum\vec{F}\cdot\vec{n}\ \Delta s)</script>. So <script type="math/tex">Flux=\displaystyle\int_C\vec{F}\cdot\vec{n}\ ds</script></li>
+<li>Interpretation: for <script type="math/tex">\vec{F}</script> a velocity field, flux measures how much fluid passes through <script type="math/tex">C</script> per unit time. </li>
+<li>Before calculation, we need  to set a direction to flux. Goes along that direction is positive while opposite direction is negative. </li>
+<li>Calculation using components: <br />Remember: <script type="math/tex">d\vec{r}=\vec{T}ds=<dx,dy></script>. Since <script type="math/tex">\vec{n}</script> is <script type="math/tex">\vec{T}</script> rotated <script type="math/tex">\displaystyle\frac{\pi}{2}</script> clockwise, <script type="math/tex">\vec{n}ds=<dy,-dx></script>. <br />If <script type="math/tex">\vec{F}=<M,N></script>, then <script type="math/tex">\displaystyle\int_C\vec{F}\cdot\vec{n}ds=\int_C-Ndx+Mdy</script></li>
+</ol>
+<h1 id="Green’s-Theorem"><a href="#Green’s-Theorem" class="headerlink" title="Green’s Theorem"></a>Green’s Theorem</h1><ol>
+<li>For work: <script type="math/tex">C</script> is a closed curve enclosing a region R, counterclockwise. <script type="math/tex">\vec{F}</script> Vector field is defined and differentiable in <script type="math/tex">R</script>. Then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script>, namely <script type="math/tex">\displaystyle\oint_CMdx+Ndy=\iint_R(N_x-M_y)dA</script>. </li>
+<li><strong><code>WARNING: ONLY FOR CLOSED CURVE</code></strong></li>
+<li>If <script type="math/tex">curl\ \vec{F}=0</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA=0</script></li>
+<li>A complex region can be decomposed into simpler regions. </li>
+<li>For flux: If <script type="math/tex">C</script> encloses a region <script type="math/tex">R</script> counterclockwise and <script type="math/tex">\vec{F}<P,Q></script> defined in <script type="math/tex">R</script>, then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot\vec{n}ds=\iint_Rdiv\ \vec{F}dA</script> <script type="math/tex">(divergent:div\ <P,Q>=P_x+Q_y)</script>. </li>
+<li>Green’s theorem shows us the position of an enclosed curve doesn’t affect the flux. </li>
+<li>Interpretation of <script type="math/tex">div\ \vec{F}</script>: <br />&emsp;Measures how much the flow is expanding. <br />&emsp;Source rate = amount of fluid added to the system per unit time per unit area. </li>
+<li>If one enclosed curve <script type="math/tex">C'</script> is in another enclosed curve <script type="math/tex">C</script>, connect them with one segment. <br />We can go along <script type="math/tex">C</script> and then go to <script type="math/tex">C'</script> through that segment. <br />And go along <script type="math/tex">C'</script> in opposite direction then come back to <script type="math/tex">C</script> through that segment. <br />This forms a new curve which encloses a region <script type="math/tex">R</script> between <script type="math/tex">C</script> and <script type="math/tex">C'</script>. <br /><script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}-\oint_{C'}\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script></li>
+<li>A connected region <script type="math/tex">R</script> in the plane is simply connected if the interior of any closed curve in <script type="math/tex">R</script> is also contained in <script type="math/tex">R</script>. <br />Simply connected has no “hole” in it. </li>
+<li>If <script type="math/tex">curl\ \vec{F}=0</script> and domain where <script type="math/tex">\vec{F}</script> defined is simply connected, then <script type="math/tex">\vec{F}</script> is conservative and a gradient. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1065,106 +1166,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/" class="post-title-link" itemprop="url">15. Indeterminate Forms-L'Hôspital's Rule and Improper Integrals</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-20 09:19:17" itemprop="dateCreated datePublished" datetime="2020-02-20T09:19:17+08:00">2020-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:07:51" itemprop="dateModified" datetime="2020-03-07T16:07:51+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Indeterminate-Forms"><a href="#Indeterminate-Forms" class="headerlink" title="Indeterminate Forms"></a>Indeterminate Forms</h1><ol>
-<li><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}</script>, if <script type="math/tex">f(a)=g(a)=0</script>, then this is an indeterminate form of <script type="math/tex">\displaystyle\frac{0}{0}</script>. </li>
-<li>To solve this limit, if <script type="math/tex">g'(a) ≠ 0</script> just divide the numerator and denominator with <script type="math/tex">x-a</script>. <br /><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{\frac{f(x)}{x-a}}{\frac{g(x)}{(x-a)}}=\frac{\lim_{x\to a}\frac{f(x)-f(a)}{x-a}}{\lim_{x\to a}\frac{g(x)-g(a)}{x-a}}=\frac{f'(a)}{g'(a)}</script></li>
-<li><code>L&#39;Hôspital&#39;s Rule</code>: <script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}</script>. If derivate once cannot solve the problem, derivate again until the denominator is not zero. </li>
-<li><script type="math/tex">\displaystyle\frac{\infty}{\infty}</script> form is also OK for L’Hôspital’s Rule. So does when right hand side is either finite or <script type="math/tex">\pm\infty</script> and <script type="math/tex">a</script> can be anything including <script type="math/tex">\pm\infty</script>. </li>
-<li>For <script type="math/tex">0</script> and <script type="math/tex">\infty</script> product problem, rewrite the equation to the ratio form to become <script type="math/tex">\displaystyle\frac{0}{0}</script> or <script type="math/tex">\displaystyle\frac{\infty}{\infty}</script>. </li>
-<li>Another form is <script type="math/tex">0^0</script>. <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=\lim_{x\to 0^+}e^{xln\ x}</script>. And <script type="math/tex">\displaystyle\lim_{x\to 0^+}xln\ x=0</script>. So <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=e^0=1</script>. </li>
-</ol>
-<h1 id="Improper-Integrals"><a href="#Improper-Integrals" class="headerlink" title="Improper Integrals"></a>Improper Integrals</h1><ol>
-<li>Definition: <script type="math/tex">\displaystyle\int^\infty_af(x)dx=\lim_{x\to \infty}\int^x_af(x)dx</script>. </li>
-<li>The integral converges if limit exists and diverges if limit doesn’t exist. </li>
-<li>This is the total area of <script type="math/tex">f(x)</script> from <script type="math/tex">a</script> to <script type="math/tex">\infty</script>. </li>
-<li>If the integral converges, the total area is finite. And if the integral diverges, the total area is infinite. </li>
-<li><script type="math/tex">\displaystyle\int^\infty_1\frac{dx}{x^p}</script> diverges if <script type="math/tex">p≤1</script> and converges if <script type="math/tex">p>1</script> (the value is <script type="math/tex">\displaystyle\frac{1}{p-1}</script>). </li>
-<li>If <script type="math/tex">\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=1</script>, then <script type="math/tex">f(x)</script> is similar to <script type="math/tex">g(x)</script> as <script type="math/tex">x\to\infty</script>, denoted by <script type="math/tex">f(x)\sim g(x)</script>. </li>
-<li>Limit Comparison: If <script type="math/tex">f(x)\sim g(x)</script> as <script type="math/tex">x\to\infty</script>, then <script type="math/tex">\displaystyle\int^\infty_af(x)dx</script> and <script type="math/tex">\displaystyle\int^\infty_ag(x)dx</script> either both converge or both diverge. </li>
-<li>Sometimes when calculation or comparison, the end of the interval can be ignored since it doesn’t effect the answer. </li>
-<li>Second type of improper integrals is defined <script type="math/tex">f(x)</script> is undefined at <script type="math/tex">x=a</script> when calculate the integral of <script type="math/tex">[a,b]</script>. <script type="math/tex">\displaystyle\int^b_af(x)dx=\lim_{x\to a^+}\int^b_xf(x)dx</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1236,7 +1237,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1249,7 +1250,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

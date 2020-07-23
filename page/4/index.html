@@ -132,7 +132,7 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">21</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">22</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -187,6 +187,119 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/" class="post-title-link" itemprop="url">08. Iterated Expectation and Sum of a Random Number of Random Variables</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-16 08:51:43" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-01 15:42:09" itemprop="dateModified" datetime="2020-06-01T15:42:09+08:00">2020-06-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Probability-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">Probability (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
+<li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
+<li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by changing $y$ in $E[X|Y=y]$ into $Y$. </li>
+<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
+<li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
+<li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
+<li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>
+<li>The random variable $E[\tilde{X}|Y]$ is identically zero: $E[\tilde{X}|Y=y]=0$ for all values of $y$. <br />The law of iterated expectation also tells us $E[\tilde{X}]=E[E[\tilde{X}|Y]]=0$. <br />It indicates that the estimation error doesn’t have a systematic upward or downward bias. </li>
+<li>$E[\hat{X}\tilde{X}]=E[E[\hat{X}\tilde{X}|Y]]$. Since $\hat{X}$ is complete determined by $Y$, $E[E[\hat{X}\tilde{X}|Y]]=E[\hat{X}E[\tilde{X}|Y]]=E[\hat{X}0]=0$<br />It follows that $cov(\hat{X},\tilde{X})=E[\hat{X}\tilde{X}]-E[\hat{X}]E[\tilde{X}]=0-E[X]\cdot0=0$<br />So $\hat{X}$ and $\tilde{X}$ are uncorrelated. <br />So $var(X)=var(\tilde{X})+var(\hat{X})$. </li>
+<li>The conditional variance: $var(X|Y)=E[(X-E{X|Y})^2|Y]=E[\tilde{X}^2|Y]$</li>
+<li>This is the function of $Y$ whose value is the conditional variance of $X$ when $Y$ takes the value $y$. </li>
+<li>Using $E[\tilde{X}]=0$, $var(\tilde{X})=E[\tilde{X}^2]=E[E[\tilde{X}^2|Y]]=E[var(X|Y)]$. <br />Since $var(X)=var(\tilde{X})+var{\hat{X}}$, we have the law of total variance: $var(X)=E[var(X|Y)]+var(E[X|Y])$</li>
+</ol>
+<h1 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h1><ol>
+<li>The transform associated with a random variable $X$ is a function $M_X(s)$ of a scalar parameter $s$, defined by $M_X(s)=E[e^{sX}]$. </li>
+<li>If $X$ is a discrete random variable, the transform can be written as $M(s)=\displaystyle\sum_xe^{sx}p_X(x)$. <br />If $X$ is a continuous random variable, $M(s)=\displaystyle\int^\infty_{-\infty}e^{sx}f_X(x)dx$. </li>
+<li>If $Y=aX+b$, $M_Y(s)=E[e^{s(aX+b)}]=E[e^{saX}e^{sb}]=e^{sb}E[e^{saX}]=e^{sb}M_X(sa)$. </li>
+<li>$\displaystyle\frac{d}{ds}M(s)=\int^\infty_{-\infty}xe^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d}{ds}M(s)\right|_{s=0}=\int^{\infty}_{-\infty}xf_X(x)dx=E[X]$<br />$\displaystyle\frac{d^n}{ds^n}M(s)=\int^{\infty}_{-\infty}x^ne^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d^n}{ds^n}M(s)\right|_{s=0}=\int^\infty_{-\infty}x^nf_X(x)dx=E[X^n]$</li>
+<li>$M_X(0)=E[e^{0X}]=E[1]=1$</li>
+<li>If $X$ takes only nonnegative integer values, then $\displaystyle\lim_{s\to-\infty}M_X(s)=P(X=0)$</li>
+<li>If $Z=X+Y$ $M_Z(s)=E[e^{sZ}]=E[e^{s(X+Y)}]=E[e^{sX+sY}]=E[e^{sX}e^{sY}]$. If $X$ and $Y$ are independent, $M_Z(s)=E[e^{sX}]E[e^{sY}]=M_X(s)M_Y(s)$. </li>
+<li>In discrete random variables: <br />&emsp;For $Bernoulli(p)$, $M_X(s)=1-p+pe^s$<br />&emsp;For $Binomial(n,p)$, $M_X(s)=(1-p+pe^s)^n$<br />&emsp;For $Geometric(p)$, $M_X(s)=\displaystyle\frac{pe^s}{1-(1-p)e^s}$<br />&emsp;For $Poisson(\lambda)$, $M_X(s)=e^{\lambda(e^s-1)}$<br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sa}(e^{s(b-a+1)}-1)}{(b-a+1)(e^s-1)}$</li>
+<li>In continuous random variables: <br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sb}-e^{sa}}{s(b-a)}$<br />&emsp;For $Exponential(\lambda)$, $M_X(s)=\displaystyle\frac{\lambda}{\lambda-s}(s&lt;\lambda)$<br />&emsp;For $Normal(\mu,\sigma^2)$, $M_X(s)=e^{\frac{\sigma^2s^2}{2}+\mu s}$</li>
+<li>$M_{X_1,…,X_n}(s_1,…,s_n)=E[e^{s_1X_1+…+s_nX_n}]$</li>
+</ol>
+<h1 id="Sum-of-a-Random-Number-of-Independent-Random-Variables"><a href="#Sum-of-a-Random-Number-of-Independent-Random-Variables" class="headerlink" title="Sum of a Random Number of Independent Random Variables"></a>Sum of a Random Number of Independent Random Variables</h1><ol>
+<li>We consider the sum $Y=X_1+X_2+…+X_N$. <br />$N$ is a random variable that takes nonnegative integer values. <br />$X_1,X_2,…$ are identically independent distributed random variables. </li>
+<li>If $N=0$, $Y=0$. </li>
+<li>Fix a nonnegative integer $n$. <br />$E[Y|N=n]=E[X_1+X_2+…X_n]=nE[X]$. <br />So $E[Y|N]=NE[X]$. By the law of iterated expectation, $E[Y]=E[E[Y|N]]=E[NE[X]]=E[N]E[X]$</li>
+<li>$\begin{equation}\begin{split}var(Y)&amp;=E[var(Y|N)]+var(E[Y|N])\\&amp;=E[Nvar(X)]+var(NE[X])\\&amp;=E[N]var(X)+(E[X])^2var(N)\end{split}\end{equation}$</li>
+<li>$E[e^{sY}|N=n]=E[e^{sX_1}…e^{sX_n}]=E[e^{sX_1}]…E[e^{sX_n}]=(M_X(s))^n$. <br />$M_Y(s)=E[e^{sY}]=E[E[e^{sY}|N]]=E[(M_X(s))^N]=\displaystyle\sum^\infty_{n=0}(M_X(s))^np_N(n)=\sum^\infty_{n=0}e^{nlog M_X(s)}p_N(n)$<br />Compare with $M_N(s)=\displaystyle\sum^\infty_{n=0}e^{sn}p_N(n)$, $M_Y(s)=M_N(log M_X(s))$. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1251,107 +1364,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/09-Flux-and-Green-s-Theorem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/01/09-Flux-and-Green-s-Theorem/" class="post-title-link" itemprop="url">09. Flux and Green's Theorem</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-01 09:18:41" itemprop="dateCreated datePublished" datetime="2020-03-01T09:18:41+08:00">2020-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:06:16" itemprop="dateModified" datetime="2020-03-07T16:06:16+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Multivariable-Calculus-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">Multivariable Calculus (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
-<li>This is another kind of line integral. </li>
-<li><script type="math/tex">C</script> is the plane curve with unit normal vector <script type="math/tex">\vec{n}</script> at each point and <script type="math/tex">\vec{F}</script> is a vector field. </li>
-<li>If break <script type="math/tex">C</script> into small pieces <script type="math/tex">\Delta s</script>, <script type="math/tex">Flux=\displaystyle\lim_{\Delta s\to 0}(\sum\vec{F}\cdot\vec{n}\ \Delta s)</script>. So <script type="math/tex">Flux=\displaystyle\int_C\vec{F}\cdot\vec{n}\ ds</script></li>
-<li>Interpretation: for <script type="math/tex">\vec{F}</script> a velocity field, flux measures how much fluid passes through <script type="math/tex">C</script> per unit time. </li>
-<li>Before calculation, we need  to set a direction to flux. Goes along that direction is positive while opposite direction is negative. </li>
-<li>Calculation using components: <br />Remember: <script type="math/tex">d\vec{r}=\vec{T}ds=<dx,dy></script>. Since <script type="math/tex">\vec{n}</script> is <script type="math/tex">\vec{T}</script> rotated <script type="math/tex">\displaystyle\frac{\pi}{2}</script> clockwise, <script type="math/tex">\vec{n}ds=<dy,-dx></script>. <br />If <script type="math/tex">\vec{F}=<M,N></script>, then <script type="math/tex">\displaystyle\int_C\vec{F}\cdot\vec{n}ds=\int_C-Ndx+Mdy</script></li>
-</ol>
-<h1 id="Green’s-Theorem"><a href="#Green’s-Theorem" class="headerlink" title="Green’s Theorem"></a>Green’s Theorem</h1><ol>
-<li>For work: <script type="math/tex">C</script> is a closed curve enclosing a region R, counterclockwise. <script type="math/tex">\vec{F}</script> Vector field is defined and differentiable in <script type="math/tex">R</script>. Then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script>, namely <script type="math/tex">\displaystyle\oint_CMdx+Ndy=\iint_R(N_x-M_y)dA</script>. </li>
-<li><strong><code>WARNING: ONLY FOR CLOSED CURVE</code></strong></li>
-<li>If <script type="math/tex">curl\ \vec{F}=0</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA=0</script></li>
-<li>A complex region can be decomposed into simpler regions. </li>
-<li>For flux: If <script type="math/tex">C</script> encloses a region <script type="math/tex">R</script> counterclockwise and <script type="math/tex">\vec{F}<P,Q></script> defined in <script type="math/tex">R</script>, then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot\vec{n}ds=\iint_Rdiv\ \vec{F}dA</script> <script type="math/tex">(divergent:div\ <P,Q>=P_x+Q_y)</script>. </li>
-<li>Green’s theorem shows us the position of an enclosed curve doesn’t affect the flux. </li>
-<li>Interpretation of <script type="math/tex">div\ \vec{F}</script>: <br />&emsp;Measures how much the flow is expanding. <br />&emsp;Source rate = amount of fluid added to the system per unit time per unit area. </li>
-<li>If one enclosed curve <script type="math/tex">C'</script> is in another enclosed curve <script type="math/tex">C</script>, connect them with one segment. <br />We can go along <script type="math/tex">C</script> and then go to <script type="math/tex">C'</script> through that segment. <br />And go along <script type="math/tex">C'</script> in opposite direction then come back to <script type="math/tex">C</script> through that segment. <br />This forms a new curve which encloses a region <script type="math/tex">R</script> between <script type="math/tex">C</script> and <script type="math/tex">C'</script>. <br /><script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}-\oint_{C'}\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script></li>
-<li>A connected region <script type="math/tex">R</script> in the plane is simply connected if the interior of any closed curve in <script type="math/tex">R</script> is also contained in <script type="math/tex">R</script>. <br />Simply connected has no “hole” in it. </li>
-<li>If <script type="math/tex">curl\ \vec{F}=0</script> and domain where <script type="math/tex">\vec{F}</script> defined is simply connected, then <script type="math/tex">\vec{F}</script> is conservative and a gradient. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1423,7 +1435,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1436,7 +1448,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
