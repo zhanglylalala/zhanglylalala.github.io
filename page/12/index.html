@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">28</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,170 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%90%9C%E7%B4%A2%E4%B9%8B%E6%9E%9A%E4%B8%BE-%E7%86%84%E7%81%AF%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E6%90%9C%E7%B4%A2%E4%B9%8B%E6%9E%9A%E4%B8%BE-%E7%86%84%E7%81%AF%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">搜索之枚举(熄灯问题)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:44:50 / Modified: 00:45:10" itemprop="dateCreated datePublished" datetime="2019-11-09T00:44:50+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Search</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>一个矩阵排列的灯阵，有的是亮的，有的是灭的。每一个灯都有一个按钮，每个按钮都控制五个灯，分别是按钮直接连的灯和这个灯的上下左右各一个灯，例如位于(2, 3)的按钮可以用控制(2, 3)、(1, 3)、(2, 2)、(2, 4)、(3, 3)。按下按钮后其控制的每一盏灯如果是亮的就灭掉，如果是暗的就亮起来。现在给定一个n×m灯阵，求可以把他们都灭掉的方法</p>
+<h1 id="状态压缩"><a href="#状态压缩" class="headerlink" title="状态压缩"></a>状态压缩</h1><p>一直以为状压是高深莫测的东西，原来这就是最经典的01状压。状压就是把物体的状态压缩成一个个整型，存储操作起来方便。状压常和其他算法结合，常见的有动态规划、线段树和搜索。这题就是状压加搜索，把亮灯状态压缩成1，暗灯状态压缩成0。</p>
+<h1 id="直观思路"><a href="#直观思路" class="headerlink" title="直观思路"></a>直观思路</h1><p>遍历所有的开关操作，验证是否可以关掉所有的灯。但复杂度是O(mn2^mn^)，高得不可接受。虽然这是一个NP完全问题，但我们还是可以尝试降低一点复杂度，使算法更优</p>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>易知有以下事实：<br>&emsp;1) 一个灯的状态变化偶数次，那个灯的最终状态就和初状态一样；<br>&emsp;2) 第i行中每盏点亮的灯都可以在第i+1行中按对应的按钮来熄灭它<br>由事实1我们可以以知道每个按钮最多按一次<br>由事实1和2我们可以推理如下：<br>&emsp;1) 如果一盏灯是亮的我们就要按奇数次控制它的开关来熄灭它，如果是暗的我们就要按偶数次来维持它暗的性质，所以如果一个点初始时是1，那其四周的点的和要为奇数；否则为偶数，即奇偶性一致<br>&emsp;2) 设记录灯原始状态的数组为lamp，按钮按的次数的数组为push，则有<code>(push[i][j] + push[i][j - 1] + push[i][j + 1] + push[i + 1][j] + push[i - 1][j]) % 2 == lamp[i][j]</code><br>&emsp;3) 由推论2)得<code>push[i][j] + push[i][j - 1] + push[i][j + 1] + push[i + 1][j] + push[i - 1][j] == (2k - 1)lamp[i][j]</code>，可以推出<code>push[i][j] + push[i][j - 1] + push[i][j + 1] + lamp[i][j] + push[i - 1][j] == 2k * lamp[i][j] - push[i + 1][j]</code>由于<code>2k * lamp[i][j]</code>为偶数，所以<code>2k * lamp[i][j] - push[i + 1][j]</code>的奇偶性与 <code>push[i + 1][j]</code>一致，所以有<code>(lamp[i][j] + push[i][j] + push[i][j - 1] + push[i][j + 1] + push[i - 1][j]) % 2 == push[i + 1][j]</code><br>&emsp;4) 我们可以通过第一行的按钮使用状态推出第二行要使第一行全熄灭的状态，直到最后一行<br>由推论4，我们想到了可以推出当运行到最后一行时，以上的所以灯都是熄灭的，因为我们每一行的目标都是使上一行的灯全部熄灭，当又不会影响到再上一行。而推论2又给了我们一个判断最后一行是否熄灭的办法<br><code>注：为什么要用推论2和3：可以在不改变原始数组的情况下得到所要的结果</code><br>由此，我们就想到了优化的办法：枚举第一行的所有操作，推出以下操作，判断是否可行。复杂度就降到了O(mn2^m^)</p>
+<h1 id="推理第二行及以下操作并判断是否可行"><a href="#推理第二行及以下操作并判断是否可行" class="headerlink" title="推理第二行及以下操作并判断是否可行"></a>推理第二行及以下操作并判断是否可行</h1><p>有一个优化代码的细节：如果我们从0开始存储，就会遇到要判断是否越界的情况，但如果我们从1开始存储并在末尾留充足的空间，并全部初始化为0就可以都用同一种操作<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> lamp[maxn][maxm], push[maxn][maxm];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">guess</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//推理第二行及以下操作</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			push[i + <span class="number">1</span>][j] = (push[i][j] + push[i][j - <span class="number">1</span>] + push[i][j + <span class="number">1</span>] + push[i - <span class="number">1</span>][j] + lamp[i][j]) % <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//判断是否可行</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//最后一行，不必加上下一行的操作</span></span><br><span class="line">		<span class="keyword">if</span>((push[n][i] + push[n][i - <span class="number">1</span>] + push[n][i] + push[n - <span class="number">1</span>][i]) % <span class="number">2</span> != lamp[n][i])</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;   <span class="comment">//返回操作次数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">			cnt += push[i][j];</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="枚举第一行的所有状态"><a href="#枚举第一行的所有状态" class="headerlink" title="枚举第一行的所有状态"></a>枚举第一行的所有状态</h1><p>枚举利用二进制的位运算，二进制第i位为1就表示按下按钮，0表示不操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//利用二进制初始化push数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">importPush</span><span class="params">(<span class="keyword">int</span> binary)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		push[<span class="number">1</span>][i] = binary &amp; <span class="number">1</span>; <span class="comment">//push[1][i]的值就是当前binary的最低位的值</span></span><br><span class="line">		binary &gt;&gt;= <span class="number">1</span>; <span class="comment">//没导入完一个以后就右移一位，把下一位暴露出来，给下一次导入使用</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>易知，灯的所有状态从全为0开始，到全为1结束</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">min</span> = <span class="number">-1</span>, ans = <span class="number">-1</span>; <span class="comment">//返回可行且操作数最小的第一行状态(二进制数)</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; m; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		importPush(i);  <span class="comment">//先导入</span></span><br><span class="line">		<span class="keyword">int</span> temp = guess();</span><br><span class="line">		<span class="keyword">if</span>(temp &gt;= <span class="number">0</span> &amp;&amp; (temp &lt; <span class="built_in">min</span> || <span class="built_in">min</span> &lt; <span class="number">0</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">min</span> = temp;</span><br><span class="line">			ans = i;</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//这里读入数据</span></span><br><span class="line">	<span class="keyword">int</span> ans = solve();</span><br><span class="line">	<span class="keyword">if</span>(ans &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"IMPOSSIBLE\n"</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		guess(ans, n, m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>, push[i][<span class="number">0</span>]);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">" %d"</span>, push[i][j]);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/POJ-3279" target="_blank" rel="noopener">POJ 3279(Fliptile)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E6%90%9C%E7%B4%A2/" class="post-title-link" itemprop="url">搜索</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-11-09 00:44:05 / Modified: 00:44:35" itemprop="dateCreated datePublished" datetime="2019-11-09T00:44:05+08:00">2019-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ACM/Search/" itemprop="url" rel="index">
+                    <span itemprop="name">Search</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="双源BFS"><a href="#双源BFS" class="headerlink" title="双源BFS"></a>双源BFS</h1><p>有两个起点的BFS，注意，在搜索的时候是搜两颗树(虽然通常两颗数在原图中可能最后会相交)，每次搜索都是一棵树搜一层，另一棵树搜一层。搜索时在开始就把两个起点都加入到同一个队列中，根据BFS是树的层次遍历知——只需要依次取出队列的首元素就可以做到轮流搜一层的效果</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Node a, Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;Node&gt; q;</span><br><span class="line">    </span><br><span class="line">    q.push(a);</span><br><span class="line">    q.push(b); <span class="comment">//加入同一个队列</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        a = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(...) <span class="comment">//遍历a的子节点</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            ...生成一个a的子节点b</span></span><br><span class="line"><span class="comment">            */</span></span><br><span class="line">            <span class="keyword">if</span>(judge(b)) <span class="comment">//如果b合法</span></span><br><span class="line">            &#123;</span><br><span class="line">                q.push(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://vjudge.net/problem/FZU-2150" target="_blank" rel="noopener">FZU 2150</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> dy[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y, cnt ;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;Node&gt; v;</span><br><span class="line"><span class="keyword">char</span> mp[N][N];</span><br><span class="line"><span class="keyword">int</span> vis[N][N];</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.x&gt;<span class="number">0</span> &amp;&amp; b.y&gt;<span class="number">0</span> &amp;&amp; b.x&lt;=n &amp;&amp; b.y&lt;=m &amp;&amp; vis[b.x][b.y]==<span class="number">0</span> &amp;&amp; mp[b.x][b.y]==<span class="string">'#'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">(Node a,Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">queue</span>&lt;Node&gt; q;</span><br><span class="line">    vis[a.x][a.y]  = vis[b.x][b.y] = <span class="number">1</span>;</span><br><span class="line">    a.cnt = <span class="number">0</span>,b.cnt = <span class="number">0</span>;</span><br><span class="line">    q.push(a);</span><br><span class="line">    q.push(b);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    <span class="keyword">int</span> cas = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        a = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        ans = a.cnt;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            b.x = a.x + dx[i];</span><br><span class="line">            b.y = a.y + dy[i];</span><br><span class="line">            b.cnt = a.cnt + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(judge(b))</span><br><span class="line">            &#123;</span><br><span class="line">                vis[b.x][b.y] = <span class="number">1</span>;</span><br><span class="line">                q.push(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> kase = <span class="number">1</span>; kase &lt;= T; kase++)</span><br><span class="line">    &#123;</span><br><span class="line">        v.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;mp[i][j]);</span><br><span class="line">                <span class="keyword">if</span>(mp[i][j] == <span class="string">'#'</span>)</span><br><span class="line">                    v.push_back((Node)&#123;i, j, <span class="number">0</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; v.<span class="built_in">size</span>(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = BFS(v[i], v[j]);</span><br><span class="line">                <span class="keyword">bool</span> ok = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> f = <span class="number">1</span>; f &lt;= m; f++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(vis[k][f] == <span class="number">0</span> &amp;&amp; mp[k][f] == <span class="string">'#'</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                            ok = <span class="literal">false</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(ok == <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(ok)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans = <span class="built_in">min</span>(ans, tmp);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: "</span>, kase);</span><br><span class="line">        <span class="keyword">if</span>(ans == <span class="number">0x3f3f3f3f</span>)</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"-1"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -892,177 +1056,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%8B%93%E5%B1%95KMP%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E6%8B%93%E5%B1%95KMP%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">拓展KMP算法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-09 00:34:03 / Modified: 00:34:55" itemprop="dateCreated datePublished" datetime="2019-11-09T00:34:03+08:00">2019-11-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>EX-KMP算法是在KMP算法的基础上改变的</p>
-<h1 id="算法目的"><a href="#算法目的" class="headerlink" title="算法目的"></a>算法目的</h1><p>求出主串每一个后缀和模式串的最长公共前缀，也可以理解为主串从每一个位置开始到结尾的子串和模式串的最长公共前缀</p>
-<h1 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h1><p>我们用一个数组extend来保存结果，受到KMP算法的启发，我们对模式串进行自匹配，得到nex数组。在拓展KMP算法中，预处理和主算法之间几乎没有区别，只是改了比较的两个数组，自匹配是模式串和模式串匹配，主算法是主串和模式串匹配</p>
-<h1 id="extend匹配方法"><a href="#extend匹配方法" class="headerlink" title="extend匹配方法"></a>extend匹配方法</h1><p>exKMP和KMP的核心思想一样，都是利用之前的匹配结果来避免不必要的匹配过程。假设我们已经完成了主串第k位及其以前的匹配，我们要开始匹配主串的第k+1位和模式串的第0位开始的串。<br>1、因为我们要利用以前的匹配结果，所以以前的匹配结果越远越好，又我们是从主串的第k+1位开始往后匹配，我们只需要主串上的最后匹配位置P越靠后就好，而无需管该次匹配的开始位置p0在哪，不需使该次匹配的长度最长<br>2、易知k+1到p~0~点距离是k+1-p~0~，我们假设第k+1位开始匹配的最长公共前缀的长度是len，则我们为了利用之前的结果，得知主串<strong>S(p~0~..&lt;p~0~+extend[p~0~]) = 模式串T(0..&lt;extend[p~0~])</strong>。又有<strong>T(0..&lt;nex[k-p~0~+1]) = T(k-p~0~+1..&lt;k-p~0~+1+nex[k-p~0~+1]</strong>，我们在模式串和主串匹配时把模式串前移k-p~0~+1，使k+1与p~0~重合<br>3、我们可以得到<strong>S(p~0~..&lt;p~0~+nex[k-p~0~+1])=T(0…nex[k-p~0~+1])=T(k-p~0~+1…k-p~0~+nex[k-p~0~+1])=S(k+1…k+nex[k-p~0~+1])</strong>。这就够了吗？不是的，我们可以注意到，在推导过程中，在最后<strong>S(k+1…k+nex[k-p~0~+1])</strong>中，最远可以到<strong>k+nex[k-p~0~+1]</strong>，如果这个值已经超出了我们的已匹配范围(<strong>p~0~+extend[p~0~]-1</strong>)就不能利用结果<br>故我们得出若<strong>k+nex[k-p~0~+1]&lt;p~0~+extend[p~0~]</strong>，则<strong>T(0…nex[k-p~0~+1])=S(k+1…k+nex[k-p~0~+1])</strong>，即<strong>第k+1位的匹配长度为nex[k-p~0~+1]</strong><br>4、若<strong>nex[k-p~0~+1] &gt;= extend[p~0~]</strong>，我们只需要从P+1开始匹配，并更新P和p~0~</p>
-<h1 id="nex匹配方法"><a href="#nex匹配方法" class="headerlink" title="nex匹配方法"></a>nex匹配方法</h1><p>匹配过程中的主串和模式串都是主算法中的模式串，extend和nex数组都是主算法中的nex</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nex[maxn], ex[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildNex</span><span class="params">(<span class="keyword">int</span> modeLen, <span class="built_in">string</span> modeString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    nex[<span class="number">0</span>] = modeLen;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos + <span class="number">1</span> &lt; modeLen &amp;&amp; modeString[mainPos + <span class="number">1</span>] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    nex[<span class="number">1</span>] = mainPos;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">2</span>; mainPos &lt; modeLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + nex[mainPos - p0] &lt; p0 + nex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            nex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = nex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; modeLen &amp;&amp; modeString[j] == modeString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            nex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildExtend</span><span class="params">(<span class="built_in">string</span> mainString, <span class="built_in">string</span> modeString, <span class="keyword">int</span> mainLen, <span class="keyword">int</span> modeLen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    buildNex(mainLen, modeString);</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    p0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos &lt; modeLen &amp;&amp; mainPos &lt; mainLen &amp;&amp; mainString[mainPos] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    ex[<span class="number">0</span>] = mainPos;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">1</span>; mainPos &lt; mainLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + ex[mainPos - p0] &lt; p0 + ex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            ex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = ex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; mainLen &amp;&amp; j &lt; modeLen &amp;&amp; modeString[j] == mainString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            ex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/KMP%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/KMP%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">KMP串匹配算法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:33:20" itemprop="dateCreated datePublished" datetime="2019-11-09T00:33:20+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-07 09:01:24" itemprop="dateModified" datetime="2020-05-07T09:01:24+08:00">2020-05-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/String/" itemprop="url" rel="index">
-                    <span itemprop="name">String</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="串匹配问题"><a href="#串匹配问题" class="headerlink" title="串匹配问题"></a>串匹配问题</h1><p>给定两个串，一个是主串，一个是模式串，要求从主串中找到模式串的匹配<br>直观地，很容易就想得到蛮力算法，即一个一个比较，直到找到或匹配结束</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> mainString, modeString;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, modePos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = mainString.length();</span><br><span class="line">    <span class="keyword">int</span> modeLen = modeString.length();</span><br><span class="line">    <span class="keyword">while</span>(mainPos &lt; len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainString[mainPos] == modeString[modePos])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = mainPos + <span class="number">1</span>;</span><br><span class="line">            modePos++;</span><br><span class="line">            <span class="keyword">while</span>(mainString[pos] == modeString[modePos] &amp;&amp; modePos &lt; modeLen)</span><br><span class="line">            &#123;</span><br><span class="line">                pos++;</span><br><span class="line">                modePos++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(modePos == modeLen)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                modePos = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>先来看一下蛮力算法慢的原因：到一个点匹配失败，可以得出在这个点之前到都是匹配成功的，这样我们就可以通过模式串知道主串在那一段中的信息，利用这些信息，我们就可以提前知道哪些值得匹配，哪些不值得花时间匹配，就可以跳过一些内容，省下时间。而蛮力算法的问题就是没有好好利用我们已知的模式串的信息。<br>于是我们就有了改进的方向——对模式串进行预处理，知道当我们在模式串的第i个点匹配失败时应该跳到第nex[ i ]而不是都回到原点</p>
-<h1 id="nex数组"><a href="#nex数组" class="headerlink" title="nex数组"></a>nex数组</h1><p><strong>含义</strong>“：<br>我们思考一下为什么我们可以直接从nex[ i ]开始匹配而不需像蛮力算法一样，从头开始？因为跳过的那些已经匹配了。那那些是和什么匹配了？首先想一下，匹配失败了以后，主串上的指针是不同的，我们所做的操作只是移动了模式串让nex[ i ]去和主串之前失败的地方匹配。所以移过去了以后，模式串跳过的那些前缀就和主串中失败点之前到一段等长后缀匹配。又主串失败点之前的内容已经和模式串的失败点之前的子串匹配所以实际就是模式串在失败点之前的子串的一个前缀和后缀在匹配，而跳过的长度就是匹配前缀的长度，nex[ i ]存储的值就是这个长度。<br><img src="/img/KMP串匹配算法01.jpg" width="80%"><br><strong>构造</strong>：<br>构造就是模式串自匹配的过程。子匹配时两个指针，一个mainPos指的是主串，一个modePos指的是模式串，虽然两个都指在同一个串中。匹配时有两种情况：<br>&emsp;1、如果主串和模式串匹配，则<code>nex[mainPos] = modeString + 1</code>，因为modePos及其以前的子串已经和mainPos之前的后缀匹配了，所以在这里的最长前缀只能全部取，长度就是modePos+1<br>&emsp;2、如果不匹配，<code>modePos = nex[modePos]</code>，道理同主串和模式串不同时，直到匹配成功<br>为了防止第一个就不匹配，我们设定一个哨兵，在整个字符串的前面，假设这个哨兵可以和任意字符匹配，位置为-1，所以<code>nex[0] = -1</code>，第一个都失败的话就让哨兵去匹配现在的那个点才能成功<br>modePos初始就设为nex[ 0 ] = -1</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildNext</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nex[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mainString = <span class="number">0</span>, modeString = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainString &lt; str2.length() - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str2[mainString] == str2[modeString] || modeString &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            nex[++mainString] = ++modeString;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            modeString = nex[modeString];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="！！！！！nex数组的下标i都是模式串的第i位，而不是主串的第i位"><a href="#！！！！！nex数组的下标i都是模式串的第i位，而不是主串的第i位" class="headerlink" title="！！！！！nex数组的下标i都是模式串的第i位，而不是主串的第i位"></a>！！！！！nex数组的下标i都是模式串的第i位，而不是主串的第i位</h5><h1 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h1><p>和蛮力算法的区别就是不匹配时<code>modeString = nex[modeString]</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">kmp</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ori = <span class="number">0</span>, cmp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len1 = (<span class="keyword">int</span>)str1.length();</span><br><span class="line">    <span class="keyword">int</span> len2 = (<span class="keyword">int</span>)str2.length();</span><br><span class="line">    <span class="keyword">while</span>(ori &lt; len1 &amp;&amp; cmp &lt; len2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span> || str1[ori] == str2[cmp])</span><br><span class="line">        &#123;</span><br><span class="line">            ori++;</span><br><span class="line">            cmp++;</span><br><span class="line">            <span class="keyword">if</span>(cmp == str2.length())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cmp = nex[cmp];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>串都是从0开始的</p>
-<h1 id="串的周期性"><a href="#串的周期性" class="headerlink" title="串的周期性"></a>串的周期性</h1><p>建立nex数组时，while循环的条件改为<code>mainString &lt; str2.length()</code>，设串长为len，则：<br>&emsp;1、如果<code>nex[len] == 0</code>，则该串毫无循环；<br>&emsp;2、如果有<code>len % (len - nex[len]) == 0</code>，则这是一个循环串，且循环节长度为<code>len - nex[len]</code>，循环次数为<code>len / (len - nex[len])</code>；<br>&emsp;3、否则该串有部分循环，且最少再补<code>(len - nex[len]) - len % (len - nex[len])</code>个元素就可以成为循环<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3746" target="_blank" rel="noopener">HDOJ 3746</a><br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1358" target="_blank" rel="noopener">HDOJ 1358</a></p>
-<h1 id="nex数组的妙用"><a href="#nex数组的妙用" class="headerlink" title="nex数组的妙用"></a>nex数组的妙用</h1><p>除了用在KMP查询上，nex数组还可以用在如下方面：<br>&emsp;任意前缀的重复次数：nex[i]可以理解为串的长为nex[i]的前缀在自身上以第i个元素开头，长为nex[i]的子串重合，即前缀重复了一次。所以利用nex数组，我们就可以知道任意前缀的重复次数<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3336" target="_blank" rel="noopener">HDOJ 3336</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1134,20 +1127,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

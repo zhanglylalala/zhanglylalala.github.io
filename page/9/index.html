@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">22</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">28</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,221 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/" class="post-title-link" itemprop="url">14. Orthogonal Matrices and Gram-Schmidt</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-02 09:28:35" itemprop="dateCreated datePublished" datetime="2020-02-02T09:28:35+08:00">2020-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:07:47" itemprop="dateModified" datetime="2020-03-07T16:07:47+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Orthogonal-Matrices"><a href="#Orthogonal-Matrices" class="headerlink" title="Orthogonal Matrices"></a>Orthogonal Matrices</h1><ol>
+<li><code>Orthonormal</code> is a basis consisting of orthogonal unit vectors. </li>
+<li>A matrix with orthonormal columns is assigned the special letter <script type="math/tex">Q</script>. </li>
+<li><script type="math/tex">Q^TQ=I</script><br />Prove: <br /><script type="math/tex">Q^TQ=\left[\begin{matrix}q_1^T\\q_2^T\\\vdots\\q_n^T\end{matrix}\right]\left[\begin{matrix}q_1&q_2&\dots&q_n\end{matrix}\right]</script><br />Except for <script type="math/tex">q_i^Tq_i</script> is <script type="math/tex">1</script>, for any <script type="math/tex">q_i^Tq_j\ (i≠j)</script> is <script type="math/tex">0</script>. So only diagonals are <script type="math/tex">1</script> and all others are <script type="math/tex">0</script>. </li>
+<li><script type="math/tex">Q</script> is not required to be square. </li>
+<li>When <script type="math/tex">Q</script> is square, <script type="math/tex">Q^TQ=I</script> means that <script type="math/tex">Q^{-1}=Q^T</script>. So <script type="math/tex">QQ^T=I</script> is also true under this condition. In this square case, we call <script type="math/tex">Q</script> an <code>orthogonal matrix</code>. </li>
+<li>Every permutaion matrix is an orthogonal matrix. </li>
+<li>If <script type="math/tex">\vec{u}</script> is any unit vector, set <script type="math/tex">Q=I-2\vec{u}\vec{u}^T</script>. <br />Then <script type="math/tex">Q^T=I-2\vec{u}\vec{u}^T=Q</script> and <script type="math/tex">Q^TQ=I-4\vec{u}\vec{u}^T-4\vec{u}\vec{u}^T\vec{u}\vec{u}^T=I\ (\vec{u}^T\vec{u}=||\vec{u}||^2=1)</script><br />This <script type="math/tex">Q</script> is called the reflection matrix. It’s symmetrix and orthogonal. <br /><script type="math/tex">Q^2=Q^TQ=QQ^T=Q^{-1}Q=I</script><br />Any vector times <script type="math/tex">Q</script> will be reflected and the mirror is the space perpendicular to <script type="math/tex">\vec{u}</script>. The vectors in the mirror doesn’t change. </li>
+<li>Multiplication by any orthogonal martix <script type="math/tex">Q</script>, lengths don’t change. <br />Proof: <script type="math/tex">||Q\vec{x}||^2=(Q\vec{x})^T(Q\vec{x})=\vec{x}^TQ^TQ\vec{x}=\vec{x}^T\vec{x}=||\vec{x}||^2</script></li>
+<li><script type="math/tex">Q</script> also preserves dot products: <script type="math/tex">(Q\vec{x})^T(Q\vec{y})=\vec{x}^TQ^TQ\vec{y}=\vec{x}^T\vec{y}</script>. </li>
+</ol>
+<h1 id="Projection"><a href="#Projection" class="headerlink" title="Projection"></a>Projection</h1><ol>
+<li>The least squares solution of <script type="math/tex">Q\vec{x}=\vec{b}</script> is <script type="math/tex">\hat{\vec{x}}=Q^T\vec{b}</script>. The projection matrix is <script type="math/tex">QQ^T</script>. <br /><code>MARK</code>: <script type="math/tex">QQ^T</script> is <script type="math/tex">I</script> only when <script type="math/tex">Q</script> is square. </li>
+<li>Projection: <script type="math/tex">\vec{p}=Q\hat{\vec{x}}=QQ^T\vec{b}=\sum{\vec{q_i}(\vec{q_i}^T\vec{b})}</script></li>
+<li>If <script type="math/tex">Q</script> is square: <br />Every <script type="math/tex">\vec{p_i}=\vec{q_i}(\vec{q_i}^T\vec{b})</script> is the projection of <script type="math/tex">\vec{b}</script> into a 1-dimentional  space. We can break <script type="math/tex">\vec{b}</script> into its projections and reconstruct <script type="math/tex">\vec{b}</script> from its projections. <br />Its columns space is the whole space. The projection of <script type="math/tex">\vec{b}</script> is itself. <script type="math/tex">P=I</script></li>
+</ol>
+<h1 id="Gram-Schmidt-Process"><a href="#Gram-Schmidt-Process" class="headerlink" title="Gram-Schmidt Process"></a>Gram-Schmidt Process</h1><ol>
+<li><code>The Gram-Schmidt process</code> is the process to create orthonormal vectors. </li>
+<li>The first direnction (column vector) is accepted as it comes. </li>
+<li>The next direction must be perpendicular to all the accepted directions. And we get the next direction by subtracting all its projections in the accepted directions from itself. This leaves only the perpendicular part. </li>
+<li>The process takes independent <script type="math/tex">\vec{a_i}</script> to orthonormal <script type="math/tex">\vec{q_i}</script>. <br />Start with <script type="math/tex">\vec{q_1}=\frac{\vec{a_1}}{||\vec{a_1}||}</script>. <br /><script type="math/tex">\vec{q_i}=\frac{\vec{a_i}-\vec{p}}{||\vec{a_i}-\vec{p}||}</script>. And <script type="math/tex">\vec{p_i}=\displaystyle\sum^{i-1}_{j=1}{(\vec{a_i}^T\vec{q_j})\vec{q_j}}</script></li>
+<li>If we take all column vectors <script type="math/tex">\vec{a}</script> into matrix <script type="math/tex">A</script> and all <script type="math/tex">\vec{q}</script> into <script type="math/tex">Q</script>. Since all vectors in <script type="math/tex">Q</script> is merely linear combination of <script type="math/tex">A</script>, their share the same column space. That’s how we know we can factorize <script type="math/tex">A</script> into something with <script type="math/tex">Q</script>. This is <script type="math/tex">A=QR</script>. </li>
+<li>Multiply by <script type="math/tex">Q^T</script>: <script type="math/tex">Q^TA=Q^TQR=R</script>. So <script type="math/tex">R=Q^TA=\left[\begin{matrix}\vec{q_1}^T\vec{a_1}&\vec{q_1}^T\vec{a_2}&\dots&\vec{q_1}^T\vec{a_n}\\&\vec{q_2}^T\vec{a_2}&\dots&\vec{q_2}^T\vec{a_n}\\&&\ddots&\vdots\\&&&\vec{q_n}^T\vec{a_n}\end{matrix}\right]</script>. </li>
+<li><script type="math/tex">R</script> is upper triangular because latter <script type="math/tex">\vec{q}</script>‘s are orthogonal to earlier <script type="math/tex">\vec{a}</script>‘s. </li>
+<li>The lengths of all <script type="math/tex">\vec{a}</script>‘s are in the diagonal of <script type="math/tex">R</script>. </li>
+<li><script type="math/tex; mode=display">A^TA=(QR)^T(QR)=R^TQ^TQR=R^TR</script></li>
+<li>The least squares equation <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> becomes <script type="math/tex">R^TR\hat{\vec{x}}=R^TQ^T\vec{b}</script> and finally <script type="math/tex">R\hat{\vec{x}}=Q^T\vec{b}</script>. <br />The least squares solution <script type="math/tex">\hat{\vec{x}}=R^{-1}Q^T\vec{b}</script></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/01/13-Least-Squares/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/01/13-Least-Squares/" class="post-title-link" itemprop="url">13. Least Squares</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-01 16:00:15" itemprop="dateCreated datePublished" datetime="2020-02-01T16:00:15+08:00">2020-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-02 12:24:46" itemprop="dateModified" datetime="2020-02-02T12:24:46+08:00">2020-02-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Minimizing-the-Error"><a href="#Minimizing-the-Error" class="headerlink" title="Minimizing the Error"></a>Minimizing the Error</h1><ol>
+<li>When $A\vec{x}=\vec{b}$ has no solution, we solve $A\hat{\vec{x}}=\vec{b}’$. And $\vec{e}=\vec{b}-A\hat{\vec{x}}$ is the error vector stands for the difference between $\vec{b}$ and the $\vec{b}’$ we use instead. </li>
+<li>$\hat{\vec{x}}$ is called the <code>least squares solution</code>. </li>
+<li>Because $\hat{\vec{x}}$ is the best solution, $\hat{\vec{x}}$ makes $E=||e||^2$ as small as possible. </li>
+<li>By geometry, to minimize $E$, we only need to make $\vec{e}$ perpendicular to $C(A)$. So the best solution to $A\hat{\vec{x}}$ is $\vec{p}$. </li>
+<li>By algebra, $\vec{b}$ splits into two parts. The part in the column space is $\vec{p}$. The perpendicular part is $\vec{e}$. So remove $\vec{e}$ and solve $A\hat{\vec{x}}=\vec{p}$. </li>
+<li>For any vector $\vec{x}$, $||A\vec{x}-\vec{b}||^2=||A\vec{x}-\vec{p}||^2+||\vec{e}||^2$. $A\vec{x}-\vec{p}$ which stands for the defference between $\vec{b}’$ and $\vec{p}$ is in $C(A)$ and $\vec{e}$ is in $N(A^T)$. We set $A\vec{x}-\vec{p}$ $\vec{0}$ by choosing $\vec{x}=\hat{\vec{x}}$ to minimize $||A\vec{x}-\vec{b}||$. </li>
+<li>By calculus, we need to minimize the function $E=\displaystyle{\sum^n_{i=1}{e_i^2}}$. To do that, we need to solve $\frac{\partial E}{\partial x_i}=0$. After that, we can get a new system of equations $A’\vec{x}=\vec{c}$. Here $A’$ happens to be $A^TA$ and $\vec{c}$ happens to be $A^T\vec{b}$. </li>
+<li>The shortage of least squares is that it cannot ignore the wrong data. If a data is wrong, it will be far a way from others and the solution will shift to it. </li>
+</ol>
+<h1 id="Dependent-Columns-in-A"><a href="#Dependent-Columns-in-A" class="headerlink" title="Dependent Columns in A"></a>Dependent Columns in A</h1><ol>
+<li>If A has dependent columns, $A^TA$ isn’t invertible, we cannot use the aforementioned way to get the best solution. </li>
+<li>If we insist the projection way, we can change an equation without solution to an equation with infinitely many solutions. </li>
+<li>The pseudoinverse will choose the shortest solution to $A\hat{\vec{x}}=\vec{p}$. </li>
+</ol>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Fitting-a-Straight-Line"><a href="#Fitting-a-Straight-Line" class="headerlink" title="Fitting a Straight Line"></a>Fitting a Straight Line</h2><ol>
+<li>We have $m$ dots and want to find a line go through all dots. When we cannot, we want a best line. </li>
+<li>If we suppose that line is $C+Dt=b$, we can have the equation $A\left[\begin{matrix}C\\D\end{matrix}\right]=\vec{b}$. $A=\left[\begin{matrix}1&amp;t_1\\1&amp;t_2\\\vdots&amp;\vdots\\1&amp;t_m\end{matrix}\right]$ $\vec{b}=\left[\begin{matrix}b_1\\b_2\\\vdots\\b_m\end{matrix}\right]$</li>
+<li>$A^TA=\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]$<br />$A^T\vec{b}=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$<br />The final equation is $\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$</li>
+<li>If two columns of $A$ is orthogonal, i.e. $\sum{t_i}=0$, the final equation becomes $\left[\begin{matrix}m&amp;0\\0&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$ which is a lot easier to solve. So we can orthognize columns of $A$ first by subtracting the average time $\hat{t}=\frac{\sum{t_i}}{m}$ from the last column of $A$. </li>
+</ol>
+<h2 id="Fitting-by-a-Parabola"><a href="#Fitting-by-a-Parabola" class="headerlink" title="Fitting by a Parabola"></a>Fitting by a Parabola</h2><ol>
+<li>Suppose $C+Dt+Et^2=b$. </li>
+<li>$A=\left[\begin{matrix}1&amp;t_1&amp;t_1^2\\1&amp;t_2&amp;t_2^2\\\vdots&amp;\vdots&amp;\vdots\\1&amp;t_m&amp;t_m^2\end{matrix}\right]$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1092,1008 +1307,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/14/04-Factorization-into-A-LU/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/14/04-Factorization-into-A-LU/" class="post-title-link" itemprop="url">04. Factorization into A = LU</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-14 23:21:00" itemprop="dateCreated datePublished" datetime="2020-01-14T23:21:00+08:00">2020-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-02 00:15:59" itemprop="dateModified" datetime="2020-04-02T00:15:59+08:00">2020-04-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Linear-Algebra-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">Linear Algebra (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Factorization"><a href="#Factorization" class="headerlink" title="Factorization"></a>Factorization</h1><ol>
-<li>According to Gauss Elimination, we can know that <script type="math/tex">E_{nn-1}…E_{ij}…E_{21}A = U</script>. We denote this equation as <script type="math/tex">L'A = U</script></li>
-<li>So it is natural that <script type="math/tex">A = E_{21}^{-1}…E_{ij}^{-1}…E_{nn-1}^{-1}U</script></li>
-<li>We denote <script type="math/tex">E_{21}^{-1}…E_{ij}^{-1}…E_{nn-1}^{-1}</script> as <script type="math/tex">L</script>, which makes <script type="math/tex">A = LU</script></li>
-<li>Every time a multiplier multiplies a row with a pivot. What is changed is the rows below it. Whatever is above that row (including that row) remains unchanged. So the multipliers in the elimination work on $U$, instead of $A$. </li>
-<li>What happens to $A$ is a lot more complicated than $U$. That means <script type="math/tex">L'</script> is a lot more complicated than <script type="math/tex">L</script>. </li>
-<li>When the matrix multiplication messed up all numbers in <script type="math/tex">L'</script>, while, amazingly, all entries of <script type="math/tex">L</script> is precisely the multiplier. Each multiplier goes directly into its <script type="math/tex">(i,\ j)</script> position in <script type="math/tex">L</script>. </li>
-<li>We can even take a further step to divide each row of <script type="math/tex">U</script> by their pivots to extract the pivots in another matrix <script type="math/tex">D</script>. All pivots in $D$ are in their old place in <script type="math/tex">U</script>. This makes the equation <script type="math/tex">A = LDU</script>. Furthermore, both <script type="math/tex">L</script> and <script type="math/tex">U</script> have $1$s in diagonal. </li>
-<li>Now we can solve the equation in two steps: <script type="math/tex">L\vec{c}=\vec{b}</script> and <script type="math/tex">U\vec{x}=\vec{c}</script></li>
-</ol>
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ol>
-<li>To factorize <script type="math/tex">A</script> into <script type="math/tex">LU</script>, how many operations we have to take? The answer is the number of operations we have to take to eliminate. </li>
-<li>To get the first pivot, we have to eliminate the first column. This stage needs to eliminate <script type="math/tex">n-1</script> elements. Each element needs <script type="math/tex">n</script> subtractions and <script type="math/tex">n</script> multiplications-totally <script type="math/tex">2n(n - 1) = 2n^2 - 2n = O(n^2)</script> operations. </li>
-<li>To get <script type="math/tex">U</script>, we have to eliminate each column as the first column while the size of each column is $1$ less than the former one. So totally about <script type="math/tex">n^2 + (n-1)^2 +…+1^2 = \frac{1}{3}n(n-\frac{1}{2})(n-1) = O(n^3)</script></li>
-<li>For the right side, when eliminating the first row, it needs <script type="math/tex">n-1</script> multiplications and <script type="math/tex">n-1</script> subtractions. So totally <script type="math/tex">2(n-1)+2(n-2)+…+2=O(n^2)</script></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/25/day-15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/25/day-15/" class="post-title-link" itemprop="url">day 15</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-25 21:12:29" itemprop="dateCreated datePublished" datetime="2019-11-25T21:12:29+08:00">2019-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-20 18:08:45" itemprop="dateModified" datetime="2020-07-20T18:08:45+08:00">2020-07-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/" itemprop="url" rel="index">
-                    <span itemprop="name">English</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/English/10000-Words/" itemprop="url" rel="index">
-                    <span itemprop="name">10000 Words</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">jovial</td>
-<td style="text-align:center">adj. 快乐的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">jolly</td>
-<td style="text-align:center">adj. 快乐的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">convivial</td>
-<td style="text-align:center">adj. 欢乐的；轻松活泼的；欢宴的</td>
-<td style="text-align:center">convival friends 酒肉朋友</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pastime</td>
-<td style="text-align:center">n. 娱乐</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diversion</td>
-<td style="text-align:center">n. 消遣，娱乐</td>
-<td style="text-align:center">来自divert</td>
-<td style="text-align:center">divers·ion</td>
-</tr>
-<tr>
-<td style="text-align:center">recreation</td>
-<td style="text-align:center">n. 消遣，娱乐</td>
-<td style="text-align:center">物质丰富，再创作出娱乐活动</td>
-<td style="text-align:center">re·creat·ion</td>
-</tr>
-<tr>
-<td style="text-align:center">abdicate</td>
-<td style="text-align:center">v. 放弃</td>
-<td style="text-align:center">说(dic)离开(ab)</td>
-<td style="text-align:center">ab·dic·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">snug</td>
-<td style="text-align:center">adj. 温暖而舒适的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cosy</td>
-<td style="text-align:center">adj. 舒适的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">purify</td>
-<td style="text-align:center">v. 使纯净</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">expurgate</td>
-<td style="text-align:center">v. 删除</td>
-<td style="text-align:center"><code>purg - pure</code><br />向外净化</td>
-<td style="text-align:center">ex·purg·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">purgative</td>
-<td style="text-align:center">n. 泻药</td>
-<td style="text-align:center">大肠清洁剂</td>
-<td style="text-align:center">purg·ative</td>
-</tr>
-<tr>
-<td style="text-align:center">purge</td>
-<td style="text-align:center">v. 清洗，净化</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">demolish</td>
-<td style="text-align:center">v. 破坏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mollify</td>
-<td style="text-align:center">v. 减轻；安慰</td>
-<td style="text-align:center"><code>moll - soft</code><br />软化受伤的心</td>
-<td style="text-align:center">moll·ify</td>
-</tr>
-<tr>
-<td style="text-align:center">emollient</td>
-<td style="text-align:center">n. 润肤剂</td>
-<td style="text-align:center">让皮肤柔软</td>
-<td style="text-align:center">e·moll·ient</td>
-</tr>
-<tr>
-<td style="text-align:center">thralldom</td>
-<td style="text-align:center">n. 奴役</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bondage</td>
-<td style="text-align:center">n. 奴役</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lull</td>
-<td style="text-align:center">v. 使安静</td>
-<td style="text-align:center">呼噜声大<br />lull sb. to sleep</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gull</td>
-<td style="text-align:center">n. 海鸥</td>
-<td style="text-align:center">海鸥咕咕叫</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gullible</td>
-<td style="text-align:center">adj. 轻信的</td>
-<td style="text-align:center">海鸥见到东西就去吃</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mull</td>
-<td style="text-align:center">v. 沉思</td>
-<td style="text-align:center">muse</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">null</td>
-<td style="text-align:center">adj. 无效的</td>
-<td style="text-align:center">null and void</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">hull</td>
-<td style="text-align:center">n. 船身</td>
-<td style="text-align:center">水手的house</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cull</td>
-<td style="text-align:center">n. 屠宰<br />v. 精选</td>
-<td style="text-align:center">cut肉</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">plaintiff</td>
-<td style="text-align:center">n. 原告</td>
-<td style="text-align:center">plain + tiff<br />发起在法院清晰的吵架的人</td>
-<td style="text-align:center">plain·tiff</td>
-</tr>
-<tr>
-<td style="text-align:center">defendant</td>
-<td style="text-align:center">n. 被告</td>
-<td style="text-align:center">为自己辩护</td>
-<td style="text-align:center">defend·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">strenuous</td>
-<td style="text-align:center">adj. 辛苦的</td>
-<td style="text-align:center">strenuous exercise 剧烈运动<br />来自strength</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitiate</td>
-<td style="text-align:center">v. 使污浊；使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nullify</td>
-<td style="text-align:center">v. 使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">annul</td>
-<td style="text-align:center">v. 使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">aggrieve</td>
-<td style="text-align:center">v. 使苦恼；迫害</td>
-<td style="text-align:center">来自grieve</td>
-<td style="text-align:center">ag·grieve</td>
-</tr>
-<tr>
-<td style="text-align:center">persecute</td>
-<td style="text-align:center">v. 迫害</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">callous</td>
-<td style="text-align:center">adj. 无情的；长茧的</td>
-<td style="text-align:center"><code>call - hand</code><br />粗活干多了，手上长老茧<br />心里长茧，心变硬了，无情</td>
-<td style="text-align:center">call·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">calloused</td>
-<td style="text-align:center">adj. 长满老茧的</td>
-<td style="text-align:center">calloused hands</td>
-<td style="text-align:center">callous·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">callosity</td>
-<td style="text-align:center">n. 无情；老茧</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">call·osity</td>
-</tr>
-<tr>
-<td style="text-align:center">dissent</td>
-<td style="text-align:center">n./v. 反对</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fabulous</td>
-<td style="text-align:center">adj. 惊人的</td>
-<td style="text-align:center"><code>fab - to speak</code><br />惊讶地大叫</td>
-<td style="text-align:center">fab·ulous</td>
-</tr>
-<tr>
-<td style="text-align:center">affable</td>
-<td style="text-align:center">adj. 和蔼可亲的</td>
-<td style="text-align:center">容易一起讲话的</td>
-<td style="text-align:center">af·fab·le</td>
-</tr>
-<tr>
-<td style="text-align:center">ineffable</td>
-<td style="text-align:center">adj. 不可言喻的</td>
-<td style="text-align:center">讲不出来的</td>
-<td style="text-align:center">in·ef·fab·le</td>
-</tr>
-<tr>
-<td style="text-align:center">gorgeous</td>
-<td style="text-align:center">adj. 惊人的，极好的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">infuriate</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center">来自fury</td>
-<td style="text-align:center">in·furi·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">furious</td>
-<td style="text-align:center">adj. 生气的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">furi·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">incense</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incentive</td>
-<td style="text-align:center">adj. 激励的</td>
-<td style="text-align:center">来自incense (s → t)<br />在怒气激励下</td>
-<td style="text-align:center">incent·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">exasperate</td>
-<td style="text-align:center">v. 激怒；恶化</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vex</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incite</td>
-<td style="text-align:center">v. 激起，煽动</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">foment</td>
-<td style="text-align:center">v. 激起，煽动</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mordant</td>
-<td style="text-align:center">adj. 尖酸的，讽刺的</td>
-<td style="text-align:center"><code>mors - bite</code><br />像要咬人一样</td>
-<td style="text-align:center">mord·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">remorse</td>
-<td style="text-align:center">n. 后悔</td>
-<td style="text-align:center">后悔得反咬自己一口</td>
-<td style="text-align:center">re·morse</td>
-</tr>
-<tr>
-<td style="text-align:center">prowess</td>
-<td style="text-align:center">n. 勇敢；高超的技艺</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissipate</td>
-<td style="text-align:center">v. 驱散，散开；浪费</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">colossal</td>
-<td style="text-align:center">adj. 巨大的</td>
-<td style="text-align:center">共同损失巨大的</td>
-<td style="text-align:center">co·loss·al</td>
-</tr>
-<tr>
-<td style="text-align:center">stupendous</td>
-<td style="text-align:center">adj. 巨大的；惊人的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">prodigious</td>
-<td style="text-align:center">adj. 惊人的</td>
-<td style="text-align:center">prod - pro<br />一直向前行动</td>
-<td style="text-align:center">prod·ig·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">prodigy</td>
-<td style="text-align:center">n. 奇才</td>
-<td style="text-align:center">在领域内一直往前不会受到阻碍</td>
-<td style="text-align:center">prod·ig·y</td>
-</tr>
-<tr>
-<td style="text-align:center">prodigal</td>
-<td style="text-align:center">adj. 浪费的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gargantuan</td>
-<td style="text-align:center">adj. 巨大的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dismal</td>
-<td style="text-align:center">adj. 沮丧的，忧郁的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">dis·mal</td>
-</tr>
-<tr>
-<td style="text-align:center">downcast</td>
-<td style="text-align:center">adj. 沮丧的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">melancholy</td>
-<td style="text-align:center">adj. 沮丧的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">genial</td>
-<td style="text-align:center">adj. 亲切的；愉快的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">inveterate</td>
-<td style="text-align:center">adj. 根深蒂固的，习惯的</td>
-<td style="text-align:center">inveterate smoker 老烟枪<br />veteran</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ineradicable</td>
-<td style="text-align:center">adj. 根深蒂固的</td>
-<td style="text-align:center"><code>rad - remove</code><br />擦不掉的习惯</td>
-<td style="text-align:center">in·e·rad·ic·able</td>
-</tr>
-<tr>
-<td style="text-align:center">ingrained</td>
-<td style="text-align:center">adj. 根深蒂固的，难以改变的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">addictive</td>
-<td style="text-align:center">adj. 根深蒂固的</td>
-<td style="text-align:center">加上难以去掉</td>
-<td style="text-align:center">add·ictive</td>
-</tr>
-<tr>
-<td style="text-align:center">sojourn</td>
-<td style="text-align:center">n./v. 暂住，寄居</td>
-<td style="text-align:center"><code>journ - day</code><br /><code>so - sub</code><br />住下的日子</td>
-<td style="text-align:center">so·journ</td>
-</tr>
-<tr>
-<td style="text-align:center">diurnal</td>
-<td style="text-align:center">adj. 白天的</td>
-<td style="text-align:center"><code>di - day</code><br />journ - urn</td>
-<td style="text-align:center">di·urn·al</td>
-</tr>
-<tr>
-<td style="text-align:center">nocturnal</td>
-<td style="text-align:center">adj. 夜间的</td>
-<td style="text-align:center"><code>noct - night</code></td>
-<td style="text-align:center">noct·urn·al</td>
-</tr>
-<tr>
-<td style="text-align:center">adjourn</td>
-<td style="text-align:center">v. 推迟，延期</td>
-<td style="text-align:center">加几天</td>
-<td style="text-align:center">ad·journ</td>
-</tr>
-<tr>
-<td style="text-align:center">lodge</td>
-<td style="text-align:center">v. 暂住</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">turmoil</td>
-<td style="text-align:center">n. 混乱，骚乱</td>
-<td style="text-align:center"><code>turb - to stir(disturn)</code></td>
-<td style="text-align:center">tur·moil</td>
-</tr>
-<tr>
-<td style="text-align:center">perturb</td>
-<td style="text-align:center">v. 打扰</td>
-<td style="text-align:center">一直stir</td>
-<td style="text-align:center">per·turb</td>
-</tr>
-<tr>
-<td style="text-align:center">turbulence</td>
-<td style="text-align:center">n. 气流；骚乱</td>
-<td style="text-align:center">气流扰乱</td>
-<td style="text-align:center">turb·ul·ence</td>
-</tr>
-<tr>
-<td style="text-align:center">turbid</td>
-<td style="text-align:center">adj. 浑浊的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">limpid</td>
-<td style="text-align:center">adj. 清澈的，透明的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tumult</td>
-<td style="text-align:center">n. 混乱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">commotion</td>
-<td style="text-align:center">n. 混乱，骚乱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">haggard</td>
-<td style="text-align:center">adj. 憔悴的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">irreparable</td>
-<td style="text-align:center">adj. 无法挽救的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paternal</td>
-<td style="text-align:center">adj. 父系的</td>
-<td style="text-align:center"><code>pater - father/country</code></td>
-<td style="text-align:center">patern·al</td>
-</tr>
-<tr>
-<td style="text-align:center">patron</td>
-<td style="text-align:center">n. 老顾客</td>
-<td style="text-align:center">对店就像父亲一样</td>
-<td style="text-align:center">patr·on</td>
-</tr>
-<tr>
-<td style="text-align:center">patronize</td>
-<td style="text-align:center">v. 赞助；庇护</td>
-<td style="text-align:center">父亲赞助生活</td>
-<td style="text-align:center">patr·on·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">repatriate</td>
-<td style="text-align:center">v. 遣返</td>
-<td style="text-align:center">返回祖国</td>
-<td style="text-align:center">re·patri·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">expatriate</td>
-<td style="text-align:center">v. 驱逐</td>
-<td style="text-align:center">赶出祖国</td>
-<td style="text-align:center">ex·patri·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">compatriot</td>
-<td style="text-align:center">n. 同胞</td>
-<td style="text-align:center">同一个国家的人</td>
-<td style="text-align:center">com·patri·ot</td>
-</tr>
-<tr>
-<td style="text-align:center">patriotism</td>
-<td style="text-align:center">n. 爱国主义</td>
-<td style="text-align:center">爱祖国</td>
-<td style="text-align:center">patri·ot·ism</td>
-</tr>
-<tr>
-<td style="text-align:center">maternal</td>
-<td style="text-align:center">adj. 母系的</td>
-<td style="text-align:center"><code>mater - mother</code></td>
-<td style="text-align:center">matern·al</td>
-</tr>
-<tr>
-<td style="text-align:center">maternity</td>
-<td style="text-align:center">n. 母性</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">matern·ity</td>
-</tr>
-<tr>
-<td style="text-align:center">metropolis</td>
-<td style="text-align:center">n. 大都市</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">metro·polis</td>
-</tr>
-<tr>
-<td style="text-align:center">matriarchy</td>
-<td style="text-align:center">n. 女族长制；母系氏族</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">matri·archy</td>
-</tr>
-<tr>
-<td style="text-align:center">fraternal</td>
-<td style="text-align:center">adj. 兄弟的</td>
-<td style="text-align:center"><code>frater - brother</code></td>
-<td style="text-align:center">frater·nal</td>
-</tr>
-<tr>
-<td style="text-align:center">quarantine</td>
-<td style="text-align:center">n./v. 隔离，验证疫期</td>
-<td style="text-align:center">qua(rter)ran(→ tin)tine<br />被关在罐子里一季度</td>
-<td style="text-align:center">qua·ran·tine</td>
-</tr>
-<tr>
-<td style="text-align:center">segregate</td>
-<td style="text-align:center">v. 隔离(种族)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">se·gre·gate</td>
-</tr>
-<tr>
-<td style="text-align:center">insulate</td>
-<td style="text-align:center">v. 隔离</td>
-<td style="text-align:center">sul - sole</td>
-<td style="text-align:center">in·sul·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">bigoted</td>
-<td style="text-align:center">adj. 固执的；偏见的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tenacious</td>
-<td style="text-align:center">adj. 固执的</td>
-<td style="text-align:center"><code>ten - tain - to keep</code><br />保留很多，不变</td>
-<td style="text-align:center">ten·acious</td>
-</tr>
-<tr>
-<td style="text-align:center">adamant</td>
-<td style="text-align:center">adj. 坚决的，坚定不移的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mulish</td>
-<td style="text-align:center">adj. 固执的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">willful</td>
-<td style="text-align:center">adj. 任性的</td>
-<td style="text-align:center">充满个人意愿</td>
-<td style="text-align:center">will·ful</td>
-</tr>
-<tr>
-<td style="text-align:center">deficient</td>
-<td style="text-align:center">adj. 不足的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sufficient</td>
-<td style="text-align:center">adj. 充足的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paucity</td>
-<td style="text-align:center">n. 缺乏，不足</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dearth</td>
-<td style="text-align:center">n. 缺乏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scarcity</td>
-<td style="text-align:center">n. 不足</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">elude</td>
-<td style="text-align:center">v. 躲避</td>
-<td style="text-align:center"><code>lude - to play</code><br />逃出去玩</td>
-<td style="text-align:center">e·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">elusive</td>
-<td style="text-align:center">adj. 逃避的；晦涩难懂的</td>
-<td style="text-align:center">来自elude</td>
-<td style="text-align:center">e·lus·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">allude</td>
-<td style="text-align:center">v. 暗示，暗指</td>
-<td style="text-align:center">开玩笑，暗指</td>
-<td style="text-align:center">al·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">collude</td>
-<td style="text-align:center">v. 串通</td>
-<td style="text-align:center">一起玩</td>
-<td style="text-align:center">col·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">delude</td>
-<td style="text-align:center">v. 欺骗</td>
-<td style="text-align:center">玩下流把戏</td>
-<td style="text-align:center">de·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">ludicrous</td>
-<td style="text-align:center">adj. 滑稽可笑的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ludi·cr·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">prelude</td>
-<td style="text-align:center">n. 前奏</td>
-<td style="text-align:center">之前play的乐曲</td>
-<td style="text-align:center">pre·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">interlude</td>
-<td style="text-align:center">n. 间奏</td>
-<td style="text-align:center">中间play的乐曲</td>
-<td style="text-align:center">inter·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">postlude</td>
-<td style="text-align:center">n. 尾声</td>
-<td style="text-align:center">后面play的乐曲</td>
-<td style="text-align:center">post·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">ignoble</td>
-<td style="text-align:center">adj. 卑微的</td>
-<td style="text-align:center"><code>ig - not</code><br />不高贵noble的</td>
-<td style="text-align:center">ig·noble</td>
-</tr>
-<tr>
-<td style="text-align:center">disgraceful</td>
-<td style="text-align:center">adj. 丢脸的，不光彩的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ignominious</td>
-<td style="text-align:center">adj. 不光彩的，可耻的</td>
-<td style="text-align:center"><code>nom - name</code><br />没有名誉的</td>
-<td style="text-align:center">ig·nom·inious</td>
-</tr>
-<tr>
-<td style="text-align:center">kindred</td>
-<td style="text-align:center">adj. 同类的；同族的</td>
-<td style="text-align:center">来自kin</td>
-<td style="text-align:center">kindr·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">poltroon</td>
-<td style="text-align:center">n. 懦夫</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rout</td>
-<td style="text-align:center">v. 溃败，打散</td>
-<td style="text-align:center"><code>rupt - to break</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">susceptible</td>
-<td style="text-align:center">adj. 易受影响的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">abide</td>
-<td style="text-align:center">v. 居住</td>
-<td style="text-align:center">abide by 遵守</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">boisterous</td>
-<td style="text-align:center">adj. 喧闹的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">despicable</td>
-<td style="text-align:center">adj. 可鄙视的的</td>
-<td style="text-align:center">可以不看的</td>
-<td style="text-align:center">de·spic·able</td>
-</tr>
-<tr>
-<td style="text-align:center">despise</td>
-<td style="text-align:center">v. 鄙视</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">de·spise</td>
-</tr>
-<tr>
-<td style="text-align:center">exotic</td>
-<td style="text-align:center">adj. 外来的；异域的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nonplus</td>
-<td style="text-align:center">v. 使迷惑</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">addle</td>
-<td style="text-align:center">v. 使头脑混乱的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sever</td>
-<td style="text-align:center">v. 分开；断绝</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sultry</td>
-<td style="text-align:center">adj. 闷热的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">swelter</td>
-<td style="text-align:center">n./v. 使闷热</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wane</td>
-<td style="text-align:center">v. 月亏；减弱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wax</td>
-<td style="text-align:center">v. 月满；增强</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2165,20 +1378,20 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
