@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="基本术语 数据 (data) &#x2F; 示例 (instance) &#x2F; 样本 (sample)：关于一个事件或对象的描述 属性 (attribute) &#x2F; 特征 (feature)：反映事件或对象在某方面的表现或性质的事项 属性值 (attribute value)：属性上的取值属性空间 (attribute space) &#x2F; 样本空间 (sample space) &#x2F; 输入空间 (input spac">
 <meta property="article:published_time" content="2020-08-06T07:59:13.000Z">
-<meta property="article:modified_time" content="2020-08-06T08:43:11.219Z">
+<meta property="article:modified_time" content="2020-08-06T09:07:38.486Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Deep Learning">
@@ -221,7 +221,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-08-06 15:59:13 / Modified: 16:43:11" itemprop="dateCreated datePublished" datetime="2020-08-06T15:59:13+08:00">2020-08-06</time>
+              <time title="Created: 2020-08-06 15:59:13 / Modified: 17:07:38" itemprop="dateCreated datePublished" datetime="2020-08-06T15:59:13+08:00">2020-08-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,21 +253,23 @@
 
       
         <h1 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h1><ol>
-<li><strong><em>数据 (data)</em></strong> / <strong><em>示例 (instance)</em></strong> / <strong><em>样本 (sample)</em></strong>：关于一个事件或对象的描述</li>
-<li><strong><em>属性 (attribute)</em></strong> / <strong><em>特征 (feature)</em></strong>：反映事件或对象在某方面的表现或性质的事项</li>
-<li><strong><em>属性值 (attribute value)</em></strong>：属性上的取值<br /><strong><em>属性空间 (attribute space)</em></strong> / <strong><em>样本空间 (sample space)</em></strong> / <strong><em>输入空间 (input space)</em></strong>：属性张成的空间</li>
-<li>每一个示例都是样本空间里的一个坐标向量，示例也称为<strong><em>特征向量 (feature vector)</em></strong></li>
-<li><strong><em>数据集 (data set)</em></strong>：数据记录的集合，有时整个数据集也被称为一个样本，因为是整个样本空间的采样</li>
-<li>令$D=\{x_1,x_2,\dots,x_m\}$表示包含$m$个示例的数据集<br />每个示例由$d$个属性描述，则每个示例$x_i=(x_{i1},x_{i2},\dots,x_{id})$是$d$维样本空间中的一个向量<br />$x_{ij}$是$x_i$在第$j$个属性上的取值，$d$称为样本$x_i$的<strong><em>维数 (dimensionality)</em></strong></li>
-<li><strong><em>模型 (model)</em></strong>：在面对新的情况时，提供相应的判断<br />或称为<strong><em>学习器 (learner)</em></strong>：学习算法在给定数据和参数空间上的实例化</li>
-<li><strong><em>学习 (learning)</em></strong> / <strong><em>训练 (trainning)</em></strong>：从数据中获得模型的过程</li>
-<li><strong><em>学习算法 (learning algorithm)</em></strong>：从数据中产生模型的算法</li>
-<li><strong><em>训练数据 (training data)</em></strong>：训练过程使用的数据<br /><strong><em>训练样本 (training sample)</em></strong> / <strong><em>训练示例 (training instance)</em></strong>：训练数据中的每一个样本<br /><strong><em>训练集 (training set)</em></strong>：训练样本组成的集合</li>
-<li><strong><em>假设 (hypothesis)</em></strong>：模型对应的关于数据的某种潜在的规律的猜想<br /><strong><em>真相 / 真实 (ground-truth)</em></strong>：潜在规律自身<br />学习过程就是找出或逼近真相</li>
-<li><strong><em>标记 (label)</em></strong>：关于示例结果的信息<br /><strong><em>样例 (example)</em></strong>：拥有了标记信息的示例<br /><strong><em>标记空间 (label space)</em></strong> / <strong><em>输出空间 (output space)</em></strong>：所有标记的集合<br />$(x_i,y_i)$表示第$i$个样例，$y_i$是示例$x_i$的标记</li>
-<li><p>预测 (prediction)：模型关于新情况判断的结果</p>
-<p>试一下</p>
-</li>
+<li><strong><em>数据</em></strong> (<strong><em>data</em></strong>) / <strong><em>示例</em></strong> (<strong><em>instance</em></strong>) / <strong><em>样本</em></strong> (<strong><em>sample</em></strong>)：关于一个事件或对象的描述</li>
+<li><strong><em>属性</em></strong> (<strong><em>attribute</em></strong>) / <strong><em>特征</em></strong> (<strong><em>feature</em></strong>)：反映事件或对象在某方面的表现或性质的事项</li>
+<li><strong><em>属性值</em></strong> (<strong><em>attribute value</em></strong>)：属性上的取值<br /><strong><em>属性空间</em></strong> (<strong><em>attribute space</em></strong>) / <strong><em>样本空间</em></strong> (<strong><em>sample space</em></strong>) / <strong><em>输入空间</em></strong> (<strong><em>input space</em></strong>)：属性张成的空间</li>
+<li>每一个示例都是样本空间里的一个坐标向量，示例也称为<strong><em>特征向量</em></strong> (<strong><em>feature vector</em></strong>)</li>
+<li><strong><em>数据集</em></strong> (<strong><em>data set</em></strong>)：数据记录的集合，有时整个数据集也被称为一个样本，因为是整个样本空间的采样</li>
+<li>令$D=\{x_1,x_2,\dots,x_m\}$表示包含$m$个示例的数据集<br />每个示例由$d$个属性描述，则每个示例$x_i=(x_{i1},x_{i2},\dots,x_{id})$是$d$维样本空间中的一个向量<br />$x_{ij}$是$x_i$在第$j$个属性上的取值，$d$称为样本$x_i$的<strong><em>维数</em></strong> (<strong><em>dimensionality</em></strong>)</li>
+<li><strong><em>模型</em></strong> (<strong><em>model</em></strong>)：在面对新的情况时，提供相应的判断<br />或称为<strong><em>学习器</em></strong> (<strong><em>learner</em></strong>)：学习算法在给定数据和参数空间上的实例化</li>
+<li><strong><em>学习</em></strong> (<strong><em>learning</em></strong>) / <strong><em>训练</em></strong> (<strong><em>trainning</em></strong>)：从数据中获得模型的过程</li>
+<li><strong><em>学习算法</em></strong> (<strong><em>learning algorithm</em></strong>)：从数据中产生模型的算法</li>
+<li><strong><em>训练数据</em></strong> (<strong><em>training data</em></strong>)：训练过程使用的数据<br /><strong><em>训练样本</em></strong> (<strong><em>training sample</em></strong>) / <strong><em>训练示例</em></strong> (<strong><em>training instance</em></strong>)：训练数据中的每一个样本<br /><strong><em>训练集</em></strong> (<strong><em>training set</em></strong>)：训练样本组成的集合</li>
+<li><strong><em>假设</em></strong> (<strong><em>hypothesis</em></strong>)：模型对应的关于数据的某种潜在的规律的猜想<br /><strong><em>真相</em></strong> / <strong><em>真实</em></strong> (<strong><em>ground-truth</em></strong>)：潜在规律自身<br />学习过程就是找出或逼近真相</li>
+<li><strong><em>标记</em></strong> (<strong><em>label</em></strong>)：关于示例结果的信息<br /><strong><em>样例</em></strong> (<strong><em>example</em></strong>)：拥有了标记信息的示例<br /><strong><em>标记空间</em></strong> (<strong><em>label space</em></strong>) / <strong><em>输出空间</em></strong> (<strong><em>output space</em></strong>)：所有标记的集合<br />$(x_i,y_i)$表示第$i$个样例，$y_i$是示例$x_i$的标记<br />通过对训练样本的学习，建立一个从输入空间到输出空间的映射</li>
+<li><strong><em>预测</em></strong> (<strong><em>prediction</em></strong>)：模型关于新情况判断的结果<br /><strong><em>分类</em></strong> (<strong><em>classification</em></strong>)：欲预测的值是离散值<br /><strong><em>回归</em></strong> (<strong><em>regression</em></strong>)：欲预测的值是连续值<br /><strong><em>二分类</em></strong> (<strong><em>binary classification</em></strong>)：只涉及两个类别的分类，其中一个类别为<strong><em>正类</em></strong> (<strong><em>positive class</em></strong>)，另一个为<strong><em>反类</em></strong> (<strong><em>negative class</em></strong>)<br /><strong><em>多分类</em></strong> (<strong><em>multi-class classification</em></strong>)：涉及多个类别的分类</li>
+<li><strong><em>测试</em></strong> (<strong><em>testing</em></strong>)：学得模型后，用其进行预测的过程<br /><strong><em>测试样本</em></strong> (<strong><em>testing sample</em></strong>) / <strong><em>测试示例</em></strong> / <strong><em>测试试例</em></strong> (<strong><em>testing instance</em></strong>)：被预测的样本</li>
+<li><strong><em>聚类</em></strong> (<strong><em>clustering</em></strong>)：将训练集中的数据分成若干组<br /><strong><em>簇</em></strong> (<strong><em>cluster</em></strong>)：每组数据一个簇</li>
+<li><strong><em>监督学习</em></strong> (<strong><em>supervised learning</em></strong>)：有标记信息，如分类、回归<br /><strong><em>无监督学习</em></strong> (<strong><em>unsupervised learning</em></strong>)：无标记信息，如聚类</li>
+<li><strong><em>泛化能力</em></strong> (<strong><em>generalization</em></strong>)：学得的模型适用于新样本的能力</li>
 </ol>
 
     </div>
