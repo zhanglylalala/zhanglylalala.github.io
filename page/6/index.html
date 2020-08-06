@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,100 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/" class="post-title-link" itemprop="url">02. Contow Plot and Partial Derivatives</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-23 17:38:13" itemprop="dateCreated datePublished" datetime="2020-02-23T17:38:13+08:00">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 16:04:26" itemprop="dateModified" datetime="2020-03-07T16:04:26+08:00">2020-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mathematics/Multivariable-Calculus-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">Multivariable Calculus (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Contow-Plot"><a href="#Contow-Plot" class="headerlink" title="Contow Plot"></a>Contow Plot</h1><ol>
+<li>Normally a function can be represented by equations or graphs. </li>
+<li>However, functions with multivariables are hard to draw on paper. For two-variablefunctions there is another way to draw is <code>Contow plot</code>: <br />&emsp;In Contow plot, we draw on an <script type="math/tex">x-y</script> plane where we link all points with the same <script type="math/tex">f(x,y)</script> value chosen at regular intevals. <br />&emsp;Namely, we slice the graph with horizontal planes <script type="math/tex">z=c</script>. </li>
+<li>Every slice of <script type="math/tex">f(x,y)</script> by <script type="math/tex">z=c</script> is a lever curve of <script type="math/tex">f</script>.  </li>
+<li>Contow plot tells us what <script type="math/tex">f</script> will increase or decrease when we move <script type="math/tex">x</script> or <script type="math/tex">y</script>, but it won’t tell how much or how fast. </li>
+</ol>
+<h1 id="Partial-Derivatives"><a href="#Partial-Derivatives" class="headerlink" title="Partial Derivatives"></a>Partial Derivatives</h1><ol>
+<li>This is where <code>partial derivatives</code> come in. <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=\lim_{\Delta x\to 0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x}</script>. Similarly we can define the partial derivative on other variables. </li>
+<li>The partial derivative of <script type="math/tex">f(x,y)</script> at point <script type="math/tex">(x_0,y_0)</script> on <script type="math/tex">x</script> means the slope of <script type="math/tex">f(x,y)</script> at slice of <script type="math/tex">y=y_0</script> at <script type="math/tex">x=x_0</script>. </li>
+<li>To compute <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=f_x</script>, we just see <script type="math/tex">x</script> as the only variable and see all others constants. </li>
+<li>Linear approximation equation: <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script><br />Quadratic approximation equation: <script type="math/tex">\Delta z\approx f_x(x-x_0)+f_y(y-y_0)+\displaystyle\frac{1}{2}f_{xx}(x-x_0)^2+f_{xy}(x-x_0)(y-y_0)+\frac{1}{2}(y-y_0)^2</script></li>
+<li>The two tangent lines represented by <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=a</script> and <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}=b</script> set the tangent plane of <script type="math/tex">f</script> at <script type="math/tex">(x_0,y_0)</script> whose equation is <script type="math/tex">z=z_0+a(x-x_0)+b(y-y_0)</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1079,108 +1173,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/12/08-Newton-s-Method%20-Mean-Value-Theorem-and-Inequalities/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/12/08-Newton-s-Method%20-Mean-Value-Theorem-and-Inequalities/" class="post-title-link" itemprop="url">08. Newton's Method, Mean Value Theorem and Inequalities</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-12 15:49:30" itemprop="dateCreated datePublished" datetime="2020-02-12T15:49:30+08:00">2020-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 16:06:09" itemprop="dateModified" datetime="2020-03-07T16:06:09+08:00">2020-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
-                    <span itemprop="name">Mathematics</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mathematics/Single-Variable-Calculus-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">Single Variable Calculus (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Newton’-Method"><a href="#Newton’-Method" class="headerlink" title="Newton’ Method"></a>Newton’ Method</h1><ol>
-<li>This is a method to solve an equation. </li>
-<li>First move everything to one side of equation to get <script type="math/tex">f(x)=0</script>. This changes the question to find the zero point of <script type="math/tex">f(x)</script>. </li>
-<li>We start with an inistial guess <script type="math/tex">x_0</script>. </li>
-<li>Then we calculate the intersection of <script type="math/tex">(x_n,f(x_n))</script>‘s tangent line and x-axis to get <script type="math/tex">x_{n+1}=x_n-\displaystyle\frac{f(x_n)}{f'(x_n)}</script>. </li>
-<li>As <script type="math/tex">n</script> goes larger, <script type="math/tex">x_n</script> is more accuracy to the solution. </li>
-<li>Error analys: <script type="math/tex">x</script> is the solution and <script type="math/tex">E_i=|x-x_i|</script>. <script type="math/tex">E_{i+1}=E_i^2</script>, so the number of digits accuracy doubles each step. </li>
-<li>If <script type="math/tex">|f'|</script> not too small and <script type="math/tex">|f''|</script> not too big and <script type="math/tex">x_0</script> stops nearby <script type="math/tex">x</script>, Newton’s Method works well. </li>
-<li>Ways the method can fail: <br />&emsp;<script type="math/tex">x_0</script> is too far away from <script type="math/tex">x</script> may get another zero point that is not the solution. <br />&emsp;<script type="math/tex">f'</script> is close to zero, so the tangent line is hard to have an intersection with x-axis. <br />&emsp;If <script type="math/tex">x_{m+2}=x_m</script>, <script type="math/tex">x_m</script> and <script type="math/tex">x_{m+1}</script> go in a circle and never come out. </li>
-</ol>
-<h1 id="Mean-Value-Theorem"><a href="#Mean-Value-Theorem" class="headerlink" title="Mean Value Theorem"></a>Mean Value Theorem</h1><ol>
-<li>If <script type="math/tex">f</script> is differentiable in <script type="math/tex">a<x<b</script> and continuous in <script type="math/tex">a≤x≤b</script>, <script type="math/tex">\displaystyle\frac{f(b)-f(a)}{b-a}=f'(c)</script> for some <script type="math/tex">c</script> <script type="math/tex">(a<c<b)</script>. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{f(b)-f(a)}{b-a}$$ is the slope of secant $$ab$$ and $$f'(c)$$ is the slope of tangent line of $$(c, f(c))</script></li>
-<li>Another version: <script type="math/tex">f(b)=f(a)+f'(c)(b-a)</script>. This formula can be used when proving the relation between <script type="math/tex">f'</script> and the monotonicity of <script type="math/tex">f</script>. </li>
-<li>Comparison with linear approximation: <br />&emsp;Mean value theorem don’t have a constraint on <script type="math/tex">a</script> and <script type="math/tex">b</script> as long as they’re defined. <br />&emsp;The <script type="math/tex">a</script> and <script type="math/tex">b</script> in linear approximation must be near. <br />&emsp;Mean value theorem states <script type="math/tex">min\ f'≤ave\ f'≤max\ f'</script>. <br />&emsp;Linear approximation states <script type="math/tex">ave\ f'\approx init\ f'</script> when the interval is small. </li>
-</ol>
-<h1 id="Important-Inequalities"><a href="#Important-Inequalities" class="headerlink" title="Important Inequalities"></a>Important Inequalities</h1><ol>
-<li><script type="math/tex; mode=display">e^x>1+x\ \ \ (x>0)</script></li>
-<li><script type="math/tex; mode=display">e^x>1+x+\displaystyle\frac{x^2}{2}</script></li>
-<li><script type="math/tex; mode=display">e^x>1+x+\displaystyle\frac{x^2}{2}+…+\frac{x^n}{n!}</script></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1252,14 +1244,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
