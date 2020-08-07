@@ -18497,24 +18497,6 @@ table th:first-of-type {
       </tags>
   </entry>
   <entry>
-    <title>位运算</title>
-    <url>/2019/11/09/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
-    <content><![CDATA[<h1 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h1><p>32位编译器下：</p>
-<script type="math/tex; mode=display">\begin{matrix}1\ Byte&\cdots\cdots\cdots&8\ bit\\char / unsigned\ char&\cdots\cdots\cdots&1\ Byte\\char *&\cdots\cdots\cdots&4\ Byte\\short\ int&\cdots\cdots\cdots&2\ Byte\\bool / int / unsigned\ int&\cdots\cdots\cdots& 4\ Byte\\long\ int&\cdots\cdots\cdots&4\ Byte\\float&\cdots\cdots\cdots& 4\ Byte\\double&\cdots\cdots\cdots&8\ Byte\\long\ long&\cdots\cdots\cdots&8\ Byte\\long\ double&\cdots\cdots\cdots&12\ Byte\end{matrix}</script><h1 id="记录一个数字的两个状态"><a href="#记录一个数字的两个状态" class="headerlink" title="记录一个数字的两个状态"></a>记录一个数字的两个状态</h1><p>假如数字较多，且只关心两个状态，即可以用$0/1$表示，可以开一个$unsigned int$，$4$个字节，$32$个$bit$就可以表示$32$个数<br>修改：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN &gt;&gt; <span class="number">5</span>]; <span class="comment">// MAXN是所有的数，右移5位 = 除以32</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> status)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (status == <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] |= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把0调成1要用或运算，num &amp; 0x1f = num % 32，把1挪到num管的那位上</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] ^= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把1调成0用异或</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>访问：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> arr[num &gt;&gt; <span class="number">5</span>] &amp; ((<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><script type="math/tex; mode=display">\begin{matrix}取出整数n在二进制表示下的第k位&(n>>k)\ \&\ 1\\取出整数n在二进制表示下的第0\sim k-1位&n\ \&\ ((1 << k) - 1)\\把整数n在二进制表达下的第k位取反&n\ xor\ (1<<k)\\对整数n在二进制表达下的第k位赋值1&n\ |\ (1<<k)\\对整数n在二进制表示下的第k位赋值0&n\ \&\ (\sim(1<<k)) \end{matrix}</script><p>或使用$bitset$实现</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>区间DP</title>
     <url>/2019/11/09/%E5%8C%BA%E9%97%B4DP/</url>
     <content><![CDATA[<p>区间DP的作用就是解决区间内的最优值。通常是化为几个小区间的和。<br><strong>处理方式</strong>：区间[i, j]内的最优值<code>dp[i][j] = max/min(dp[i][k] + dp[k][j] + sth, dp[i][j])</code>枚举所有的区间划分方式k，求得最优值。<br><strong>但是枚举的顺序应该是怎样的呢？</strong><br>首先容易想到的就是枚举区间的两个端点，i、j再枚举其中的k，但是这样不可取，每次枚举的时候已经枚举的都是区间开始端点小于i的区间，显然区间[k, j]还没有枚举过。我们可以发现求区间[i, j]时要用到的两个子区间的长度都是小于待求区间的，所以我们可以想到按区间长度枚举。下面上板子</p>
@@ -19298,10 +19280,7 @@ table th:first-of-type {
   <entry>
     <title>杂谈</title>
     <url>/2019/11/09/%E6%9D%82%E8%B0%88/</url>
-    <content><![CDATA[<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
-<li>$memset(a,val,sizeof(a))$把$val$填入$a$的每一个字节中，常用$memset(a,0x3f,sizeof(a))$初始化一个正无穷的值</li>
-<li>$整数/2$是向零取整，$整数 &gt;&gt;2$是向下取整</li>
-</ol>
+    <content><![CDATA[<p>2. </p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -19425,7 +19404,13 @@ table th:first-of-type {
   <entry>
     <title>状态压缩DP</title>
     <url>/2020/07/21/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9DP/</url>
-    <content><![CDATA[<h1 id="最短Hamilton路径"><a href="#最短Hamilton路径" class="headerlink" title="最短Hamilton路径"></a>最短Hamilton路径</h1><ol>
+    <content><![CDATA[<h1 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h1><p>32位编译器下：</p>
+<script type="math/tex; mode=display">\begin{matrix}1\ Byte&\cdots\cdots\cdots&8\ bit\\char / unsigned\ char&\cdots\cdots\cdots&1\ Byte\\char *&\cdots\cdots\cdots&4\ Byte\\short\ int&\cdots\cdots\cdots&2\ Byte\\bool / int / unsigned\ int&\cdots\cdots\cdots& 4\ Byte\\long\ int&\cdots\cdots\cdots&4\ Byte\\float&\cdots\cdots\cdots& 4\ Byte\\double&\cdots\cdots\cdots&8\ Byte\\long\ long&\cdots\cdots\cdots&8\ Byte\\long\ double&\cdots\cdots\cdots&12\ Byte\end{matrix}</script><h1 id="记录一个数字的两个状态"><a href="#记录一个数字的两个状态" class="headerlink" title="记录一个数字的两个状态"></a>记录一个数字的两个状态</h1><p>假如数字较多，且只关心两个状态，即可以用$0/1$表示，可以开一个$unsigned int$，$4$个字节，$32$个$bit$就可以表示$32$个数<br>修改：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN &gt;&gt; <span class="number">5</span>]; <span class="comment">// MAXN是所有的数，右移5位 = 除以32</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> status)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (status == <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] |= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把0调成1要用或运算，num &amp; 0x1f = num % 32，把1挪到num管的那位上</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		arr[num &gt;&gt; <span class="number">5</span>] ^= (<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>);</span><br><span class="line">		<span class="comment">// 把1调成0用异或</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> arr[num &gt;&gt; <span class="number">5</span>] &amp; ((<span class="keyword">unsigned</span> <span class="keyword">int</span>)<span class="number">1</span> &lt;&lt; (num &amp; <span class="number">0x1f</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><script type="math/tex; mode=display">\begin{matrix}取出整数n在二进制表示下的第k位&(n>>k)\ \&\ 1\\取出整数n在二进制表示下的第0\sim k-1位&n\ \&\ ((1 << k) - 1)\\把整数n在二进制表达下的第k位取反&n\ xor\ (1<<k)\\对整数n在二进制表达下的第k位赋值1&n\ |\ (1<<k)\\对整数n在二进制表示下的第k位赋值0&n\ \&\ (\sim(1<<k)) \end{matrix}</script><p>或使用$bitset$实现</p>
+<h1 id="最短Hamilton路径"><a href="#最短Hamilton路径" class="headerlink" title="最短Hamilton路径"></a>最短Hamilton路径</h1><ol>
 <li><p>$Hamilton$路径的定义是从$0$到$n-1$不重不漏地经过每一个点恰好一次</p>
 </li>
 <li><p>朴素的算法是枚举$n$个点遍历顺序的全排列，复杂度为$O(n\cdot n!)$</p>

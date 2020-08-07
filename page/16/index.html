@@ -191,111 +191,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/23/02-Elimination-with-Matrices/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/23/02-Elimination-with-Matrices/" class="post-title-link" itemprop="url">02. Elimination with Matrices</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-23 20:38:36" itemprop="dateCreated datePublished" datetime="2019-10-23T20:38:36+08:00">2019-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:15:32" itemprop="dateModified" datetime="2020-08-07T19:15:32+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Elimination"><a href="#Elimination" class="headerlink" title="Elimination"></a>Elimination</h1><ol>
-<li>To solve a system, we can eliminate it to make it an upper-triangular form. The goal of elimination is to produce an upper triangular system. </li>
-<li>Before every elimination, choose a pivot. <code>Zero will never be accepted as a pivot</code>.  Pivots are the coefficients in the diagonal of the system. </li>
-<li>We can <code>multiply</code> a specific multiplier to the main equation and <code>subtract</code> it from another equation to eliminate. </li>
-<li>Pivot is the first nonzero in the row that does the elimination. <br />The multiplier is the entry to eliminate divided by pivot. </li>
-<li>When solving the system, right-hand side vector and the coefficients act the same. So it is convenient to add it to the coefficient matrix. The matrix with the right-hand side vector is called <code>the augmented matrix</code>, written as <script type="math/tex">[E\ \vec{b}]</script>. </li>
-<li>After elimination, we <code>back substitute</code> from bottom to top to solve each unknowns. </li>
-<li>Elimination can fail when we do not get $n$ pivots. This could lead to either no solution or infinitely many solutions. However, if there is  a nonzero below the zero in the pivot, we can exchange them to correct the system. </li>
-</ol>
-<h1 id="Matrix-Elimination"><a href="#Matrix-Elimination" class="headerlink" title="Matrix Elimination"></a>Matrix Elimination</h1><h2 id="Operation-by-Rows-or-Columns"><a href="#Operation-by-Rows-or-Columns" class="headerlink" title="Operation by Rows or Columns"></a>Operation by Rows or Columns</h2><ol>
-<li>Every matrix is a series of row vectors or column vectors. When multiplying two matrices, we can multiply them separately. We can multiply the first matrix to every column vector in the second matrix or multiply the second matrix to every row vector in the first matrix</li>
-<li>This gives us a hint of row operations and column operations. The first matrix can change the second matrix on rows while the second matrix changes the first matrix on columns. </li>
-<li>In the multiplication of $LR = A$, the $i$th row of $A$ is $L$ times the $i$th row of $R$ while the $i$th column of $A$ is the $i$th column of $L$ times $R$. </li>
-<li>More specifically, the $i$th row of $A$ is the linear combination of all row vectors in $R$ whose coefficients are the $i$th row of $L$. The $i$th column of $A$ is the linear combination of all column vectors in $L$ whose coefficients are the $i$th column of $R$. </li>
-</ol>
-<h2 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h2><ol>
-<li>With the basic of matrices multiplication, we can eliminate the system with that. </li>
-<li>Based on the identity matrix, we make the elimination matrix <script type="math/tex">E</script>. <script type="math/tex">E_{ij}</script> is to produce a zero in the <script type="math/tex">(i,\ j)</script> position of the matrix. Furthermore, <script type="math/tex">the\ (i,\ j)\ entry\ of\ E_{ij}=-l</script> (<script type="math/tex">l</script> is the multiplier to do the elimination). </li>
-<li>We usually do the row operations when eliminating. So <script type="math/tex">E</script> is usually the left matrix. </li>
-<li>When multiple eliminations are necessary, we write those elimination matrices from right to left opposite to the sequence of elimination. </li>
-<li>Though we can move parentheses, we cannot change the relative position of the matrices. </li>
-<li>The elimination matrices will not change the solution, because the final equation will be <script type="math/tex">EA\vec{x}=E\vec{b}</script>. For augmented matrix the final result is <script type="math/tex">[EA\ E\vec{b}]</script></li>
-<li>When we need a row exchange, a permutation matrix is multiplied. The permutation matrix <script type="math/tex">P_{ij}</script> is the identity matrix with rows <script type="math/tex">i</script> and <script type="math/tex">j</script> reversed to exchange rows <script type="math/tex">i</script> and <script type="math/tex">j</script> of the original matrix.  </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/19/01-The-geometry-of-linear-equations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1184,6 +1079,102 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/10/07-Multiple-MVCs-and-Timer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/10/07-Multiple-MVCs-and-Timer/" class="post-title-link" itemprop="url">07. Multiple MVCs and Timer</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-10 12:32:36" itemprop="dateCreated datePublished" datetime="2019-08-10T12:32:36+08:00">2019-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:27:12" itemprop="dateModified" datetime="2020-08-07T19:27:12+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Multiple-MVCs"><a href="#Multiple-MVCs" class="headerlink" title="Multiple MVCs"></a>Multiple MVCs</h1><ol>
+<li>When MVCs work together, one MVC is a View as the other MVC, and a MVC sees other MVCs as its View</li>
+<li>We usually use the Controllers iOS provides whose View is other MVCs</li>
+<li>There are three main kind of MVC models provided by iOS</li>
+</ol>
+<h2 id="UITabBarController"><a href="#UITabBarController" class="headerlink" title="UITabBarController"></a>UITabBarController</h2><ol>
+<li>Just a set of taps in the app at the top or in the bottom. </li>
+<li>When user tap one of the taps, the MVC controls the current view changes to the MVC of that tap, and together changes the view
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/10/07-Multiple-MVCs-and-Timer/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1255,7 +1246,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
