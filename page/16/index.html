@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,144 +187,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/19/01-The-geometry-of-linear-equations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/19/01-The-geometry-of-linear-equations/" class="post-title-link" itemprop="url">01. The Geometry of Linear Equations</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-19 20:13:11" itemprop="dateCreated datePublished" datetime="2019-10-19T20:13:11+08:00">2019-10-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:56" itemprop="dateModified" datetime="2020-08-07T19:14:56+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linear-Combination"><a href="#Linear-Combination" class="headerlink" title="Linear Combination"></a>Linear Combination</h1><ol>
-<li><code>Vector addition</code> : $\vec{c}=\vec{a}+\vec{b}     (c_i= a_i+b_i)$</li>
-<li><code>Scalar multiplication</code>: $\vec{b}=c\vec{a}    (b_i=ca_i)$</li>
-<li><code>Linear combination</code>: the sum of $c\vec{a}$ and $d\vec{b}$, i.e. $c\vec{a}+d\vec{b}$</li>
-<li>Expressions of vectors: $\vec{x}=\left[\begin{matrix}a \ b \ …\end{matrix}\right]=(a, b, …)≠[a, b, …]$</li>
-<li>For one vector $\vec{u}$, the only linear combination is the scalar multiplication $c\vec{u}$. </li>
-<li>If all vectors are $\vec{0}$, every combination would be zero. </li>
-<li>If $\vec{0}$ does not exist, all the combinations of $n$ independent vectors form an  $n$-dimensional space with $\vec{0}$ in it. </li>
-<li>The picture of a vector is an arrow pointing from the origin point to the point with the coordination of the vector. Moreover, addition is merely following all the vectors and pointing from the origin to the final point. Multiplication is the arrow $c$ times longer. If $c&lt;0$, the arrow goes the other way. </li>
-</ol>
-<h1 id="Lengths-and-Dot-Products"><a href="#Lengths-and-Dot-Products" class="headerlink" title="Lengths and Dot Products"></a>Lengths and Dot Products</h1><ol>
-<li><code>Dot product (Inner product)</code>: $\vec{v}\cdot \vec{w}=\sum{v_iw_i}$</li>
-<li>If the dot product equals to 0, two vectors are perpendicular. The $\vec{0}$ is perpendicular to every vector. </li>
-<li><code>Length of a vector</code>: $||\vec{v}||=\displaystyle\sqrt{\vec{v}\cdot \vec{v}}=\sqrt{\sum{v_i^2}}$</li>
-<li>The length of a vector is the length of the arrow that represents the vector in the picture. </li>
-<li>A unit vector $\vec{u}$ is a vector whose length is $1$. </li>
-<li>We can create a unit vector by dividing a vector with its length, i.e. $\vec{u}=\displaystyle\frac{\vec{v}}{||\vec{v}||}$. </li>
-<li>The standard unit vectors along the $x$ and $y$ axes are written $\vec{i}$ and $\vec{j}$. </li>
-<li>$\vec{v}\cdot \vec{w} &gt; 0 \Longleftrightarrow \theta  &lt;\frac{\Pi}{2}$ <br />$\vec{v}\cdot \vec{w} &lt; 0 \Longleftrightarrow \theta &gt; \frac{\Pi}{2}$</li>
-<li>For unit vectors, the dot product of two vectors is <script type="math/tex">cos\ \theta</script>. If not both vectors are unit vectors, divide them with their length to make them unit vectors. <script type="math/tex">cos\ \theta=\frac{\vec{u}\cdot \vec{v}}{||\vec{u}||\ ||\vec{v}||}</script></li>
-<li><code>Schwarz Inequality</code>: <script type="math/tex">\displaystyle cos\ \theta=\frac{\vec{u}\cdot \vec{v}}{||\vec{u}||\ ||\vec{v}||}\ \Leftrightarrow\ \vec{u}\cdot \vec{v}=||\vec{u}||\ ||\vec{v}||\ cos\ \theta \Leftrightarrow \vec{u}\cdot \vec{v}≥||\vec{u}||\ ||\vec{v}||</script></li>
-<li><code>Triangle Inequality</code>: $||\vec{v}+\vec{u}||≤||\vec{v}||+||\vec{u}||$. Because $\vec{v}+\vec{u}$ is the third side of the triangle of $\vec{u}$ and $\vec{v}$</li>
-<li>For $2$-dimensional vectors $\vec{v}=(a, b)$ and $\vec{u}=(b, a)$, the Schwarz Inequality becomes $2ab ≤ a^2 + b^2$. If we let $x=a^2$ and $y=b^2$, $\displaystyle\sqrt{xy}≤\frac{x+y}{2}$, which is <code>Geometric mean ≤ Arithmetic mean</code></li>
-</ol>
-<h1 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h1><h2 id="Matrix-Times-Vector"><a href="#Matrix-Times-Vector" class="headerlink" title="Matrix Times Vector"></a>Matrix Times Vector</h2><ol>
-<li>For $A\vec{x}$, one way is to calculate by columns, and the other is by rows. </li>
-<li>For columns, the result is the linear combination of each column. </li>
-<li>For rows, the result is the dot product of each row and the vector. </li>
-</ol>
-<h2 id="Solve-Equations"><a href="#Solve-Equations" class="headerlink" title="Solve Equations"></a>Solve Equations</h2><ol>
-<li>First, we need to make sure those equations are linear, which means that the unknowns are only multiplied by numbers. </li>
-<li>For $A\vec{x}=\vec{b}$, we can solve this equation to $\vec{x}=A^{-1}\vec{b}$. Here $A^{-1}$ is the inverse of $A$. $A$ is called the <code>coefficient matrix</code>. </li>
-<li>$A\vec{x}=\vec{b}$ has only one solution as long as $\vec{b}$ is in the column space of $A$. Alternatively, this system has either no solution or infinite solutions. </li>
-<li><code>Independence</code>: If no combination of vectors is $\vec{0}$ except all the scalar is 0, this system of vectors is independent. <br /><code>Dependence</code>: If at least one combination of vectors is $\vec{0}$, this system of vectors is dependent. </li>
-<li>If $A$ has independent columns, $A\vec{x}=\vec{0}$ has one solution. $A$ is an invertible matrix. <br />If $A$ has dependent columns, $A\vec{x}=\vec{0}$ has many solutions. $A$ is a singular matrix. </li>
-</ol>
-<h2 id="Two-ways-to-see-equations"><a href="#Two-ways-to-see-equations" class="headerlink" title="Two ways to see equations"></a>Two ways to see equations</h2><ol>
-<li>For $n$ equations in $m$ unknowns, We can write them in equation form or the matrix form. </li>
-<li>The matrix form has three matrices, the coefficient matrix A, the unknown matrix $\vec{x}$, and the right-hand side matrix $\vec{b}$. These make the system  $A\vec{x} = \vec{b}$. </li>
-<li>The equation form is the usual form, like “$2x - y = 0$”, which is the row form of the matrix. </li>
-<li>According to two ways to calculate the multiplication of matrix and vector, we have two ways to see a system of equations. </li>
-</ol>
-<h3 id="Row-Picture"><a href="#Row-Picture" class="headerlink" title="Row Picture"></a>Row Picture</h3><ol>
-<li>In the row picture, we look at the coefficient matrix by rows. </li>
-<li>Each row dot products with the unknown matrix and produces an equation which stands for a space. </li>
-<li>Furthermore, the answer to the system is the intersection of all spaces. </li>
-<li>The row picture of two equations in two unknowns shows two lines meeting at a single point (the solution). </li>
-</ol>
-<h3 id="Column-Picture"><a href="#Column-Picture" class="headerlink" title="Column Picture"></a>Column Picture</h3><ol>
-<li>In the column picture, we look at the combination of the column vectors. </li>
-<li>Each column, including the right-hand side vector, stands for a vector. </li>
-<li>Moreover, the unknowns are the coefficients of the vectors in the linear combination to produce the right-hand-side vector. </li>
-<li>The column picture combines the column vectors on the left side to produce the vector $\vec{b}$ on the right side. </li>
-<li>The pictures of the higher dimension are hard to draw, even to imagine. Nevertheless, base on the column picture, we can solve other questions. </li>
-<li>The question of solving equations is turned into finding linear combinations. </li>
-<li>Furthermore, the existence of answers becomes a vector space problem, which becomes the rank problem. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -1175,6 +1037,104 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/08/06.Multi-touch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/08/06.Multi-touch/" class="post-title-link" itemprop="url">06. Multi-touch</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-08 10:46:57" itemprop="dateCreated datePublished" datetime="2019-08-08T10:46:57+08:00">2019-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:26:36" itemprop="dateModified" datetime="2020-08-07T19:26:36+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="React-to-touches"><a href="#React-to-touches" class="headerlink" title="React to touches"></a>React to touches</h1><ol>
+<li>We can react to touches with raw touch events. (touches, moves, up, etc.)</li>
+<li>But, we can also react to certain, predefined “gestures”. Gestures are recognized by instances of <code>UIGestureRecognizer</code>. </li>
+<li>There are two sides to using a gesture recognizer.<br>First, add a gesture recognizer to a UIView<br>Second, provide a method to “handle” that gesture</li>
+<li>Usually the first is done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence. </li>
+<li>The second is provided either by the UIView or a Controller. </li>
+</ol>
+<h1 id="Create-one"><a href="#Create-one" class="headerlink" title="Create one"></a>Create one</h1><h2 id="Adding-a-gesture-recognizer-to-a-UIView"><a href="#Adding-a-gesture-recognizer-to-a-UIView" class="headerlink" title="Adding a gesture recognizer to a UIView"></a>Adding a gesture recognizer to a UIView</h2><ol>
+<li>In this way, we ask the UIView to “recognize” that gesture. Usually it’s done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence</li>
+<li>First, we need to create a outlet of the view and add a property observer “didset” to it.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/08/06.Multi-touch/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1246,14 +1206,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1351,54 +1311,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
