@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,441 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/19-Diagonalization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/19-Diagonalization/" class="post-title-link" itemprop="url">19. Diagonalization</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-03 23:13:27" itemprop="dateCreated datePublished" datetime="2020-02-03T23:13:27+08:00">2020-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:23" itemprop="dateModified" datetime="2020-08-07T19:15:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Diagonization"><a href="#Diagonization" class="headerlink" title="Diagonization"></a>Diagonization</h1><ol>
+<li>Suppose the <script type="math/tex">n</script> by <script type="math/tex">n</script> martix <script type="math/tex">A</script> has <script type="math/tex">n</script> independent eigenvectors <script type="math/tex">\vec{x_1},\ …,\ \vec{x_n}</script>. Put them into the columns of an <code>eigenvector martix</code> <script type="math/tex">X</script>. <br /><script type="math/tex">X^{-1}AX=\Lambda=\left[\begin{matrix}\lambda_1\\&\ddots\\&&\lambda_n\end{matrix}\right]</script></li>
+<li>We can also get <script type="math/tex">A=X\Lambda X^{-1}</script>. </li>
+<li><script type="math/tex; mode=display">AX =A\left[\begin{matrix}\\\vec{x_1}&…&\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\A\vec{x_1}&&A\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\\lambda_1\vec{x_1}&…&\lambda_n\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\\vec{x_1}&…&\vec{x_n}\\&\end{matrix}\right]\left[\begin{matrix}\lambda_1\\&\ddots\\&&\lambda_n\end{matrix}\right]=X\Lambda</script></li>
+<li>The powers of <script type="math/tex">A</script>: <script type="math/tex">A^k=(X\Lambda X^{-1})(X\Lambda X^{-1})…(X\Lambda X^{-1})=X\Lambda^k X^{-1}</script> (<script type="math/tex">k</script> can even be <script type="math/tex">-1</script>)</li>
+<li>if <script type="math/tex">n</script> eigenvalues are different, <script type="math/tex">n</script> eigenvectors are different, <script type="math/tex">A</script> is diagonizable. </li>
+<li>If <script type="math/tex">A</script> has repeated eigenvalues, <script type="math/tex">A</script> still has a chance to be diagonizable. </li>
+<li>Eigenvectors can be multiplied by any nonzero constants. </li>
+<li>The eigenvectors in <script type="math/tex">X</script> come in the same order as the eigenvalues in <script type="math/tex">\Lambda</script>. </li>
+<li>Invertibility only affects if one eigenvalue is <script type="math/tex">0</script>. But diagonalizability is concerned with the number of different eigenvalues. </li>
+</ol>
+<h1 id="Fibonacci"><a href="#Fibonacci" class="headerlink" title="Fibonacci"></a>Fibonacci</h1><ol>
+<li>If <script type="math/tex">n</script> eigenvectors are independent, all vectors in <script type="math/tex">R^n</script> can be represented by eigenvectors. </li>
+<li>If <script type="math/tex">\vec{u_{k+1}}=A\vec{u_k}</script> for any dimension vector <script type="math/tex">\vec{u_i}</script> and given a known vector <script type="math/tex">\vec{u_0}</script>. This is the classical Fibonacci formula. </li>
+<li>We can factorize <script type="math/tex">\vec{u_0}=c_1\vec{x_1}+…+c_n\vec{x_n}</script>. Here <script type="math/tex">\vec{x_i}</script>‘s are eigenvecgtors of <script type="math/tex">A</script>. </li>
+<li>For <script type="math/tex">\vec{u_k}</script>, we can find <script type="math/tex">\vec{u_k}=A^k\vec{u_0}=c_1A^k\vec{x_1}+…+c_nA^k\vec{x_n}=c_1\lambda^k\vec{x_1}+…+c_n\lambda^k\vec{x_n}</script>. </li>
+<li>When <script type="math/tex">k \rightarrow \infty</script>, all terms with <script type="math/tex">|\lambda_i| < 1</script> approach to zero which can be ignored. </li>
+<li>For Fibonacci, two eigenvalues are <script type="math/tex">\frac{1 \pm\sqrt5}{2}</script>. <script type="math/tex">|\frac{1-\sqrt5}{2}| < 1</script>, so its value are mostly determined by <script type="math/tex">\frac{1+\sqrt5}{2}</script>. </li>
+</ol>
+<h1 id="Similar-Matrices"><a href="#Similar-Matrices" class="headerlink" title="Similar Matrices"></a>Similar Matrices</h1><ol>
+<li>All matrices with the same <script type="math/tex">\Lambda</script> are called <code>similar</code>. </li>
+<li>Extend this idea to non-diagonizable matrices, if <script type="math/tex">B</script> is any invertible matrix, <script type="math/tex">C</script> is any matrix, <script type="math/tex">A=BCB^{-1}</script>. Then we say <script type="math/tex">A</script> and <script type="math/tex">C</script> are similar. </li>
+<li>Similar matrices have the same eigenvalues. <br />&emsp; Proof: if <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>, multily a <script type="math/tex">B^{-1}</script> on the left and add a <script type="math/tex">BB^{-1}</script> between <script type="math/tex">A</script> and <script type="math/tex">\vec{x}</script>. <br />&emsp;We get <script type="math/tex">(B^{-1}AB)B^{-1}\vec{x}=\lambda B^{-1}\vec{x}</script>. So <script type="math/tex">CB^{-1}\vec{x}=\lambda B^{-1}\vec{x}</script>. <br />So <script type="math/tex">\lambda</script> is also an eigenvalue of <script type="math/tex">C</script> and its corresponding eigenvector is <script type="math/tex">B^{-1}\vec{x}</script>. </li>
+<li>If <script type="math/tex">C=I</script>, <script type="math/tex">BIB^{-1}=I</script>. Only <script type="math/tex">I</script> is similar to <script type="math/tex">I</script>. So <script type="math/tex">I</script> is the only diagonizable matrix with all eigenvalues <script type="math/tex">\lambda=1</script>. </li>
+<li><code>Jordan block</code>: for a <script type="math/tex">n</script> by <script type="math/tex">n</script> square block, it has <script type="math/tex">n</script> repeated eigenvalues on the main diagonal and the left of each eigenvalue is a <script type="math/tex">1</script> except the last one and all other entries are <script type="math/tex">0</script>. <script type="math/tex">J_i=\left[\begin{matrix}\lambda_i&1\\&\lambda_i&1\\&&\ddots&\ddots\\&&&\lambda_i&1\\&&&&\lambda_i\end{matrix}\right]</script>. </li>
+<li>Each Jordan block has only one eigenvectors. </li>
+<li><code>Jordan form matrix</code>: This is a kind of matrices with Jordan blocks on the diagonal and <script type="math/tex">0</script>‘s on other place. </li>
+<li>The number of eigenvectors of a Jordan matrix is the number of Jordan blocks. </li>
+<li>Jordan matrix is the representation of a similar family. </li>
+</ol>
+<h1 id="Multiplicity"><a href="#Multiplicity" class="headerlink" title="Multiplicity"></a>Multiplicity</h1><ol>
+<li>The <code>geometric multiplicity (GM)</code> is the independent eigenvectors for <script type="math/tex">\lambda</script>. GM is the dimension of <script type="math/tex">N(A-\lambda I)</script>. </li>
+<li>The <code>algebraic multiplicity (AM)</code> is the repetition of <script type="math/tex">\lambda</script> among the eigenvalues. AM is depend on the roots of <script type="math/tex">|A-\lambda I|=0</script>. </li>
+<li>Always <script type="math/tex">GM ≤ AM</script> for each <script type="math/tex">\lambda</script>. </li>
+<li>When <script type="math/tex">GM < AM</script>, <script type="math/tex">A</script> is not diagonalizable. <script type="math/tex">A</script> is diagonizable if and only if <script type="math/tex">GM=AM</script>.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/18-Eigenvalues-and-Eigenvectors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/18-Eigenvalues-and-Eigenvectors/" class="post-title-link" itemprop="url">18. Eigenvalues and Eigenvectors</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-03 17:29:46" itemprop="dateCreated datePublished" datetime="2020-02-03T17:29:46+08:00">2020-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:17:20" itemprop="dateModified" datetime="2020-08-07T19:17:20+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Eigenvalues-and-Eigenvectors"><a href="#Eigenvalues-and-Eigenvectors" class="headerlink" title="Eigenvalues and Eigenvectors"></a>Eigenvalues and Eigenvectors</h1><ol>
+<li>An <code>eigenvector</code> is a vector doesn’t change direction even when multiplied by <script type="math/tex">A</script>. </li>
+<li>So the basis equation is <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. The number <script type="math/tex">\lambda</script> is an <code>eigenvalue</code> of <script type="math/tex">A</script>. </li>
+<li><script type="math/tex">\lambda=0</script> means the eigenvector is in <script type="math/tex">N(A)</script>. <br /><script type="math/tex">\lambda=1</script> means the eigenvector is a steady state that doesn’t change. </li>
+<li>If <script type="math/tex">\lambda</script> is the eigenvalue and <script type="math/tex">\vec{x}</script> is the eigenvector of <script type="math/tex">A</script>, for <script type="math/tex">B=A^n</script>, its eigenvector stays the same while its eigenvalue <script type="math/tex">\lambda'=\lambda^n</script>. And the eigenvalue of <script type="math/tex">A^{-1}</script> is <script type="math/tex">\lambda^{-1}</script>. </li>
+<li>For the projection matrix <script type="math/tex">P</script>, <script type="math/tex">P\vec{x}=\vec{x}</script>. Its eigenvalue is <script type="math/tex">1</script> and <script type="math/tex">0</script>. The eigenvectors for <script type="math/tex">\lambda=1</script> and <script type="math/tex">\lambda=0</script> fill the column space (in the projection plane) and nullspace (perpendicular to the projection plane). </li>
+<li>If each column of a matrix adds to <script type="math/tex">1</script>, that martix is <code>Markov matrix</code>. <script type="math/tex">\lambda=1</script> is its largest eigenvalue. </li>
+<li>The reflection matrix <script type="math/tex">R=\left[\begin{matrix}0&1\\1&0\end{matrix}\right]</script> has eigenvalues <script type="math/tex">1</script> and <script type="math/tex">-1</script>. </li>
+<li>When a matrix is shifted by <script type="math/tex">I</script>, each <script type="math/tex">\lambda</script> is shifted by <script type="math/tex">1</script>. NO change in eigenvectors. </li>
+<li>If <script type="math/tex">A</script> is singular, <script type="math/tex">0</script> must be one of the eigenvalues. </li>
+<li>The eigenvalues might not be real numbers. </li>
+<li>An orthogonal martix (<script type="math/tex">Q^TQ=I</script>) corresponds to a complex number with <script type="math/tex">|\lambda|=1</script>. </li>
+<li><script type="math/tex">A</script> and <script type="math/tex">A^T</script> share the same eigenvalues. </li>
+</ol>
+<h1 id="Equation-for-the-Eigenvalues"><a href="#Equation-for-the-Eigenvalues" class="headerlink" title="Equation for the Eigenvalues"></a>Equation for the Eigenvalues</h1><ol>
+<li>For projection matrices we found <script type="math/tex">\lambda</script>‘s and <script type="math/tex">\vec{x}</script>‘s by geometry: <script type="math/tex">P\vec{x}=\vec{x}</script> and <script type="math/tex">P\vec{x}=\vec{0}</script>. </li>
+<li>For others, we need to solve the equation <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. <br />First move <script type="math/tex">\lambda\vec{x}</script> to the left side, to get <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script>. <br />This means that eigenvectors make up <script type="math/tex">N(A-\lambda I)</script>. <br />If that new equation has a nonzero solution, <script type="math/tex">A-\lambda I</script> must be singular, which leads us to its determinant is zero. </li>
+<li>The equation we really need to solve is <script type="math/tex">|A-\lambda I|=0</script>. This is called the <code>eigenequation</code> or <code>characteristic equation</code>. </li>
+<li>When <script type="math/tex">A</script> is <script type="math/tex">n</script> by <script type="math/tex">n</script>, <script type="math/tex">A</script> has <script type="math/tex">n</script> eigenvalues (they might repeat). Each <script type="math/tex">\lambda</script> leads to one <script type="math/tex">\vec{x}</script>. We can solve <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script> or <script type="math/tex">A\vec{x}=\lambda \vec{x}</script> to find eigenvectors. </li>
+</ol>
+<h1 id="Determinant-and-Trace"><a href="#Determinant-and-Trace" class="headerlink" title="Determinant and Trace"></a>Determinant and Trace</h1><ol>
+<li>Elimination does noe preserve the <script type="math/tex">\lambda</script>‘s. </li>
+<li>The product of the <script type="math/tex">n</script> eigenvalues equals the determinant. </li>
+<li>The sum of the <script type="math/tex">n</script> eigenvalues equals the sum of the <script type="math/tex">n</script> diagonal entries. We can the sum <code>trance of martix</code>. </li>
+<li>The diagonal of triangualr martix is the eigenvalues. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/" class="post-title-link" itemprop="url">17. Cramers Rule, Inverse Matrix, and Volume</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-03 11:06:45" itemprop="dateCreated datePublished" datetime="2020-02-03T11:06:45+08:00">2020-02-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:16:23" itemprop="dateModified" datetime="2020-08-07T19:16:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Cramer’s-Rule"><a href="#Cramer’s-Rule" class="headerlink" title="Cramer’s Rule"></a>Cramer’s Rule</h1><ol>
+<li>This is a new way to solve <script type="math/tex">A\vec{x}=\vec{b}</script>. </li>
+<li>First let’s sovle the first unknown <script type="math/tex">x_1</script>. <br />Replace the first column of <script type="math/tex">I</script> with <script type="math/tex">\vec{x}</script>. <br /><script type="math/tex">A</script> multiplies that matrix will give a new matrix <script type="math/tex">B</script>. <script type="math/tex">B</script> is actually <script type="math/tex">A</script> replacing first column with <script type="math/tex">\vec{b}</script>. </li>
+<li>Calculate their determinants, <script type="math/tex">|A|(x_1)=|B|</script>. To get <script type="math/tex">x_1=\frac{|A|}{|B|}</script></li>
+<li>Just like how we solved <script type="math/tex">x_1</script>, replace the second column of <script type="math/tex">A</script> with <script type="math/tex">\vec{x}</script>, the third, …, the nth. We can solve all components of <script type="math/tex">\vec{x}</script>. </li>
+<li><code>Cramer&#39;s Ruie</code>: <script type="math/tex">x_i=\frac{|B_i|}{|A|}</script>. Here <script type="math/tex">B_i</script> has the ith column of <script type="math/tex">A</script> replaced by <script type="math/tex">\vec{b}</script>. </li>
+<li>With Cramer’s Rule, we can find another solution to <script type="math/tex">A^{-1}</script>. <br />To solve the equation of <script type="math/tex">AA^{-1}=I</script>, we can split it into <script type="math/tex">n</script> <script type="math/tex">A\vec{x}=\vec{b}</script> form equations. <br />Now all <script type="math/tex">\vec{b}</script>s are a column with only a <script type="math/tex">1</script> and <script type="math/tex">n-1</script> 0s. Calculate the <script type="math/tex">|B_{ij}|</script> (the determinant we need to solve the <script type="math/tex">jth</script> component of the <script type="math/tex">ith</script> equation) with cofactor along that column <script type="math/tex">\vec{b}</script>, we can find <script type="math/tex">|B_{ij}|=|C_{ji}|</script>. <br />So <script type="math/tex">(A^{-1})_{ij}=\frac{C_{ji}}{|A|}</script>.   <code>MARK</code>: NOT <script type="math/tex">C_{ij}</script>. Because the <script type="math/tex">1</script> in <script type="math/tex">B_{ij}</script> is in the <script type="math/tex">ith</script> column <script type="math/tex">jth</script> row. <br />Put the <script type="math/tex">C_{ij}</script> into the corresponding entry of a matrix, we can get the <code>cofactor matrix</code> <script type="math/tex">C</script>. <script type="math/tex">A^{-1}=\frac{C^T}{|A|}</script></li>
+<li>We can directly calculate the result <script type="math/tex">I'</script> of <script type="math/tex">AC^T</script>. <br />In the diagonal, we have <script type="math/tex">I'_{ii}=(row\ i\ of\ A)\cdot(column\ i\ of\ C^T)=\sum a_{ik}C_{ik}=|A|</script>. <br />Off the main diagonal, we have <script type="math/tex">I'_{ij}=(row\ i\ of\ A)\cdot(column\ j\ of\ C^T)=\sum a_{ik}C_{jk}</script>. This is the value of a new matrix with <script type="math/tex">jth</script> row of <script type="math/tex">A</script> replaced by <script type="math/tex">ith</script>. <br />So that determinant has two equal rows which makes its value <script type="math/tex">0</script>. <br />Concolusion, <script type="math/tex">I'</script> has <script type="math/tex">|A|</script> in its main diagonal and <script type="math/tex">0</script>s in other entries. <br /><script type="math/tex">AC^T=|A|I \Longrightarrow A\frac{C^T}{|A|}=I \Longrightarrow A^{-1}=\frac{C^T}{|A|}</script></li>
+<li>If <script type="math/tex">A</script> is a triangular matrix, if <script type="math/tex">a_{ij}</script> is in the nonezero part of martix, <script type="math/tex">C_{ij}</script> has zeros in the diagonal. So <script type="math/tex">C_{ij}=0</script> when <script type="math/tex">a_{ij}≠0</script>. And after transpose, we can get a matrix <script type="math/tex">C^T</script> the same shape as <script type="math/tex">A</script>. So the inverse of a triangular is also a triangualar. </li>
+</ol>
+<h1 id="Area-of-a-Triangular"><a href="#Area-of-a-Triangular" class="headerlink" title="Area of a Triangular"></a>Area of a Triangular</h1><ol>
+<li>If three points of <script type="math/tex">A</script> is <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_3,y_3)</script>, its area is <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1&1\\x_2&y_2&1\\x_3&y_3&1\end{array}\right|</script>. </li>
+<li>If <script type="math/tex">(x_3,y_3)=(0,0)</script>, <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script></li>
+<li>A triangular is half of a parallelogram. If the four points of a parallelogram are <script type="math/tex">(0,0)</script>, <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_1+x_2,y_1+y_2)</script>, its area is <script type="math/tex">S=\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script>. </li>
+<li>This law can expand to higher dimension, like the volume in 3-dimension. The volume of box <script type="math/tex">V=|3\ by\ 3\ determinant|</script>. That determinant is formed by three independent edge vectors. </li>
+</ol>
+<h1 id="Cross-Product"><a href="#Cross-Product" class="headerlink" title="Cross Product"></a>Cross Product</h1><ol>
+<li>The <code>cross product</code> is a vector in the same dimension written <script type="math/tex">\vec{u}\times \vec{v}</script> called “<script type="math/tex">\vec{u}</script> cross <script type="math/tex">\vec{v}</script>“. </li>
+<li>The components of this cross product are <script type="math/tex">2</script> by <script type="math/tex">2</script> cofactors. </li>
+<li>If we write <script type="math/tex">\vec{u}=\left[\begin{matrix}u_1\\u_2\\u_3\end{matrix}\right]=u_1\vec{i}+u_2\vec{j}+u_3\vec{k}</script> and <script type="math/tex">\vec{v}=\left[\begin{matrix}v_1\\v_2\\v_3\end{matrix}\right]=v_1\vec{i}+v_2\vec{j}+v_3\vec{k}</script>, then <script type="math/tex">\vec{u}\times\vec{v}=\left|\begin{array}{cccc}\vec{i}&\vec{j}&\vec{k}\\u_1&u_2&u_3\\v_1&v_2&v_3\end{array}\right|</script>. </li>
+<li><script type="math/tex">\vec{v}\times\vec{u}=-(\vec{u}\times\vec{v})</script> for it exchanging the lower two rows. </li>
+<li><script type="math/tex">\vec{u}\times\vec{v}</script> is perpedicular to <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
+<li>The cross product of two dependent vector with itself is zero. </li>
+<li><script type="math/tex; mode=display">||\vec{u}\times\vec{v}||=||\vec{u}||\ ||\vec{v}||\ |sin\ \theta|</script></li>
+<li>The length os <script type="math/tex">\vec{u}\times\vec{v}</script> is the area of parallelogram with sides <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
+<li>The direction obeys the <code>right hand rule</code>. </li>
+<li>Triple product <script type="math/tex">(\vec{u}\times\vec{v})\cdot\vec{w}</script> can replace the vector row in the cross product determinant with <script type="math/tex">\vec{w}^T</script>. </li>
+<li>The triple product is the volumn of box. The cross product is the vector perpendicular to the base and its length is the area. The dot product is the area times the height in its direction.  </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/16-Determinant-Formulas-and-Cofactors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/02/16-Determinant-Formulas-and-Cofactors/" class="post-title-link" itemprop="url">16. Determinant Formulas and Cofactors</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-02 17:24:27" itemprop="dateCreated datePublished" datetime="2020-02-02T17:24:27+08:00">2020-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:19" itemprop="dateModified" datetime="2020-08-07T19:15:19+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Pivot-Formula"><a href="#Pivot-Formula" class="headerlink" title="Pivot Formula"></a>Pivot Formula</h1><ol>
+<li>We can eliminate to factorize <script type="math/tex">PA=LU</script>. So <script type="math/tex">|P||A|=|L||U|= \displaystyle\prod^{n}_{i=1}1\displaystyle \prod^{n}_{i=1}{d_i}</script>, which gives us <script type="math/tex">|A|=\pm(d_1d_2…d_n)</script>. Here <script type="math/tex">d_i</script> is the pivots in the diagonal of <script type="math/tex">U</script>. </li>
+<li>Without row exchanges, if we take the upper left <script type="math/tex">k</script> by <script type="math/tex">k</script> square in <script type="math/tex">A</script> as <script type="math/tex">A_k</script>, the kth pivot is <script type="math/tex">d_k=\frac{|A_k|}{|A_{k-1}|}</script>. </li>
+</ol>
+<h1 id="The-Big-Formula"><a href="#The-Big-Formula" class="headerlink" title="The Big Formula"></a>The Big Formula</h1><ol>
+<li>One row a time, we use the linearity to split determinant into <script type="math/tex">n</script> determinant with only one nonzero entry in the current row. <br />After <script type="math/tex">n</script> rows, we get <script type="math/tex">n^n</script> determinant and most of them are zero. <br />For example, <script type="math/tex">\left|\begin{array}{aa}a&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\c&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\0&d\end{array}\right|+\left|\begin{array}{aa}a&0\\c&0\end{array}\right|+\left|\begin{array}{aa}0&b\\0&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&0\end{array}\right|</script><br />The new determinants are nonzero if and only if all none zero entries are not one the same row and the same column. </li>
+<li>All the “survived” determinants are a form of permutation and we can calculate with permutation by factoring all entries out. </li>
+<li>Each product had one entry from each row and also one entry from each column. </li>
+<li>The formula has <script type="math/tex">n!</script> terms to add up. Half the terms have minus signs while the other half have plus signs determined by the permutation matrix. </li>
+<li>The <script type="math/tex">n!</script> possibilities are <script type="math/tex">n</script> columns <script type="math/tex">(1,2,…,n)</script> go into each possible order <script type="math/tex">(\alpha,\beta,…,\omega)</script>. And the result is the sum over all <script type="math/tex">n!</script> column permutations <script type="math/tex">P=(\alpha,\beta,…,\omega)</script>. <script type="math/tex">|A|=\sum|P|a_{1\alpha}a_{2\beta}…a_{n\omega}</script>. </li>
+<li>When <script type="math/tex">U</script> is upper triangular, only one of the <script type="math/tex">n!</script> products can be nonzero. </li>
+</ol>
+<h1 id="Cofactors"><a href="#Cofactors" class="headerlink" title="Cofactors"></a>Cofactors</h1><ol>
+<li>We note a submatrix <script type="math/tex">M_{ij}</script> of size <script type="math/tex">n-1</script> which comes from the original matrix without row <script type="math/tex">i</script> and column <script type="math/tex">j</script>. </li>
+<li>The <code>cofactors</code> <script type="math/tex">C_{ij}=(-1)^{i+j}|M_{ij}|</script>. </li>
+<li>The determinant is the sum of all entries in one row times its cofactor. By its cofactor, we mean that the cofactor of <script type="math/tex">a_{ij}</script> is <script type="math/tex">C_{ij}</script>. </li>
+<li><script type="math/tex">|A|=\displaystyle\sum^{n}_{j=1}{a_{ij}C_{ij}}</script>. </li>
+<li>This is a recursive way to calculate determinants. The determinant to calculate goes from order <script type="math/tex">n</script> to order <script type="math/tex">n-1</script> and finally comes to order <script type="math/tex">1</script> which don’t need calculation. </li>
+<li>Cofactors are useful when matrices have many zeros. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -815,471 +1250,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/30/09-The-Four-Fundamental-Subspaces/" class="post-title-link" itemprop="url">09. The Four Fundamental Subspaces</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-30 19:53:40" itemprop="dateCreated datePublished" datetime="2020-01-30T19:53:40+08:00">2020-01-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:17" itemprop="dateModified" datetime="2020-08-07T19:16:17+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>The four fundamental subspaces are: </p>
-<ol>
-<li>The <code>row space</code>: <script type="math/tex">C(A^T)</script>, a subspace of <script type="math/tex">R^n</script></li>
-<li>The <code>column space</code>: <script type="math/tex">C(A)</script>, a subspace of <script type="math/tex">R^m</script></li>
-<li>The <code>nullspace</code>: <script type="math/tex">N(A)</script>, a subspace of <script type="math/tex">R^n</script></li>
-<li>The <code>left nullspace</code>: <script type="math/tex">N(A^T)</script>, a subspace of <script type="math/tex">R^m</script>. This is the solution space of <script type="math/tex">\vec{y}^TA=A^Ty=\vec{0}^T</script></li>
-</ol>
-<h1 id="The-Four-Subspaces-for-R"><a href="#The-Four-Subspaces-for-R" class="headerlink" title="The Four Subspaces for R"></a>The Four Subspaces for R</h1><ol>
-<li>The dimension of the row space is the rank <script type="math/tex">r</script>. The nonzero rows of <script type="math/tex">R</script> form a basis. </li>
-<li>The dimension of the column space is the rank <script type="math/tex">r</script>. The pivot columns of <script type="math/tex">R</script> form a basis. </li>
-<li>The nullspace has dimension <script type="math/tex">n-r</script>. The special solutions form a basis. </li>
-<li>The left nullspace has dimension <script type="math/tex">m-r</script>. <br /><script type="math/tex">\vec{y}^TR</script> is the row linear combination of <script type="math/tex">R</script>. To make the combination <script type="math/tex">\vec{0}^T</script>, we can only use the last <script type="math/tex">m-r</script> zero rows because the pivots can never be eliminated again. <br />So the left nullspace is a space with vectors containing the first <script type="math/tex">r</script> $0$s and then  <script type="math/tex">m-r</script> free variables. </li>
-</ol>
-<h1 id="The-Four-Subspaces-for-A"><a href="#The-Four-Subspaces-for-A" class="headerlink" title="The Four Subspaces for A"></a>The Four Subspaces for A</h1><ol>
-<li><script type="math/tex">A</script> has the same row space as <script type="math/tex">R</script>. Same dimension <script type="math/tex">r</script> and same basis. We can choose the <script type="math/tex">r</script> rows that end up nonzero rows in <script type="math/tex">R</script>. </li>
-<li>The column space of <script type="math/tex">A</script> has dimension <script type="math/tex">r</script>. Nevertheless, <script type="math/tex">A</script> and <script type="math/tex">R</script> have different column space. The <script type="math/tex">r</script> pivot columns of <script type="math/tex">A</script> form basis of <script type="math/tex">C(A)</script>. </li>
-<li><script type="math/tex">A</script> has the same nullspace as  <script type="math/tex">R</script>. </li>
-<li>The left nullspace of <script type="math/tex">A</script> has dimension <script type="math/tex">m-r</script>. The basis vectors are the vectors that create zero rows. </li>
-<li>The Counting Theorem<br />&emsp;In <script type="math/tex">R^n</script>, <script type="math/tex">dim(row\ space)+dim(nullspace)=n</script><br />&emsp;In <script type="math/tex">R^m</script>, <script type="math/tex">dim(column\ space)+dim(left\ nullspace)=m</script></li>
-<li>For any matrix <script type="math/tex">A</script>, we can eliminate to get <script type="math/tex">EA=R</script>. If we take <script type="math/tex">C=E^{-1}</script>, then <script type="math/tex">A=CR</script>. <br />Furthermore, the basis of <script type="math/tex">N(A^T)</script> is the rows of <script type="math/tex">E</script> that is zero rows in <script type="math/tex">R</script>. <br />Since identity matrix is in pivot columns of <script type="math/tex">R</script>, we know that the pivot columns of <script type="math/tex">C</script> is the same as <script type="math/tex">A</script>. <br />Also, we can write <script type="math/tex">A=\left[\begin{matrix}\vec{u_1}&\vec{u_2}&…&\vec{u_n}\end{matrix}\right]\left[\begin{matrix}\vec{v_1}^T\\\vec{v_2}^T\\…\\\vec{v_r}^T\\zero\ rows\end{matrix}\right]=\vec{u_1}\vec{v_1}^T+\vec{u_2}\vec{v_2}^T+…+\vec{u_r}\vec{v_r}^T</script><br />Every <script type="math/tex">\vec{u_i}\vec{v_i}^T</script> is a rank <script type="math/tex">1</script> matrix. So every rank <script type="math/tex">r</script> matrix can be the sum of <script type="math/tex">r</script> rank <script type="math/tex">1</script> matrices. <br />So the basis of <script type="math/tex">C(A)</script> is pivot columns. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/08-Independence-Basis-and-Dimension/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/28/08-Independence-Basis-and-Dimension/" class="post-title-link" itemprop="url">08. Independence, Basis, and Dimension</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-28 23:26:57" itemprop="dateCreated datePublished" datetime="2020-01-28T23:26:57+08:00">2020-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:51" itemprop="dateModified" datetime="2020-08-07T19:14:51+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>The columns of <script type="math/tex">A</script> are <code>linearly independent</code> when the only solution to <script type="math/tex">A\vec{x}=\vec{0}</script> is <script type="math/tex">\vec{x}=\vec{0}</script>, i.e. the nullspace <script type="math/tex">N(A)</script> contains only the zero vector. No other combination <script type="math/tex">A\vec{x}</script> of the columns gives the zero vector. </li>
-<li>Another definition of independence: <script type="math/tex">x_1\vec{v}_1+x_2\vec{v}_2+…+x_n\vec{v}_n=\vec{0}</script> only happens when all <script type="math/tex">x</script>‘s are zero. </li>
-<li>Independence is a relationship among vectors instead of matrices. </li>
-<li>The columns of <script type="math/tex">A</script> are independent exactly when <script type="math/tex">A</script> has full column rank. </li>
-<li>Any set of <script type="math/tex">n</script> vectors in <script type="math/tex">R^m</script> must be linearly dependent if <script type="math/tex">n > m</script>. </li>
-<li><code>Linear dependence</code> can also be described as follows. <br />&emsp;One vector is a combination of other vectors. <br />&emsp;Some combination gives the zero vector, other than the trivial combination with every <script type="math/tex">x=0</script>. </li>
-</ol>
-<h1 id="Basis-for-a-Vector-Space"><a href="#Basis-for-a-Vector-Space" class="headerlink" title="Basis for a Vector Space"></a>Basis for a Vector Space</h1><ol>
-<li>A set of vectors <code>spans</code> a space if their linear combinations fill the space. </li>
-<li>The vectors which span a space could be dependent or independent. </li>
-<li>A <code>basis for a vector space</code> is a sequence of vectors that are linearly independent and span the space. </li>
-<li>There is only one way to write a vector <script type="math/tex">\vec{v}</script> as a combination of the basis vectors. <br />Prove: <br />&emsp;Suppose <script type="math/tex">\vec{v}=a_1\vec{v_1}+a_2\vec{v_2}+…+a_n\vec{v_n}</script> and <script type="math/tex">\vec{v}=b_1\vec{v_1}+b_2\vec{v_2}+…+b_n\vec{v_n}</script>. <br />&emsp;Subtract those two equations to get <script type="math/tex">\vec{0}=(a_1-b_1)\vec{v_1}+(a_2-b_2)\vec{v_2}+…+(a_n-b_n)\vec{v_n}</script><br />&emsp;So <script type="math/tex">a_i-b_i=0(\forall \ i≤n)</script>, i.e. <script type="math/tex">a_i=b_i(\forall \ i ≤ n)</script>. </li>
-<li>The columns of the <script type="math/tex">n</script> by <script type="math/tex">n</script> identity matrix give the <code>standard basis</code> for <script type="math/tex">R^n</script>. </li>
-<li>The basis is not unique. </li>
-<li>The vectors are a basis for <script type="math/tex">R^n</script> exactly when they are the columns of an <script type="math/tex">n</script> by <script type="math/tex">n</script> invertible matrix. </li>
-<li>The pivot columns (row) of <script type="math/tex">A</script> <strong>(not <script type="math/tex">R</script>)</strong> are a basis for its column (row) space. </li>
-<li>Two way to find a basis from a sequence of vectors: <br />&emsp;Make them the rows of <script type="math/tex">A</script> , and eliminate to find the nonzero rows of <script type="math/tex">R</script>. <br />&emsp;Put the vectors into the columns of <script type="math/tex">A</script>. Eliminate to find the pivot columns of <script type="math/tex">A</script>. </li>
-<li>The zero vector will never be allowed into any basis because then linear independence is lost. </li>
-<li>Every basis of the space has the same number of vectors. </li>
-<li>The special solutions are a basis of $N(A)$. </li>
-</ol>
-<h1 id="Dimension-of-a-Vectors-Space"><a href="#Dimension-of-a-Vectors-Space" class="headerlink" title="Dimension of a Vectors Space"></a>Dimension of a Vectors Space</h1><ol>
-<li>The number of vectors, in any and every basis, is the <code>dimension</code> of the space. </li>
-<li>All basis of the same space has the same number. </li>
-<li>The dimension of the column space equals the rank of the matrix. </li>
-<li>The dimension of <script type="math/tex">Z</script> is zero. The empty set (containing no vectors) is a basis for <script type="math/tex">Z</script>. </li>
-<li>The dimension of the column space: $dim(C(A))=rank(A)$</li>
-<li>The dimension of the nullspace: <script type="math/tex">dim(N(A))=number\ of\ free\ variables=n-rank(A)</script></li>
-</ol>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><ol>
-<li>The idea of independence, basis and dimension are not restricted to column vectors. Matrix and functions can also have these. </li>
-<li>In matrices, it is much like in column space, except components in different rows. </li>
-<li>In function, space usually is given by differential equation. It is also quite like <script type="math/tex">A\vec{x}=\vec{b}</script>. However, we solve it with calculus. </li>
-<li>In function spaces, it also has nullspace and particular solution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/07-Solving-Ax-b-Row-Reduced-Form-R/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/28/07-Solving-Ax-b-Row-Reduced-Form-R/" class="post-title-link" itemprop="url">07. Solving Ax = b: Row Reduced Form R</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-28 15:33:44" itemprop="dateCreated datePublished" datetime="2020-01-28T15:33:44+08:00">2020-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:37" itemprop="dateModified" datetime="2020-08-07T19:14:37+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="One-Particular-Solution"><a href="#One-Particular-Solution" class="headerlink" title="One Particular Solution"></a>One Particular Solution</h1><ol>
-<li><script type="math/tex">A\vec{x}=\vec{b}</script> and <script type="math/tex">R\vec{x}=\vec{d}</script> are solvable only when all-zero rows of <script type="math/tex">R</script> having zeros in <script type="math/tex">\vec{d}</script>. </li>
-<li>We can get one <code>particular solution</code> by setting free variables to zeros. </li>
-<li>This particular solution is pivot rows of <script type="math/tex">\vec{d}</script> in pivots’ position and zeros in the free variables’ position. </li>
-<li>With full column rank, <script type="math/tex">A\vec{x}=\vec{b}</script> has one solution or no solution. </li>
-</ol>
-<h1 id="Complete-Solution"><a href="#Complete-Solution" class="headerlink" title="Complete Solution"></a>Complete Solution</h1><ol>
-<li>The particular solution will be one point on the solution space. Adding the nullspace vectors will make the solutions complete. </li>
-<li><code>Complete solution = one particular solution + all nullspace solutions</code>. </li>
-<li><script type="math/tex">\vec{x}_{particular}</script> comes from <script type="math/tex">\vec{d}</script>, while <script type="math/tex">\vec{x}_{special}</script> comes from the free columns of <script type="math/tex">R</script>. </li>
-<li>When writing the complete solution, we multiply the special solutions to their free variable then add them together. However, nothing will multiply the particular solution. </li>
-<li>The picture of the complete solution is the nullspace shifted by the particular solution. </li>
-<li>Four possibilities for linear equations: <br /></li>
-</ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Condition</th>
-<th style="text-align:center">R</th>
-<th style="text-align:center">Solution</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$r=m=n$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I\end{matrix}\right]$</td>
-<td style="text-align:center">only $1$ solution</td>
-</tr>
-<tr>
-<td style="text-align:center">$r=m &lt; n$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I&amp;F\end{matrix}\right]$</td>
-<td style="text-align:center">infinitely many solutions (<code>full row rank</code>)</td>
-</tr>
-<tr>
-<td style="text-align:center">$r=n &lt; m$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I \ 0\end{matrix}\right]$</td>
-<td style="text-align:center">$0$ or $1$ solution (<code>full column solution</code>)</td>
-</tr>
-<tr>
-<td style="text-align:center"><script type="math/tex">r<m\ \ r<n</script></td>
-<td style="text-align:center">$R=\left[\begin{matrix}I&amp;F\\0&amp;0\end{matrix}\right]$</td>
-<td style="text-align:center">$0$ solution or infinitely many solutions</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/26/06-Column-Space-and-Nullspace/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/26/06-Column-Space-and-Nullspace/" class="post-title-link" itemprop="url">06. Column Space and Nullspace</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-26 12:06:36" itemprop="dateCreated datePublished" datetime="2020-01-26T12:06:36+08:00">2020-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:05" itemprop="dateModified" datetime="2020-08-07T19:16:05+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Column-Space"><a href="#Column-Space" class="headerlink" title="Column Space"></a>Column Space</h1><ol>
-<li>For a matrix <script type="math/tex">A</script>, its <code>column space</code> contains not only <script type="math/tex">n</script> columns of <script type="math/tex">A</script>, but also all combinations <script type="math/tex">A\vec{x}</script>. The column space of <script type="math/tex">A</script> is denoted as <script type="math/tex">C(A)</script>. </li>
-<li>To solve <script type="math/tex">A\vec{x}=\vec{b}</script> is to express <script type="math/tex">\vec{b}</script> as a combination of columns. The <script type="math/tex">\vec{b}</script> has to be in the column space of $A$, or no solution! </li>
-<li>The column space of <script type="math/tex">A_{m\times n}</script> is a subspace of <script type="math/tex">R^m</script> (not <script type="math/tex">R^n</script>), for each column has $n$ components.  </li>
-<li>The column space is the smallest subspace containing all column vectors. </li>
-<li>The row space of <script type="math/tex">A</script> is <script type="math/tex">C(A^T)</script>. </li>
-</ol>
-<h1 id="Nullspace"><a href="#Nullspace" class="headerlink" title="Nullspace"></a>Nullspace</h1><ol>
-<li>For equation <script type="math/tex">A\vec{x}=\vec{0}</script>, if <script type="math/tex">A</script> is invertible, it has only one solution <script type="math/tex">\vec{x}=\vec{0}</script>. Otherwise, there are nonzero solutions. </li>
-<li>The <code>nullspace</code> <script type="math/tex">N(A)</script> consists of all solutions to <script type="math/tex">A\vec{x}=\vec{0}</script>. </li>
-<li>Prove that the nullspace is a vector space: <br />&emsp;<script type="math/tex">\forall\ \vec{x}, \ \vec{y}\ \in\ N(A),\ A\vec{x}=\vec{0}, \ A\vec{y}=\vec{0}</script><br />&emsp;<script type="math/tex">A\vec{x}+A\vec{y}=\vec{0}+\vec{0}=\vec{0}=A(\vec{x}+\vec{y})</script><br />&emsp;<script type="math/tex">A(\vec{x}+\vec{y})=\vec{0}</script>. So <script type="math/tex">\vec{x}+\vec{y}</script> is in the <script type="math/tex">N(A)</script><br />&emsp;<script type="math/tex">A(c\vec{x})=cA\vec{x}=c\vec{0}=\vec{0}</script>. So <script type="math/tex">c\vec{x}</script> is in the <script type="math/tex">N(A)</script>. <br />&emsp;Conclusion, <script type="math/tex">N(A)</script> is a vector space. </li>
-<li><script type="math/tex">N(A)</script> is a subspace of <script type="math/tex">R^n</script>. </li>
-<li>A nullspace can be described by special solutions to <script type="math/tex">A\vec{x}=\vec{0}</script>. </li>
-<li>The <code>free components</code> correspond to columns with no pivots. </li>
-<li>If we have <script type="math/tex">k</script> free components, we can get <script type="math/tex">k</script> special solutions. The only thing to do is to set one free component to $1$ and all others to $0$. </li>
-<li>For invertible matrix <script type="math/tex">A</script>, <script type="math/tex">N(A)=Z</script>. Further for any matrix <script type="math/tex">A</script>, if <script type="math/tex">N(A)=Z</script>, that means the columns of <script type="math/tex">A</script> are <code>independent</code>. </li>
-<li>For matrices <script type="math/tex">A_{m\times n}</script> with <script type="math/tex">n > m</script>, there must be at least <script type="math/tex">n-m</script> free variables. </li>
-<li>The <code>dimension of a nullspace</code> is the number of free variables. </li>
-<li>Every free column is a combination of earlier pivot columns. It is the special solutions (set the corresponding free component to $1$) that tell us those combinations. </li>
-</ol>
-<h1 id="Reduced-Row-Echelon-Form"><a href="#Reduced-Row-Echelon-Form" class="headerlink" title="Reduced Row Echelon Form"></a>Reduced Row Echelon Form</h1><ol>
-<li>The <code>reduced row echelon form (rref)</code> has $1$s in the pivots’ position and $0$s above and bellow, which is denoted by <script type="math/tex">rref(A)</script> or <script type="math/tex">R</script>. </li>
-<li>The eliminations will not change the nullspace, i.e. <script type="math/tex">N(A)=N(U)=N(R)</script></li>
-<li>The pivot columns of <script type="math/tex">R</script> contain <script type="math/tex">I</script>. </li>
-<li>With some row and column exchanges, put all pivot column before free columns and pivot rows before free rows. This form of <script type="math/tex">R</script> is like <script type="math/tex">R=\left[\begin{matrix}I & F \\ 0&0\end{matrix}\right]</script>. Since all special solutions form a nullspace matrix called <script type="math/tex">N</script>, <script type="math/tex">RN=0</script>. After solving this equation, we can get <script type="math/tex">N=\left[\begin{matrix}-F\\I\end{matrix}\right]</script>. In <script type="math/tex">N</script>, pivots are above free variables. </li>
-</ol>
-<h1 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h1><ol>
-<li>The <code>rank of a matrix</code> is the number of pivots. Rank is denoted by <script type="math/tex">r</script>. </li>
-<li>The actual size of <script type="math/tex">A</script> is given by its rank. </li>
-<li>All three matrices <script type="math/tex">A</script>, <script type="math/tex">U</script> and <script type="math/tex">R</script> have <script type="math/tex">r</script> independent rows. </li>
-<li>The rank <script type="math/tex">r</script> is the dimension of the column space and the dimension of the row space. </li>
-<li><script type="math/tex">n - r</script> is the dimension of the nullspace and the number of free variables. </li>
-<li>$r(A)=r(A^T)$</li>
-<li>Matrix <script type="math/tex">A</script> has full row rank means: <br />&emsp;The column space is the whole space <script type="math/tex">R^m</script><br />&emsp;There are <script type="math/tex">n-r=n-m</script> special solutions in the nullspace of <script type="math/tex">A</script></li>
-<li>Matrix <script type="math/tex">A</script> has full column rank means: <br />&emsp;The nullspace <script type="math/tex">N(A)</script> contains only the zero vector. <br />&emsp;If <script type="math/tex">A\vec{x}=\vec{b}</script> has a solution, then it has only one solution. </li>
-<li>Every rank one matrix is one column times one row <script type="math/tex">A=\vec{u}\vec{v}^T</script></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1351,14 +1321,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

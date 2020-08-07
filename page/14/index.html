@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,377 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">树状数组</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:27:24" itemprop="dateCreated datePublished" datetime="2019-11-09T00:27:24+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:46:01" itemprop="dateModified" datetime="2020-08-07T19:46:01+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">区间问题</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><p><strong>主要用法</strong>：单点修改，区间求和，如果涉及到区间修改，要么转为单点修改，要么用线段树<br><strong>原理</strong>：利用二叉索引树，把区间依次分为多个子区间。</p>
+<h1 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h1><p><strong>本质</strong>：求一个数二进制的最低位的1所代表的数字，如：lowbit(6) = 2<br><strong>求法</strong>：与其相反数做位与操作<br><strong>原理</strong>：负数在计算机内到存储方式是正数逐位取反再加一，取反之后原本末尾的0都变味1，最低位1变为0，加一之后反码末尾的1都变为0，恢复和原本的正数一样，进位进到最低位的1时停止进位，最低位的1恢复成和原本的正数一样，但更高位的数仍维持和反码一样，意味着在逐位取和的过程中更高位都会变为0，最低位1及以下的数不变，由此得到最低位1代表的数字<br>如：<br>原数1001110 | 10<br>取反0110001 | 01<br>加一0110001 | 10<br>逐位取和10 -&gt; 2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉索引树"><a href="#二叉索引树" class="headerlink" title="二叉索引树"></a>二叉索引树</h1><p>二叉索引树长相如图：<img src="/img/树状数组01.png" style="zoom:67%;" /><br>1、<strong>含义</strong>：每一个黑点都代表的是一个原始数组单元内存储的信息的位置。白条加黑点代表的是该单元内存储的长条覆盖范围内的数据和。例如数组的4号元素，表示的是从1号加到4号的和<br>2、可以观察到树状数组和原始数组的大小一样<br>3、在树状数组中，每一个节点到包含它的父节点的方法就是加上lowbit，而求从1号到x号的节点和要从x号节点开始依次减去lowbit<br>单点修改代码<br>4、树状数组常从1开始存储<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[maxn], ori[maxn];   <span class="comment">//sum为树状数组，ori为原始数据</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> val, <span class="keyword">int</span> n)</span> <span class="comment">//要把x号元素增加val，n为元素个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x &lt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[x] += val;</span><br><span class="line">        x += lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>区间查询代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span>   <span class="comment">//求从1号元素到x号元素到和</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += sum[x];</span><br><span class="line">        x -= lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;/</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E9%A2%98%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E9%A2%98%E9%9B%86/" class="post-title-link" itemprop="url">并查集题集</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:26:09" itemprop="dateCreated datePublished" datetime="2019-11-09T00:26:09+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 17:42:28" itemprop="dateModified" datetime="2020-08-07T17:42:28+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/" itemprop="url" rel="index">
+                    <span itemprop="name">并查集</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://codeforces.com/problemset/problem/1156/D" target="_blank" rel="noopener">CF 1156D</a><br>思路：建立两个并查集，权值为1的一个，权值为2的一个，记录每个点不同权值边所在的树的节点数。每一颗树中的节点都是相互可配对的，从一棵0树的节点经过另一个节点到一棵1树也是合法的，我们计算时就枚举所有的节点，计算出经过该节点的可匹配点，即<code>该节点所在的0树的节点数乘以1数的节点数再减去1(该节点到该节点)</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e5</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sz[<span class="number">2</span>][MAXN], dsu[<span class="number">2</span>][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != dsu[v][x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> dsu[v][x] = find(dsu[v][x], v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fx = find(x, v);</span><br><span class="line">    <span class="keyword">int</span> fy = find(y, v);</span><br><span class="line">    <span class="keyword">if</span>(fx != fy)</span><br><span class="line">    &#123;</span><br><span class="line">        dsu[v][fx] = fy;</span><br><span class="line">        sz[v][fy] += sz[v][fx];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, x, y, v;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    rep(i, <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        dsu[<span class="number">0</span>][i] = dsu[<span class="number">1</span>][i] = i;</span><br><span class="line">        sz[<span class="number">0</span>][i] = sz[<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    rep(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y &gt;&gt; v;</span><br><span class="line">        merge(x, y, v);</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    rep(i, <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += <span class="number">1L</span>L * sz[<span class="number">0</span>][find(i, <span class="number">0</span>)] * sz[<span class="number">1</span>][find(i, <span class="number">1</span>)] - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">并查集应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:24:04" itemprop="dateCreated datePublished" datetime="2019-11-09T00:24:04+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 17:42:23" itemprop="dateModified" datetime="2020-08-07T17:42:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/" itemprop="url" rel="index">
+                    <span itemprop="name">并查集</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目1-带权并查集"><a href="#题目1-带权并查集" class="headerlink" title="题目1 (带权并查集)"></a>题目1 (带权并查集)</h1><p><a href="https://vjudge.net/problem/HDU-3038" target="_blank" rel="noopener">HDOJ 3038</a><br>这题是带权并查集的模版题。我们定义，如果询问到了区间[x, y]，我们就把y所在的树变为x所在的树的根节点的子树连起来。权值sum[maxn]，判断是否有矛盾的方法：1、询问的区间两个端点必须是在同一棵树上的，即之前有被询问过，否则不能判断；2、<code>sum[x] + val != sum[y]</code>。注意定义的并查集向量的方向是父节点指向孩子节点的，所以判断时是sum[x] + val而不是sum[y] + val，合并的顺序也要注意<br>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">200000</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> unionFind[maxn], sum[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(unionFind[x] == x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">    unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">    sum[x] = sum[x] + sum[oldFather];</span><br><span class="line">    <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isTrue</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">    <span class="keyword">if</span>(fx == fy)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(sum[x] + val != sum[y])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        unionFind[fx] = fy;</span><br><span class="line">        sum[fx] = sum[y] + val - sum[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(sum, <span class="number">0</span>, <span class="keyword">sizeof</span>(sum));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            unionFind[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x, y, val;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(m--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;val);</span><br><span class="line">            x--; <span class="comment">//为了把形如[1, 5]和[6, 10]这样的区间连接起来</span></span><br><span class="line">            <span class="keyword">if</span>(!isTrue(x, y, val))</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题目2-种类并查集"><a href="#题目2-种类并查集" class="headerlink" title="题目2 (种类并查集)"></a>题目2 (种类并查集)</h1><p><a href="https://vjudge.net/problem/POJ-1182" target="_blank" rel="noopener">POJ 1182</a><br>这题的状态比较难定义，我们定义：0表示和父节点同类，1表示吃父节点，2表示被父节点吃，而0、1也和题中的1、2对应起来</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100000</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> unionFind[maxn], val[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">        unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">        val[x] = (val[x] + val[oldFather]) % <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span>(val));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            unionFind[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x, y, relation;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(k--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;relation, &amp;x, &amp;y);</span><br><span class="line">            <span class="keyword">if</span>(x &gt; n || (x == y &amp;&amp; relation == <span class="number">2</span>) || y &gt; n)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">                <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">                <span class="keyword">if</span>(fx == fy &amp;&amp; (val[x] - val[y] + <span class="number">3</span>) % <span class="number">3</span> != relation - <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(fx != fy)</span><br><span class="line">                &#123;</span><br><span class="line">                    unionFind[fx] = fy;</span><br><span class="line">                    val[fx] = (val[y] + relation - val[x] + <span class="number">2</span>) % <span class="number">3</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="post-title-link" itemprop="url">并查集</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:18:25" itemprop="dateCreated datePublished" datetime="2019-11-09T00:18:25+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:45:48" itemprop="dateModified" datetime="2020-08-07T19:45:48+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%B9%B6%E6%9F%A5%E9%9B%86/" itemprop="url" rel="index">
+                    <span itemprop="name">并查集</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>并查集是一种高级的数据结构，本质是一个树，用数组实现，可以进行并集和查集的操作。并查集的特点在于快速判断两个点是不是在同一棵树中</p>
+<h1 id="构成"><a href="#构成" class="headerlink" title="构成"></a>构成</h1><p>一个一维数组arr，arr[i] = j的含义是第i个元素属于j这棵树中。初始的时候每一棵树都是一棵单独的树，故在初始的时候每一个单元内存储的值和该单元的下标一样(我们一般都以根节点为基准，把别的点合并到根节点)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> unionFind[maxn]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++)</span><br><span class="line">		unionFind[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="查"><a href="#查" class="headerlink" title="查"></a>查</h1><p>查是并查集的核心操作，由并查集的构成可知，有且只有一棵树的根节点保存的值和其下标一样。查就是判断数组中下标和值是否一样，若一样则返回该值，否则找该值所在的树。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x != unionFind[x])</span><br><span class="line">	&#123;</span><br><span class="line">		x = unionFind[x];     <span class="comment">//下标和值不想等，沿值继续查找</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;    <span class="comment">//相等了返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果数据量大，查找会花费大量的时间，这时候如果路径不影响结果就可以利用路径压缩优化之后查找的时间</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">		unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">		<span class="comment">//不相等，利用递归，把所有的子节点的值都直接</span></span><br><span class="line">	<span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="并"><a href="#并" class="headerlink" title="并"></a>并</h1><p>并就没有什么技术含量了，用查找出两个小弟的老大，把、让一个老大心中装有另一个老大就完成了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = <span class="built_in">find</span>(x);</span><br><span class="line">	y = <span class="built_in">find</span>(y);</span><br><span class="line">	unionFind[x] = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="带权并查集"><a href="#带权并查集" class="headerlink" title="带权并查集"></a>带权并查集</h1><p>一般并查集都是无权树，带权并查集是对并查集的一个扩展。通过对点赋值，来确定特殊的属于关系，相当于把一般并查集的属于关系进行了拓展，在属于的基础上还可以利用权值来确定点与点之间的其他特殊关系<br>在带权并查集中，我们多加一个数组val，来存储i号节点到它父节点的边的权值。我们在图中也可以把边看成是孩子节点指向父节点的一个向量，之后的值的相加都要利用到向量的思想<br><strong>查(路径压缩)</strong>：压缩后，节点x的父节点变为根节点<br><img src="/img/并查集01.jpg" width="60%"><br>由图可知，更新后的<code>val[x] = val[x] + val[oldFather]</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(unionFind[x] == x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">	unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">	val[x] = val[x] + val[oldFather];</span><br><span class="line">	<span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>并：</strong><br>合并之前总是要先找到他们的最远祖先，就意味着之前一定要运行一遍find函数，就意味着在合并正式开始的时候两颗树的形状一定是如上右图一样，路径压缩过后的样子<br><img src="/img/并查集02.jpg" width="60%"><br>由图可知，<code>val[fx] = val[y] + v - val[x]</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">	<span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">	<span class="keyword">if</span>(fx != fy)</span><br><span class="line">	&#123;</span><br><span class="line">		unionFind[fx] = fy;</span><br><span class="line">		vaL[fx] = val[y] + x - val[x];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一个遗留问题：在合并的时候为什么只修改根节点的值？val的含义是和父节点的权值，在合并时不改变树型，就不会改变根节点的孩子节点的父节点，就没有必要更新它们</p>
+<h1 id="种类并查集"><a href="#种类并查集" class="headerlink" title="种类并查集"></a>种类并查集</h1><p>本质就是利用带权并查集和状态压缩。利用状态压缩，把物间的关系压缩成一系列数，一般是从0开始的连续实数，a和b有关系，就把a和b连起来，关系a、b间关系的大小<br>但是在合并时，在更新值的时候要取余，有减的项，为了防止在取余时出现负数，就要加上取余的数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -749,386 +1120,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">二分图匹配(匈牙利算法的优化—— Hopcroft-Karp算法)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:08:35" itemprop="dateCreated datePublished" datetime="2019-11-09T00:08:35+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:30:19" itemprop="dateModified" datetime="2020-08-07T22:30:19+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="匈牙利算法的不足"><a href="#匈牙利算法的不足" class="headerlink" title="匈牙利算法的不足"></a>匈牙利算法的不足</h1><p>匈牙利算法在进行DFS时，没次都最多只能找到一条增广路，导致了我们要遍历所有的点和边才可以找到最大匹配。而Hopcroft-Karp算法就从这里开始改进——每次先通过BFS标出层次，再通过DFS验证增广路，可以一次找到多条路</p>
-<h1 id="Hopcroft-Karp算法"><a href="#Hopcroft-Karp算法" class="headerlink" title="Hopcroft-Karp算法"></a>Hopcroft-Karp算法</h1><p>1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化<br>&emsp;增广路都是从一个未匹配点开始，我们就只需要在开始的时候把所有的未匹配点推入队列<br>&emsp;增广路都是在另一个未匹配点结束，我们就只需标记到另一个未匹配点所在的那层即可<br>&emsp;<strong>数据存储</strong>：map存边，dN和dM分别表示N点集和M点集中各个点的层次，matchN、matchM分别存储点集N和点集M的匹配情况，整型全局变量dist表示当前遍历的最大层次同时标记还有没有增广路</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxN][maxM], dN[maxN], dM[maxM], matchN[maxN], matchM[maxM];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span>  <span class="comment">//n是点集N的个数，m是点集M的个数，这里假设从点集N去匹配点集M</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	dist = INF;</span><br><span class="line">	<span class="built_in">memset</span>(dN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dN));</span><br><span class="line">	<span class="built_in">memset</span>(dM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dM));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//所以未匹配点都加入队列</span></span><br><span class="line">		<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			que.push(i);</span><br><span class="line">			dN[i] = <span class="number">0</span>;  <span class="comment">//这些未匹配点都是起点，所以是第0层</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> dotN = que.front();</span><br><span class="line">		que.pop();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//根据BFS的性质，当出现第一个超出遍历层数的点出现，之后的点都会超出，不必再继续遍历</span></span><br><span class="line">		<span class="keyword">if</span>(dN[dotN] &gt; dist)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == <span class="number">-1</span>) <span class="comment">//相连且没有遍历过</span></span><br><span class="line">			&#123;</span><br><span class="line">				dM[dotM] = dN[dotN] + <span class="number">1</span>; <span class="comment">//dotN再走一步就可以到dotM，所以dotM的层数就是dotN加一</span></span><br><span class="line">				<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span>) <span class="comment">//如果是未匹配点，遍历到这层就结束</span></span><br><span class="line">				&#123;</span><br><span class="line">					dist = dM[dotM]; <span class="comment">//这次遍历到最大层数</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="comment">//如果是匹配点</span></span><br><span class="line">				&#123;</span><br><span class="line">					dN[matchM[dotM]] = dM[dotM] + <span class="number">1</span>;</span><br><span class="line">					que.push(matchM[dotM]); <span class="comment">//队列里装的永远都是点集N里的点</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dist != INF; <span class="comment">//如果dist == INF就说明没有增广路路，可以结束循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、DFS验证增广路：和匈牙利算法的DFS差不多，但是要求长度在dist以内，且是连续层次的点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vis[maxM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == dN[dotN] + <span class="number">1</span>) <span class="comment">//连边且层次连续</span></span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] != <span class="number">-1</span> &amp;&amp; dM[dotM] &gt; dist) <span class="comment">//长度超过dist还没找到未匹配点即路未结束</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span> || DFS(matchM[dotM], m))</span><br><span class="line">			&#123;</span><br><span class="line">				matchM[dotM] = dotN;</span><br><span class="line">				matchN[dotN] = dotM;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3、主算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxMatch</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(matchN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchN));</span><br><span class="line">	<span class="built_in">memset</span>(matchM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchM));</span><br><span class="line">	<span class="keyword">while</span>(BFS(n, m))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				ans += DFS(i, m);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/HDU-2389" target="_blank" rel="noopener">HDOJ 2389</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95DFS%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95DFS%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">二分图匹配(匈牙利算法DFS实现)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:06:54" itemprop="dateCreated datePublished" datetime="2019-11-09T00:06:54+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:31:02" itemprop="dateModified" datetime="2020-08-07T22:31:02+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>相关内容：<br>二分图：可以分成毫无相关的两个子图<br>二分图匹配就是在二分图中依某种关系将两个图中的元素匹配起来。和稳定婚姻匹配的差别就是二分图匹配的榜单<code>没有优先关系之分</code>，即不会私奔</p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>1、路：<br>&emsp;交替路：从<code>未匹配点</code>出发，依次经过非匹配边，匹配边，非匹配边……的路<br>&emsp;增广路：经过另一个未匹配点的交替路<br>2、增广路的特性：非匹配边比匹配边多一条<br>3、增广路定理：把增广路里的匹配边和非匹配边交换，即匹配边变为非匹配边，非匹配边变为非匹配边；就可以在点集无内边的前提下多一条匹配边，得以改进匹配<br>4、极大匹配：无法在只添加未匹配边的情况下增加匹配<br>5、最大匹配：极大匹配中匹配边最大的情况<br>6、完美(完备)匹配：所有点都是匹配点的匹配<br>7、二分图最小顶点覆盖：使用最少的顶点就覆盖所有边。<code>二分图最小顶点覆盖数 = 最大匹配数</code><br>8、最小路径覆盖：用最少的边组成路径，使得这个路径经过所有点。<code>最小路径覆盖数 = 顶点数 - 最大匹配数</code><br>9、最大独立集：一个点集，使得点集内的所有点与点集外的所有点都没有连边。一般图的最大独立集是NP完全问题，但二分图中<code>最大独立集 = 最小路径覆盖数</code></p>
-<h1 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h1><p>思想：先定一个点集A，让A里的点去“追”另一个点集B里的点。对A里的每一个点利用增广路定理改进匹配，直到无法改进，就得到最大匹配<br><strong>数据存储</strong>：一个二维数组graph来存储点集之间的选择，一个一维数组mark来标记被追点集中的点在该次查询中是否被访问过，两个一维数组BoyMatched和GirlMatched来表示两个点集中的匹配情况</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> graph[maxn][maxn], mark[maxn], BoyMatched[maxn], GirlMatched[maxn];</span><br></pre></td></tr></table></figure>
-<p><strong>初始化</strong>：graph初始化为0，若i和j愿意在一起，则<code>graph[i][j] = graph[j][I] = 1</code>；mark在每次开始搜索增广路的时候都要全部初始化为0。BoyMatched和GirlMatched都初始化为一个点集里没有的值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(graph, <span class="number">0</span>, <span class="keyword">sizeof</span>(graph));</span><br><span class="line"><span class="built_in">memset</span>(boyMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(boyMatched));</span><br><span class="line"><span class="built_in">memset</span>(girlMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(girlMatched));</span><br></pre></td></tr></table></figure>
-<p><strong>处理</strong>：<br>搜索增广路：用DFS搜索(假设Girl追Boy，他们的标号都是从1开始)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)   <span class="comment">//n：Boy的个数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!mark[i] &amp;&amp; graph[i][u])  <span class="comment">//判断是否这条路在之前有没有经过这个点以及这个点与u是否来电</span></span><br><span class="line">		&#123;</span><br><span class="line">			mark[i] = <span class="number">1</span>;     <span class="comment">//标记这条路已经走过这个点了</span></span><br><span class="line">			<span class="keyword">if</span>(!BoyMatched[i] || DFS(BoyMatched[i]))<span class="comment">//若这个点就是未匹配点或这个点往下走有未匹配点</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">//匹配边和未匹配边状态交换</span></span><br><span class="line">				BoyMatched[i] = u;</span><br><span class="line">				GirlMarched[u] = i;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>主算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximumMatch</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;   <span class="comment">//最大匹配数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) <span class="comment">//遍历所有女生，m：女生个数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!GirlMatched[i])   <span class="comment">//增广路要求从未匹配点开始</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));    <span class="comment">//开始遍历一条新的路，之前的标记要清除</span></span><br><span class="line">			ans += DFS(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E8%B7%AF%E5%BE%84%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">最短路综合应用——路径相关</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:00:32" itemprop="dateCreated datePublished" datetime="2019-11-09T00:00:32+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:30:16" itemprop="dateModified" datetime="2020-08-07T22:30:16+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" itemprop="url" rel="index">
-                    <span itemprop="name">最短路径</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="附加权值、输出路径、路径种数-题目保证唯一"><a href="#附加权值、输出路径、路径种数-题目保证唯一" class="headerlink" title="附加权值、输出路径、路径种数(题目保证唯一)"></a>附加权值、输出路径、路径种数(题目保证唯一)</h1><p><a href="https://pintia.cn/problem-sets/994805046380707840/problems/994805073643683840" target="_blank" rel="noopener">PTA  L2-001</a><br>题目要求：<br>&emsp;1、输出最短路径的种数<br>&emsp;2、输出最多救援队人数<br>&emsp;3、输出最优路径<br>解决：<br>&emsp;1、最短路算法选择：Dijkstra算法<br>&emsp;2、路径种数：建立一个一维way数组，表示从出发点到一点的路径种数。初始化为0，出发点为1。在Dijkstra算法中，进入更新各个点到出发点距离时，若<code>dist[i] &lt; dist[x] + map[x][i]</code>，则使<code>way[i] = way[x]</code>，若<code>dist[i] == dist[x] + map[x][i]</code>，则<code>way[i] += way[x]</code><br>&emsp;3、输出最多救援队人数：建立一个一维数组men，表示从出发点到一点的最短路径上能有的最多救援队人数，再建一个一维数组people，存放各个点的救援队人数。关注人数意味着最优路径多了一个指标，故在Dij算法最开始找当前最优点时不仅仅要距离最短，也要人数最多，故需要增加一个指标来标记最多人数。更新各点距离时，若<code>dist[i]==dist[x]+map[x][i]</code>&amp;&amp;<code>men[i] &lt; men[x]+people[i]</code>，则<code>men[i]=men[x]+people[i]</code>；若<code>dist[i] &lt; dist[x] + map[x][i]</code>，则<code>men[i]=men[x]+people[i]</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxn][maxn], dist[maxn], way[maxn], people[maxn], men[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dist[i] = INF;</span><br><span class="line">        men[i] = vis[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dist[start] = <span class="number">0</span>;</span><br><span class="line">    men[start] = people[start];     <span class="comment">//直接在出发点就可以招到people[start]那么多人</span></span><br><span class="line">    way[start] = <span class="number">1</span>;    <span class="comment">//从出发点到出发点有1种走法，不是0种</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> minLength = INF, maxMen = <span class="number">0</span>, x;</span><br><span class="line">        <span class="comment">//   最小距离         最大人数</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(dist[j] == minLength &amp;&amp; maxMen &lt; men[j])   <span class="comment">//相等且更多人也更新</span></span><br><span class="line">                    maxMen = men[x = j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(dist[j] &lt; minLength)     <span class="comment">//距离更短必定更新</span></span><br><span class="line">                &#123;</span><br><span class="line">                    minLength = dist[x = j];</span><br><span class="line">                    maxMen = men[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vis[x] = <span class="number">1</span>;     <span class="comment">//标记</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(dist[j] &gt; dist[x] + <span class="built_in">map</span>[x][j] &amp;&amp; <span class="built_in">map</span>[x][j] &lt; INF)   <span class="comment">//有路且更短</span></span><br><span class="line">                &#123;</span><br><span class="line">                    dist[j] = dist[x] + <span class="built_in">map</span>[x][j];</span><br><span class="line">                    way[j] = way[x];    <span class="comment">//到j的方法就是到x到方法：目前到j必经过x</span></span><br><span class="line">                    men[j] = men[x] + people[j];     <span class="comment">//x上招到人，j上还可以招到人</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(dist[j] == dist[x] + <span class="built_in">map</span>[x][j])    <span class="comment">//距离相等</span></span><br><span class="line">                &#123;</span><br><span class="line">                    way[j] += way[x];      <span class="comment">//到j还可以先到x，故到j的方法还有到x的方法种</span></span><br><span class="line">                    <span class="keyword">if</span>(men[j] &lt; men[x] + people[j])    <span class="comment">//如果经过j可以招到更多的人</span></span><br><span class="line">                        men[j] = men[x] + people[j];<span class="comment">//way是最短路种数，路径长度没变，不必更新way</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&emsp;4、输出最优路径：从终点开始DFS，若当前点的总人数减掉当前点的单点人数等于第i个点的人数，且出发点到当前点的距离减掉当前点到第i点的距离等于出发点到第i点的距离，则第i点就是最短路中当前点的父节点，并以这点继续DFS，直到第i点为出发点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> cur, <span class="keyword">int</span> sumMen, <span class="keyword">int</span> n, <span class="keyword">int</span> start)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cur == start)    <span class="comment">//递归到出发点，结束递归</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(sumMen - people[cur] == men[i] &amp;&amp; dist[cur] - <span class="built_in">map</span>[cur][i] == dist[i])<span class="comment">//确定父节点</span></span><br><span class="line">        &#123;</span><br><span class="line">            DFS(i, men[i], n, start);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, i);</span><br><span class="line">            <span class="comment">//先进行递归就可以先输出后搜到的节点也就是先走到的节点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>main函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, start, <span class="built_in">end</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;n, &amp;m, &amp;start, &amp;<span class="built_in">end</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">            <span class="built_in">map</span>[i][j] = INF;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">map</span>[i][i] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;people[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> c1, c2, d;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;c1, &amp;c2, &amp;d);</span><br><span class="line">        <span class="built_in">map</span>[c1][c2] = <span class="built_in">map</span>[c2][c1] = <span class="built_in">std</span>::<span class="built_in">min</span>(<span class="built_in">map</span>[c1][c2], d);</span><br><span class="line">    &#125;</span><br><span class="line">    dijkstra(start, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, way[<span class="built_in">end</span>], men[<span class="built_in">end</span>]);</span><br><span class="line">    DFS(<span class="built_in">end</span>, men[<span class="built_in">end</span>], n, start);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">end</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最短路径字典序打印"><a href="#最短路径字典序打印" class="headerlink" title="最短路径字典序打印"></a>最短路径字典序打印</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1385" target="_blank" rel="noopener">HDOJ 1385</a><br>题目要求：要求若花费相同，则输出字典序最小路径<br>1、存储路径：建立一个一维数组pre来存储每个节点的父节点<br>2、比较字典序：转化为字符数组，利用strcmp的返回值比较转化为字符数组：<br>转化为字符数组：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dfs(<span class="keyword">int</span> u, <span class="keyword">char</span> * str, <span class="keyword">int</span> &amp; pos)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(u == <span class="number">-1</span>)   <span class="comment">//表明结束</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(pre[u], str, pos);</span><br><span class="line">	str[pos++] = u + <span class="string">'0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>比较：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> ori, <span class="keyword">int</span> cur)</span>   <span class="comment">//ori代表原始路径与现路径终点，cur表示新路线先经过cur再到ori</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> origin[maxn], current[maxn];</span><br><span class="line">	dfs(ori, origin, pos);   <span class="comment">//直接找出到ori的最短路</span></span><br><span class="line">	str[pos] = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">	pos = <span class="number">0</span>;</span><br><span class="line">	dfs(cur, current, pos);     <span class="comment">//先找出到cur的最短路</span></span><br><span class="line">	cur[pos++] = ori + <span class="string">'0'</span>;     <span class="comment">//加上ori后表示经过cur到ori的最短路</span></span><br><span class="line">	cur[pos] = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">strcmp</span>(str1, str2) == <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在SPFA中若距离相等且字典序更短，就要更新父节点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist[maxn], pre[maxn], inQue[maxn], charge[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(inQue, <span class="number">0</span>, <span class="keyword">sizeof</span>(inQue));</span><br><span class="line">	<span class="built_in">memset</span>(pre, <span class="number">-1</span>, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		dist[i] = INF;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	que.push(start);</span><br><span class="line">	inQue[start] = <span class="number">1</span>;</span><br><span class="line">	dist[start] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u = que.front();</span><br><span class="line">		que.pop();</span><br><span class="line">		inQue[u] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> temp = dist[u] + <span class="built_in">map</span>[u][i] + charge[i];</span><br><span class="line">			<span class="keyword">if</span>(dist[i] &gt; temp)</span><br><span class="line">			&#123;</span><br><span class="line">				dist[i] = temp;</span><br><span class="line">				pre[i] = u;</span><br><span class="line">				<span class="keyword">if</span>(!inQue[i])</span><br><span class="line">				&#123;</span><br><span class="line">					inQue[i] = <span class="number">1</span>;</span><br><span class="line">					que.push(i);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(dist[i] == temp &amp;&amp; cmp(i, u))</span><br><span class="line">				pre[i] = u;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印路径</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pre[u] == <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d"</span>, u);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">print</span>(pre[u]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"--&gt;%d"</span>, u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95-Dijkstra%E3%80%81Bellman-Ford%E3%80%81SPFA%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95-Dijkstra%E3%80%81Bellman-Ford%E3%80%81SPFA%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">最短路算法(Dijkstra、Bellman-Ford、SPFA邻接表实现)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 23:58:41" itemprop="dateCreated datePublished" datetime="2019-11-08T23:58:41+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:30:42" itemprop="dateModified" datetime="2020-08-07T22:30:42+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" itemprop="url" rel="index">
-                    <span itemprop="name">最短路径</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>邻接矩阵实现起来比较简单，但对空间的利用效率不高，常常会导致内存超限的MLE，此时就应当改用邻接表实现，省去不必要的边，减小内存消耗</p>
-<h1 id="邻接表的构造"><a href="#邻接表的构造" class="headerlink" title="邻接表的构造"></a>邻接表的构造</h1><p>邻接表都是利用Vector替换原来的map数组实现的。由于邻接表的本质是存储边，所以我们还要定义一个结构体，包含两个值，一个是这条路的终点，一个是这条路的长度。开一个向量数组，一个点一个向量，每次都把与那个点相关的点加如向量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to, dist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;info&gt; <span class="built_in">map</span>[maxn];</span><br></pre></td></tr></table></figure>
-<h1 id="Dijkstra的邻接表实现"><a href="#Dijkstra的邻接表实现" class="headerlink" title="Dijkstra的邻接表实现"></a>Dijkstra的邻接表实现</h1><p>Dij算法的邻接表和邻接矩阵相比，差异只在于更新各点到起点的距离。由于是邻接表，所以那个循环枚举的是边，而不是想邻接矩阵那样枚举点，就不必想邻接矩阵那样判断是否存在边。将x点的向量map[x]从头枚举到尾，每一个元素的to值就是可以到的终点，dist值就是距离<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">	<span class="built_in">fill</span>(dist, dist + n + <span class="number">1</span>, INF);</span><br><span class="line">	dist[start] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mini = INF, x;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[j] &lt; mini &amp;&amp; !vis[j])</span><br><span class="line">			&#123;</span><br><span class="line">				mini = dist[j];</span><br><span class="line">				x = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		vis[x] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//以下才开始变化</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[x].<span class="built_in">size</span>(); j++) <span class="comment">//枚举map[x]里的所有元素</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[<span class="built_in">map</span>[x][j].to] &lt; dist[x] + <span class="built_in">map</span>[x][j].dist)</span><br><span class="line">			&#123;</span><br><span class="line">				dist[<span class="built_in">map</span>[x][j].to] = dist[x] + <span class="built_in">map</span>[x][j].dist;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Bellman-Ford算法的邻接表实现"><a href="#Bellman-Ford算法的邻接表实现" class="headerlink" title="Bellman-Ford算法的邻接表实现"></a>Bellman-Ford算法的邻接表实现</h1><p>和Dij一样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bellmanFord</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n - <span class="number">1</span> &amp;&amp; !flag; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">				&#123;</span><br><span class="line">					flag = <span class="literal">true</span>;</span><br><span class="line">					dist[<span class="built_in">map</span>[i][j].to] = dist[i] + <span class="built_in">map</span>[i][j].dist;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">negLoop</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    que.push(start);</span><br><span class="line">    dist[start] = <span class="number">0</span>;</span><br><span class="line">    vis[start] = enqueue_num[start] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        x = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        vis[x] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(enqueue_num[x] &gt; n)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mp[x].<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> i = mp[x][j].to;</span><br><span class="line">            <span class="keyword">if</span>(dist[x] + mp[x][j].dist &lt; dist[i])</span><br><span class="line">            &#123;</span><br><span class="line">                dist[i] = dist[x] + mp[x][j].dist;</span><br><span class="line">                <span class="keyword">if</span>(!vis[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    que.push(i);</span><br><span class="line">                    vis[i] = <span class="number">1</span>;</span><br><span class="line">                    enqueue_num[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1200,14 +1191,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,543 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/25/08-Recurrent-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/25/08-Recurrent-Neural-Networks/" class="post-title-link" itemprop="url">08. Recurrent Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-25 15:54:28" itemprop="dateCreated datePublished" datetime="2020-05-25T15:54:28+08:00">2020-05-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:48:11" itemprop="dateModified" datetime="2020-08-07T19:48:11+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Common-models"><a href="#Common-models" class="headerlink" title="Common models"></a>Common models</h1><ol>
+<li>One to one model: vanilla model</li>
+<li>One to many: image captioning</li>
+<li>Many to one: sentiment classification</li>
+<li>Many to many (some input without output while some output without input): machine translation</li>
+<li>Many to many (each input has an output): vedio classification on frame level</li>
+</ol>
+<h1 id="Recurrent-Neural-Network"><a href="#Recurrent-Neural-Network" class="headerlink" title="Recurrent Neural Network"></a>Recurrent Neural Network</h1><ol>
+<li>It has a recurrent core that will update each time it’s needed, and the next data will still be feed to it. </li>
+<li>$h_t = f_W(h_{t-1},x_t)$</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">07. 语义分析和中间代码生成</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-20 21:54:23" itemprop="dateCreated datePublished" datetime="2020-05-20T21:54:23+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:32" itemprop="dateModified" datetime="2020-08-07T19:49:32+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h1><ol>
+<li>中间代码可以是一个真正的语言，也可以是各个阶段共享的多个内部数据结构</li>
+<li>中间代码生成的任务：把语法分析和语义分析完成后得到的源程序中间表示翻译为中间代码</li>
+<li>独立于机器的中间代码便于编译系统的建立和移植，便于进行独立于机器的代码优化</li>
+</ol>
+<h2 id="图表示法"><a href="#图表示法" class="headerlink" title="图表示法"></a>图表示法</h2><h3 id="抽象语法树"><a href="#抽象语法树" class="headerlink" title="抽象语法树"></a>抽象语法树</h3><ol>
+<li>抽象语法：语言结构本质性的东西，不考虑具体符号表示</li>
+<li>抽象语法树：反映抽象语法，是分析书的抽象形式或压缩形式</li>
+<li>抽象语法树中每一个叶节点都表示运算对象，内部节点表示运算符</li>
+<li>分析树反映的是具体语法结构</li>
+<li>语法规则中符号可能起标点符号作用，也可能起解释作用</li>
+<li>辅助函数：<br />&emsp;<script type="math/tex">mknode(op,\ left,\ right)</script>建立一个运算符节点<br />&emsp;<script type="math/tex">mkleaf(id,\ entry)</script>建立一个标识符节点，即变量下存储的运算对象，变量名为$id$，变量的值为$value$<br />&emsp;<script type="math/tex">mkleaf(num,\ val)</script>建立一个数节点，标号为$num$，数的值为$val$</li>
+<li>利用语法制导定义，每一个产生式的语义规则都是其对应节点的产生辅助函数。如果产生式是$E\to id$，就用<script type="math/tex">mkleaf(id,\ entry)</script>；若是$E\to num$，就用<script type="math/tex">mkleaf(num,\ val)</script>；其它的就用<script type="math/tex">mknode(op,\ left,\ right)</script>来产生对应的运算符</li>
+<li>利用图像直观地展示从分析树生成语法树的过程就可以用箭头从一个语法树的节点指向生成的那个节点，并将节点中的域指针指向对应的语法树节点。最后再把分析树和从分析树指向语法树的箭头去掉，就得到一个语法树</li>
+</ol>
+<h3 id="有向非循环图"><a href="#有向非循环图" class="headerlink" title="有向非循环图"></a>有向非循环图</h3><ol>
+<li>在抽象语法树中，有大量节点表示的是同一个值，这造成了大量的空间浪费</li>
+<li>我们可以把抽象语法树中的公共节点提取出来，只建立一个节点，并把原本指向不同的同值节点的域指针都指向那一个公共节点</li>
+<li>显然这样产生的图就不再是一棵树，一个公共节点可能有多个父节点</li>
+<li>我们相当于只是把原本语法树的节点合并成一个，并没有改变其走向，所以这个图不会有循环</li>
+<li>现在在构造节点前要先检查现有节点，若存在相同节点，就直接返回，确定了不存在相同节点才会创建新的节点</li>
+</ol>
+<h2 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h2><ol>
+<li>$\Theta$是$k$目运算符，则$\Theta$作用于$e_1e_2…e_k$的结果用$e_1e_2…e_k\Theta$表示</li>
+<li>对语法树进行一次后根遍历得到的序列就是后缀式</li>
+<li>还是利用语法制导定义，设置每一个产生式的语义规则为给左部赋予一个$code$属性，表示改产生式的后缀式。用$||$表示空格，将符号串连接起来</li>
+<li>后缀式的优点是易于计算机处理表达式</li>
+<li>常见的是栈算法，详见 <a href="http://www.laughingtree.cn/2019/07/23/栈和队列/" target="_blank" rel="noopener">栈和队列</a></li>
+</ol>
+<h2 id="三地址代码"><a href="#三地址代码" class="headerlink" title="三地址代码"></a>三地址代码</h2><ol>
+<li>一般形式：<script type="math/tex">x\ :=\ y\ op\ z</script></li>
+<li>一般包含三个地址：两个操作分量和一个结果的抽象地址</li>
+<li>通常用变量名代替抽象地址</li>
+<li>三地址代码是语法树或DAG的线性表示，用临时变量代替语法树中的节点</li>
+<li>三地址代码的类型<br />&emsp;赋值语句：<script type="math/tex">x\ :=\ y\ op\ z</script>    <script type="math/tex">x\ :=\ op\ y</script><br />&emsp;无条件转移语句：<script type="math/tex">goto\ L</script><br />&emsp;条件转移语句：<script type="math/tex">if\ x\ relop\ y\ goto\ L</script>，关系运算符号<script type="math/tex">relop(<,\ =, 等等)</script><br />&emsp;复制语句：<script type="math/tex">x\ :=\ y</script><br />&emsp;过程调用语句：先用$n$次<script type="math/tex">param\ x</script>依次调用各个参数，再用<script type="math/tex">call\ p,\ n</script>表示调用的函数和参数个数<br />&emsp;过程返回语句：<script type="math/tex">return\ y</script><br />&emsp;索引赋值语句：$x := y[i]$，<script type="math/tex">x[i]\ :=\ y</script><br />&emsp;地址和指针赋值语句：<script type="math/tex">x\ :=\ \&y</script>，<script type="math/tex">x\ :=\ *y</script>，<script type="math/tex">*x\ :=\ y</script></li>
+<li>语法制导翻译的属性<br />&emsp;$E.place$表示存放$E$值的名字<br />&emsp;$E.code$表示对$E$求值的三地址语句序列。先计算涉及到的计算对象，再用计算当前对象。如<br />&emsp;<script type="math/tex">E.code=E_1.code||E_2.code||gen(E.place':='E_1.place'+'E_2.place)</script><br />&emsp;$newtemp$是个函数，产生一个新的临时变量</li>
+<li>实际实现中，三地址语句序列往往是被放到一个输出文件中，而不是将三地址语句序列置入$code$属性之中</li>
+<li>具体实现<br />&emsp;四元式：<script type="math/tex">op,\ arg1,\ arg2,\ result</script><br />&emsp;三元式：<script type="math/tex">op,\ arg1,\ arg2</script>。结果就存放在当前三元式的地方，要调用是直接调用当前三元式的编号<br />&emsp;间接三元式：间接码表+三元式表。三元式放在一个单独的表中，间接码表中每一行都指向不同的三元式<br />&emsp;涉及到单目运算的不使用$arg2$<br />&emsp;$param$只用$arg1$<br />&emsp;转移指令将目标标号放入$result$</li>
+<li>实现方式的比较<br />&emsp;四元式调整顺序方便，引入的临时变量多，所需存储空间大<br />&emsp;三元式所需存储空间小，但调整顺序不变，调整后还需改变其余行对当前行的引用指针<br />&emsp;间接三元式调整顺序和四元式差不多方便，所需的存储空间也和四元式差不多多</li>
+</ol>
+<h1 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h1><ol>
+<li>类型检查是语义分析的重要组成部分</li>
+<li>编译器先根据类型说明，确定每一个变量和常量的类型，计算其使用存储空间大小，从而建立其到存储空间的映射。进而，编译器要确定每个语言结构的类型，判定重载算符 (函数)在程序中代表哪个、类型转换、类型检查</li>
+<li>类型表达式：<br />&emsp;类型名和基本类型是类型表达式<br />&emsp;类型构造符作用于类型表达式的结果仍然是类型表达式<br />&emsp;&emsp;数组构造符$ARRAY(I,T)$，$I$是下标集合，$T$是数组类型<br />&emsp;&emsp;笛卡尔乘积$\times$，<script type="math/tex">A\times B=\{(x,y)|x\in A\ and\ y\in B\}</script><br />&emsp;&emsp;记录类型构造符$RECORD$，其结果类似$C$中的结构体<br />&emsp;&emsp;指针类型构造符$POINTER$，其结果是一个指针类型<br />&emsp;&emsp;函数类型构造符$\to$，$D_1\times D_2\times…\times D_n\to R$<br />&emsp;类型表达式中可以出现类型变量，类型变量的值科院是任何类型表达式</li>
+<li>分类<br />&emsp;静态类型检查：由编译器完成的检查<br />&emsp;动态类型检查：目标程序运行时完成的检查。若目标代码把每个对象的类型和值一起保存，那么任何检查都可以动态完成</li>
+<li>强类型语言：保证编译器所接受的程序不会有运行时的类型错误的语言</li>
+<li>类型检查的内容：表达式、语句、函数</li>
+<li>变量标识符类型的确定<br />&emsp;语义分析程序先处理类型说明，建立类型表达式，然后处理变量说明，建立变量和类型表达式的绑定<br />&emsp;把变量标识符的类型信息记录在其符号表的表项中，$addtype(id.entry,T.type)$完成这个任务，引入综合属性$T.type$记录类型表达式</li>
+<li>表达式的类型检查：检查运算对象之间是否满足相容条件。综合属性$E.type$表示$E$的类型表达式。常用$IF…THEN…ELSE$或$lookup(id.entry)$</li>
+<li>语句的类型检查：主要包括赋值语句类型的相容性、控制表达式的结果类型检查。语句中没有类型错误就是$void$，否则为$type_error$。语句中有表达式，所以还要对表达式类型检查</li>
+<li>函数引用的类型检查：检查参数是否和函数类型一致，是则返回函数返回值的类型</li>
+<li>必须类型转换：赋值号右边的类型转换为左边的类型；整数转换成实数</li>
+<li>类型表达式在源程序的中间表示里插入这些转换操作</li>
+<li>自动类型转换 (隐式转换)：从一种数据类型转换成另一种数据类型，可以由编译器自动完成<br />强制类型转换 (显式转换)：必须由程序员显式地写在源程序中，在类型检查器中类似函数调用</li>
+</ol>
+<h1 id="常用语句的翻译"><a href="#常用语句的翻译" class="headerlink" title="常用语句的翻译"></a>常用语句的翻译</h1><h2 id="说明语句的翻译"><a href="#说明语句的翻译" class="headerlink" title="说明语句的翻译"></a>说明语句的翻译</h2><ol>
+<li>说明语句：对程序中规定范围内使用的各类变量、常数、过程进行说明</li>
+<li>编译要做的工作：在符号表中建立相应的表项，填写有关的信息。如类型、嵌套深度、相对地址</li>
+<li>$T.width$记录名字的域宽，$T.type$记录名字的类型，$enter(id.name,T.type,offset)$为名字$name$建立一个符号表表项</li>
+<li>用一个全局变量$offset$来记录下一个可用单元相对于初始单元的相对地址。每新建一个变量，就给$offset$叠加该变量的域宽</li>
+</ol>
+<h3 id="保留作用域信息"><a href="#保留作用域信息" class="headerlink" title="保留作用域信息"></a>保留作用域信息</h3><ol>
+<li>同一个标识符有可能在不同的范围内表示不同的信息，要正确区分在各个范围内引用的标识符而不产生混乱</li>
+<li>首先要解决的问题是局部数据和非局部数据的访问</li>
+<li>方法是为每个过程建立一张符号表，每张表都有一个指针指向其直接外围过程的符号表，如果内部数据中无法找到，就顺着指针去直接外围过程符号表找</li>
+<li>子过程名$id$作为直接外围过程的局部名字记录在直接外围过程符号表中，其中还有一个指针指向子过程$id$</li>
+<li>每次生成一个过程 (包括主程序)，先执行定位操作，记录所需空间，若不是主程序，还要返回到外围过程，再执行重定位操作，创建主出现的符号表、初始化</li>
+<li>翻译过程用到一个栈存放指向外围过程的指针。还有一个栈存放变量的相对地址，当过程结束时，里面记录的就是该过程占用的所有字节数</li>
+<li>辅助操作<br />&emsp;$mktable(previous)$创建一张新符号表<br />&emsp;$enter(table,name,type,offset)$插入表项<br />&emsp;$addwidth(table,width)$记录总域宽<br />&emsp;$enterproc(table,name,newtable)$进入过程</li>
+<li>记录声明：定位操作中建立一个空表记录各个域中的信息，最后的重定位操作中将各域的总域宽作为该记录型的域宽，返回记录声明所在过程的符号表</li>
+</ol>
+<h2 id="赋值语句的翻译"><a href="#赋值语句的翻译" class="headerlink" title="赋值语句的翻译"></a>赋值语句的翻译</h2><ol>
+<li>利用过程$lookup(id.name)$检查是否在符号表中存在相应次名字的表项</li>
+<li>$lookup$函数先通过$top(tblptr)$指针在当前符号表中查找，若找到直接返回；若没找到，就到当前表的外围表找，直到找到返回，或所有外围表项都没找到，返回$nil$</li>
+<li>查找只要对终结符中的标识符查找，不必对非终结符或终结符中的常量查找</li>
+<li>语义动作应包括类型分析，文法符阿訇应有类型属性，在类型分析的基础上，进行相容和赋值相容检查，生成类型转换的三地址代码</li>
+<li>一维数组$A$的基址为$base$，域宽为$w$，下标下界为$low$，上界为$high$。$A[i]$的位置为$i\times w+base-low\times w$<br />二维数组行列下界分别为$low_1,low_2$，长度$n_1,n_2$，$A[i][j]$位置为$(i\times n_2 + j)\times w + base-(low_1\times n_2+low_2)\times w$<br />$A[i_1,i_2,…,i_k]$的地址为$((…((i_1\times n_2+i_2)\times n_3+i_3)…)\times n_k+i_k)\times w+base-((…((low_1\times n_2+low_2)\times n_3+low_3)…)\times n_k+low_k)\times w$</li>
+<li>我们用$Elist$来表示数组的一个下标，多个下标用逗号分割。定义其属性$Elist.array$为数组名在符号表的位置，$Elist.ndim$为目前已经识别出的下标表达式的个数，$Elist.place$保存递推公式中临时变量位置</li>
+<li>如果一个变量的$.offset$属性是$null$，则为简单变量，如果是一个变项，则是一个数字元素，且其值为$Elist.array$</li>
+<li>访问记录中的域：先找到符号表里的记录变量的位置，再找到记录表的位置</li>
+</ol>
+<h2 id="布尔表达式和控制流语句"><a href="#布尔表达式和控制流语句" class="headerlink" title="布尔表达式和控制流语句"></a>布尔表达式和控制流语句</h2><ol>
+<li>布尔表达式与一般的算术表达式类似，运算符是与或非等，运算量是布尔常量或关系表达式，运算结果是布尔常量</li>
+<li>布尔表达式的值的表示方法：数值法、控制流表示法。布尔表达式的翻译方法也是这两种</li>
+<li>数值翻译法就只有一个属性$E.place$存放$E$的布尔数值，控制流翻译法就有$E.true$表示$E$值为真时应执行的第一条语句的标号，$E.false$表示$E$值为假时应执行的第一条语句的标号。他们都有$E.code$表示三地址代码</li>
+<li>对语句$S$有：$S.next$表示紧跟在语句$S$之后的三地址语句的标号，$S.begin$表示语句$S$的第一条三地址语句的标号，$S.code$表示语句$S$的三地址代码</li>
+</ol>
+<h3 id="回填技术"><a href="#回填技术" class="headerlink" title="回填技术"></a>回填技术</h3><ol>
+<li>两遍扫描的翻译技术 ($L$属性定义，深度优先翻译)：先产生分析树，再为分析树加注释 (翻译)</li>
+<li>一边扫描技术 ($S$属性定义，自底向上翻译)的问题时生成某些转移指令时，目标地址可能还不知道，即布尔表达式的真出口和假出口可能还不知道</li>
+<li>解决：先产生无转移标号的转移语句，再转向标号确定后，再把语句标号填上，即回填</li>
+<li>定义综合属性$E.truelist$记录转移到$E$的真出口的指令的链表指针，$E.falselist$记录转移到$E$的假出口的指令的链表指针。一个真出口链表里可能有不止一个指针，但他们指向的语句的跳转出口都是一样的</li>
+<li>在计算时，我们先把所有带回填且需回填同一个值的指针串成一条链，当满足回填要求的时候就把其中的每一个都填上</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:51:12" itemprop="dateModified" datetime="2020-08-07T19:51:12+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
+<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
+<li>语法正确的程序不一定语义正确</li>
+<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
+</ol>
+<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
+<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
+<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
+<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
+<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
+<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承属性：由该节点的兄弟节点及父节点的属性值计算出来</li>
+<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
+<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
+<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
+<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合属性，一般由词法分析器提供</li>
+<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
+<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
+<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
+<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
+<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
+</ol>
+<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
+<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
+<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
+<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
+<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
+</ol>
+<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
+<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
+<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
+<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有关</li>
+<li>每一个$S-$属性定义都是$L-$属性定义</li>
+<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
+<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
+<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
+<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">05. 自底向上语法分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-13 22:03:25" itemprop="dateCreated datePublished" datetime="2020-05-13T22:03:25+08:00">2020-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:16" itemprop="dateModified" datetime="2020-08-07T19:49:16+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>方法：从输入串开始，逐步进行归约，直到归约到文法的开始符号</li>
+<li>边扫描输入串，边把输入符号移入分析者，边检查位于栈顶的一串符号是否与某个产生式的右部相同。如果相同，就把串归约为相应左部非终结符，否则继续移入输入符号。重复直到栈内符号为开始符号</li>
+<li>构造分析树时从叶节点 (句子)开始，(以单位为单位)向根节点前进</li>
+<li>问题：如何合适地选择归约串。一个串是多个不同左部产生式的右部；可以看成多种不同的串分别都是不同产生式的右部</li>
+<li>本质是每次都把句柄归约</li>
+<li>初始时栈内只有$\<script type="math/tex">，结束时栈内是$S\</script>，输入缓冲为空</li>
+</ol>
+<h1 id="可归约串的识别——LR分析"><a href="#可归约串的识别——LR分析" class="headerlink" title="可归约串的识别——LR分析"></a>可归约串的识别——LR分析</h1><ol>
+<li>$LR$分析程序，是通用的分析程序，自左向右 ($L$)扫描，识别句柄，自下而上归约，构造一个最右推导的逆过程 ($R$)。为了作出分析决定前(构造分析表时)而向前看的输入符号的个数，通常是$0$或$1$</li>
+<li>$LR$分析器是无回溯的“移进-归约”方法，根据栈中的符号串和向右顺序查看输入串中的$k(k≥0)$个符号唯一确定分析器的操作</li>
+<li>结构：符号栈、状态栈、$action$表、$goto$表。$action$表和$goto$表构成分析表</li>
+<li>状态栈的栈顶元素用$s_m$表示，当前输入符号用$a_i$表示</li>
+<li>$action$表根据当前状态和输入符号唯一确定是移进、归约、接受、报错</li>
+<li>$goto$表根据压入的非终结符号和当前状态确定下一个状态</li>
+<li>把栈中符号序列和剩余输入串看书一个二元格局，初始格局为$(s_0,a_1a_2…a_n\$)$<br />假设当前格局为$(s_0X_1s_1X_2s_2…X_ms_m,a_ia_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=shift\ s</script>，二元式变为$(s_0X_1s_1X_2s_2…X_ms_ma_is,a_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=reduce\ A\to\beta</script>，$|\beta|=r$，二元式变为$(s_0X_1s_1X_2s_2…X_{m-r}s_{m-r}As,a_ia_{i+1}…a_n\$)$<br />&emsp;&emsp;$s=goto[s_{m-r},A]$，$\beta=X_{m-r+1}X_{m-r+2}…X_m$</li>
+</ol>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ol>
+<li>活前缀：归约前栈内的所有符号。即，句柄的前缀。<br />严格定义：若$S’\Rightarrow^*_{rm}\alpha Aw\Rightarrow_{rm}\alpha\beta w$是文法$G$的拓广文法$G’$的一个规范推导，符号$\gamma$是$\alpha\beta$的前缀，则称$\gamma$是$G$的一个活前缀。<br />在$w$的任何一个符号被压入栈前，$\alpha\beta$就必然形成可归约串，并立即运用产生式$A\to\beta$归约，就不可能和$\beta$的任何一个符号同时出现在栈中，就不是活前缀</li>
+<li>每个句柄的识别过程划分为若干个状态，用$\cdot$做区分，称为$LR(0)$项目。<br />例如对产生式$A\to XYZ$，$LR(0)$项目有$A\to\cdot XYZ,A\to X\cdot YZ,A\to XY\cdot Z,A\to XYZ\cdot$，分别表示$XYZ$均未入栈；$X$入栈，$YZ$未入栈；$XY$入栈，$Z$未入栈；$XYZ$均入栈<br />$A\to\epsilon$的项目为$A\to\cdot$</li>
+<li>拓广文法：添加一个唯一的推导出开始符号的符号。$S’$是$G’$的开始符号，$S$是$G$的开始符号，$G’$之比$G$多一条$S’\to S$</li>
+<li>包含了完整句柄的活前缀称为可归前缀</li>
+<li>分析过程可以看做是活前缀的识别过程</li>
+</ol>
+<h1 id="LR-0-分析"><a href="#LR-0-分析" class="headerlink" title="LR(0)分析"></a>LR(0)分析</h1><ol>
+<li>根据$LR(0)$项目分析操作类型</li>
+<li>项目分类：<br />&emsp;$A\to\alpha\cdot a\beta$，$a\in V_T$，移进项目<br />&emsp;$A\to\alpha\cdot B\beta$，$B\in V_N$，待归约项目<br />&emsp;$A\to\alpha\cdot$，归约项目<br />&emsp;$S’\to\cdot S$，开始项目<br />&emsp;$S’\to S\cdot$，接受项目<br />&emsp;项目$A\to XY\cdot Z$是$A\to X\cdot YZ$的后继项目</li>
+</ol>
+<h2 id="构造识别所有活前缀的NFA"><a href="#构造识别所有活前缀的NFA" class="headerlink" title="构造识别所有活前缀的NFA"></a>构造识别所有活前缀的NFA</h2><ol>
+<li>开始符号$S’\to\cdot S$是NFA的唯一初态</li>
+<li>项目$j$是项目$i$的后继项目，就从$i$画一条$X_j$弧到$j$</li>
+<li>若项目$i$后是一个非终结符号，$X\to \alpha\cdot A\beta$，从$i$画$\epsilon$弧到所有$A\to\cdot\gamma$，因为他们是等价状态</li>
+</ol>
+<h2 id="识别活前缀的有效项目的DFA"><a href="#识别活前缀的有效项目的DFA" class="headerlink" title="识别活前缀的有效项目的DFA"></a>识别活前缀的有效项目的DFA</h2><ol>
+<li>如果存在一个规范推导$S\Rightarrow^*_{rm}\alpha Aw\Rightarrow\alpha\beta_1\beta_2w$，则项目$A\to \beta_1\cdot\beta_2$对识别活前缀$\gamma=\alpha\beta_1$是有效的</li>
+<li>若项目$A\to\alpha\cdot B\beta$对识别活前缀$\gamma=\delta\alpha$是有效的，且$B\to\cdot\eta$对识别活前缀$\gamma=\delta\alpha$也有效</li>
+<li>某个活前缀$\gamma$的所有有效项目组成的集合称为$\gamma$的有效项目集</li>
+<li>所有有效项目集组成的集合称为$LR(0)$项目的集规范族，即DFA的状态集</li>
+<li>有效项目集就是之前对每一个项目的$\epsilon$闭包。若项目$A\to\alpha\cdot B\beta$在$closure(I)$中，且$B\to\gamma$是$G$的一个产生式，如果$B\to\cdot\gamma$不在$closure(I)$中，则将$B\to\cdot\gamma$加入$closure(I)$</li>
+<li>待归约项目称为基本项目，是每一个有效项目集的核心</li>
+<li>转移函数$go(I,X)$，输入中把当前状态改为当前有效项目集，输出改为下一有效状态集，$go(I,X)=closure(J)$，$J=\{A\to\alpha X\cdot\beta|A\to\alpha\cdot X\beta\in I\}$</li>
+<li>带有归约项目的有效项目集都是生成的DFA的接受状态</li>
+</ol>
+<h2 id="分析表的构造"><a href="#分析表的构造" class="headerlink" title="分析表的构造"></a>分析表的构造</h2><ol>
+<li>$LR(0)$文法：DFA中每个状态不存在：既含移进项目又含归约项目 (移进-归约冲突)、含有多个归约项目 (归约-归约冲突)</li>
+<li>若项目$A\to\alpha\cdot X\beta\in I_k$，且$go(I_k,X)=I_j$，则<br />&emsp;若$X=a$为终结符号，则置<script type="math/tex">action[k,a]=shift\ j</script>，简写为$sj$，表示把$a$和$j$移入栈中<br />&emsp;若$X$是非终结符号，则置$goto[k,X]=j$</li>
+<li>若$S’\to S\in I_k$，则置$action[k, \$]=acc$</li>
+<li>若$A\to\alpha\cdot\in I_k$，则对所有终结符号$a$，置<script type="math/tex">action[k,a]=reduce\ A\to\alpha</script>，简写为$rj$，$j$为产生式编号</li>
+<li>其他空白格都表示出错</li>
+</ol>
+<h1 id="SLR-1-文法"><a href="#SLR-1-文法" class="headerlink" title="SLR(1)文法"></a>SLR(1)文法</h1><ol>
+<li>如果有冲突，我们可以提前看下一个输入非终结符号，把移进和归约、归约和归约分离开来制作$action$表</li>
+<li>$LR(0)$文法中归约的优先级过高，在$LR(1)$文法中，我们通过限定归约的前提条件来解决冲突</li>
+<li>$n$个归约$A_i\to\gamma_i\cdot$，若$FOLLOW(A_1)\cap FOLLOW(A_0)\cap…\cap FOLLOW(A_n)=\emptyset$，则当$I$面临输入符号$a$时<br />&emsp;若$a\notin FOLLOW(A_1)\cup FOLLOW(A_0)\cup…\cup FOLLOW(A_n)$，移进<br />&emsp;若$a\in FOLLOW(A_1)$，用$A_1\to\gamma_1$归约<br />&emsp;若$a\in FOLLOW(A_2)$，用$A_2\to\gamma_2$归约<br />&emsp;$…$<br />&emsp;否则，报错</li>
+<li>$action$表的生成中唯一的不同就是在填入归约操作时要提前展望下一输入</li>
+</ol>
+<h1 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h1><ol>
+<li>问题：移进符号在某个归约符号的$FOLLOW$集中</li>
+<li>原因：$SLR(1)$只考虑了$FOLLOW$集，没有考虑规范文法的上下文</li>
+<li>考察每一条产生式，如果在某个项目集$I$中包含项目$A\to\alpha\cdot B\beta$，则$B\to\cdot\gamma$也属于$I$。由$FOLLOW$集与$FIRST$集的定义可知$FIRST(\beta)\subseteq FOLLOW(B)$。用$FIRST(\beta)$替代$SLR(1)$中的$FOLLOW(B)$</li>
+<li>在分析的时候，项目增加一元，表示用此产生式归约时，后面可以跟的元素，称之为搜索符，原本的表达式状态称为心，即$[心(产生式)，搜索符]$的二元式形式，$搜索符\in FIRST(\beta)$</li>
+<li>开始项目变为$[S’\to S,\$]$</li>
+<li>闭包函数：若$[A\to\alpha\cdot B\beta,a]\in I$，$B\to\gamma$是一条产生式，$b\in FIRST(\beta a)$，则将$[B\to\cdot\gamma,b]$加入$CLOSURE(I)$中</li>
+<li>转换函数：$I$中任何形如$[A\to\alpha\cdot X\beta,a]$，$[A\to\alpha X\cdot\beta,a]$都在$J$中，$GO(I,X)=CLOSURE(J)$</li>
+</ol>
+<h1 id="LALR-1-分析"><a href="#LALR-1-分析" class="headerlink" title="LALR(1)分析"></a>LALR(1)分析</h1><ol>
+<li>$LR(1)$分析由于原本一个状态根据不同的搜索符拆分成了不同的多个状态，状态的数量大量增加</li>
+<li>我们可以把心相同，但是搜索符不同的项目合并成一个项目，来减少项目的数量</li>
+<li>$LALR(1)$分析的结果不会出现移进-归约冲突，但是仍然可能出现归约-归约冲突</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -886,440 +1423,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/26/03-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%92%8C%E6%A3%80%E6%9F%A5%E7%BA%A0%E9%94%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/26/03-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%92%8C%E6%A3%80%E6%9F%A5%E7%BA%A0%E9%94%99/" class="post-title-link" itemprop="url">03. 数据表示和检查纠错</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-26 15:50:45" itemprop="dateCreated datePublished" datetime="2020-04-26T15:50:45+08:00">2020-04-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:52:28" itemprop="dateModified" datetime="2020-08-07T19:52:28+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机组成原理 (清华大学)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h1><p>1. </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/25/02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/25/02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">02. 计算机的指令系统</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-25 16:11:16" itemprop="dateCreated datePublished" datetime="2020-04-25T16:11:16+08:00">2020-04-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:52:15" itemprop="dateModified" datetime="2020-08-07T19:52:15+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机组成原理 (清华大学)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="计算机程序"><a href="#计算机程序" class="headerlink" title="计算机程序"></a>计算机程序</h1><ol>
-<li>计算机程序是程序员和计算机硬件之间交互的语言</li>
-<li>分类：高级语言程序、汇编语言程序、机器语言程序</li>
-<li>高级语言 (算法语言)为了让程序员着重注意在解决实际问题所用的算法，更贴近自然语言，让程序设计更为高效。且高级语言通用性更好，可移植性强</li>
-<li>计算机硬件是由逻辑门组成的，而逻辑门是由信号驱动的，信号以高低电平区分。所以计算机硬件只能理解$01$二进制串</li>
-<li>机器语言是计算机硬件能直接识别和运行的指令的集合，是二进制码组成的指令，用机器语言设计程序基本不可行，可读性几乎为零</li>
-<li>汇编语言用英文单词或其缩写替代二进制的指令代码，更容易记忆和理解。存储单元由汇编程序分配而非程序员，达到基本可用标准</li>
-<li>高级语言设计出来的程序，需要经过编译程序或解释程序，才能在计算机的硬件系统上予以执行。汇编程序要经过汇编器翻译成机器语言后方可运行</li>
-</ol>
-<h1 id="计算机指令"><a href="#计算机指令" class="headerlink" title="计算机指令"></a>计算机指令</h1><p>冯诺依曼计算机<br />&emsp;存储程序计算机：程序由指令构成，程序功能通过指令序列描述，指令在内存中顺序存放<br />&emsp;顺序执行指令：用PC指示当前被执行的指令，从存储器中读出指令执行，PC指向下一条指令(程序指定的下一条指令，若没指定，默认为物理地址上的下一条)</p>
-<h2 id="指令是什么"><a href="#指令是什么" class="headerlink" title="指令是什么"></a>指令是什么</h2><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ol>
-<li>指令用于程序设计人员告知计算机执行一个最基本运算、处理功能。程序由一个序列的计算机指令组成，程序的最小单元是指令</li>
-<li>指令是指挥计算机硬件运行的命令，是计算机硬件执行程序的最小单位</li>
-<li>指令是由多个二进制位组成的位串，是计算机硬件可以直接识别和执行的信息体</li>
-<li>指令中应指明指令所完成的操作，并明确操作对象</li>
-</ol>
-<h3 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h3><ol>
-<li>指令系统：一台计算机提供的全部指令</li>
-<li>指令系统层处在硬件系统和软件系统之间，是硬、软件间的接口部分<br />硬件系统：实现指令，解决指令间衔接关系。包括数字逻辑层和微体系结构层<br />软件系统：按一定规则组织起来的指令，完成一定的功能。包括操作系统层、汇编语言层、高级语言层</li>
-<li>指令系统的优劣势一个计算机系统是否成功的关键因素</li>
-</ol>
-<h2 id="指令的分类"><a href="#指令的分类" class="headerlink" title="指令的分类"></a>指令的分类</h2><ol>
-<li>数据运算指令：算数运算、逻辑运算</li>
-<li>数据传输指令：内存到寄存器、寄存器到寄存器</li>
-<li>输入输出指令：与输入输出端口的数据传输，这是一种特殊的数据传输指令</li>
-<li>控制指令：无条件跳转、条件跳转、子程序的支持 (调用和返回)</li>
-<li>其他指令：停机、开/关中断、空操作、特权指令、设置条件码</li>
-</ol>
-<h2 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h2><ol>
-<li>指令格式指的是操作码、操作数地址的二进制分配方案</li>
-<li>操作码：指令的操作功能，每条指令都有一个确定的操作码</li>
-<li>操作数地址：操作数存放的地址，或操作数本身</li>
-<li>指令字：完整的一条指令的二进制表示</li>
-<li>指令字长：指令中二进制的代码的位数<br />机器字长：计算机能够直接处理的二进制数据的位数<br />指令字长为一个字节的倍数</li>
-<li>根据指令字长是否固定，指令还可以分为定长指令字结构和变长指令字结构 (现在少用)<br />根据操作码长度是否固定，分为定长操作码和扩展操作码</li>
-</ol>
-<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><ol>
-<li>寻址方式 (编址方式)：确定本条指令的操作数地址和下一条要执行的指令的地址的方法</li>
-<li>寻址方式的数目和功能依不同的计算机系统而定。不同的寻址方式实现的复杂程度和运行性能各不同</li>
-<li>通常指令中每一个操作数都有一个地址字段表示其来源或去向的地址</li>
-<li>形式地址：在指令中给出的操作数或指令的地址<br />实际地址：依据形式地址及一定的规则得到的一个数值</li>
-<li>操作数地址字段可能要指出：<br />&emsp;运算器中累加器的编号或专用寄存器名称 (编号)<br />&emsp;输入/输出指令中用到的I/O设备的入出端口地址<br />&emsp;内存储器的一个存储单元 (或一个I/O设备)的地址</li>
-</ol>
-<h2 id="MIPS指令系统"><a href="#MIPS指令系统" class="headerlink" title="MIPS指令系统"></a>MIPS指令系统</h2><ol>
-<li>MIPS：Microprocessor without interlocked piped stages 无内部互锁流水级的微处理器</li>
-<li>为RISC芯片设计的指令系统</li>
-<li>MIPS32所有的指令都是32位字长，有3种指令格式：寄存器型，立即数型，和转移型<br />MIPS64是面向54位处理器的指令系统</li>
-<li>操作数寻址：基址加16位偏移的访存寻址、立即数寻址和寄存器寻址</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/24/01-%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/01-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">01. 概述</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-24 22:35:12" itemprop="dateCreated datePublished" datetime="2020-04-24T22:35:12+08:00">2020-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:52:18" itemprop="dateModified" datetime="2020-08-07T19:52:18+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机组成原理 (清华大学)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>计算机是什么：<br />&emsp;一种高速运行的电子设备<br />&emsp;用于进行数据的算术或逻辑运算<br />&emsp;可接受输入信息<br />&emsp;根据用户要求对信息进行加工<br />&emsp;输出结果</li>
-<li>冯诺依曼机<br />&emsp;存储程序<br />&emsp;用二进制编码数据<br />&emsp;体系结构：控制器、运算器、存储器、输入、输出设备<br />&emsp;以运算器 (logic unit，LU)为核心</li>
-<li>现代计算机<br />&emsp;功能部件：CPU (数据通道、控制器)、存储器、输入输出设备<br />&emsp;VLSI<br />&emsp;体系结构：流水技术 (PIPELINE)、层次存储系统、并行</li>
-<li>计算机运行机制<br />&emsp;数据通道：完成算术和逻辑运算，通常包括其中的寄存器<br />&emsp;控制器：CPU的组成成分，它根据程序指令来指挥数据通道、存储器和输入输出设备运行，共同完成程序功能<br />&emsp;存储器：存放运行时程序及其所需要的数据的场所<br />&emsp;输入设备：信息进入计算机的设备<br />&emsp;输出设备：讲计算机结果展示给用户的设备</li>
-<li>计算机的层次结构<br />&emsp;可运行高级语言的计算机 = 可运行汇编语言的计算机 + 编译器<br />&emsp;可运行汇编语言的计算机 = 可运行机器语言的计算机 + 汇编器<br />&emsp;可运行机器语言的计算机可以生成控制信号，由硬件实现</li>
-<li>计算机系统<br />&emsp;硬件：中央处理器、存储器、外围设备<br />&emsp;软件：为了使用计算机而编写的各种系统的和用户的程序</li>
-<li>评价计算机性能的指标<br />&emsp;吞吐率：单位时间内完成的任务数量，即完成的指令条数<br />&emsp;响应时间：完成任务的时间<br />&emsp;衡量性能的指标<br />&emsp;&emsp;MIPS (吞吐率 Million Instructions per Second，注意与指令系统区分)<br />&emsp;&emsp;CPI (每条指令完成的平均周期数，相对于周期长度)<br />&emsp;&emsp;CPU时间 (绝对时间)、CPU时钟 (绝对时间)<br />&emsp;综合测试程序</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/09/07-CNN-Architectures/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/07-CNN-Architectures/" class="post-title-link" itemprop="url">07. CNN Architectures</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-09 19:47:07" itemprop="dateCreated datePublished" datetime="2020-04-09T19:47:07+08:00">2020-04-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:19" itemprop="dateModified" datetime="2020-08-07T19:47:19+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
-<li>When we say how many layers a network has, we mean how many layers in that network has weight. Namely, the sum of fully-connected layers and convolution layers. </li>
-<li>The rule of naming a layer: <br />&emsp;If it is a fully-connected layer, its name will begin with “FC”. Behind “FC” is a number that stands for the number of neurons in this layer. Namely, the dimension of the output vector. <br />&emsp;If it is a convolution layer, its name begins with the size of the filter. In the middle is “conv”. At the end is the number of filters. <br />&emsp;Pooling layers write “Pool”. </li>
-</ol>
-<h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><ol>
-<li>Published at 2012, AlexNet has many features: <br />&emsp;It is the first network using ReLU. <br />&emsp;It uses norm layers (not common now). <br />&emsp;It has heavy data augmentation. <br />&emsp;It uses the dropout with the probability of $0.5$. <br />&emsp;Its batch size is $128$, SGD momentum is $0.9$. <br />&emsp;The learning rate is $1e-2$, reduced by $10$ manually when validation accuracy plateaus. <br />&emsp;$L2$ weight decay is $5e-4$. <br />&emsp;$7$ models ensemble to create about $3%$ better accuracy. </li>
-<li>Architecture: <br /><img src="/img/07.CNNArchitectures01.png" width="10%"></li>
-<li>AlexNet was trained on <script type="math/tex">GTX\ 580</script> GPU with only $3$ GB of memory. However, the output of its first convolution layer is $55\times55\times96$. So the network has to spread across $2$ GPUs, half the neurons (feature maps) on each GPU. </li>
-<li>$CONV1$, $CONV2$, $CONV4$, $CONV5$ in AlexNet only have connections with feature maps on the same GPU. $CONV3$, $FC6$, $FC7$, $FC8$ have connections with all feature maps in the preceding layer; They communicate across GPUs. </li>
-<li>ZFNect is AlexNet, except that $CONV1$ changed to $7\times7$ with stride $2$, and $CONV3, 4, 5$ uses $512, 1024, 512$ filters. </li>
-</ol>
-<h1 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h1><ol>
-<li>The main feature of VGG is small filters and deeper networks. </li>
-<li>VGG has many architectures with $16\sim19$ layers. The structure of VGG can be divided into blocks. So in VGG, we can name the convolution layers like $conv-x-y$, where $x$ is the number of blocks and $y$ is its position in that block. </li>
-<li>All three fully-connected layers of VGG are in the last as AlexNet. </li>
-<li>VGG only uses small filters of $3\times3,CONV$ stride $1$, pad $1$, and <script type="math/tex">2\times2,MAX\ POOL</script> stride $2$. Stack of three $3\times3 conv$ (stride $1$) layers has the same effective receptive field as one $7\times7 conv$ layer. However, a stack of three $3\times3$ convolution layer is deeper, more nonlinearities and fewer parameters than one $7\times7$ layer and <br />The size of the receptive field is the size of pixels that affect one pixel of the last layer. In this case, $3\times3$ pixels affect one pixel of the first convolution layer. Since the stride is $1$, we pad the receptive field of last layer with $1$, which makes the receptive field of the second convolution layer $5\times5$. Finally, the receptive field of the last layer is $7\times7$. </li>
-<li>Most memory is spent on early convolution layers while most parameters are in late fully-connected layers. </li>
-</ol>
-<h1 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h1><ol>
-<li>GoogLeNet replaced fully-connected layer with average pooling layer. Nevertheless, in order to finetune hyperparameters, it still added one fully-connected layer at the end. </li>
-<li>GoogLeNet first used the inception module. The naive version of inception module is as followed. <br /><img src="/img/07.CNNArchitectures02.png" width="30%"><br />It applied parallel filter operations on the input from the previous layer. With padding to make the output of four layers in the same size, the output of this inception module merely stacks them up. <br />However, its computational complexity is too high, not to mention that the pooling layer preserves feature depth, which means total depth after concatenation can only grow at every layer. </li>
-<li>Hence, we use the bottleneck to reduce feature depth as followed. <br /><img src="/img/07.CNNArchitectures03.png" width="30%"><br />It uses less $1\times1$ filters then the depth of the input to reduce the complexity of calculation. </li>
-<li>GoogLeNet stacks inception modules with dimension reduce on top of each other. <br /><img src="/img/07.CNNArchitectures04.png" width='30%'><br />At the beginning is the stem network and at the end is the classifier output. <br />Nevertheless, it added some auxiliary classification outputs to inject additional gradient at lower layers. </li>
-</ol>
-<h1 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h1><ol>
-<li>ResNet is so deep that it has $152$ layers. </li>
-<li>The problem is that when continue stacking deeper layers on a “plain” convolutional neural network, the performance will become even worse. </li>
-<li>The team assumed that the problem is an <em>optimization</em> problem; deeper models are harder to optimize. </li>
-<li>Their solution is to use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping. Namely, learn a function $H(x)$ to be the output to the next layer. <br /><img src="/img/07.CNNArchitectures05.png" width="10%"></li>
-<li>They also assumed that learning a $H(x) = F(x)+x$ is much easier than learning a completely unknown $H(x)$. <br /><img src="/img/07.CNNArchitectures06.png" width="20%"></li>
-<li>ResNet stacks residual blocks together, and every residual block has two $3\times3$ convolutional layers. <br />It also periodically double the number of filters and downsample spatially using stride $2$. <br />The ResNet begins with an additional convolutional layer and ends with a fully-connected layer. <br /></li>
-<li>For deeper networks, they also use the bottleneck layer to improve efficiency as GoogLeNet. </li>
-<li>To train a ResNet in practice: <br />&emsp;Add a BN layer after each convolutional layer. <br />&emsp;Use $Xavier/2$ initialization. <br />&emsp;Some hyperparameters: <br />&emsp;&emsp;Momentum: $0.9$<br />&emsp;&emsp;Learning rate: $0.1$, divided by $10$ when validation error plateaus. <br />&emsp;&emsp;Mini-batch size: 256<br />&emsp;&emsp;Weight decay: $1e-5$<br />&emsp;No dropout used. </li>
-</ol>
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ol>
-<li>AlexNet: small compute, still memory heavy, lower accuracy</li>
-<li>VGG: highest memory, most operations</li>
-<li>GoogLeNet: most efficient</li>
-<li>ResNet: Moderate efficiency depending on model, highest accuracy</li>
-<li>ResNet, with inception, has the highest accuracy. </li>
-</ol>
-<h1 id="Other-Architectures"><a href="#Other-Architectures" class="headerlink" title="Other Architectures"></a>Other Architectures</h1><ol>
-<li>NiN (Network in Network): <br />&emsp;Multiple convolutional layers with “micro-network” within each convolutional layer to compute more abstract features for local patches. <br />&emsp;The micro-network uses multilayer perceptron, like fully-connected layer. <br />&emsp;This is the precursor to GoogLeNet and ResNet bottleneck layers. </li>
-<li>Identity Mappings in Deep Residual Networks: Creates a more direct path for propagating information throughout the network (moves activation to residual mapping pathway)</li>
-<li>Wide residual network: <br />&emsp;Residuals are the critical factor, not depth. <br />&emsp;Use wider residual blocks ($F\times k$ filters instead of $F$ filters in each layer)<br />&emsp;$50$-layer wide ResNet outperforms $152$-layer original ResNet. <br />&emsp;Increasing width instead of depth is more computationally efficient. The computation can be easily parallelized. </li>
-<li>ResNeXt: increase the width of theresidual block through multiple parallel pathways. <br /><img src="/img/07.CNNArchitectures07.png" width="30%"></li>
-<li>Stochastic depth: <br />&emsp;Motivation: reduce vanishing gradients and training time through short networks during training. <br />&emsp;Randomly drop a subset of layers during each training pass. <br />&emsp;Bypass with identity function. <br />&emsp;Use the full network at test time. </li>
-<li>FractalNet: <br />&emsp;The key is transitioning efficiently from shallow to deep and residual representation is not necessary. <br />&emsp;It has both shallow and deep paths to output. <br />&emsp;It is trained with dropout, and test with full network. <br />&emsp;<img src="/img/07.CNNArchitectures08.png" width="50%"></li>
-<li>Densely Connected Convolutional Networks: <br />&emsp;In dense block, each layer is connected to every other layer in a feedforward fashion. <br />&emsp;<img src="/img/07.CNNArchitectures09.png" width="30%"><br />&emsp;It alleviates vanishing gradients, strengths feature propagation, encourages feature reuse. <br />&emsp;<img src="/img/07.CNNArchitectures10.png" width="15%"></li>
-<li>SqueezeNet: <br />&emsp;It has AlexNet-level accuracy with $50$ times fewer parameters and less than $0.5$ Mb model size. <br />&emsp;Fire modules consisting of a ‘squeeze’ layer with $1\times1$ filters feeding an ‘expand’ layer with $1\times1$ and $3\times3$ filters. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1391,14 +1494,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
