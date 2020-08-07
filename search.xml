@@ -14,13 +14,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -77,13 +77,13 @@
 <p>The difference between answers is most affected by the sample space they choose. </p>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -133,13 +133,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -204,13 +204,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -227,12 +227,12 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Organization (Tsinghua)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机组成原理 (清华大学)</category>
       </categories>
       <tags>
-        <tag>Hardware</tag>
-        <tag>Foundation</tag>
+        <tag>硬件</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -256,13 +256,13 @@
 <p>See more about vectors and matrices on <a href="http://www.laughingtree.cn/categories/Mathematics/Linear-Algebra-MIT-18-06/" target="_blank" rel="noopener">Linear Algebra (18.06)</a></p>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -289,11 +289,11 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -319,13 +319,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -346,13 +346,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -395,13 +395,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -447,13 +447,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -485,13 +485,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -517,13 +517,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -567,13 +567,13 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -635,11 +635,11 @@
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -681,13 +681,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 <h2 id="NSAttributedString"><a href="#NSAttributedString" class="headerlink" title="NSAttributedString"></a>NSAttributedString</h2><p>NSAttributedString is another kind of String, which we can set its font, color… in code. To implement an NSAttributedString, we need to build a <code>[NSAttributedStringKey : Any]</code> dictionary first, the value of each key do not have a specific type, totally depend on the key. After that, we declare an NSAttributedString with its initializer <code>NSAttributedString(String, [NSAttributedStringKey : Any])</code>. Then we can assign this NSAttributedString to the attributedText or attributedLabel of a UILabel or a UIButton</p>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -716,13 +716,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -779,12 +779,12 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Organization (Tsinghua)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机组成原理 (清华大学)</category>
       </categories>
       <tags>
-        <tag>Hardware</tag>
-        <tag>Foundation</tag>
+        <tag>硬件</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -807,13 +807,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -848,13 +848,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -880,13 +880,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 <p>See the linear algebra version of least square: <a href="http://www.laughingtree.cn/2020/02/01/13-Least-Squares/" target="_blank" rel="noopener">Least square</a></p>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -1257,12 +1257,12 @@ The first selection is the way to keep members in order, to lie them all horizan
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
+        <category>英语</category>
         <category>Word Power Made Easy</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -1271,12 +1271,12 @@ The first selection is the way to keep members in order, to lie them all horizan
     <content><![CDATA[<h1 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h1><p>1. </p>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Organization (Tsinghua)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机组成原理 (清华大学)</category>
       </categories>
       <tags>
-        <tag>Hardware</tag>
-        <tag>Foundation</tag>
+        <tag>硬件</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -1368,11 +1368,11 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -1416,13 +1416,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,13 +1446,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -1480,13 +1480,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -1570,13 +1570,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -1600,13 +1600,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -1627,13 +1627,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -1707,11 +1707,11 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -1754,13 +1754,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -1785,13 +1785,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -1977,13 +1977,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -2009,13 +2009,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -2063,13 +2063,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -2147,11 +2147,11 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -2276,13 +2276,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -2327,13 +2327,13 @@ The first selection is the way to keep members in order, to lie them all horizan
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -2418,13 +2418,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -2451,13 +2451,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -2506,13 +2506,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -2557,11 +2557,11 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -2585,13 +2585,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -2612,13 +2612,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -2685,13 +2685,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -2750,13 +2750,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -2789,13 +2789,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -2818,13 +2818,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -2879,13 +2879,13 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
 </div>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -2982,13 +2982,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -3032,13 +3032,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -3063,13 +3063,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -3206,13 +3206,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -3241,13 +3241,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -3287,13 +3287,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -3395,11 +3395,11 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Compilers (HDU / Stanford)</category>
+        <category>计算机科学与技术</category>
+        <category>编译原理 (HDU / Stanford)</category>
       </categories>
       <tags>
-        <tag>Foundation</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
@@ -3440,13 +3440,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -3466,13 +3466,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computer Vision (Stanford CS231n)</category>
+        <category>计算机科学与技术</category>
+        <category>计算机视觉 (Stanford CS231n)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Deep Learning</tag>
-        <tag>Computer Vision</tag>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -3500,13 +3500,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -3538,13 +3538,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -3635,13 +3635,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -3670,13 +3670,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -3709,13 +3709,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -3755,13 +3755,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -3897,13 +3897,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -3938,13 +3938,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4127,13 +4127,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -4169,13 +4169,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4206,13 +4206,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -4287,13 +4287,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -4309,13 +4309,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4360,13 +4360,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Multivariable Calculus (MIT 18.02)</category>
+        <category>数学</category>
+        <category>多元微积分 (MIT 18.02)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4395,13 +4395,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -4434,13 +4434,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -4463,13 +4463,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4499,13 +4499,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -4536,13 +4536,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -4707,13 +4707,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -4734,13 +4734,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4807,13 +4807,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -4863,13 +4863,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Probability (MIT 6.041)</category>
+        <category>数学</category>
+        <category>概率论 (MIT 6.041)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Probability</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>概率论</tag>
       </tags>
   </entry>
   <entry>
@@ -4905,13 +4905,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -4938,13 +4938,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -4965,13 +4965,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5076,13 +5076,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -5163,13 +5163,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -5197,13 +5197,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5240,13 +5240,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5338,13 +5338,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -5388,13 +5388,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5417,13 +5417,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Single Variable Calculus (MIT 18.01)</category>
+        <category>数学</category>
+        <category>单变量微积分 (MIT 18.01)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Calculus</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>微积分</tag>
       </tags>
   </entry>
   <entry>
@@ -5435,9 +5435,9 @@ The second one is splitViewController. If we want to show the master view, then 
 <h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>有向图中经常会有环，根据上面对边的定义，可以发现环中的每一个元素要么都选要么都不选，而且这个问题中的环都是对称的，我们就可以利用强连通分量把多个形成环的点缩成一个点，减少点数</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Others</category>
+        <category>算法</category>
+        <category>图论</category>
+        <category>其他</category>
       </categories>
       <tags>
         <tag>Algorithms</tag>
@@ -5474,13 +5474,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5512,13 +5512,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5536,13 +5536,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5565,13 +5565,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5648,13 +5648,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5686,13 +5686,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5718,13 +5718,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5762,13 +5762,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5790,13 +5790,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Mathematics</category>
-        <category>Linear Algebra (MIT 18.06)</category>
+        <category>数学</category>
+        <category>线性代数 (MIT 18.06)</category>
       </categories>
       <tags>
-        <tag>Theories</tag>
-        <tag>Mathematics</tag>
-        <tag>Linear Algebra</tag>
+        <tag>理论</tag>
+        <tag>数学</tag>
+        <tag>线性代数</tag>
       </tags>
   </entry>
   <entry>
@@ -5819,11 +5819,11 @@ The second one is splitViewController. If we want to show the master view, then 
 <h1 id="最长单调子序列"><a href="#最长单调子序列" class="headerlink" title="最长单调子序列"></a>最长单调子序列</h1><p><a href="https://vjudge.net/problem/HDU-1257" target="_blank" rel="noopener">HDOJ 1257</a><br>这题就是最长递减子序列的一个变形：定义dp数组，使dp[i]表示的是第i个发射台发射的上一个炮弹的高度。对于每一枚导弹，要找到可以拦截且前一个导弹高度最小的系统去拦截。我们初始只用一个系统，每次无法拦截的时候就新增一个系统，由此可知dp数组一定是单调增长的，所以只需要从前往后遍历，第一个可以拦截的系统即可</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        dp[<span class="number">0</span>] = INF;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> inp;</span><br><span class="line">        <span class="keyword">while</span>(n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(j &lt; cnt)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(dp[j] &gt;= inp)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j] = inp;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j == cnt)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[cnt] = inp;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, cnt);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -5897,13 +5897,13 @@ The second one is splitViewController. If we want to show the master view, then 
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Developing iOS App with Swift (Stanford CS193p)</category>
+        <category>计算机科学与技术</category>
+        <category>Swift开发 (Stanford CS193p)</category>
       </categories>
       <tags>
-        <tag>Application</tag>
         <tag>Swift</tag>
         <tag>iOS</tag>
+        <tag>应用开发</tag>
       </tags>
   </entry>
   <entry>
@@ -5912,11 +5912,11 @@ The second one is splitViewController. If we want to show the master view, then 
     <content><![CDATA[<p><img src="/img/GTD.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>Books</category>
+        <category>看过的书</category>
       </categories>
       <tags>
-        <tag>Time Manage</tag>
-        <tag>Books</tag>
+        <tag>时间管理</tag>
+        <tag>书</tag>
       </tags>
   </entry>
   <entry>
@@ -5934,11 +5934,11 @@ The second one is splitViewController. If we want to show the master view, then 
 <h1 id="nex数组的妙用"><a href="#nex数组的妙用" class="headerlink" title="nex数组的妙用"></a>nex数组的妙用</h1><p>除了用在KMP查询上，nex数组还可以用在如下方面：<br>&emsp;任意前缀的重复次数：nex[i]可以理解为串的长为nex[i]的前缀在自身上以第i个元素开头，长为nex[i]的子串重合，即前缀重复了一次。所以利用nex数组，我们就可以知道任意前缀的重复次数<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3336" target="_blank" rel="noopener">HDOJ 3336</a></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>String</category>
+        <category>算法</category>
+        <category>串</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -5947,11 +5947,11 @@ The second one is splitViewController. If we want to show the master view, then 
     <content><![CDATA[<p><img src="/img/OmniFocus.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>Books</category>
+        <category>看过的书</category>
       </categories>
       <tags>
-        <tag>Time Manage</tag>
-        <tag>Books</tag>
+        <tag>时间管理</tag>
+        <tag>书</tag>
       </tags>
   </entry>
   <entry>
@@ -6844,12 +6844,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -7784,12 +7784,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -8472,12 +8472,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -9466,12 +9466,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -10388,12 +10388,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -11244,12 +11244,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -11968,12 +11968,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -12746,12 +12746,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -13518,12 +13518,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -14254,12 +14254,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -14995,12 +14995,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -15737,12 +15737,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -16467,12 +16467,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -17221,12 +17221,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -17280,12 +17280,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -17301,12 +17301,12 @@ table th:first-of-type {
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/HDU-2389" target="_blank" rel="noopener">HDOJ 2389</a></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -17323,12 +17323,12 @@ table th:first-of-type {
 <p>主算法</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximumMatch</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;   <span class="comment">//最大匹配数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) <span class="comment">//遍历所有女生，m：女生个数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!GirlMatched[i])   <span class="comment">//增广路要求从未匹配点开始</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));    <span class="comment">//开始遍历一条新的路，之前的标记要清除</span></span><br><span class="line">			ans += DFS(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18160,12 +18160,12 @@ table th:first-of-type {
 </div>
 ]]></content>
       <categories>
-        <category>English</category>
-        <category>10000 Words</category>
+        <category>英语</category>
+        <category>曲根万词班</category>
       </categories>
       <tags>
-        <tag>English</tag>
-        <tag>Words</tag>
+        <tag>英语</tag>
+        <tag>单词</tag>
       </tags>
   </entry>
   <entry>
@@ -18174,12 +18174,12 @@ table th:first-of-type {
     <content><![CDATA[<h1 id="行列交换"><a href="#行列交换" class="headerlink" title="行列交换"></a>行列交换</h1><p><a href="https://vjudge.net/problem/HDU-2819" target="_blank" rel="noopener">HDOJ 2819</a><br>题目要求使对角线上都是1，就意味着我们要先选择几个1来挪到对角线上。又易知每一行每一列选且只选一个，这时我们就可以选择用匈牙利算法，如果不是完全匹配就无法完成。用匈牙利算法匹配后的成果match数组记录的是行列匹配情况，要使1都在对角线上，易知最终的行列匹配必须使行号等于列号。所以之后只需遍历一遍把匹配结果换到结果对应的那个下标即可</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">105</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmd</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> num1, num2;</span><br><span class="line">&#125; arr[<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxn][maxn], vis[maxn], match[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i] &amp;&amp; <span class="built_in">map</span>[x][i])</span><br><span class="line">        &#123;</span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(match[i] == <span class="number">0</span> || dfs(n, match[i]))</span><br><span class="line">            &#123;</span><br><span class="line">                match[i] = x;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isOK</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="keyword">if</span>(!dfs(n, i))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//有一个点失败就一定不是完全匹配</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(match, <span class="number">0</span>, <span class="keyword">sizeof</span>(match));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;<span class="built_in">map</span>[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!isOK(n))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(j &lt;= n)</span><br><span class="line">            &#123;</span><br><span class="line">            	<span class="comment">//寻找应该放在这个下标的元素</span></span><br><span class="line">                <span class="keyword">if</span>(match[j] == i)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i == j) <span class="comment">//如果就是当前下标则不需操作</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            arr[ans].num1 = i;</span><br><span class="line">            arr[ans].num2 = j;</span><br><span class="line">            <span class="comment">//交换匹配结果相当于直接交换列</span></span><br><span class="line">            <span class="keyword">int</span> temp = match[i];</span><br><span class="line">            match[i] = match[j];</span><br><span class="line">            match[j] = temp;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"C %d %d\n"</span>, arr[i].num1, arr[i].num2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18197,12 +18197,12 @@ table th:first-of-type {
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>最大权：<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2255" target="_blank" rel="noopener">HDOJ 2255(奔小康赚大钱)</a><br><a href="http://codeforces.com/problemset/problem/1107/F" target="_blank" rel="noopener">CF 1107F(Vasya and Endless Credits)</a><br>最小权：<br><a href="https://vjudge.net/problem/POJ-3565" target="_blank" rel="noopener">POJ 3656(Ants)</a><br><a href="https://vjudge.net/problem/POJ-2195" target="_blank" rel="noopener">POJ 2195(Going Home)</a></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18217,12 +18217,12 @@ table th:first-of-type {
 <h1 id="单点在多路径上"><a href="#单点在多路径上" class="headerlink" title="单点在多路径上"></a>单点在多路径上</h1><p><a href="https://vjudge.net/problem/POJ-2594" target="_blank" rel="noopener">POJ 2594</a><br>一般的最小路径中，一个点只能属于一条路，但在有的问题中，一个点可以属于多条路径<br>为了防止一个点匹配过了就没了，导致其他经过这个点到另一个点的路径不见了，所以在开始匹配前要先用Floyd算法把所有连通的点直接连起来<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>[i][k] &amp;&amp; <span class="built_in">map</span>[k][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">map</span>[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18231,12 +18231,12 @@ table th:first-of-type {
     <content><![CDATA[<p><a href="https://vjudge.net/problem/POJ-2289" target="_blank" rel="noopener">POJ  2289</a><br>多重匹配一般是一个点集N里的点每个只能匹配一个点，另一个点集M里的点可以匹配多个。一般是从只能匹配一个点的点集出发去匹配另一个点集<br>二分图的多重匹配是在单重匹配的基础上进行修改的<br>&emsp;1、如果这个点的匹配数还没有超过上限，就直接匹配<br>&emsp;2、如果匹配数超了上限，就尝试把已经匹配了的点里踢掉一个点，让其去匹配另一条边</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> limit[maxn], <span class="built_in">map</span>[maxn][maxn], vis[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; match[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM])</span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(match[dotM].<span class="built_in">size</span>() &lt; limit[dotM])</span><br><span class="line">			&#123;</span><br><span class="line">				match[dotM].push_back[dotN];</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; match[dotM]; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(dfs(match[dotM][j], m))</span><br><span class="line">				&#123;</span><br><span class="line">					match[dotM][j] = dotN;</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18288,12 +18288,12 @@ table th:first-of-type {
 <p>3+4重构<br>把三个节点v、p、g按中序遍历次序依次命名为a、b、c，三棵子树依次记为T<sub>0</sub>、T<sub>1</sub>、T<sub>2</sub>、T<sub>3</sub>，则最终需要的必然如下图所示<br><img src="/img/二叉搜索树06.png" alt="3+4重构"><br>则我们可以避免了繁琐的旋转操作，直接利用一系列的赋值就得到需要的树型</p>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18391,12 +18391,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18488,12 +18488,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18507,11 +18507,11 @@ table th:first-of-type {
 <h1 id="二进制状态压缩"><a href="#二进制状态压缩" class="headerlink" title="二进制状态压缩"></a>二进制状态压缩</h1><script type="math/tex; mode=display">\begin{matrix}取出整数n在二进制表示下的第k位&(n>>k)\ \&\ 1\\取出整数n在二进制表示下的第0\sim k-1位&n\ \&\ ((1 << k) - 1)\\把整数n在二进制表达下的第k位取反&n\ xor\ (1<<k)\\对整数n在二进制表达下的第k位赋值1&n\ |\ (1<<k)\\对整数n在二进制表示下的第k位赋值0&n\ \&\ (\sim(1<<k)) \end{matrix}</script><p>或使用$bitset$实现</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Others</category>
+        <category>算法</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18524,11 +18524,11 @@ table th:first-of-type {
 <p>模版题：<a href="https://www.luogu.org/problemnew/show/P1880" target="_blank" rel="noopener">洛谷 P1880</a></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">205</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN], sum[MAXN];</span><br><span class="line"><span class="keyword">int</span> dp1[MAXN][MAXN], dp2[MAXN][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    scInt(n);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        scInt(num[i]);</span><br><span class="line">        num[n + i] = num[i];</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + num[i];</span><br><span class="line">    &#125;</span><br><span class="line">    repLE(i, n + <span class="number">1</span>, n * <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[i] = sum[i - <span class="number">1</span>] + num[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> p=<span class="number">1</span>;p&lt;n;p++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=i+p;(j&lt;n+n) &amp;&amp; (i&lt;n+n);i++,j=i+p)</span><br><span class="line">        &#123;</span><br><span class="line">            dp2[i][j] = INF;</span><br><span class="line">            repLess(k, i, j)</span><br><span class="line">            &#123;</span><br><span class="line">                dp1[i][j] = max(dp1[i][j], dp1[i][k] + dp1[k + <span class="number">1</span>][j] + sum[j] - sum[i - <span class="number">1</span>]);</span><br><span class="line">                dp2[i][j] = min(dp2[i][j], dp2[i][k] + dp2[k + <span class="number">1</span>][j] + sum[j] - sum[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> maxAns = <span class="number">0</span>, minAns = INF;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        maxAns = max(maxAns, dp1[i][i + n - <span class="number">1</span>]);</span><br><span class="line">        minAns = min(minAns, dp2[i][i + n - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n%d\n"</span>, minAns, maxAns);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18560,12 +18560,12 @@ table th:first-of-type {
 <h1 id="Graham-Scan"><a href="#Graham-Scan" class="headerlink" title="Graham Scan"></a>Graham Scan</h1><p>思考一下极点算法为什么慢？因为它枚举了大量的无用的点。我们可以对初始点进行一个预处理，对点以一个基准点按逆时针进行排序(基准点一般选y值最小的点，有多个就再选其中x值最小的点)。预处理之后就可以开始主算法了。每次我们只需要关心三个点，待判断的点和最后确定的两个极点。向量方向定义为倒数第二个确定的点指向最后确定的点，如果待判断点在向量的右边，就要回溯判断这个极点的加入会不会造成之前被认定为极点的点变为非极点，只要判断出一个没有变为非极点就可以终止判断，为了便于回溯，我们建立一个栈来保持加入极点的次序；如果在左边，就说明这个点是极点，直接加入栈中</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Point结构体要加一个元素index存储的是这个点在原始数组中的标号</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; extremePoint;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">grahamScan</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	sort(s, s + n); <span class="comment">//之前已经重载了小于号</span></span><br><span class="line">	extreme[s[<span class="number">0</span>].index] = extreme[s[<span class="number">1</span>].index] = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">int</span> lLast = <span class="number">0</span>, last = <span class="number">1</span>;</span><br><span class="line">	extremePoint.push(<span class="number">0</span>);</span><br><span class="line">	extremePoint.push(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		last = extremePoint.top();</span><br><span class="line">		extremePoint.pop();</span><br><span class="line">		lLast = extremePoint.top();</span><br><span class="line">		extremePoint.pop();</span><br><span class="line">		<span class="keyword">if</span>(toLeft(s[lLast], s[last], s[i]))</span><br><span class="line">		&#123;</span><br><span class="line">			extreme[s[i].index] = <span class="literal">true</span>;</span><br><span class="line">			extremePoint.push(lLast);</span><br><span class="line">			extremePoint.push(last);</span><br><span class="line">			extremePoint.push(i);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			extreme[s[i].index] = <span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">while</span>(toLeft(s[lLast], s[i], s[last]))</span><br><span class="line">			&#123;</span><br><span class="line">				extremePoint[last] = <span class="literal">false</span>;</span><br><span class="line">				last = lLast;</span><br><span class="line">				lLast = extremePoint.top();</span><br><span class="line">				extremePoint.pop();</span><br><span class="line">			&#125;</span><br><span class="line">			extremePoint.push(lLast);</span><br><span class="line">			extremePoint.push(last);</span><br><span class="line">			extremePoint.push(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Computational Geometry</category>
+        <category>计算机科学与技术</category>
+        <category>计算几何 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Computational Geometry</tag>
+        <tag>理论</tag>
+        <tag>计算几何</tag>
       </tags>
   </entry>
   <entry>
@@ -18582,12 +18582,12 @@ table th:first-of-type {
 <p>例题：<a href="https://www.luogu.org/problemnew/show/P1903" target="_blank" rel="noopener">洛谷 P1903</a></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">5e4</span> + <span class="number">50</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXCOL = <span class="number">1e6</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, t, id, ans;</span><br><span class="line">&#125; q[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">modify</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> pos, old, ne, t;</span><br><span class="line">&#125; modi[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ori[MAXN], now[MAXN], blo[MAXN], col[MAXCOL];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmpLR</span><span class="params">(query a, query b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (blo[a.l] == blo[b.l])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (blo[a.r] == blo[b.r])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a.t &lt; b.t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a.r &lt; b.r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a.l &lt; b.l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmpID</span><span class="params">(query a, query b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.id &lt; b.id;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    col[color]++;</span><br><span class="line">    ans += col[color] == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> color)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    col[color]--;</span><br><span class="line">    ans -= col[color] == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    scan(n);</span><br><span class="line">    scan(m);</span><br><span class="line">    <span class="keyword">int</span> block = <span class="built_in">pow</span>(n, <span class="number">0.66666666</span>);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        scan(ori[i]);</span><br><span class="line">        blo[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">        now[i] = ori[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> cmd;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="keyword">int</span> times = <span class="number">0</span>, qLen = <span class="number">0</span>;;</span><br><span class="line">    repLE(i, <span class="number">1</span>, m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%c%d"</span>, &amp;cmd, &amp;a);</span><br><span class="line">        scan(b);</span><br><span class="line">        <span class="keyword">if</span> (cmd == <span class="string">'Q'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            q[++qLen].t = times;</span><br><span class="line">            q[qLen].id = qLen;</span><br><span class="line">            q[qLen].l = a;</span><br><span class="line">            q[qLen].r = b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            modi[++times].pos = a;</span><br><span class="line">            modi[times].ne = b;</span><br><span class="line">            modi[times].old = now[a];</span><br><span class="line">            now[a] = b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(q + <span class="number">1</span>, q + <span class="number">1</span> + qLen, cmpLR);</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>, l = <span class="number">1</span>, r = <span class="number">0</span>;</span><br><span class="line">    ans = <span class="number">0</span>;</span><br><span class="line">    repLE(i, <span class="number">1</span>, qLen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (t &lt; q[i].t)</span><br><span class="line">        &#123;</span><br><span class="line">            t++;</span><br><span class="line">            <span class="keyword">if</span> (l &lt;= modi[t].pos &amp;&amp; modi[t].pos &lt;= r)</span><br><span class="line">            &#123;</span><br><span class="line">                remove(modi[t].old);</span><br><span class="line">                add(modi[t].ne);</span><br><span class="line">            &#125;</span><br><span class="line">            ori[modi[t].pos] = modi[t].ne;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (t &gt; q[i].t)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (l &lt;= modi[t].pos &amp;&amp; modi[t].pos &lt;= r)</span><br><span class="line">            &#123;</span><br><span class="line">                remove(modi[t].ne);</span><br><span class="line">                add(modi[t].old);</span><br><span class="line">            &#125;</span><br><span class="line">            ori[modi[t].pos] = modi[t].old;</span><br><span class="line">            t--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; q[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            remove(ori[l]);</span><br><span class="line">            l++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l &gt; q[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            l--;</span><br><span class="line">            add(ori[l]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r &lt; q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            r++;</span><br><span class="line">            add(ori[r]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r &gt; q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            remove(ori[r]);</span><br><span class="line">            r--;</span><br><span class="line">        &#125;</span><br><span class="line">        q[i].ans = ans;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(q + <span class="number">1</span>, q + <span class="number">1</span> + qLen, cmpID);</span><br><span class="line">    repLE(i, <span class="number">1</span>, qLen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, q[i].ans);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Range Problem</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>区间问题</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18623,12 +18623,12 @@ table th:first-of-type {
 <p>动态操作的复杂度几乎是O(1)，但是其中涉及到的new和delete所需要的时间大概是一般操作(如加法)的100倍</p>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18679,12 +18679,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18697,11 +18697,11 @@ table th:first-of-type {
 <p>字典树的还原(DFS)：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(node * root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">		<span class="keyword">if</span>(root -&gt; next[i] != <span class="literal">NULL</span>)</span><br><span class="line">			dfs(root -&gt; next[i]);     <span class="comment">//递归直到树的最深处</span></span><br><span class="line">	<span class="keyword">delete</span> root;</span><br><span class="line">	<span class="comment">//从最深的地方开始才删就不会遗漏</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>String</category>
+        <category>算法</category>
+        <category>串</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18720,12 +18720,12 @@ table th:first-of-type {
 <h1 id="拓扑排序与SPFA"><a href="#拓扑排序与SPFA" class="headerlink" title="拓扑排序与SPFA"></a>拓扑排序与SPFA</h1><p>SPFA用于解决：验证约束是否成立、求值。但SPFA不能用于把点排序<br>拓扑排序：只能用于点排序</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18736,12 +18736,12 @@ table th:first-of-type {
 <h1 id="题目2-种类并查集"><a href="#题目2-种类并查集" class="headerlink" title="题目2 (种类并查集)"></a>题目2 (种类并查集)</h1><p><a href="https://vjudge.net/problem/POJ-1182" target="_blank" rel="noopener">POJ 1182</a><br>这题的状态比较难定义，我们定义：0表示和父节点同类，1表示吃父节点，2表示被父节点吃，而0、1也和题中的1、2对应起来</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100000</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> unionFind[maxn], val[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">        unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">        val[x] = (val[x] + val[oldFather]) % <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span>(val));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            unionFind[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> x, y, relation;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(k--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;relation, &amp;x, &amp;y);</span><br><span class="line">            <span class="keyword">if</span>(x &gt; n || (x == y &amp;&amp; relation == <span class="number">2</span>) || y &gt; n)</span><br><span class="line">            &#123;</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">                <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">                <span class="keyword">if</span>(fx == fy &amp;&amp; (val[x] - val[y] + <span class="number">3</span>) % <span class="number">3</span> != relation - <span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(fx != fy)</span><br><span class="line">                &#123;</span><br><span class="line">                    unionFind[fx] = fy;</span><br><span class="line">                    val[fx] = (val[y] + relation - val[x] + <span class="number">2</span>) % <span class="number">3</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Union Find</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>并查集</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18831,12 +18831,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -18845,11 +18845,11 @@ table th:first-of-type {
     <content><![CDATA[<p><img src="/img/如何高效学习.png"></p>
 ]]></content>
       <categories>
-        <category>Books</category>
+        <category>看过的书</category>
       </categories>
       <tags>
-        <tag>Books</tag>
-        <tag>Learn Better</tag>
+        <tag>书</tag>
+        <tag>学习效率</tag>
       </tags>
   </entry>
   <entry>
@@ -18858,12 +18858,12 @@ table th:first-of-type {
     <content><![CDATA[<p><a href="http://codeforces.com/problemset/problem/1156/D" target="_blank" rel="noopener">CF 1156D</a><br>思路：建立两个并查集，权值为1的一个，权值为2的一个，记录每个点不同权值边所在的树的节点数。每一颗树中的节点都是相互可配对的，从一棵0树的节点经过另一个节点到一棵1树也是合法的，我们计算时就枚举所有的节点，计算出经过该节点的可匹配点，即<code>该节点所在的0树的节点数乘以1数的节点数再减去1(该节点到该节点)</code></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e5</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sz[<span class="number">2</span>][MAXN], dsu[<span class="number">2</span>][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x != dsu[v][x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> dsu[v][x] = find(dsu[v][x], v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fx = find(x, v);</span><br><span class="line">    <span class="keyword">int</span> fy = find(y, v);</span><br><span class="line">    <span class="keyword">if</span>(fx != fy)</span><br><span class="line">    &#123;</span><br><span class="line">        dsu[v][fx] = fy;</span><br><span class="line">        sz[v][fy] += sz[v][fx];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, x, y, v;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    rep(i, <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        dsu[<span class="number">0</span>][i] = dsu[<span class="number">1</span>][i] = i;</span><br><span class="line">        sz[<span class="number">0</span>][i] = sz[<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    rep(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y &gt;&gt; v;</span><br><span class="line">        merge(x, y, v);</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    rep(i, <span class="number">1</span>, n + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += <span class="number">1L</span>L * sz[<span class="number">0</span>][find(i, <span class="number">0</span>)] * sz[<span class="number">1</span>][find(i, <span class="number">1</span>)] - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Union Find</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>并查集</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18875,12 +18875,12 @@ table th:first-of-type {
 <p>调用：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(DFN, <span class="number">0</span>, <span class="keyword">sizeof</span>(DFN));</span><br><span class="line">	<span class="built_in">memset</span>(low, <span class="number">0</span>, <span class="keyword">sizeof</span>(low));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!DFN[i])</span><br><span class="line">		&#123;</span><br><span class="line">			tarjan(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Others</category>
+        <category>算法</category>
+        <category>图论</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18903,12 +18903,12 @@ table th:first-of-type {
 <h1 id="种类并查集"><a href="#种类并查集" class="headerlink" title="种类并查集"></a>种类并查集</h1><p>本质就是利用带权并查集和状态压缩。利用状态压缩，把物间的关系压缩成一系列数，一般是从0开始的连续实数，a和b有关系，就把a和b连起来，关系a、b间关系的大小<br>但是在合并时，在更新值的时候要取余，有减的项，为了防止在取余时出现负数，就要加上取余的数</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Union Find</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>并查集</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18919,11 +18919,11 @@ table th:first-of-type {
 <h1 id="求k步可重复走，从一个点到另一个点的路径总数"><a href="#求k步可重复走，从一个点到另一个点的路径总数" class="headerlink" title="求k步可重复走，从一个点到另一个点的路径总数"></a>求k步可重复走，从一个点到另一个点的路径总数</h1><p><a href="https://ac.nowcoder.com/acm/contest/549/E" target="_blank" rel="noopener">牛客网 小白月赛13-E</a><br>先常规建图，再对邻接矩阵求k次幂，这时的graph[i][j]表示从i到j的路径总数</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Math</category>
+        <category>算法</category>
+        <category>数学</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18936,11 +18936,11 @@ table th:first-of-type {
 <h1 id="nex匹配方法"><a href="#nex匹配方法" class="headerlink" title="nex匹配方法"></a>nex匹配方法</h1><p>匹配过程中的主串和模式串都是主算法中的模式串，extend和nex数组都是主算法中的nex</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> nex[maxn], ex[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildNex</span><span class="params">(<span class="keyword">int</span> modeLen, <span class="built_in">string</span> modeString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    nex[<span class="number">0</span>] = modeLen;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos + <span class="number">1</span> &lt; modeLen &amp;&amp; modeString[mainPos + <span class="number">1</span>] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    nex[<span class="number">1</span>] = mainPos;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">2</span>; mainPos &lt; modeLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + nex[mainPos - p0] &lt; p0 + nex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            nex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = nex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; modeLen &amp;&amp; modeString[j] == modeString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            nex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildExtend</span><span class="params">(<span class="built_in">string</span> mainString, <span class="built_in">string</span> modeString, <span class="keyword">int</span> mainLen, <span class="keyword">int</span> modeLen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    buildNex(mainLen, modeString);</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    p0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos &lt; modeLen &amp;&amp; mainPos &lt; mainLen &amp;&amp; mainString[mainPos] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    ex[<span class="number">0</span>] = mainPos;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">1</span>; mainPos &lt; mainLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + ex[mainPos - p0] &lt; p0 + ex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            ex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = ex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; mainLen &amp;&amp; j &lt; modeLen &amp;&amp; modeString[j] == mainString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            ex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>String</category>
+        <category>算法</category>
+        <category>串</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18949,10 +18949,11 @@ table th:first-of-type {
     <content><![CDATA[<p><img src="\img\所谓情商高，就是会说话.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>Books</category>
+        <category>看过的书</category>
       </categories>
       <tags>
-        <tag>Books</tag>
+        <tag>书</tag>
+        <tag>人际交往</tag>
       </tags>
   </entry>
   <entry>
@@ -18971,11 +18972,11 @@ table th:first-of-type {
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/POJ-3279" target="_blank" rel="noopener">POJ 3279(Fliptile)</a></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Search</category>
+        <category>算法</category>
+        <category>搜索</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -18990,11 +18991,11 @@ table th:first-of-type {
 <p><strong>注意</strong>：数位dp不能解决包含某种结构的问题，只能解决不包含，所以包含的问题要转化成不包含做</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19057,12 +19058,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -19085,11 +19086,11 @@ table th:first-of-type {
 <h1 id="概率求解"><a href="#概率求解" class="headerlink" title="概率求解"></a>概率求解</h1><p>1、对于独立重复实验中，重复n次实验，某一概率为p的事件恰好出现m次的概率：<br>P = C(m, n) <em> p^m^ </em> p^n-m^<br>2、条件概率：在事件A发生的条件下事件B发生的概率<code>P(B | A) = P(AB) / P(A)</code></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Math</category>
+        <category>算法</category>
+        <category>数学</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19100,11 +19101,11 @@ table th:first-of-type {
 <p><a href="https://vjudge.net/problem/FZU-2150" target="_blank" rel="noopener">FZU 2150</a></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">15</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">5</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> dy[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y, cnt ;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;Node&gt; v;</span><br><span class="line"><span class="keyword">char</span> mp[N][N];</span><br><span class="line"><span class="keyword">int</span> vis[N][N];</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.x&gt;<span class="number">0</span> &amp;&amp; b.y&gt;<span class="number">0</span> &amp;&amp; b.x&lt;=n &amp;&amp; b.y&lt;=m &amp;&amp; vis[b.x][b.y]==<span class="number">0</span> &amp;&amp; mp[b.x][b.y]==<span class="string">'#'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">(Node a,Node b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">queue</span>&lt;Node&gt; q;</span><br><span class="line">    vis[a.x][a.y]  = vis[b.x][b.y] = <span class="number">1</span>;</span><br><span class="line">    a.cnt = <span class="number">0</span>,b.cnt = <span class="number">0</span>;</span><br><span class="line">    q.push(a);</span><br><span class="line">    q.push(b);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    <span class="keyword">int</span> cas = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        a = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        ans = a.cnt;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            b.x = a.x + dx[i];</span><br><span class="line">            b.y = a.y + dy[i];</span><br><span class="line">            b.cnt = a.cnt + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(judge(b))</span><br><span class="line">            &#123;</span><br><span class="line">                vis[b.x][b.y] = <span class="number">1</span>;</span><br><span class="line">                q.push(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> kase = <span class="number">1</span>; kase &lt;= T; kase++)</span><br><span class="line">    &#123;</span><br><span class="line">        v.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;mp[i][j]);</span><br><span class="line">                <span class="keyword">if</span>(mp[i][j] == <span class="string">'#'</span>)</span><br><span class="line">                    v.push_back((Node)&#123;i, j, <span class="number">0</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; v.<span class="built_in">size</span>(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = BFS(v[i], v[j]);</span><br><span class="line">                <span class="keyword">bool</span> ok = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> f = <span class="number">1</span>; f &lt;= m; f++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(vis[k][f] == <span class="number">0</span> &amp;&amp; mp[k][f] == <span class="string">'#'</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                            ok = <span class="literal">false</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(ok == <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(ok)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans = <span class="built_in">min</span>(ans, tmp);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: "</span>, kase);</span><br><span class="line">        <span class="keyword">if</span>(ans == <span class="number">0x3f3f3f3f</span>)</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"-1"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Search</category>
+        <category>算法</category>
+        <category>搜索</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19181,11 +19182,11 @@ table th:first-of-type {
 <p>我们可以利用递推式，把要求的放在结果矩阵中，需要用到的放在基础矩阵中，在凑出其余项。如我们要求斐波那契数列，已知f(n) = f(n-1) + f(n-2)，则f(n)一定在结果矩阵中，f(n-1)、f(n-2)一定在基础矩阵中。得到 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}? \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>又由递推式得 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}1&amp;1 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>此时还不能用快速矩阵幂，故我们要凑出方阵得 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>再递推下去得到 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]^{n-1}\times\left[\begin{matrix}f(1)\\f(2) \end{matrix}\right]$<br>然后就可以用矩阵幂在O(log n)内解得斐波那契数列的第n项</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Math</category>
+        <category>算法</category>
+        <category>数学</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19214,12 +19215,12 @@ table th:first-of-type {
 <h1 id="最长路"><a href="#最长路" class="headerlink" title="最长路"></a>最长路</h1><p>最长路不能用Dijkstra，只能取负权之后用Bellman-Ford、SPFA、Floyd求最短路</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19233,12 +19234,12 @@ table th:first-of-type {
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bellmanFord</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n - <span class="number">1</span> &amp;&amp; !flag; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">				&#123;</span><br><span class="line">					flag = <span class="literal">true</span>;</span><br><span class="line">					dist[<span class="built_in">map</span>[i][j].to] = dist[i] + <span class="built_in">map</span>[i][j].dist;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">negLoop</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    que.push(start);</span><br><span class="line">    dist[start] = <span class="number">0</span>;</span><br><span class="line">    vis[start] = enqueue_num[start] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        x = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        vis[x] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(enqueue_num[x] &gt; n)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mp[x].<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> i = mp[x][j].to;</span><br><span class="line">            <span class="keyword">if</span>(dist[x] + mp[x][j].dist &lt; dist[i])</span><br><span class="line">            &#123;</span><br><span class="line">                dist[i] = dist[x] + mp[x][j].dist;</span><br><span class="line">                <span class="keyword">if</span>(!vis[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    que.push(i);</span><br><span class="line">                    vis[i] = <span class="number">1</span>;</span><br><span class="line">                    enqueue_num[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19255,12 +19256,12 @@ table th:first-of-type {
 <p>打印路径</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pre[u] == <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d"</span>, u);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">print</span>(pre[u]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"--&gt;%d"</span>, u);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19274,12 +19275,12 @@ table th:first-of-type {
 <h1 id="最大生成树"><a href="#最大生成树" class="headerlink" title="最大生成树"></a>最大生成树</h1><p>最大生成树只是最小生成树的反式写法，最小生成树都取最小，最大生成树都取最大<br>例如：<a href="https://www.luogu.org/problemnew/show/P4826" target="_blank" rel="noopener">洛谷 P4826</a><br>每只牛之间的比赛连一条边，边的权值就是两只牛的异或，建立一张图，因为每只牛都要参加比赛，除了最后那一只牛，每只牛都会且只会输一场，又不会出现环，就可以构建出一棵树，求最大生成树</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLess(ele, init, lim) for(int ele = init; ele &lt; lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLE(ele, init, lim) for(int ele = init; ele &lt;= lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repMore(ele, init, lim) for(int ele = init; ele &gt; lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repME(ele, init, lim) for(int ele = init; ele &gt;= lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scInt(to) scanf(<span class="meta-string">"%d"</span>, &amp;to)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scTwoInt(one, two) scanf(<span class="meta-string">"%d%d"</span>, &amp;one, &amp;two)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scThreeInt(one, two, three) scanf(<span class="meta-string">"%d%d%d"</span>, &amp;one, &amp;two, &amp;three)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> clr(arr, init) memset(arr, init, sizeof(arr))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rc ((o &lt;&lt; 1) + 1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lc (o &lt;&lt; 1)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS = <span class="number">1e-8</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e5</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">ll cow[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    ll weight;</span><br><span class="line">&#125; e[MAXN &lt;&lt; <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(edge a, edge b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.weight &gt; b.weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> disjoint[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (disjoint[x] == x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> disjoint[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> disjoint[x] = find(disjoint[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;cow[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        repLess(j, <span class="number">1</span>, i)</span><br><span class="line">        &#123;</span><br><span class="line">            e[len].weight = (<span class="number">1L</span>L * cow[i]) ^ cow[j];</span><br><span class="line">            e[len].a = i;</span><br><span class="line">            e[len].b = j;</span><br><span class="line">            len++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(e, e + len, cmp);</span><br><span class="line">    repLE(i, <span class="number">0</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        disjoint[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> getEdge = <span class="number">0</span>;</span><br><span class="line">    repLess(pos, <span class="number">0</span>, len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x = find(e[pos].a), y = find(e[pos].b);</span><br><span class="line">        <span class="keyword">if</span> (x == y)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        disjoint[x] = y;</span><br><span class="line">        ans += e[pos].weight;</span><br><span class="line">        getEdge++;</span><br><span class="line">        <span class="keyword">if</span> (getEdge == n - <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Others</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19335,12 +19336,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -19351,12 +19352,12 @@ table th:first-of-type {
 <p>在更新距离的时候，更新的是直系的距离，实际上k代祖先的后代可以不更新，因为后代只有：1、已经访问过的不会再访问；2、稍后访问，访问时会自动更新(旁系后代的更新方式)<br>例题：<br><a href="https://www.luogu.org/problemnew/show/P3942" target="_blank" rel="noopener">洛谷 P3942</a></p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19365,12 +19366,12 @@ table th:first-of-type {
     <content><![CDATA[<h1 id="次短路-纯dij"><a href="#次短路-纯dij" class="headerlink" title="次短路(纯dij)"></a>次短路(纯dij)</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">qnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, c;</span><br><span class="line">    </span><br><span class="line">    qnode(<span class="keyword">void</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        v = c = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    qnode (<span class="keyword">int</span> val, <span class="keyword">int</span> cost)</span><br><span class="line">    &#123;</span><br><span class="line">        v = val;</span><br><span class="line">        c = cost;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> qnode &amp; r) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> c &gt; r.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, cost;</span><br><span class="line">    </span><br><span class="line">    edge (<span class="keyword">void</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        v = cost = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    edge (<span class="keyword">int</span> val, <span class="keyword">int</span> c)</span><br><span class="line">    &#123;</span><br><span class="line">        v = val;</span><br><span class="line">        cost = c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; e[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dist[MAXN][<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dij</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> start)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    clr(dist, INF);</span><br><span class="line">    priority_queue&lt;qnode&gt; que;</span><br><span class="line">    <span class="keyword">while</span> (!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        que.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    dist[start][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    que.push(qnode(start, <span class="number">0</span>));</span><br><span class="line">    qnode tmp;</span><br><span class="line">    <span class="keyword">while</span> (!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        tmp = que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> u = tmp.v;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; e[u].size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = e[u][i].v;</span><br><span class="line">            <span class="keyword">int</span> cost = e[u][i].cost + tmp.c;</span><br><span class="line">            <span class="keyword">if</span> (dist[v][<span class="number">0</span>] &gt; cost)</span><br><span class="line">            &#123;</span><br><span class="line">                swap(dist[v][<span class="number">0</span>], cost);</span><br><span class="line">                que.push(qnode(v, dist[v][<span class="number">0</span>]));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (dist[v][<span class="number">0</span>] &lt; cost &amp;&amp; cost &lt; dist[v][<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                dist[v][<span class="number">1</span>] = cost;</span><br><span class="line">                que.push(qnode(v, dist[v][<span class="number">1</span>]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="k短路-dij-A"><a href="#k短路-dij-A" class="headerlink" title="k短路(dij + A*)"></a>k短路(dij + A*)</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> S,T,K;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to,cost;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt;E[N],G[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dis[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Anode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to,d,all;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Anode &amp;_)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> all==_.all?d&gt;_.d:all&gt;_.all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;Anode&gt;Star;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Astar</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(dis[S]==<span class="number">0x3f3f3f3f</span>)<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(S==T)K++;</span><br><span class="line">    <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!Star.empty())Star.pop();</span><br><span class="line"></span><br><span class="line">    Star.push((Anode)&#123;S,<span class="number">0</span>,dis[S]&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!Star.empty())&#123;</span><br><span class="line">        Anode now=Star.top();Star.pop();</span><br><span class="line">        <span class="keyword">int</span> x=now.to;</span><br><span class="line">        <span class="keyword">if</span>(x==T)&#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            <span class="keyword">if</span>(cnt==K)<span class="keyword">return</span> now.d;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="keyword">int</span>)E[x].size();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> y=E[x][i].to;</span><br><span class="line">            Star.push((Anode)&#123;y,now.d+E[x][i].cost,now.d+E[x][i].cost+dis[y]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span><span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Shortest Path</category>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路径</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19382,12 +19383,12 @@ table th:first-of-type {
 <h1 id="二叉索引树"><a href="#二叉索引树" class="headerlink" title="二叉索引树"></a>二叉索引树</h1><p>二叉索引树长相如图：<img src="/img/树状数组01.png" style="zoom:67%;" /><br>1、<strong>含义</strong>：每一个黑点都代表的是一个原始数组单元内存储的信息的位置。白条加黑点代表的是该单元内存储的长条覆盖范围内的数据和。例如数组的4号元素，表示的是从1号加到4号的和<br>2、可以观察到树状数组和原始数组的大小一样<br>3、在树状数组中，每一个节点到包含它的父节点的方法就是加上lowbit，而求从1号到x号的节点和要从x号节点开始依次减去lowbit<br>单点修改代码<br>4、树状数组常从1开始存储<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[maxn], ori[maxn];   <span class="comment">//sum为树状数组，ori为原始数据</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> val, <span class="keyword">int</span> n)</span> <span class="comment">//要把x号元素增加val，n为元素个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(x &lt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[x] += val;</span><br><span class="line">        x += lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>区间查询代码</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span>   <span class="comment">//求从1号元素到x号元素到和</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += sum[x];</span><br><span class="line">        x -= lowbit(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;/</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Range Problem</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>区间问题</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19420,11 +19421,11 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Others</category>
+        <category>算法</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19442,12 +19443,12 @@ table th:first-of-type {
 <p>3、主算法</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GS</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		match(i);</span><br><span class="line">	<span class="keyword">int</span> boy;</span><br><span class="line">	<span class="keyword">while</span>(!singleBoy.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		boy = singleBoy.top();</span><br><span class="line">		singleBoy.pop();</span><br><span class="line">		match(boy);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Graph</category>
-        <category>Bipartite Graph</category>
+        <category>算法</category>
+        <category>图论</category>
+        <category>二分图</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19510,12 +19511,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -19531,11 +19532,11 @@ table th:first-of-type {
 <p>②和③可以合并为：当<code>j &gt; 1</code>时，<code>dp[i][j] = p21 * dp[i][j - 1] + c[j]</code>···········④<br>看起来好像dp[i][i]会影响到dp[i][j]，形成一个循环，不满足无后效性，但是我们不断用④代入①，最终会得到式子如下：<br><img src="/img/概率DP和高斯消元02.jpg" alt="20190518222358442.jpeg"><br>然后就可以每次先算出$dp[i][1]$再递推</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e3</span> + <span class="number">50</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS = <span class="number">1e-8</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> dp[MAXN][MAXN], c[MAXN], p[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, k;</span><br><span class="line">    <span class="keyword">double</span> p1, p2, p3, p4;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d%d%lf%lf%lf%lf"</span>, &amp;n, &amp;m, &amp;k, &amp;p1, &amp;p2, &amp;p3, &amp;p4))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(p4) &lt; EPS)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"0.00000\n"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p2 /= <span class="number">1</span> - p1;</span><br><span class="line">        p3 /= <span class="number">1</span> - p1;</span><br><span class="line">        p4 /= <span class="number">1</span> - p1;</span><br><span class="line">        p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        rep(i, <span class="number">1</span>, n + <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p[i] = p[i - <span class="number">1</span>] * p2;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">1</span>] = p4 / (<span class="number">1</span> - p2);</span><br><span class="line">        rep(i, <span class="number">2</span>, n + <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            c[<span class="number">1</span>] = p4;</span><br><span class="line">            rep(j, <span class="number">1</span>, i + <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j &lt;= k)</span><br><span class="line">                &#123;</span><br><span class="line">                    c[j] = p3 * dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + p4;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c[j] = p3 * dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">double</span> sum = c[<span class="number">1</span>];</span><br><span class="line">            rep(j, <span class="number">2</span>, i + <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += c[j] * p[i + <span class="number">1</span> - j];</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i][<span class="number">1</span>] = sum / (<span class="number">1</span> - p[i]);</span><br><span class="line">            rep(j, <span class="number">2</span>, i + <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j] = dp[i][j - <span class="number">1</span>] * p2 + c[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.5lf\n"</span>, dp[n][m]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19556,11 +19557,11 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19592,11 +19593,11 @@ table th:first-of-type {
 <h1 id="二维费用背包"><a href="#二维费用背包" class="headerlink" title="二维费用背包"></a>二维费用背包</h1><p><a href="https://ac.nowcoder.com/acm/contest/911/H" target="_blank" rel="noopener">新疆省赛-H</a><br>这题对每个数只需要考虑2和5的因数个数，把个数记为费用1，因数5的个数记为费用2，求能得到的最多因数2的个数。费用1的界就是k，费用2的界是前i个数中因数5的个数的总和</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLess(ele, init, lim) for(int ele = init; ele &lt; lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLE(ele, init, lim) for(int ele = init; ele &lt;= lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repMore(ele, init, lim) for(int ele = init; ele &gt; lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repME(ele, init, lim) for(int ele = init; ele &gt;= lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scInt(to) scanf(<span class="meta-string">"%d"</span>, &amp;to)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scTwoInt(one, two) scanf(<span class="meta-string">"%d%d"</span>, &amp;one, &amp;two)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scThreeInt(one, two, three) scanf(<span class="meta-string">"%d%d%d"</span>, &amp;one, &amp;two, &amp;three)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> clr(arr, init) memset(arr, init, sizeof(arr))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rc ((o &lt;&lt; 1) + 1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lc (o &lt;&lt; 1)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS = <span class="number">1e-8</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">205</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll a;</span><br><span class="line">    <span class="keyword">int</span> matchFive, matchEven;</span><br><span class="line">&#125; arr[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[MAXN][<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        repLess(i, <span class="number">0</span>, n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;arr[i].a);</span><br><span class="line">            arr[i].matchFive = arr[i].matchEven = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (arr[i].a % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                arr[i].matchEven++;</span><br><span class="line">                arr[i].a /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (arr[i].a % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                arr[i].matchFive++;</span><br><span class="line">                arr[i].a /= <span class="number">5</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        clr(dp, -INF);</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        repLess(i, <span class="number">0</span>, n)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += arr[i].matchFive;</span><br><span class="line">            repME(j, k, <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                repME(l, sum, arr[i].matchFive)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j][l] = max(dp[j - <span class="number">1</span>][l - arr[i].matchFive] + arr[i].matchEven, dp[j][l]);</span><br><span class="line">                    ans = max(min(l, dp[j][l]), ans);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19622,11 +19623,11 @@ table th:first-of-type {
 <h1 id="如果给的物品的价值不是定值"><a href="#如果给的物品的价值不是定值" class="headerlink" title="如果给的物品的价值不是定值"></a>如果给的物品的价值不是定值</h1><p>如果价值不是定值，如这题<a href="https://www.luogu.org/problemnew/show/P1417" target="_blank" rel="noopener">洛谷 P1417</a>，价值和时间有关，就不能直接套用01背包的模版了。01背包遍历物品从1到n表示的是每个物品在轮到被选择之前的所有选择都是正确的，由于01背包价值的固定性，并不在乎选择的顺序。但是这题不同，这题如果之前的选择不够优，就有可能在选择的时候由于暂时的dp值更大而而导致了如贪心算法一样的片面性，所以我们要保证在选择之前的正确性才可以开始按顺序选择。<br>考虑相邻两物品x,y。假设现在已经耗费p的时间，那么x、y先后做的价值：<br><code>a[x] - (p + c[x]) * b[x] + a[y] - (p + c[x] + c[y]) * b[y]</code>(先做x后做y)<br><code>a[y] - (p + c[y]) * b[y] + a[x] - (p + c[y] + c[x]) * b[x]</code>(先做y后做x)<br>为了让先考虑x再考虑y的顺序是最优解，我们就要让先x后y的价值更大，让1式&gt;2式解得：<code>c[x] * b[y] &lt; c[y] * b[x]</code>，先i项已经考虑过的物品就可以合成一个物品，所以我们只需要按这个顺序对物品进行排序，再按顺序求解就可以得到最优解<br>P.S. 最大值不一定出现在最大时间处</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll a, b, c;</span><br><span class="line">&#125; dish[MAXN];</span><br><span class="line">ll dp[MAXT];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(info a, info b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.c * b.b &lt; a.b * b.c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, n;</span><br><span class="line">    scTwoInt(t, n);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].a);</span><br><span class="line">    &#125;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].b);</span><br><span class="line">    &#125;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(dish + <span class="number">1</span>, dish + <span class="number">1</span> + n, cmp);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        repME(j, t, dish[i].c)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - dish[i].c] + dish[i].a - dish[i].b * j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    repLE(i, <span class="number">1</span>, t)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = max(ans, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Dynamic Programming</category>
+        <category>算法</category>
+        <category>动态规划</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19654,12 +19655,12 @@ table th:first-of-type {
 <h1 id="线段树基础三连"><a href="#线段树基础三连" class="headerlink" title="线段树基础三连"></a>线段树基础三连</h1><p>维护哪些值？<br>pushUp怎么写？<br>pushDown怎么写?</p>
 ]]></content>
       <categories>
-        <category>ACM</category>
-        <category>Data Structure</category>
-        <category>Range Problem</category>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>区间问题</category>
       </categories>
       <tags>
-        <tag>Algorithms</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -19668,11 +19669,11 @@ table th:first-of-type {
     <content><![CDATA[<p><img src="\img\高效休息法.png" alt=""></p>
 ]]></content>
       <categories>
-        <category>Books</category>
+        <category>看过的书</category>
       </categories>
       <tags>
-        <tag>Books</tag>
-        <tag>Rest Well</tag>
+        <tag>书</tag>
+        <tag>休息</tag>
       </tags>
   </entry>
   <entry>
@@ -19769,12 +19770,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -19881,7 +19882,7 @@ table th:first-of-type {
 <li>发生下溢时，当前节点的内部节点数一定是⎡m/2⎤ - 2</li>
 <li>若当前节点有一个左兄弟，且左兄弟的内部节点数至少是⎡m/2⎤，则父节点中的那个介于当前节点和其左兄弟之间的关键码移至当前节点的最前面，把左兄弟的最后一个关键码移至父节点刚刚被移至当前节点的关键码处顶替它留下的空缺<br><img src="/img/高级搜索树06.png" width="30%"></li>
 <li>若当前节点有一个右兄弟，且右兄弟的内部节点数至少是⎡m/2⎤</li>
-<li>若不满足以上条件，易知当前节点至少有一个兄弟，且该兄弟至多⎡m/2⎤ - 1个节点。所以我们可以把父节点中的那个介于当前节点和其某一个兄弟之间的关键码下移一层，把当前节点和其某一个兄弟节点连接起来，作为一个新的超级节点连接至父节点对应处，父节点也要删去一个对应的节点。注意，在这时父节点也有下溢的可能，重复处理<br><img src="/img/高级搜索树07.png" width="30%"></li>
+<li>若不满足以上条件，易知当前节点至少有一个兄弟，且该兄弟至多⎡m/2⎤ - 1个节点。所以我们可以把父节点中的那个介于当前节点和其某一个兄弟之间的关键码下移一层，把当前节点和其某一个兄弟节点连接起来，作为一个新的超级节点连接至父节点对应处，父节点也要删去一个对应的节点。注意，在这时父节点也有下溢的可能，重复处理<br> <img src="/img/高级搜索树07.png" width="30%"></li>
 <li>根节点没有下溢的可能，但当根节点只有唯一一个关键码而且根节点的两个孩子节点中有一个发生了下溢的时候根节点就会下移一层，和其两个孩子节点一起成为一个新的根节点。这是B-树高度降低的唯一途径</li>
 </ol>
 <h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="可持续化结构"><a href="#可持续化结构" class="headerlink" title="可持续化结构"></a>可持续化结构</h2><ol>
@@ -19959,12 +19960,12 @@ table th:first-of-type {
 <p>综上，红黑树满足可持续化结构的要求</p>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Data Structure (Tsinghua Deng)</category>
+        <category>计算机科学与技术</category>
+        <category>数据结构 (清华大学邓俊辉)</category>
       </categories>
       <tags>
-        <tag>Theory</tag>
-        <tag>Data Structure</tag>
+        <tag>理论</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -19991,12 +19992,12 @@ table th:first-of-type {
 </ol>
 ]]></content>
       <categories>
-        <category>Computer Science</category>
-        <category>Machine Learning (Watermelon)</category>
+        <category>计算机科学与技术</category>
+        <category>机器学习 (西瓜书)</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
-        <tag>Artificial Intelligence</tag>
+        <tag>机器学习</tag>
+        <tag>人工智能</tag>
       </tags>
   </entry>
   <entry>

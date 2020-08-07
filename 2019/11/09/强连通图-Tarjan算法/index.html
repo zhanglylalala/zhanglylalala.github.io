@@ -55,9 +55,9 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="概念强连通：如果a点和b点可互达，则称a和b强连通强连通图：如果一个图中的任意两个点之间都是强连通，则称该图为强连通图强连通分量：一个图的子图是一个强连通图，则称该子图就是原图的一个强连通分量 Tarjan算法需要存储的信息：首先肯定要有一个邻接表&#x2F;邻接矩阵来存储边的信息，一个DFN数组存储该点的访问时间戳(即第几个被访问)，还要有一个low数组储存在一个强连通分量中根节点的的时间戳，还要有一个栈">
 <meta property="article:published_time" content="2019-11-08T16:46:44.000Z">
-<meta property="article:modified_time" content="2019-11-08T16:47:04.610Z">
+<meta property="article:modified_time" content="2020-08-07T09:43:42.915Z">
 <meta property="article:author" content="LiyunZhang">
-<meta property="article:tag" content="Algorithms">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://http//www.laughingtree.cn/2019/11/09/%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%9B%BE-Tarjan%E7%AE%97%E6%B3%95/">
@@ -137,12 +137,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">36</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -218,30 +218,36 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-11-09 00:46:44 / Modified: 00:47:04" itemprop="dateCreated datePublished" datetime="2019-11-09T00:46:44+08:00">2019-11-09</time>
+              <time title="Created: 2019-11-09 00:46:44" itemprop="dateCreated datePublished" datetime="2019-11-09T00:46:44+08:00">2019-11-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 17:43:42" itemprop="dateModified" datetime="2020-08-07T17:43:42+08:00">2020-08-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Graph/" itemprop="url" rel="index">
-                    <span itemprop="name">Graph</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ACM/Graph/Others/" itemprop="url" rel="index">
-                    <span itemprop="name">Others</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
                   </a>
                 </span>
             </span>
@@ -271,7 +277,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Algorithms/" rel="tag"><i class="fa fa-tag"></i> Algorithms</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
           </div>
 
         
@@ -368,13 +374,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
