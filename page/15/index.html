@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">36</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,99 +187,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95-Dijkstra%E3%80%81Bellman-Ford%E3%80%81SPFA%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95-Dijkstra%E3%80%81Bellman-Ford%E3%80%81SPFA%E9%82%BB%E6%8E%A5%E8%A1%A8%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">最短路算法(Dijkstra、Bellman-Ford、SPFA邻接表实现)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 23:58:41" itemprop="dateCreated datePublished" datetime="2019-11-08T23:58:41+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:39:29" itemprop="dateModified" datetime="2020-08-07T17:39:29+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">图</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" itemprop="url" rel="index">
-                    <span itemprop="name">最短路径</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>邻接矩阵实现起来比较简单，但对空间的利用效率不高，常常会导致内存超限的MLE，此时就应当改用邻接表实现，省去不必要的边，减小内存消耗</p>
-<h1 id="邻接表的构造"><a href="#邻接表的构造" class="headerlink" title="邻接表的构造"></a>邻接表的构造</h1><p>邻接表都是利用Vector替换原来的map数组实现的。由于邻接表的本质是存储边，所以我们还要定义一个结构体，包含两个值，一个是这条路的终点，一个是这条路的长度。开一个向量数组，一个点一个向量，每次都把与那个点相关的点加如向量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to, dist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;info&gt; <span class="built_in">map</span>[maxn];</span><br></pre></td></tr></table></figure>
-<h1 id="Dijkstra的邻接表实现"><a href="#Dijkstra的邻接表实现" class="headerlink" title="Dijkstra的邻接表实现"></a>Dijkstra的邻接表实现</h1><p>Dij算法的邻接表和邻接矩阵相比，差异只在于更新各点到起点的距离。由于是邻接表，所以那个循环枚举的是边，而不是想邻接矩阵那样枚举点，就不必想邻接矩阵那样判断是否存在边。将x点的向量map[x]从头枚举到尾，每一个元素的to值就是可以到的终点，dist值就是距离<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">	<span class="built_in">fill</span>(dist, dist + n + <span class="number">1</span>, INF);</span><br><span class="line">	dist[start] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mini = INF, x;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[j] &lt; mini &amp;&amp; !vis[j])</span><br><span class="line">			&#123;</span><br><span class="line">				mini = dist[j];</span><br><span class="line">				x = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		vis[x] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//以下才开始变化</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[x].<span class="built_in">size</span>(); j++) <span class="comment">//枚举map[x]里的所有元素</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[<span class="built_in">map</span>[x][j].to] &lt; dist[x] + <span class="built_in">map</span>[x][j].dist)</span><br><span class="line">			&#123;</span><br><span class="line">				dist[<span class="built_in">map</span>[x][j].to] = dist[x] + <span class="built_in">map</span>[x][j].dist;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="Bellman-Ford算法的邻接表实现"><a href="#Bellman-Ford算法的邻接表实现" class="headerlink" title="Bellman-Ford算法的邻接表实现"></a>Bellman-Ford算法的邻接表实现</h1><p>和Dij一样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bellmanFord</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n - <span class="number">1</span> &amp;&amp; !flag; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">				&#123;</span><br><span class="line">					flag = <span class="literal">true</span>;</span><br><span class="line">					dist[<span class="built_in">map</span>[i][j].to] = dist[i] + <span class="built_in">map</span>[i][j].dist;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">negLoop</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="built_in">map</span>[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dist[<span class="built_in">map</span>[i][j].to] &lt; dist[i] + <span class="built_in">map</span>[i][j].dist)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    que.push(start);</span><br><span class="line">    dist[start] = <span class="number">0</span>;</span><br><span class="line">    vis[start] = enqueue_num[start] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        x = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        vis[x] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(enqueue_num[x] &gt; n)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mp[x].<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> i = mp[x][j].to;</span><br><span class="line">            <span class="keyword">if</span>(dist[x] + mp[x][j].dist &lt; dist[i])</span><br><span class="line">            &#123;</span><br><span class="line">                dist[i] = dist[x] + mp[x][j].dist;</span><br><span class="line">                <span class="keyword">if</span>(!vis[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    que.push(i);</span><br><span class="line">                    vis[i] = <span class="number">1</span>;</span><br><span class="line">                    enqueue_num[i]++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -488,7 +395,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E5%BF%AB%E9%80%9F%E7%9F%A9%E9%98%B5%E5%B9%82/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E5%BF%AB%E9%80%9F%E5%B9%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -502,7 +409,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/08/%E5%BF%AB%E9%80%9F%E7%9F%A9%E9%98%B5%E5%B9%82/" class="post-title-link" itemprop="url">快速矩阵幂</a>
+            <a href="/2019/11/08/%E5%BF%AB%E9%80%9F%E5%B9%82/" class="post-title-link" itemprop="url">快速幂</a>
         </h1>
 
         <div class="post-meta">
@@ -519,7 +426,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:54:29" itemprop="dateModified" datetime="2020-08-07T19:54:29+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 20:20:40" itemprop="dateModified" datetime="2020-08-07T20:20:40+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -533,8 +440,14 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/" itemprop="url" rel="index">
+                    <span itemprop="name">算法竞赛进阶指南</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E8%BF%9B%E9%98%B6%E6%8C%87%E5%8D%97/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
                   </a>
                 </span>
             </span>
@@ -618,7 +531,10 @@
 <p>矩阵幂：原理同数幂，单要先构造的是单位矩阵</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">quickPow</span><span class="params">(Matrix base, <span class="keyword">int</span> <span class="built_in">pow</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix ans;</span><br><span class="line">	ans.init();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)</span><br><span class="line">			ans = mul(ans, base);</span><br><span class="line">		base = mul(base, base);</span><br><span class="line">		<span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>矩阵的构造：<br>首先一点，只有方阵才可以使用快速矩阵幂，故我们的目标就是构造出方阵<br>我们先得有一个递推式，然后就可以根据这个递推式来构造出矩阵<br>&emsp;矩阵乘法的另一视角：操作矩阵和基础矩阵<br>&emsp;&emsp;操作矩阵在右边就是对列进行操作，在左边就是对行进行操作。以在左边对行操作为例，操作矩阵的第i行操作后的结果就是结果矩阵的第i行，操作矩阵第i行的第j个元素就是基础矩阵的第j行乘以该元素的数值，再把基础矩阵所有行如此操作后相加得到结果矩阵的第i行<br>&emsp;如：<br />$\left[\begin{matrix}1&amp;2\\3&amp;4 \end{matrix}\right]\times\left[\begin{matrix}4&amp;3\\2&amp;1 \end{matrix}\right]=\left[\begin{matrix}1\times\left[\begin{matrix}4&amp;3 \end{matrix}\right]+2\times\left[\begin{matrix}2&amp;1 \end{matrix}\right]\\3\times\left[\begin{matrix}4&amp;3 \end{matrix}\right]+2\times\left[\begin{matrix}2&amp;1 \end{matrix}\right] \end{matrix}\right]=\left[\begin{matrix}1\times4+2\times2&amp;1\times3+2\times1\\3\times4+4\times2&amp;3\times3+4\times1 \end{matrix}\right]=\left[\begin{matrix}8&amp;5\\20&amp;13 \end{matrix}\right]$<br /></p>
-<p>我们可以利用递推式，把要求的放在结果矩阵中，需要用到的放在基础矩阵中，在凑出其余项。如我们要求斐波那契数列，已知f(n) = f(n-1) + f(n-2)，则f(n)一定在结果矩阵中，f(n-1)、f(n-2)一定在基础矩阵中。得到 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}? \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>又由递推式得 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}1&amp;1 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>此时还不能用快速矩阵幂，故我们要凑出方阵得 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>再递推下去得到 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]^{n-1}\times\left[\begin{matrix}f(1)\\f(2) \end{matrix}\right]$<br>然后就可以用矩阵幂在O(log n)内解得斐波那契数列的第n项</p>
+<p>我们可以利用递推式，把要求的放在结果矩阵中，需要用到的放在基础矩阵中，在凑出其余项。如我们要求斐波那契数列，已知f(n) = f(n-1) + f(n-2)，则f(n)一定在结果矩阵中，f(n-1)、f(n-2)一定在基础矩阵中。得到 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}? \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>又由递推式得 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}1&amp;1 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>此时还不能用快速矩阵幂，故我们要凑出方阵得 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>再递推下去得到 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]^{n-1}\times\left[\begin{matrix}f(1)\\f(2) \end{matrix}\right]$<br>然后就可以用矩阵幂在<script type="math/tex">O(log\ n)</script>内解得斐波那契数列的第n项</p>
+<h1 id="快速求一个分数的第k位"><a href="#快速求一个分数的第k位" class="headerlink" title="快速求一个分数的第k位"></a>快速求一个分数的第k位</h1><p>利用快速幂，把分子放大$10^{k-1}$，对分母取模后再乘$10$除分母就可以得到第$k$位<br><a href="https://ac.nowcoder.com/acm/contest/548/B" target="_blank" rel="noopener">牛客网练习赛43 - B</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">qpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> <span class="built_in">pow</span>, <span class="keyword">long</span> <span class="keyword">long</span> mod)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)</span><br><span class="line">            ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        <span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> m, n, k1, k2;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>, &amp;m, &amp;n, &amp;k1 ,&amp;k2);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ans = m * qpow(<span class="number">10</span>, k1 - <span class="number">1</span>, n) % n; <span class="comment">//把分子放大10^(K-1)，对分母取模</span></span><br><span class="line">        <span class="keyword">while</span>(k1 &lt;= k2)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">//乘10除分母</span></span><br><span class="line">            ans = ans * <span class="number">10</span>;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans / n);</span><br><span class="line">            ans = ans % n;</span><br><span class="line">            k1++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="求k步可重复走，从一个点到另一个点的路径总数"><a href="#求k步可重复走，从一个点到另一个点的路径总数" class="headerlink" title="求k步可重复走，从一个点到另一个点的路径总数"></a>求k步可重复走，从一个点到另一个点的路径总数</h1><p><a href="https://ac.nowcoder.com/acm/contest/549/E" target="_blank" rel="noopener">牛客网 小白月赛13-E</a><br>先常规建图，再对邻接矩阵求$k$次幂，这时的$graph[i][j]$表示从$i$到$j$的路径总数</p>
 
       
     </div>
@@ -2809,6 +2725,99 @@ table th:first-of-type {
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/27/16-More-Segue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/27/16-More-Segue/" class="post-title-link" itemprop="url">16. More Segue</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-27 15:58:49" itemprop="dateCreated datePublished" datetime="2019-08-27T15:58:49+08:00">2019-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:27:14" itemprop="dateModified" datetime="2020-08-07T19:27:14+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Modal-Segue"><a href="#Modal-Segue" class="headerlink" title="Modal Segue"></a>Modal Segue</h1><h2 id="Set-A-Modal-Segue-Up"><a href="#Set-A-Modal-Segue-Up" class="headerlink" title="Set A Modal Segue Up"></a>Set A Modal Segue Up</h2><ol>
+<li>Just ctrl-drag from a button to another View Controller &amp; pick segue type “Modal”. </li>
+<li>If you need to present a Modal View Controller not from a button, use a manual segue with <code>performSegue</code>. </li>
+<li>If you have the View Controller itself (e.g. Alerts or from instantiateViewController), you can use the <code>present</code> to perform it directly. </li>
+<li>You prepare for a Modal segue just like any other segue.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/27/16-More-Segue/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -2880,14 +2889,14 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
