@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="离散化 把所有数据排序去重之后，从第一个开始逐一往后标记，把每一个数据和一个整数一一对应 排序之后再离散化可以保留原始数据的大小关系，不必查询原数据，就可以直接从Hash后的值得到其大小关系  中位数 在有序序列中，若下标是从$1$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n+1}{2}$，总共有偶数个数时，中位数是下标为$\displaystyle\fr">
 <meta property="article:published_time" content="2020-08-07T14:41:49.000Z">
-<meta property="article:modified_time" content="2020-08-08T03:10:56.110Z">
+<meta property="article:modified_time" content="2020-08-08T05:58:14.010Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-08 11:10:56" itemprop="dateModified" datetime="2020-08-08T11:10:56+08:00">2020-08-08</time>
+                <time title="Modified: 2020-08-08 13:58:14" itemprop="dateModified" datetime="2020-08-08T13:58:14+08:00">2020-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,10 +263,33 @@
 </ol>
 <h1 id="中位数"><a href="#中位数" class="headerlink" title="中位数"></a>中位数</h1><ol>
 <li>在有序序列中，若下标是从$1$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n+1}{2}$，总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}{2}+1$与$\displaystyle\frac{n}{2}$的数之间的数；若下标是从$0$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n-1}{2}$，当总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}2-1$与$\displaystyle\frac{n}{2}$</li>
+<li>在一个数组中考虑$\displaystyle\sum |a[i]-x|$的最小值。假设在数轴中$a$数组有$P$个数比$x$小，有$Q$个数比$x$大<br />若$P<Q$，则每把$x+1$，要求的值都会减小$Q-P$<br />若$P&gt;Q$，则每把$x-1$，要求的值都会减小$P-Q$<br />所以使得$\displaystyle\sum|a[i]-x|$最小的$x$就是$a$数组的中位数，若$a$数组有偶数个元素，则$x$为两个中位数之间的任意数，若有奇数个元素，则$x$为中位数本身</li>
 </ol>
-<h1 id="环形均分纸牌问题"><a href="#环形均分纸牌问题" class="headerlink" title="环形均分纸牌问题"></a>环形均分纸牌问题</h1><ol>
-<li>环形均分纸牌问题只是在均分纸牌问题上取消一个限制，最后一个人可以把纸牌给第$1$个人</li>
-<li></li>
+<h2 id="环形均分纸牌问题"><a href="#环形均分纸牌问题" class="headerlink" title="环形均分纸牌问题"></a>环形均分纸牌问题</h2><ol>
+<li>环形均分纸牌问题只是在<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">均分纸牌问题</a>上取消一个限制，最后一个人可以把纸牌给第$1$个人</li>
+<li>从均分纸牌问题的推导中，我们可以知道必然有一个人不用给任何人纸牌，这个人就可以被看作是均分纸牌问题中的最后一个人，即环形链从这个人断开。在环形均分纸牌问题中，我们只需要枚举每一个人作为最后一个人的情况，取其结果的最小值就是答案</li>
+<li>先给每个人从$1$号标到$M$号，记$A[1\sim M]=C[i\sim M]-\displaystyle\frac{T}M$，$A$数组的前缀和$sum[1\sim M]$，则当第$k$个人为最后一个人，链从这里断开时，前缀和<br />$sum_k[k+1]=sum[k+1]-sum[k]$<br />$sum_k[k+2]=sum[k+2]-sum[k]$<br />$…$<br />$sum_k[M]=sum[M]-sum[k]$<br />$sum_k[1]=sum[1]+sum_k[M]=sum[1]+sum[M]-sum[k]$<br />$sum_k[M]=sum[k]+sum[M]-sum[k]=sum[M]$</li>
+<li>故答案为$\displaystyle\sum^M_{i=1}\bigg|sum[i]-sum[k]\bigg|$的最小值，即为$sum$数组的中位数</li>
+</ol>
+<h2 id="动态维护中位数"><a href="#动态维护中位数" class="headerlink" title="动态维护中位数"></a>动态维护中位数</h2><ol>
+<li><p>在线的做法是对顶堆算法</p>
+</li>
+<li><p>把序列中从小到大的$1\sim\displaystyle\frac{M}2+1$都存储在大根堆中，$\displaystyle\frac{M}2+2\sim M$存储在小根堆中<br />小根堆中共有$\displaystyle\frac{M}2+1$个数，大根堆中一共有$\displaystyle\frac{M}2-1$个元素</p>
+</li>
+<li><p>每读入一个数，如果比大根堆的堆顶元素小，则推入大根堆，否则推入小根堆。如果有一个堆的大小不符合要求的，就把太大的那个堆的堆顶元素弹出，推入另一个堆中</p>
+</li>
+<li><p>中位数就是小根堆的堆顶元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; large;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; small;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">median</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> inp;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">    <span class="comment">// 推入堆中</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() == <span class="number">0</span> || inp &lt; large.top())</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      small.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 维护堆</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() &gt; i / <span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      small.push(large.top());</span><br><span class="line">      large.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (small.<span class="built_in">size</span>() &gt; i / <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(small.top());</span><br><span class="line">      small.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当有奇数个输入时，输出中位数</span></span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, large.top());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="逆序对"><a href="#逆序对" class="headerlink" title="逆序对"></a>逆序对</h1><ol>
+<li><p>在冒泡排序中，每一次交换就是修复一对逆序对，所以冒泡排序中的交换次数就是逆序对数</p>
+</li>
+<li><p>但是冒泡排序的复杂度是$O(n^2)$，相对较高，可以利用归并排序优化</p>
+</li>
+<li><p>在归并排序的归并过程中$loPtr$指向当前正在排序数组段的前半段中正在比较的数，$hiPtr$指向后半段正在比较的数。若$hiPtr$指向的数小于$loPtr$指向的数，则$hiPtr$指向的数与从$loPtr$到$mid$之间的所有数都构成逆序对</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN], tmp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo == hi - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = mergeSort(lo, mid) + mergeSort(mid, hi);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt; mid; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tmpPtr = lo, hiPtr = mid, arrPtr = lo;</span><br><span class="line">    <span class="keyword">while</span> (arrPtr &lt; hi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (tmpPtr == mid || (hiPtr != hi &amp;&amp; tmp[tmpPtr] &gt; arr[hiPtr]))</span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = arr[hiPtr++];</span><br><span class="line">            ans += mid - tmpPtr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = tmp[tmpPtr++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
     </div>
@@ -353,7 +376,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#离散化"><span class="nav-number">1.</span> <span class="nav-text">离散化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中位数"><span class="nav-number">2.</span> <span class="nav-text">中位数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环形均分纸牌问题"><span class="nav-number">3.</span> <span class="nav-text">环形均分纸牌问题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#离散化"><span class="nav-number">1.</span> <span class="nav-text">离散化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中位数"><span class="nav-number">2.</span> <span class="nav-text">中位数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环形均分纸牌问题"><span class="nav-number">2.1.</span> <span class="nav-text">环形均分纸牌问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态维护中位数"><span class="nav-number">2.2.</span> <span class="nav-text">动态维护中位数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逆序对"><span class="nav-number">3.</span> <span class="nav-text">逆序对</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -473,6 +496,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
