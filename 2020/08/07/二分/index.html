@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="基本二分查找1234567891011121314151617181920212223242526272829303132333435int arr[MAXN];&#x2F;&#x2F; arr按非降排序int binary_search_int(int lo, int hi, int target) &#x2F;&#x2F; 查找区间为 [lo, hi)&amp;#123;  while (lo &lt; hi)  &amp;#123;    int">
 <meta property="article:published_time" content="2020-08-07T14:42:19.000Z">
-<meta property="article:modified_time" content="2020-08-07T15:51:45.258Z">
+<meta property="article:modified_time" content="2020-08-08T11:33:42.819Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -218,10 +218,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-08-07 22:42:19 / Modified: 23:51:45" itemprop="dateCreated datePublished" datetime="2020-08-07T22:42:19+08:00">2020-08-07</time>
+              <time title="Created: 2020-08-07 22:42:19" itemprop="dateCreated datePublished" datetime="2020-08-07T22:42:19+08:00">2020-08-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-08 19:33:42" itemprop="dateModified" datetime="2020-08-08T19:33:42+08:00">2020-08-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -366,7 +372,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -471,6 +477,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="问题描述最大权匹配是在完美匹配的前提下，使得所选的匹配边权值之和最大，是稳定二分图的进阶版。和稳定婚姻匹配的区别在于二分图最大权匹配不存在私奔的问题，故只需考虑匹配和权最大。 KM算法数据存储：两个一维数组expectBoy、expectGirl来存储Boy和Girl对对方的期望值，一个一维数组boyMatch存储Boy的匹配对象，两个一维数组visBoy、visGirl存储在该轮匹配中是否访问，">
+  <meta name="description" content="问题描述最大权匹配是在完美匹配的前提下，使得所选的匹配边权值之和最大，是稳定二分图的进阶版。和稳定婚姻匹配的区别在于二分图最大权匹配不存在私奔的问题，故只需考虑匹配和权最大。 KM算法数据存储：两个一维数组$expectBoy$、$expectGirl$来存储$Boy$和$Girl$对对方的期望值，一个一维数组$boyMatch$存储$Boy$的匹配对象，两个一维数组$visBoy$、$visGi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分图最大权匹配">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%9D%83%E5%8C%B9%E9%85%8D/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="问题描述最大权匹配是在完美匹配的前提下，使得所选的匹配边权值之和最大，是稳定二分图的进阶版。和稳定婚姻匹配的区别在于二分图最大权匹配不存在私奔的问题，故只需考虑匹配和权最大。 KM算法数据存储：两个一维数组expectBoy、expectGirl来存储Boy和Girl对对方的期望值，一个一维数组boyMatch存储Boy的匹配对象，两个一维数组visBoy、visGirl存储在该轮匹配中是否访问，">
+<meta property="og:description" content="问题描述最大权匹配是在完美匹配的前提下，使得所选的匹配边权值之和最大，是稳定二分图的进阶版。和稳定婚姻匹配的区别在于二分图最大权匹配不存在私奔的问题，故只需考虑匹配和权最大。 KM算法数据存储：两个一维数组$expectBoy$、$expectGirl$来存储$Boy$和$Girl$对对方的期望值，一个一维数组$boyMatch$存储$Boy$的匹配对象，两个一维数组$visBoy$、$visGi">
 <meta property="article:published_time" content="2019-11-08T16:10:58.000Z">
-<meta property="article:modified_time" content="2020-08-07T14:30:33.405Z">
+<meta property="article:modified_time" content="2020-08-08T11:35:22.418Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:30:33" itemprop="dateModified" datetime="2020-08-07T22:30:33+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-08 19:35:22" itemprop="dateModified" datetime="2020-08-08T19:35:22+08:00">2020-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,14 +264,14 @@
 
       
         <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>最大权匹配是在<code>完美匹配</code>的前提下，使得所选的匹配边权值之和最大，是稳定二分图的进阶版。和稳定婚姻匹配的区别在于二分图最大权匹配不存在私奔的问题，故只需考虑匹配和权最大。</p>
-<h1 id="KM算法"><a href="#KM算法" class="headerlink" title="KM算法"></a>KM算法</h1><p><strong>数据存储</strong>：两个一维数组expectBoy、expectGirl来存储Boy和Girl对对方的期望值，一个一维数组boyMatch存储Boy的匹配对象，两个一维数组visBoy、visGirl存储在该轮匹配中是否访问，一个一维数组differ存储男生匹配到女生的期望值差距，一个二维数组love存储两人间的好感度</p>
+<h1 id="KM算法"><a href="#KM算法" class="headerlink" title="KM算法"></a>KM算法</h1><p><strong>数据存储</strong>：两个一维数组$expectBoy$、$expectGirl$来存储$Boy$和$Girl$对对方的期望值，一个一维数组$boyMatch$存储$Boy$的匹配对象，两个一维数组$visBoy$、$visGirl$存储在该轮匹配中是否访问，一个一维数组$differ$存储男生匹配到女生的期望值差距，一个二维数组$love$存储两人间的好感度</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> expectGirl[maxn], expectBoy[maxn], boyMatch[maxn];</span><br><span class="line"><span class="keyword">int</span> visBoy[maxn], visGirl[maxn], differ[maxn];</span><br><span class="line"><span class="keyword">int</span> love[maxn][maxn];</span><br></pre></td></tr></table></figure>
-<p><strong>初始化</strong>：初始时，expectBoy全部初始化为0，expectGirl初始化为该女生喜欢的男生中好感度最高的那个好感值(谁在一开始都希望得到最好的)，boyMatch全部初始化为-1，differ初始化为INF，visBoy、visGirl在每一轮的匹配开始都要初始化为0<br><strong>处理</strong>：<br>&emsp;1、匹配的DFS和二分图匹配一样，但是匹配要多一个条件就是男生和女生的期待值之和要等于两人间的好感度，即<code>expectBoy[boy] + expectGirl[girl] ==  love[girl][boy]</code><br>&emsp;2、由第一条规则可以得知要求的最终最大权和就是男女的期望值和<br>&emsp;3、如果有一个女生试图匹配男生失败了，那个参与这次匹配的女生们就应该降低她们的期待值来得到牺牲自己让更多的人匹配到男生，而参与这次匹配的男生就应该提升期待值，保持和其匹配女生的期待值之和不变。而因为要得到最大的权值和，而此时男生一定比女生少一个，所以应该降低尽可能小的值，以减少权值的损失。而期待值只需降低至可以再拉一个为参加匹配的男生进来即可<br>&emsp;4、一个女生可能会匹配失败多次，所以要不断循环第三步直到成功<br>&emsp;5、每个女生都要匹配到</p>
+<p><strong>初始化</strong>：初始时，$expectBoy$全部初始化为$0$，$expectGirl$初始化为该女生喜欢的男生中好感度最高的那个好感值(谁在一开始都希望得到最好的)，$boyMatch$全部初始化为$-1$，$differ$初始化为$INF$，$visBoy$、$visGirl$在每一轮的匹配开始都要初始化为$0$<br><strong>处理</strong>：<br>&emsp;1、匹配的DFS和二分图匹配一样，但是匹配要多一个条件就是男生和女生的期待值之和要等于两人间的好感度，即$expectBoy[boy] + expectGirl[girl] ==  love[girl][boy]$<br>&emsp;2、由第一条规则可以得知要求的最终最大权和就是男女的期望值和<br>&emsp;3、如果有一个女生试图匹配男生失败了，那个参与这次匹配的女生们就应该降低她们的期待值来得到牺牲自己让更多的人匹配到男生，而参与这次匹配的男生就应该提升期待值，保持和其匹配女生的期待值之和不变。而因为要得到最大的权值和，而此时男生一定比女生少一个，所以应该降低尽可能小的值，以减少权值的损失。而期待值只需降低至可以再拉一个为参加匹配的男生进来即可<br>&emsp;4、一个女生可能会匹配失败多次，所以要不断循环第三步直到成功<br>&emsp;5、每个女生都要匹配到</p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>DFS：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> girl, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    visGirl[girl] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!visBoy[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//男生和女生的期待值之和与两人间的好感度之差</span></span><br><span class="line">            <span class="keyword">int</span> gap = expectBoy[i] + expectGirl[girl] - love[girl][i];</span><br><span class="line">            <span class="keyword">if</span>(gap == <span class="number">0</span>) <span class="comment">//若差为0，即相等</span></span><br><span class="line">            &#123;</span><br><span class="line">                visBoy[i] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(boyMatch[i] == <span class="number">-1</span> || DFS(boyMatch[i], n))</span><br><span class="line">                &#123;</span><br><span class="line">                    boyMatch[i] = girl;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">//差不为0，则男生和女生之间有差距，取差距的最小值</span></span><br><span class="line">                differ[i] = <span class="built_in">min</span>(differ[i], gap);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>主算法：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KM</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="built_in">memset</span>(boyMatch, <span class="number">-1</span>, <span class="keyword">sizeof</span>(boyMatch));</span><br><span class="line">    <span class="built_in">memset</span>(expectBoy, <span class="number">0</span>, <span class="keyword">sizeof</span>(expectBoy));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        expectGirl[i] = love[i][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">            expectGirl[i] = <span class="built_in">max</span>(expectGirl[i], love[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//为每个女生找对象</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">fill</span>(differ, differ + n, INF);</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>) <span class="comment">//不断找，直到找到对象</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memset</span>(visBoy, <span class="number">0</span>, <span class="keyword">sizeof</span>(visBoy));</span><br><span class="line">            <span class="built_in">memset</span>(visGirl, <span class="number">0</span>, <span class="keyword">sizeof</span>(visGirl));</span><br><span class="line">            <span class="keyword">if</span>(DFS(i, n)) <span class="comment">//成功了</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//失败了，查找降低的最小标准</span></span><br><span class="line">            <span class="keyword">int</span> gap = INF;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">                <span class="keyword">if</span>(!visBoy[j])</span><br><span class="line">                    gap = <span class="built_in">min</span>(gap, differ[j]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(visGirl[j]) <span class="comment">//降低所有参与匹配的女生的期望</span></span><br><span class="line">                    expectGirl[j] -= gap;</span><br><span class="line">                <span class="keyword">if</span>(visBoy[j]) <span class="comment">//降低所有参与匹配的女生的期望</span></span><br><span class="line">                    expectBoy[j] += gap;</span><br><span class="line">                <span class="keyword">else</span> <span class="comment">//没参与的因为女生期望降低，差距也减少</span></span><br><span class="line">                    differ[j] -= gap;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        ans += love[boyMatch[i]][i];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="最小权"><a href="#最小权" class="headerlink" title="最小权"></a>最小权</h1><p>把权值取相反数，再用KM算法求</p>
+<h1 id="最小权"><a href="#最小权" class="headerlink" title="最小权"></a>最小权</h1><p>把权值取相反数，再用$KM$算法求</p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>最大权：<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2255" target="_blank" rel="noopener">HDOJ 2255(奔小康赚大钱)</a><br><a href="http://codeforces.com/problemset/problem/1107/F" target="_blank" rel="noopener">CF 1107F(Vasya and Endless Credits)</a><br>最小权：<br><a href="https://vjudge.net/problem/POJ-3565" target="_blank" rel="noopener">POJ 3656(Ants)</a><br><a href="https://vjudge.net/problem/POJ-2195" target="_blank" rel="noopener">POJ 2195(Going Home)</a></p>
 
     </div>
@@ -373,7 +373,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -478,6 +478,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 

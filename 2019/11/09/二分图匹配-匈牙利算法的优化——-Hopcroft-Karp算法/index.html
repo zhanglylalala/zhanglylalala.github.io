@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="匈牙利算法的不足匈牙利算法在进行DFS时，没次都最多只能找到一条增广路，导致了我们要遍历所有的点和边才可以找到最大匹配。而Hopcroft-Karp算法就从这里开始改进——每次先通过BFS标出层次，再通过DFS验证增广路，可以一次找到多条路 Hopcroft-Karp算法1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化&amp;emsp;增广路都是从一个">
 <meta property="article:published_time" content="2019-11-08T16:08:35.000Z">
-<meta property="article:modified_time" content="2020-08-07T14:30:19.372Z">
+<meta property="article:modified_time" content="2020-08-08T11:38:42.958Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:30:19" itemprop="dateModified" datetime="2020-08-07T22:30:19+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-08 19:38:42" itemprop="dateModified" datetime="2020-08-08T19:38:42+08:00">2020-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,9 +264,9 @@
 
       
         <h1 id="匈牙利算法的不足"><a href="#匈牙利算法的不足" class="headerlink" title="匈牙利算法的不足"></a>匈牙利算法的不足</h1><p>匈牙利算法在进行DFS时，没次都最多只能找到一条增广路，导致了我们要遍历所有的点和边才可以找到最大匹配。而Hopcroft-Karp算法就从这里开始改进——每次先通过BFS标出层次，再通过DFS验证增广路，可以一次找到多条路</p>
-<h1 id="Hopcroft-Karp算法"><a href="#Hopcroft-Karp算法" class="headerlink" title="Hopcroft-Karp算法"></a>Hopcroft-Karp算法</h1><p>1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化<br>&emsp;增广路都是从一个未匹配点开始，我们就只需要在开始的时候把所有的未匹配点推入队列<br>&emsp;增广路都是在另一个未匹配点结束，我们就只需标记到另一个未匹配点所在的那层即可<br>&emsp;<strong>数据存储</strong>：map存边，dN和dM分别表示N点集和M点集中各个点的层次，matchN、matchM分别存储点集N和点集M的匹配情况，整型全局变量dist表示当前遍历的最大层次同时标记还有没有增广路</p>
+<h1 id="Hopcroft-Karp算法"><a href="#Hopcroft-Karp算法" class="headerlink" title="Hopcroft-Karp算法"></a>Hopcroft-Karp算法</h1><p>1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化<br>&emsp;增广路都是从一个未匹配点开始，我们就只需要在开始的时候把所有的未匹配点推入队列<br>&emsp;增广路都是在另一个未匹配点结束，我们就只需标记到另一个未匹配点所在的那层即可<br>&emsp;<strong>数据存储</strong>：$map$存边，$dN$和$dM$分别表示$N$点集和$M$点集中各个点的层次，$matchN$、$matchM$分别存储点集$N$和点集$M$的匹配情况，整型全局变量$dist$表示当前遍历的最大层次同时标记还有没有增广路</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxN][maxM], dN[maxN], dM[maxM], matchN[maxN], matchM[maxM];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span>  <span class="comment">//n是点集N的个数，m是点集M的个数，这里假设从点集N去匹配点集M</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	dist = INF;</span><br><span class="line">	<span class="built_in">memset</span>(dN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dN));</span><br><span class="line">	<span class="built_in">memset</span>(dM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dM));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//所以未匹配点都加入队列</span></span><br><span class="line">		<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			que.push(i);</span><br><span class="line">			dN[i] = <span class="number">0</span>;  <span class="comment">//这些未匹配点都是起点，所以是第0层</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> dotN = que.front();</span><br><span class="line">		que.pop();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//根据BFS的性质，当出现第一个超出遍历层数的点出现，之后的点都会超出，不必再继续遍历</span></span><br><span class="line">		<span class="keyword">if</span>(dN[dotN] &gt; dist)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == <span class="number">-1</span>) <span class="comment">//相连且没有遍历过</span></span><br><span class="line">			&#123;</span><br><span class="line">				dM[dotM] = dN[dotN] + <span class="number">1</span>; <span class="comment">//dotN再走一步就可以到dotM，所以dotM的层数就是dotN加一</span></span><br><span class="line">				<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span>) <span class="comment">//如果是未匹配点，遍历到这层就结束</span></span><br><span class="line">				&#123;</span><br><span class="line">					dist = dM[dotM]; <span class="comment">//这次遍历到最大层数</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="comment">//如果是匹配点</span></span><br><span class="line">				&#123;</span><br><span class="line">					dN[matchM[dotM]] = dM[dotM] + <span class="number">1</span>;</span><br><span class="line">					que.push(matchM[dotM]); <span class="comment">//队列里装的永远都是点集N里的点</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dist != INF; <span class="comment">//如果dist == INF就说明没有增广路路，可以结束循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、DFS验证增广路：和匈牙利算法的DFS差不多，但是要求长度在dist以内，且是连续层次的点</p>
+<p>2、DFS验证增广路：和匈牙利算法的DFS差不多，但是要求长度在$dist$以内，且是连续层次的点</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vis[maxM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == dN[dotN] + <span class="number">1</span>) <span class="comment">//连边且层次连续</span></span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] != <span class="number">-1</span> &amp;&amp; dM[dotM] &gt; dist) <span class="comment">//长度超过dist还没找到未匹配点即路未结束</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span> || DFS(matchM[dotM], m))</span><br><span class="line">			&#123;</span><br><span class="line">				matchM[dotM] = dotN;</span><br><span class="line">				matchN[dotN] = dotM;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>3、主算法</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxMatch</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(matchN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchN));</span><br><span class="line">	<span class="built_in">memset</span>(matchM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchM));</span><br><span class="line">	<span class="keyword">while</span>(BFS(n, m))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				ans += DFS(i, m);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -371,7 +371,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -476,6 +476,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
