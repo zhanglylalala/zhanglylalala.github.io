@@ -191,6 +191,321 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/05/04-Convolutional-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/05/04-Convolutional-Neural-Networks/" class="post-title-link" itemprop="url">04. Convolutional Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-05 09:29:06" itemprop="dateCreated datePublished" datetime="2020-04-05T09:29:06+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:47:58" itemprop="dateModified" datetime="2020-08-07T19:47:58+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Convolution-Layer"><a href="#Convolution-Layer" class="headerlink" title="Convolution Layer"></a>Convolution Layer</h1><ol>
+<li>Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image. </li>
+<li>In the convolution layer, we convolve a smaller filter with the image; namely, we slide it over the image spatially, computing dot products. </li>
+<li>The size of the matrix of an image is usually $N\times N\times z$. The filter we choose can have random $F$, but the $z$ must be maintained. So the filter can be anything in the form of $F\times F\times z$. </li>
+<li>Every filter is a weighted matrix. We use it to cover up some location of the image, then calculate the sum of the products of the corresponding numbers. <br />This process is the same as we stretch the filter and the covered area into two one-dimensional vectors and calculate the dot product of these two vectors. </li>
+<li>After each dot product, we get a number $w^Tx+b$ instead of a vector. So each filter can produce an $F’\times F’\times1$ activation map. Furthermore, we can use multiple filters to create multiple activation maps. With $k$ filters, the activation matrix will be $F’\times F’\times k$. </li>
+<li>The earlier convolution layers will learn lower-level features while the later ones will learn higher-level features. </li>
+<li>One thing that will affect the size of the activation map is the stride we choose when the filter is slid around the image. If the stride is $S$, the size will be $\displaystyle(\frac{N-F}{S}+1)\times(\frac{N-F}{S}+1)\times n$. <br />Stride can be any integer as long as $N-F$ is dividable by it. </li>
+<li>Another common phenomenon is padding. When we say “zero pad with $P$”, we mean that add $a$ laps zero bounds around the original matrix. <br />So the actual size of a matrix which pad with $P$ we need to slide is $(N+2P)\times (N+2P)\times z$. <br />The padding is used to maintain the input size. So in convolution layer, we often pad the image with $\displaystyle\frac{F-1}{2}$ laps of zero pixel border. Nevertheless, the pad is not necessary; sometimes we do not use padding; sometimes we pad less, sometimes we pad more. </li>
+</ol>
+<h1 id="Other-layers"><a href="#Other-layers" class="headerlink" title="Other layers"></a>Other layers</h1><ol>
+<li>Pooling layer makes the representations smaller and more manageable. It operates over each activation map independently and downsamples them. </li>
+<li>The pooling layer also has a filter, but instead of doing a dot product, it may take the maximum of the numbers (Max Pooling Layer). </li>
+<li>In convention, we do not want any overlap in pooling layer, unlike in the convolution layer. </li>
+<li>Typically, the last layer of a convolution neural network will be a fully-connected layer, which connects the class labels to the input. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/03-Backpropagation-and-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/04/03-Backpropagation-and-Neural-Networks/" class="post-title-link" itemprop="url">03. Backpropagation and Neural Networks</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-04 19:16:49" itemprop="dateCreated datePublished" datetime="2020-04-04T19:16:49+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:47:45" itemprop="dateModified" datetime="2020-08-07T19:47:45+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><ol>
+<li>Backpropagation is used for calculating the gradient. </li>
+<li>In each gradient, we need to calculate the derivative of $f$ with respect to each component. </li>
+<li>Any function $f$ can be decomposed into a computational graph, which contains several nodes. Each node represents one single simple calculation with some inputs and one output. </li>
+<li>We can easily calculate the local gradient for each node function $q$, $\displaystyle\frac{\partial q}{\partial x_i}$. </li>
+<li>With the chain rule, we can multiply each local gradient to get $\displaystyle\frac{\partial f}{\partial x_i}$. </li>
+<li>In programming, we usually start from the end of the computational graph, namely $f=f$. Its local gradient is $\displaystyle\frac{\partial f}{\partial f}=1$. <br />Then we calculate backwardly the last but one node. <br />Each node except the last one multiplies the previously calculated gradient to get the global gradient. <br />The global gradients of the leaf nodes are the gradient we want. <br /><img src="/img/03.BackpropagationandNeuralNetworks01.png" width="40%">$\displaystyle\frac{\partial f}{\partial q},\frac{\partial q}{\partial W},\frac{\partial q}{\partial X},\frac{\partial f}{\partial b}$ are all local gradients, while $\displaystyle1.0,\frac{\partial f}{\partial q}\times1.0,\frac{\partial q}{\partial W}\frac{\partial f}{\partial q},\frac{\partial q}{\partial X}\frac{\partial f}{\partial q},\frac{\partial f}{\partial b}\times1.0$ are all global gradients. </li>
+<li>We can also group some nodes to form a complicated node as long as we can write down the local gradient. </li>
+<li>Add gate distributes the global gradient of the output as the global gradient of each input. <br />Max gate gives the output local gradient to the larger input as its global gradient and gives $0$ to another input. <br />Multiplication gate switches the values of inputs as their local gradient. </li>
+<li>If inputs are vectors, the local gradients are the Jacobian matrices; namely, we need to calculate each element of the output with respect to each element of the input. Given the property of partial derivative, the Jacobian matrices are diagonal. </li>
+<li>Always check: The gradient with respect to a variable should have the same shape as the variable. </li>
+<li>In implement, we can make each gate a class with a forward function and a backward function. The forward function takes in the inputs and returns the forward calculation output. The backward function takes in the previous gradient and returns the gradients with respect to each component. </li>
+</ol>
+<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><ol>
+<li>Instead of using a single linear score function, we use multiple linear functions in neural networks with nonlinear functions in between. </li>
+<li>The nonlinear functions are called the activation function. </li>
+<li>There are many kinds of activation functions: <br />&emsp;Sigmoid: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$<br />&emsp;tanh: $tanh(x)$<br />&emsp;ReLu: $max(0,x)$<br />&emsp;Leaky ReLu: $max(0.1x,x)$<br />&emsp;Maxout: $max(w_1^Tx+b_1,w^T_2x+b_2)$<br />&emsp;ELU: $\left\{\begin{array}{}x&amp;x≥0\\\alpha(e^x-1)&amp;x&lt;0 \end{array}\right.$</li>
+<li>The layers which take in the output of the previous layer and do one linear calculation and one nonlinear calculation is called fully-connected layers. </li>
+<li>The first layer is the input layer, which takes in the input and calculate. So it is a fully-connected layer. <br />The last layer is the output layer, which does no calculation, simply outputs the result. So it is not a fully-connected layer. <br />All layers except these two layers are hidden layers. </li>
+<li>What we called “$2$-layer Neural Network” is “$2$-fully-connected-layer Neural Network” or “$1$-hidden-layer Neural Network”. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/02-Loss-Functions-and-Optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/04/02-Loss-Functions-and-Optimization/" class="post-title-link" itemprop="url">02. Loss Functions and Optimization</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-04 15:30:24" itemprop="dateCreated datePublished" datetime="2020-04-04T15:30:24+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:47:31" itemprop="dateModified" datetime="2020-08-07T19:47:31+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>A loss function tells how good our current classifier is. </p>
+<h2 id="Data-Loss"><a href="#Data-Loss" class="headerlink" title="Data Loss"></a>Data Loss</h2><ol>
+<li>Given a dataset of examples $\{(x_i,y_i)\}^N_{i=1}$ where $x_i$ is an image and $y_i$ is an integer label. Loss over the dataset is a sum of loss over examples: $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)$. </li>
+<li>There are infinitely many $W$ to make $L=0$. </li>
+</ol>
+<h3 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h3><ol>
+<li>Multiclass SVM loss (Hinge loss): $L_i=\displaystyle\sum_{j≠y_i}max(0,s_j-s_{y_i}+1)$. $s_i$ is the score of the $i$th class. </li>
+<li>The minimum loss of SVM is $0$ when all prediction is correct. The maximum loss is infinity when the prediction is as wrong as possible. </li>
+<li>If at initialization $W$ is small, so all $s\approx 0$, the loss will be <script type="math/tex">the\ number\ of\ class-1</script>. </li>
+</ol>
+<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><ol>
+<li>We can use the scores to calculate the probabilities of all labels given the condition of the image is $x_i$. </li>
+<li>We exponentiate scores to make every term positive. So the probability of the actual label being $k$ is $P(Y=k|X=x_i)=\displaystyle\frac{e^{s_k}}{\sum_je^{s_j}}$, which is called the softmax function. </li>
+<li>To maximize the log-likelihood, or to minimize the negative log-likelihood of the correct class. <script type="math/tex">L_i=-log\ P(Y=y_i|X=x_i)=-log\ \displaystyle\frac{e^{s_{y_i}}}{\sum_je^{s_j}}</script>. </li>
+<li>The goal is to maximize the probability of the right label. It is easier to maximize the log function than the raw probability. Also, the loss function is describing how bad the model is, so we take the negative of it. </li>
+<li>Three steps for softmax classifier: exponentiate the scores; normalize them; take the negative log of the correct label. </li>
+<li>The minimum possible loss is $0$ when the model is totally right (the probability of the accurate label is $1$). The maximum is infinity when the model is entirely wrong (the probability of the correct label is $0$). However, these two situations will occur. </li>
+<li>A slight change in a datapoint might when changing the loss of SVM if the label is right, but it will change the loss of softmax in any situation. </li>
+</ol>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><ol>
+<li>The only thing we care about is the performance on the test set. So we need to tell our algorithm more than the performance on the training data. </li>
+<li>To avoid overfitting the training data, we should add regularization to the loss, which will punish when the model is complicated. So the loss becomes $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$. $\lambda$ is a hyperparameter called regularization strength. </li>
+<li>$L2$ regularization: $R(W)=\displaystyle\sum_k\sum_lW_{k,l}^2$<br />$L1$ regularization: $R(W)=\displaystyle\sum_k\sum_l|W_{k,l}|$<br />Elastic net $(L1+L2)$: $R(W)=\displaystyle\sum_k\sum_l\beta W_{k,l}^2+|W_{k,l}|$</li>
+<li>The idea of regularization is to penalize the complexity of model rather than trying to fit the training data. </li>
+<li>$L2$ regularization also corresponds MAP inference using a Gaussian prior on $W$. </li>
+<li>The regularization function is a problem-dependent hyperparameter. </li>
+<li>If at initialization $W$ is small so all $s\approx 0$, the loss will be <script type="math/tex">-log\ c</script>. $c$ is the number of classes. </li>
+</ol>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><ol>
+<li>The strategy here is to follow the gradient of $f$. The opposite direction of the gradient is the greatest decrease in the function. </li>
+<li>The numerical way to calculate the gradient to increase one component of $W$ a little bit, then use the formula $\displaystyle\frac{df}{dx}=\frac{f(x+h)-f(x)}{h}$ to get the corresponding component in the gradient. </li>
+<li>The faster way to get the gradient is the analytic way. In practice, always use the analytic gradient, but check implementation with numerical gradient. This is called a gradient check. </li>
+<li>Gradient descent: first calculate the gradient, then subtract the multiplication of learning rate and the gradient from the weight. </li>
+<li>Calculation of the gradient can be slow, so in practice, we usually use the stochastic gradient descent, which only calculates the gradient of part of the training set. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/01-Image-Classification/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1062,344 +1377,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/09-Bernoulli-Process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/16/09-Bernoulli-Process/" class="post-title-link" itemprop="url">09. Bernoulli Process</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-16 20:51:19" itemprop="dateCreated datePublished" datetime="2020-03-16T20:51:19+08:00">2020-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:39" itemprop="dateModified" datetime="2020-08-07T19:34:39+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>The Bernoulli process can be visualized as a sequence of independent coin tosses where the probability of heads in each toss is a fixed number $p$ in the range $(0,1)$. </li>
-<li>In convention, each trial produces a $1$ (a success) with probability $p$, and a $0$ (a failure) with probability $1-p$, independent of what happens in other trials. </li>
-</ol>
-<h1 id="Independence-and-Memorylessness"><a href="#Independence-and-Memorylessness" class="headerlink" title="Independence and Memorylessness"></a>Independence and Memorylessness</h1><ol>
-<li>Fresh-start property: The future trials are independent from the past ones. Starting from any given point in time, the future is also modeled by a Bernoulli process, which is independent from the past. </li>
-<li>Memorylessness property: The time $T$ until the first success is a geometric random variable. After $n$ failures, since a fresh-start Bernoulli process is constituting, the remaining trials until first success $T-n$ is still a geometric random variable. $P(T-n=t|T&gt;n)=P(T=t)$</li>
-</ol>
-<h1 id="Interarrival-Times"><a href="#Interarrival-Times" class="headerlink" title="Interarrival Times"></a>Interarrival Times</h1><ol>
-<li>$Y_k$ represents the time of $k$th success. $T_k$ stands for the $k$th interarrival time. </li>
-<li>$T_1=Y_1$, $T_i=Y_i-Y_{i-1}(i&gt;1)$</li>
-<li>$Y_k=\displaystyle\sum^k_{i=1}T_i$</li>
-<li>$T_1$ is a geometric random variable with parameter $p$. After $T_1$, the future is a new Bernoulli process similar to the old one. </li>
-<li>All $T_i$ are independent and all have the same geometric distribution. </li>
-<li>In the problem of finding the first failure string, the string begins with the first failure and ends with the first success since then is not geometric. Because we look at it from the frist failure when we know it’s a failure. So we need to look from the experiment after the first failure, since we only know whether it’s going to success or not. So the geometric begins after the first failure occurred, ends when the frist success occurred. And the expectation of that is $E[T_1]+1$. </li>
-</ol>
-<h1 id="The-kth-Arrivial-Time"><a href="#The-kth-Arrivial-Time" class="headerlink" title="The  kth Arrivial Time"></a>The  kth Arrivial Time</h1><ol>
-<li>$Y_k=T_1+…+T_k$, $T_1,…,T_k$ are independent and have geometric PMF. So $E[Y_k]=E[T_1+…+T_k]=E[T_1]+…E[T_k]=\displaystyle\frac{k}{p}$</li>
-<li>$var(Y_k)=var(T_1+…+T_k)=var(T_1)+…+var(T_k)=\displaystyle\frac{k(1-p)}{p^2}$</li>
-<li>The PMF of $Y_k$ (Pascal PMF of order $k$): $p_{Y_k}(t)={t-1\choose k-1}p^k(1-p)^{t-k}  t≥k$</li>
-</ol>
-<h1 id="Split-and-Merge"><a href="#Split-and-Merge" class="headerlink" title="Split and Merge"></a>Split and Merge</h1><h2 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h2><ol>
-<li>Imaging tossing two coins, the first coin has a bias to the head of probability $p$ and the second coin has a bias to the head of probability $q$. </li>
-<li>If the outcome of the first coin is head, then we toss the second coin. </li>
-<li>We can split the result of first coin into two independent process. Both of the later process focus only on the second coin. </li>
-<li>One process marks the head side on the second coin as success and tail on the first coin or tail on the second coin as failure. <br />The other process marks the tail on the second coin as success and tail on the first coin or head on the second coin as failure. </li>
-<li>The first process has a proabability of success of $pq$ while the second process has a probability of success of $p(1-q)$. </li>
-</ol>
-<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><ol>
-<li>Other than split one process into two process, we can also merge two process into one process. </li>
-<li>Tossing the same two coins as above at the same time, the result is success if one of the coins is head. </li>
-<li>This final process has a probability of <script type="math/tex">1-P(none\ is\ head)=1-(1-p)(1-q)=p+q-pq</script></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/" class="post-title-link" itemprop="url">08. Iterated Expectation and Sum of a Random Number of Random Variables</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-16 08:51:43" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:53:39" itemprop="dateModified" datetime="2020-08-07T19:53:39+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
-<li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
-<li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by changing $y$ in $E[X|Y=y]$ into $Y$. </li>
-<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
-<li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
-<li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
-<li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>
-<li>The random variable $E[\tilde{X}|Y]$ is identically zero: $E[\tilde{X}|Y=y]=0$ for all values of $y$. <br />The law of iterated expectation also tells us $E[\tilde{X}]=E[E[\tilde{X}|Y]]=0$. <br />It indicates that the estimation error doesn’t have a systematic upward or downward bias. </li>
-<li>$E[\hat{X}\tilde{X}]=E[E[\hat{X}\tilde{X}|Y]]$. Since $\hat{X}$ is complete determined by $Y$, $E[E[\hat{X}\tilde{X}|Y]]=E[\hat{X}E[\tilde{X}|Y]]=E[\hat{X}0]=0$<br />It follows that $cov(\hat{X},\tilde{X})=E[\hat{X}\tilde{X}]-E[\hat{X}]E[\tilde{X}]=0-E[X]\cdot0=0$<br />So $\hat{X}$ and $\tilde{X}$ are uncorrelated. <br />So $var(X)=var(\tilde{X})+var(\hat{X})$. </li>
-<li>The conditional variance: $var(X|Y)=E[(X-E{X|Y})^2|Y]=E[\tilde{X}^2|Y]$</li>
-<li>This is the function of $Y$ whose value is the conditional variance of $X$ when $Y$ takes the value $y$. </li>
-<li>Using $E[\tilde{X}]=0$, $var(\tilde{X})=E[\tilde{X}^2]=E[E[\tilde{X}^2|Y]]=E[var(X|Y)]$. <br />Since $var(X)=var(\tilde{X})+var{\hat{X}}$, we have the law of total variance: $var(X)=E[var(X|Y)]+var(E[X|Y])$</li>
-</ol>
-<h1 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h1><ol>
-<li>The transform associated with a random variable $X$ is a function $M_X(s)$ of a scalar parameter $s$, defined by $M_X(s)=E[e^{sX}]$. </li>
-<li>If $X$ is a discrete random variable, the transform can be written as $M(s)=\displaystyle\sum_xe^{sx}p_X(x)$. <br />If $X$ is a continuous random variable, $M(s)=\displaystyle\int^\infty_{-\infty}e^{sx}f_X(x)dx$. </li>
-<li>If $Y=aX+b$, $M_Y(s)=E[e^{s(aX+b)}]=E[e^{saX}e^{sb}]=e^{sb}E[e^{saX}]=e^{sb}M_X(sa)$. </li>
-<li>$\displaystyle\frac{d}{ds}M(s)=\int^\infty_{-\infty}xe^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d}{ds}M(s)\right|_{s=0}=\int^{\infty}_{-\infty}xf_X(x)dx=E[X]$<br />$\displaystyle\frac{d^n}{ds^n}M(s)=\int^{\infty}_{-\infty}x^ne^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d^n}{ds^n}M(s)\right|_{s=0}=\int^\infty_{-\infty}x^nf_X(x)dx=E[X^n]$</li>
-<li>$M_X(0)=E[e^{0X}]=E[1]=1$</li>
-<li>If $X$ takes only nonnegative integer values, then $\displaystyle\lim_{s\to-\infty}M_X(s)=P(X=0)$</li>
-<li>If $Z=X+Y$ $M_Z(s)=E[e^{sZ}]=E[e^{s(X+Y)}]=E[e^{sX+sY}]=E[e^{sX}e^{sY}]$. If $X$ and $Y$ are independent, $M_Z(s)=E[e^{sX}]E[e^{sY}]=M_X(s)M_Y(s)$. </li>
-<li>In discrete random variables: <br />&emsp;For $Bernoulli(p)$, $M_X(s)=1-p+pe^s$<br />&emsp;For $Binomial(n,p)$, $M_X(s)=(1-p+pe^s)^n$<br />&emsp;For $Geometric(p)$, $M_X(s)=\displaystyle\frac{pe^s}{1-(1-p)e^s}$<br />&emsp;For $Poisson(\lambda)$, $M_X(s)=e^{\lambda(e^s-1)}$<br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sa}(e^{s(b-a+1)}-1)}{(b-a+1)(e^s-1)}$</li>
-<li>In continuous random variables: <br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sb}-e^{sa}}{s(b-a)}$<br />&emsp;For $Exponential(\lambda)$, $M_X(s)=\displaystyle\frac{\lambda}{\lambda-s}(s&lt;\lambda)$<br />&emsp;For $Normal(\mu,\sigma^2)$, $M_X(s)=e^{\frac{\sigma^2s^2}{2}+\mu s}$</li>
-<li>$M_{X_1,…,X_n}(s_1,…,s_n)=E[e^{s_1X_1+…+s_nX_n}]$</li>
-</ol>
-<h1 id="Sum-of-a-Random-Number-of-Independent-Random-Variables"><a href="#Sum-of-a-Random-Number-of-Independent-Random-Variables" class="headerlink" title="Sum of a Random Number of Independent Random Variables"></a>Sum of a Random Number of Independent Random Variables</h1><ol>
-<li>We consider the sum $Y=X_1+X_2+…+X_N$. <br />$N$ is a random variable that takes nonnegative integer values. <br />$X_1,X_2,…$ are identically independent distributed random variables. </li>
-<li>If $N=0$, $Y=0$. </li>
-<li>Fix a nonnegative integer $n$. <br />$E[Y|N=n]=E[X_1+X_2+…X_n]=nE[X]$. <br />So $E[Y|N]=NE[X]$. By the law of iterated expectation, $E[Y]=E[E[Y|N]]=E[NE[X]]=E[N]E[X]$</li>
-<li>$\begin{equation}\begin{split}var(Y)&amp;=E[var(Y|N)]+var(E[Y|N])\\&amp;=E[Nvar(X)]+var(NE[X])\\&amp;=E[N]var(X)+(E[X])^2var(N)\end{split}\end{equation}$</li>
-<li>$E[e^{sY}|N=n]=E[e^{sX_1}…e^{sX_n}]=E[e^{sX_1}]…E[e^{sX_n}]=(M_X(s))^n$. <br />$M_Y(s)=E[e^{sY}]=E[E[e^{sY}|N]]=E[(M_X(s))^N]=\displaystyle\sum^\infty_{n=0}(M_X(s))^np_N(n)=\sum^\infty_{n=0}e^{nlog M_X(s)}p_N(n)$<br />Compare with $M_N(s)=\displaystyle\sum^\infty_{n=0}e^{sn}p_N(n)$, $M_Y(s)=M_N(log M_X(s))$. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/" class="post-title-link" itemprop="url">07. Derived Distributions, Convolution, Covariance and Correlation</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-14 23:03:14" itemprop="dateCreated datePublished" datetime="2020-03-14T23:03:14+08:00">2020-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:36" itemprop="dateModified" datetime="2020-08-07T19:34:36+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Derived-Distributions"><a href="#Derived-Distributions" class="headerlink" title="Derived Distributions"></a>Derived Distributions</h1><ol>
-<li>Calculate the PDF of $Y=g(X)$ of a continuous random variable $X$: <br />&emsp;First calculate the CDF $F_Y$ of $Y$ using $F_Y(y)=P(g(X)≤y)=\displaystyle\int_{\{x|g(x)≤y\}}f_X(x)dx$<br />&emsp;Differentiate to obtain the PDF of $Y$: $f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)$</li>
-<li>If $Y=aX+b$, where $a$ and $b$ are scalars, with $a≠0$. Then $f_Y(y)=\displaystyle\frac{1}{|a|}f_X(\frac{y-b}{a})$<br />Graphical proof: The width will be $|a|$ times wider and the height will be $|a|$ times shorter. The points are shifted by $b$. If $a$ were negative, the graph will be flipped around the vertical axis. <br />Algebra proof: <br />&emsp;If $a&gt;0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≤\displaystyle\frac{y-b}{a})=F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=\frac{1}{a}f_X(\frac{y-b}{a})$<br />&emsp;If $a<0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≥\displaystyle\frac{y-b}{a})=1-F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=-\frac{1}{a}f_X(\frac{y-b}{a})$</li>
-<li>$Y=g(X)$ is a monotonic function and its inverse is $X=h(Y)$. Assume that $h$ is differentiable. Then the PDF of $Y$ in the region where $f_Y(y)&gt;0$ is given by $f_Y(y)=f_X(h(y))\bigg|\displaystyle\frac{dh}{dy}(y)\bigg|$. <br />Proof: <br />&emsp;If $g$ is monotonically increasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(x≤h(y))=F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\frac{dh}{dy}(y)$<br />&emsp;If $g$ is monotonically decreasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(X≥h(y))=1-F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\bigg[-\frac{dh}{dy}(y)\bigg]$</li>
-<li>This method also works for functions of multiple random variables. <br />&emsp;$F_Z(z)=P(g(X,Y)≤z)=\displaystyle\iint\limits_{\{(x,y)|(x,y)≤z\}}f_{X,Y}(x,y)dxdy$<br />&emsp;$f_Z(z)=\displaystyle\frac{dF_Z}{dz}(z)$</li>
-<li>Two-sided exponential PDF (Laplace PDF): $f_Z(z)=\displaystyle\frac{\lambda}{2}e^{-\lambda|z|}$</li>
-<li>For independent $X$ and $Y$, $Z=X+Y$. <br />&emsp;If $X$ and $Y$ are independent discrete random variables with PMFs $p_X,p_y$: <br />&emsp;&emsp;$\begin{equation}\begin{split}p_Z(z)&amp;=P(X+Y=z)\\&amp;=\displaystyle\sum_{\{(x,y)|x+y=z\}}P(X=x,Y=y)\\&amp;=\sum_xP(X=x,Y=z-x)\\&amp;=\sum_xp_X(x)p_Y(z-x) \end{split}\end{equation}$<br />&emsp;&emsp;The resulting PMF $p_Z$ is called the convolution of the PMFs of $X$ and $Y$. <br />&emsp;If $X$ and $Y$ are independent continuous random variables with PDFs $f_X$ and $f_Y$. <br />&emsp;&emsp;$\begin{equation}\begin{split}P(Z≤z|X=x)&amp;=P(X+Y≤z|X=x)\\&amp;=P(x+Y≤z|X=x)\\&amp;=P(x+Y≤z)\\&amp;=P(Y≤z-x) \end{split}\end{equation}$<br />&emsp;&emsp;Differentiating both sides with respect to $z$. $f_{Z|X}(z|x)=f_Y(z-x)$<br />&emsp;&emsp;So $f_{X,Z}(x,z)=f_X(x)f_{Z|X}(z|x)=f_X(x)f_Y(z-x)$<br />&emsp;&emsp;$f_Z(z)=\displaystyle\int^\infty_{-\infty}f_{X,Z}(x,z)dx=\int^\infty_{-\infty}f_X(x)f_Y(z-x)dx$<br />&emsp;&emsp;This is the convolution of the PDFs of $X$ and $Y$. </li>
-<li>With the help of convolution, we know that the sum of two normal random variables with means $\mu_1,\mu_2$ and variance $\sigma_1^2,\sigma_2^2$ is another normal random variable with mean $\mu_1+\mu_2$ and variance $\sigma_1^2+\sigma^2_2$. </li>
-<li>Graphical calculation of convolution: <br />&emsp;First plot $f_Y(z-t)$ as a function of $t$. <br />&emsp;Place the plots of $f_X(t)$ and $f_Y(z-t)$ on top of each other and form their product. <br />&emsp; The value of $f_Z(z)$ is the integral of the product of these two plots. </li>
-</ol>
-<h1 id="Covariance-and-Correlation"><a href="#Covariance-and-Correlation" class="headerlink" title="Covariance and Correlation"></a>Covariance and Correlation</h1><ol>
-<li>The covariance of two random variables $X$ and $Y$, denoted by $cov(X,Y)$ is defined by $cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. </li>
-<li>When $cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated. <br />Roughly speaking, a positive or negative covariance indicates that the value of $X-E[X]$ and $Y-E[Y]$ obtained in a single experiment tend to have the same or the opposite sign. </li>
-<li>$cov(X,Y)=E[XY]-E[X]E[Y]$</li>
-<li>$cov(X,X)=var(X)$</li>
-<li>$cov(X,aY+b)=a\cdot cov(X,Y)$</li>
-<li>$cov(X,Y+Z)=cov(X,Y)+cov(X,Z)$</li>
-<li>If $X$ and $Y$ are independent, $E[XY]=E[X]E[Y]$, so $cov(X,Y)=0$. Thus, if $X$ and $Y$ are independent, they are also uncorrelated. But two uncorrelated random variables are not alway independent. </li>
-<li>If $E[X|Y=y]=E[X]$, <script type="math/tex">E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&X\ and\ Y\ are\ discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&X\ and\ Y\ are\ continuous \end{array}\right.</script><br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
-<li>The correlation coefficient of two random variables $X$ and $Y$ that have nonzero variances: $\rho(X,Y)=\displaystyle\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$</li>
-<li>The correlation coefficient is a normalized version of the covariance. It ranges from $-1$ to $1$. </li>
-<li>If $\rho&gt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the same sign. if $\rho&lt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the opposite sign. </li>
-<li>$\rho=\pm1$ means $X$ and $Y$ are strongly dependent, knowing one can restore another one. <br />$\rho=1$ if and only if there exists a positive constant $c$ such that $Y-E[Y]=c(X-E[X])$. <br />$\rho=-1$ if and only if there exists a negative constant $c$ such that $Y-E[Y]=c(X-E[X])$. </li>
-<li>If $X_1,X_2,…,X_n$ are random variables with finite variance, we have $var\left(\displaystyle\sum^n_{i=1}X_i\right)=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j)$. <br />For $n=2$, $var(X_1+X_2)=var(X_1)+var(X_2)+2cov(X_1,X_2)$. <br />Proof: We denote $\tilde{X_i}=X_i-E[X_i]$. <br />&emsp;$\displaystyle\begin{equation}\begin{split}var\left(\sum^n_{i=1}X_i\right)&amp;=E\left[\left(\sum^n_{i=1}\tilde{X_i} \right)^2 \right]\\&amp;=E\left[\sum^n_{i=1}\sum^n_{j=1}\tilde{X_i}\tilde{X_j} \right]\\&amp;=\sum^n_{i=1}\sum^n_{j=1}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}E[\tilde{X_i}^2]+\sum_{\{(i,j)|i≠j\}}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j) \end{split}\end{equation}$</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1466,7 +1448,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">181</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

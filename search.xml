@@ -996,7 +996,7 @@ The first selection is the way to keep members in order, to lie them all horizan
 </tr>
 <tr>
 <td style="text-align:center">alter·nate</td>
-<td style="text-align:center"><strong><em>skip one and take the other</em></strong><br />The other one that will take over.</td>
+<td style="text-align:center"><strong><em>skip one and take the other</em></strong><br /><strong><em>The other one that will take over.</em></strong></td>
 </tr>
 <tr>
 <td style="text-align:center">alter·native</td>
@@ -1017,7 +1017,7 @@ The first selection is the way to keep members in order, to lie them all horizan
 </tbody>
 </table>
 </div>
-<h1 id="verto-to-turn"><a href="#verto-to-turn" class="headerlink" title="verto: to turn"></a>verto: to turn</h1><div class="table-container">
+<h1 id="vert-to-turn"><a href="#vert-to-turn" class="headerlink" title="vert: to turn"></a>vert: to turn</h1><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -18869,18 +18869,18 @@ table th:first-of-type {
     <title>并查集</title>
     <url>/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>并查集是一种高级的数据结构，本质是一个树，用数组实现，可以进行并集和查集的操作。并查集的特点在于快速判断两个点是不是在同一棵树中</p>
-<h1 id="构成"><a href="#构成" class="headerlink" title="构成"></a>构成</h1><p>一个一维数组arr，arr[i] = j的含义是第i个元素属于j这棵树中。初始的时候每一棵树都是一棵单独的树，故在初始的时候每一个单元内存储的值和该单元的下标一样(我们一般都以根节点为基准，把别的点合并到根节点)</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> unionFind[maxn]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++)</span><br><span class="line">		unionFind[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="构成"><a href="#构成" class="headerlink" title="构成"></a>构成</h1><p>一个一维数组$arr$，$arr[i] = j$的含义是第$i$个元素属于$j$这棵树中。初始的时候每一棵树都是一棵单独的树，故在初始的时候每一个单元内存储的值和该单元的下标一样(我们一般都以根节点为基准，把别的点合并到根节点)</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> unionFind[maxn]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++)</span><br><span class="line">  unionFind[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="查"><a href="#查" class="headerlink" title="查"></a>查</h1><p>查是并查集的核心操作，由并查集的构成可知，有且只有一棵树的根节点保存的值和其下标一样。查就是判断数组中下标和值是否一样，若一样则返回该值，否则找该值所在的树。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x != unionFind[x])</span><br><span class="line">	&#123;</span><br><span class="line">		x = unionFind[x];     <span class="comment">//下标和值不想等，沿值继续查找</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;    <span class="comment">//相等了返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(x != unionFind[x])</span><br><span class="line">  &#123;</span><br><span class="line">    x = unionFind[x];     <span class="comment">//下标和值不想等，沿值继续查找</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> x;    <span class="comment">//相等了返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果数据量大，查找会花费大量的时间，这时候如果路径不影响结果就可以利用路径压缩优化之后查找的时间</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">		unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">		<span class="comment">//不相等，利用递归，把所有的子节点的值都直接</span></span><br><span class="line">	<span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(x != unionFind[x])</span><br><span class="line">  &#123;</span><br><span class="line">    unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//不相等，利用递归，把所有的子节点的值都直接</span></span><br><span class="line">  <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="并"><a href="#并" class="headerlink" title="并"></a>并</h1><p>并就没有什么技术含量了，用查找出两个小弟的老大，把、让一个老大心中装有另一个老大就完成了</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = <span class="built_in">find</span>(x);</span><br><span class="line">	y = <span class="built_in">find</span>(y);</span><br><span class="line">	unionFind[x] = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="带权并查集"><a href="#带权并查集" class="headerlink" title="带权并查集"></a>带权并查集</h1><p>一般并查集都是无权树，带权并查集是对并查集的一个扩展。通过对点赋值，来确定特殊的属于关系，相当于把一般并查集的属于关系进行了拓展，在属于的基础上还可以利用权值来确定点与点之间的其他特殊关系<br>在带权并查集中，我们多加一个数组val，来存储i号节点到它父节点的边的权值。我们在图中也可以把边看成是孩子节点指向父节点的一个向量，之后的值的相加都要利用到向量的思想<br><strong>查(路径压缩)</strong>：压缩后，节点x的父节点变为根节点<br><img src="/img/并查集01.jpg" width="60%"><br>由图可知，更新后的<code>val[x] = val[x] + val[oldFather]</code></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(unionFind[x] == x)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">	unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">	val[x] = val[x] + val[oldFather];</span><br><span class="line">	<span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>并：</strong><br>合并之前总是要先找到他们的最远祖先，就意味着之前一定要运行一遍find函数，就意味着在合并正式开始的时候两颗树的形状一定是如上右图一样，路径压缩过后的样子<br><img src="/img/并查集02.jpg" width="60%"><br>由图可知，<code>val[fx] = val[y] + v - val[x]</code></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">	<span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">	<span class="keyword">if</span>(fx != fy)</span><br><span class="line">	&#123;</span><br><span class="line">		unionFind[fx] = fy;</span><br><span class="line">		vaL[fx] = val[y] + x - val[x];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  x = <span class="built_in">find</span>(x);</span><br><span class="line">  y = <span class="built_in">find</span>(y);</span><br><span class="line">  unionFind[x] = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="带权并查集"><a href="#带权并查集" class="headerlink" title="带权并查集"></a>带权并查集</h1><p>一般并查集都是无权树，带权并查集是对并查集的一个扩展。通过对点赋值，来确定特殊的属于关系，相当于把一般并查集的属于关系进行了拓展，在属于的基础上还可以利用权值来确定点与点之间的其他特殊关系<br>在带权并查集中，我们多加一个数组val，来存储i号节点到它父节点的边的权值。我们在图中也可以把边看成是孩子节点指向父节点的一个向量，之后的值的相加都要利用到向量的思想<br><strong>查(路径压缩)</strong>：压缩后，节点x的父节点变为根节点<br><img src="/img/并查集01.jpg" width="60%"><br>由图可知，更新后的$val[x] = val[x] + val[oldFather]$</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(unionFind[x] == x)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> oldFather = unionFind[x];</span><br><span class="line">  unionFind[x] = <span class="built_in">find</span>(unionFind[x]);</span><br><span class="line">  val[x] = val[x] + val[oldFather];</span><br><span class="line">  <span class="keyword">return</span> unionFind[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>并：</strong><br>合并之前总是要先找到他们的最远祖先，就意味着之前一定要运行一遍find函数，就意味着在合并正式开始的时候两颗树的形状一定是如上右图一样，路径压缩过后的样子<br><img src="/img/并查集02.jpg" width="60%"><br>由图可知，$val[fx] = val[y] + v - val[x]$</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> fx = <span class="built_in">find</span>(x);</span><br><span class="line">  <span class="keyword">int</span> fy = <span class="built_in">find</span>(y);</span><br><span class="line">  <span class="keyword">if</span>(fx != fy)</span><br><span class="line">  &#123;</span><br><span class="line">    unionFind[fx] = fy;</span><br><span class="line">    vaL[fx] = val[y] + x - val[x];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>还有一个遗留问题：在合并的时候为什么只修改根节点的值？val的含义是和父节点的权值，在合并时不改变树型，就不会改变根节点的孩子节点的父节点，就没有必要更新它们</p>
 <h1 id="种类并查集"><a href="#种类并查集" class="headerlink" title="种类并查集"></a>种类并查集</h1><p>本质就是利用带权并查集和状态压缩。利用状态压缩，把物间的关系压缩成一系列数，一般是从0开始的连续实数，a和b有关系，就把a和b连起来，关系a、b间关系的大小<br>但是在合并时，在更新值的时候要取余，有减的项，为了防止在取余时出现负数，就要加上取余的数</p>
 ]]></content>
@@ -20110,6 +20110,327 @@ table th:first-of-type {
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN], f[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    f[i][<span class="number">0</span>] = arr[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> t = <span class="built_in">log</span>(n) / <span class="built_in">log</span>(<span class="number">2</span>) + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; t; j++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - (<span class="number">1</span> &lt;&lt; j); i++)</span><br><span class="line">    &#123;</span><br><span class="line">      f[i][j] = <span class="built_in">max</span>(f[i][j - <span class="number">1</span>], f[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> k = <span class="built_in">log</span>(r - l + <span class="number">1</span>) / <span class="built_in">log</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">max</span>(f[l][k], f[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>基本算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>04. How to talk about doctors</title>
+    <url>/2020/08/11/04-How-to-talk-about-doctors/</url>
+    <content><![CDATA[<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">internist</td>
+</tr>
+<tr>
+<td style="text-align:center">gyncologist</td>
+</tr>
+<tr>
+<td style="text-align:center">obstetrician</td>
+</tr>
+<tr>
+<td style="text-align:center">pediatrician</td>
+</tr>
+<tr>
+<td style="text-align:center">dermatologist</td>
+</tr>
+<tr>
+<td style="text-align:center">ophthalmologist</td>
+</tr>
+<tr>
+<td style="text-align:center">orthopedist</td>
+</tr>
+<tr>
+<td style="text-align:center">cardiologist</td>
+</tr>
+<tr>
+<td style="text-align:center">neurologist</td>
+</tr>
+<tr>
+<td style="text-align:center">psychiatrist</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Latin-internus-inside"><a href="#Latin-internus-inside" class="headerlink" title="Latin internus: inside"></a>Latin internus: inside</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">intern·al</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">intern·ist</td>
+<td style="text-align:center"><strong><em>a specialist in internal medicine, in the exploration of your insides</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">intern<br />interne</td>
+<td style="text-align:center"><strong><em>a medical graduate serving an apprenticeship inside a hospital</em></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="logos-science"><a href="#logos-science" class="headerlink" title="logos: science"></a>logos: science</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">gyne·cologist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">gyne·cological</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Latin-obstetrix-midwife"><a href="#Latin-obstetrix-midwife" class="headerlink" title="Latin obstetrix: midwife"></a>Latin obstetrix: midwife</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">obstetr·ician</td>
+<td style="text-align:center"><code>-ician: expert</code></td>
+</tr>
+<tr>
+<td style="text-align:center">obstetr·ics</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">obstetr·ic<br />obstetr·ical</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Greek-paidos-child"><a href="#Greek-paidos-child" class="headerlink" title="Greek paidos: child"></a>Greek paidos: child</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ped·iatr·ician</td>
+<td style="text-align:center"><code>iatreia: medical healing</code></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·iatr·ics</td>
+<td style="text-align:center"><strong><em>the medical healing of a child</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·iatr·ic</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·estal</td>
+<td style="text-align:center"><code>Latin pedis: foot</code></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·al</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·estr·ian</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·agogy</td>
+<td style="text-align:center"><code>agogos: leading</code><br />the leading of children to learn<br /><strong><em>the principles and methods of teaching</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·agog·ical</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ped·agogue</td>
+<td style="text-align:center">versed in pedagogy<br /><strong><em>Originally, it is the neutral meaning of teacher</em></strong><br /><strong><em>Now, it has deteriorated to the point whiere it refers to a narrow-minded, strait-laced, old-fashion, dogmatic teacher.</em></strong> <br />It’s a word of contempt and should be used with caution.</td>
+</tr>
+<tr>
+<td style="text-align:center">dem·agogue</td>
+<td style="text-align:center"><code>demos: people</code><br /><strong><em>Originally, it means a learder of the people</em></strong><br /><strong><em>Today, it’s one who attempts, in essence, to mislead the people, a politician who foments discontent among the masses, rousing them to fever pitch by wild oratory, in an attempt to be voted into office. </em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">dem·agogue·ry</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">dem·agog·ic</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Greek-derma-skin"><a href="#Greek-derma-skin" class="headerlink" title="Greek derma: skin"></a>Greek derma: skin</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">dermato·log·ist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">dermato·log·y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">dermato·log·ical</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">hypo·derm·ic</td>
+<td style="text-align:center"><code>Greek, hypos: under</code><br /><strong><em>needle penetrates under the skin</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">epi·derm·is</td>
+<td style="text-align:center"><strong><em>the outermost layer of skin</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">taxi·derm·y</td>
+<td style="text-align:center"><strong><em>prepares, stuffs, and mounts the skins of animals</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">taxi·derm·ist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">pachy·derm</td>
+<td style="text-align:center"><strong><em>an animal with an unusually thick skin, like an elephant, hippopotamus or rhinoceros</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">derma·titis</td>
+<td style="text-align:center"><strong><em>the general name for any skin inflammation, irritation, or infection</em></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Greek-ophthalms-eye"><a href="#Greek-ophthalms-eye" class="headerlink" title="Greek ophthalms: eye"></a>Greek ophthalms: eye</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ophthalm·olog·ist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ophthalm·olog·y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ophthalm·olog·ical</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">ocul·ist</td>
+<td style="text-align:center"><code>Latin oculus: eye</code><br /><strong><em>earlier title for ophthalmologist</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">ocul·ar</td>
+<td style="text-align:center"><strong><em>an adjective that refers to the eye</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">mon·ocle</td>
+<td style="text-align:center"><strong><em>a lens for one eye, symbol of the British so-called upper class</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">bi·n·ocular·s</td>
+<td style="text-align:center"><strong><em>field glasses that increase the range to two eyes</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">in·ocul·ate</td>
+<td style="text-align:center"><strong><em>an “eye”, puncture, or hole is made in skin, through which serum is injected to against a disease</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">opto·metr·ist</td>
+<td style="text-align:center"><code>Greek opsis, optikos: sight or vision</code><br /><code>metron: measurement</code><br /><strong><em>one who measures vision, tests for glaucoma, and prescribes and fits glasses</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">opto·metr·y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">opto·metr·ic<br />opto·metr·ical</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">opt·ician</td>
+<td style="text-align:center"><strong><em>one who fills an optometrist’s or ophthalmologist’s prescription, grinding lenses according to specifications. Doesn’t examine patients. </em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">opt·ics</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">opt·ical</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>英语</category>
+        <category>Word Power Made Easy</category>
+      </categories>
+      <tags>
+        <tag>英语</tag>
+        <tag>单词</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贪心</title>
+    <url>/2020/08/10/%E8%B4%AA%E5%BF%83/</url>
+    <content><![CDATA[<h1 id="POJ-3614"><a href="#POJ-3614" class="headerlink" title="POJ 3614"></a>POJ 3614</h1><p><a href="https://ac.nowcoder.com/acm/contest/1003/A" target="_blank" rel="noopener">Sunscreen</a></p>
+<p>目标：尽量不浪费防晒霜，一头奶牛选择防晒霜的标准是在其之后选择的奶牛要么不能使用其选择的防晒霜，要么都有其他的防晒霜可以选择使用</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>基本算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高精度模版</title>
+    <url>/2020/08/11/%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%A8%A1%E7%89%88/</url>
+    <content><![CDATA[<h1 id="高精度与低精度的乘除"><a href="#高精度与低精度的乘除" class="headerlink" title="高精度与低精度的乘除"></a>高精度与低精度的乘除</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">highAccuracy</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data[MAXN];</span><br><span class="line"></span><br><span class="line">    highAccuracy()</span><br><span class="line">    &#123;</span><br><span class="line">        clr(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy(<span class="keyword">int</span> x)</span><br><span class="line">    &#123;</span><br><span class="line">        clr(data);</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x)</span><br><span class="line">        &#123;</span><br><span class="line">            data[++len] = x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        data[<span class="number">0</span>] = len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy <span class="keyword">operator</span> * (<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        highAccuracy ans = highAccuracy();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= data[<span class="number">0</span>]; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[i] = data[i] * b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= data[<span class="number">0</span>] || ans.data[i]; len = ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[i + <span class="number">1</span>] += ans.data[i] / <span class="number">10</span>;</span><br><span class="line">            ans.data[i] = ans.data[i] % <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.data[<span class="number">0</span>] = ans.data[len] ? len : len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy <span class="keyword">operator</span> / (<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        highAccuracy ans = highAccuracy();</span><br><span class="line">        <span class="keyword">int</span> rest = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            rest = rest * <span class="number">10</span> + data[i];</span><br><span class="line">            ans.data[i] = rest / b;</span><br><span class="line">            rest = rest % b;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.data[<span class="number">0</span>] = data[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">while</span> (ans.data[ans.data[<span class="number">0</span>]] == <span class="number">0</span> &amp;&amp; ans.data[<span class="number">0</span>] &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[<span class="number">0</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> highAccuracy &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[<span class="number">0</span>] == b.data[<span class="number">0</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (data[i] != b.data[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> data[i] &lt; b.data[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> data[<span class="number">0</span>] &lt; b.data[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, data[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
