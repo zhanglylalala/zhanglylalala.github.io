@@ -675,7 +675,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-16 16:47:14" itemprop="dateModified" datetime="2020-08-16T16:47:14+08:00">2020-08-16</time>
+                <time title="Modified: 2020-08-16 16:49:33" itemprop="dateModified" datetime="2020-08-16T16:49:33+08:00">2020-08-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -732,7 +732,7 @@
 <li>交换前还是最优排列时，两个大臣的金币数分别时$\displaystyle\frac{\prod^{i-1}_{x=0}minister[x].left}{minister[i].right}$与$\displaystyle\frac{\prod^{i}_{x=0}minister[x].left}{minister[i+1].right}$</li>
 <li>交换后他们的金币变为$\displaystyle\frac{\prod^{i-1}_{x=0}minister[x].left}{minister[i+1].right}$与$\displaystyle\frac{minister[i+1].left\times\prod^{i-1}_{x=0}minister[x].left}{minister[i].right}$</li>
 <li>他们都有公因子$\displaystyle\prod^{i-1}_{x=0}minister[x].left$，所以最终是比较$max(\displaystyle\frac{1}{minister[i].right},\frac{minister[i].left}{minister[i+1].right})$与$max(\displaystyle\frac{1}{minister[i+1].right},\frac{minister[i+1].left}{minster[i].right})$</li>
-<li>同乘$minister[i].right\times minister[i+1].right$即为比较$max(minister[i+1].right,minister[i].left\times minister[i].right)$与$max(minister[i].right, minister[i+1].left\times minister[i+1].right)$</li>
+<li>同乘$minister[i].right\times minister[i+1].right$即为比较<br />$max(minister[i+1].right,minister[i].left\times minister[i].right)$与$max(minister[i].right, minister[i+1].left\times minister[i+1].right)$</li>
 <li>又$minister[i+1].right≤minister[i+1].right\times minister[i+1].left$，$minister[i].right≤minister[i].right\times minister[i].left$</li>
 <li>所以要使得交换前更优，则有$minister[i].left\times minister[i].right≤minister[i+1].left\times minister[i+1].right$<br>所以贪心策略为按大臣左右手数字乘积升序排列</li>
 </ol>
