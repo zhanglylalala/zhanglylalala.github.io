@@ -991,7 +991,7 @@ pre .javascript .function {
 .brand {
   background: #222;
   border-bottom: none;
-  color: #222;
+  color: #fff;
   display: inline-block;
   line-height: 1.375em;
   padding: 0 40px;
@@ -1189,7 +1189,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #8ceeff;
+  background: #ff7750;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2398,7 +2398,7 @@ hr {
 }
 .logo-line-before i,
 .logo-line-after i {
-  background: #222;
+  background: #fff;
   display: block;
   height: 2px;
   position: relative;
@@ -2437,7 +2437,7 @@ hr {
 .menu-item-active a,
 .menu .menu-item a:hover,
 .menu .menu-item span.exturl:hover {
-  background: #ddd;
+  background: #696969;
 }
 .menu {
   margin: 0px;
@@ -2569,7 +2569,7 @@ hr {
   display: inline-block;
 }
 body {
-  background: url("/images/background.jpeg");
+  background: url("/images/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -2578,7 +2578,7 @@ body {
 .content {
   background: #fff;
   padding: 25px;
-  opacity: 0.9;
+  opacity: 0.7;
   border-radius: 15px;
 }
 .footer {
@@ -2595,7 +2595,7 @@ body {
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 .menu .menu-item a {
-  color: #000;
+  color: #fff;
   border-radius: 10px;
 }
 .menu {
