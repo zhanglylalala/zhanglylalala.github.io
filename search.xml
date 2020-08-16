@@ -892,7 +892,13 @@ The first selection is the way to keep members in order, to lie them all horizan
   <entry>
     <title>03. How to Talk About Personality Types</title>
     <url>/2020/07/25/03-How-to-Talk-About-Personality-Types/</url>
-    <content><![CDATA[<div class="table-container">
+    <content><![CDATA[<style>
+table th:first-of-type {
+    width: 150px;
+}
+</style>
+
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -20103,7 +20109,13 @@ table th:first-of-type {
   <entry>
     <title>04. How to talk about doctors</title>
     <url>/2020/08/11/04-How-to-talk-about-doctors/</url>
-    <content><![CDATA[<div class="table-container">
+    <content><![CDATA[<style>
+table th:first-of-type {
+    width: 150px;
+}
+</style>
+
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -20518,6 +20530,7 @@ table th:first-of-type {
 </tr>
 <tr>
 <td style="text-align:center">psych·iatr·ic</td>
+<td style="text-align:center"></td>
 </tr>
 </tbody>
 </table>
