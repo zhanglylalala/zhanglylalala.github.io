@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="基本二分查找1234567891011121314151617181920212223242526272829303132333435int arr[MAXN];&#x2F;&#x2F; arr按非降排序int binary_search_int(int lo, int hi, int target) &#x2F;&#x2F; 查找区间为 [lo, hi)&amp;#123;  while (lo &lt; hi)  &amp;#123;    int">
 <meta property="article:published_time" content="2020-08-07T14:42:19.000Z">
-<meta property="article:modified_time" content="2020-08-21T08:05:03.236Z">
+<meta property="article:modified_time" content="2020-08-21T08:07:36.989Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-21 16:05:03" itemprop="dateModified" datetime="2020-08-21T16:05:03+08:00">2020-08-21</time>
+                <time title="Modified: 2020-08-21 16:07:36" itemprop="dateModified" datetime="2020-08-21T16:07:36+08:00">2020-08-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,10 +277,10 @@
 <p>扩展：把点分为两类，要找出一类点到另一类点的最短距离 <a href="https://ac.nowcoder.com/acm/contest/1004/D" target="_blank" rel="noopener">POJ 3714</a></p>
 <p>在枚举的时候特判一下两个点的类别不同即可</p>
 <h1 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h1><ol>
-<li>$lower_bound(begin, end, num)$：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于或等于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
-<li>$upper_bound(begin, end, num)$：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li><code>lower_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于或等于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li><code>upper_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
 <li>这两个函数都是返回一个指针，减掉$begin$，就可以得到其与$begin$的相对位置，是一个整型</li>
-<li>如果要找的是小于或等于查找值的最大位置的话<br />&emsp;使用$lower _ bound$<br />&emsp;&emsp;如果查找值存在，得到的位置就是等于查找值的位置<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用$upper_bound$<br />&emsp;&emsp;无论查找值是否存在，得到的位置都是大于查找值，其上一个位置不是等于查找值 (查找值存在)，就是小于查找值 (查找值不存在)，所以所有情况都要减$1$<br />综上，我们采用$upper_bound(begin, end, num) - begin - 1$的策略</li>
+<li>如果要找的是小于或等于查找值的最大位置的话<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置就是等于查找值的位置<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;无论查找值是否存在，得到的位置都是大于查找值，其上一个位置不是等于查找值 (查找值存在)，就是小于查找值 (查找值不存在)，所以所有情况都要减$1$<br />综上，我们采用​<code>upper_bound(begin, end, num) - begin - 1</code>的策略</li>
 </ol>
 
     </div>
