@@ -1373,7 +1373,7 @@ table th:first-of-type {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-21 16:09:41" itemprop="dateModified" datetime="2020-08-21T16:09:41+08:00">2020-08-21</time>
+                <time title="Modified: 2020-08-21 16:16:03" itemprop="dateModified" datetime="2020-08-21T16:16:03+08:00">2020-08-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1428,6 +1428,7 @@ table th:first-of-type {
 <li><code>upper_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
 <li>这两个函数都是返回一个指针，减掉$begin$，就可以得到其与$begin$的相对位置，是一个整型</li>
 <li>如果要找的是小于或等于查找值的最大位置的话<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置就是等于查找值的位置<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;任何情况下得到的位置都是大于查找值，且其上一个位置等于查找值 (查找值存在)，或小于查找值 (查找值不存在)，所以都要减$1$<br />综上，我们采用​<code>upper_bound(begin, end, num) - begin - 1</code>的策略</li>
+<li>如果要找的是小于查找值的最大位置的话<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置的上一个位置是查找值，再上一个位置才小于查找值，则需要减$2$<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置是查找值，上一个位置小于查找值，要减$1$<br />&emsp;&emsp;如果查找值不存在，得到的位置大于查找值，但由于查找值不存在，其上一个位置小于查找值，要减$1$<br />综上，我们采用<code>lower_bound(begin, end, num) - begin - 1</code>的策略</li>
 </ol>
 
       
