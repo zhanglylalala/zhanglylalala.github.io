@@ -132,7 +132,7 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -187,6 +187,164 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/08/06-Deep-Learning-Software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/08/06-Deep-Learning-Software/" class="post-title-link" itemprop="url">06. Deep Learning Software</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-08 14:23:27" itemprop="dateCreated datePublished" datetime="2020-04-08T14:23:27+08:00">2020-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:48:02" itemprop="dateModified" datetime="2020-08-07T19:48:02+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CPU-and-GPU"><a href="#CPU-and-GPU" class="headerlink" title="CPU and GPU"></a>CPU and GPU</h1><ol>
+<li>GPU has way more cores than CPU. Most CUP has no more than $10$ cores, while the GPU can contain thousands of cores. </li>
+<li>Nevertheless, the clock speed of each core of CPU is a lot faster than the GPU. </li>
+<li>Furthermore, the CPU does not have its own memory. CPU has to share the memory with the system. However, GPU can have a large amount of memory of its own. </li>
+<li>So GPU is better when doing the tedious parallel tasks, like the multiplication of matrices. CPU is better at sequential tasks. </li>
+<li>When it comes to machine learning, the GPU can be about $70$ times faster than CPU, and CUDA can be $3$ times faster than none-CUDAs. </li>
+<li>When training, to synchronize the speed of GPU and reading data, we have three solutions: <br />&emsp;Read all data into RAM. <br />&emsp;Use SSD instead of HDD. <br />&emsp;Use multiple CPU threads to prefetch data. </li>
+</ol>
+<h1 id="Deep-Learning-Software"><a href="#Deep-Learning-Software" class="headerlink" title="Deep Learning Software"></a>Deep Learning Software</h1><ol>
+<li>The networks build with NumPy can only run on the CPU, and it is hard to compute the gradients. </li>
+<li>The point of deep learning frameworks: <br />&emsp;Quickly build big computational graphs. <br />&emsp;Efficiently compute gradients in computational graphs. <br />&emsp;Run it all efficiently on GPU. </li>
+</ol>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ol>
+<li>The main structure of TensorFlow is to define a computational graph first without doing any calculation. Then run the graph over and over. </li>
+<li>If we want to run the code on GPU, define the graph under the tf.device. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">'/gpu:0'</span>):</span><br></pre></td></tr></table></figure>
+Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
+<li>A placeholder is an array ran on CPU while a Variable is another kind of array ran on GPU. Usually, we declare the input and output as placeholders and weights as Variables. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(tf.float32, shape = (N, D))</span><br><span class="line"></span><br><span class="line">W = tf.Variable(tf.random_normal(D, H))</span><br></pre></td></tr></table></figure></li>
+<li>Then we define the the process of forward pass with some functions. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.maximum(matrix, number) <span class="comment">#a matrix of which each entry is the maximum of corresponding entry and the number</span></span><br><span class="line">tf.matmul(x, w) <span class="comment"># a matrix represents the product of the matrices</span></span><br><span class="line">tf.reduce_mean(matrix) <span class="comment"># a number represents the mean of all entries of that matrix</span></span><br><span class="line">tf.reduce_sum(matrix, axis) <span class="comment"># a vector whose each entry is the sum of that matrix along that axis.</span></span><br></pre></td></tr></table></figure></li>
+<li>The loss can be defined automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loss = tf.losses.mean_squared_error(y_pred, y)</span><br></pre></td></tr></table></figure></li>
+<li>The gradients can be calculated automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(loss, [variables]) <span class="comment"># multiple gradients of loss with respect to each variables</span></span><br></pre></td></tr></table></figure></li>
+<li>If we defined the weights as Variables, then we need to update weights here. Otherwise, we do it in the session. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_w = w.assign(w - learning_rate * grad_w)</span><br></pre></td></tr></table></figure></li>
+<li>There is no computation until here, only building the graph. </li>
+<li>With the graph done, we enter the session so we can actually run the graph. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br></pre></td></tr></table></figure></li>
+<li>In the session, we can initialize the placeholders in value. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">values = &#123;placeholder_name: np.random.randn(N, D), …&#125;</span><br></pre></td></tr></table></figure></li>
+<li>If we defined the weights as Variables, we need to run graph once to initialize the weights. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess.run(tf.global_variables_initializer())</span><br></pre></td></tr></table></figure></li>
+<li>After all those things, we can now enter the for-loop to run many times to train. In each iteration, we run the graph once. The loss in the parameter is defined above in the graph. <br />&emsp;If weights are defined as Variables, we need to group the gradients before entering the session and put the group in the parameter. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">updates = tf.group(new_w, …)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = value)</span><br></pre></td></tr></table></figure>
+&emsp;If weights are defined as Placeholder, we need to update the weights here. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_val, grad_w_val, … = sess.run([loss, grad_w, …], feed_dict = values)</span><br><span class="line">values[w] -= learning_rate * grad_w_val</span><br></pre></td></tr></table></figure></li>
+<li>If we are using optimizer, <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">1e-5</span>)</span><br><span class="line">updates = optimizer.minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = values)</span><br></pre></td></tr></table></figure></li>
+<li>We can also use the predefined layers, which automatically set up weight and bias for us. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">init = tf.contrib.layers.xavier_initializer() <span class="comment"># use Xavier initializer</span></span><br><span class="line">h = tf.layers.dense(inputs = x, </span><br><span class="line">                    units = H, </span><br><span class="line">                    activation = tf.nn.relu, </span><br><span class="line">                    kernel_initializer = init)</span><br><span class="line">y_pred = tf.layers.dense(inputs = h,</span><br><span class="line">                         units = D,</span><br><span class="line">                         kernel_initializer = init)</span><br></pre></td></tr></table></figure></li>
+<li>Furthermore, we can use Keras. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = keras.models.Sequential()</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = D, output_dim = H))</span><br><span class="line">model.add(keras.layers.core.Activation(<span class="string">'relu'</span>))</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = H, output_dim = D))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define optimizer</span></span><br><span class="line">optimizer = keras.optimizers.SGD(lr = <span class="number">1e0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the model, specify loss function</span></span><br><span class="line">model.compile(loss = <span class="string">'mean_squared_error'</span>, optimizer = optimizer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Train model</span></span><br><span class="line">history = model.fit(x, y, nb_epoch = <span class="number">50</span>, batch_size = N, verbose = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><ol>
+<li>Three levels of abstraction: <br />&emsp;Tensor: Imperative array, but runs on GPU. This is almost a Numpy array. <br />&emsp;Variable: Node in a computational graph; stores data and gradient. This is the Tensor, Variable, Placeholder on TensorFlow. <br />&emsp;Module: A neural network layer; may store state or learnable weights. </li>
+<li><p>To run on GPU, cast tensors to a CUDA datatype. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype = torch.cuda.FloatTensor</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A Pytorch Variable is a node in a computational graph. All Variables have two essential properties. Data is a Tensor while grad is a Variable of gradients with the same shape as data. Naturally, grad.data is a Tensor of gradients. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = torch.autograd.Variable(torch.randn(N, D_in), requires_grad = <span class="literal">False</span> / <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pytorch Tensors and Variables have the same API. Variables remember how they were created for backpropagation. </p>
+</li>
+<li><p>After defined all matrices, we enter the for-loop to train the network directly. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = x.mm(w1) <span class="comment"># matrices multiplication</span></span><br><span class="line">h_relu = h.clamp(h, min = <span class="number">0</span>) <span class="comment"># squash h into [min, max]</span></span><br><span class="line">loss = (y_pred - y).pow(<span class="number">2</span>).sum() <span class="comment"># the sum of the square of (y_pred - y)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compute the gradient of the loss with respect to weights. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> w.grad:</span><br><span class="line">  w.grad.data.zero_() <span class="comment"># zero out grad first</span></span><br><span class="line">loss.backward()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Update the weights. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w.data -= learning_rate * w.grad.data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can define our own autograd functions by writing forward and backward for Tensors. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLayer</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    self.save_for_backward(x)</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self, grad_y)</span>:</span></span><br><span class="line">    x, = self.saved_tensors</span><br><span class="line">    grad_input = grad_y.clone()</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> gradMatrix</span><br><span class="line">  </span><br><span class="line"> <span class="comment"># in forward process in the for-loop</span></span><br><span class="line">myLayer = MyLayer()</span><br><span class="line">y_pred = … <span class="comment"># some operations involve myLayer</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The predefined layers and loss functions are stored in <code>nn</code>. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = torch.nn.Sequential(</span><br><span class="line">  torch.nn.Linear(D_in, H), </span><br><span class="line">  torch.nn.ReLU(), </span><br><span class="line">  torch.nn.Linear(H, D_out))</span><br><span class="line">loss_fn = torch.nn.MSELoss(size_average = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train model</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  <span class="comment"># Feed data</span></span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = loss_fn(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Backward</span></span><br><span class="line">  model.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.data -= learning_rate * param.grad.data</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>There also exist predefined optimizers. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Before training</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters, lr = learning_rate)</span><br><span class="line"></span><br><span class="line"><span class="comment"># In training</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can also define our own Models. Models can contain weight as variables or other Modules. We only need to implement the initialization and forward function. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, D_in, H, D_out)</span>:</span></span><br><span class="line">    super(MyModule, self).__init__()</span><br><span class="line">    self.linear1 = torch.nn.Linear(D_in, H)</span><br><span class="line">    self.linear2 = torch.nn.Linear(H, D_out)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Define model, then all is the same</span></span><br><span class="line">model = MyModule(D_in, H, D_out)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A DataLoader wraps a Dataset and provides mini-batching, shuffling, multithreading. When custom data is needed, write a Dataset class. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> TensorDataset, DataLoader</span><br><span class="line">loader = DataLoader(TensorDataset(x, y), batch_size = <span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> loader:</span><br><span class="line">    y_pred = model(x_batch)</span><br><span class="line">    loss = loss_fn(y_pred, y_batch)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PyTorch has some pre-trained models which can be used immediately. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line">alexnet = torchvision.models.alexnet(pretrained = <span class="literal">True</span>)</span><br><span class="line">vgg16 = torchvision.models.vgg<span class="number">.16</span>(pretrained = <span class="literal">True</span>)</span><br><span class="line">resnet101 = torchvision.models.resnet101(pretrained = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><ol>
+<li>Tensorflow is static graphs, while PyTorch is dynamic graphs. </li>
+<li>A static graph is built at the beginning, and the graph is never changed while a dynamic graph is new each iteration. </li>
+<li>With static graphs, the framework can optimize the graph before it runs. Furthermore, when one graph is built, we can serialize the static graph and run it without the code that built that graph. We can even change other language to run it. </li>
+<li>However, to build dynamic graphs  has less code to write. Moreover, conditional and loops can be easily written with dynamic graphs. </li>
+<li>Dynamic graphs are usually used on recurrent networks, recursive networks and modular networks. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1354,154 +1512,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/17/11-Markov-Chains/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/17/11-Markov-Chains/" class="post-title-link" itemprop="url">11. Markov Chains</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-17 15:43:13" itemprop="dateCreated datePublished" datetime="2020-03-17T15:43:13+08:00">2020-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:52" itemprop="dateModified" datetime="2020-08-07T19:35:52+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Discrete-Time-Markov-Chains"><a href="#Discrete-Time-Markov-Chains" class="headerlink" title="Discrete-Time Markov Chains"></a>Discrete-Time Markov Chains</h1><ol>
-<li>The effect of the past on the future is summarized by state, which changes over time according to given probabilities. </li>
-<li>In discrete-time Markoc chains, state changes at certain discrete time instants, indexed by an integer variable $n$. </li>
-<li>At each time step $n$, the state of the chain is denoted by $X_n$ and belongs to a finite set $S$ of possible states, called the state space. <br />We assume that $S=\{1,…,m\}$, for some positive integer $m$. </li>
-<li>The Markov chain is described in terms of its transition probabilities $p_{ij}$: whenever the state happens to be $i$, there is a probability $p_{ij}$ that the next state is equal to $j$. Mathematically, $p_{ij}=P(X_{n+1}=j|X_n=i), (i,j\in S)$. </li>
-<li>The transition probabilities apply whenever state $i$ is visited, no matter what happened in the past and no matter how state $i$ was reached. <br />The Markov property requires $P(X_{n+1}=j|X_n=i,X_{n-1}=i_n-1,…,X_0=i_0)=P(X_{n+1}=j|X_n=i)=p_{ij}$, for all time $n$, all states $i,j\in S$ and all sequences $i_0,…,i_{n-1}$ of earlier states. <br />Thus, the probability law of the next state $X_{n-1}$ depends on the past only through the value of the present state $X_n$. </li>
-<li>For all states, $\displaystyle\sum^m_{j=1}p_{ij}=1, \forall i$. </li>
-<li>The probability $p_{ii}$ is allowed to be positive, in which case it’s possible for the next state to be the same as the current one. Even though the state doesn’t change, we still view this as a state stransition of a special type (a “self-transition”). </li>
-<li>All of the elements of a Markov chain model can be encoded in a transition probability matrix. </li>
-<li>It’s also helpful to lay out the model in the socalled transition probability graph, whose nodes are the states and whose arcs are the possible transitions. </li>
-<li>It’s possible to use a Markov chain model even if there is a dependence on the states at several past days. The general idea is to introduce some additional states which encode relevant information from preceding periods. </li>
-<li>$P(X_0=i_0,X_1=i_1,…,X_n=i_n)=P(X_0=0)p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$<br />$P(X_1=i_1,…,X_n=i_n|X_0=i_0)=p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$</li>
-<li>Graphically, a state sequence can be identified with a sequence of arcs in the transition probability graph, and the probability of such a path (given the initial state) is given by the product of the probabilities associated with the arcs traversed by the path. </li>
-</ol>
-<h1 id="n-step-Transition-Probabilities"><a href="#n-step-Transition-Probabilities" class="headerlink" title="n-step Transition Probabilities"></a>n-step Transition Probabilities</h1><ol>
-<li>$n$-step transition probabilities are probabilities that describe the likelihood of the state at some  future time, conditioned on the current state. </li>
-<li>This is defined by $r_{ij}(n)=P(X_n=j|X_0=i)$. This is the probability that the state after $n$ time periods will be $j$, given that the current state is $i$. </li>
-<li>Chapman_Kolmogorov equation: $r_{ij}(n)=\displaystyle\sum^m_{k=1}r_{ik}(n-1)p_{kj}$, for $n&gt;1$ and all $i,j$. Start with $r_{ij}(1)=p_{ij}$. <br />Namely the sum of the product of the probability of $n-1$ steps later at state $k$ and the probability of from $k$ to $j$. <br />The trick is that once we condition on $X_{n-1}=k$, the conditioning on $X_0=i$ does not affect the probability $p_{kj}$ of reaching $j$ at the next step. </li>
-<li>We can view $r_{ij}(n)$  as the element at the $i$th row and $j$th column of $n$-step transition probability matrix. </li>
-<li>The matrix of $n$-step transition probabilities $r_{ij}(n)$ is obtained by multiplying the $i$th row of matrix of $(n-1)$-step transition probability $r_{ik}(n-1)$, with the $j$th column of one-step transition probability matrix $p_{kj}$. <br />Thus, the $n$-step transition probability matrix is the $n$th power of the transition probability matrix. </li>
-</ol>
-<h1 id="Recurrent-and-Transient"><a href="#Recurrent-and-Transient" class="headerlink" title="Recurrent and Transient"></a>Recurrent and Transient</h1><ol>
-<li>A state $j$ is accessible from a state $i$ if for some $n$, the $n$-step transition probability $r_{ij}(n)$ is positive. </li>
-<li>Let $A(i)$ be the set of states that are accessible from $i$. </li>
-<li>We say that $i$ is recurrent if for every $j$ that is accessible from $i$, $i$ is also accessible from $j$. Namely for all $j$ that belong to $A(i)$ , we have that $i$ belongs to $A(j)$. </li>
-<li>From any future state, there is always som probability of returning to $i$ and , given enough time, this is certain to happen. </li>
-<li>If a recurrent state is visited once, it’s certain to be revisited an infinite number of times. </li>
-<li>If a state is not recurrent, then it is called transient. Thus, a state $i$ is transient if there is a stete $j\in A(i)$ such that $i$ is not accessible from $j$. <br />After each visit to state $i$, there is positive probability that the state enters such a $j$. Given enough time, this will happen, and state $i$ cannot be visited after that. Thus, a transient state will only be visited a finite number of times. </li>
-<li>Transient or recurrent is determined by the arcs of the transition probability graph (wheter $p_{ij}&gt;0$) and not by the numerical values of the $p_{ij}$. </li>
-<li>If $i$ is a recurrent state, the set of states $A(i)$ that are accessible from $i$ form a recurrent class, meaning that states in $A(i)$ are all accessible from each other, and no state outside $A(i)$ is accessible from them. <br />For a recurrent state $i$, we have $A(i)=A(j)$ for all $j$ that belong to $A(i)$. </li>
-<li>At least one recurrent state must be accessible from any given transient state. <br />A recurrent state is accessible from all states in its class, but is not accessible from recurrent states in other classes. <br />A transient state is not accessible from any recurrent state. </li>
-<li>There must exist at least one recurrent state and hence at least one class. </li>
-<li>A Markov chain can be decomposed into one or more recurrent classes, plus possibly some transient states. </li>
-<li>Once the state enters (or starts in) a class of recurrent states, it stays within that class; since all states in the class are accessible from each other, all states in the class will be visited an infinite number of times. </li>
-<li>If the initial state is transient, then the state trajectory contains an initial portion consisting of transient states and a final portion consisting of recurrent states from the same class. </li>
-</ol>
-<h1 id="Periodicity"><a href="#Periodicity" class="headerlink" title="Periodicity"></a>Periodicity</h1><ol>
-<li>A recurrent class is said to be periodic if its states can be grouped in $d&gt;1$ disjoint subsets $S_1,…,S_d$ so that all transitions from one subset lead to the next subset. <br />If $i\in S$ and $p_{ij}&gt;0$, then <script type="math/tex">\left\{\begin{array}{}j\in S_{k+1} & if\ k=1,…,d-1\\j\in S_1&if\ k=d \end{array}\right.</script>. </li>
-<li>A recurrent class that is not periodic is said to be aperiodic. </li>
-<li>In a periodic recurrent class, we move through that sequence of subsets in order, and after $d$ steps, we end up in the same subset. </li>
-<li>Given a periodic recurrent class, a positive time $n$, and a state $i$ in the class, there must exist one or more states $j$ for which $r_{ij}(n)=0$. <br />Starting from $i$, only one of the sets is possible at time $n$. </li>
-<li>A way to verify aperiodicity of a given recurrent class $R$, is to check whether there is a special time $n≥1$ and a special state $i\in R$ from which all states in $R$ can be reached in $n$ steps, i.e. $r_{ij}(n)&gt;0$ for all $j\in R$. </li>
-<li>If a recurrent class $R$ is aperiodic, then there exists a time $n$ such that $r_{ij}(n)&gt;0$ for every $i$ and $j$ in $R$. </li>
-</ol>
-<h1 id="Steady-State-Behavior"><a href="#Steady-State-Behavior" class="headerlink" title="Steady-State Behavior"></a>Steady-State Behavior</h1><ol>
-<li>If there are two or more classes of recurrent states, it is clear that the limiting values of the $r_{ij}(n)$ must depend on the initial state (the possibility of visiting $j$ far into the future depends on whether $j$ is in the same class as the initial state $i$). </li>
-<li>Even for chains with a single recurrent class, the $r_{ij}(n)$ may fail to converge. </li>
-<li>The recurrent class is periodic, and for such a class, it can be seen that the $r_{ij}(n)$ generically oscillate. </li>
-<li>For every state $j$, the probability $r_{ij}(n)$ of being at state $j$ approaches a limiting value that is independent of the initial state $i$. This limiting value, denoted by $\pi_j$, has the interpretation $\pi_j\approx P(X_n=j)$, when $n$ is large, and is called the steady-state probability of $j$. </li>
-<li>For a Markov chain with a single recurrent class, which is aperiodic, <br />&emsp;for each $j$, we have $\displaystyle\lim_{i\to\infty}r_{ij}(n)=\pi_j$, for all $i$; <br />&emsp;The $\pi_j$ are unique solution to the system of equation <script type="math/tex">\displaystyle\left\{\begin{array}{}the\ balance\ equations:& \pi_j=\sum^n_{k=1}\pi_kp_{kj}&j=1,…,m\\the\ normalization\ equation:&1=\sum^m_{k=1}\pi_k \end{array}\right.</script><br />&emsp;We have <script type="math/tex">\left\{\begin{array}{}\pi_j=0 &for\ all\ transient\ states\ j\\\pi_j>0&for\ all\ recurrent\ states\ j\end{array}\right.</script>. </li>
-<li>The steady-state probabilities $\pi_j$ sum to $1$ and form a probability distribution on the state space, called the stationary distribution of the chain. <br />If the initial state is chosen according to this distribution, i.e. if $P(X_0=j)=\pi_j, j=1,…,m$, then, using the total probability theorem, we have $P(X_1=j)=\displaystyle\sum^m_{k=1}P(X_0=k)p_{kj}=\sum^m_{k=1}\pi_kp_{kj}=\pi_j$. <br />Similarly $P(X_n=j)=\pi_j$, for all $n$ and $j$. </li>
-</ol>
-<h1 id="Long-Term-Frequency-Interpretations"><a href="#Long-Term-Frequency-Interpretations" class="headerlink" title="Long-Term Frequency Interpretations"></a>Long-Term Frequency Interpretations</h1><ol>
-<li>Two way to view the long-term expected value: <br />&emsp;One way is to view it as the expected value of the number on a randomly chosen day far into the future. <br />&emsp;Another way is to calculate the total expected value of the number in $n$ days, where $n$ is very large, and divide it by $n$. </li>
-<li>For a Markov chain with a single class which is aperiodic, the steady-state probabilities $\pi_j$ satisfy $\pi_j=\displaystyle\lim_{n\to\infty}\frac{v_{ij}(n)}{n}$, where $v_{ij}(n)$ is the expected value of the number of visits to state $j$ within the first $n$ transitions, starting from state $i$. </li>
-<li>$\pi_j$ is the long-term expected fraction of time that the state is equal to $j$. Each time that state $j$ is visited, there is probability $p_{jk}$ that the next transition takes up to state $k$. We conclude that $\pi_kp_{jk}$ can be viewed as the long-term expected fraction of transitions that move the state from $j$ to $k$. </li>
-<li>Whenever we carry out a probabilistic experiment and generate a trajectory of the Markov chain over an infinite time horizon, the observed long-term frequency with which state $j$ is visited will be exactly equal to $\pi_j$, and the observed long-term frequency of transitions from $j$ to $k$ will be exactly equal to $\pi_jp_{jk}$. </li>
-<li>For $n$ transitions of a Markov chain with a single class which is aperiodic, let $q_{jk}(n)$ be the expected number of such transitions that take the state from $j$ to $k$. Then regardless of the initial state, we have $\displaystyle\lim_{n\to\infty}\frac{q_{jk}(n)}{n}=\pi_jp_{jk}$. </li>
-<li>Now we can see that the balance equation expresses the fact that the expected frequency $\pi_j$ of visits to $j$ is equal to the sum of the expected frequencies $\pi_kp_{kj}$ of the transition that lead to $j$. </li>
-</ol>
-<h1 id="Birth-Death-Process"><a href="#Birth-Death-Process" class="headerlink" title="Birth-Death Process"></a>Birth-Death Process</h1><ol>
-<li>A birth-death process is a Markov chain in which the states are linearly arranged and transitions can only occur to a neighboring state, or else leave the state unchanged. <br />$b_i=P(X_{n+1}=i+1|X_n=i)$, (“birth” probability at state $i$), <br />$d_i=P(X_{n+1}=i-1|X_n=1)$, (“death” probability at state $i$). </li>
-<li>In any trajectory of the Markov chain, a transition from $i$ to $i+1$ has to be followed by a transition from $i+1$ to $i$, before another transition from $i$ to $i+1$ can occur. </li>
-<li>The expected frequency of transitions from $i$ to $i+1$, which is $\pi_ib_i$, must be equal to the expected frequency of transitions from $i+1$ to $i$, which is $\pi_{i+1}d_{i+1}$. This leads to the local balance equations $\pi_ib_i=\pi_{i+1}d_{i+1}$, $i=0,1,…,m-1$. </li>
-<li>Using the local balance equations, we obtain $\pi_i=\pi_0\displaystyle\frac{b_0b_2…b_{i-1}}{d_1d_2…d_i}$, $i=1,…,m$. </li>
-<li>If $b_i=p,d_i=q$ for all $i$, <script type="math/tex">\rho=\displaystyle\frac{p}{q}=load\ factor≠1</script>, there are $m$ states. <br />$\pi_{i+1}=\pi_i\displaystyle\frac{p}q=\pi_i\rho$. So $\pi_i=\pi_0\rho^i$, $i=0,1,…,m$. <br />$1=\displaystyle\sum^m_{i=0}\pi_i=\pi_0(1+\rho+…+\rho^m)$. So $\pi_0=\displaystyle\frac{1-\rho}{1-\rho^{m+1}}$<br />If $p<q$, $\rho<1$ and $m\to\infty$. Then $\pi_0=1-p$ $\pi_i=(1-\rho)\rho^i$, $E[X_n]=\displaystyle\frac{\rho}{1-\rho}$. <br />If $p&gt;q$, $\rho&gt;1$ and $m\to\infty$. Then $\pi_i\to0$, for all $i$. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1573,7 +1583,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1586,7 +1596,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

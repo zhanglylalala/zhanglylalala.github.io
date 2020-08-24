@@ -132,7 +132,7 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -187,6 +187,153 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">04. 自顶向下语法分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-12 11:57:11" itemprop="dateCreated datePublished" datetime="2020-05-12T11:57:11+08:00">2020-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:50:08" itemprop="dateModified" datetime="2020-08-07T19:50:08+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>自顶向下分析法构造语法分析树是从根节点开始构造</li>
+<li>其本质是寻找文法的推导过程，一般采用最左推导</li>
+</ol>
+<h1 id="不确定的自顶向下分析-递归下降法"><a href="#不确定的自顶向下分析-递归下降法" class="headerlink" title="不确定的自顶向下分析 (递归下降法)"></a>不确定的自顶向下分析 (递归下降法)</h1><ol>
+<li>利用回溯法遍历可能情况，当没有终结符号时就回溯</li>
+<li>为每个非终结符号设计一个函数，在函数中遍历所有该非终结符号的产生式，利用DFS实现</li>
+<li>优点：对文法限制小，易于实现</li>
+<li>缺点：回溯效率低，文法左递归导致死循环，出错时难以缺点出错位置</li>
+</ol>
+<h1 id="消除左递归"><a href="#消除左递归" class="headerlink" title="消除左递归"></a>消除左递归</h1><ol>
+<li>三种类型的左递归<br />&emsp;直接 (立即)左递归：$N\to Na$<br />&emsp;间接左递归：$N\to A\alpha,A\Rightarrow^+Ny$<br />&emsp;潜在左递归：$N\to\alpha N,\alpha\Rightarrow^+\epsilon$</li>
+<li>直接左递归的消除：对于左递归$A\to A\alpha_1|A\alpha_2|…|\beta_1|\beta_2|…$<br />分析得串是从右向左生成的，以$\beta_1|\beta_2|…$开头，后面跟$(\alpha_1|\alpha_2|…)^*$<br />我们可以把左递归改为右递归，让串从左向右生成<br />$A\to\beta_1 A’|\beta_2A’|…,A’\to \alpha_1A’|\alpha_2A’|…$</li>
+<li>间接和潜在左递归的消除：找到左递归，变为直接左递归，再消除<br />代入法：将右部$\alpha$中非终结符号$N$替换为$N$的候选式<br />过程：<br />&emsp;对文法的所有非终结符号进行排序<br />&emsp;排在前面的非终结符号如果出现在后面非终结符号的右部，就把前面的非终结符号替换掉<br />&emsp;迭代替换操作<br />&emsp;每消除一个非终结符号的间接或潜在左递归，就马上消除新生成的直接左递归<br />限制：不包含环路$A\Rightarrow^+A$和$A\to\epsilon$</li>
+</ol>
+<h1 id="克服回溯问题"><a href="#克服回溯问题" class="headerlink" title="克服回溯问题"></a>克服回溯问题</h1><ol>
+<li>两种情况：<br />&emsp;相同左部的规则，右部左端第一个符号相同，无法根据当前输入符号选择产生式，只能试探<br />&emsp;相同左部的规则，某一右部能推出$\epsilon$串，不知道要不要生成其他的串</li>
+<li>对第一种情况，只需要提取左公共因子。$A\to\delta\beta_1|\delta\beta_2|…|\gamma_1|\gamma_2|…$变为$A\to\delta A’|\gamma_1|\gamma_2|…,A’\to\beta_1|\beta_2|…$</li>
+</ol>
+<h1 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h1><h2 id="FIRST集"><a href="#FIRST集" class="headerlink" title="FIRST集"></a>FIRST集</h2><ol>
+<li>$FIRST$集 (首符集)：$FIRST(\alpha)$是由任意文法符号串$\alpha$推导出的所有的文法符号串的第一个终结符号组成的集合。<script type="math/tex">FIRST(\alpha)=\{a|\alpha\Rightarrow^*a…,a\in V_T\}</script>，如果$\alpha\Rightarrow^*\epsilon$，则$\epsilon\in FIRST(\alpha)$</li>
+<li>$FIRST$集中的元素是终结符号或$\epsilon$</li>
+<li>如果$X$是一个终结符号，$FIRST(X)=\{X\}$</li>
+<li>如果$X\to\epsilon$是一个产生式，则被$\epsilon$加到$FIRST(X)$</li>
+<li>如果$X\to Y_1Y_2…Y_k$是一个产生式，<br />则把$FIRST{(Y_1)}\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果<script type="math/tex">Y_1…Y_{i-1}\Rightarrow^*\epsilon</script>，则把$FIRST(Y_i)\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_k\Rightarrow^*\epsilon$，则把$\epsilon$加入$FIRST(X)$</li>
+<li>假设$A\to\alpha$，$a\in FIRST(\alpha)$，那么当输入符号是$a$时，将待推导非终结符号替换为$\alpha$</li>
+</ol>
+<h2 id="FOLLOW集"><a href="#FOLLOW集" class="headerlink" title="FOLLOW集"></a>FOLLOW集</h2><ol>
+<li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
+<li>$FOLLOW$集中的元素是终结符号或$\$$</li>
+<li>如果$X\to AB$<br />&emsp;则$FIRST(B)\subseteq FOLLOW(A)$且$FOLLOW(X)\subseteq FOLLOW(B)$。$B$的第一个符号就是紧跟在$A$后面。凡事可以跟在$X$后面的，利用这条规则推导后都可以跟在$B$houmi<br />&emsp;如果$B\Rightarrow^*\epsilon$，则$FOLLOW(X)\subseteq FOLLOW(A)$</li>
+<li>$\$$在开始符号的$FOLLOW$集中</li>
+<li>如果$A\to\alpha B\beta$是产生式，则$FIRST(\beta)\backslash\{\epsilon\}$在$FOLLOW(B)$中</li>
+<li>如果$A\to\alpha B$或$A\to\alpha B\beta$且$\beta\Rightarrow^*\epsilon$，$FOLLOW(A)\subseteq FOLOOW(B)$</li>
+<li>算法实现<br />先把$\$$加入开始符号的$FOLLOW$集中<br />循环直到没有$FOLLOW$集改变<br />&emsp;对每一条产生式$X\to X_1X_2…X_m$，对其中的每一个非终结符号$X_j$<br />&emsp;$FOLLOW(X_j)=FOLLOW(X_j)\cup(FIRST(X_{j+1}…X_m)\backslash\{\epsilon\})$<br />&emsp;如果$\epsilon\in FIRST(X_{j+1}…X_m)$，$FOLLOW(X_j)=FOLLOW(X_j)\cup FOLLOW(X)$</li>
+<li>为了避免第二种回溯，$FIRST(B)\cap FOLLOW(B)=\emptyset$，$B$为中间非终结符号</li>
+<li>如果$A\to\alpha$，当$\alpha\Rightarrow^*\epsilon$，则当输入符号在$FOLLOW(A)$中是，用$\alpha$替代$A$</li>
+</ol>
+<h2 id="SELECT集"><a href="#SELECT集" class="headerlink" title="SELECT集"></a>SELECT集</h2><ol>
+<li>当输入符号在左部的某一产生式的$SELECT$中，则选择该条产生式</li>
+<li>对产生式$A\to\alpha,A\in V_N,\alpha\in V^*$<br />&emsp;如果$\alpha$不能推导出$\epsilon$，则$SELECT(A\to\alpha)=FIRST(\alpha)$<br />&emsp;如果$\alpha$可以推导出$\epsilon$，则$SELECT(A\to\alpha)=(FIRST(\alpha)\backslash\{\epsilon\})\cup FOLLOW(A)$</li>
+</ol>
+<h2 id="LL-1-文法-1"><a href="#LL-1-文法-1" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h2><ol>
+<li>解决了左递归和提取了左因子之后，基本避免 了回溯问题 (除了第二种回溯)，这时就可以设计确定的自顶向下分析法</li>
+<li>能使用确定的自顶向下分析法的文法称为$LL(1)$文法</li>
+<li>上下文无关文法$G$是$LL(1)$文法，当且仅当对于$G$的每一个非终结符$A$的任何两个不同产生式$A\to\alpha|\beta$，$SELECT(A\to\alpha)\cap SELECT(A\to\beta)=\emptyset$，且$\alpha$和$\beta$不能同时推导出$\epsilon$</li>
+<li>第一个$L$表示自左而右扫描输入，第二个$L$表示最左推导，$1$表示每部分析只要向前查看一个符号</li>
+<li>$LL(1)$文法不是二义的，无左递归，无左公共因子产生式</li>
+<li>无左递归，无左公共因子的文法不一定是$LL(1)$文法，还有可能有第二种回溯</li>
+<li>$LL(1)$文法可以直接用递归下降法求解</li>
+</ol>
+<h1 id="预测分析器"><a href="#预测分析器" class="headerlink" title="预测分析器"></a>预测分析器</h1><ol>
+<li>预测分析器：对于$LL(1)$文法的句子，用确定的分析方法进行分析的分析程序</li>
+<li>预测分析器是通用的架构，而不像递归是不通用的架构</li>
+<li>工作过程：在推导替代非终结符号集的时候，利用当前非终结符号和下一个输入符号，在预测分析表中查找对应产生式，并替代</li>
+<li>预测分析表就是$SELECT$集，把$SELECT$集中的右部填入左部对应行，集合内各个元素对应列的单元内</li>
+<li>预测分析表的生成过程就是$SELECT$集的遍历过程</li>
+<li>$LL(1)$文法是在分析表在那个不存在多重入口的文法</li>
+<li>一个栈存储待处理符号，栈顶元素$X$和当前输入符号$a$表示程序状态$(X,a)$，称为一个格局<br />若$X\in V_T$，判断$X$和$a$是否相同，若相同则弹出$X$，输入指针往后移，否则为出错<br />若$X\in V_N$，查得分析表$M$的元素$M[X,a]$。若查得$M[X,a]=X\to Y_1Y_2…Y_k$，则$X$弹出，依次将$Y_k,Y_{k-1},…,Y_1$压入栈中。若$M[X,a]=error$，错误分析<br />若<script type="math/tex">X=\$ </script>，如果<script type="math/tex">a=\$ </script>，分析停止，成功分析，否则失败</li>
+</ol>
+<h2 id="预测分析的错误恢复"><a href="#预测分析的错误恢复" class="headerlink" title="预测分析的错误恢复"></a>预测分析的错误恢复</h2><ol>
+<li>错误种类<br />&emsp;栈顶的终结符与当前输入符不匹配<br />&emsp;非终结符$A$在栈顶，面临输入符$a$，分析表$M[A,a]$为空<br />&emsp;$X=\$ $但$a≠\$ $</li>
+<li>应急恢复策略：跳过输入串中的一些符号，直到遇到同步符号把栈顶元素弹出为止</li>
+<li>同步符号：$FOLLOW(A)$中的所有符号作为$A$的同步符号</li>
+<li>若栈顶为终结符号，但与输入符号不符，弹出栈顶终结符号</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1173,164 +1320,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/08/06-Deep-Learning-Software/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/08/06-Deep-Learning-Software/" class="post-title-link" itemprop="url">06. Deep Learning Software</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-08 14:23:27" itemprop="dateCreated datePublished" datetime="2020-04-08T14:23:27+08:00">2020-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:48:02" itemprop="dateModified" datetime="2020-08-07T19:48:02+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="CPU-and-GPU"><a href="#CPU-and-GPU" class="headerlink" title="CPU and GPU"></a>CPU and GPU</h1><ol>
-<li>GPU has way more cores than CPU. Most CUP has no more than $10$ cores, while the GPU can contain thousands of cores. </li>
-<li>Nevertheless, the clock speed of each core of CPU is a lot faster than the GPU. </li>
-<li>Furthermore, the CPU does not have its own memory. CPU has to share the memory with the system. However, GPU can have a large amount of memory of its own. </li>
-<li>So GPU is better when doing the tedious parallel tasks, like the multiplication of matrices. CPU is better at sequential tasks. </li>
-<li>When it comes to machine learning, the GPU can be about $70$ times faster than CPU, and CUDA can be $3$ times faster than none-CUDAs. </li>
-<li>When training, to synchronize the speed of GPU and reading data, we have three solutions: <br />&emsp;Read all data into RAM. <br />&emsp;Use SSD instead of HDD. <br />&emsp;Use multiple CPU threads to prefetch data. </li>
-</ol>
-<h1 id="Deep-Learning-Software"><a href="#Deep-Learning-Software" class="headerlink" title="Deep Learning Software"></a>Deep Learning Software</h1><ol>
-<li>The networks build with NumPy can only run on the CPU, and it is hard to compute the gradients. </li>
-<li>The point of deep learning frameworks: <br />&emsp;Quickly build big computational graphs. <br />&emsp;Efficiently compute gradients in computational graphs. <br />&emsp;Run it all efficiently on GPU. </li>
-</ol>
-<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ol>
-<li>The main structure of TensorFlow is to define a computational graph first without doing any calculation. Then run the graph over and over. </li>
-<li>If we want to run the code on GPU, define the graph under the tf.device. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.device(<span class="string">'/gpu:0'</span>):</span><br></pre></td></tr></table></figure>
-Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
-<li>A placeholder is an array ran on CPU while a Variable is another kind of array ran on GPU. Usually, we declare the input and output as placeholders and weights as Variables. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(tf.float32, shape = (N, D))</span><br><span class="line"></span><br><span class="line">W = tf.Variable(tf.random_normal(D, H))</span><br></pre></td></tr></table></figure></li>
-<li>Then we define the the process of forward pass with some functions. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tf.maximum(matrix, number) <span class="comment">#a matrix of which each entry is the maximum of corresponding entry and the number</span></span><br><span class="line">tf.matmul(x, w) <span class="comment"># a matrix represents the product of the matrices</span></span><br><span class="line">tf.reduce_mean(matrix) <span class="comment"># a number represents the mean of all entries of that matrix</span></span><br><span class="line">tf.reduce_sum(matrix, axis) <span class="comment"># a vector whose each entry is the sum of that matrix along that axis.</span></span><br></pre></td></tr></table></figure></li>
-<li>The loss can be defined automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loss = tf.losses.mean_squared_error(y_pred, y)</span><br></pre></td></tr></table></figure></li>
-<li>The gradients can be calculated automatically. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.gradients(loss, [variables]) <span class="comment"># multiple gradients of loss with respect to each variables</span></span><br></pre></td></tr></table></figure></li>
-<li>If we defined the weights as Variables, then we need to update weights here. Otherwise, we do it in the session. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_w = w.assign(w - learning_rate * grad_w)</span><br></pre></td></tr></table></figure></li>
-<li>There is no computation until here, only building the graph. </li>
-<li>With the graph done, we enter the session so we can actually run the graph. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br></pre></td></tr></table></figure></li>
-<li>In the session, we can initialize the placeholders in value. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">values = &#123;placeholder_name: np.random.randn(N, D), …&#125;</span><br></pre></td></tr></table></figure></li>
-<li>If we defined the weights as Variables, we need to run graph once to initialize the weights. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess.run(tf.global_variables_initializer())</span><br></pre></td></tr></table></figure></li>
-<li>After all those things, we can now enter the for-loop to run many times to train. In each iteration, we run the graph once. The loss in the parameter is defined above in the graph. <br />&emsp;If weights are defined as Variables, we need to group the gradients before entering the session and put the group in the parameter. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">updates = tf.group(new_w, …)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = value)</span><br></pre></td></tr></table></figure>
-&emsp;If weights are defined as Placeholder, we need to update the weights here. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_val, grad_w_val, … = sess.run([loss, grad_w, …], feed_dict = values)</span><br><span class="line">values[w] -= learning_rate * grad_w_val</span><br></pre></td></tr></table></figure></li>
-<li>If we are using optimizer, <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">1e-5</span>)</span><br><span class="line">updates = optimizer.minimize(loss)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in for-loop</span></span><br><span class="line">loss_val, _ = sess.run([loss, updates], feed_dict = values)</span><br></pre></td></tr></table></figure></li>
-<li>We can also use the predefined layers, which automatically set up weight and bias for us. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># before session</span></span><br><span class="line">init = tf.contrib.layers.xavier_initializer() <span class="comment"># use Xavier initializer</span></span><br><span class="line">h = tf.layers.dense(inputs = x, </span><br><span class="line">                    units = H, </span><br><span class="line">                    activation = tf.nn.relu, </span><br><span class="line">                    kernel_initializer = init)</span><br><span class="line">y_pred = tf.layers.dense(inputs = h,</span><br><span class="line">                         units = D,</span><br><span class="line">                         kernel_initializer = init)</span><br></pre></td></tr></table></figure></li>
-<li>Furthermore, we can use Keras. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = keras.models.Sequential()</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = D, output_dim = H))</span><br><span class="line">model.add(keras.layers.core.Activation(<span class="string">'relu'</span>))</span><br><span class="line">model.add(keras.layers.core.Dense(input_dim = H, output_dim = D))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define optimizer</span></span><br><span class="line">optimizer = keras.optimizers.SGD(lr = <span class="number">1e0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build the model, specify loss function</span></span><br><span class="line">model.compile(loss = <span class="string">'mean_squared_error'</span>, optimizer = optimizer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Train model</span></span><br><span class="line">history = model.fit(x, y, nb_epoch = <span class="number">50</span>, batch_size = N, verbose = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><ol>
-<li>Three levels of abstraction: <br />&emsp;Tensor: Imperative array, but runs on GPU. This is almost a Numpy array. <br />&emsp;Variable: Node in a computational graph; stores data and gradient. This is the Tensor, Variable, Placeholder on TensorFlow. <br />&emsp;Module: A neural network layer; may store state or learnable weights. </li>
-<li><p>To run on GPU, cast tensors to a CUDA datatype. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtype = torch.cuda.FloatTensor</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>A Pytorch Variable is a node in a computational graph. All Variables have two essential properties. Data is a Tensor while grad is a Variable of gradients with the same shape as data. Naturally, grad.data is a Tensor of gradients. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X = torch.autograd.Variable(torch.randn(N, D_in), requires_grad = <span class="literal">False</span> / <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Pytorch Tensors and Variables have the same API. Variables remember how they were created for backpropagation. </p>
-</li>
-<li><p>After defined all matrices, we enter the for-loop to train the network directly. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h = x.mm(w1) <span class="comment"># matrices multiplication</span></span><br><span class="line">h_relu = h.clamp(h, min = <span class="number">0</span>) <span class="comment"># squash h into [min, max]</span></span><br><span class="line">loss = (y_pred - y).pow(<span class="number">2</span>).sum() <span class="comment"># the sum of the square of (y_pred - y)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Compute the gradient of the loss with respect to weights. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> w.grad:</span><br><span class="line">  w.grad.data.zero_() <span class="comment"># zero out grad first</span></span><br><span class="line">loss.backward()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Update the weights. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w.data -= learning_rate * w.grad.data</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can define our own autograd functions by writing forward and backward for Tensors. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLayer</span><span class="params">(torch.autograd.Function)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    self.save_for_backward(x)</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(self, grad_y)</span>:</span></span><br><span class="line">    x, = self.saved_tensors</span><br><span class="line">    grad_input = grad_y.clone()</span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> gradMatrix</span><br><span class="line">  </span><br><span class="line"> <span class="comment"># in forward process in the for-loop</span></span><br><span class="line">myLayer = MyLayer()</span><br><span class="line">y_pred = … <span class="comment"># some operations involve myLayer</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The predefined layers and loss functions are stored in <code>nn</code>. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define model</span></span><br><span class="line">model = torch.nn.Sequential(</span><br><span class="line">  torch.nn.Linear(D_in, H), </span><br><span class="line">  torch.nn.ReLU(), </span><br><span class="line">  torch.nn.Linear(H, D_out))</span><br><span class="line">loss_fn = torch.nn.MSELoss(size_average = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train model</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  <span class="comment"># Feed data</span></span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = loss_fn(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Backward</span></span><br><span class="line">  model.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.data -= learning_rate * param.grad.data</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>There also exist predefined optimizers. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Before training</span></span><br><span class="line">optimizer = torch.optim.Adam(model.parameters, lr = learning_rate)</span><br><span class="line"></span><br><span class="line"><span class="comment"># In training</span></span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can also define our own Models. Models can contain weight as variables or other Modules. We only need to implement the initialization and forward function. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, D_in, H, D_out)</span>:</span></span><br><span class="line">    super(MyModule, self).__init__()</span><br><span class="line">    self.linear1 = torch.nn.Linear(D_in, H)</span><br><span class="line">    self.linear2 = torch.nn.Linear(H, D_out)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    …</span><br><span class="line">    <span class="keyword">return</span> resultMatrix</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Define model, then all is the same</span></span><br><span class="line">model = MyModule(D_in, H, D_out)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>A DataLoader wraps a Dataset and provides mini-batching, shuffling, multithreading. When custom data is needed, write a Dataset class. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> TensorDataset, DataLoader</span><br><span class="line">loader = DataLoader(TensorDataset(x, y), batch_size = <span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> loader:</span><br><span class="line">    y_pred = model(x_batch)</span><br><span class="line">    loss = loss_fn(y_pred, y_batch)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>PyTorch has some pre-trained models which can be used immediately. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line">alexnet = torchvision.models.alexnet(pretrained = <span class="literal">True</span>)</span><br><span class="line">vgg16 = torchvision.models.vgg<span class="number">.16</span>(pretrained = <span class="literal">True</span>)</span><br><span class="line">resnet101 = torchvision.models.resnet101(pretrained = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><ol>
-<li>Tensorflow is static graphs, while PyTorch is dynamic graphs. </li>
-<li>A static graph is built at the beginning, and the graph is never changed while a dynamic graph is new each iteration. </li>
-<li>With static graphs, the framework can optimize the graph before it runs. Furthermore, when one graph is built, we can serialize the static graph and run it without the code that built that graph. We can even change other language to run it. </li>
-<li>However, to build dynamic graphs  has less code to write. Moreover, conditional and loops can be easily written with dynamic graphs. </li>
-<li>Dynamic graphs are usually used on recurrent networks, recursive networks and modular networks. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1402,7 +1391,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-count">182</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1415,7 +1404,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
