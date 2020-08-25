@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="栈的实现 栈就是一种受限的序列，每种操作都只能对栈顶元素进行操作，要么弹出，要么推入 栈需要的接口就只有：size()获取栈的大小&#x2F;empty()判空、top()获得栈顶元素的值、pop()删除栈顶元素、push()推入一个元素 栈是受限的序列，在实现的时候就可以直接由向量或列表派生 栈顶应该设置成向量的末端还是首端？如果设置在首端，每次改变元素都要移动所有元素，所以应该设置在末端">
 <meta property="article:published_time" content="2019-07-23T06:11:16.000Z">
-<meta property="article:modified_time" content="2020-08-07T11:42:05.953Z">
+<meta property="article:modified_time" content="2020-08-25T14:32:43.621Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="理论">
 <meta property="article:tag" content="数据结构">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:42:05" itemprop="dateModified" datetime="2020-08-07T19:42:05+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-25 22:32:43" itemprop="dateModified" datetime="2020-08-25T22:32:43+08:00">2020-08-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,13 +279,13 @@
 <h3 id="栈混洗"><a href="#栈混洗" class="headerlink" title="栈混洗"></a>栈混洗</h3><ol>
 <li>问题：一个起始栈，一个结果栈和一个中转栈，每次要么把起始栈的栈顶压入中转栈，要么把中转栈的栈顶压入结果栈</li>
 <li>计数：记n个元素栈混洗的结果有$sp(n)$种，考虑首元素是第k个入栈的话结果就有$sp(k - 1) \cdot sp(n - k)$，第一个是在首素之前入栈的k - 1个元素的结果，第二个是在首元素之后入栈的n - k个元素的结果，首元素可以是第1个、第2个……第n个入栈，结果就是把上式k从1累加到n</li>
-<li>化简结果是卡特兰数：$\frac{(2n)!}{(n+1)!\cdot n!}$</li>
+<li>化简结果是卡特兰数：$\displaystyle\frac{(2n)!}{(n+1)!\cdot n!}=\frac{C^{2n}_{n}}{n+1}$</li>
 <li>甄别：判断一个序列是不是另一个序列栈混洗的结果。已知甄别的结果只和顺序有关，所以以下所讲的数实际是序号</li>
-<li>定理：对于不同的三个数<code>i &lt; j &lt; k</code>，必不存在相对次序为<code>… k … j … i …</code>的序列</li>
+<li>定理：对于不同的三个数$i &lt; j &lt; k$，必不存在相对次序为$… k … j … i …$的序列</li>
 <li>算法1：枚举所有三个元素对判断，复杂度$O(n^3)$</li>
-<li>算法2：枚举两个元素i &lt; j，判断i、j、j + 1，复杂度$O(n^2)$</li>
+<li>算法2：枚举两个元素$i &lt; j$，判断$i$、$j$、$j + 1$，复杂度$O(n^2)$</li>
 <li>算法3：直接模拟，用三个栈模拟是否可以得到相应的栈，复杂度$O(n)$</li>
-<li>将栈混洗中转栈的每一次push都对应于一个左括号，pop对应于一个右括号，括号匹配就是一个栈混洗。n对括号合法匹配种数就是$sp(n)$</li>
+<li>将栈混洗中转栈的每一次push都对应于一个左括号，pop对应于一个右括号，括号匹配就是一个栈混洗。$n$对括号合法匹配种数就是$sp(n)$</li>
 </ol>
 <h2 id="延迟缓冲"><a href="#延迟缓冲" class="headerlink" title="延迟缓冲"></a>延迟缓冲</h2><p>应用：线性扫描算法模式中，在预读足够长之后方能确定可处理的前缀</p>
 <h3 id="中缀表达式求值"><a href="#中缀表达式求值" class="headerlink" title="中缀表达式求值"></a>中缀表达式求值</h3><ol>

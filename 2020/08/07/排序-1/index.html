@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="离散化 把所有数据排序去重之后，从第一个开始逐一往后标记，把每一个数据和一个整数一一对应 排序之后再离散化可以保留原始数据的大小关系，不必查询原数据，就可以直接从Hash后的值得到其大小关系  例如POJ 3179  首先很明显，这题要用二维前缀和来求解一个区域内的和  答案直接求不容易，但是判定一个值是不是答案很容易，所以可以二分答案求解  这题对空间限制比较严格，而且只有少部分的地方有非$0$">
 <meta property="article:published_time" content="2020-08-07T14:41:49.000Z">
-<meta property="article:modified_time" content="2020-08-21T08:04:08.938Z">
+<meta property="article:modified_time" content="2020-08-24T10:30:53.104Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-21 16:04:08" itemprop="dateModified" datetime="2020-08-21T16:04:08+08:00">2020-08-21</time>
+                <time title="Modified: 2020-08-24 18:30:53" itemprop="dateModified" datetime="2020-08-24T18:30:53+08:00">2020-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,6 +283,7 @@
 <li>先给每个人从$1$号标到$M$号，记$A[1\sim M]=C[i\sim M]-\displaystyle\frac{T}M$，$A$数组的前缀和$sum[1\sim M]$，则当第$k$个人为最后一个人，链从这里断开时，前缀和<br />$sum_k[k+1]=sum[k+1]-sum[k]$<br />$sum_k[k+2]=sum[k+2]-sum[k]$<br />$…$<br />$sum_k[M]=sum[M]-sum[k]$<br />$sum_k[1]=sum[1]+sum_k[M]=sum[1]+sum[M]-sum[k]$<br />$sum_k[M]=sum[k]+sum[M]-sum[k]=sum[M]$</li>
 <li>故答案为$\displaystyle\sum^M_{i=1}\bigg|sum[i]-sum[k]\bigg|$的最小值，即为$sum$数组的中位数</li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = (n + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ave = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ave += sum[i];</span><br><span class="line">    &#125;</span><br><span class="line">    ave /= n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[i] -= ave;</span><br><span class="line">        sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(sum + <span class="number">1</span>, sum + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += <span class="built_in">abs</span>(sum[i] - sum[pos]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="动态维护中位数"><a href="#动态维护中位数" class="headerlink" title="动态维护中位数"></a>动态维护中位数</h2><ol>
 <li><p>在线的做法是对顶堆算法</p>
 </li>
