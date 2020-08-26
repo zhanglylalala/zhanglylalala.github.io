@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,117 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/26/%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/26/%E6%A0%88/" class="post-title-link" itemprop="url">栈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-26 17:32:01 / Modified: 23:25:00" itemprop="dateCreated datePublished" datetime="2020-08-26T17:32:01+08:00">2020-08-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">基础数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="对顶栈"><a href="#对顶栈" class="headerlink" title="对顶栈"></a>对顶栈</h1><p><a href="https://ac.nowcoder.com/acm/contest/1005/A" target="_blank" rel="noopener">HDOJ 4699</a></p>
+<ol>
+<li>建立两个栈，一个栈存储光标前的内容，一个栈存储光标后的内容。两个数组$sum[i]$表示前$i$项前缀和，$ans[i]$表示前$i$项中最大前缀和</li>
+<li>左移操作就把左栈栈顶的元素弹入右栈中</li>
+<li>右移操作就把右栈栈顶的元素弹入左栈中，同时更新$sum$和$ans$</li>
+<li>删除操作就把左栈栈顶元素弹出</li>
+<li>插入操作就把插入的元素压入左栈中，同时更新$sum$和$ans$</li>
+<li>询问操作就直接返回$ans[k]$</li>
+<li>更新$sum$时直接叠加之前栈内已有所有元素和$sum[l.size()-1]$，即为$sum[l.size()]=sum[l.size()-1]+l.top()$</li>
+<li>更新$ans$时取之前的最大前缀和和当前前缀和最大值，即为$ans[l.size()]=max(ans[l.size()-1],sum[l.size()])$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[MAXN], ans[MAXN];</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; l, r;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sum[l.<span class="built_in">size</span>()] = sum[l.<span class="built_in">size</span>() - <span class="number">1</span>] + l.top();</span><br><span class="line">    ans[l.<span class="built_in">size</span>()] = <span class="built_in">max</span>(ans[l.<span class="built_in">size</span>() - <span class="number">1</span>], sum[l.<span class="built_in">size</span>()]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">    <span class="keyword">char</span> op;</span><br><span class="line">    <span class="keyword">int</span> inp;</span><br><span class="line">    ans[<span class="number">0</span>] = -INF;</span><br><span class="line">    <span class="keyword">while</span> (q--)</span><br><span class="line">    &#123;</span><br><span class="line">        getchar();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">        <span class="keyword">if</span> (op == <span class="string">'L'</span> &amp;&amp; !l.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            r.push(l.top());</span><br><span class="line">            l.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'R'</span> &amp;&amp; !r.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            l.push(r.top());</span><br><span class="line">            r.pop();</span><br><span class="line">            update();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'I'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            l.push(inp);</span><br><span class="line">            update();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'Q'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans[inp]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'D'</span> &amp;&amp; !l.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            l.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><p><a href="https://ac.nowcoder.com/acm/contest/1005/C" target="_blank" rel="noopener">POJ 2559</a></p>
+<ol>
+<li>我们对每一个矩形都考虑以这个矩形的高为高的最大面积</li>
+<li>如果这个矩形比它前一个矩形矮，则以它前面的矩阵为基准的所有情况都不会包括这个矩形及其以后的矩形，可以直接计算出前面的结果。而且在以这个矩形为基准的时候，前面的矩形比它高的部分对答案都没有贡献，所以可以把前面的矩形都替换成和它一样高的矩形</li>
+<li>如果这个矩形比它前一个矩形高，则以它为基准的答案可能包含后面的矩形，要继续遍历</li>
+<li>由此，我们设计一个栈：<br />如果当前矩形的高度大于等于栈顶矩形的高度，则直接入栈<br />如果当前矩形的高度小于栈顶矩形的高度，则把所有高于它的矩形从栈中弹出，并计算它们的面积，再把累积的宽度和新矩形的高度压入栈中</li>
+<li>从操作中可以看出栈内的元素必然是单调递增的，所以对于弹出计算面积时，只要累计弹出的第几个矩形，就是以这个矩形为基准的宽度</li>
+<li>遍历完后再把栈内的元素一一弹出计算</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>&lt;pair&lt;ll, ll&gt;&gt; rects; <span class="comment">// 第一个为高度，第二个为宽度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        ll <span class="built_in">height</span>;</span><br><span class="line">        <span class="keyword">char</span> ch;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!rects.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            rects.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;<span class="built_in">height</span>);</span><br><span class="line">            <span class="keyword">if</span> (rects.empty()) <span class="comment">// 栈为空，直接压入</span></span><br><span class="line">            &#123;</span><br><span class="line">                ans = <span class="built_in">height</span>;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (rects.top().first &gt; <span class="built_in">height</span>) <span class="comment">// 当前矩形的高度小于前一个矩形的高度</span></span><br><span class="line">            &#123;</span><br><span class="line">                ll accumulate = <span class="number">0</span>; <span class="comment">// 累计宽度</span></span><br><span class="line">                <span class="keyword">while</span> (!rects.empty() &amp;&amp; rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    accumulate += rects.top().second;</span><br><span class="line">                    ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans); <span class="comment">// 宽就是第几个出栈</span></span><br><span class="line">                    rects.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, accumulate + <span class="number">1</span>)); <span class="comment">// 把前面的都替换成和当前矩形一样高的</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">// 当前矩形的高度不低于前一个矩形，压入宽度为1</span></span><br><span class="line">            &#123;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll accumulate = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!rects.empty()) <span class="comment">// 最后再计算一次</span></span><br><span class="line">        &#123;</span><br><span class="line">            accumulate += rects.top().second;</span><br><span class="line">            ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">            rects.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode-cn.com/problems/maximal-rectangle/submissions/" target="_blank" rel="noopener">Leetcode 85</a></p>
+<p>这题可以变形成单调栈问题</p>
+<ol>
+<li>把每一个$1$都想象成一个小方块，小方块叠加变成矩形</li>
+<li>从第一行开始放置小方块，如果是$1$就放置一个小方块，如果是$0$就空着，最后要求的还是最大矩形的面积</li>
+<li>但是这个问题一列可能有不只一个矩形，中间可能有$0$把多个矩形空开，易知每一列都只能有一个矩形参与到答案中，所以遇到$0$的时候可以把矩形长度清空，因为包含当前矩形的答案已经遍历过了</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximalRectangle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; matrix)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (matrix.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">h</span><span class="params">(matrix[<span class="number">0</span>].<span class="built_in">size</span>(), <span class="number">0</span>)</span></span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.<span class="built_in">size</span>(); i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (matrix[i][j] == <span class="string">'0'</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        h[j] = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        h[j]++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = <span class="built_in">max</span>(ans, largestRectangleArea(h));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; rects;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">height</span> = heights[i];</span><br><span class="line">    <span class="keyword">if</span> (rects.empty())</span><br><span class="line">    &#123;</span><br><span class="line">      ans = <span class="built_in">height</span>;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">int</span> accumulate = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (!rects.empty() &amp;&amp; rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        accumulate += rects.top().second;</span><br><span class="line">        ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">        rects.pop();</span><br><span class="line">      &#125;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, accumulate + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> accumulate = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (!rects.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    accumulate += rects.top().second;</span><br><span class="line">    ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">    rects.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -2035,140 +2146,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E6%8E%92%E5%BA%8F-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/07/%E6%8E%92%E5%BA%8F-1/" class="post-title-link" itemprop="url">排序</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-07 22:41:49" itemprop="dateCreated datePublished" datetime="2020-08-07T22:41:49+08:00">2020-08-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-24 18:30:53" itemprop="dateModified" datetime="2020-08-24T18:30:53+08:00">2020-08-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">基本算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h1><ol>
-<li>把所有数据排序去重之后，从第一个开始逐一往后标记，把每一个数据和一个整数一一对应</li>
-<li>排序之后再离散化可以保留原始数据的大小关系，不必查询原数据，就可以直接从Hash后的值得到其大小关系</li>
-</ol>
-<p>例如<a href="https://ac.nowcoder.com/acm/contest/1004/F?&amp;headNav=acm" target="_blank" rel="noopener">POJ 3179</a></p>
-<ol>
-<li><p>首先很明显，这题要用<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">二维前缀和</a>来求解一个区域内的和</p>
-</li>
-<li><p>答案直接求不容易，但是判定一个值是不是答案很容易，所以可以<a href="http://www.laughingtree.cn/2020/08/07/二分/" target="_blank" rel="noopener">二分答案</a>求解</p>
-</li>
-<li><p>这题对空间限制比较严格，而且只有少部分的地方有非$0$值，所以可以把所有非$0$值的横纵坐标离散化，$500$个点离散后最大只有$1000$，来压缩空间</p>
-</li>
-<li><p>离散化后，在确认答案时，要在哈希表中找到原来的坐标对应的哈希后的坐标以及遍历的上界<br />找哈希后的坐标要求的是不大于目标坐标的点，只要找出所有在当前区域内的和即可<br />遍历上界的要求是不超过哈希表中最大元素</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1E3</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sum[MAXN][MAXN], ori[MAXN], disc[MAXN];</span><br><span class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pos[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> mid, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> bound = upper_bound(disc + <span class="number">1</span>, disc + len, disc[len - <span class="number">1</span>] - mid + <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= bound; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= bound; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">int</span> ti = upper_bound(disc + <span class="number">1</span>, disc + len, disc[i] + mid - <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">int</span> tj = upper_bound(disc + <span class="number">1</span>, disc + len, disc[j] + mid - <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (sum[i - <span class="number">1</span>][j - <span class="number">1</span>] - sum[ti][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][tj] + sum[ti][tj] &gt;= c)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">discrete</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  sort(ori, ori + n);</span><br><span class="line">  <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">  disc[<span class="number">0</span>] = -INF;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span> || ori[i] != ori[i - <span class="number">1</span>])</span><br><span class="line">    &#123;</span><br><span class="line">      disc[cnt++] = ori[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  disc[cnt++] = INF;</span><br><span class="line">  <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> c, n;</span><br><span class="line">  <span class="keyword">int</span> x, y;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;c, &amp;n);</span><br><span class="line">  <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">    pos[i] = make_pair(x, y);</span><br><span class="line">    ori[<span class="number">2</span> * i] = x;</span><br><span class="line">    ori[<span class="number">2</span> * i + <span class="number">1</span>] = y;</span><br><span class="line">  &#125;</span><br><span class="line">  len = discrete(<span class="number">2</span> * n);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> nx = lower_bound(disc + <span class="number">1</span>, disc + len, pos[i].first) - disc;</span><br><span class="line">    <span class="keyword">int</span> ny = lower_bound(disc + <span class="number">1</span>, disc + len, pos[i].second) - disc;</span><br><span class="line">    sum[nx][ny]++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      sum[i][j] += sum[i - <span class="number">1</span>][j] + sum[i][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> lo = <span class="number">0</span>, hi = disc[len - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (check(len, mid, c))</span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, lo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="中位数"><a href="#中位数" class="headerlink" title="中位数"></a>中位数</h1><ol>
-<li>在有序序列中，若下标是从$1$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n+1}{2}$，总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}{2}+1$与$\displaystyle\frac{n}{2}$的数之间的数；若下标是从$0$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n-1}{2}$，当总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}2-1$与$\displaystyle\frac{n}{2}$</li>
-<li>在一个数组中考虑$\displaystyle\sum |a[i]-x|$的最小值。假设在数轴中$a$数组有$P$个数比$x$小，有$Q$个数比$x$大<br />若$P<Q$，则每把$x+1$，要求的值都会减小$Q-P$<br />若$P&gt;Q$，则每把$x-1$，要求的值都会减小$P-Q$<br />所以使得$\displaystyle\sum|a[i]-x|$最小的$x$就是$a$数组的中位数，若$a$数组有偶数个元素，则$x$为两个中位数之间的任意数，若有奇数个元素，则$x$为中位数本身</li>
-</ol>
-<h2 id="环形均分纸牌问题"><a href="#环形均分纸牌问题" class="headerlink" title="环形均分纸牌问题"></a>环形均分纸牌问题</h2><ol>
-<li>环形均分纸牌问题只是在<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">均分纸牌问题</a>上取消一个限制，最后一个人可以把纸牌给第$1$个人</li>
-<li>从均分纸牌问题的推导中，我们可以知道必然有一个人不用给任何人纸牌，这个人就可以被看作是均分纸牌问题中的最后一个人，即环形链从这个人断开。在环形均分纸牌问题中，我们只需要枚举每一个人作为最后一个人的情况，取其结果的最小值就是答案</li>
-<li>先给每个人从$1$号标到$M$号，记$A[1\sim M]=C[i\sim M]-\displaystyle\frac{T}M$，$A$数组的前缀和$sum[1\sim M]$，则当第$k$个人为最后一个人，链从这里断开时，前缀和<br />$sum_k[k+1]=sum[k+1]-sum[k]$<br />$sum_k[k+2]=sum[k+2]-sum[k]$<br />$…$<br />$sum_k[M]=sum[M]-sum[k]$<br />$sum_k[1]=sum[1]+sum_k[M]=sum[1]+sum[M]-sum[k]$<br />$sum_k[M]=sum[k]+sum[M]-sum[k]=sum[M]$</li>
-<li>故答案为$\displaystyle\sum^M_{i=1}\bigg|sum[i]-sum[k]\bigg|$的最小值，即为$sum$数组的中位数</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = (n + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ave = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ave += sum[i];</span><br><span class="line">    &#125;</span><br><span class="line">    ave /= n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[i] -= ave;</span><br><span class="line">        sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(sum + <span class="number">1</span>, sum + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += <span class="built_in">abs</span>(sum[i] - sum[pos]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="动态维护中位数"><a href="#动态维护中位数" class="headerlink" title="动态维护中位数"></a>动态维护中位数</h2><ol>
-<li><p>在线的做法是对顶堆算法</p>
-</li>
-<li><p>把序列中从小到大的$1\sim\displaystyle\frac{M}2+1$都存储在大根堆中，$\displaystyle\frac{M}2+2\sim M$存储在小根堆中<br />小根堆中共有$\displaystyle\frac{M}2+1$个数，大根堆中一共有$\displaystyle\frac{M}2-1$个元素</p>
-</li>
-<li><p>每读入一个数，如果比大根堆的堆顶元素小，则推入大根堆，否则推入小根堆。如果有一个堆的大小不符合要求的，就把太大的那个堆的堆顶元素弹出，推入另一个堆中</p>
-</li>
-<li><p>中位数就是小根堆的堆顶元素</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; large;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; small;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">median</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> inp;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">    <span class="comment">// 推入堆中</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() == <span class="number">0</span> || inp &lt; large.top())</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      small.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 维护堆</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() &gt; i / <span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      small.push(large.top());</span><br><span class="line">      large.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (small.<span class="built_in">size</span>() &gt; i / <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(small.top());</span><br><span class="line">      small.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当有奇数个输入时，输出中位数</span></span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, large.top());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="逆序对"><a href="#逆序对" class="headerlink" title="逆序对"></a>逆序对</h1><ol>
-<li><p>在冒泡排序中，每一次交换就是修复一对逆序对，所以冒泡排序中的交换次数就是逆序对数</p>
-</li>
-<li><p>但是冒泡排序的复杂度是$O(n^2)$，相对较高，可以利用归并排序优化</p>
-</li>
-<li><p>在归并排序的归并过程中$loPtr$指向当前正在排序数组段的前半段中正在比较的数，$hiPtr$指向后半段正在比较的数。若$hiPtr$指向的数小于$loPtr$指向的数，则$hiPtr$指向的数与从$loPtr$到$mid$之间的所有数都构成逆序对</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN], tmp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo == hi - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = mergeSort(lo, mid) + mergeSort(mid, hi);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt; mid; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tmpPtr = lo, hiPtr = mid, arrPtr = lo;</span><br><span class="line">    <span class="keyword">while</span> (arrPtr &lt; hi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (tmpPtr == mid || (hiPtr != hi &amp;&amp; tmp[tmpPtr] &gt; arr[hiPtr]))</span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = arr[hiPtr++];</span><br><span class="line">            ans += mid - tmpPtr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = tmp[tmpPtr++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="数码问题"><a href="#数码问题" class="headerlink" title="数码问题"></a>数码问题</h2><ol>
-<li>在$n\times m$的矩阵中，有$n\times m-1$个数和一个空格，空格可以和其上下左右相邻的格子交换，给出两个局面，问能否从其中一个局面变换到另一个局面</li>
-<li>将矩阵内的非空格内容展开成一维数组，空格的左右交换相当于没有操作，不会改变一维数组，但空格向上交换相当于一维数组中被交换的那格向后移动了$m-1$位；向下交换相当于前移了$m-1$位</li>
-<li>若$m$为奇数，则$m-1$为偶数，移动的过程消除了$x$个逆序对，但增加了$y$个逆序对 (为方便相等的也记为新的逆序对)，且$x+y=m-1$。逆序对的数量变化为$y-x$。$x+y$是偶数，则$y-x$也是偶数。$x$与$y$要么都是奇数，要么都是偶数<br />所以若两个局面可以相互转换，则他们的一维展开逆序对的奇偶性一样</li>
-<li>若$m$为偶数，则$m-1$为奇数。则$y-x$也为奇数，则每变动一行奇偶性变动一次，即逆序对数量之差的奇偶性与行数之差的奇偶性相同</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2240,14 +2217,14 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

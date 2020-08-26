@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,100 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%BB%BA%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%BB%BA%E5%9B%BE/" class="post-title-link" itemprop="url">二分图的建图</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:12:59" itemprop="dateCreated datePublished" datetime="2019-11-09T00:12:59+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-08 19:39:57" itemprop="dateModified" datetime="2020-08-08T19:39:57+08:00">2020-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">二分图</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="依行建图与依列建图"><a href="#依行建图与依列建图" class="headerlink" title="依行建图与依列建图"></a>依行建图与依列建图</h1><p><a href="https://vjudge.net/problem/HDU-1045" target="_blank" rel="noopener">HDOJ 1045(Fire Net)</a><br>思路：<br>&emsp;1、寻找二分图<br>&emsp;&emsp;二分图的要求是要有两个互相独立的集合，而在图中最容易想到的互相独立的就是行列，且一个行号只可以和一个列号匹配，符合二分图的要求<br>&emsp;2、匹配机制<br>&emsp;&emsp;若一个格点内要放一个碉堡，就把行号和列号匹配起来<br>&emsp;3、构建二分图<br>&emsp;&emsp;由于题中的限制，我们要合并/拆分行列号，一行(列)中连续的可放点合并为一个行(列)号，被间隔的话就拆分为两个行(列)号。然后如果一个点是可放点就把那个点的行号和列号连起来建边<br>&emsp;4、然后利用匈牙利算法算出最大匹配</p>
+<p>建图代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rowNum[maxn], columnNum[maxn], graph[maxn][maxn];</span><br><span class="line"><span class="keyword">char</span> <span class="built_in">map</span>[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column, <span class="keyword">int</span> &amp; rowTotal, <span class="keyword">int</span> &amp; columnTotal)</span></span></span><br><span class="line"><span class="function"><span class="comment">//利用引用返回比行和列的总数大一的值，所以之后用到是小于号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//标行号</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>)</span><br><span class="line">				rowNum[i][j] = rowTotal++;</span><br><span class="line">			<span class="keyword">while</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>) <span class="comment">//合并连续可放点</span></span><br><span class="line">				rowNum[i][j++] = rowTotal - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//标列号</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; column; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; row; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[j][i] == <span class="string">'.'</span>)</span><br><span class="line">				columnNum[j][i] = columnTotal++;</span><br><span class="line">			<span class="keyword">while</span>(<span class="built_in">map</span>[j][i] == <span class="string">'.'</span>) <span class="comment">//合并连续可放点</span></span><br><span class="line">				columnNum[j++][i] = columnTotal - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//建图</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; j++)</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>)</span><br><span class="line">				graph[row[i][j]][column[i][j]] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="依边建图"><a href="#依边建图" class="headerlink" title="依边建图"></a>依边建图</h1><p><a href="https://vjudge.net/problem/HDU-2444" target="_blank" rel="noopener">HDOJ 2444</a><br><a href="https://vjudge.net/problem/HDU-4185" target="_blank" rel="noopener">HDOJ 4185</a><br><a href="https://vjudge.net/problem/POJ-3020" target="_blank" rel="noopener">HDOJ 3020</a><br><a href="https://vjudge.net/problem/HDU-1054" target="_blank" rel="noopener">HDOJ 1054(最小点覆盖)</a><br>如果一个图是二分图，就可以通过染色法把点分别染为两种不同的颜色，然后就可以把点依据颜色的不同分成两部分，进行二分匹配<br><strong>染色法</strong>：利用BFS，把一个点所有的邻接点染成另一种颜色，如果染色的过程中发现有两个邻接点的颜色一样，就说明这不是一个二分图</p>
+<p>当然，这种题也可以不按颜色划分，直接开始匹配。但是由于是无向边，从点集$A$到点集$B$会匹配一遍，$B$到$A$还会重复一遍，所以结果要除$2$<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxn][maxn], col[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(col, <span class="number">-1</span>, <span class="keyword">sizeof</span>(col));</span><br><span class="line">	<span class="keyword">bool</span> ok = <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(!ok) <span class="comment">//防止有非连通图</span></span><br><span class="line">	&#123;</span><br><span class="line">		ok = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			que.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(col[i] == <span class="number">-1</span>) <span class="comment">//找到一个尚未染色的点，开始染色</span></span><br><span class="line">			&#123;</span><br><span class="line">				que.push(i);</span><br><span class="line">				col[i] = <span class="number">1</span>; <span class="comment">//先给一个颜色</span></span><br><span class="line">				ok = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> cur;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			cur = que.front();</span><br><span class="line">			que.pop();</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">map</span>[cur][i]) <span class="comment">//与cur相连</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(col[i] == col[cur]) <span class="comment">//如果两个颜色一样，说明不是二分图</span></span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(col[i] == <span class="number">-1</span>) <span class="comment">//如果没有染过色</span></span><br><span class="line">					&#123;</span><br><span class="line">						col[i] = <span class="number">1</span> - col[cur]; <span class="comment">//染上和cur不同的颜色</span></span><br><span class="line">						que.push(i); <span class="comment">//入队</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>匈牙利算法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> matchZero[maxn], matchOne[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> zero)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">map</span>[zero][i] &amp;&amp; !vis[i] &amp;&amp; col[i] == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			vis[i] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!matchOne[i] || DFS(n, matchOne[i]))</span><br><span class="line">			&#123;</span><br><span class="line">				matchOne[i] = zero;</span><br><span class="line">				matchZero[zero] = i;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(matchZero, <span class="number">0</span>, <span class="keyword">sizeof</span>(matchZero));</span><br><span class="line">	<span class="built_in">memset</span>(matchOne, <span class="number">0</span>, <span class="keyword">sizeof</span>(matchOne));</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!matchZero[i] &amp;&amp; col[i] == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">			ans += DFS(n, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="有向无环图"><a href="#有向无环图" class="headerlink" title="有向无环图"></a>有向无环图</h1><p><a href="https://vjudge.net/problem/HDU-1151" target="_blank" rel="noopener">HDOJ 1151</a><br>有向无环图天生就有二分性，可以对有向无环图进行分层，奇数层是一组，偶数层是一组。但有向图由于每条边只存储一次，就不会像无向图那样反过来再匹配一遍，就不用除2。</p>
+<h1 id="单点在多路径上"><a href="#单点在多路径上" class="headerlink" title="单点在多路径上"></a>单点在多路径上</h1><p><a href="https://vjudge.net/problem/POJ-2594" target="_blank" rel="noopener">POJ 2594</a><br>一般的最小路径中，一个点只能属于一条路，但在有的问题中，一个点可以属于多条路径<br>为了防止一个点匹配过了就没了，导致其他经过这个点到另一个点的路径不见了，所以在开始匹配前要先用Floyd算法把所有连通的点直接连起来<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>[i][k] &amp;&amp; <span class="built_in">map</span>[k][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">map</span>[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1053,159 +1147,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/08/%E5%BF%AB%E9%80%9F%E5%B9%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/%E5%BF%AB%E9%80%9F%E5%B9%82/" class="post-title-link" itemprop="url">快速幂</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-08 23:33:20" itemprop="dateCreated datePublished" datetime="2019-11-08T23:33:20+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:28:56" itemprop="dateModified" datetime="2020-08-07T22:28:56+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引入：数幂"><a href="#引入：数幂" class="headerlink" title="引入：数幂"></a>引入：数幂</h1><p>a<sup>n</sup>一般的朴素算法的复杂度是O(n)，但有办法让其变为O(log n)，方法就是不断平方底数<br>原理：每一个整数指数都写为2进制的形式，从右往左算出每一位代表的数的幂， 再相乘。如11 = (1011)~2~，故3<sup>11</sup> = 3<sup>1011</sup> = 3<sup>(1000)+(10)+(1)</sup> = 3<sup>(1000)</sup> <em> 3<sup>(10)</sup> </em> 3<sup>(1)</sup> = 3<sup>8</sup> <em> 3<sup>2</sup> </em> 3<br>我们每平方一次，幂都右移一位，故当前值的最后一位就是我们正在求的那一位代表的幂值，若那位为1，则表明这个值包含在最后的答案中，否则就跳过。利用二进制的特性，我们只需要判断奇偶性就可以得知<br>分解3<sup>11</sup>求解过程：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">0</th>
-<th style="text-align:center">1</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">base</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">3<sup>2</sup></td>
-<td style="text-align:center">3<sup>4</sup></td>
-<td style="text-align:center">3<sup>8</sup></td>
-<td style="text-align:center">3<sup>16</sup></td>
-</tr>
-<tr>
-<td style="text-align:center">pow</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">ans</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">3<sup>1+2</sup></td>
-<td style="text-align:center">3<sup>1+2</sup></td>
-<td style="text-align:center">3<sup>1+2+8</sup></td>
-</tr>
-<tr>
-<td style="text-align:center">使ans更新的pow</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">11</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-</td>
-<td style="text-align:center">1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">quickPow</span><span class="params">(<span class="keyword">int</span> base, <span class="keyword">int</span> <span class="built_in">pow</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)   <span class="comment">//判断奇偶性</span></span><br><span class="line">			ans *= base;    <span class="comment">//若为奇数就乘给ans</span></span><br><span class="line">		base = base * base;    <span class="comment">//平方底数</span></span><br><span class="line">		<span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="类似的：64位整数乘法"><a href="#类似的：64位整数乘法" class="headerlink" title="类似的：64位整数乘法"></a>类似的：64位整数乘法</h1><p>求$a$乘$b$对$p$取模的值，其中$1≤a,b,p≤10^{18}$</p>
-<p>类似之前的处理，把$b$拆解成二进制，则有$b=c_{k-1}2^{k-1}+c_{k-2}2^{k-2}+…+c_02^0$，故有$a*b=c_{k-1}\cdot a\cdot 2^{k-1}+c_{k-2}\cdot a\cdot 2^{k-2}+…+c_0\cdot a\cdot2^0$</p>
-<p>利用$a$存储$a\cdot 2^{k-1}$，若$c_{i}$为$1$，则累加入结果</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">mul</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b, <span class="keyword">long</span> <span class="keyword">long</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (b)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (b &amp; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      ans += a;</span><br><span class="line">      ans %= p;</span><br><span class="line">    &#125;</span><br><span class="line">    a &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    a %= p;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="应用：等比数列求和"><a href="#应用：等比数列求和" class="headerlink" title="应用：等比数列求和"></a>应用：等比数列求和</h1><p>求和$1+q+q^2+…+q^c$</p>
-<p>若$c$为奇数，整个数列就有偶数项，把整个数列对半分，则有</p>
-<p>$\begin{equation}\begin{aligned}sum(q,c) &amp;= (1+q+…+q^{\frac{c-1}{2}}) + (q^{\frac{c+1}{2}}+…+q^c)\\&amp;=(1+q+…+q^{\frac{c-1}{2}})+q^{\frac{c+1}{2}}(1+…+q^{\frac{c-1}{2}})\\&amp;=(1+q^{\frac{c+1}{2}})(1+q+…+q^{\frac{c-1}{2}})\\&amp;=(1+q^{\frac{c+1}{2}})\cdot sum (q,\frac{c-1}{2})\end{aligned}\end{equation}$</p>
-<p>若$c$为偶数，则把最后一个$q^c$单独拿出来算，剩下的$c-1$项就是奇数项，即</p>
-<p>$\begin{equation}\begin{aligned}sum &amp;=(1+q^{\frac{c}{2}})(1+q+…+q^{\frac{c}{2}-1})+q^c\\&amp;=(1+q^{\frac{c}{2}})\cdot sum(q,\frac{c}{2}-1)+q^c \end{aligned}\end{equation}$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">sum</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> p, <span class="keyword">long</span> <span class="keyword">long</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (c == <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (p == <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (c % <span class="number">2</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> ((<span class="number">1L</span>L + <span class="built_in">pow</span>(p, (c + <span class="number">1</span>) / <span class="number">2</span>) % MOD) * (sum(p, (c - <span class="number">1</span>) / <span class="number">2</span>) % MOD)) % MOD;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ((((<span class="number">1L</span>L + <span class="built_in">pow</span>(p, c / <span class="number">2</span>) % MOD) * sum(p, c / <span class="number">2</span> - <span class="number">1</span>) % MOD) % MOD) + <span class="built_in">pow</span>(p, c)) % MOD;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="进一步：矩阵幂"><a href="#进一步：矩阵幂" class="headerlink" title="进一步：矩阵幂"></a>进一步：矩阵幂</h1><p>返回值：定义一个结构体存放二维数组，直接返回结构体。注意，结构体可以定义一个初始化函数，初始化为单位矩阵</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> matrix[maxn][maxn];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span>    <span class="comment">//初始化为单位矩阵</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++)</span><br><span class="line">			matrix[i][i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>矩阵乘法：第i行的元素和第j行的元素对应相加，得到结果的第i行第j列元素</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">mul</span><span class="params">(Matrix a, Matrix b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix ans;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)    <span class="comment">//n为矩阵行列数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			ans.matrix[i][j] = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">			&#123;</span><br><span class="line">				ans.matrix[i][j] += a.matrix[i][k] * b.matrix[k][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>矩阵幂：原理同数幂，单要先构造的是单位矩阵</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Matrix <span class="title">quickPow</span><span class="params">(Matrix base, <span class="keyword">int</span> <span class="built_in">pow</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Matrix ans;</span><br><span class="line">	ans.init();</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)</span><br><span class="line">			ans = mul(ans, base);</span><br><span class="line">		base = mul(base, base);</span><br><span class="line">		<span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>矩阵的构造：<br>首先一点，只有方阵才可以使用快速矩阵幂，故我们的目标就是构造出方阵<br>我们先得有一个递推式，然后就可以根据这个递推式来构造出矩阵<br>&emsp;矩阵乘法的另一视角：操作矩阵和基础矩阵<br>&emsp;&emsp;操作矩阵在右边就是对列进行操作，在左边就是对行进行操作。以在左边对行操作为例，操作矩阵的第i行操作后的结果就是结果矩阵的第i行，操作矩阵第i行的第j个元素就是基础矩阵的第j行乘以该元素的数值，再把基础矩阵所有行如此操作后相加得到结果矩阵的第i行<br>&emsp;如：<br />$\left[\begin{matrix}1&amp;2\\3&amp;4 \end{matrix}\right]\times\left[\begin{matrix}4&amp;3\\2&amp;1 \end{matrix}\right]=\left[\begin{matrix}1\times\left[\begin{matrix}4&amp;3 \end{matrix}\right]+2\times\left[\begin{matrix}2&amp;1 \end{matrix}\right]\\3\times\left[\begin{matrix}4&amp;3 \end{matrix}\right]+2\times\left[\begin{matrix}2&amp;1 \end{matrix}\right] \end{matrix}\right]=\left[\begin{matrix}1\times4+2\times2&amp;1\times3+2\times1\\3\times4+4\times2&amp;3\times3+4\times1 \end{matrix}\right]=\left[\begin{matrix}8&amp;5\\20&amp;13 \end{matrix}\right]$<br /></p>
-<p>我们可以利用递推式，把要求的放在结果矩阵中，需要用到的放在基础矩阵中，在凑出其余项。如我们要求斐波那契数列，已知f(n) = f(n-1) + f(n-2)，则f(n)一定在结果矩阵中，f(n-1)、f(n-2)一定在基础矩阵中。得到 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}? \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>又由递推式得 $\left[\begin{matrix}f(n) \end{matrix}\right]=\left[\begin{matrix}1&amp;1 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>此时还不能用快速矩阵幂，故我们要凑出方阵得 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]\times\left[\begin{matrix}f(n-1)\\f(n-2) \end{matrix}\right]$<br>再递推下去得到 $\left[\begin{matrix}f(n)\\f(n-1) \end{matrix}\right]=\left[\begin{matrix}1&amp;1\\1&amp;0 \end{matrix}\right]^{n-1}\times\left[\begin{matrix}f(1)\\f(2) \end{matrix}\right]$<br>然后就可以用矩阵幂在<script type="math/tex">O(log\ n)</script>内解得斐波那契数列的第n项</p>
-<h1 id="快速求一个分数的第k位"><a href="#快速求一个分数的第k位" class="headerlink" title="快速求一个分数的第k位"></a>快速求一个分数的第k位</h1><p>利用快速幂，把分子放大$10^{k-1}$，对分母取模后再乘$10$除分母就可以得到第$k$位<br><a href="https://ac.nowcoder.com/acm/contest/548/B" target="_blank" rel="noopener">牛客网练习赛43 - B</a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">qpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> <span class="built_in">pow</span>, <span class="keyword">long</span> <span class="keyword">long</span> mod)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">pow</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pow</span> &amp; <span class="number">1</span>)</span><br><span class="line">            ans = ans * a % mod;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">        <span class="built_in">pow</span> &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> m, n, k1, k2;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>, &amp;m, &amp;n, &amp;k1 ,&amp;k2);</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ans = m * qpow(<span class="number">10</span>, k1 - <span class="number">1</span>, n) % n; <span class="comment">//把分子放大10^(K-1)，对分母取模</span></span><br><span class="line">        <span class="keyword">while</span>(k1 &lt;= k2)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">//乘10除分母</span></span><br><span class="line">            ans = ans * <span class="number">10</span>;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans / n);</span><br><span class="line">            ans = ans % n;</span><br><span class="line">            k1++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="求k步可重复走，从一个点到另一个点的路径总数"><a href="#求k步可重复走，从一个点到另一个点的路径总数" class="headerlink" title="求k步可重复走，从一个点到另一个点的路径总数"></a>求k步可重复走，从一个点到另一个点的路径总数</h1><p><a href="https://ac.nowcoder.com/acm/contest/549/E" target="_blank" rel="noopener">牛客网 小白月赛13-E</a><br>先常规建图，再对邻接矩阵求$k$次幂，这时的$graph[i][j]$表示从$i$到$j$的路径总数</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1277,14 +1218,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-count">183</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
