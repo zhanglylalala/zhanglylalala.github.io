@@ -21315,8 +21315,53 @@ table th:first-of-type {
   <entry>
     <title>06. How To Talk About Science And Scientists</title>
     <url>/2020/08/27/06-How-To-Talk-About-Science-And-Scientists/</url>
-    <content><![CDATA[<p><style><br>table th:first-of-type {<br>    width: 150px;<br>}
-</style><br>|      Word      |<br>| :——————: |<br>| anthropologist |<br>|   astronomer   |<br>|   geologist    |<br>|   biologist    |<br>|    botanist    |<br>|   zoologist    |<br>|  entomologist  |<br>|  philologist   |<br>|  semanticist   |<br>|  sociologist   |</p>
+    <content><![CDATA[<style>
+table th:first-of-type {
+    width: 150px;
+}
+</style>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">anthropologist</td>
+</tr>
+<tr>
+<td style="text-align:center">astronomer</td>
+</tr>
+<tr>
+<td style="text-align:center">geologist</td>
+</tr>
+<tr>
+<td style="text-align:center">biologist</td>
+</tr>
+<tr>
+<td style="text-align:center">botanist</td>
+</tr>
+<tr>
+<td style="text-align:center">zoologist</td>
+</tr>
+<tr>
+<td style="text-align:center">entomologist</td>
+</tr>
+<tr>
+<td style="text-align:center">philologist</td>
+</tr>
+<tr>
+<td style="text-align:center">semanticist</td>
+</tr>
+<tr>
+<td style="text-align:center">sociologist</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h1 id="Greek-astron-star"><a href="#Greek-astron-star" class="headerlink" title="Greek astron: star"></a>Greek astron: star</h1><div class="table-container">
 <table>
 <thead>
