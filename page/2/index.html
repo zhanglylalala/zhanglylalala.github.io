@@ -191,6 +191,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E5%9B%BE%E8%AE%BA%E6%9D%82%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/%E5%9B%BE%E8%AE%BA%E6%9D%82%E8%B0%88/" class="post-title-link" itemprop="url">图论杂谈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-07 22:45:05 / Modified: 22:48:11" itemprop="dateCreated datePublished" datetime="2020-08-07T22:45:05+08:00">2020-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="缩点"><a href="#缩点" class="headerlink" title="缩点"></a>缩点</h1><p>一种就是比如2-sat问题中的缩点，用tarjan，用于关系模糊未知的图中<br>还可以是用并查集，把同一祖先节点的缩成一个点，用于关系明确，直接说明两个点可以缩为一个点的情况，如：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1811" target="_blank" rel="noopener">HDOJ 1811</a></p>
+<h1 id="判断环"><a href="#判断环" class="headerlink" title="判断环"></a>判断环</h1><p>有一种办法就是利用<strong>拓扑排序</strong>，但这种办法只能静态判断，不能动态，下面还有一种办法：<br>在图中，新建一条边，判断这条边会不会导致形成一个环？<br>只需要开一个二维数组，记录两个点之间有没有连边(直接 / 间接)，新建了一条a -&gt; b的边，就判断一下是不是已经有一条b -&gt; a的边，有就会构成环。<br>边的更新：首先把graph[a][b] = 1，然后开始分点更新。先更新到a的边，遍历一遍，graph[i][a]不为0就说明有路径i -&gt; a -&gt; b，就可以更新graph[i][b] = 1。再更新b出发的边，遍历一遍如果有graph[b][i]不为0，就说明有a -&gt; b -&gt; i，就更新graph[a][i] = 1，但是还不能结束，还要遍历一遍到a的点，如果还有graph[j][a]不为0，就说明有j -&gt; a -&gt; b -&gt; i，就更新graph[j][i] = 1</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	graph[a][b] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (graph[i][a])</span><br><span class="line">		&#123;</span><br><span class="line">			graph[i][b] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (graph[b][i])</span><br><span class="line">		&#123;</span><br><span class="line">			graph[a][i] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (graph[j][b])</span><br><span class="line">				&#123;</span><br><span class="line">					graph[j][i] = <span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E4%BA%8C%E5%88%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1403,181 +1486,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">07. 语义分析和中间代码生成</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-20 21:54:23" itemprop="dateCreated datePublished" datetime="2020-05-20T21:54:23+08:00">2020-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:49:32" itemprop="dateModified" datetime="2020-08-07T19:49:32+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h1><ol>
-<li>中间代码可以是一个真正的语言，也可以是各个阶段共享的多个内部数据结构</li>
-<li>中间代码生成的任务：把语法分析和语义分析完成后得到的源程序中间表示翻译为中间代码</li>
-<li>独立于机器的中间代码便于编译系统的建立和移植，便于进行独立于机器的代码优化</li>
-</ol>
-<h2 id="图表示法"><a href="#图表示法" class="headerlink" title="图表示法"></a>图表示法</h2><h3 id="抽象语法树"><a href="#抽象语法树" class="headerlink" title="抽象语法树"></a>抽象语法树</h3><ol>
-<li>抽象语法：语言结构本质性的东西，不考虑具体符号表示</li>
-<li>抽象语法树：反映抽象语法，是分析书的抽象形式或压缩形式</li>
-<li>抽象语法树中每一个叶节点都表示运算对象，内部节点表示运算符</li>
-<li>分析树反映的是具体语法结构</li>
-<li>语法规则中符号可能起标点符号作用，也可能起解释作用</li>
-<li>辅助函数：<br />&emsp;<script type="math/tex">mknode(op,\ left,\ right)</script>建立一个运算符节点<br />&emsp;<script type="math/tex">mkleaf(id,\ entry)</script>建立一个标识符节点，即变量下存储的运算对象，变量名为$id$，变量的值为$value$<br />&emsp;<script type="math/tex">mkleaf(num,\ val)</script>建立一个数节点，标号为$num$，数的值为$val$</li>
-<li>利用语法制导定义，每一个产生式的语义规则都是其对应节点的产生辅助函数。如果产生式是$E\to id$，就用<script type="math/tex">mkleaf(id,\ entry)</script>；若是$E\to num$，就用<script type="math/tex">mkleaf(num,\ val)</script>；其它的就用<script type="math/tex">mknode(op,\ left,\ right)</script>来产生对应的运算符</li>
-<li>利用图像直观地展示从分析树生成语法树的过程就可以用箭头从一个语法树的节点指向生成的那个节点，并将节点中的域指针指向对应的语法树节点。最后再把分析树和从分析树指向语法树的箭头去掉，就得到一个语法树</li>
-</ol>
-<h3 id="有向非循环图"><a href="#有向非循环图" class="headerlink" title="有向非循环图"></a>有向非循环图</h3><ol>
-<li>在抽象语法树中，有大量节点表示的是同一个值，这造成了大量的空间浪费</li>
-<li>我们可以把抽象语法树中的公共节点提取出来，只建立一个节点，并把原本指向不同的同值节点的域指针都指向那一个公共节点</li>
-<li>显然这样产生的图就不再是一棵树，一个公共节点可能有多个父节点</li>
-<li>我们相当于只是把原本语法树的节点合并成一个，并没有改变其走向，所以这个图不会有循环</li>
-<li>现在在构造节点前要先检查现有节点，若存在相同节点，就直接返回，确定了不存在相同节点才会创建新的节点</li>
-</ol>
-<h2 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h2><ol>
-<li>$\Theta$是$k$目运算符，则$\Theta$作用于$e_1e_2…e_k$的结果用$e_1e_2…e_k\Theta$表示</li>
-<li>对语法树进行一次后根遍历得到的序列就是后缀式</li>
-<li>还是利用语法制导定义，设置每一个产生式的语义规则为给左部赋予一个$code$属性，表示改产生式的后缀式。用$||$表示空格，将符号串连接起来</li>
-<li>后缀式的优点是易于计算机处理表达式</li>
-<li>常见的是栈算法，详见 <a href="http://www.laughingtree.cn/2019/07/23/栈和队列/" target="_blank" rel="noopener">栈和队列</a></li>
-</ol>
-<h2 id="三地址代码"><a href="#三地址代码" class="headerlink" title="三地址代码"></a>三地址代码</h2><ol>
-<li>一般形式：<script type="math/tex">x\ :=\ y\ op\ z</script></li>
-<li>一般包含三个地址：两个操作分量和一个结果的抽象地址</li>
-<li>通常用变量名代替抽象地址</li>
-<li>三地址代码是语法树或DAG的线性表示，用临时变量代替语法树中的节点</li>
-<li>三地址代码的类型<br />&emsp;赋值语句：<script type="math/tex">x\ :=\ y\ op\ z</script>    <script type="math/tex">x\ :=\ op\ y</script><br />&emsp;无条件转移语句：<script type="math/tex">goto\ L</script><br />&emsp;条件转移语句：<script type="math/tex">if\ x\ relop\ y\ goto\ L</script>，关系运算符号<script type="math/tex">relop(<,\ =, 等等)</script><br />&emsp;复制语句：<script type="math/tex">x\ :=\ y</script><br />&emsp;过程调用语句：先用$n$次<script type="math/tex">param\ x</script>依次调用各个参数，再用<script type="math/tex">call\ p,\ n</script>表示调用的函数和参数个数<br />&emsp;过程返回语句：<script type="math/tex">return\ y</script><br />&emsp;索引赋值语句：$x := y[i]$，<script type="math/tex">x[i]\ :=\ y</script><br />&emsp;地址和指针赋值语句：<script type="math/tex">x\ :=\ \&y</script>，<script type="math/tex">x\ :=\ *y</script>，<script type="math/tex">*x\ :=\ y</script></li>
-<li>语法制导翻译的属性<br />&emsp;$E.place$表示存放$E$值的名字<br />&emsp;$E.code$表示对$E$求值的三地址语句序列。先计算涉及到的计算对象，再用计算当前对象。如<br />&emsp;<script type="math/tex">E.code=E_1.code||E_2.code||gen(E.place':='E_1.place'+'E_2.place)</script><br />&emsp;$newtemp$是个函数，产生一个新的临时变量</li>
-<li>实际实现中，三地址语句序列往往是被放到一个输出文件中，而不是将三地址语句序列置入$code$属性之中</li>
-<li>具体实现<br />&emsp;四元式：<script type="math/tex">op,\ arg1,\ arg2,\ result</script><br />&emsp;三元式：<script type="math/tex">op,\ arg1,\ arg2</script>。结果就存放在当前三元式的地方，要调用是直接调用当前三元式的编号<br />&emsp;间接三元式：间接码表+三元式表。三元式放在一个单独的表中，间接码表中每一行都指向不同的三元式<br />&emsp;涉及到单目运算的不使用$arg2$<br />&emsp;$param$只用$arg1$<br />&emsp;转移指令将目标标号放入$result$</li>
-<li>实现方式的比较<br />&emsp;四元式调整顺序方便，引入的临时变量多，所需存储空间大<br />&emsp;三元式所需存储空间小，但调整顺序不变，调整后还需改变其余行对当前行的引用指针<br />&emsp;间接三元式调整顺序和四元式差不多方便，所需的存储空间也和四元式差不多多</li>
-</ol>
-<h1 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h1><ol>
-<li>类型检查是语义分析的重要组成部分</li>
-<li>编译器先根据类型说明，确定每一个变量和常量的类型，计算其使用存储空间大小，从而建立其到存储空间的映射。进而，编译器要确定每个语言结构的类型，判定重载算符 (函数)在程序中代表哪个、类型转换、类型检查</li>
-<li>类型表达式：<br />&emsp;类型名和基本类型是类型表达式<br />&emsp;类型构造符作用于类型表达式的结果仍然是类型表达式<br />&emsp;&emsp;数组构造符$ARRAY(I,T)$，$I$是下标集合，$T$是数组类型<br />&emsp;&emsp;笛卡尔乘积$\times$，<script type="math/tex">A\times B=\{(x,y)|x\in A\ and\ y\in B\}</script><br />&emsp;&emsp;记录类型构造符$RECORD$，其结果类似$C$中的结构体<br />&emsp;&emsp;指针类型构造符$POINTER$，其结果是一个指针类型<br />&emsp;&emsp;函数类型构造符$\to$，$D_1\times D_2\times…\times D_n\to R$<br />&emsp;类型表达式中可以出现类型变量，类型变量的值科院是任何类型表达式</li>
-<li>分类<br />&emsp;静态类型检查：由编译器完成的检查<br />&emsp;动态类型检查：目标程序运行时完成的检查。若目标代码把每个对象的类型和值一起保存，那么任何检查都可以动态完成</li>
-<li>强类型语言：保证编译器所接受的程序不会有运行时的类型错误的语言</li>
-<li>类型检查的内容：表达式、语句、函数</li>
-<li>变量标识符类型的确定<br />&emsp;语义分析程序先处理类型说明，建立类型表达式，然后处理变量说明，建立变量和类型表达式的绑定<br />&emsp;把变量标识符的类型信息记录在其符号表的表项中，$addtype(id.entry,T.type)$完成这个任务，引入综合属性$T.type$记录类型表达式</li>
-<li>表达式的类型检查：检查运算对象之间是否满足相容条件。综合属性$E.type$表示$E$的类型表达式。常用$IF…THEN…ELSE$或$lookup(id.entry)$</li>
-<li>语句的类型检查：主要包括赋值语句类型的相容性、控制表达式的结果类型检查。语句中没有类型错误就是$void$，否则为$type_error$。语句中有表达式，所以还要对表达式类型检查</li>
-<li>函数引用的类型检查：检查参数是否和函数类型一致，是则返回函数返回值的类型</li>
-<li>必须类型转换：赋值号右边的类型转换为左边的类型；整数转换成实数</li>
-<li>类型表达式在源程序的中间表示里插入这些转换操作</li>
-<li>自动类型转换 (隐式转换)：从一种数据类型转换成另一种数据类型，可以由编译器自动完成<br />强制类型转换 (显式转换)：必须由程序员显式地写在源程序中，在类型检查器中类似函数调用</li>
-</ol>
-<h1 id="常用语句的翻译"><a href="#常用语句的翻译" class="headerlink" title="常用语句的翻译"></a>常用语句的翻译</h1><h2 id="说明语句的翻译"><a href="#说明语句的翻译" class="headerlink" title="说明语句的翻译"></a>说明语句的翻译</h2><ol>
-<li>说明语句：对程序中规定范围内使用的各类变量、常数、过程进行说明</li>
-<li>编译要做的工作：在符号表中建立相应的表项，填写有关的信息。如类型、嵌套深度、相对地址</li>
-<li>$T.width$记录名字的域宽，$T.type$记录名字的类型，$enter(id.name,T.type,offset)$为名字$name$建立一个符号表表项</li>
-<li>用一个全局变量$offset$来记录下一个可用单元相对于初始单元的相对地址。每新建一个变量，就给$offset$叠加该变量的域宽</li>
-</ol>
-<h3 id="保留作用域信息"><a href="#保留作用域信息" class="headerlink" title="保留作用域信息"></a>保留作用域信息</h3><ol>
-<li>同一个标识符有可能在不同的范围内表示不同的信息，要正确区分在各个范围内引用的标识符而不产生混乱</li>
-<li>首先要解决的问题是局部数据和非局部数据的访问</li>
-<li>方法是为每个过程建立一张符号表，每张表都有一个指针指向其直接外围过程的符号表，如果内部数据中无法找到，就顺着指针去直接外围过程符号表找</li>
-<li>子过程名$id$作为直接外围过程的局部名字记录在直接外围过程符号表中，其中还有一个指针指向子过程$id$</li>
-<li>每次生成一个过程 (包括主程序)，先执行定位操作，记录所需空间，若不是主程序，还要返回到外围过程，再执行重定位操作，创建主出现的符号表、初始化</li>
-<li>翻译过程用到一个栈存放指向外围过程的指针。还有一个栈存放变量的相对地址，当过程结束时，里面记录的就是该过程占用的所有字节数</li>
-<li>辅助操作<br />&emsp;$mktable(previous)$创建一张新符号表<br />&emsp;$enter(table,name,type,offset)$插入表项<br />&emsp;$addwidth(table,width)$记录总域宽<br />&emsp;$enterproc(table,name,newtable)$进入过程</li>
-<li>记录声明：定位操作中建立一个空表记录各个域中的信息，最后的重定位操作中将各域的总域宽作为该记录型的域宽，返回记录声明所在过程的符号表</li>
-</ol>
-<h2 id="赋值语句的翻译"><a href="#赋值语句的翻译" class="headerlink" title="赋值语句的翻译"></a>赋值语句的翻译</h2><ol>
-<li>利用过程$lookup(id.name)$检查是否在符号表中存在相应次名字的表项</li>
-<li>$lookup$函数先通过$top(tblptr)$指针在当前符号表中查找，若找到直接返回；若没找到，就到当前表的外围表找，直到找到返回，或所有外围表项都没找到，返回$nil$</li>
-<li>查找只要对终结符中的标识符查找，不必对非终结符或终结符中的常量查找</li>
-<li>语义动作应包括类型分析，文法符阿訇应有类型属性，在类型分析的基础上，进行相容和赋值相容检查，生成类型转换的三地址代码</li>
-<li>一维数组$A$的基址为$base$，域宽为$w$，下标下界为$low$，上界为$high$。$A[i]$的位置为$i\times w+base-low\times w$<br />二维数组行列下界分别为$low_1,low_2$，长度$n_1,n_2$，$A[i][j]$位置为$(i\times n_2 + j)\times w + base-(low_1\times n_2+low_2)\times w$<br />$A[i_1,i_2,…,i_k]$的地址为$((…((i_1\times n_2+i_2)\times n_3+i_3)…)\times n_k+i_k)\times w+base-((…((low_1\times n_2+low_2)\times n_3+low_3)…)\times n_k+low_k)\times w$</li>
-<li>我们用$Elist$来表示数组的一个下标，多个下标用逗号分割。定义其属性$Elist.array$为数组名在符号表的位置，$Elist.ndim$为目前已经识别出的下标表达式的个数，$Elist.place$保存递推公式中临时变量位置</li>
-<li>如果一个变量的$.offset$属性是$null$，则为简单变量，如果是一个变项，则是一个数字元素，且其值为$Elist.array$</li>
-<li>访问记录中的域：先找到符号表里的记录变量的位置，再找到记录表的位置</li>
-</ol>
-<h2 id="布尔表达式和控制流语句"><a href="#布尔表达式和控制流语句" class="headerlink" title="布尔表达式和控制流语句"></a>布尔表达式和控制流语句</h2><ol>
-<li>布尔表达式与一般的算术表达式类似，运算符是与或非等，运算量是布尔常量或关系表达式，运算结果是布尔常量</li>
-<li>布尔表达式的值的表示方法：数值法、控制流表示法。布尔表达式的翻译方法也是这两种</li>
-<li>数值翻译法就只有一个属性$E.place$存放$E$的布尔数值，控制流翻译法就有$E.true$表示$E$值为真时应执行的第一条语句的标号，$E.false$表示$E$值为假时应执行的第一条语句的标号。他们都有$E.code$表示三地址代码</li>
-<li>对语句$S$有：$S.next$表示紧跟在语句$S$之后的三地址语句的标号，$S.begin$表示语句$S$的第一条三地址语句的标号，$S.code$表示语句$S$的三地址代码</li>
-</ol>
-<h3 id="回填技术"><a href="#回填技术" class="headerlink" title="回填技术"></a>回填技术</h3><ol>
-<li>两遍扫描的翻译技术 ($L$属性定义，深度优先翻译)：先产生分析树，再为分析树加注释 (翻译)</li>
-<li>一边扫描技术 ($S$属性定义，自底向上翻译)的问题时生成某些转移指令时，目标地址可能还不知道，即布尔表达式的真出口和假出口可能还不知道</li>
-<li>解决：先产生无转移标号的转移语句，再转向标号确定后，再把语句标号填上，即回填</li>
-<li>定义综合属性$E.truelist$记录转移到$E$的真出口的指令的链表指针，$E.falselist$记录转移到$E$的假出口的指令的链表指针。一个真出口链表里可能有不止一个指针，但他们指向的语句的跳转出口都是一样的</li>
-<li>在计算时，我们先把所有带回填且需回填同一个值的指针串成一条链，当满足回填要求的时候就把其中的每一个都填上</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1649,7 +1557,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

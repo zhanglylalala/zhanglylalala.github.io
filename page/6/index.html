@@ -191,6 +191,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/" class="post-title-link" itemprop="url">04. Discrete Random Variables; Probability Mass Functions; Expectations</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-12 18:14:27" itemprop="dateCreated datePublished" datetime="2020-03-12T18:14:27+08:00">2020-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:07" itemprop="dateModified" datetime="2020-08-07T19:35:07+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Random-Variables"><a href="#Random-Variables" class="headerlink" title="Random Variables"></a>Random Variables</h1><ol>
+<li>Sometimes we can use a random variable to associate the (numerical) value with each outcome. </li>
+<li>A random variable is a real valued function of the experimental outcome. </li>
+<li>A function of a random variable defines another random variable. </li>
+<li>A random variable can be conditioned on an event or on another random variable. </li>
+<li>A random variable can be independent of an event or from another random variable. </li>
+<li>A random variable is called discrete if its range is either finite or countably infinite. </li>
+<li>If $Y=g(X)$ is a function of a random variable $X$, then $Y$ is also a random variable. </li>
+</ol>
+<h1 id="Probability-Mass-Function"><a href="#Probability-Mass-Function" class="headerlink" title="Probability Mass Function"></a>Probability Mass Function</h1><ol>
+<li>Probability mass function (PMF) of a discrete random variable $X$ can capture the probabilities of the values that it can take. PMF of $X$ is denoted $p_X$. </li>
+<li>If $x$ is any possible value of $X$, the probability mass of $x$ denoted $p_X(x)$ is the probability of the event $\{X=x\}$ consisting of all outcomes that give rise to a value of $X$ equal to $x$: $p_X(x)=P(\{X=x\})$ or $p_X(x)=P(X=x)$. </li>
+<li>Convention: upper case characters denote random variables and lower case characters denote real numbers such as the numerical values of a random variable. </li>
+<li>The events $\{X=x\}$ are disjoint and form a partition of the sample space. So: $\displaystyle\sum_xp_X(x)=1$ and $P(X\in S)=\displaystyle\sum_{x\in S}p_X(x)$. </li>
+<li>$p_X(x)$ equals the sum of the probabilities of all outcomes that give rise to event $\{X=x\}$. </li>
+<li>If $Y=g(X)$, $p_Y(y)=\displaystyle\sum_{\{x|g(x)=y\}}p_X(x)$. </li>
+</ol>
+<h1 id="Special-Random-Variable"><a href="#Special-Random-Variable" class="headerlink" title="Special Random Variable"></a>Special Random Variable</h1><ol>
+<li>The Bernoulli random variable takes the two values $1$ and $0$. And its PMF is <script type="math/tex">p_X(x)=\left\{\begin{array}{}p&if\ x=1\\1-p&if\ x=0 \end{array}\right.</script></li>
+<li>The Binomial random variable: In $n$ times of Bernoulli experiment, $x=1$ has happened $k$ times. Its PMF is $p_X(k)=P(X=k)=\big(^n_k\big)p^k(1-p)^{n-k}$. </li>
+<li>The geometric random variable: In $n$ times of Bernoulli experiment, $x=1$ haven’t occurred until $k$th time. Its PMF is $p_X(k)=(1-p)^{k-1}p$. </li>
+<li>The Poisson random variable has PMF of $p_X(k)=e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}$. This is a binomial random variable with very small $p$ and very large $n$. $e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}\approx\big(^n_k\big)p^k(1-p)^{n-k}$. $\lambda=np$</li>
+</ol>
+<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><ol>
+<li>The expectation of $X$ is a weighted average of the possible values of $X$. $E[X]=\displaystyle\sum_xxp_X(x)$. </li>
+<li>The expectationid well-defined if $\displaystyle\sum_x|x|p_X(x)&lt;\infty$. In this case, it’s known that the infinite sum converges to a finite value that is independent of the order in which the various terms are summed. </li>
+<li>The expectation is the center of gravity of the PMF. The sum of the torques from the weights to its left is equal to the sum of the torques from the weights to its right. $\displaystyle\sum_x(x-c)p_X(x)=0$. </li>
+<li>The $n$th moment as $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
+<li>The variance of $X$ is $var(X)=E[(X-E[X])^2]$. </li>
+<li>The variance provides a measure of dispersion of $X$ around its mean. </li>
+<li>Another measure of dispersion is the standard deviation of $X$, $\sigma_X=\sqrt{var(X)}$. </li>
+<li>The PMF of $(X-E[X])^2$ is not alway the same PMF of $X$. </li>
+<li>Expected value rule for functions of random variables: $E[g(X)]=\displaystyle\sum_xg(x)p_X(x)$. <br />So the variance: $var(X)=E[(X-E[x])^2]=\displaystyle\sum_x(x-E[x])^2p_X(x)$. <br />The $n$th moment: $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
+<li>Variance is zero if and only if all $x=E[X]$. </li>
+<li>In general, $E[g(X)]≠g(E[X])$</li>
+</ol>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ol>
+<li>The expectation of a constant is itself. $E[c]=c$. </li>
+<li>Define $Y=aX+b$, $E[Y]=\displaystyle\sum_x(ax+b)p_X(x)=a\sum_xxp_X(x)+b\sum_xp_X(x)=aE[x]+b$<br />$\begin{equation}\begin{split}var(Y)&amp;=\displaystyle\sum_x(ax+b-E[aX+b])^2p_X(x)\\&amp;=\sum_x(ax+b-aE[x]-b)^2p_X(x)\\&amp;=a^2\sum_x(x-E[x])^2p_X(x)\\&amp;=a^2var(X) \end{split}\end{equation}$</li>
+<li><br />$\begin{equation}\begin{split}var(X)&amp;=\sum_x(x-E[X])^2p_X(x)\\&amp;=\sum_x(x^2-2xE[X]+(E[X])^2)p_X(x)\\&amp;=\sum_xx^2p_X(x)-2E[x]\sum_xxp_X(x)+(E[X])^2\sum_xp_X(x)\\&amp;=E[X^2]-2(E[X])^2+(E[X])^2\\&amp;=E[X^2]-(E[X])^2 \end{split}\end{equation}$</li>
+<li>For discrete uniform over $[a,b]$: <br />$p_X(k)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a+1}&amp;if k=a,a+1,…b\\0&amp;otherwise \end{array}\right.$<br />$E[X]=\displaystyle\frac{a+b}{2}$, $var(X)=\displaystyle\frac{(b-a)(b-a+2)}{12}$</li>
+<li>For Bernoulli random variable: <br />$E[X]=1\cdot p+0\cdot(1-p)=p$<br />$E[X^2]=1^2\cdot p+0^2\cdot(1-p)=p$<br />$var(X)=E[X^2]-(E[X])^2=p-p^2=p(1-p)$</li>
+<li>For Poisson random variable: <br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\sum^\infty_{k=1}ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}e^{-\lambda}\frac{\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}e^{-\lambda}\frac{\lambda^m}{m!}\\&amp;=\lambda \end{split}\end{equation}$</li>
+<li>For Binomial random variable:  $E[X]=\displaystyle\sum_{i=1}^nE[X_i]=\sum^n_{i=1}p=np$</li>
+</ol>
+<h1 id="Other-PMF-Models"><a href="#Other-PMF-Models" class="headerlink" title="Other PMF Models"></a>Other PMF Models</h1><h2 id="Joint-PMF"><a href="#Joint-PMF" class="headerlink" title="Joint PMF"></a>Joint PMF</h2><ol>
+<li>The probability of the values that $X$ and $Y$ can take are captured by the joint PMF of $X$ and $Y$, denoted $p_{X,Y}$. $p_{X,Y}(x,y)=P(X=x,Y=y)$. </li>
+<li>$P((X,Y)\in A)=\displaystyle\sum_{(x,y)\in A}p_{X,Y}(x,y)$</li>
+<li>Sometimes, we refer to $p_X$ and $p_Y$ as the marginal PMFs. And we can calculate the marginla PMFs by using the tabular method, $p_X(x)=\displaystyle\sum_{y}p_{X,Y}(x,y)$</li>
+<li>If $Z=g(X,Y)$, $p_Z(z)=\displaystyle\sum_{\{(x,y)|g(x,y=z)\}}p_{X,Y}(x,y)$</li>
+<li>The expected value rule: $E[g(X,Y)]=\displaystyle\sum_x\sum_yg(x,y)p_{X,Y}(x,y)$</li>
+<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
+</ol>
+<h2 id="Conditional-PMF"><a href="#Conditional-PMF" class="headerlink" title="Conditional PMF"></a>Conditional PMF</h2><ol>
+<li>$p_{X|A}(x)=P(X=x|A)=\displaystyle\frac{P(\{X=x\}\cap A)}{P(A)}=\frac{P(\{X=x\}\cap A)}{\sum_xP(\{X=x\}\cap A)}$</li>
+<li>$E[X|A]=\displaystyle\sum_xxp_{X|A}(x)$<br />$E[X|Y=y]=\displaystyle\sum_xxp_{X|Y}(x|y)$</li>
+<li>$p_{X|Y}(x|y)=P(X=x|Y=y)=\displaystyle\frac{p_{X,Y}(x,y)}{p_Y(y)}$</li>
+<li>$p_{X,Y}(x,y)=p_{X|Y}(x|y)\cdot p_Y(y)=p_{Y|X}(y|x)\cdot p_X(x)$</li>
+<li>Partition of sample space into disjoint events $A_1,A_2,…,A_n$. <br />$p_X(x)=\displaystyle\sum_{i=1}^nP(A_i)p_{X|A_i}(x)$<br />$p_{X|B}(x)=\displaystyle\sum^n_{i=1}P(A_i|B)p_{X|A_i\cap B}(x)$<br /> Total expectation theorem: $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$<br />$E[X|B]=\displaystyle\sum^n_{i=1}P(A_i|B)E[X|A_i\cap B]$</li>
+<li>$E[g(X)|A]=\displaystyle\sum_xg(x)p_{X|A}(x)$</li>
+<li>$E[X]=\displaystyle\sum_yp_Y(y)E[X|Y=y]$</li>
+<li>Geometric random variable: <br />$E[X]=P(X=1)E[X|X=1]+P(X&gt;1)E[X|X&gt;1]$<br />$E[X|X&gt;1]=E[X-1|X-1&gt;0]+1=E[X]+1$<br />So $E[X]=p\cdot 1+(1-p)(E(x)+1)$. <br />$E[X]=\displaystyle\frac{1}{p}$<br />Similarly, we can obtain $E[X^2|X&gt;1]=E[(1+X)^2|X+1&gt;1]=E[(1+X)^2]=1+2E[X]+E[X^2]$<br />So that $E[X^2]=p\cdot 1+(1-p)(1+2E[X]+E[X^2])$ from which we obtain $E[X^2]=\displaystyle\frac{2}{p^2}-\frac{1}{p}$. <br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1-p}{p^2}$</li>
+</ol>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li>The random variable $X$ is independent of the event $A$ if <script type="math/tex">P(X=x\ and\ A)=P(X=x)P(A)=p_X(x)P(A)</script> for all $x$. </li>
+<li><script type="math/tex; mode=display">P(X=x\ and\ A)=p_{X|A}(x)P(A)</script></li>
+<li>$p_{X|A}(x)=p_X(x)$ for all $x$</li>
+<li>Two random variables $X$ and $Y$ are independent if $p_{X,Y}(x,y)=p_X(x)p_Y(y)$, for all $x,y$. </li>
+<li>$X$ and $Y$ are said to be conditionally independent, given a positive probability event $A$, if $P(X=x,Y=y|A)=P(X=x|A)P(Y=y|A)$ or $p_{X,Y|A}(x,y)=p_{X|A}(x)p_{Y|A}(y)$, for all $x$ and $y$. </li>
+<li>If $X $ and $Y$ are independent random variables, then <br />$g(X)$ and $h(Y)$ are also independent. <br />$E[XY]=E[X]E[Y]$ and $E[g(X)h(Y)]=E[g(X)]E[h(Y)]$<br />$var(X+Y)=var(X)+var(Y)$</li>
+<li>Three  random variables $X,Y,Z$ are said to be independent if $p_{X,Y,Z}(x,y,z)=p_X(x)p_Y(y)p_Z(z)$ for all $x,y,z$</li>
+<li>If $X,Y,Z$ are independent, then <br />$f(X),g(Y),h(Z)$ are also independent and $g(X,Y)$ and $h(Z)$ are independent. <br />$var(\displaystyle\sum^n_{i=1}X_i)=\sum^n_{i=1}var(X_i)$</li>
+<li>For Binomial random variable: <br />For each toss, we let $X_i$ be the random variable which is equal to 1 if the $i$th toss comes up a head. Then $X=\displaystyle\sum^n_{i=1}X_i$<br />$var(X)=\displaystyle\sum^n_{i=1}v ar(X_i)=np(1-p)$</li>
+<li>For Poisson random variable: <br />$E[Y]=\lambda$<br />$\begin{equation}\begin{split}E[Y^2]&amp;=\displaystyle\sum^\infty_{k=1}k^2e^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}k\frac{e^{-\lambda}\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}(m+1)\frac{e^{-\lambda}\lambda^m}{m!}\\&amp;=\lambda(E[Y]+1)\\&amp;=\lambda(\lambda+1) \end{split}\end{equation}$<br />$var(Y)=E[Y^2]-(E[Y])^2=\lambda(\lambda+1)-\lambda^2=\lambda$</li>
+<li>For Bernoulli random variable: <br />Let $X=1$ is event occurred. Then $E[X]=p,var(X)=p(1-p)$<br />Sample mean $S_n=\displaystyle\frac{X_1+X_2+…+X_n}{n}$<br />$E[S_n]=\displaystyle\sum^n_{i=1}\frac{1}{n}E[X_i]=p$<br />$var(S_n)=\displaystyle\sum^n_{i=1}\frac{1}{n^2}var(X_i)=\frac{p(1-p)}{n}$<br />Not only for Bernoulli experiments, $var(S_n)=\displaystyle\frac{var(X)}{n}$ as long as $X_i$ are independent, with common mean $E[X]$ and variance $var(X)$. <br />The sample mean $S_n$ can be viewed as a good estimate of the probability of $X=1$. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/03-Independence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1143,105 +1300,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/26/05-Lagrange-Multipliers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/26/05-Lagrange-Multipliers/" class="post-title-link" itemprop="url">05. Lagrange Multipliers</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-26 13:22:31" itemprop="dateCreated datePublished" datetime="2020-02-26T13:22:31+08:00">2020-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:16" itemprop="dateModified" datetime="2020-08-07T22:36:16+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lagrange-Multipliers"><a href="#Lagrange-Multipliers" class="headerlink" title="Lagrange Multipliers"></a>Lagrange Multipliers</h1><ol>
-<li>The goal is to minize of maximize a function <script type="math/tex">f(x,y,z)</script> where <script type="math/tex">x,y,z</script> are not independent, namely <script type="math/tex">g(x,y,z)=c</script>. </li>
-<li>At the minimum/maximum, the level curve of <script type="math/tex">f</script> is tangent to the hyperbola <script type="math/tex">g</script>. </li>
-<li>Find the tangent point: If the two curves are tangent at that point, the two curves share the same tangent line, namely their normal vectors are parallel. So <script type="math/tex">\triangledown f \parallel \triangledown g</script>, i.e. <script type="math/tex">\triangledown f=\lambda\triangledown g</script>. </li>
-<li><script type="math/tex">\left\{\begin{array}{}f_x=\lambda g_x\\f_y=\lambda g_y\\\dots\\g=c\end{array}\right.</script> is the <code>Lagrange equations</code> to solve all the variables and <script type="math/tex">\lambda</script>. </li>
-<li>The partial derivative equations can form <script type="math/tex">A\vec{x}=\vec{0}</script> (<script type="math/tex">A</script> contains constants and <script type="math/tex">\lambda</script> and <script type="math/tex">\vec{x}</script> is the vector of variables). Normally <script type="math/tex">\vec{x}</script> will not be a solution to <script type="math/tex">g=c</script>, so <script type="math/tex">A\vec{x}=\vec{0}</script> must has at least one nontrivial solution. So the determinant of <script type="math/tex">A</script> is zero, which allows us to solve <script type="math/tex">\lambda</script>. </li>
-<li>At constrained min/max, in any direction along level <script type="math/tex">g=c</script> the rate of change of <script type="math/tex">f</script> must be <script type="math/tex">0</script>. <br />For any <script type="math/tex">\vec{u}</script> tangent of <script type="math/tex">g=c</script>, we must have <script type="math/tex">\displaystyle\frac{df}{ds}\Big|_\vec{u}=0</script>. So any such <script type="math/tex">\vec{u}</script> is perpendicular to <script type="math/tex">\triangledown f</script>. <br /><script type="math/tex">\triangledown f</script> is perpendicular to level set of <script type="math/tex">g</script>. Since <script type="math/tex">\triangledown g</script> is perpendicular to level set of <script type="math/tex">f</script>, <script type="math/tex">\triangledown f\parallel\triangledown g</script>. </li>
-<li>We cannot use second derivatives to distinguish if the point is minimum or maximum. To find out about that ,we can only compare values of <script type="math/tex">f</script> at various solution to Lagrange equations. </li>
-</ol>
-<h1 id="Non-independent-Variables"><a href="#Non-independent-Variables" class="headerlink" title="Non-independent Variables"></a>Non-independent Variables</h1><ol>
-<li>If <script type="math/tex">g(x,y,z)=c</script>, how to find <script type="math/tex">\displaystyle\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}</script>? </li>
-<li><script type="math/tex">dg=\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz</script>. Since <script type="math/tex">g=c</script>, <script type="math/tex">dg=0</script>, <script type="math/tex">\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz=0</script>. Plug in the point <script type="math/tex">(x,y,z)</script>, we can have a relationship of <script type="math/tex">a_0dx+a_1dy+a_2dz=0</script> which contains among the change of <script type="math/tex">x, y</script> and <script type="math/tex">z</script>. </li>
-<li>Separate <script type="math/tex">dx, dy</script> or <script type="math/tex">dz</script> and compare to the equation <script type="math/tex">dz=\displaystyle\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy</script>, we can have <script type="math/tex">\displaystyle\frac{\partial g}{\partial x},\frac{\partial g}{\partial y}</script>. Or we can set <script type="math/tex">y</script> constant by setting <script type="math/tex">dy=0</script>. </li>
-<li>So in general, <script type="math/tex">\displaystyle\frac{\partial z}{\partial x}=-\frac{g_x}{g_z}</script> and <script type="math/tex">\displaystyle\frac{\partial z}{\partial y}=-\frac{g_y}{g_z}</script>. </li>
-<li><script type="math/tex">(\displaystyle\frac{\partial g}{\partial x})_y</script> means when calculating the partial derivative, we set <script type="math/tex">y</script> constant. Normally when <script type="math/tex">x=u</script>, <script type="math/tex">\displaystyle(\frac{\partial g}{\partial x})_y≠(\frac{\partial g}{\partial x})_v=(\frac{\partial  g}{\partial u})_v</script>. </li>
-<li>In the function <script type="math/tex">w=f(x,y,z)</script>, <script type="math/tex">dw=f_xdx+f_ydy+f_zdz</script>. <br />One variable is set constant (<script type="math/tex">x</script> for example), and from above we can solve <script type="math/tex">dy</script> in terms of <script type="math/tex">dz</script>. <br />Then substitute <script type="math/tex">dx=0</script> and <script type="math/tex">dy</script> into the differential equation, to get <script type="math/tex">(\displaystyle\frac{dw}{dz})_x</script>. </li>
-<li>Another way: <br />In the chain rule: <script type="math/tex">(\displaystyle\frac{\partial w}{\partial z})_x=f_z(\frac{\partial z}{\partial z})_x+f_x(\frac{\partial x}{\partial z})_x+f_y(\frac{\partial y}{\partial z})_x</script>. <br /><script type="math/tex">(\displaystyle\frac{\partial z}{\partial z})_x=1</script> and <script type="math/tex">(\displaystyle\frac{\partial x}{\partial z})_x=0</script>. We can also find <script type="math/tex">(\displaystyle\frac{\partial y}{\partial z})</script> in the constrain. <br />Substitute all the three into the differential equation to find the solution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1313,7 +1371,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
