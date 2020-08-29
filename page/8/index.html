@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,95 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/16/12-Trigonometric-Integrals-and-substitution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/16/12-Trigonometric-Integrals-and-substitution/" class="post-title-link" itemprop="url">12. Trigonometric Integrals and Substitution</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-16 09:58:21" itemprop="dateCreated datePublished" datetime="2020-02-16T09:58:21+08:00">2020-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:19:29" itemprop="dateModified" datetime="2020-08-07T19:19:29+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Trigonometric-Integrals"><a href="#Trigonometric-Integrals" class="headerlink" title="Trigonometric Integrals"></a>Trigonometric Integrals</h1><ol>
+<li>Trigonomatric formulas: <br />&emsp;Double Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}cos (2\theta)=cos^2\ \theta-sin^2\ \theta\\sin(2\theta)=2sin\ \theta\ cos\ \theta\end{array}\right.</script><br />&emsp;Half Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}\displaystyle cos^2\theta=\frac{1+cos\ (2\theta)}{2}\\sin^2\theta=\displaystyle\frac{1-cos\ (2\theta)}{2}\end{array}\right.</script><br />&emsp;<script type="math/tex">sec\ \theta=\displaystyle\frac{1}{cos\ \theta}</script><br />&emsp;<script type="math/tex">csc\ \theta=\displaystyle\frac{1}{sin\ \theta}</script><br />&emsp;<script type="math/tex">cot\ \theta=\displaystyle\frac{cos\ \theta}{sin\ \theta}</script><br />&emsp;<script type="math/tex">sec^2\ \theta=1+tan^2\ \theta</script><br />&emsp;<script type="math/tex">(tan\ \theta)'=sec^2\ \theta</script><br />&emsp;<script type="math/tex">(sec\ \theta)'=sec\ \theta\ tan\ \theta</script><br />&emsp;<script type="math/tex">\displaystyle\int tan\ x\ dx=-ln\ |cos(x)|+c</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\int sec\ x\ dx$$<br />&emsp;Add the derivative of $$sec\ x$$ and $$tan\ x$$ together to get $$(sec\ x+tan\ x)'=(sec\ x+tan\ x)sec\ x$$. <br />&emsp;Assign $$u=sec\ x+tan\ x$$. $$sec\ x=\displaystyle\frac{u'}{u}=\frac{d}{dx}ln(u)$$. <br />&emsp;So $$\displaystyle\int sec\ x\ dx=\int\frac{d}{dx}ln\ (u)dx=ln\ (u)+c=ln\ (sec\ x+tan\ x)+c</script></li>
+<li><script type="math/tex">\displaystyle\int sin^n(x)cos^m(x)dx</script><br />If at least one exponent is odd. <br />&emsp;Use <script type="math/tex">sin^2x+cos^2x=1</script> to eliminate the odd exponent to <script type="math/tex">1</script>. <br />&emsp;Then we can assign <script type="math/tex">u</script> to the other one and use the substitution. <br />If both exponents are even. <br />&emsp;Use the half angle formulas to eliminate both <script type="math/tex">sin</script> and <script type="math/tex">cos</script>. <br />&emsp;If after elimination we are still in this case, just do it again until the situation becomes the the aforementioned case. </li>
+<li><script type="math/tex; mode=display">\displaystyle\int \sqrt{a^2-y^2}dy$$. Assign $$y=asin\ \theta$$. <br />$$\begin{equation}\begin{split}\displaystyle\int acos\ \theta\ (acos\ \theta)d\theta&=a^2\int cos^2\theta\ d\theta\\&=a^2\int \frac{1+cos(2\theta)}{2}d\theta\\&=a^2(\frac{\theta}{2}+\frac{sin\ (2\theta)}{4})+c\\&=a^2(\frac{\theta}{2}+\frac{sin\ \theta\ cos\ \theta}{2})+c\\&=\frac{a^2\ \theta}{2}+\frac{(a\ sin\ \theta)(a\ cos\ \theta)}{2}+c\\&= \frac{a^2\ arcsin(\frac{y}{a})}{2}+\frac{y\sqrt{a^2-y^2}}{2}+c\end{split}\end{equation}</script></li>
+<li>When involve <script type="math/tex">a^2-x^2</script>, we can think about making <script type="math/tex">x=acos\ \theta</script> or <script type="math/tex">x=asin\ \theta</script>. <script type="math/tex">a^2-x^2=a^2sin^2\theta</script> and <script type="math/tex">dx=-asin\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">a^2+x^2</script>, we can think about <script type="math/tex">x=atan\ \theta</script>, then <script type="math/tex">a^2+x^2=sec^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">x^2-a^2</script>, we can think about <script type="math/tex">x=asec\ \theta</script>, then <script type="math/tex">x^2-a^2=tan^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ tan\ \theta</script></li>
+<li>In the form of <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{x^2+2ax}}</script> or similar forms, we can complete the square to <script type="math/tex">(x+a)^2-a^2</script>, and use substitution <script type="math/tex">u=x+a</script> to change the original form to <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{u^2-a^2}}</script>. Now the problem returns to the trigonometric substitution. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1090,105 +1179,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/02-Limits-continuity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/10/02-Limits-continuity/" class="post-title-link" itemprop="url">02. Limits, continuity</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-10 10:48:18" itemprop="dateCreated datePublished" datetime="2020-02-10T10:48:18+08:00">2020-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:23:30" itemprop="dateModified" datetime="2020-08-07T19:23:30+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Limits"><a href="#Limits" class="headerlink" title="Limits"></a>Limits</h1><ol>
-<li>Easy limits: this is the limits that only need to plug in the variable. </li>
-<li>Derivatives are always harder. We need cancellation to make it work. </li>
-<li><code>Right-hand limit</code>: variable approaches the constant from the right-hand side of the x-axis. <script type="math/tex">x\to x_0^+=\left\{\begin{array}{lr}x\to x_0\\x>x_0\end{array}\right.</script>. <br /><code>Left-hand limit</code>: variable approaches the constant from the left-hand side of the x-axis. <script type="math/tex">x\to x_0^-=\left\{\begin{array}{lr}x\to x_0\\x<x_0\end{array}\right.</script>. </li>
-</ol>
-<h1 id="Continuity"><a href="#Continuity" class="headerlink" title="Continuity"></a>Continuity</h1><ol>
-<li><script type="math/tex">f</script> is <code>continuous</code> at <script type="math/tex">x_0</script> means <script type="math/tex">\displaystyle\lim_{x\to x_0}f(x)=f(x_0)</script>. <br />&emsp;The limit exists from both left and right hand side and <script type="math/tex">\displaystyle\lim_{x\to x_0^+}f(x)=\displaystyle\lim_{x\to x_0^-}f(x)</script>. <br />&emsp;<script type="math/tex">f(x_0)</script> is defined. <br />&emsp;They are equal. </li>
-<li>The continuous can also be expressed by <script type="math/tex">\displaystyle\lim_{x\to x_0}{f(x)-f(x_0)}=0</script>. </li>
-<li><code>Jump discontinuity</code>: the limit from left and right exist but not equal. </li>
-<li><code>Removable discontinuity</code>: the limit from left and right are equal but <script type="math/tex">f(x_0)</script> is not defined. </li>
-<li><code>Infinite discontinuity</code>: the limit from left and right approaches to infinity, not necessarily equal. </li>
-<li><code>Other discontinuities</code>: no left or right limits. </li>
-<li>If <script type="math/tex">f</script> is differentiable at <script type="math/tex">x_0</script>, then <script type="math/tex">f</script> is continuous at <script type="math/tex">x_0</script>. <br />Proof: <script type="math/tex">\displaystyle\lim_{x\to x_0}{f(x)-f(x_0)}=\displaystyle\lim_{x\to x_0}{\displaystyle\frac{f(x)-f(x_0)}{x-x_0}(x-x_0)}=f'(x_0)\cdot 0=0</script>. </li>
-</ol>
-<h1 id="Two-Important-Equations"><a href="#Two-Important-Equations" class="headerlink" title="Two Important Equations"></a>Two Important Equations</h1><ol>
-<li><script type="math/tex">\displaystyle\lim_{x\to 0}{\displaystyle\frac{sin\ x}{x}}=1</script><br />&emsp;Geometric proof: <br />&emsp;&emsp;In the graph below is a unit circle. The green line is <script type="math/tex">2sin\ \theta</script> and the red curve is <script type="math/tex">2\theta</script>. <br />&emsp;&emsp;So the limit is <script type="math/tex">\displaystyle\frac{length\ of\ straight\ line}{length\ of\ curve}</script> as <script type="math/tex">\theta</script> approaches to <script type="math/tex">0</script>. <br />&emsp;&emsp;And the result is the curve become more and more like a straight line which equals to the line. <br />&emsp;&emsp;So the limit is <script type="math/tex">1</script>. <br />&emsp;&emsp;<img src="/img/02.Limitscontinuity01.png" width="15%"></li>
-<li><script type="math/tex">\displaystyle\lim_{x\to 0}{\displaystyle\frac{1-cos\ x}{x}}=0</script><br />&emsp;&emsp;Geometric proof: <br />&emsp;&emsp;In the graph below, that green line is <script type="math/tex">1-cos\ \theta</script>. The red line is <script type="math/tex">\theta</script>. <br />&emsp;&emsp;So the limit is <script type="math/tex">\displaystyle\frac{length\ of\ straight\ line}{length\ of\ curve}</script> as <script type="math/tex">\theta</script> approaches to <script type="math/tex">0</script>. <br />&emsp;&emsp;And as <script type="math/tex">\theta</script> approaching, that green line decays way faster than the red line. <br />&emsp;&emsp;So the limit is <script type="math/tex">0</script>. <br />&emsp;&emsp;<img src="/img/02.Limitscontinuity02.png" width="15%"></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1260,20 +1250,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

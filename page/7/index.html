@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,106 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/27/06-Double-Integrals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/06-Double-Integrals/" class="post-title-link" itemprop="url">06. Double Integrals</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-27 16:11:44" itemprop="dateCreated datePublished" datetime="2020-02-27T16:11:44+08:00">2020-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:35:51" itemprop="dateModified" datetime="2020-08-07T22:35:51+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Double-Integral"><a href="#Double-Integral" class="headerlink" title="Double Integral"></a>Double Integral</h1><ol>
+<li>Double integral is calculating the volumn below graph of <script type="math/tex">f</script> on a certain region <script type="math/tex">R</script>. It’s denoted by <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>. <script type="math/tex">dA</script> stands for area. </li>
+<li>Like in the one variable integral, we cut <script type="math/tex">R</script> into small pieces of area <script type="math/tex">\Delta A</script>. Mark each pieces with its center <script type="math/tex">(x_i,y_i)</script>. <br />Then answer is <script type="math/tex">\displaystyle\lim_{\Delta A\to 0}\sum f(x_i,y_i)\Delta A</script>. </li>
+<li>To compute <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>, take slices let <script type="math/tex">S(x)</script> is area of slice by plane parallel to <script type="math/tex">yoz</script> plane. Then the volumn is <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}} S(x)dx</script>. For given <script type="math/tex">x</script>, <script type="math/tex">S(x)=\displaystyle\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy</script>. <br />Conclusion, <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{x_{max}}_{x_{min}}\bigg[\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\bigg]dx</script></li>
+<li>The bounds of outer integral are pure constants while the bounds of inner integral may contain <script type="math/tex">x</script>. However in inner integrals <script type="math/tex">x</script> is set constant. </li>
+<li>When exchanging order of integration, remember to change the bounds. Draw <script type="math/tex">y_{max}(x)</script> and <script type="math/tex">y_{min}(x)</script> in the inteval <script type="math/tex">[x_{min},x_{max}]</script> to find the new bounds. Normally <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}}\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\ dx</script> becomes <script type="math/tex">\displaystyle\int^{y_{max}}_{x_{min}}\int^{x_{max}(y)}_{x_{min}(y)}f(x,y)dx\ dy</script> (<script type="math/tex">x_{max}(y)\ is\ y^{-1}_{min}(x)</script> and <script type="math/tex">x_{min}(y)\ is\ y^{-1}_{max}(x)</script>). </li>
+</ol>
+<h1 id="Polar-Coordination"><a href="#Polar-Coordination" class="headerlink" title="Polar Coordination"></a>Polar Coordination</h1><ol>
+<li>In polar coordination, we substitute <script type="math/tex">\left\{\begin{array}{}x=rcos\ \theta\\y=rsin\ \theta\end{array}\right.</script> to get the function <script type="math/tex">f(r,\theta)</script>. </li>
+<li>In perpendicular coordination, we can do all those things because <script type="math/tex">\Delta A=\Delta x\cdot \Delta y</script>. But in polar coordination, cut <script type="math/tex">R</script> into small pieces of fan-shaped area with straight lines from origin and circles. So <script type="math/tex">\Delta A=width\ between\ rings\cdot\ arclength=\Delta r\cdot r\Delta\theta</script>, namely <script type="math/tex">da=rdr\ d\theta</script></li>
+<li>So <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{\theta_{max}}_{\theta_{min}}\int^{r_{max}(\theta)}_{r_{min}(\theta)}f(r,\theta)rdr\ d\theta</script></li>
+</ol>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><ol>
+<li>The area of given region <script type="math/tex">R</script> in two dimension is <script type="math/tex">\displaystyle Area(R)=\iint_R1\ dA</script>. </li>
+<li>The density of a flat matter in a unit area is <script type="math/tex">\delta</script>, then the mass is <script type="math/tex">m=\displaystyle\iint_R\delta\ dA</script>. </li>
+<li>Average value of <script type="math/tex">f</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{Area(R)}\iint_RfdA</script><br />Weighted average of <script type="math/tex">f</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{\iint_R\delta dA}\iint_Rf\delta dA</script>. </li>
+<li>Center of mass of a planer object with density <script type="math/tex">\delta</script>: <script type="math/tex">\left\{\begin{array}{}\overline{x}=\displaystyle\frac{1}{mass}\iint_Rx\delta\ dA\\\overline y= \displaystyle\frac{1}{mass}\iint_Ry\delta\ dA\end{array}\right.</script></li>
+<li>Moment of inertia about an axis: <script type="math/tex">I=\displaystyle\iint_Rr^2\delta\ dA</script> (<script type="math/tex">r</script> is the spin radius)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1063,95 +1163,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/16/12-Trigonometric-Integrals-and-substitution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/16/12-Trigonometric-Integrals-and-substitution/" class="post-title-link" itemprop="url">12. Trigonometric Integrals and Substitution</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-16 09:58:21" itemprop="dateCreated datePublished" datetime="2020-02-16T09:58:21+08:00">2020-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:19:29" itemprop="dateModified" datetime="2020-08-07T19:19:29+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Trigonometric-Integrals"><a href="#Trigonometric-Integrals" class="headerlink" title="Trigonometric Integrals"></a>Trigonometric Integrals</h1><ol>
-<li>Trigonomatric formulas: <br />&emsp;Double Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}cos (2\theta)=cos^2\ \theta-sin^2\ \theta\\sin(2\theta)=2sin\ \theta\ cos\ \theta\end{array}\right.</script><br />&emsp;Half Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}\displaystyle cos^2\theta=\frac{1+cos\ (2\theta)}{2}\\sin^2\theta=\displaystyle\frac{1-cos\ (2\theta)}{2}\end{array}\right.</script><br />&emsp;<script type="math/tex">sec\ \theta=\displaystyle\frac{1}{cos\ \theta}</script><br />&emsp;<script type="math/tex">csc\ \theta=\displaystyle\frac{1}{sin\ \theta}</script><br />&emsp;<script type="math/tex">cot\ \theta=\displaystyle\frac{cos\ \theta}{sin\ \theta}</script><br />&emsp;<script type="math/tex">sec^2\ \theta=1+tan^2\ \theta</script><br />&emsp;<script type="math/tex">(tan\ \theta)'=sec^2\ \theta</script><br />&emsp;<script type="math/tex">(sec\ \theta)'=sec\ \theta\ tan\ \theta</script><br />&emsp;<script type="math/tex">\displaystyle\int tan\ x\ dx=-ln\ |cos(x)|+c</script></li>
-<li><script type="math/tex; mode=display">\displaystyle\int sec\ x\ dx$$<br />&emsp;Add the derivative of $$sec\ x$$ and $$tan\ x$$ together to get $$(sec\ x+tan\ x)'=(sec\ x+tan\ x)sec\ x$$. <br />&emsp;Assign $$u=sec\ x+tan\ x$$. $$sec\ x=\displaystyle\frac{u'}{u}=\frac{d}{dx}ln(u)$$. <br />&emsp;So $$\displaystyle\int sec\ x\ dx=\int\frac{d}{dx}ln\ (u)dx=ln\ (u)+c=ln\ (sec\ x+tan\ x)+c</script></li>
-<li><script type="math/tex">\displaystyle\int sin^n(x)cos^m(x)dx</script><br />If at least one exponent is odd. <br />&emsp;Use <script type="math/tex">sin^2x+cos^2x=1</script> to eliminate the odd exponent to <script type="math/tex">1</script>. <br />&emsp;Then we can assign <script type="math/tex">u</script> to the other one and use the substitution. <br />If both exponents are even. <br />&emsp;Use the half angle formulas to eliminate both <script type="math/tex">sin</script> and <script type="math/tex">cos</script>. <br />&emsp;If after elimination we are still in this case, just do it again until the situation becomes the the aforementioned case. </li>
-<li><script type="math/tex; mode=display">\displaystyle\int \sqrt{a^2-y^2}dy$$. Assign $$y=asin\ \theta$$. <br />$$\begin{equation}\begin{split}\displaystyle\int acos\ \theta\ (acos\ \theta)d\theta&=a^2\int cos^2\theta\ d\theta\\&=a^2\int \frac{1+cos(2\theta)}{2}d\theta\\&=a^2(\frac{\theta}{2}+\frac{sin\ (2\theta)}{4})+c\\&=a^2(\frac{\theta}{2}+\frac{sin\ \theta\ cos\ \theta}{2})+c\\&=\frac{a^2\ \theta}{2}+\frac{(a\ sin\ \theta)(a\ cos\ \theta)}{2}+c\\&= \frac{a^2\ arcsin(\frac{y}{a})}{2}+\frac{y\sqrt{a^2-y^2}}{2}+c\end{split}\end{equation}</script></li>
-<li>When involve <script type="math/tex">a^2-x^2</script>, we can think about making <script type="math/tex">x=acos\ \theta</script> or <script type="math/tex">x=asin\ \theta</script>. <script type="math/tex">a^2-x^2=a^2sin^2\theta</script> and <script type="math/tex">dx=-asin\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">a^2+x^2</script>, we can think about <script type="math/tex">x=atan\ \theta</script>, then <script type="math/tex">a^2+x^2=sec^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">x^2-a^2</script>, we can think about <script type="math/tex">x=asec\ \theta</script>, then <script type="math/tex">x^2-a^2=tan^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ tan\ \theta</script></li>
-<li>In the form of <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{x^2+2ax}}</script> or similar forms, we can complete the square to <script type="math/tex">(x+a)^2-a^2</script>, and use substitution <script type="math/tex">u=x+a</script> to change the original form to <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{u^2-a^2}}</script>. Now the problem returns to the trigonometric substitution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1223,20 +1234,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
