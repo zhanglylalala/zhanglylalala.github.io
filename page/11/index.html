@@ -191,6 +191,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/31/10-Graphs-Networks-Incidence-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/31/10-Graphs-Networks-Incidence-Matrices/" class="post-title-link" itemprop="url">10. Graphs, Networks, Incidence Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-01-31 14:08:23" itemprop="dateCreated datePublished" datetime="2020-01-31T14:08:23+08:00">2020-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:14:16" itemprop="dateModified" datetime="2020-08-07T19:14:16+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><ol>
+<li><code>Graph</code> is a model consisting of <code>nodes</code> connected by <code>edges</code>. </li>
+<li>A graph where every pair of nodes is connected by an edge is called <code>complete</code>. </li>
+<li>A graph without closed loop is a <code>tree</code>. </li>
+<li>The complete graph has a maximum number of edges <script type="math/tex">\displaystyle\frac{1}{2}n(n-1)</script>. <br />The tree has a minimum number of edges <script type="math/tex">n-1</script>. </li>
+</ol>
+<h1 id="Incidence-Matrix"><a href="#Incidence-Matrix" class="headerlink" title="Incidence Matrix"></a>Incidence Matrix</h1><ol>
+<li><code>Incidence matrix</code> is a $m$ by $n$ matrix that tells how the <script type="math/tex">n</script> nodes are connected by the <script type="math/tex">m</script> edges. </li>
+<li>Every entry of an incidence matrix is <script type="math/tex">0</script>, <script type="math/tex">1</script>, or <script type="math/tex">-1</script>. <script type="math/tex">0</script> represents that that node has nothing to do with that edge. If the $i$th edge starts from the $j_1$th node and ends at the $j_2$th node, $(i,j_1)=-1$ while $(i,j_2)=1$. </li>
+<li>Elimination of the incidence matrix reduces every graph to a tree. </li>
+<li>Loops produce dependent rows in the matrix and zero rows in the echelon form <script type="math/tex">U</script> and <script type="math/tex">R</script>. </li>
+<li>When <script type="math/tex">\vec{x}</script> is the voltage at the nodes, <script type="math/tex">A\vec{x}</script> gives the differences along all edges. </li>
+<li>The nullspace of <script type="math/tex">A</script> means all differences between the voltage of <script type="math/tex">A</script> are $0$. So The nullspace of <script type="math/tex">A</script> contains all vectors with all components equal. <script type="math/tex">dim(N(A))=1</script></li>
+<li>The dimension of row space of <script type="math/tex">A</script> is the number of edges of a tree <script type="math/tex">n-1</script>. A vector <script type="math/tex">\vec{v}</script> is in the row space if and only if it is perpendicular to any vectors in the nullspace, i.e. the sum of all components equals to zero. </li>
+<li>If we add differences around a closed loop in the graph, they cancel to leave zero. <br /><code>Kirchhoff&#39;s Voltage Law</code>: The components of <script type="math/tex">A\vec{x}=\vec{b}</script> add to zero around every loop. For example, for every triangle, <script type="math/tex">b_1+b_2-b_3=0</script><br />We can use this law to test if a vector is in the column space. </li>
+<li><code>Kirchhoff&#39;s Current Law</code>: <script type="math/tex">A^T\vec{y}=\vec{0}</script>, flow in equals flow out at each node. <br />Now each component in <script type="math/tex">\vec{y}</script> means the flow in each edge. <br />Every equation in <script type="math/tex">A^T\vec{y}</script> stands for the sum of in (<script type="math/tex">1</script>) and out (<script type="math/tex">-1</script>) of each node in the flow net, i.e. the value of each nodes gain (positive) or loss (negative). <br />The easiest way to satisfy this law is to flow around a loop. Each loop is a special solution to <script type="math/tex">A^T\vec{y}=\vec{0}</script> (backward edge is <script type="math/tex">-1</script>). <br />So <script type="math/tex">dim(N(A^T))=m-r=m-n+1</script> is the number of small independent loops in the graph. </li>
+<li><code>Euler&#39;s formula</code>: <code>(number of nodes) - (number of edges) + (number of small loops) = n - m + (m-n+1) = 1​</code></li>
+</ol>
+<h1 id="With-Sources"><a href="#With-Sources" class="headerlink" title="With Sources"></a>With Sources</h1><ol>
+<li>As is known, when the resistances on the edges are all <script type="math/tex">1</script>, the <code>Ohm&#39;s Law</code> gives <script type="math/tex">\vec{y}=-A\vec{x}</script>. Substituting this to the Current Law, we get <script type="math/tex">A^T\vec{y}=-A^TA\vec{y}=\vec{0}</script>. </li>
+<li><script type="math/tex">A^TA</script> is called the <code>Laplacian matrix</code>. </li>
+<li>Without any sources, the solution will be no flow: <script type="math/tex">\vec{x}=\vec{0}</script>, <script type="math/tex">\vec{y}=\vec{0}</script>. </li>
+<li>With sources, we need to solve the <script type="math/tex">-A^TA\vec{x}=\vec{f}</script>. Each component of <script type="math/tex">\vec{f}</script> is the source of nodes. </li>
+<li>The Laplacian matrix is not invertible. It shares the same nullspace with <script type="math/tex">A</script>. So one node has to be grounded by setting it to <script type="math/tex">0</script>. </li>
+</ol>
+<h1 id="With-Resistances"><a href="#With-Resistances" class="headerlink" title="With Resistances"></a>With Resistances</h1><ol>
+<li>If the resistances on the edges are not all <script type="math/tex">1</script>, the Ohm’s Law will be <script type="math/tex">R\vec{y}=-A\vec{x}</script>. The <code>conductances</code> are <script type="math/tex">C=R^{-1}</script>. So <script type="math/tex">\vec{y}=-CA\vec{x}</script>. </li>
+<li><script type="math/tex">C</script> is the <code>conductances matrix</code>. It is a diagonal matrix with conductances in its diagonal. </li>
+<li>For every conductance, <script type="math/tex">c=\displaystyle\frac{1}{resistance}</script>. </li>
+<li><code>Ohm&#39;s Law</code>: <code>Current along with edge = conductance ✕ voltage difference​</code>. </li>
+<li>Combining Ohm’s Law with Kirchhoff’s Current Law, we get <script type="math/tex">A^TCA\vec{x}=\vec{0}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3395,816 +3508,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/24/day-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/24/day-12/" class="post-title-link" itemprop="url">day 12</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-24 22:06:50" itemprop="dateCreated datePublished" datetime="2019-11-24T22:06:50+08:00">2019-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:36:29" itemprop="dateModified" datetime="2020-08-07T17:36:29+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/%E6%9B%B2%E6%A0%B9%E4%B8%87%E8%AF%8D%E7%8F%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">曲根万词班</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">sparse</td>
-<td style="text-align:center">adj. 稀疏的，稀少的</td>
-<td style="text-align:center"><code>sperse - scatter</code><br />散得很开</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">disperse</td>
-<td style="text-align:center">v. 驱散</td>
-<td style="text-align:center">散离开</td>
-<td style="text-align:center">di·sperse</td>
-</tr>
-<tr>
-<td style="text-align:center">asperse</td>
-<td style="text-align:center">v. 诽谤</td>
-<td style="text-align:center">好事不出门，坏事传千里</td>
-<td style="text-align:center">a·sperse</td>
-</tr>
-<tr>
-<td style="text-align:center">intersperse</td>
-<td style="text-align:center">v. 点缀；散播</td>
-<td style="text-align:center">分散到中间，点缀</td>
-<td style="text-align:center">inter·sperse</td>
-</tr>
-<tr>
-<td style="text-align:center">scanty</td>
-<td style="text-align:center">adj. 缺乏的</td>
-<td style="text-align:center">太少了，scan不到</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scant</td>
-<td style="text-align:center">adj. 缺乏的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scarce</td>
-<td style="text-align:center">adj. 缺乏的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">meagre</td>
-<td style="text-align:center">adj. 贫乏的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">undue</td>
-<td style="text-align:center">adj. 过度的</td>
-<td style="text-align:center">不合适的</td>
-<td style="text-align:center">un·due</td>
-</tr>
-<tr>
-<td style="text-align:center">unduly</td>
-<td style="text-align:center">adv. 过度地</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">undue·ly</td>
-</tr>
-<tr>
-<td style="text-align:center">excessive</td>
-<td style="text-align:center">adj. 过度的</td>
-<td style="text-align:center">超过界限</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">immoderate</td>
-<td style="text-align:center">adj. 过度的</td>
-<td style="text-align:center">不适度的</td>
-<td style="text-align:center">im·moderate</td>
-</tr>
-<tr>
-<td style="text-align:center">allay</td>
-<td style="text-align:center">v. 减轻，缓和</td>
-<td style="text-align:center"><code>lev - light</code></td>
-<td style="text-align:center">al·lay</td>
-</tr>
-<tr>
-<td style="text-align:center">elevator</td>
-<td style="text-align:center">n. 电梯</td>
-<td style="text-align:center"><code>lev - lift</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">levy</td>
-<td style="text-align:center">v. 征收(税)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">waylay</td>
-<td style="text-align:center">v. 埋伏</td>
-<td style="text-align:center">在路边躺着</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">defunct</td>
-<td style="text-align:center">adj. 死的</td>
-<td style="text-align:center"><code>funct - to perform function</code><br />没有功能的</td>
-<td style="text-align:center">de·funct</td>
-</tr>
-<tr>
-<td style="text-align:center">perfunctory</td>
-<td style="text-align:center">adj. 草率的</td>
-<td style="text-align:center"><code>per - away</code><br />远离职责，敷衍</td>
-<td style="text-align:center">per·funct·ory</td>
-</tr>
-<tr>
-<td style="text-align:center">dysfunction</td>
-<td style="text-align:center">n. 功能失调，功能紊乱</td>
-<td style="text-align:center">功能die了</td>
-<td style="text-align:center">dys·function</td>
-</tr>
-<tr>
-<td style="text-align:center">demise</td>
-<td style="text-align:center">n. 死亡</td>
-<td style="text-align:center"><code>mis - send</code><br />送到地下</td>
-<td style="text-align:center">de·mis·e</td>
-</tr>
-<tr>
-<td style="text-align:center">decease</td>
-<td style="text-align:center">v./n. 死亡</td>
-<td style="text-align:center">一切生理功能停止了</td>
-<td style="text-align:center">de·cease</td>
-</tr>
-<tr>
-<td style="text-align:center">feasible</td>
-<td style="text-align:center">adj. 可行的</td>
-<td style="text-align:center"><code>feas - fact - to make</code></td>
-<td style="text-align:center">feas·ible</td>
-</tr>
-<tr>
-<td style="text-align:center">viable</td>
-<td style="text-align:center">adj. 可行的</td>
-<td style="text-align:center">可以通行的</td>
-<td style="text-align:center">via·ble</td>
-</tr>
-<tr>
-<td style="text-align:center">practicable</td>
-<td style="text-align:center">adj. 可行的</td>
-<td style="text-align:center">可以实践的</td>
-<td style="text-align:center">practic·able</td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuity</td>
-<td style="text-align:center">n. 创造力；心灵手巧</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ordain</td>
-<td style="text-align:center">v. 命令</td>
-<td style="text-align:center">order</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">preordain</td>
-<td style="text-align:center">n. 预先注定</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ordinance</td>
-<td style="text-align:center">n. 法令</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ordnance</td>
-<td style="text-align:center">n. 大炮，军械，武器</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">predetermine</td>
-<td style="text-align:center">v. 预先决定，预先确定</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">pre·determine</td>
-</tr>
-<tr>
-<td style="text-align:center">predestine</td>
-<td style="text-align:center">v. 注定</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">pre·destine</td>
-</tr>
-<tr>
-<td style="text-align:center">extemporize</td>
-<td style="text-align:center">v. 即兴创作</td>
-<td style="text-align:center">临时temporary表达出来的东西</td>
-<td style="text-align:center">ex·tempor·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">prompt</td>
-<td style="text-align:center">adj. 立即的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">impromptu</td>
-<td style="text-align:center">adj. 即兴的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">im·prompt·u</td>
-</tr>
-<tr>
-<td style="text-align:center">offhand</td>
-<td style="text-align:center">adj. 即兴的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">off·hand</td>
-</tr>
-<tr>
-<td style="text-align:center">taciturn</td>
-<td style="text-align:center">adj. 沉默寡言的</td>
-<td style="text-align:center"><code>tac - silent</code></td>
-<td style="text-align:center">tac·it·urn</td>
-</tr>
-<tr>
-<td style="text-align:center">tacit</td>
-<td style="text-align:center">adj. 沉默的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">tac·it</td>
-</tr>
-<tr>
-<td style="text-align:center">reticent</td>
-<td style="text-align:center">adj.沉默寡言的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">re·tic·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">venomous</td>
-<td style="text-align:center">adj. 有毒的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">venom</td>
-<td style="text-align:center">n. 毒液</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">toxic</td>
-<td style="text-align:center">adj. 有毒的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lethal</td>
-<td style="text-align:center">adj. 致命的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vindictive</td>
-<td style="text-align:center">adj. 报复性的，恶毒的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">amiss</td>
-<td style="text-align:center">adj. 错误的；有缺陷的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">comprise</td>
-<td style="text-align:center">v. 构成；包含</td>
-<td style="text-align:center"><code>prise/prehend - to seize(prison)</code><br />抓在一起</td>
-<td style="text-align:center">com·prise</td>
-</tr>
-<tr>
-<td style="text-align:center">apprise</td>
-<td style="text-align:center">v. 通知</td>
-<td style="text-align:center">飞鸽传书之前先把鸽子抓来</td>
-<td style="text-align:center">ap·prise</td>
-</tr>
-<tr>
-<td style="text-align:center">reprehend</td>
-<td style="text-align:center">v. 谴责</td>
-<td style="text-align:center">抓过来骂</td>
-<td style="text-align:center">re·prehend</td>
-</tr>
-<tr>
-<td style="text-align:center">apprehend</td>
-<td style="text-align:center">v. 逮捕；忧虑</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ap·prehend</td>
-</tr>
-<tr>
-<td style="text-align:center">apprehensive</td>
-<td style="text-align:center">adj. 逮捕的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ap·prehens·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">constitute</td>
-<td style="text-align:center">v. 组成</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">omit</td>
-<td style="text-align:center">v. 遗漏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissemble</td>
-<td style="text-align:center">v. 伪装，掩饰</td>
-<td style="text-align:center"><code>dis - to</code><br /><code>semble/simul - same</code><br />变得像</td>
-<td style="text-align:center">dis·semble</td>
-</tr>
-<tr>
-<td style="text-align:center">dissimulate</td>
-<td style="text-align:center">v. 伪装</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">resemble</td>
-<td style="text-align:center">v. 相似，像…</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center">re·semble</td>
-</tr>
-<tr>
-<td style="text-align:center">disclose</td>
-<td style="text-align:center">v. 解开</td>
-<td style="text-align:center">不关闭了</td>
-<td style="text-align:center">dis·close</td>
-</tr>
-<tr>
-<td style="text-align:center">glib</td>
-<td style="text-align:center">adj. 油腔滑调的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">voluble</td>
-<td style="text-align:center">adj. 滔滔不绝的</td>
-<td style="text-align:center"><code>valv - turn</code><br />嘴巴不停转动</td>
-<td style="text-align:center">valu·able</td>
-</tr>
-<tr>
-<td style="text-align:center">slick</td>
-<td style="text-align:center">adj. 光滑的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">invincible</td>
-<td style="text-align:center">adj. 难以克服的</td>
-<td style="text-align:center"><code>vinc/vict - to conquer</code></td>
-<td style="text-align:center">in·vinc·ible</td>
-</tr>
-<tr>
-<td style="text-align:center">convict</td>
-<td style="text-align:center">v. 证明……有罪</td>
-<td style="text-align:center">convict sb. of …</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">evict</td>
-<td style="text-align:center">v. 驱逐</td>
-<td style="text-align:center">战胜后赶出去</td>
-<td style="text-align:center">e·vict</td>
-</tr>
-<tr>
-<td style="text-align:center">evince</td>
-<td style="text-align:center">v. 表明</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vanquish</td>
-<td style="text-align:center">v. 征服</td>
-<td style="text-align:center">i → a<br />c → qu</td>
-<td style="text-align:center">vanqu·ish</td>
-</tr>
-<tr>
-<td style="text-align:center">insurmountable</td>
-<td style="text-align:center">adj. 难以征服的，不能克服的</td>
-<td style="text-align:center">不能骑mount在上面sur</td>
-<td style="text-align:center">in·sur·mount·able</td>
-</tr>
-<tr>
-<td style="text-align:center">insuperable</td>
-<td style="text-align:center">adj. 难以超越的</td>
-<td style="text-align:center">不能更super</td>
-<td style="text-align:center">in·super·able</td>
-</tr>
-<tr>
-<td style="text-align:center">indomitable</td>
-<td style="text-align:center">adj. 不可征服的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">in·dom·it·able</td>
-</tr>
-<tr>
-<td style="text-align:center">imprudent</td>
-<td style="text-align:center">adj. 草率的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cursory</td>
-<td style="text-align:center">adj. 草率的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">reckless</td>
-<td style="text-align:center">adj. 鲁莽的，草率的</td>
-<td style="text-align:center">不多想reckon</td>
-<td style="text-align:center">reck·less</td>
-</tr>
-<tr>
-<td style="text-align:center">impetuous</td>
-<td style="text-align:center">adj. 冲动的；鲁莽的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">meticulous</td>
-<td style="text-align:center">adj. 一丝不苟的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">punctilious</td>
-<td style="text-align:center">adj. 一丝不苟的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scrupulous</td>
-<td style="text-align:center">adj. 谨慎的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">discreet</td>
-<td style="text-align:center">adj. 小心翼翼的</td>
-<td style="text-align:center">discrete</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">chary</td>
-<td style="text-align:center">adj. 谨慎的</td>
-<td style="text-align:center">care</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">replenish</td>
-<td style="text-align:center">v. 装满</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rife</td>
-<td style="text-align:center">adj. 充斥的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vacuous</td>
-<td style="text-align:center">adj. 空的</td>
-<td style="text-align:center"><code>van/vac - empty</code></td>
-<td style="text-align:center">vac·uous</td>
-</tr>
-<tr>
-<td style="text-align:center">evacuate</td>
-<td style="text-align:center">v. 撤离，疏散</td>
-<td style="text-align:center">向外走，让里面变空</td>
-<td style="text-align:center">e·vac·uate</td>
-</tr>
-<tr>
-<td style="text-align:center">evanescent</td>
-<td style="text-align:center">adj. 转瞬即逝的</td>
-<td style="text-align:center">一会就变空了</td>
-<td style="text-align:center">e·van·esc·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">vanity</td>
-<td style="text-align:center">n. 虚荣心</td>
-<td style="text-align:center">内部实际十分空虚</td>
-<td style="text-align:center">van·ity</td>
-</tr>
-<tr>
-<td style="text-align:center">vainglorious</td>
-<td style="text-align:center">adj. 虚荣的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">vain·glor·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">devoid</td>
-<td style="text-align:center">adj. 缺乏的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">de·void</td>
-</tr>
-<tr>
-<td style="text-align:center">wilt</td>
-<td style="text-align:center">v. 枯萎；凋谢</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wither</td>
-<td style="text-align:center">v. 枯萎</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">blight</td>
-<td style="text-align:center">n./v. 枯萎病</td>
-<td style="text-align:center">不见光</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">abominable</td>
-<td style="text-align:center">adj. 可恶的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">brainy</td>
-<td style="text-align:center">adj. 聪明的</td>
-<td style="text-align:center">有脑子的</td>
-<td style="text-align:center">brain·y</td>
-</tr>
-<tr>
-<td style="text-align:center">shrewd</td>
-<td style="text-align:center">adj. 精明的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">astute</td>
-<td style="text-align:center">adj. 精明的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">deteriorate</td>
-<td style="text-align:center">v. 恶化</td>
-<td style="text-align:center"><code>teriror - terror</code><br />变得越来越可怕</td>
-<td style="text-align:center">de·terior·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">deter</td>
-<td style="text-align:center">v. 抑制</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">deterrent</td>
-<td style="text-align:center">n. 抑制</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ameliorate</td>
-<td style="text-align:center">v. 改善</td>
-<td style="text-align:center"><code>a - not</code><br />mal (a → e)<br />没有变坏</td>
-<td style="text-align:center">a·mel·ior·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">aggravate</td>
-<td style="text-align:center">v. 加重</td>
-<td style="text-align:center"><code>grav - heavy</code></td>
-<td style="text-align:center">ag·grav·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">exacerbate</td>
-<td style="text-align:center">v. 恶化</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">exquisite</td>
-<td style="text-align:center">adj. 精致的</td>
-<td style="text-align:center"><code>quis - seek(k → qu, ee → i, 反写)</code><br />被挑选出来的</td>
-<td style="text-align:center">ex·quis·ite</td>
-</tr>
-<tr>
-<td style="text-align:center">requisite</td>
-<td style="text-align:center">adj. 必须的<br />n. 必需品</td>
-<td style="text-align:center">一再被选</td>
-<td style="text-align:center">re·quis·ite</td>
-</tr>
-<tr>
-<td style="text-align:center">prerequisite</td>
-<td style="text-align:center">n. 先决条件</td>
-<td style="text-align:center">之前必须有</td>
-<td style="text-align:center">pre·requisite</td>
-</tr>
-<tr>
-<td style="text-align:center">disquisition</td>
-<td style="text-align:center">n. 专题论文</td>
-<td style="text-align:center">把一个大专业分开寻求答案</td>
-<td style="text-align:center">dis·quis·i·tion</td>
-</tr>
-<tr>
-<td style="text-align:center">acquisitive</td>
-<td style="text-align:center">adj. 物欲重的，贪婪的</td>
-<td style="text-align:center">一直在找</td>
-<td style="text-align:center">ac·quis·i·tive</td>
-</tr>
-<tr>
-<td style="text-align:center">sequester</td>
-<td style="text-align:center">v. 隐居；扣押</td>
-<td style="text-align:center">找到后分开</td>
-<td style="text-align:center">se·ques·ter</td>
-</tr>
-<tr>
-<td style="text-align:center">sequestrate</td>
-<td style="text-align:center">v. 扣押；没收</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center">se·ques·trate</td>
-</tr>
-<tr>
-<td style="text-align:center">fiscal</td>
-<td style="text-align:center">n. 财政</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">confiscate</td>
-<td style="text-align:center">v. 充公</td>
-<td style="text-align:center">同一到财政局</td>
-<td style="text-align:center">con·fisc·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">potential</td>
-<td style="text-align:center">adj. 潜在的</td>
-<td style="text-align:center"><code>potent - power</code></td>
-<td style="text-align:center">potent·ial</td>
-</tr>
-<tr>
-<td style="text-align:center">potent</td>
-<td style="text-align:center">adj. 强有力的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">impotent</td>
-<td style="text-align:center">adj. 无力的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">im·potent</td>
-</tr>
-<tr>
-<td style="text-align:center">omnipotent</td>
-<td style="text-align:center">adj. 万能的</td>
-<td style="text-align:center"><code>omni - all</code><br />所有力量都有</td>
-<td style="text-align:center">omni·potent</td>
-</tr>
-<tr>
-<td style="text-align:center">potentate</td>
-<td style="text-align:center">n. 统治者</td>
-<td style="text-align:center"><code>ate - ren</code><br />最有权力的人</td>
-<td style="text-align:center">potent·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">underlying</td>
-<td style="text-align:center">adj. 潜在的</td>
-<td style="text-align:center">躺在下面的</td>
-<td style="text-align:center">under·lying</td>
-</tr>
-<tr>
-<td style="text-align:center">incorrigible</td>
-<td style="text-align:center">adj. 无药可救的</td>
-<td style="text-align:center"><code>cor/corrig - correct</code><br />无法改正的</td>
-<td style="text-align:center">in·corrig·ible</td>
-</tr>
-<tr>
-<td style="text-align:center">manual</td>
-<td style="text-align:center">n. 使用手册<br />adj. 手工的，体力的</td>
-<td style="text-align:center"><code>manu - hand</code></td>
-<td style="text-align:center">manu·al</td>
-</tr>
-<tr>
-<td style="text-align:center">manacle</td>
-<td style="text-align:center">n. 手铐；束缚</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">mana·cle</td>
-</tr>
-<tr>
-<td style="text-align:center">manifest</td>
-<td style="text-align:center">v. 表明<br />adj. 明显的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">mani·fest</td>
-</tr>
-<tr>
-<td style="text-align:center">emancipate</td>
-<td style="text-align:center">v. 解放</td>
-<td style="text-align:center">手举在头顶上欢呼</td>
-<td style="text-align:center">e·man·cip·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">manumit</td>
-<td style="text-align:center">v. 解放</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">manu·mit</td>
-</tr>
-<tr>
-<td style="text-align:center">maneuver</td>
-<td style="text-align:center">v. 操纵(车辆)；策划；军事演习</td>
-<td style="text-align:center">用手开车</td>
-<td style="text-align:center">mane·uver</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -4276,7 +3579,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">187</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
