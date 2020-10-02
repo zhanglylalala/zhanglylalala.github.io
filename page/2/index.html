@@ -191,6 +191,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/11/%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%A8%A1%E7%89%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/11/%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%A8%A1%E7%89%88/" class="post-title-link" itemprop="url">高精度模版</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-11 20:29:52 / Modified: 20:33:18" itemprop="dateCreated datePublished" datetime="2020-08-11T20:29:52+08:00">2020-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="高精度与低精度的乘除"><a href="#高精度与低精度的乘除" class="headerlink" title="高精度与低精度的乘除"></a>高精度与低精度的乘除</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">highAccuracy</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data[MAXN];</span><br><span class="line"></span><br><span class="line">    highAccuracy()</span><br><span class="line">    &#123;</span><br><span class="line">        clr(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy(<span class="keyword">int</span> x)</span><br><span class="line">    &#123;</span><br><span class="line">        clr(data);</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x)</span><br><span class="line">        &#123;</span><br><span class="line">            data[++len] = x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        data[<span class="number">0</span>] = len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy <span class="keyword">operator</span> * (<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        highAccuracy ans = highAccuracy();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= data[<span class="number">0</span>]; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[i] = data[i] * b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= data[<span class="number">0</span>] || ans.data[i]; len = ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[i + <span class="number">1</span>] += ans.data[i] / <span class="number">10</span>;</span><br><span class="line">            ans.data[i] = ans.data[i] % <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.data[<span class="number">0</span>] = ans.data[len] ? len : len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    highAccuracy <span class="keyword">operator</span> / (<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        highAccuracy ans = highAccuracy();</span><br><span class="line">        <span class="keyword">int</span> rest = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            rest = rest * <span class="number">10</span> + data[i];</span><br><span class="line">            ans.data[i] = rest / b;</span><br><span class="line">            rest = rest % b;</span><br><span class="line">        &#125;</span><br><span class="line">        ans.data[<span class="number">0</span>] = data[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">while</span> (ans.data[ans.data[<span class="number">0</span>]] == <span class="number">0</span> &amp;&amp; ans.data[<span class="number">0</span>] &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans.data[<span class="number">0</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> highAccuracy &amp; b) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[<span class="number">0</span>] == b.data[<span class="number">0</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (data[i] != b.data[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> data[i] &lt; b.data[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> data[<span class="number">0</span>] &lt; b.data[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = data[<span class="number">0</span>]; i &gt; <span class="number">0</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, data[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/11/04-How-to-talk-about-doctors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1582,456 +1658,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/07/25/03-How-to-Talk-About-Personality-Types/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/25/03-How-to-Talk-About-Personality-Types/" class="post-title-link" itemprop="url">03. How to Talk About Personality Types</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-25 13:27:16" itemprop="dateCreated datePublished" datetime="2020-07-25T13:27:16+08:00">2020-07-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-16 21:47:24" itemprop="dateModified" datetime="2020-08-16T21:47:24+08:00">2020-08-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Words</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">egoist</td>
-</tr>
-<tr>
-<td style="text-align:center">egotist</td>
-</tr>
-<tr>
-<td style="text-align:center">altruist</td>
-</tr>
-<tr>
-<td style="text-align:center">introvert</td>
-</tr>
-<tr>
-<td style="text-align:center">extrovert</td>
-</tr>
-<tr>
-<td style="text-align:center">ambivert</td>
-</tr>
-<tr>
-<td style="text-align:center">misanthrope</td>
-</tr>
-<tr>
-<td style="text-align:center">misogynist</td>
-</tr>
-<tr>
-<td style="text-align:center">misogamist</td>
-</tr>
-<tr>
-<td style="text-align:center">ascetic</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="ego-I"><a href="#ego-I" class="headerlink" title="ego: I"></a>ego: I</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ego</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ego·ist</td>
-<td style="text-align:center">obnoxious</td>
-</tr>
-<tr>
-<td style="text-align:center">ego·tist</td>
-<td style="text-align:center">The extra ‘t’ is ‘talk’. <br />obnoxious</td>
-</tr>
-<tr>
-<td style="text-align:center">ego·centric</td>
-<td style="text-align:center"><strong><em>an extreme form of the egoist</em></strong><br />intolerable<br />both a noun and an adjective<br /><code>centrum: center</code></td>
-</tr>
-<tr>
-<td style="text-align:center">ego·maniac</td>
-<td style="text-align:center"><strong><em>carry egoism to such an extreme maniac</em></strong><br />dangerous and slightly mad<br /><code>mania: madness</code></td>
-</tr>
-<tr>
-<td style="text-align:center">ego·maniac·al</td>
-<td style="text-align:center">the adjective form of egomaniac<br /><code>-al: adjective suffix</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="alter-other"><a href="#alter-other" class="headerlink" title="alter: other"></a>alter: other</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">alter</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">altru·ism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">altru·ist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">altru·istic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">alter·nate</td>
-<td style="text-align:center"><strong><em>skip one and take the other</em></strong><br /><strong><em>The other one that will take over.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">alter·native</td>
-<td style="text-align:center"><strong><em>a choice</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">alter ego</td>
-<td style="text-align:center"><strong><em>the other me</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">alter·cation</td>
-<td style="text-align:center"><strong><em>a verbal dispute</em></strong><br />stronger than quarrel or dispute</td>
-</tr>
-<tr>
-<td style="text-align:center">alter·ation</td>
-<td style="text-align:center"><strong><em>making into something other</em></strong><br />a change</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="vert-to-turn"><a href="#vert-to-turn" class="headerlink" title="vert: to turn"></a>vert: to turn</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">intro·vert</td>
-<td style="text-align:center"><strong><em>thoughts are turned inward</em></strong><br /><code>intro: inward</code></td>
-</tr>
-<tr>
-<td style="text-align:center">extro·vert</td>
-<td style="text-align:center"><strong><em>thoughts are turned outward</em></strong><br /><code>extro: ouward</code></td>
-</tr>
-<tr>
-<td style="text-align:center">ambi·vert</td>
-<td style="text-align:center"><strong><em>thoughts are turned in both direction</em></strong><br /><code>ambi: both</code></td>
-</tr>
-<tr>
-<td style="text-align:center">ambi·dextr·ous</td>
-<td style="text-align:center"><strong><em>able to use both hands with equal skill</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dexter·ous</td>
-<td style="text-align:center"><strong><em>skillful</em></strong><br /><code>-ous: adjective suffix</code><br /><code>dexter: Latin word for right hand</code></td>
-</tr>
-<tr>
-<td style="text-align:center">dexter·ity</td>
-<td style="text-align:center"><strong><em>skill</em></strong><br /><code>-ity: noun suffix</code></td>
-</tr>
-<tr>
-<td style="text-align:center">left-handed</td>
-<td style="text-align:center"><strong><em>awkward</em></strong><br />traditionally right hand is the more skillful one</td>
-</tr>
-<tr>
-<td style="text-align:center">sinister</td>
-<td style="text-align:center"><strong><em>threatening, evil or dangerous</em></strong><br /><code>the Latin word for the left hand</code></td>
-</tr>
-<tr>
-<td style="text-align:center">gauche</td>
-<td style="text-align:center"><strong><em>clumsiness</em></strong><br /><code>the French word for the left hand</code><br />social rather than physical</td>
-</tr>
-<tr>
-<td style="text-align:center">gaucherie</td>
-<td style="text-align:center"><strong><em>an awkward, clumsy, tactless, embarrassing way of saying things or of handling situations</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">a·droit</td>
-<td style="text-align:center"><strong><em>skillful, especially in the exercise of the mental facilities</em></strong><br /><code>droit: the French word for the right hand</code><br />is used figuratively, socially</td>
-</tr>
-<tr>
-<td style="text-align:center">a·droit·ness</td>
-<td style="text-align:center">the noun of adroit</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="misein-to-hate"><a href="#misein-to-hate" class="headerlink" title="misein: to hate"></a>misein: to hate</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">mis·anthrope</td>
-<td style="text-align:center"><strong><em>hates mankind</em></strong><br /><code>Greek anthoropos, mankind</code></td>
-</tr>
-<tr>
-<td style="text-align:center">mis·o·gyn·ist</td>
-<td style="text-align:center"><strong><em>hates women</em></strong><br /><code>Greek gyne, women</code></td>
-</tr>
-<tr>
-<td style="text-align:center">mis·o·gam·ist</td>
-<td style="text-align:center"><strong><em>hates marriage</em></strong><br /><code>Greek gamos, marriage</code></td>
-</tr>
-<tr>
-<td style="text-align:center">anthrop·ology</td>
-<td style="text-align:center"><strong><em>the study of the development of the human race</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">phil·anthrop·ist</td>
-<td style="text-align:center"><strong><em>one who loves mankind, and shows such love by making substantial financial contributions to charitable organizations or by donating time and energy to helping those in need</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gyne·cologist</td>
-<td style="text-align:center"><strong><em>the medical specialist who treats female disorders</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">mono·gam·y</td>
-<td style="text-align:center"><strong><em>the custom of only one marriage (at a time)</em></strong><br /><code>mono: one</code></td>
-</tr>
-<tr>
-<td style="text-align:center">bi·gam·y</td>
-<td style="text-align:center"><strong><em>the unlawful act of two marriages at a time</em></strong><br /><code>bi: two</code></td>
-</tr>
-<tr>
-<td style="text-align:center">poly·gam·y</td>
-<td style="text-align:center"><strong><em>the custom which allows plural marriage for either males or females</em></strong><br /><code>poly: many</code></td>
-</tr>
-<tr>
-<td style="text-align:center">poly·gyn·y</td>
-<td style="text-align:center"><strong><em>a male has many wives</em></strong><br />the correct, but rarely used, term for polygamy</td>
-</tr>
-<tr>
-<td style="text-align:center">poly·andr·y</td>
-<td style="text-align:center"><strong><em>a female has many husbands</em></strong><br /><code>Greek andros, male</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Suffixes"><a href="#Suffixes" class="headerlink" title="Suffixes"></a>Suffixes</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Person</th>
-<th style="text-align:center">Practice, etc.</th>
-<th style="text-align:center">Adjective</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">misanthrope<br />misanthropist</td>
-<td style="text-align:center">misanthropy</td>
-<td style="text-align:center">misanthropic</td>
-</tr>
-<tr>
-<td style="text-align:center">misogynist</td>
-<td style="text-align:center">misogyny</td>
-<td style="text-align:center">misogynous<br />misogynistic</td>
-</tr>
-<tr>
-<td style="text-align:center">gynecologist</td>
-<td style="text-align:center">gynecology</td>
-<td style="text-align:center">gynecological</td>
-</tr>
-<tr>
-<td style="text-align:center">monogamist</td>
-<td style="text-align:center">monogamy</td>
-<td style="text-align:center">monogamous</td>
-</tr>
-<tr>
-<td style="text-align:center">bigamist</td>
-<td style="text-align:center">bigamy</td>
-<td style="text-align:center">bigamous</td>
-</tr>
-<tr>
-<td style="text-align:center">polygamist</td>
-<td style="text-align:center">polygamy</td>
-<td style="text-align:center">polygamous</td>
-</tr>
-<tr>
-<td style="text-align:center">polygynist</td>
-<td style="text-align:center">polygyny</td>
-<td style="text-align:center">polygynous</td>
-</tr>
-<tr>
-<td style="text-align:center">polyandrist</td>
-<td style="text-align:center">polyandry</td>
-<td style="text-align:center">polyandrous</td>
-</tr>
-<tr>
-<td style="text-align:center">philanthropist</td>
-<td style="text-align:center">philanthropy</td>
-<td style="text-align:center">philanthropic</td>
-</tr>
-<tr>
-<td style="text-align:center">anthropologist</td>
-<td style="text-align:center">anthropology</td>
-<td style="text-align:center">anthropological</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>-ist</code> is a common suffix for a person</p>
-<p><code>-y</code> for a practice, attitude, etc. </p>
-<p><code>-ic</code> or <code>-ous</code> for an adjective</p>
-<h1 id="asketes-monk-or-hermit"><a href="#asketes-monk-or-hermit" class="headerlink" title="asketes: monk or hermit"></a>asketes: monk or hermit</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ascet·ic</td>
-<td style="text-align:center"><strong><em>a monk</em></strong><br />both a noun and an adjective</td>
-</tr>
-<tr>
-<td style="text-align:center">ascetic·ism</td>
-<td style="text-align:center"><strong><em>the practice of ascetic</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">anthropo·centr·ic</td>
-<td style="text-align:center"><strong><em>thinking, assumptions, reasoning, etc. that see mankind as the central fact, or ultimate aim, of the universe</em></strong><br />noun form: anthropocentrism / anthropocentricity</td>
-</tr>
-<tr>
-<td style="text-align:center">andro·mania</td>
-<td style="text-align:center"><strong><em>an obsession with males</em></strong><br />person: andromaniac<br />adjective: andromaniacal</td>
-</tr>
-<tr>
-<td style="text-align:center">gyn·andr·ous<br />andro·gyn·ous</td>
-<td style="text-align:center"><strong><em>a. plants in which the male and female organs are united in the same column</em></strong><br /><strong><em>b. people who physically have both male and female sexual organs, often one or both in rudimentary form</em></strong><br /><strong><em>c. people who exhibit, or are will to own up to, the male and female emotional characteristics that everyone possesses</em></strong><br />noun form: gynandry / androgyny<br />individual plant: andrognye</td>
-</tr>
-<tr>
-<td style="text-align:center">herm·aphrodit·ic</td>
-<td style="text-align:center"><code>Hermes: the Greek god who served as messenger or herald (or, in Roman mythology, known as Mercury)</code><br /><code>Aphrodite: the Greek goddes of love and beauty (or, in Roman mythology, Venus)</code><br /><strong><em>a. plants in which the male and female organs are united in the same column</em></strong><br /><strong><em>b. people who physically have both male and female sexual organs, often one or both in rudimentary form</em></strong><br />noun form: hermaphroditism<br />plant or person: hermaphrodite</td>
-</tr>
-<tr>
-<td style="text-align:center">mono·mania</td>
-<td style="text-align:center"><strong><em>an obsession with one thing, or obsessiveness in one area</em></strong><br />person: monomaniac<br />adjective: monomaniacal</td>
-</tr>
-<tr>
-<td style="text-align:center">mis·andr·ist</td>
-<td style="text-align:center">hates men<br />noun form: misandry<br />adjective form: misandrous</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2103,7 +1729,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
