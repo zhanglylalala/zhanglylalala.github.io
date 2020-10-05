@@ -191,6 +191,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/KMP%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/KMP%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">KMP串匹配算法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:33:20" itemprop="dateCreated datePublished" datetime="2019-11-09T00:33:20+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-08 19:27:53" itemprop="dateModified" datetime="2020-08-08T19:27:53+08:00">2020-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E4%B8%B2/" itemprop="url" rel="index">
+                    <span itemprop="name">串</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="串匹配问题"><a href="#串匹配问题" class="headerlink" title="串匹配问题"></a>串匹配问题</h1><p>给定两个串，一个是主串，一个是模式串，要求从主串中找到模式串的匹配<br>直观地，很容易就想得到蛮力算法，即一个一个比较，直到找到或匹配结束</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> mainString, modeString;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, modePos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = mainString.length();</span><br><span class="line">    <span class="keyword">int</span> modeLen = modeString.length();</span><br><span class="line">    <span class="keyword">while</span>(mainPos &lt; len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainString[mainPos] == modeString[modePos])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = mainPos + <span class="number">1</span>;</span><br><span class="line">            modePos++;</span><br><span class="line">            <span class="keyword">while</span>(mainString[pos] == modeString[modePos] &amp;&amp; modePos &lt; modeLen)</span><br><span class="line">            &#123;</span><br><span class="line">                pos++;</span><br><span class="line">                modePos++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(modePos == modeLen)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                modePos = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>先来看一下蛮力算法慢的原因：到一个点匹配失败，可以得出在这个点之前到都是匹配成功的，这样我们就可以通过模式串知道主串在那一段中的信息，利用这些信息，我们就可以提前知道哪些值得匹配，哪些不值得花时间匹配，就可以跳过一些内容，省下时间。而蛮力算法的问题就是没有好好利用我们已知的模式串的信息。<br>于是我们就有了改进的方向——对模式串进行预处理，知道当我们在模式串的第$i$个点匹配失败时应该跳到第$nex[ i ]$而不是都回到原点</p>
+<h1 id="nex数组"><a href="#nex数组" class="headerlink" title="nex数组"></a>nex数组</h1><p><strong>含义</strong>：<br>我们思考一下为什么我们可以直接从$nex[ i ]$开始匹配而不需像蛮力算法一样，从头开始？因为跳过的那些已经匹配了。那那些是和什么匹配了？首先想一下，匹配失败了以后，主串上的指针是不同的，我们所做的操作只是移动了模式串让$nex[ i ]$去和主串之前失败的地方匹配。所以移过去了以后，模式串跳过的那些前缀就和主串中失败点之前到一段等长后缀匹配。又主串失败点之前的内容已经和模式串的失败点之前的子串匹配所以实际就是模式串在失败点之前的子串的一个前缀和后缀在匹配，而跳过的长度就是匹配前缀的长度，$nex[ i ]$存储的值就是这个长度。<br><img src="/img/KMP串匹配算法01.jpg" width="80%"><br><strong>构造</strong>：<br>构造就是模式串自匹配的过程。子匹配时两个指针，一个$mainPos$指的是主串，一个$modePos$指的是模式串，虽然两个都指在同一个串中。匹配时有两种情况：<br>&emsp;1、如果主串和模式串匹配，则$nex[mainPos] = modeString + 1$，因为$modePos$及其以前的子串已经和$mainPos$之前的后缀匹配了，所以在这里的最长前缀只能全部取，长度就是$modePos+1$<br>&emsp;2、如果不匹配，$modePos = nex[modePos]$，道理同主串和模式串不同时，直到匹配成功<br>为了防止第一个就不匹配，我们设定一个哨兵，在整个字符串的前面，假设这个哨兵可以和任意字符匹配，位置为-1，所以$nex[0] = -1$，第一个都失败的话就让哨兵去匹配现在的那个点才能成功<br>$modePos$初始就设为$nex[ 0 ] = -1$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildNext</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nex[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mainString = <span class="number">0</span>, modeString = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainString &lt; str2.length() - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str2[mainString] == str2[modeString] || modeString &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            nex[++mainString] = ++modeString;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            modeString = nex[modeString];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>！！！！！nex数组的下标$i$都是模式串的第$i$位，而不是主串的第$i$位</strong></p>
+<h1 id="KMP主算法"><a href="#KMP主算法" class="headerlink" title="KMP主算法"></a>KMP主算法</h1><p>和蛮力算法的区别就是不匹配时$modeString = nex[modeString]$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">kmp</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ori = <span class="number">0</span>, cmp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len1 = (<span class="keyword">int</span>)str1.length();</span><br><span class="line">    <span class="keyword">int</span> len2 = (<span class="keyword">int</span>)str2.length();</span><br><span class="line">    <span class="keyword">while</span>(ori &lt; len1 &amp;&amp; cmp &lt; len2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span> || str1[ori] == str2[cmp])</span><br><span class="line">        &#123;</span><br><span class="line">            ori++;</span><br><span class="line">            cmp++;</span><br><span class="line">            <span class="keyword">if</span>(cmp == str2.length())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cmp = nex[cmp];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>串都是从0开始的</p>
+<h1 id="串的周期性"><a href="#串的周期性" class="headerlink" title="串的周期性"></a>串的周期性</h1><p>建立nex数组时，while循环的条件改为$mainString &lt; str2.length()$，设串长为$len$，则：<br>&emsp;1、如果$nex[len] == 0$，则该串毫无循环；<br>&emsp;2、如果有$len % (len - nex[len]) == 0$，则这是一个循环串，且循环节长度为$len - nex[len]$，循环次数为$len / (len - nex[len])$；<br>&emsp;3、否则该串有部分循环，且最少再补$(len - nex[len]) - len % (len - nex[len])$个元素就可以成为循环<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3746" target="_blank" rel="noopener">HDOJ 3746</a><br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1358" target="_blank" rel="noopener">HDOJ 1358</a></p>
+<h1 id="nex数组的妙用"><a href="#nex数组的妙用" class="headerlink" title="nex数组的妙用"></a>nex数组的妙用</h1><p>除了用在KMP查询上，$nex$数组还可以用在如下方面：<br>&emsp;任意前缀的重复次数：$nex[i]$可以理解为串的长为$nex[i]$的前缀在自身上以第$i$个元素开头，长为$nex[i]$的子串重合，即前缀重复了一次。所以利用$nex$数组，我们就可以知道任意前缀的重复次数<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3336" target="_blank" rel="noopener">HDOJ 3336</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%AD%97%E5%85%B8%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E5%AD%97%E5%85%B8%E6%A0%91/" class="post-title-link" itemprop="url">字典树</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:32:13" itemprop="dateCreated datePublished" datetime="2019-11-09T00:32:13+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 17:42:40" itemprop="dateModified" datetime="2020-08-07T17:42:40+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E4%B8%B2/" itemprop="url" rel="index">
+                    <span itemprop="name">串</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>字典树节点结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> ch;   <span class="comment">//可以不用这个变量来标注节点代表字符，因为可以根据index推测  </span></span><br><span class="line">	node * next[<span class="number">26</span>];   <span class="comment">//指向子节点的指针数组</span></span><br><span class="line">	<span class="comment">//...还可以根据需要定义其他变量，如常见的：标记是否是字符串结尾的end记号</span></span><br><span class="line">	node()    <span class="comment">//构造函数，使得在使用new定义node时自动初始化</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">			next[i] = <span class="literal">NULL</span>;   <span class="comment">//将指针数组初始化为NULL</span></span><br><span class="line">		<span class="comment">//...还可以对其他变量初始化</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义node</span></span><br><span class="line">node * root = <span class="keyword">new</span> node();   <span class="comment">//new返回的是一个指针</span></span><br></pre></td></tr></table></figure>
+<p>字典树的建树</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">char</span> * str, node * root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(str[i] != <span class="string">'\0'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> index = str[i] - <span class="string">'a'</span>;</span><br><span class="line">		<span class="keyword">if</span>(root -&gt; next[index] == <span class="literal">NULL</span>)    <span class="comment">//若为空节点则先建立一个新节点</span></span><br><span class="line">			root -&gt; next[index] = <span class="keyword">new</span> node();</span><br><span class="line">		<span class="comment">//全字典树的根节点不赋任何值</span></span><br><span class="line">		root = root -&gt; next[index];</span><br><span class="line">		root -&gt; ch = str[i];</span><br><span class="line">		<span class="comment">//...对变量赋值</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>字典树的还原(DFS)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(node * root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">		<span class="keyword">if</span>(root -&gt; next[i] != <span class="literal">NULL</span>)</span><br><span class="line">			dfs(root -&gt; next[i]);     <span class="comment">//递归直到树的最深处</span></span><br><span class="line">	<span class="keyword">delete</span> root;</span><br><span class="line">	<span class="comment">//从最深的地方开始才删就不会遗漏</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%88%86%E5%9D%97%E4%B8%8E%E8%8E%AB%E9%98%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -959,188 +1137,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%BB%BA%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E7%9A%84%E5%BB%BA%E5%9B%BE/" class="post-title-link" itemprop="url">二分图的建图</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:12:59" itemprop="dateCreated datePublished" datetime="2019-11-09T00:12:59+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-08 19:39:57" itemprop="dateModified" datetime="2020-08-08T19:39:57+08:00">2020-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="依行建图与依列建图"><a href="#依行建图与依列建图" class="headerlink" title="依行建图与依列建图"></a>依行建图与依列建图</h1><p><a href="https://vjudge.net/problem/HDU-1045" target="_blank" rel="noopener">HDOJ 1045(Fire Net)</a><br>思路：<br>&emsp;1、寻找二分图<br>&emsp;&emsp;二分图的要求是要有两个互相独立的集合，而在图中最容易想到的互相独立的就是行列，且一个行号只可以和一个列号匹配，符合二分图的要求<br>&emsp;2、匹配机制<br>&emsp;&emsp;若一个格点内要放一个碉堡，就把行号和列号匹配起来<br>&emsp;3、构建二分图<br>&emsp;&emsp;由于题中的限制，我们要合并/拆分行列号，一行(列)中连续的可放点合并为一个行(列)号，被间隔的话就拆分为两个行(列)号。然后如果一个点是可放点就把那个点的行号和列号连起来建边<br>&emsp;4、然后利用匈牙利算法算出最大匹配</p>
-<p>建图代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rowNum[maxn], columnNum[maxn], graph[maxn][maxn];</span><br><span class="line"><span class="keyword">char</span> <span class="built_in">map</span>[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> column, <span class="keyword">int</span> &amp; rowTotal, <span class="keyword">int</span> &amp; columnTotal)</span></span></span><br><span class="line"><span class="function"><span class="comment">//利用引用返回比行和列的总数大一的值，所以之后用到是小于号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//标行号</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>)</span><br><span class="line">				rowNum[i][j] = rowTotal++;</span><br><span class="line">			<span class="keyword">while</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>) <span class="comment">//合并连续可放点</span></span><br><span class="line">				rowNum[i][j++] = rowTotal - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//标列号</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; column; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; row; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[j][i] == <span class="string">'.'</span>)</span><br><span class="line">				columnNum[j][i] = columnTotal++;</span><br><span class="line">			<span class="keyword">while</span>(<span class="built_in">map</span>[j][i] == <span class="string">'.'</span>) <span class="comment">//合并连续可放点</span></span><br><span class="line">				columnNum[j++][i] = columnTotal - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//建图</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; column; j++)</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[i][j] == <span class="string">'.'</span>)</span><br><span class="line">				graph[row[i][j]][column[i][j]] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="依边建图"><a href="#依边建图" class="headerlink" title="依边建图"></a>依边建图</h1><p><a href="https://vjudge.net/problem/HDU-2444" target="_blank" rel="noopener">HDOJ 2444</a><br><a href="https://vjudge.net/problem/HDU-4185" target="_blank" rel="noopener">HDOJ 4185</a><br><a href="https://vjudge.net/problem/POJ-3020" target="_blank" rel="noopener">HDOJ 3020</a><br><a href="https://vjudge.net/problem/HDU-1054" target="_blank" rel="noopener">HDOJ 1054(最小点覆盖)</a><br>如果一个图是二分图，就可以通过染色法把点分别染为两种不同的颜色，然后就可以把点依据颜色的不同分成两部分，进行二分匹配<br><strong>染色法</strong>：利用BFS，把一个点所有的邻接点染成另一种颜色，如果染色的过程中发现有两个邻接点的颜色一样，就说明这不是一个二分图</p>
-<p>当然，这种题也可以不按颜色划分，直接开始匹配。但是由于是无向边，从点集$A$到点集$B$会匹配一遍，$B$到$A$还会重复一遍，所以结果要除$2$<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxn][maxn], col[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(col, <span class="number">-1</span>, <span class="keyword">sizeof</span>(col));</span><br><span class="line">	<span class="keyword">bool</span> ok = <span class="literal">false</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(!ok) <span class="comment">//防止有非连通图</span></span><br><span class="line">	&#123;</span><br><span class="line">		ok = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			que.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(col[i] == <span class="number">-1</span>) <span class="comment">//找到一个尚未染色的点，开始染色</span></span><br><span class="line">			&#123;</span><br><span class="line">				que.push(i);</span><br><span class="line">				col[i] = <span class="number">1</span>; <span class="comment">//先给一个颜色</span></span><br><span class="line">				ok = <span class="literal">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> cur;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			cur = que.front();</span><br><span class="line">			que.pop();</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">map</span>[cur][i]) <span class="comment">//与cur相连</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(col[i] == col[cur]) <span class="comment">//如果两个颜色一样，说明不是二分图</span></span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span>(col[i] == <span class="number">-1</span>) <span class="comment">//如果没有染过色</span></span><br><span class="line">					&#123;</span><br><span class="line">						col[i] = <span class="number">1</span> - col[cur]; <span class="comment">//染上和cur不同的颜色</span></span><br><span class="line">						que.push(i); <span class="comment">//入队</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>匈牙利算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> matchZero[maxn], matchOne[maxn], vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> zero)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">map</span>[zero][i] &amp;&amp; !vis[i] &amp;&amp; col[i] == <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			vis[i] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!matchOne[i] || DFS(n, matchOne[i]))</span><br><span class="line">			&#123;</span><br><span class="line">				matchOne[i] = zero;</span><br><span class="line">				matchZero[zero] = i;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(matchZero, <span class="number">0</span>, <span class="keyword">sizeof</span>(matchZero));</span><br><span class="line">	<span class="built_in">memset</span>(matchOne, <span class="number">0</span>, <span class="keyword">sizeof</span>(matchOne));</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!matchZero[i] &amp;&amp; col[i] == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">			ans += DFS(n, i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="有向无环图"><a href="#有向无环图" class="headerlink" title="有向无环图"></a>有向无环图</h1><p><a href="https://vjudge.net/problem/HDU-1151" target="_blank" rel="noopener">HDOJ 1151</a><br>有向无环图天生就有二分性，可以对有向无环图进行分层，奇数层是一组，偶数层是一组。但有向图由于每条边只存储一次，就不会像无向图那样反过来再匹配一遍，就不用除2。</p>
-<h1 id="单点在多路径上"><a href="#单点在多路径上" class="headerlink" title="单点在多路径上"></a>单点在多路径上</h1><p><a href="https://vjudge.net/problem/POJ-2594" target="_blank" rel="noopener">POJ 2594</a><br>一般的最小路径中，一个点只能属于一条路，但在有的问题中，一个点可以属于多条路径<br>为了防止一个点匹配过了就没了，导致其他经过这个点到另一个点的路径不见了，所以在开始匹配前要先用Floyd算法把所有连通的点直接连起来<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>[i][k] &amp;&amp; <span class="built_in">map</span>[k][j])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">map</span>[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%A4%9A%E9%87%8D%E5%8C%B9%E9%85%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%A4%9A%E9%87%8D%E5%8C%B9%E9%85%8D/" class="post-title-link" itemprop="url">二分多重匹配</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:12:07" itemprop="dateCreated datePublished" datetime="2019-11-09T00:12:07+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-08 19:40:10" itemprop="dateModified" datetime="2020-08-08T19:40:10+08:00">2020-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://vjudge.net/problem/POJ-2289" target="_blank" rel="noopener">POJ  2289</a><br>多重匹配一般是一个点集N里的点每个只能匹配一个点，另一个点集$M$里的点可以匹配多个。一般是从只能匹配一个点的点集出发去匹配另一个点集<br>二分图的多重匹配是在单重匹配的基础上进行修改的<br>&emsp;1、如果这个点的匹配数还没有超过上限，就直接匹配<br>&emsp;2、如果匹配数超了上限，就尝试把已经匹配了的点里踢掉一个点，让其去匹配另一条边</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> limit[maxn], <span class="built_in">map</span>[maxn][maxn], vis[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; match[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM])</span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(match[dotM].<span class="built_in">size</span>() &lt; limit[dotM])</span><br><span class="line">			&#123;</span><br><span class="line">				match[dotM].push_back[dotN];</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; match[dotM]; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(dfs(match[dotM][j], m))</span><br><span class="line">				&#123;</span><br><span class="line">					match[dotM][j] = dotN;</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1212,7 +1208,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">193</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
