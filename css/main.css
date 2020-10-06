@@ -1189,7 +1189,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9aff33;
+  background: #ff5cb1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2569,7 +2569,7 @@ hr {
   display: inline-block;
 }
 body {
-  background: url("/images/background.jpg");
+  background: #000;
   background-size: cover;
   background-repeat: repeat;
   background-attachment: fixed;
