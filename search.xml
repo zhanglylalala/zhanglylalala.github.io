@@ -829,14 +829,6 @@ table th:first-of-type {
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td style="text-align:center">egoist</td>
-<td style="text-align:center">obnoxious</td>
-</tr>
-<tr>
-<td style="text-align:center">egotist</td>
-<td style="text-align:center">The extra ‘t’ is ‘talk’. <br />obnoxious</td>
-</tr>
-<tr>
 <td style="text-align:center">egocentric</td>
 <td style="text-align:center"><strong><em>an extreme form of the egoist</em></strong><br />intolerable<br />both a noun and an adjective<br /><code>centrum: center</code></td>
 </tr>
@@ -847,6 +839,14 @@ table th:first-of-type {
 <tr>
 <td style="text-align:center">egomaniacal</td>
 <td style="text-align:center">the adjective form of egomaniac<br /><code>-al: adjective suffix</code></td>
+</tr>
+<tr>
+<td style="text-align:center">egoist</td>
+<td style="text-align:center">obnoxious</td>
+</tr>
+<tr>
+<td style="text-align:center">egotist</td>
+<td style="text-align:center">The extra ‘t’ is ‘talk’. <br />obnoxious</td>
 </tr>
 </tbody>
 </table>
@@ -861,19 +861,15 @@ table th:first-of-type {
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">alter</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
 <td style="text-align:center">altruism</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td style="text-align:center">altruist</td>
+<td style="text-align:center">altruistic</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td style="text-align:center">altruistic</td>
+<td style="text-align:center">altruist</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
@@ -885,16 +881,20 @@ table th:first-of-type {
 <td style="text-align:center"><strong><em>a choice</em></strong></td>
 </tr>
 <tr>
-<td style="text-align:center">alter ego</td>
-<td style="text-align:center"><strong><em>the other me</em></strong></td>
+<td style="text-align:center">alteration</td>
+<td style="text-align:center"><strong><em>making into something other</em></strong><br />a change</td>
+</tr>
+<tr>
+<td style="text-align:center">alter</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">altercation</td>
 <td style="text-align:center"><strong><em>a verbal dispute</em></strong><br />stronger than quarrel or dispute</td>
 </tr>
 <tr>
-<td style="text-align:center">alteration</td>
-<td style="text-align:center"><strong><em>making into something other</em></strong><br />a change</td>
+<td style="text-align:center">alter ego</td>
+<td style="text-align:center"><strong><em>the other me</em></strong></td>
 </tr>
 </tbody>
 </table>
@@ -923,6 +923,10 @@ table th:first-of-type {
 <tr>
 <td style="text-align:center">ambidextrous</td>
 <td style="text-align:center"><strong><em>able to use both hands with equal skill</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">ambidexterity</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">dexterous</td>
@@ -985,32 +989,95 @@ table th:first-of-type {
 <td style="text-align:center"><strong><em>the study of the development of the human race</em></strong></td>
 </tr>
 <tr>
+<td style="text-align:center">anthropologist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">anthropological</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td style="text-align:center">philanthropist</td>
 <td style="text-align:center"><strong><em>one who loves mankind, and shows such love by making substantial financial contributions to charitable organizations or by donating time and energy to helping those in need</em></strong></td>
+</tr>
+<tr>
+<td style="text-align:center">philanthropy</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">philanthropic</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">gynecologist</td>
 <td style="text-align:center"><strong><em>the medical specialist who treats female disorders</em></strong></td>
 </tr>
 <tr>
+<td style="text-align:center">gynecology</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">gynecological</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">monogamist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td style="text-align:center">monogamy</td>
 <td style="text-align:center"><strong><em>the custom of only one marriage (at a time)</em></strong><br /><code>mono: one</code></td>
+</tr>
+<tr>
+<td style="text-align:center">monogamous</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">bigamist</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">bigamy</td>
 <td style="text-align:center"><strong><em>the unlawful act of two marriages at a time</em></strong><br /><code>bi: two</code></td>
 </tr>
 <tr>
+<td style="text-align:center">bigmous</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">poligamist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td style="text-align:center">polygamy</td>
 <td style="text-align:center"><strong><em>the custom which allows plural marriage for either males or females</em></strong><br /><code>poly: many</code></td>
+</tr>
+<tr>
+<td style="text-align:center">polygamous</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">polygynist</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td style="text-align:center">polygyny</td>
 <td style="text-align:center"><strong><em>a male has many wives</em></strong><br />the correct, but rarely used, term for polygamy</td>
 </tr>
 <tr>
+<td style="text-align:center">polygynous</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">polyandrist</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
 <td style="text-align:center">polyandry</td>
 <td style="text-align:center"><strong><em>a female has many husbands</em></strong><br /><code>Greek andros, male</code></td>
+</tr>
+<tr>
+<td style="text-align:center">polyandrous</td>
 </tr>
 </tbody>
 </table>
@@ -1124,7 +1191,7 @@ table th:first-of-type {
 </tr>
 <tr>
 <td style="text-align:center">hermaphroditic</td>
-<td style="text-align:center"><code>Hermes: the Greek god who served as messenger or herald (or, in Roman mythology, known as Mercury)</code><br /><code>Aphrodite: the Greek goddes of love and beauty (or, in Roman mythology, Venus)</code><br /><strong><em>a. plants in which the male and female organs are united in the same column</em></strong><br /><strong><em>b. people who physically have both male and female sexual organs, often one or both in rudimentary form</em></strong><br />noun form: hermaphroditism<br />plant or person: hermaphrodite</td>
+<td style="text-align:center"><code>Hermes: the Greek god who served as messenger or herald (or, in Roman mythology, known as Mercury)</code><br /><code>Aphrodite: the Greek goddess of love and beauty (or, in Roman mythology, Venus)</code><br /><strong><em>a. plants in which the male and female organs are united in the same column</em></strong><br /><strong><em>b. people who physically have both male and female sexual organs, often one or both in rudimentary form</em></strong><br />noun form: hermaphroditism<br />plant or person: hermaphrodite</td>
 </tr>
 <tr>
 <td style="text-align:center">monomania</td>
@@ -1132,7 +1199,7 @@ table th:first-of-type {
 </tr>
 <tr>
 <td style="text-align:center">misandrist</td>
-<td style="text-align:center">hates men<br />noun form: misandry<br />adjective form: misandrous</td>
+<td style="text-align:center"><strong><em>hates men</em></strong><br />noun form: misandry<br />adjective form: misandrous</td>
 </tr>
 </tbody>
 </table>
@@ -1871,7 +1938,7 @@ table th:first-of-type {
 </tr>
 <tr>
 <td style="text-align:center">optician</td>
-<td style="text-align:center"><strong><em>one who fills an optometrist’s or ophthalmologist’s prescription, grinding lenses according to specifications. Doesn’t examine patients. </em></strong></td>
+<td style="text-align:center"><strong><em>one who fills an optometrist’s or ophthalmologist’s prescription, grinding lenses according to specifications. Doesn’t examine patients.</em></strong></td>
 </tr>
 <tr>
 <td style="text-align:center">optics</td>
@@ -1879,6 +1946,7 @@ table th:first-of-type {
 </tr>
 <tr>
 <td style="text-align:center">optical</td>
+<td style="text-align:center">&emsp;</td>
 </tr>
 </tbody>
 </table>
