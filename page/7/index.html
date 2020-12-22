@@ -191,6 +191,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/" class="post-title-link" itemprop="url">07. Derived Distributions, Convolution, Covariance and Correlation</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-14 23:03:14" itemprop="dateCreated datePublished" datetime="2020-03-14T23:03:14+08:00">2020-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:34:36" itemprop="dateModified" datetime="2020-08-07T19:34:36+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Derived-Distributions"><a href="#Derived-Distributions" class="headerlink" title="Derived Distributions"></a>Derived Distributions</h1><ol>
+<li>Calculate the PDF of $Y=g(X)$ of a continuous random variable $X$: <br />&emsp;First calculate the CDF $F_Y$ of $Y$ using $F_Y(y)=P(g(X)≤y)=\displaystyle\int_{\{x|g(x)≤y\}}f_X(x)dx$<br />&emsp;Differentiate to obtain the PDF of $Y$: $f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)$</li>
+<li>If $Y=aX+b$, where $a$ and $b$ are scalars, with $a≠0$. Then $f_Y(y)=\displaystyle\frac{1}{|a|}f_X(\frac{y-b}{a})$<br />Graphical proof: The width will be $|a|$ times wider and the height will be $|a|$ times shorter. The points are shifted by $b$. If $a$ were negative, the graph will be flipped around the vertical axis. <br />Algebra proof: <br />&emsp;If $a&gt;0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≤\displaystyle\frac{y-b}{a})=F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=\frac{1}{a}f_X(\frac{y-b}{a})$<br />&emsp;If $a<0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≥\displaystyle\frac{y-b}{a})=1-F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=-\frac{1}{a}f_X(\frac{y-b}{a})$</li>
+<li>$Y=g(X)$ is a monotonic function and its inverse is $X=h(Y)$. Assume that $h$ is differentiable. Then the PDF of $Y$ in the region where $f_Y(y)&gt;0$ is given by $f_Y(y)=f_X(h(y))\bigg|\displaystyle\frac{dh}{dy}(y)\bigg|$. <br />Proof: <br />&emsp;If $g$ is monotonically increasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(x≤h(y))=F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\frac{dh}{dy}(y)$<br />&emsp;If $g$ is monotonically decreasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(X≥h(y))=1-F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\bigg[-\frac{dh}{dy}(y)\bigg]$</li>
+<li>This method also works for functions of multiple random variables. <br />&emsp;$F_Z(z)=P(g(X,Y)≤z)=\displaystyle\iint\limits_{\{(x,y)|(x,y)≤z\}}f_{X,Y}(x,y)dxdy$<br />&emsp;$f_Z(z)=\displaystyle\frac{dF_Z}{dz}(z)$</li>
+<li>Two-sided exponential PDF (Laplace PDF): $f_Z(z)=\displaystyle\frac{\lambda}{2}e^{-\lambda|z|}$</li>
+<li>For independent $X$ and $Y$, $Z=X+Y$. <br />&emsp;If $X$ and $Y$ are independent discrete random variables with PMFs $p_X,p_y$: <br />&emsp;&emsp;$\begin{equation}\begin{split}p_Z(z)&amp;=P(X+Y=z)\\&amp;=\displaystyle\sum_{\{(x,y)|x+y=z\}}P(X=x,Y=y)\\&amp;=\sum_xP(X=x,Y=z-x)\\&amp;=\sum_xp_X(x)p_Y(z-x) \end{split}\end{equation}$<br />&emsp;&emsp;The resulting PMF $p_Z$ is called the convolution of the PMFs of $X$ and $Y$. <br />&emsp;If $X$ and $Y$ are independent continuous random variables with PDFs $f_X$ and $f_Y$. <br />&emsp;&emsp;$\begin{equation}\begin{split}P(Z≤z|X=x)&amp;=P(X+Y≤z|X=x)\\&amp;=P(x+Y≤z|X=x)\\&amp;=P(x+Y≤z)\\&amp;=P(Y≤z-x) \end{split}\end{equation}$<br />&emsp;&emsp;Differentiating both sides with respect to $z$. $f_{Z|X}(z|x)=f_Y(z-x)$<br />&emsp;&emsp;So $f_{X,Z}(x,z)=f_X(x)f_{Z|X}(z|x)=f_X(x)f_Y(z-x)$<br />&emsp;&emsp;$f_Z(z)=\displaystyle\int^\infty_{-\infty}f_{X,Z}(x,z)dx=\int^\infty_{-\infty}f_X(x)f_Y(z-x)dx$<br />&emsp;&emsp;This is the convolution of the PDFs of $X$ and $Y$. </li>
+<li>With the help of convolution, we know that the sum of two normal random variables with means $\mu_1,\mu_2$ and variance $\sigma_1^2,\sigma_2^2$ is another normal random variable with mean $\mu_1+\mu_2$ and variance $\sigma_1^2+\sigma^2_2$. </li>
+<li>Graphical calculation of convolution: <br />&emsp;First plot $f_Y(z-t)$ as a function of $t$. <br />&emsp;Place the plots of $f_X(t)$ and $f_Y(z-t)$ on top of each other and form their product. <br />&emsp; The value of $f_Z(z)$ is the integral of the product of these two plots. </li>
+</ol>
+<h1 id="Covariance-and-Correlation"><a href="#Covariance-and-Correlation" class="headerlink" title="Covariance and Correlation"></a>Covariance and Correlation</h1><ol>
+<li>The covariance of two random variables $X$ and $Y$, denoted by $cov(X,Y)$ is defined by $cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. </li>
+<li>When $cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated. <br />Roughly speaking, a positive or negative covariance indicates that the value of $X-E[X]$ and $Y-E[Y]$ obtained in a single experiment tend to have the same or the opposite sign. </li>
+<li>$cov(X,Y)=E[XY]-E[X]E[Y]$</li>
+<li>$cov(X,X)=var(X)$</li>
+<li>$cov(X,aY+b)=a\cdot cov(X,Y)$</li>
+<li>$cov(X,Y+Z)=cov(X,Y)+cov(X,Z)$</li>
+<li>If $X$ and $Y$ are independent, $E[XY]=E[X]E[Y]$, so $cov(X,Y)=0$. Thus, if $X$ and $Y$ are independent, they are also uncorrelated. But two uncorrelated random variables are not alway independent. </li>
+<li>If $E[X|Y=y]=E[X]$, <script type="math/tex">E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&X\ and\ Y\ are\ discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&X\ and\ Y\ are\ continuous \end{array}\right.</script><br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
+<li>The correlation coefficient of two random variables $X$ and $Y$ that have nonzero variances: $\rho(X,Y)=\displaystyle\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$</li>
+<li>The correlation coefficient is a normalized version of the covariance. It ranges from $-1$ to $1$. </li>
+<li>If $\rho&gt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the same sign. if $\rho&lt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the opposite sign. </li>
+<li>$\rho=\pm1$ means $X$ and $Y$ are strongly dependent, knowing one can restore another one. <br />$\rho=1$ if and only if there exists a positive constant $c$ such that $Y-E[Y]=c(X-E[X])$. <br />$\rho=-1$ if and only if there exists a negative constant $c$ such that $Y-E[Y]=c(X-E[X])$. </li>
+<li>If $X_1,X_2,…,X_n$ are random variables with finite variance, we have $var\left(\displaystyle\sum^n_{i=1}X_i\right)=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j)$. <br />For $n=2$, $var(X_1+X_2)=var(X_1)+var(X_2)+2cov(X_1,X_2)$. <br />Proof: We denote $\tilde{X_i}=X_i-E[X_i]$. <br />&emsp;$\displaystyle\begin{equation}\begin{split}var\left(\sum^n_{i=1}X_i\right)&amp;=E\left[\left(\sum^n_{i=1}\tilde{X_i} \right)^2 \right]\\&amp;=E\left[\sum^n_{i=1}\sum^n_{j=1}\tilde{X_i}\tilde{X_j} \right]\\&amp;=\sum^n_{i=1}\sum^n_{j=1}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}E[\tilde{X_i}^2]+\sum_{\{(i,j)|i≠j\}}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j) \end{split}\end{equation}$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1246,104 +1352,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/29/08-Gradient%20Field/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/29/08-Gradient%20Field/" class="post-title-link" itemprop="url">08. Gradient Field</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-29 20:34:47" itemprop="dateCreated datePublished" datetime="2020-02-29T20:34:47+08:00">2020-02-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:23" itemprop="dateModified" datetime="2020-08-07T22:36:23+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
-<li>Gradient field: <script type="math/tex">\vec{F}=\triangledown f</script> (<script type="math/tex">f(x,y)</script> is called potential). </li>
-<li>Fundamental theorem of calculus for line integrals: <script type="math/tex">\displaystyle\int_C\triangledown f\cdot d\vec{r}=f(P_1)-f(P_0)</script> (<script type="math/tex">C</script> starts from <script type="math/tex">P_0</script> ends at <script type="math/tex">P_1</script>)<br />Proof: <script type="math/tex">\begin{equation}\begin{split}\displaystyle\int_C\triangledown f\cdot d\vec{r}&=\int_C\triangledown f\cdot\frac{d\vec{r}}{dt}dt=\int_C<f_x,f_y>\cdot<\frac{dx}{dt},\frac{dy}{dt}>dt\\&=\int_C(f_x\frac{dx}{dt}+f_y\frac{dy}{dt})dt=\int^{t_2}_{t_1}\frac{df}{dt}dt\ \ \ (chain\ rule)\\&=\int^{t_2}_{t_1}df=f(P_1)-f(P_2) \end{split}\end{equation}</script></li>
-<li>Path independence: The integral doesn’t depend on the path we take. As long as the start and end points are the same, integrals are the same. <br /><script type="math/tex">\displaystyle\int_{C_1}\triangledown fd\vec{r}=\int_{C_2}\triangledown fd\vec{r}</script></li>
-<li><script type="math/tex">\triangledown f</script> Is conservative. If <script type="math/tex">C</script> is any closed curve, the work along <script type="math/tex">C</script> is zero. </li>
-<li>Not every field is a gradient field. </li>
-<li>Conservativeness means no energy can be extracted from the field for free. </li>
-<li><script type="math/tex">Mdx+Ndy</script> is an exact differential which equals to <script type="math/tex">df</script>. </li>
-<li>If <script type="math/tex">\vec{F}=\triangledown f</script>, then <script type="math/tex">M=f_x</script> and <script type="math/tex">N=f_y</script>. Also <script type="math/tex">f_{xy}=f_{yx}</script>. So if <script type="math/tex">\vec{F}</script> is a gradient field, <script type="math/tex">M_y=N_x</script>. <br />If <script type="math/tex">M_y=N_x</script> and <script type="math/tex">\vec{F}</script> is defined in entire plane (or simply concrete region), we can know <script type="math/tex">\vec{F}</script> is a gradient field. </li>
-<li>When <script type="math/tex">\vec{F}</script> is a gradient field, we can find the potential: <br />&emsp;The first method is computing the line integral from the known point to the target. <br />&emsp;The second method is antiderivatives. With <script type="math/tex">f_x</script>, we can know <script type="math/tex">f=F(x)+G(y)</script> (<script type="math/tex">F(x)</script> is the main answer of antiderivative which may contain <script type="math/tex">y</script> while <script type="math/tex">G(y)</script> is the optional term of antiderivative which becomes zero when derivative with respect to <script type="math/tex">x</script>). <br />Now derivative the <script type="math/tex">f</script> with respect to <script type="math/tex">y</script> to get <script type="math/tex">f_y=F_y+G'(y)</script>. After compared to the known <script type="math/tex">f_y</script>, we can get the expression of <script type="math/tex">G'(y)</script>. Then calculate <script type="math/tex">G(y)</script> ans substitute to <script type="math/tex">f</script>. </li>
-</ol>
-<h1 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h1><ol>
-<li><script type="math/tex; mode=display">curl(\vec{F})=N_x-M_y$$. Test for conservativeness is $$curl\ \vec{F}=0</script></li>
-<li>Curl measures twice angular velocity of rotation component of velocity field and torque exerted on a test object in the field. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{torque}{moment\ of\ inertia}=\frac{d}{dt}(angular\ velocity)</script></li>
-<li>If force <script type="math/tex">\vec{F}</script> derives from a potential, <script type="math/tex">curl\ \vec{F}=0</script> means <script type="math/tex">\vec{F}</script> doesn’t induce any rotation motion. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1415,7 +1423,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">198</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

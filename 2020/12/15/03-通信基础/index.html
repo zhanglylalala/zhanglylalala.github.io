@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="物理层接口特性 解决如何在连接各种计算机的传输媒体传输上传输比特流，而不是指具体的传输模块 主要任务是确定与传输媒体接口有关的一些特性，定义标准 机械特性：定义物理连接的特性，规定物理连接时所采用的规格、接口形状、引线数目、引脚数量和排列情况 电气特性：规定传输二进制位时，线路上信号的电压范围、阻抗匹配、传输速率和距离限制 功能特性：指明某条线上出现的某一电平表示何种意义，接口部件的信号线的用途">
 <meta property="article:published_time" content="2020-12-15T07:44:07.000Z">
-<meta property="article:modified_time" content="2020-12-15T11:56:26.304Z">
+<meta property="article:modified_time" content="2020-12-22T07:32:40.452Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="基础">
 <meta name="twitter:card" content="summary">
@@ -218,10 +218,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-15 15:44:07 / Modified: 19:56:26" itemprop="dateCreated datePublished" datetime="2020-12-15T15:44:07+08:00">2020-12-15</time>
+              <time title="Created: 2020-12-15 15:44:07" itemprop="dateCreated datePublished" datetime="2020-12-15T15:44:07+08:00">2020-12-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 15:32:40" itemprop="dateModified" datetime="2020-12-22T15:32:40+08:00">2020-12-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -272,6 +278,109 @@
 <li>码元：用一个固定时长的信号波形 (数字脉冲)，代表不同离散数值的基本波形，是数字通信中数字信号的计量单位，这个时长内的信号称为$k$进制码元，该时长称为码元宽度。当码元的离散状态有$M$个时，码元为$M$进制码元<br />码元是基本波形，波形每一次变动都是一个码元<br />一个码元可以携带多个bit的信息量，$M$进制码元可以携带$log_2M$个bit的信息量</li>
 <li>速率 / 数据率：数据的传输速率，表示单位时间内传输的数据量<br />波特率 / 码元传输速率 / 码元速率 / 波形速率 / 调制速率 / 符号速率：单位时间内数字通信系统所传输的码元个数 (脉冲个数 / 信号变化个数)。单位是波特 ($Baud / B$)<br />波特率与进制数无关，只与码元宽度$T$有关<script type="math/tex">R_B=\displaystyle\frac{1}{T}\ \ B</script><br />比特率 (信息传输速率 / 信息速率)：单位时间内数字通信系统传输的比特数。单位是$b/s$<br />若一个码元携带<script type="math/tex">n\ bit</script>的信息量，则<script type="math/tex">M\ B</script>的波特率所对应的比特率为<script type="math/tex">M\times n\ bit/s</script></li>
 <li>带宽：单位时间从网络中的一点到另一点所能通过的最高数据率，或单位时间内通过链路的数量。单位是$bps$</li>
+</ol>
+<h1 id="奈氏准则与香农定理"><a href="#奈氏准则与香农定理" class="headerlink" title="奈氏准则与香农定理"></a>奈氏准则与香农定理</h1><h2 id="失真"><a href="#失真" class="headerlink" title="失真"></a>失真</h2><ol>
+<li>失真：现实中的信道带宽受限、有噪声、干扰导致接受到的信号波形发送改变</li>
+<li>失真的结果有两种：有失真但可识别和失真大无法识别</li>
+<li>影响失真的因素<br />&emsp;波特率越大失真越严重<br />&emsp;信号传输距离越远失真越严重<br />&emsp;噪声干扰越大失真越严重<br />&emsp;传输媒体质量越差失真越严重</li>
+<li>信号带宽：模拟信号的震动频率，单位$Hz$<br />信道带宽：信道能通过的最高频率和最低频率之差</li>
+<li>码间串扰：接收端收到的信号波形失去了码元之间清晰界限的现象，是由信号带宽太大造成的</li>
+</ol>
+<h2 id="奈氏准则"><a href="#奈氏准则" class="headerlink" title="奈氏准则"></a>奈氏准则</h2><ol>
+<li>奈氏准则：在理想低通 (无噪声，带宽受限)条件下，为了避免码间串扰，极限波特率为<script type="math/tex">2W\ Baud</script>，$W$是信道带宽，单位是$Hz$</li>
+<li>$极限数据率=2Wlog_2V$ ($V$是码元离散电平数目)</li>
+<li>任何信道中，码元传输速率有上限。若传输速率超过此上限，就会出现严重的码间串扰问题，使接收端对码元的完全识别成为不可能</li>
+<li>信道的频带越宽 (即能通过的信号高频分量越多)，就可以用更高的速率进行码元的有效传输</li>
+<li>由于码元的传输速率受奈氏准则的制约，所以要提高数据的传输速率，就必须设法使每个码元能携带更多个bit的信息量，这就需要采用多元制的调制方法</li>
+</ol>
+<h2 id="香农定理"><a href="#香农定理" class="headerlink" title="香农定理"></a>香农定理</h2><ol>
+<li>信噪比：衡量噪声对信号影响的大小。若信号强，噪声影响就相对较小</li>
+<li>$信噪比=\displaystyle\frac{信号的平均功率}{噪声的平均功率}$，常记为$\displaystyle\frac SN$。若用 ($dB$)为单位，则$信噪比(dB)=10log_{10}(\displaystyle\frac SN)$</li>
+<li>香农定理：在带宽受限且有噪声的信道中，为了不产生误差，可以清晰分辨是哪种码元，信息的比特率有上限值，<script type="math/tex">信道的极限比特率=Wlog_2(\displaystyle\frac SN)\ (b/s)</script></li>
+<li>信道的带宽或信道的信噪比越大，则信息的比特率就越高</li>
+<li>对一定的传输带宽和一定的信噪比，信息传输速率的上限就确定了</li>
+<li>只要信息的传输速率低于信道的极限传输速率，就一定能找到某种方法来实现无差别的传输</li>
+<li>香农定理得出的为极限传输速率，实际信道能达到的传输速率要低不少</li>
+</ol>
+<h1 id="编码与调制"><a href="#编码与调制" class="headerlink" title="编码与调制"></a>编码与调制</h1><ol>
+<li>基带信号：将数字信号$1$和$0$直接用两种不同的电压表示，再送到数字<code>信道上去</code>传输 (基带传输)。传输的是来自信源的信号，直接表达了要传输的信息。编码就是基带传输中规定的波形的含义<br />宽带信号：将基带信号进行调制后形成的频分复用模拟信号，再传送到<code>模拟信道</code>上去传输 (宽带传输)。把基带信号经过载波调制后，把信号的频率范围搬移到较高的频段以便在信道中传输</li>
+<li>传输距离近时，计算机网络采用基带传输方式 (近距离衰减小，从而信号内容不易发生变化)<br />传输距离远时，计算机网络采用宽带传输方式 (远距离衰减大，即使信号变化大也能最后过滤出来基带信号)</li>
+<li>数据编码生成数字信号，数据调制生成模拟信号<br />&emsp;数字数据经过数字发送器编码生成数字信号；数字数据经过调制器调制生成模拟信号<br />&emsp;模拟数据经过PCM编码器编码生成数字信号；模拟数据经过放大器调制器调制生成模拟信号</li>
+<li>收发方同步：如果接收方连续收到相同的电平，无法分清刚刚收到的是几个信号，还要另开一条信道与发送方的时钟信号保持同步。</li>
+</ol>
+<h2 id="数字数据编码为数字信号"><a href="#数字数据编码为数字信号" class="headerlink" title="数字数据编码为数字信号"></a>数字数据编码为数字信号</h2><ol>
+<li>非归零编码：高1低0。编码容易实现，但没有检错功能，且无法判断一个码元的开始和结束，以至于收发双方难以保持同步</li>
+<li>归零编码：信号电平在一个码元之内都要恢复到零。大部分时间都是0，信道利用率低</li>
+<li>反向不归零编码：信号电平翻转表示0，信号电平不翻转表示1。全1信号无法同步</li>
+<li>曼切斯特编码：一个码元内从高电平跳变为低电平是1，从低电平跳变到高电平是0<br />可以实现自同步，但是占用的频带宽度好似原始的基带宽度的两倍<br />每一个码元都有两次跳变 (开始一次，从前一码元的后一电平跳变到当前码元的前一电平；中间一次，从当前码元的前一电平跳变到当前码元的后一电平)<br />比特率只有调制速率的$\displaystyle\frac12$</li>
+<li>差分曼切斯特编码：在两个相邻码元之间，前一码元的后一电平与后一码元的前一电平相同就是1，相异就是0<br />每个码元的中间都有一个电平跳转，抗干扰性强于曼切斯特编码，常用于局域网传输</li>
+<li>4B/5B编码：bit流中插入额外的bit以打破一连串的0或1，用5个bit来编码4个bit的数据。编码效率为80%<br />只采用16中对应16种不同的4位码，其他的16种作为控制码</li>
+</ol>
+<h2 id="数字数据调制为模拟信号"><a href="#数字数据调制为模拟信号" class="headerlink" title="数字数据调制为模拟信号"></a>数字数据调制为模拟信号</h2><ol>
+<li>在发送端将数字信号转换为模拟信号，在接收端将模拟信号还原为数字信号，分别是调制解调器的调制和解调过程</li>
+<li>调幅：0没有振幅，1有振幅</li>
+<li>调频：0低频，1高频</li>
+<li>调相：相位调制，余弦波和正线波</li>
+<li>调幅+调相 (QAM)：若有$n$种相位，$m$种振幅，共有$nm$种码元</li>
+</ol>
+<h2 id="模拟数据编码为数字信号"><a href="#模拟数据编码为数字信号" class="headerlink" title="模拟数据编码为数字信号"></a>模拟数据编码为数字信号</h2><ol>
+<li>常用的是PCM脉码调制，分为三步：抽样、量化、编码</li>
+<li>抽样：对模拟信号周期性扫描，把时间上连续的信号变成时间上离散的信号<br />采样定理：$f_{采样频率}≥f_{信号最高频率}$</li>
+<li>量化：把抽样取得的电平幅值按照一定的分级标度转化为对应的数字值，并取整数，把连续的电平幅值转换为离散的数字量</li>
+<li>编码：把量化的结果转换为与之对应的二进制编码</li>
+</ol>
+<h2 id="模拟数据调制为模拟信号"><a href="#模拟数据调制为模拟信号" class="headerlink" title="模拟数据调制为模拟信号"></a>模拟数据调制为模拟信号</h2><ol>
+<li>为实现传输的有效性，可能需要较高的频率</li>
+<li>这种调制方式还可以使用频分复用技术，充分利用带宽资源</li>
+</ol>
+<h1 id="数据交换方式"><a href="#数据交换方式" class="headerlink" title="数据交换方式"></a>数据交换方式</h1><h2 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h2><ol>
+<li>原理：在数据传输期间，源结点与目的结点之间有一条由中间节点构成的专用物理连接线路，在数据传输结束之前，这条线路一直保持</li>
+<li>阶段：建立连接 (呼叫/电路建立)、通信 (数据传输)、释放连接 (拆除电路)</li>
+<li>特点：独占资源，用户始终占用端到端的固定传输带宽</li>
+<li>适用于远程批处理信息传输或系统间实时性要求高的大量数据传输</li>
+<li>建立连接的时候，源结点会延路发送呼叫请求，目的结点收到请求后会延路返回呼叫应答<br />释放连接的时候，源结点会延路发送释放请求，目的结点收到请求后会延路返回释放应答</li>
+<li>优点<br />&emsp;传输时延小<br />&emsp;数据顺序传送，无失序问题<br />&emsp;实时性强，双方一旦建立物理通路，便可以实时通信，适用于交互式会话类通信<br />&emsp;全双工通信，没有冲突，通信双方有不同的信道，不会争用物理信道<br />&emsp;适用于模拟信号和数字信号<br />&emsp;控制简单，电路的交换设备及控制较简单</li>
+<li>缺点<br />&emsp;建立连接时间长<br />&emsp;线路独占，即使通信线路空闲，也不能供其他用户使用，信道使用效率低<br />&emsp;灵活性差，双方连接通信中任何一点出了故障，必须重新拨号建立连接，不适应突发性通信<br />&emsp;无数据存储能力，难以平滑通信量<br />&emsp;电路交换时，数据直达，不同类型、不同规格、不同速率的终端很难相互进行通信<br />&emsp;无法发现与纠正传输差错，难以在通信过程中进行差错控制</li>
+</ol>
+<h2 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h2><ol>
+<li>报文：网络中交换与传输的数据单元，即站点一次性要发送的数据块。报文包含了将要发送的完整数据信息，其长短很不一致，长度不限且可变</li>
+<li>原理：无需在两个站点之间建立一条专用通路，其数据传输的单位是报文，传送过程采用存储转发的方式</li>
+<li>报文：信息+报头 (目的地址、源地址等)</li>
+<li>每个节点收下整个报文后，暂存报文并检查有无错误</li>
+<li>当所需要的输出电路空闲时，利用路由信息找到下一个结点地址，传送给下一个结点；若非空闲，先存储报文，待空闲时再发送</li>
+<li>在两个通信用户间的其他线路段，可传输其他用户的报文，不像电路交换那样必须占用端到端的全部信道</li>
+<li>优点<br />&emsp;无需建立连接，无需建立时延，用户可随时发送报文<br />&emsp;动态分配线路，动态选择报文通过的最佳路径，可以平滑通信量<br />&emsp;提高线路利用率，通信双方在不同的时间一段一段地部分占有这条物理通道，多个报文可共享信道<br />&emsp;提供多目标服务：一个报文可同时发往多个目的地址<br />&emsp;在存储转发中容易实现代码转换和速率匹配，甚至收发双方可以不同时处于可用状态。这样就便于类型、规格和速度不同的计算机之间进行通信</li>
+<li>缺点<br />&emsp;实时性差，不适合传送实时或交互式业务的数据。数据进入交换结点后要经历存储转发过程，从而引发时延<br />&emsp;只适用于数字信号<br />&emsp;由于报文长度没有限制，而每个中间节点都要完整地接受传来的整个报文，当输出线路不空闲时，还可能要存储几个完整报文等待转发，要求网络中每个节点有较大的缓冲区。为了降低成本，减少结点的缓冲存储器的容量，有时要把等待转发的报文存在磁盘上，进一步增加了传送时延</li>
+</ol>
+<h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><ol>
+<li>大多数计算机网络都不能连续地传送任意长的数据，所以实际上网络系统把数据分割成小块，然后逐块地发送</li>
+<li>分组：小数据块+控制信息 (源地址、目的地址、编号)</li>
+<li>工作方式与报文交换基本相同，都采用存储转发方式。但分组交换网中限制传输的数据单位的长度，一般是128B</li>
+<li>相比报文交换的优点<br />&emsp;简化了存储管理，因为分组的长度固定，相应缓冲区的大小也固定，在交换结点中存储器的管理被简化为对缓冲区的管理，相对容易<br />&emsp;加速传输，后一个分组的存储可以比前一个分组的转发并行操作；传输一个分组比一份报文所需缓冲区小，减少等待发送时间<br />&emsp;减少出错几率和重发数据量，提高可靠性，减少传输时延<br />&emsp;分组短小，适用于计算机之间突发式数据通信</li>
+<li>缺点<br />&emsp;尽管分组交换比报文交换的传输时延少，但仍存在存储转发时延，而且其结点交换机必须具有更强的处理能力<br />&emsp;每个分组都要加控制信息，一定程度上降低了通信效率，增加了处理的时间<br />&emsp;当分组交换采用数据报服务时，分组达到目的结点时，要对分组按编号进行排序等工作，增加了麻烦。若采用虚电路服务，虽无失序问题，但有呼叫连接、数据传输和虚电路释放三个过程</li>
+</ol>
+<h3 id="数据报方式"><a href="#数据报方式" class="headerlink" title="数据报方式"></a>数据报方式</h3><ol>
+<li>过程<br />&emsp;源主机将报文分成多个分组，依次发送到直接相连的结点<br />&emsp;结点收到分组后，对每个分组差错检测，若正确则向上一结点发送确认信息，上一结点收到确认后丢弃分组副本<br />&emsp;结点进行路由选择，不同分组的下一跳结点可能不同<br /></li>
+<li>数据报方式为网络层提供无连接服务。发送方可随时发送分组，网络中的结点可随时接受分组<br />无连接服务：不事先为分组的传输确定传输路径，每个分组独立确定传输路径，不同分组传输路径可能不同</li>
+<li>同一报文的的不同分组达到目的结点时可能发生乱序、重复与丢失</li>
+<li>每个分组在传输过程中都必须携带源地址、目的地址、分组号</li>
+<li>分组在交换结点存储转发时，需要排队等候处理，这会带来一定的时延。当通过交换结点的通信量较大或网络发生拥塞时，这种时延会大大增加，交换结点还可根据情况丢弃部分分组</li>
+<li>网络具有冗余路径，当某一交换结点或一段链路出现故障时，可相应地3更新路由表，寻找一条路径转发分组，对故障的适应能力强，适用于突发性通信，不适于长报文、会话式通信</li>
+</ol>
+<h3 id="虚电路方式"><a href="#虚电路方式" class="headerlink" title="虚电路方式"></a>虚电路方式</h3><ol>
+<li>结合数据报方式和电路交换方式</li>
+<li>虚电路：一条源主机到目的主机类似于电路的路径 (逻辑连接)，路径桑所有结点都要维持这条虚电路的建立，都维持一张虚电路表，每一项纪录了一个打开的虚电路的信息</li>
+<li>每个分组携带虚电路号，分组号、检验和等控制信息，根据虚电路号还原报文，区分不同报文</li>
+<li>虚电路方式为网络层提供连接服务。源结点与目的结点之间建立一条逻辑连接，而非实际物理连接<br />连接服务：首先为分组的传输确定传输路径 (建立连接)，然后沿该路径 (连接)传输系列分组，系列分组传输路径相同，传输结束后拆除连接</li>
+<li>一次通信的所有分组都通过虚电路顺序传送，分组不需携带源地址、目的地址等信息，包含虚电路号，相对数据报方式开销小，同一报文的不同分组达到目的结点时不会乱序、重复或丢失</li>
+<li>分组通过虚电路上的每个节点时，节点只进行差错检测，不进行路由选择</li>
+<li>每个节点可能与多个节点之间建立多条虚电路，每条虚电路支持特点的两个端系统之间的数据传输，可以对两个数据端点的流量进行控制，两个端系统之间也可以有多条虚电路为不同的进程服务</li>
+<li>当网络中的某个节点或某条链路出现故障而彻底失效时，则所有经过该结点或该链路的虚电路将遭到破坏</li>
+</ol>
+<h2 id="数据交换方式的选择"><a href="#数据交换方式的选择" class="headerlink" title="数据交换方式的选择"></a>数据交换方式的选择</h2><ol>
+<li>传送数据量大，且传送时间远大于呼叫时，选择电路交换。电路交换传输时延最小</li>
+<li>当端到端的通路有很多端的链路组成时，采用分组交换传送数据较为合适</li>
+<li>从信道利用率上看，报文交换和分组交换优于电路交换，其中分组交换比报文交换的时延小，尤其适合于计算机之间的突发式数据通信</li>
 </ol>
 
     </div>
@@ -358,7 +467,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#物理层接口特性"><span class="nav-number">1.</span> <span class="nav-text">物理层接口特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据通信模型"><span class="nav-number">2.</span> <span class="nav-text">数据通信模型</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#物理层接口特性"><span class="nav-number">1.</span> <span class="nav-text">物理层接口特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据通信模型"><span class="nav-number">2.</span> <span class="nav-text">数据通信模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#奈氏准则与香农定理"><span class="nav-number">3.</span> <span class="nav-text">奈氏准则与香农定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#失真"><span class="nav-number">3.1.</span> <span class="nav-text">失真</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奈氏准则"><span class="nav-number">3.2.</span> <span class="nav-text">奈氏准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#香农定理"><span class="nav-number">3.3.</span> <span class="nav-text">香农定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码与调制"><span class="nav-number">4.</span> <span class="nav-text">编码与调制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字数据编码为数字信号"><span class="nav-number">4.1.</span> <span class="nav-text">数字数据编码为数字信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字数据调制为模拟信号"><span class="nav-number">4.2.</span> <span class="nav-text">数字数据调制为模拟信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟数据编码为数字信号"><span class="nav-number">4.3.</span> <span class="nav-text">模拟数据编码为数字信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟数据调制为模拟信号"><span class="nav-number">4.4.</span> <span class="nav-text">模拟数据调制为模拟信号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据交换方式"><span class="nav-number">5.</span> <span class="nav-text">数据交换方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电路交换"><span class="nav-number">5.1.</span> <span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报文交换"><span class="nav-number">5.2.</span> <span class="nav-text">报文交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组交换"><span class="nav-number">5.3.</span> <span class="nav-text">分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据报方式"><span class="nav-number">5.3.1.</span> <span class="nav-text">数据报方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚电路方式"><span class="nav-number">5.3.2.</span> <span class="nav-text">虚电路方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据交换方式的选择"><span class="nav-number">5.4.</span> <span class="nav-text">数据交换方式的选择</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -373,7 +482,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">198</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

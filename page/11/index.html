@@ -191,6 +191,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/04/21-Markov-Matrices-Fourier-Series/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/04/21-Markov-Matrices-Fourier-Series/" class="post-title-link" itemprop="url">21. Markov Matrices; Fourier Series</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-04 17:07:05" itemprop="dateCreated datePublished" datetime="2020-02-04T17:07:05+08:00">2020-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:14:33" itemprop="dateModified" datetime="2020-08-07T19:14:33+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Markov-Matrices"><a href="#Markov-Matrices" class="headerlink" title="Markov Matrices"></a>Markov Matrices</h1><ol>
+<li>If every entry of <script type="math/tex">A</script> is positive and every column of <script type="math/tex">A</script> adds to <script type="math/tex">1</script>, <script type="math/tex">A</script> is a <code>Markov Matrices</code>. </li>
+<li>Columns of Markov matrices are probability vectors. </li>
+<li><script type="math/tex">1</script> is an eigenvalue for any Markov matrix. <br />Proof: columns of <script type="math/tex">A-I</script> add to <script type="math/tex">0</script>. So the sum of rows is <script type="math/tex">\vec{0}^T</script>. So <script type="math/tex">A-I</script> is singular, with determinant <script type="math/tex">0</script>. </li>
+<li><script type="math/tex">\vec{u_k}=A\vec{u_{k-1}}</script>, after <script type="math/tex">k</script> steps we have <script type="math/tex">A^k\vec{u_0}</script>. The vectors will approach a steady state <script type="math/tex">\vec{u_\infty}</script>. </li>
+<li>The steady state equation <script type="math/tex">A\vec{u_\infty}=\vec{u_\infty}</script> makes <script type="math/tex">\vec{u_\infty}</script> and eigenvector with eigenvalue <script type="math/tex">1</script>. </li>
+<li><script type="math/tex">\vec{u_\infty}=\displaystyle\lim_{k\to \infty}{A^k\vec{u_0}}</script>. So <script type="math/tex">\vec{u_\infty}</script> depends on <script type="math/tex">A^k</script>. Since a Markov matrix is always diagonalizable, <script type="math/tex">A^k=X\Lambda^kX^{-1}</script>. <br /><script type="math/tex">1</script> must be one of the eigenvalues. we can write <script type="math/tex">\vec{u_k}=c_11^k\vec{x_1}+c_2(\lambda_2)^k\vec{x_2}+…+c_n(\lambda_n)^k\vec{x_n}</script>. Since <script type="math/tex">|\lambda_i|<1</script>, when <script type="math/tex">k</script> approaches to infinity, <script type="math/tex">k</script> power of all other eigenvalues approach zero. <br />So <script type="math/tex">\vec{u_\infty}=c_1\vec{x_1}</script>. </li>
+</ol>
+<h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
+<li>Dot product between functions is <script type="math/tex">f^Tg=\displaystyle\int_0^{2\pi}{f(x)g(x)\ dx}</script>. Functions <script type="math/tex">f</script> and <script type="math/tex">g</script> are orthogonal if <script type="math/tex">f^Tg=0</script>. </li>
+<li>Projection into orthonormal basis. If <script type="math/tex">\vec{v}=Q\vec{x}</script>, then <script type="math/tex">x_i=\vec{q_i}^T\vec{v}</script>. </li>
+<li><code>Fourier series</code>: <script type="math/tex">f(x)=a_01+a_1cos\ x+b_1sin\ x+a_2cos\ 2x+b_2sin\ 2x+…</script></li>
+<li>Notice that <script type="math/tex">f(x)</script> are similar to the projection since <script type="math/tex">1,cos\ x,sin\ x,cos\ 2x, sin\ 2x</script> are all orthonormal basis. </li>
+<li>We can find the coeffecients with <script type="math/tex">\vec{q_i}^T\vec{v}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/04/20-Differential-Equations-and-exp-At/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1138,110 +1234,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/" class="post-title-link" itemprop="url">11. Orthogonal Vectors and Subspaces</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-31 21:44:03" itemprop="dateCreated datePublished" datetime="2020-01-31T21:44:03+08:00">2020-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:18:08" itemprop="dateModified" datetime="2020-08-07T19:18:08+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Orthogonality"><a href="#Orthogonality" class="headerlink" title="Orthogonality"></a>Orthogonality</h1><ol>
-<li>Two vectors are <code>orthogonal</code> when their dot product is zero: <script type="math/tex">\vec{v}\cdot \vec{w}=\vec{v}^T\vec{w}=0</script>. </li>
-<li>If two vectors are orthogonal, <script type="math/tex">||\vec{v}||^2+||\vec{w}||^2=||\vec{v}+\vec{w}||^2=||\vec{v}-\vec{w}||^2</script>. </li>
-<li>For two subspaces <script type="math/tex">V</script> and <script type="math/tex">W</script>, if <script type="math/tex">\forall\ \vec{v}\ \forall\ \vec{w},\ \vec{v}^T\vec{w}=0</script>, we say <script type="math/tex">V</script> and <script type="math/tex">W</script> are <code>orthogonal</code> or <code>perpendicular</code>. </li>
-<li>The row space is perpendicular to the nullsapce. Every row of <script type="math/tex">A</script> is perpendicular to every solution of <script type="math/tex">A\vec{x}=\vec{0}</script><br />The column space is perpendicular to the left nullspace. Every row of <script type="math/tex">A^T</script> is perpendicular to every solution of <script type="math/tex">A^T\vec{y}=\vec{0}</script> </li>
-<li>If two orthogonal subspaces have intersection, the intersection can and only can contain <script type="math/tex">\vec{0}</script>, or the vector in the intersection cannot be perpendicular to itself. </li>
-</ol>
-<h1 id="Orthogonal-Complements"><a href="#Orthogonal-Complements" class="headerlink" title="Orthogonal Complements"></a>Orthogonal Complements</h1><ol>
-<li>The orthogonal complements of a subspace <script type="math/tex">V</script> contains every vector that is perpendicular to <script type="math/tex">V</script>. It’s denoted by <script type="math/tex">V^\perp</script>. </li>
-<li>Both row space and nullspace are the orhogonal complement of the other. <br />Both column space and left nullspace are the orhogonal complement of the other. </li>
-<li><script type="math/tex">\forall\ \vec{x_r}\in C(A^T),\ \forall\ \vec{x_n}\in\ N(A),\ A(\vec{x_r}+\vec{x_n})=A\vec{x_r}+A\vec{x_n}=A\vec{x}+\vec{0}=A\vec{x}=\vec{b}</script>. Every <script type="math/tex">\vec{b}</script> (a vector in <script type="math/tex">C(A)</script>) corresponds to one <script type="math/tex">\vec{x_r}</script>. </li>
-</ol>
-<h1 id="Combining-Basis"><a href="#Combining-Basis" class="headerlink" title="Combining Basis"></a>Combining Basis</h1><ol>
-<li>Any <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script> must span <script type="math/tex">R^n</script>. Any n vectors that span <script type="math/tex">R^n</script> must be independent. </li>
-<li>If the <script type="math/tex">n</script> columns of <script type="math/tex">A</script> are independent, they span <script type="math/tex">R^n</script>. So <script type="math/tex">A\vec{x}=\vec{b}</script> is solvable. <br />If the n columns of <script type="math/tex">A</script> span <script type="math/tex">R^n</script>, they are independent. So <script type="math/tex">A\vec{x}=\vec{b}</script> has only one solution. </li>
-<li>The <script type="math/tex">r</script> basis of <script type="math/tex">C(A^T)</script> combine <script type="math/tex">n-r</script> basis of <script type="math/tex">N(A)</script> is <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script>. So each <script type="math/tex">\vec{x}</script> is the sum <script type="math/tex">\vec{x_r}+\vec{x_n}</script>. <br />Prove of independence: <br />If a combination of all <script type="math/tex">n</script> vectors gives <script type="math/tex">\vec{x_r}+\vec{x_n}=\vec{0}</script>, then <script type="math/tex">\vec{x_r}=-\vec{x_n}</script> is in both subspaces. So <script type="math/tex">\vec{x_r}=\vec{x_n}=\vec{0}</script>. </li>
-</ol>
-<h1 id="When-Ax-b-fails"><a href="#When-Ax-b-fails" class="headerlink" title="When Ax=b fails"></a>When Ax=b fails</h1><ol>
-<li>In application, <script type="math/tex">A\vec{x}=\vec{b}</script> is usually unsovable, especially when there are way more equations then the unknowns, the <script type="math/tex">\vec{b}</script> often has noise. </li>
-<li>In order to make good use of data, we usually multiply two side with <script type="math/tex">A^T</script> to solve <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script>. </li>
-<li><script type="math/tex">N(A^TA)=N(A)</script>, and <script type="math/tex">rank\ of\ A^TA=rank\ of\ A</script>. </li>
-<li><script type="math/tex">A^TA</script> is invertible when <script type="math/tex">A</script> has independent columns and this is when <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> has a solution. <br />Prove independence: <br />To find <script type="math/tex">N(A^TA)</script>, we find the solution space of <script type="math/tex">A^TA\vec{x}=\vec{0}</script>. <br />Multiply by <script type="math/tex">\vec{x}^T</script>, we get <script type="math/tex">\vec{x}^TA^TA\vec{x}=(A\vec{x})^T(A\vec{x})=\vec{0}</script>. <br />This means <script type="math/tex">A\vec{x}=\vec{0}</script>. <br />If <script type="math/tex">A</script> has independent columns, that equation leads to <script type="math/tex">\vec{x}=0</script>, i.e. <script type="math/tex">N(A^TA)=Z</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1313,7 +1305,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">198</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
