@@ -602,8 +602,31 @@
 <li>TCP/IP模型有四层，自上而下分别是应用层、传输层、网际层、网络接口层</li>
 <li>TCP/IP模型的应用层对应OSI模型的应用层、表示层、会话层，传输层对应传输层，网际层对应网络层，网络接口层对应数据链路层、物理层</li>
 <li>面向连接三个阶段：$建立连接\rightarrow数据传输\rightarrow释放连接$<br />无连接直接数据传输</li>
-<li>5层参考模型：自上而下分别是应用层、传输层、网络层、数据链路层、物理层<br>|  |     OSI模型     |   TCP/IP模型    |<br>| :——: | :——————-: | :——————-: |<br>| 网络层 | 无连接+面向连接 |     无连接      |<br>| 传输层 |    面向连接     | 无连接+面向连接 |</li>
+<li>5层参考模型：自上而下分别是应用层、传输层、网络层、数据链路层、物理层</li>
 </ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">OSI模型</th>
+<th style="text-align:center">TCP/IP模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">无连接+面向连接</td>
+<td style="text-align:center">无连接</td>
+</tr>
+<tr>
+<td style="text-align:center">传输层</td>
+<td style="text-align:center">面向连接</td>
+<td style="text-align:center">无连接+面向连接</td>
+</tr>
+</tbody>
+</table>
+</div>
 ]]></content>
       <categories>
         <category>计算机科学与技术</category>
