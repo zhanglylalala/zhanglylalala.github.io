@@ -867,7 +867,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-26 21:27:30" itemprop="dateModified" datetime="2021-01-26T21:27:30+08:00">2021-01-26</time>
+                <time title="Modified: 2021-01-26 21:32:41" itemprop="dateModified" datetime="2021-01-26T21:32:41+08:00">2021-01-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -913,44 +913,28 @@
 <li>负载均衡</li>
 </ol>
 <h1 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h1><ol>
-<li><p>第一阶段<br />美苏冷战时期，美国国防部高级研究计划局 (ARPA)设计的一个分散的指挥系统，阿帕网 (ARPAnet)<br />阿帕网希望实现不同网络互连  (internet)，接受TCP/IP协议，形成Internet<br />网络连接计算机，互联网连接网络，Internet是最大的互联网</p>
-</li>
-<li><p>第二阶段<br />美国国家科学基金会建立的三层网络<br />最低层为校园网，校园网需要连接地区网，地区网连接主干网</p>
-</li>
-<li><p>第三阶段<br />ISP：Internet服务提供者，Internet服务提供商<br />本质还是三层网络，但是ISP从美国政府分散到各个公司<br />访问流程：$主机 \rightarrow 本地ISP\rightarrow 地区ISP\rightarrow\dots\rightarrow 主干ISP\rightarrow\dots\rightarrow 地区ISP\rightarrow 本地ISP\rightarrow 主机$<br />IXP：Internet交换点，让两个网络可以直接相连，无需向上传递数据可以直接通信</p>
-</li>
+<li>第一阶段<br />美苏冷战时期，美国国防部高级研究计划局 (ARPA)设计的一个分散的指挥系统，阿帕网 (ARPAnet)<br />阿帕网希望实现不同网络互连  (internet)，接受TCP/IP协议，形成Internet<br />网络连接计算机，互联网连接网络，Internet是最大的互联网</li>
+<li>第二阶段<br />美国国家科学基金会建立的三层网络<br />最低层为校园网，校园网需要连接地区网，地区网连接主干网</li>
+<li>第三阶段<br />ISP：Internet服务提供者，Internet服务提供商<br />本质还是三层网络，但是ISP从美国政府分散到各个公司<br />访问流程：$主机 \rightarrow 本地ISP\rightarrow 地区ISP\rightarrow\dots\rightarrow 主干ISP\rightarrow\dots\rightarrow 地区ISP\rightarrow 本地ISP\rightarrow 主机$<br />IXP：Internet交换点，让两个网络可以直接相连，无需向上传递数据可以直接通信</li>
 </ol>
 <h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><ol>
-<li><p>组成部分：硬件、软件、协议 (一系列规定和约定的集合)</p>
-</li>
-<li><p>硬件组成了网络的端系统以及中间设备<br />软件附着在端系统上，部分在中间设备上<br />协议规定数据如何封装打包，如何在网络中传播</p>
-</li>
-<li><p>边缘部分：端系统，用户直接使用<br />核心部分：为边缘部分服务的中间设备</p>
-</li>
-<li><p>边缘部分端系统之间的通信是进程之间的通信</p>
-</li>
-<li><p>边缘部分之间的通信方式<br />C/S方式：Client to Server，把数据从发起Client都发送到Server上再发到目标Client，Client越多，速度越慢<br />B/S方式：Browser to Server，与C/S方式类似，但是发生在Browser上<br />P2P方式：Peer to Peer，所有主机都是提供服务的Server，也是享受服务的Client，使用的主机越多，速度越快</p>
-</li>
-<li><p>通信子网：实现数据通信，由各种传输介质、通信设备、相应的网络协议组成<br />资源子网：实现资源共享 / 数据处理，由实现资源共享功能的设备和软件的集合组成<br />在OSI七层模型中，下三层 (物理层、数据链路层、网络层)是通信子网，上三层 (会话层、表示层、应用层)是资源子网，传输层连接资源子网和通信子网</p>
-</li>
+<li>组成部分：硬件、软件、协议 (一系列规定和约定的集合)</li>
+<li>硬件组成了网络的端系统以及中间设备<br />软件附着在端系统上，部分在中间设备上<br />协议规定数据如何封装打包，如何在网络中传播</li>
+<li>边缘部分：端系统，用户直接使用<br />核心部分：为边缘部分服务的中间设备</li>
+<li>边缘部分端系统之间的通信是进程之间的通信</li>
+<li>边缘部分之间的通信方式<br />C/S方式：Client to Server，把数据从发起Client都发送到Server上再发到目标Client，Client越多，速度越慢<br />B/S方式：Browser to Server，与C/S方式类似，但是发生在Browser上<br />P2P方式：Peer to Peer，所有主机都是提供服务的Server，也是享受服务的Client，使用的主机越多，速度越快</li>
+<li>通信子网：实现数据通信，由各种传输介质、通信设备、相应的网络协议组成<br />资源子网：实现资源共享 / 数据处理，由实现资源共享功能的设备和软件的集合组成<br />在OSI七层模型中，下三层 (物理层、数据链路层、网络层)是通信子网，上三层 (会话层、表示层、应用层)是资源子网，传输层连接资源子网和通信子网</li>
 </ol>
 <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ol>
-<li><p>按分布范围分：广域网 (WAN)、城域网 (MAN)、局域网 (LAN)、个人区域网 (PAN)<br />广域网使用交换技术，局域网使用广播技术<br />不看地理范围，而看使用的技术，即使只有几米，使用广域网技术，也是广域网</p>
-</li>
-<li><p>按使用者分：公用网、专用网</p>
-</li>
-<li><p>按交换技术分：电路交换、报文交换、分组交换<br />电路交换：$建立连接，占用资源\rightarrow 通信，持续占用资源\rightarrow 通信结束，释放资源$<br />电路交换在通信时别人无法与通信中的人通信<br />报文交换、分组交换：使用存储转发技术，不会占线，区别是发送的报文是否分组</p>
-</li>
-<li><p>按拓扑结构分：总线型、星型、环型、网络型<br />星型结构中如果有$n$个节点，则有$n-1$条链路</p>
-</li>
-<li><p>按传输技术分：广播式网络、点对点网络<br />广播式网络是共享公共通信信道，网络中所有人都可以收到信息<br />点对点网络是使用分组存储转发和路由选择机制，只有目标才可以收到信息</p>
-</li>
+<li>按分布范围分：广域网 (WAN)、城域网 (MAN)、局域网 (LAN)、个人区域网 (PAN)<br />广域网使用交换技术，局域网使用广播技术<br />不看地理范围，而看使用的技术，即使只有几米，使用广域网技术，也是广域网</li>
+<li>按使用者分：公用网、专用网</li>
+<li>按交换技术分：电路交换、报文交换、分组交换<br />电路交换：$建立连接，占用资源\rightarrow 通信，持续占用资源\rightarrow 通信结束，释放资源$<br />电路交换在通信时别人无法与通信中的人通信<br />报文交换、分组交换：使用存储转发技术，不会占线，区别是发送的报文是否分组</li>
+<li>按拓扑结构分：总线型、星型、环型、网络型<br />星型结构中如果有$n$个节点，则有$n-1$条链路</li>
+<li>按传输技术分：广播式网络、点对点网络<br />广播式网络是共享公共通信信道，网络中所有人都可以收到信息<br />点对点网络是使用分组存储转发和路由选择机制，只有目标才可以收到信息</li>
 </ol>
 <h1 id="标准化工作"><a href="#标准化工作" class="headerlink" title="标准化工作"></a>标准化工作</h1><ol>
-<li><p>标准分类<br />法定标准：由权威机构制定的正式的、合法的标准<br />事实标准：某些公司的产品在竞争中占据了主流，时间长了，这些产品中的协议和技术就成了标准</p>
-</li>
-<li><p>标准的制定<br />RFC (Request For Comment)：Internet标准的形式。所有的Internet标准都是RFC格式，但不是所有RFC都是Internet标准<br />RFC成为Internet正式标准：<script type="math/tex">Internet草案\rightarrow 建议标准\rightarrow草案标准\rightarrow Internet标准</script><br />Internet草案还不是RFC文档，从建议标准开始才是<br />草案标准已经取消</p>
-</li>
+<li>标准分类<br />法定标准：由权威机构制定的正式的、合法的标准<br />事实标准：某些公司的产品在竞争中占据了主流，时间长了，这些产品中的协议和技术就成了标准</li>
+<li>标准的制定<br />RFC (Request For Comment)：Internet标准的形式。所有的Internet标准都是RFC格式，但不是所有RFC都是Internet标准<br />RFC成为Internet正式标准：<script type="math/tex">Internet草案\rightarrow 建议标准\rightarrow草案标准\rightarrow Internet标准</script><br />Internet草案还不是RFC文档，从建议标准开始才是<br />草案标准已经取消</li>
 </ol>
 <h1 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h1><h2 id="速率、带宽、吞吐量"><a href="#速率、带宽、吞吐量" class="headerlink" title="速率、带宽、吞吐量"></a>速率、带宽、吞吐量</h2><ol>
 <li>速率 / 数据率 / 数据传输率 / 比特率：连接在计算机网络上的主机在数字信道上传送数据位数的速率</li>
@@ -960,20 +944,13 @@
 <li>吞吐量受网络的带宽限制，带宽是吞吐量的上限</li>
 </ol>
 <h2 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h2><ol>
-<li><p>时延 / 延迟 / 迟延：数据从网络的一端传送到另一端所需的时间</p>
-</li>
-<li><p>时延由四部分组成<br />发送时延：发送分组的第一个bit到分组的最后一个bit发送完所需的时间，发生在发送端内。$发送时延=\displaystyle\frac{数据长度}{信道带宽}$<br />传播时延：在链路上传播花费的时间，发生在链路上。$传播时延=\displaystyle\frac{信道长度}{电磁波在信道上的传播速率}$<br />排队时延：等待输出/输入链路可用的时间，发生在中间设备中<br />处理时延：在中间设备中检错和找出口，发生在中间设备中</p>
-</li>
-<li><p>高速链路提高了信道带宽，缩短了发送时延</p>
-</li>
-<li><p>$时延带宽积=传播时延\times带宽$，单位是bit，表示某段链路上现在有多少bit。又称为以bit为单位的链路长度</p>
-</li>
-<li><p>往返时延RTT：从发送方发送数据开始，到发送方收到接收方的确认 (收到数据后立即发送确认)总共经历的时延<br />RTT越大，在收到确认之前，可以发送的数据越多<br />$RTT=传播时延\times 2+末端处理时间$</p>
-</li>
-<li><p>$信道利用率=\displaystyle\frac{有数据通过的时间}{总时间}$<br />网络利用率：信道利用率的加权平均值</p>
-</li>
-<li><p>时延随利用率的提升而提高，且在利用率接近$1$时急剧上升</p>
-</li>
+<li>时延 / 延迟 / 迟延：数据从网络的一端传送到另一端所需的时间</li>
+<li>时延由四部分组成<br />发送时延：发送分组的第一个bit到分组的最后一个bit发送完所需的时间，发生在发送端内。$发送时延=\displaystyle\frac{数据长度}{信道带宽}$<br />传播时延：在链路上传播花费的时间，发生在链路上。$传播时延=\displaystyle\frac{信道长度}{电磁波在信道上的传播速率}$<br />排队时延：等待输出/输入链路可用的时间，发生在中间设备中<br />处理时延：在中间设备中检错和找出口，发生在中间设备中</li>
+<li>高速链路提高了信道带宽，缩短了发送时延</li>
+<li>$时延带宽积=传播时延\times带宽$，单位是bit，表示某段链路上现在有多少bit。又称为以bit为单位的链路长度</li>
+<li>往返时延RTT：从发送方发送数据开始，到发送方收到接收方的确认 (收到数据后立即发送确认)总共经历的时延<br />RTT越大，在收到确认之前，可以发送的数据越多<br />$RTT=传播时延\times 2+末端处理时间$</li>
+<li>$信道利用率=\displaystyle\frac{有数据通过的时间}{总时间}$<br />网络利用率：信道利用率的加权平均值</li>
+<li>时延随利用率的提升而提高，且在利用率接近$1$时急剧上升</li>
 </ol>
 
       
