@@ -191,6 +191,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/12/22/05-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/22/05-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">05. 数据链路层的功能</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-22 15:36:27 / Modified: 23:16:33" itemprop="dateCreated datePublished" datetime="2020-12-22T15:36:27+08:00">2020-12-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%80%83%E7%A0%94/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络 (考研)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ol>
+<li>结点：主机、路由器</li>
+<li>链路：网络中两个结点之间的物理通道，分为有线链路和无线链路</li>
+<li>数据链路：网络中两个结点之间的逻辑通道，把实现控制数据传输协议的硬件和软件加到链路上就构成数据链路</li>
+<li>帧：链路层的协议数据单元，封装网络层数据报</li>
+<li>数据链路层负责通过一条链路从一个结点向另一个物理链路直接相连的相邻结点传送数据报</li>
+<li>数据链路在物理层提供服务的基础上向网络层提供服务<br />最基本服务：将源自网络层来的数据可靠地传输到相邻结点的目标网络层<br />主要作用：加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造成为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路</li>
+<li>五大功能：为网络层提供服务、链路管理、组帧、流量控制、差错控制</li>
+<li>为网络层提供的服务包括：无确认无连接服务、有确认无连接服务，有确认面向连接服务<br />其中无确认无连接服务主要用于实时服务或误码率较低的服务，有确认无连接服务主要用于误码率较高的服务，如无线连接</li>
+<li>链路控制用于面向连接的服务，连接建立、维持、释放</li>
+</ol>
+<h1 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h1><ol>
+<li>封装成帧：在一段数据的前后部分添加首部和尾部，这样就构成了一个帧。接收端在收到物理层上交的比特流后就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束</li>
+<li>首部和尾部包含许多控制信息，其中最重要的一个是帧定界符，其作用是帧定界</li>
+<li>帧同步：接收方能从接收到的二进制比特流中区分出帧的起始和终止</li>
+<li>数据链路层的帧长：包括帧首部和帧尾部的整个数据长度</li>
+<li>帧的数据部分不大于最大传输单元MTU</li>
+<li>透明传输：不管所传输的是什么样的比特组合，都应当能够在链路上传输</li>
+<li>字符计数法：帧的首部用一个字节来标明帧内包括该计数字段在内的总长度<br />如果有一个帧的计数字段出错，该帧之后的每一帧都会出错</li>
+<li>字符填充法：在帧首部添加SOH (Start of Header)表示帧的开始，在尾部添加EOT (End of Transmission)表示帧的开始<br />当传送的帧由ASCII码组成时，无需担心在帧内出现和SOH或EOT重复的字段<br />当传送的帧由非ASCII码组成是，就有可能出现和SOH或EOT重复的字段，就可能出现误解导致无法帧同步<br />发送端：在帧内除真正的SOH和EOT外的每一个冲突的字段前都添加一个转义字符ESC，与ESC冲突的字段前也要添加ESC<br />接收端：若检测到ESC，将其删除，并将下一字节处理成数据而非标记</li>
+<li>零比特填充法：在帧首部和尾部各添加一字节的$01111110$<br />发送端：只要有连续的$5$个$1$，不管其后面是什么，就在后面添加$1$个$0$<br />接收端：每发现连续的$5$个$1$，就删除其后的$1$个$0$</li>
+<li>违规码编法：曼切斯特编码在每一个码元之内都是高-低或低-高格式，用高-高或低-低表示帧的起始和终止</li>
+<li>字节计数法过于脆弱，字符填充法较为复杂，较普遍使用比特填充和违规编码法</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/12/22/04-%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8%E5%92%8C%E8%AE%BE%E5%A4%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -603,10 +702,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-06 11:56:28 / Modified: 19:26:04" itemprop="dateCreated datePublished" datetime="2020-12-06T11:56:28+08:00">2020-12-06</time>
+              <time title="Created: 2020-12-06 11:56:28" itemprop="dateCreated datePublished" datetime="2020-12-06T11:56:28+08:00">2020-12-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-26 21:13:58" itemprop="dateModified" datetime="2021-01-26T21:13:58+08:00">2021-01-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -637,34 +742,19 @@
 
       
           <h1 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h1><ol>
-<li><p>发送文件前要完成的工作：</p>
-<p>发起通信的计算机必须将数据通信的通路进行激活</p>
-<p>要告诉网络如何识别目标主机</p>
-<p>查明目的主机是否开机，并且网络连接正常</p>
-<p>弄清楚对方计算机中文件管理程序是否已经做好准备</p>
-<p>确保差错和意外可以解决</p>
+<li><p>发送文件前要完成的工作：<br /><br>发起通信的计算机必须将数据通信的通路进行激活<br /><br>要告诉网络如何识别目标主机<br /><br>查明目的主机是否开机，并且网络连接正常<br /><br>弄清楚对方计算机中文件管理程序是否已经做好准备<br /><br>确保差错和意外可以解决</p>
 </li>
 <li><p>分层的体系结构把大问题化为多个小问题逐一解决</p>
 </li>
-<li><p>实体：每一层中的活动对象</p>
-<p>对等实体：同一层的实体</p>
+<li><p>实体：每一层中的活动对象<br /><br>对等实体：同一层的实体</p>
 </li>
-<li><p>协议：对等实体之间的一系列规定</p>
-<p>协议三部分：语法规定传输数据的格式，语义规定所要完成的功能，同步规定各种操作的顺序</p>
+<li><p>协议：对等实体之间的一系列规定<br /><br>协议三部分：语法规定传输数据的格式，语义规定所要完成的功能，同步规定各种操作的顺序</p>
 </li>
-<li><p>接口：连接相邻两层之间的上层使用下层服务的逻辑入口</p>
-<p>服务：下层为相邻上层提供的功能调用</p>
+<li><p>接口：连接相邻两层之间的上层使用下层服务的逻辑入口<br /><br>服务：下层为相邻上层提供的功能调用</p>
 </li>
-<li><p>分层的要求</p>
-<p>各层之间相互独立，每层只实现一种相对独立的功能</p>
-<p>每层之间界面自然清晰，易于理解，相互交流尽可能少</p>
-<p>结构上可分割开，每层都采用最合适的技术实现</p>
-<p>保持下层对上层的独立性，上层单向使用下层的服务</p>
-<p>分层有助于标准化工作的进行</p>
+<li><p>分层的要求<br /><br>各层之间相互独立，每层只实现一种相对独立的功能<br /><br>每层之间界面自然清晰，易于理解，相互交流尽可能少<br /><br>结构上可分割开，每层都采用最合适的技术实现<br /><br>保持下层对上层的独立性，上层单向使用下层的服务<br /><br>分层有助于标准化工作的进行</p>
 </li>
-<li><p>SDU服务数据单元：为完成用户所要求的功能而应传送的数据</p>
-<p>PCI协议控制信息：控制协议操作的信息</p>
-<p>PDU协议数据单元：对等层次之间传送的数据单元</p>
+<li><p>SDU服务数据单元：为完成用户所要求的功能而应传送的数据<br /><br>PCI协议控制信息：控制协议操作的信息<br /><br>PDU协议数据单元：对等层次之间传送的数据单元</p>
 </li>
 </ol>
 <h1 id="参考模型"><a href="#参考模型" class="headerlink" title="参考模型"></a>参考模型</h1><h2 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h2><ol>
@@ -672,48 +762,23 @@
 </li>
 <li><p>OSI模型由七层组成，自上而下依次是：应用层、表示层、会话层、传输层、网络层、数据链路层、物理层</p>
 </li>
-<li><p>通信的两个端系统都要经历完整的七层，中间设备只要两层或三层</p>
-<p>最上面四层无需中间设备参与，是端到端通信；下三层是点到点通信</p>
+<li><p>通信的两个端系统都要经历完整的七层，中间设备只要两层或三层<br /><br>最上面四层无需中间设备参与，是端到端通信；下三层是点到点通信</p>
 </li>
-<li><p>数据的处理</p>
-<p>物理层不对数据做处理，只转换成信号并传输 </p>
-<p>发送端除物理层外的每层会把上层的传下来的数据添加一个首部，包装成该层的PDU。数字链路层除了首部还添加了一个尾部</p>
-<p>接收端每层都把下一层传来的数据处理解码，去除发送端对应层添加的内容，再发送给上一层</p>
+<li><p>数据的处理<br /><br>物理层不对数据做处理，只转换成信号并传输 <br /><br>发送端除物理层外的每层会把上层的传下来的数据添加一个首部，包装成该层的PDU。数字链路层除了首部还添加了一个尾部<br /><br>接收端每层都把下一层传来的数据处理解码，去除发送端对应层添加的内容，再发送给上一层</p>
 </li>
-<li><p>应用层：所有能和用户交互产生网络流量的程序，即需要联网的应用程序</p>
-<p>典型应用层服务：文件传输 (FTP协议)、电子邮件 (SMTP协议)、万维网 (HTTP协议)</p>
+<li><p>应用层：所有能和用户交互产生网络流量的程序，即需要联网的应用程序<br /><br>典型应用层服务：文件传输 (FTP协议)、电子邮件 (SMTP协议)、万维网 (HTTP协议)</p>
 </li>
-<li><p>表示层：处理在两个通信系统中交换信息的表示方式 (语法和语义)</p>
-<p>功能：数据格式变换、数据加密解密、数据压缩和恢复</p>
+<li><p>表示层：处理在两个通信系统中交换信息的表示方式 (语法和语义)<br /><br>功能：数据格式变换、数据加密解密、数据压缩和恢复</p>
 </li>
-<li><p>会话层：向表示层实体/用户进程提供建立连接并在连接上有序地传输数据</p>
-<p>会话 / 建立同步 (SYN)：建立连接并有序传输</p>
-<p>功能：建立、管理、终止会话、使用校验点可使会话在通信失效时从校验点 / 同步点继续恢复通信，实现数据同步</p>
-<p>主要协议：ADSP、ASP</p>
+<li><p>会话层：向表示层实体/用户进程提供建立连接并在连接上有序地传输数据<br /><br>会话 / 建立同步 (SYN)：建立连接并有序传输<br /><br>功能：建立、管理、终止会话、使用校验点可使会话在通信失效时从校验点 / 同步点继续恢复通信，实现数据同步<br /><br>主要协议：ADSP、ASP</p>
 </li>
-<li><p>传输层：负载主机中两个进程的通信，即端到端的通信。端表示的是端口号</p>
-<p>传输单位是报文段或用户数据报</p>
-<p>功能：可靠传输、不可靠传输、差错控制、流量控制、复用分用</p>
-<p>复用：多个应用层进程同时使用下面运输层的服务</p>
-<p>分用：运输层把收到的信息依据端口号分别交给上面应用层中的相应进程</p>
-<p>主要协议：TCP、UDP</p>
+<li><p>传输层：负载主机中两个进程的通信，即端到端的通信。端表示的是端口号<br /><br>传输单位是报文段或用户数据报<br /><br>功能：可靠传输、不可靠传输、差错控制、流量控制、复用分用<br /><br>复用：多个应用层进程同时使用下面运输层的服务<br /><br>分用：运输层把收到的信息依据端口号分别交给上面应用层中的相应进程<br /><br>主要协议：TCP、UDP</p>
 </li>
-<li><p>网络层：把分组从原端传到目的端，为分组交换网上的不同主机提供通信服务</p>
-<p>传输单位是数据报</p>
-<p>功能：路由选择 (最佳路径)、流量控制、差错控制、拥塞控制</p>
-<p>拥塞状态：所有节点都来不及接受分组，而要丢弃大量分组</p>
-<p>主要协议：IP、IPX、ICMP、IGMP、ARP、RARP、OSPF</p>
+<li><p>网络层：把分组从原端传到目的端，为分组交换网上的不同主机提供通信服务<br /><br>传输单位是数据报<br /><br>功能：路由选择 (最佳路径)、流量控制、差错控制、拥塞控制<br /><br>拥塞状态：所有节点都来不及接受分组，而要丢弃大量分组<br /><br>主要协议：IP、IPX、ICMP、IGMP、ARP、RARP、OSPF</p>
 </li>
-<li><p>数据链路层：把网络层传下来的数据报组装成帧</p>
-<p>传输单位是帧</p>
-<p>功能：成帧 (定义帧的开始和结束)、差错控制 (帧错、位错)、流量控制、访问 (对信道的访问接入)控制 </p>
-<p>主要协议：SDLC、HDLC、PPP、STP</p>
+<li><p>数据链路层：把网络层传下来的数据报组装成帧<br /><br>传输单位是帧<br /><br>功能：成帧 (定义帧的开始和结束)、差错控制 (帧错、位错)、流量控制、访问 (对信道的访问接入)控制 <br /><br>主要协议：SDLC、HDLC、PPP、STP</p>
 </li>
-<li><p>物理层：在物理媒体上实现比特流的透明传输</p>
-<p>传输单位是bit</p>
-<p>透明传输：不管所传数据是什么样的bit组合，都应当能够在链路上传送</p>
-<p>功能：定义接口特性、定义传输模式 (单工、半双工、双工)、定义传输速率、bit同步、bit编码</p>
-<p>主要协议：Rj45、802.3</p>
+<li><p>物理层：在物理媒体上实现比特流的透明传输<br /><br>传输单位是bit<br /><br>透明传输：不管所传数据是什么样的bit组合，都应当能够在链路上传送<br /><br>功能：定义接口特性、定义传输模式 (单工、半双工、双工)、定义传输速率、bit同步、bit编码<br /><br>主要协议：Rj45、802.3</p>
 </li>
 </ol>
 <h2 id="TCP-IP模型"><a href="#TCP-IP模型" class="headerlink" title="TCP/IP模型"></a>TCP/IP模型</h2><ol>
@@ -723,8 +788,7 @@
 </li>
 <li><p>TCP/IP模型的应用层对应OSI模型的应用层、表示层、会话层，传输层对应传输层，网际层对应网络层，网络接口层对应数据链路层、物理层</p>
 </li>
-<li><p>面向连接三个阶段：$建立连接\rightarrow数据传输\rightarrow释放连接$</p>
-<p>无连接直接数据传输</p>
+<li><p>面向连接三个阶段：$建立连接\rightarrow数据传输\rightarrow释放连接$<br /><br>无连接直接数据传输</p>
 </li>
 </ol>
 <div class="table-container">
@@ -803,7 +867,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-06 11:55:36" itemprop="dateModified" datetime="2020-12-06T11:55:36+08:00">2020-12-06</time>
+                <time title="Modified: 2021-01-26 21:15:43" itemprop="dateModified" datetime="2021-01-26T21:15:43+08:00">2021-01-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -849,82 +913,49 @@
 <li>负载均衡</li>
 </ol>
 <h1 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h1><ol>
-<li><p>第一阶段</p>
-<p>美苏冷战时期，美国国防部高级研究计划局 (ARPA)设计的一个分散的指挥系统，阿帕网 (ARPAnet)</p>
-<p>阿帕网希望实现不同网络互连  (internet)，接受TCP/IP协议，形成Internet</p>
-<p>网络连接计算机，互联网连接网络，Internet是最大的互联网</p>
+<li><p>第一阶段<br /><br>美苏冷战时期，美国国防部高级研究计划局 (ARPA)设计的一个分散的指挥系统，阿帕网 (ARPAnet)<br /><br>阿帕网希望实现不同网络互连  (internet)，接受TCP/IP协议，形成Internet<br /><br>网络连接计算机，互联网连接网络，Internet是最大的互联网</p>
 </li>
-<li><p>第二阶段</p>
-<p>美国国家科学基金会建立的三层网络</p>
-<p>最低层为校园网，校园网需要连接地区网，地区网连接主干网</p>
+<li><p>第二阶段<br /><br>美国国家科学基金会建立的三层网络<br /><br>最低层为校园网，校园网需要连接地区网，地区网连接主干网</p>
 </li>
-<li><p>第三阶段</p>
-<p>ISP：Internet服务提供者，Internet服务提供商</p>
-<p>本质还是三层网络，但是ISP从美国政府分散到各个公司</p>
-<p>访问流程：$主机 \rightarrow 本地ISP\rightarrow 地区ISP\rightarrow\dots\rightarrow 主干ISP\rightarrow\dots\rightarrow 地区ISP\rightarrow 本地ISP\rightarrow 主机$</p>
-<p>IXP：Internet交换点，让两个网络可以直接相连，无需向上传递数据可以直接通信</p>
+<li><p>第三阶段<br /><br>ISP：Internet服务提供者，Internet服务提供商<br /><br>本质还是三层网络，但是ISP从美国政府分散到各个公司<br /><br>访问流程：$主机 \rightarrow 本地ISP\rightarrow 地区ISP\rightarrow\dots\rightarrow 主干ISP\rightarrow\dots\rightarrow 地区ISP\rightarrow 本地ISP\rightarrow 主机$<br /><br>IXP：Internet交换点，让两个网络可以直接相连，无需向上传递数据可以直接通信</p>
 </li>
 </ol>
 <h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><ol>
 <li><p>组成部分：硬件、软件、协议 (一系列规定和约定的集合)</p>
 </li>
-<li><p>硬件组成了网络的端系统以及中间设备</p>
-<p>软件附着在端系统上，部分在中间设备上</p>
-<p>协议规定数据如何封装打包，如何在网络中传播</p>
+<li><p>硬件组成了网络的端系统以及中间设备<br /><br>软件附着在端系统上，部分在中间设备上<br /><br>协议规定数据如何封装打包，如何在网络中传播</p>
 </li>
-<li><p>边缘部分：端系统，用户直接使用</p>
-<p>核心部分：为边缘部分服务的中间设备</p>
+<li><p>边缘部分：端系统，用户直接使用<br /><br>核心部分：为边缘部分服务的中间设备</p>
 </li>
 <li><p>边缘部分端系统之间的通信是进程之间的通信</p>
 </li>
-<li><p>边缘部分之间的通信方式</p>
-<p>C/S方式：Client to Server，把数据从发起Client都发送到Server上再发到目标Client，Client越多，速度越慢</p>
-<p>B/S方式：Browser to Server，与C/S方式类似，但是发生在Browser上</p>
-<p>P2P方式：Peer to Peer，所有主机都是提供服务的Server，也是享受服务的Client，使用的主机越多，速度越快</p>
+<li><p>边缘部分之间的通信方式<br /><br>C/S方式：Client to Server，把数据从发起Client都发送到Server上再发到目标Client，Client越多，速度越慢<br /><br>B/S方式：Browser to Server，与C/S方式类似，但是发生在Browser上<br /><br>P2P方式：Peer to Peer，所有主机都是提供服务的Server，也是享受服务的Client，使用的主机越多，速度越快</p>
 </li>
-<li><p>通信子网：实现数据通信，由各种传输介质、通信设备、相应的网络协议组成</p>
-<p>资源子网：实现资源共享 / 数据处理，由实现资源共享功能的设备和软件的集合组成</p>
-<p>在OSI七层模型中，下三层 (物理层、数据链路层、网络层)是通信子网，上三层 (会话层、表示层、应用层)是资源子网，传输层连接资源子网和通信子网</p>
+<li><p>通信子网：实现数据通信，由各种传输介质、通信设备、相应的网络协议组成<br /><br>资源子网：实现资源共享 / 数据处理，由实现资源共享功能的设备和软件的集合组成<br /><br>在OSI七层模型中，下三层 (物理层、数据链路层、网络层)是通信子网，上三层 (会话层、表示层、应用层)是资源子网，传输层连接资源子网和通信子网</p>
 </li>
 </ol>
 <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ol>
-<li><p>按分布范围分：广域网 (WAN)、城域网 (MAN)、局域网 (LAN)、个人区域网 (PAN)</p>
-<p>广域网使用交换技术，局域网使用广播技术</p>
-<p>不看地理范围，而看使用的技术，即使只有几米，使用广域网技术，也是广域网</p>
+<li><p>按分布范围分：广域网 (WAN)、城域网 (MAN)、局域网 (LAN)、个人区域网 (PAN)<br /><br>广域网使用交换技术，局域网使用广播技术<br /><br>不看地理范围，而看使用的技术，即使只有几米，使用广域网技术，也是广域网</p>
 </li>
 <li><p>按使用者分：公用网、专用网</p>
 </li>
-<li><p>按交换技术分：电路交换、报文交换、分组交换</p>
-<p>电路交换：$建立连接，占用资源\rightarrow 通信，持续占用资源\rightarrow 通信结束，释放资源$</p>
-<p>电路交换在通信时别人无法与通信中的人通信</p>
-<p>报文交换、分组交换：使用存储转发技术，不会占线，区别是发送的报文是否分组</p>
+<li><p>按交换技术分：电路交换、报文交换、分组交换<br /><br>电路交换：$建立连接，占用资源\rightarrow 通信，持续占用资源\rightarrow 通信结束，释放资源$<br /><br>电路交换在通信时别人无法与通信中的人通信<br /><br>报文交换、分组交换：使用存储转发技术，不会占线，区别是发送的报文是否分组</p>
 </li>
-<li><p>按拓扑结构分：总线型、星型、环型、网络型</p>
-<p>星型结构中如果有$n$个节点，则有$n-1$条链路</p>
+<li><p>按拓扑结构分：总线型、星型、环型、网络型<br /><br>星型结构中如果有$n$个节点，则有$n-1$条链路</p>
 </li>
-<li><p>按传输技术分：广播式网络、点对点网络</p>
-<p>广播式网络是共享公共通信信道，网络中所有人都可以收到信息</p>
-<p>点对点网络是使用分组存储转发和路由选择机制，只有目标才可以收到信息</p>
+<li><p>按传输技术分：广播式网络、点对点网络<br /><br>广播式网络是共享公共通信信道，网络中所有人都可以收到信息<br /><br>点对点网络是使用分组存储转发和路由选择机制，只有目标才可以收到信息</p>
 </li>
 </ol>
 <h1 id="标准化工作"><a href="#标准化工作" class="headerlink" title="标准化工作"></a>标准化工作</h1><ol>
-<li><p>标准分类</p>
-<p>法定标准：由权威机构制定的正式的、合法的标准</p>
-<p>事实标准：某些公司的产品在竞争中占据了主流，时间长了，这些产品中的协议和技术就成了标准</p>
+<li><p>标准分类<br /><br>法定标准：由权威机构制定的正式的、合法的标准<br /><br>事实标准：某些公司的产品在竞争中占据了主流，时间长了，这些产品中的协议和技术就成了标准</p>
 </li>
-<li><p>标准的制定</p>
-<p>RFC (Request For Comment)：Internet标准的形式。所有的Internet标准都是RFC格式，但不是所有RFC都是Internet标准</p>
-<p>RFC成为Internet正式标准：<script type="math/tex">Internet草案\rightarrow 建议标准\rightarrow草案标准\rightarrow Internet标准</script></p>
-<p>Internet草案还不是RFC文档，从建议标准开始才是</p>
-<p>草案标准已经取消</p>
+<li><p>标准的制定<br /><br>RFC (Request For Comment)：Internet标准的形式。所有的Internet标准都是RFC格式，但不是所有RFC都是Internet标准<br /><br>RFC成为Internet正式标准：<script type="math/tex">Internet草案\rightarrow 建议标准\rightarrow草案标准\rightarrow Internet标准</script><br /><br>Internet草案还不是RFC文档，从建议标准开始才是<br /><br>草案标准已经取消</p>
 </li>
 </ol>
 <h1 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h1><h2 id="速率、带宽、吞吐量"><a href="#速率、带宽、吞吐量" class="headerlink" title="速率、带宽、吞吐量"></a>速率、带宽、吞吐量</h2><ol>
 <li><p>速率 / 数据率 / 数据传输率 / 比特率：连接在计算机网络上的主机在数字信道上传送数据位数的速率</p>
 </li>
-<li><p>单位：b/s、kb/s、Mb/s、Gb/s、Tb/s</p>
-<p>$1Tb/s=10^3Gb/s=10^6Mb/s=10^9kb/s=10^{12}b/s$</p>
-<p>注意与内存的转化区别开，内存中每级差$2^{10}=1024$</p>
+<li><p>单位：b/s、kb/s、Mb/s、Gb/s、Tb/s<br /><br>$1Tb/s=10^3Gb/s=10^6Mb/s=10^9kb/s=10^{12}b/s$<br /><br>注意与内存的转化区别开，内存中每级差$2^{10}=1024$</p>
 </li>
 <li><p>带宽：单位时间从网络中的一点到另一点所能通过的最高数据率</p>
 </li>
@@ -936,22 +967,15 @@
 <h2 id="时延"><a href="#时延" class="headerlink" title="时延"></a>时延</h2><ol>
 <li><p>时延 / 延迟 / 迟延：数据从网络的一端传送到另一端所需的时间</p>
 </li>
-<li><p>时延由四部分组成</p>
-<p>发送时延：发送分组的第一个bit到分组的最后一个bit发送完所需的时间，发生在发送端内。$发送时延=\displaystyle\frac{数据长度}{信道带宽}$</p>
-<p>传播时延：在链路上传播花费的时间，发生在链路上。$传播时延=\displaystyle\frac{信道长度}{电磁波在信道上的传播速率}$</p>
-<p>排队时延：等待输出/输入链路可用的时间，发生在中间设备中</p>
-<p>处理时延：在中间设备中检错和找出口，发生在中间设备中</p>
+<li><p>时延由四部分组成<br /><br>发送时延：发送分组的第一个bit到分组的最后一个bit发送完所需的时间，发生在发送端内。$发送时延=\displaystyle\frac{数据长度}{信道带宽}$<br /><br>传播时延：在链路上传播花费的时间，发生在链路上。$传播时延=\displaystyle\frac{信道长度}{电磁波在信道上的传播速率}$<br /><br>排队时延：等待输出/输入链路可用的时间，发生在中间设备中<br /><br>处理时延：在中间设备中检错和找出口，发生在中间设备中</p>
 </li>
 <li><p>高速链路提高了信道带宽，缩短了发送时延</p>
 </li>
 <li><p>$时延带宽积=传播时延\times带宽$，单位是bit，表示某段链路上现在有多少bit。又称为以bit为单位的链路长度</p>
 </li>
-<li><p>往返时延RTT：从发送方发送数据开始，到发送方收到接收方的确认 (收到数据后立即发送确认)总共经历的时延</p>
-<p>RTT越大，在收到确认之前，可以发送的数据越多</p>
-<p>$RTT=传播时延\times 2+末端处理时间$</p>
+<li><p>往返时延RTT：从发送方发送数据开始，到发送方收到接收方的确认 (收到数据后立即发送确认)总共经历的时延<br /><br>RTT越大，在收到确认之前，可以发送的数据越多<br /><br>$RTT=传播时延\times 2+末端处理时间$</p>
 </li>
-<li><p>$信道利用率=\displaystyle\frac{有数据通过的时间}{总时间}$</p>
-<p>网络利用率：信道利用率的加权平均值</p>
+<li><p>$信道利用率=\displaystyle\frac{有数据通过的时间}{总时间}$<br /><br>网络利用率：信道利用率的加权平均值</p>
 </li>
 <li><p>时延随利用率的提升而提高，且在利用率接近$1$时急剧上升</p>
 </li>
@@ -3424,1325 +3448,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/09/07/11-How-To-Insult-Your-Enemies/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/07/11-How-To-Insult-Your-Enemies/" class="post-title-link" itemprop="url">11. How To Insult Your Enemies</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-07 10:50:20" itemprop="dateCreated datePublished" datetime="2020-09-07T10:50:20+08:00">2020-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 16:36:13" itemprop="dateModified" datetime="2020-10-06T16:36:13+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">martinet</td>
-</tr>
-<tr>
-<td style="text-align:center">sycophant</td>
-</tr>
-<tr>
-<td style="text-align:center">dilettante</td>
-</tr>
-<tr>
-<td style="text-align:center">virago</td>
-</tr>
-<tr>
-<td style="text-align:center">chauvinist</td>
-</tr>
-<tr>
-<td style="text-align:center">monomaniac</td>
-</tr>
-<tr>
-<td style="text-align:center">iconoclast</td>
-</tr>
-<tr>
-<td style="text-align:center">atheist</td>
-</tr>
-<tr>
-<td style="text-align:center">lecher</td>
-</tr>
-<tr>
-<td style="text-align:center">hypochondriac</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="martinet"><a href="#martinet" class="headerlink" title="martinet"></a>martinet</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">martinet</td>
-<td style="text-align:center">from Jean Martinet known for discipline dated<br /><strong><em>used in a derogatory sense and generally shows resentment and anger on the part of the user</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">martinetish</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">martinetism</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="phanein-to-show"><a href="#phanein-to-show" class="headerlink" title="phanein: to show"></a>phanein: to show</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">sycophant</td>
-<td style="text-align:center"><code>Greek sykon: fig</code><br />the fellow that informed the officers in charge when the figs in the sacred groves were being taken, or when the Smyrna fig-dealers were dodging the tariff</td>
-</tr>
-<tr>
-<td style="text-align:center">sycophantic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sycophancy</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diaphanous</td>
-<td style="text-align:center"><code>Greek prefix dia-: through</code><br /><strong><em>anything behind it will show through</em></strong><br />only used on material that is silky, gauzy, filmy, and transparent or practically transparent</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Italian-dilettare-to-delight"><a href="#Italian-dilettare-to-delight" class="headerlink" title="Italian dilettare: to delight"></a>Italian dilettare: to delight</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">dilettante</td>
-<td style="text-align:center"><strong><em>Dilettante is purely for amusement.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dilettantes<br />dilettanti</td>
-<td style="text-align:center"><code>the i ending for a plural is the Italian form</code></td>
-</tr>
-<tr>
-<td style="text-align:center">dilettantish</td>
-<td style="text-align:center"><strong><em>a dilettantish attitude is superficial, unprofessional</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dilettantism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tyro</td>
-<td style="text-align:center"><strong><em>the inexperienced beginner in some art, but who may be full of ambition, drive, and energy</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">virtuoso</td>
-<td style="text-align:center"><strong><em>anyone who has developed consummate skill in an artistic field</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">virtuosos<br />virtuosi</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="virago"><a href="#virago" class="headerlink" title="virago"></a>virago</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">virago</td>
-<td style="text-align:center"><code>Latin vir: man</code></td>
-</tr>
-<tr>
-<td style="text-align:center">termagant</td>
-<td style="text-align:center">synonym of virago</td>
-</tr>
-<tr>
-<td style="text-align:center">harridan</td>
-<td style="text-align:center">synonym of virago</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-pater-patris-father"><a href="#Latin-pater-patris-father" class="headerlink" title="Latin pater, patris: father"></a>Latin pater, patris: father</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">chauvinistic</td>
-<td style="text-align:center"><strong><em>To be chauvinistic is to be exaggerate such pride and devotion to an obnoxious degree.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chauvinist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">chauvinism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patriotic</td>
-<td style="text-align:center"><strong><em>To be patriotic is to be normally proud of, and devoted to, one’s country</em></strong><br />One’s country is, in a sense, one’s fatherland.</td>
-</tr>
-<tr>
-<td style="text-align:center">patrimony</td>
-<td style="text-align:center"><strong><em>an inheritance from one’s father</em></strong><br /><code>-mony: Juno Moneta, the Roman goddess who guarded the temples of finance</code></td>
-</tr>
-<tr>
-<td style="text-align:center">partrimonial</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patronymic</td>
-<td style="text-align:center"><strong><em>a name formed on the father’s name, like Johnson (son of John)</em></strong><br /><code>Greek onyma: name</code></td>
-</tr>
-<tr>
-<td style="text-align:center">synonym</td>
-<td style="text-align:center"><code>Greek prefix syn-: with or together</code><br /><strong><em>with the same name (or meaning)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">synonymous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">antonym</td>
-<td style="text-align:center"><code>prefix anti-: against</code><br /><strong><em>a word of opposite meaning</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">antonymous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">homonym</td>
-<td style="text-align:center"><code>Greek homos: the same</code><br /><strong><em>a word that sounds like another but has a different meaning and spelling</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">homonymous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">homophone</td>
-<td style="text-align:center">more accurate form of homonym<br /><code>phone: sound</code></td>
-</tr>
-<tr>
-<td style="text-align:center">homophonous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paternity</td>
-<td style="text-align:center"><strong><em>fatherhood</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">paternal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paternalism</td>
-<td style="text-align:center"><strong><em>the philosophy or system of governing a country, or of managing a business or institution, so that the citizens employees, or staff are treated in a manner suggesting a father-children relationship</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">paternalistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patriarch</td>
-<td style="text-align:center"><strong><em>a venerable, fatherlike old man; an old man in a ruling, fatherlike position.</em></strong> <br /><code>Greek archein: to rule</code></td>
-</tr>
-<tr>
-<td style="text-align:center">patriarchal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patriarchy</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patricide</td>
-<td style="text-align:center"><strong><em>the killing of one’s father</em></strong><br /><code>suffix -cide: derived from the Latin verb caedo, to kill</code></td>
-</tr>
-<tr>
-<td style="text-align:center">patricidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">patrician</td>
-<td style="text-align:center"><strong><em>a person who comes from a family of high social rank</em></strong><br /><strong><em>describe someone as patrician, you mean that they behave in a sophisticated way, and look as though they are from a high social rank</em></strong><br />having a noble father</td>
-</tr>
-<tr>
-<td style="text-align:center">patron</td>
-<td style="text-align:center"><strong><em>a person who supports and give money to artists, writers, or muscians</em></strong><br /><strong><em>customer, especially of a pub, bar, or hotel</em></strong><br />protector of clients, defender</td>
-</tr>
-<tr>
-<td style="text-align:center">patronize</td>
-<td style="text-align:center"><strong><em>if someone patronizes you, they speak or behave towards you in a way which seems friendly, but which shows that they think they are superior to you in some way</em></strong><br />verb of patron</td>
-</tr>
-<tr>
-<td style="text-align:center">patronizing</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paterfamilias</td>
-<td style="text-align:center"><strong><em>the male head of a family</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">padre</td>
-<td style="text-align:center"><strong><em>the title of the priest in some regions</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="mater-matris-mother"><a href="#mater-matris-mother" class="headerlink" title="mater, matris: mother"></a>mater, matris: mother</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">matriarch</td>
-<td style="text-align:center"><strong><em>the mother ruler</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matriarchy</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">maternity</td>
-<td style="text-align:center"><strong><em>motherhood</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">maternal</td>
-<td style="text-align:center"><strong><em>motherly</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matron</td>
-<td style="text-align:center"><strong><em>an older married woman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matronly</td>
-<td style="text-align:center"><em>a woman no longer in the glow of youth and pssible with a bit of addedwright in the wrong places</em></td>
-</tr>
-<tr>
-<td style="text-align:center">alma mater</td>
-<td style="text-align:center">soul mother<br /><strong><em>the school or college from which one has graduated</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matrimony</td>
-<td style="text-align:center"><strong><em>marriage</em></strong><br /><strong><em>suffix -mony: state, condition, or result</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">sanctimony</td>
-<td style="text-align:center"><strong><em>the quality of being hypocriticality devout</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">parsimony</td>
-<td style="text-align:center"><strong><em>extreme unwillingness to spend money or use resource</em></strong><br /><strong><em>parcere: be sparing</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matrimonial</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">matricide</td>
-<td style="text-align:center"><strong><em>the killing of one’s mother</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">matricidal</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="suffix-cide-to-kill"><a href="#suffix-cide-to-kill" class="headerlink" title="suffix -cide: to kill"></a>suffix -cide: to kill</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">suicide</td>
-<td style="text-align:center"><strong><em>killing oneself intentionally</em></strong><br /><code>sui: for oneself</code><br />both the verb and the person</td>
-</tr>
-<tr>
-<td style="text-align:center">suicidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fratricide</td>
-<td style="text-align:center"><strong><em>the killing of one’s brother</em></strong><br /><code>frater, fratris: brother</code></td>
-</tr>
-<tr>
-<td style="text-align:center">fratricidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sororicide</td>
-<td style="text-align:center"><strong><em>the killing of one’s sister</em></strong><br /><code>soror: sister</code></td>
-</tr>
-<tr>
-<td style="text-align:center">sororcidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">homicide</td>
-<td style="text-align:center"><strong><em>the killing of human being</em></strong><br /><code>homo: person</code><br />the general term for any slaying</td>
-</tr>
-<tr>
-<td style="text-align:center">murder</td>
-<td style="text-align:center"><strong><em>intent and premeditation of killing can be proved</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">manslaughter</td>
-<td style="text-align:center"><strong><em>no such intent is present</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">homicidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">regicide</td>
-<td style="text-align:center"><strong><em>the killing of one’s king, president, or other governing official</em></strong><br /><strong><em>Latin. rex, regis: king</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">regicidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">uxoricide</td>
-<td style="text-align:center"><strong><em>the killing of one’s wife</em></strong><br /><strong><em>Latin uxor: wife</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">uxoricidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mariticide</td>
-<td style="text-align:center"><strong><em>the killing of one’s husband</em></strong><br /><code>Latin maritus: husband</code></td>
-</tr>
-<tr>
-<td style="text-align:center">mariticidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">infanticide</td>
-<td style="text-align:center"><strong><em>the killing of a newborn child</em></strong><br /><strong><em>Latin infans, infantis: baby</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">genocide</td>
-<td style="text-align:center"><strong><em>the killing of a whole race or nation</em></strong><br /><strong><em>Greek genos: race, kind</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">genocidal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">parricide</td>
-<td style="text-align:center"><strong><em>the killing of either or both parents</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">parricidal</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="brother-and-sister"><a href="#brother-and-sister" class="headerlink" title="brother and sister"></a>brother and sister</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">faternize</td>
-<td style="text-align:center">to have a brotherly relationship<br /><strong><em>social intercourse between people, irrespective of sex</em></strong><br /><strong><em>implication of having a social relationship with one’s subordinates in an organization, or even with one’s so-called inferiors</em></strong><br /><strong><em>soldiers of occupying armies had sexual relations with the women of conquered countries</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">faternization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fraternal</td>
-<td style="text-align:center">brotherly<br /><strong><em>non-identical, twins</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fraternity</td>
-<td style="text-align:center"><strong><em>a men’s organiation in a high school or college</em></strong><br /><strong><em>any group of people of similar interests or profession</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">sorority</td>
-<td style="text-align:center"><strong><em>a women’s organization in high school or college</em></strong><br /><strong><em>any women’s social club</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="husband-and-wife"><a href="#husband-and-wife" class="headerlink" title="husband and wife"></a>husband and wife</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">uxorious</td>
-<td style="text-align:center"><strong><em>an adjective describing a man who excessively, even absurdly, caters to, dotes on, worships, and submits to the most outlandish or outrageous demands of, his wife</em></strong><br />the husband is dominated only by his neurosis</td>
-</tr>
-<tr>
-<td style="text-align:center">henpecked</td>
-<td style="text-align:center"><strong><em>an adjective describing a man who is dominated by his wife, perhaps because of his own fear or weakness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">uxorial</td>
-<td style="text-align:center"><strong><em>pertaining to, characteristic of, or befitting, a wife</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">martital</td>
-<td style="text-align:center"><strong><em>pertaining or referrring to, or characteristic of, a husband</em></strong><br />the marriage relationship of both husband and wife</td>
-</tr>
-<tr>
-<td style="text-align:center">extramarital</td>
-<td style="text-align:center"><strong><em>outside the marriage</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">premarital</td>
-<td style="text-align:center"><strong><em>events that occur before a planned marriage</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-rex-regis-king"><a href="#Latin-rex-regis-king" class="headerlink" title="Latin rex, regis: king"></a>Latin rex, regis: king</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">tyrannosaurus rex</td>
-<td style="text-align:center">the king of the dinosaurs</td>
-</tr>
-<tr>
-<td style="text-align:center">regal</td>
-<td style="text-align:center"><strong><em>royal, or fit for a king</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">regality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">regalia</td>
-<td style="text-align:center">a plural noun<br /><strong><em>designated the emblems or insignia or dress of a king</em></strong><br />impressively formal clothes</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Greek-mania-madness"><a href="#Greek-mania-madness" class="headerlink" title="Greek mania: madness"></a>Greek mania: madness</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">monomaniac</td>
-<td style="text-align:center"><strong><em>an abnormal obsession in respect to one particular thing, but is otherwise normal</em></strong><br /><code>Greek monos: one</code></td>
-</tr>
-<tr>
-<td style="text-align:center">monomania</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">monomaniacal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dipsomania</td>
-<td style="text-align:center"><strong><em>morbid compulsion to keep on absorbing alcoholic beverages</em></strong><br /><code>Greek dipsa: thirst</code></td>
-</tr>
-<tr>
-<td style="text-align:center">dipsomaniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dipsomaniacal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">kleptomania</td>
-<td style="text-align:center"><strong><em>morbid compulsion to steal, not from any economic motive, but simply because the urge to take another’s possessions is irresistible</em></strong><br /><code>Greek klepte: thief</code></td>
-</tr>
-<tr>
-<td style="text-align:center">kleptomaniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pyromania</td>
-<td style="text-align:center"><strong><em>morbid compulsion to set fires</em></strong><br /><code>Greek pyros: fire</code></td>
-</tr>
-<tr>
-<td style="text-align:center">pyromaniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pyromaniacal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incendiarism</td>
-<td style="text-align:center"><strong><em>the malicious and deliberate burning of another’s property, and is not a compulsive need to see the flames and enjoy the thrill of the heat and the smoke</em></strong><br /><code>incendo, incensus: to set on fire</code></td>
-</tr>
-<tr>
-<td style="text-align:center">incendiary</td>
-<td style="text-align:center"><strong><em>antisocial, and usually sets fires for revenge</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">arson</td>
-<td style="text-align:center"><strong><em>in law, setting fire to another’s, or to one’s own, property for the purpose of economic gain</em></strong><br /><code>Latin ardo, arsus: to burn</code></td>
-</tr>
-<tr>
-<td style="text-align:center">arsonist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">megalomania</td>
-<td style="text-align:center"><strong><em>morbid delusions of grandeur, power, importance, godliness, etc.</em></strong> <br /><code>Greek megas: great, big, large</code></td>
-</tr>
-<tr>
-<td style="text-align:center">megalomaniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">megalomaniacal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nymphomania</td>
-<td style="text-align:center"><strong><em>morbid, incessant, uncontrollable, and intense desire, on the part of a female, for sexual intercourse</em></strong><br /><strong><em>Greek nymphe: bride</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">nymphomaniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nymphomaniacal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">satyromania</td>
-<td style="text-align:center"><strong><em>the same morbid, incessant, etc. desire on the part of a male</em></strong><br /><code>Grek satyros: satyr, a Greek god, motorious for lechery</code></td>
-</tr>
-<tr>
-<td style="text-align:center">satyriasis</td>
-<td style="text-align:center">synonym of satyromania</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Greek-phobia-morbid-fear"><a href="#Greek-phobia-morbid-fear" class="headerlink" title="Greek phobia: morbid fear"></a>Greek phobia: morbid fear</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">claustrophobia</td>
-<td style="text-align:center"><strong><em>morbid dread of being physically hemmed in, of enclosed spaces, of crowds, etc.</em></strong> <br /><strong><em>Latin claustrum: enclosed place</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">claustrophobe</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">claustrophobic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">agoraphobia</td>
-<td style="text-align:center"><strong><em>morbid dread of open space</em></strong><br /><code>Greek agora: market place</code></td>
-</tr>
-<tr>
-<td style="text-align:center">agoraphobe</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">agoraphobic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">acrophobia</td>
-<td style="text-align:center"><strong><em>morbid dread of high places</em></strong><br /><strong><em>Greek akros: highest</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">acrophobe</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">acrophobic</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="iconoclast"><a href="#iconoclast" class="headerlink" title="iconoclast"></a>iconoclast</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">iconoclast</td>
-<td style="text-align:center"><code>eikon: a religious image</code><br /><code>klaein: to break</code></td>
-</tr>
-<tr>
-<td style="text-align:center">iconoclasm</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">iconoclastic</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="theos-God"><a href="#theos-God" class="headerlink" title="theos: God"></a>theos: God</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">atheist</td>
-<td style="text-align:center">no god</td>
-</tr>
-<tr>
-<td style="text-align:center">atheism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">agnosticism</td>
-<td style="text-align:center"><strong><em>the philosophy that claims that God is unknownble</em></strong><br />He may or may not exist, and that human beings can never come to a final conclusion about Him<br /><code>Greek gnostos: known</code></td>
-</tr>
-<tr>
-<td style="text-align:center">agnostic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diagnosis</td>
-<td style="text-align:center"><code>Greek gnosis: knowledge</code><br /><code>dia-: through</code><br />a knowing through examination or testing</td>
-</tr>
-<tr>
-<td style="text-align:center">diagnose</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diagnostic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diagnostician</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">prognosis</td>
-<td style="text-align:center">a knowing beforehand<br /><strong><em>prediction, generally, but not solely, as to the course of a disease</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prognosticate</td>
-<td style="text-align:center"><strong><em>the forecasting of developments from a consideration of symptoms or conditions</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prognostication</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">monotheism</td>
-<td style="text-align:center"><strong><em>belief in one God</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">monotheist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">monotheistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">polytheism</td>
-<td style="text-align:center"><strong><em>belief in many gods, as in ancient Greece or Rome</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">polytheist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">polytheistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pantheism</td>
-<td style="text-align:center"><strong><em>belief that God is not in man’s image, but is a combination of all forces of the universe</em></strong><br /><code>pan: all</code></td>
-</tr>
-<tr>
-<td style="text-align:center">pantheist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pantheistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">theology</td>
-<td style="text-align:center"><strong><em>the study of God and religion</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">theologian</td>
-<td style="text-align:center"><strong><em>the student of theology</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">theological</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="sex"><a href="#sex" class="headerlink" title="sex"></a>sex</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">lecher</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lechery</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lecherous</td>
-<td style="text-align:center">derogatory</td>
-</tr>
-<tr>
-<td style="text-align:center">libidinous</td>
-<td style="text-align:center"><code>Latin libido: pleasure</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lascivious</td>
-<td style="text-align:center"><code>Latin lascivia: wantonness</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lubricious</td>
-<td style="text-align:center"><code>Latin lubricus: slippery</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lubricity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lubricate</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">licentious</td>
-<td style="text-align:center"><code>Latin licere: to be permitted</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lisense</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">illicit</td>
-<td style="text-align:center">not permitted</td>
-</tr>
-<tr>
-<td style="text-align:center">lewd</td>
-<td style="text-align:center"><code>Anglo-Saxon lewed: vile</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lustful</td>
-<td style="text-align:center"><code>a Anglo-Saxon word: pleasure, desire</code><br /><strong><em>indicate sexual desire and/or activity, derogatory</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lust</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">prurient</td>
-<td style="text-align:center"><code>Latin prurio: to itch, to long for</code><br /><strong><em>describes someone who is filled with great sexual curiosity, desire, longing, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prurience</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pruritis</td>
-<td style="text-align:center"><strong><em>a medical candition in which the skin is very itchy, but without a rash or eruptions</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pruritic</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Greek-hypos-under"><a href="#Greek-hypos-under" class="headerlink" title="Greek hypos: under"></a>Greek hypos: under</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">hypochondria</td>
-<td style="text-align:center"><code>Greek chondros: the cartilage of the breastbone</code><br />under the breastbon is the abdomen; the ancient Greeks believed that morbid anxiety about one’s health arose in the abdomen. And no one is more morbidly, unceasingly, and unhappily anxious about health than the hypochondriac</td>
-</tr>
-<tr>
-<td style="text-align:center">hypochondracal</td>
-<td style="text-align:center">hypochondria is also an adjective, but this one is used more commonly</td>
-</tr>
-<tr>
-<td style="text-align:center">hypodermic</td>
-<td style="text-align:center">penetrates under the skin</td>
-</tr>
-<tr>
-<td style="text-align:center">hypothyroid</td>
-<td style="text-align:center"><strong><em>having an underworking thyroid gland</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypotension</td>
-<td style="text-align:center"><strong><em>abnormally low blood pressure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypotensive</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">hypercritical</td>
-<td style="text-align:center"><code>Greek hyper: over</code><br /><strong><em>excessively fault-finding</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hyperthyroidism</td>
-<td style="text-align:center"><strong><em>an overworking of the thyroid gland</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypertension</td>
-<td style="text-align:center"><strong><em>high blood pressure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypertensive</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">hyperacidity</td>
-<td style="text-align:center"><strong><em>the level of acid in gastric juices is excessive</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hyperactive</td>
-<td style="text-align:center"><strong><em>abnormally or extremely active</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypersensitive</td>
-<td style="text-align:center"><strong><em>abnormally or excessively sensitive, either psychologically or in physical respond</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">matronymic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">metronymic</td>
-<td style="text-align:center"><code>Greek meter, metr: mother</code></td>
-</tr>
-<tr>
-<td style="text-align:center">metritis</td>
-<td style="text-align:center"><code>Greek metra: uterus</code><br /><strong><em>inflammation of the uterus</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">metralgia</td>
-<td style="text-align:center"><strong><em>uterine pain</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">endometriosis</td>
-<td style="text-align:center"><strong><em>any abnormal condition of the uterine lining</em></strong><br /><code>endo: inside</code><br /><code>-osis; abnormal condition</code></td>
-</tr>
-<tr>
-<td style="text-align:center">incense</td>
-<td style="text-align:center"><strong><em>a gum, spice or other substance to be burt for the sweet smell it produces</em></strong><br /><strong><em>to make someone very angry</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incendiary</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ardent</td>
-<td style="text-align:center"><strong><em>burning with zeal, ambition, love, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ardor</td>
-<td style="text-align:center">the noun form of ardent</td>
-</tr>
-<tr>
-<td style="text-align:center">megaphone</td>
-<td style="text-align:center"><strong><em>used to make sound greater</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">metropolis</td>
-<td style="text-align:center"><strong>the mother city</strong><br /><code>polis: city, state</code></td>
-</tr>
-<tr>
-<td style="text-align:center">megalopolis</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bibliokleptomaniac</td>
-<td style="text-align:center"><strong><em>one who has an absession for stealing books</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gynekleptomaniac</td>
-<td style="text-align:center"><strong><em>one who has an irresistible compulsion to steal women</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pedokleptomaniac</td>
-<td style="text-align:center"><strong><em>one who has an irresistible compulsion to steal children</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">androkleptomaniac</td>
-<td style="text-align:center"><strong><em>one who has an irresistible compulsion to steal males</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">demokleptomaniac</td>
-<td style="text-align:center"><strong><em>one who has an irresistible compulsion to steal people</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">acromaniac</td>
-<td style="text-align:center"><strong><em>someone who has an obsession to reach the hightest places</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">agoramaniac</td>
-<td style="text-align:center"><strong><em>someone who has an obsession to be in the market place, or in wide-open spaces</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">claustromaniac</td>
-<td style="text-align:center"><strong><em>someone who has an obsession to in confined places</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">kleptophobe</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of thieves</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pyrophobe</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of fire</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gynephobe</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of women</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">androphobe</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of males</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">demophobe</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of people</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">triskaidekaphobia</td>
-<td style="text-align:center"><strong><em>one who has a morbid dread of the number 13</em></strong><br /><code>Greek triskai: three</code><br /><code>Greek deka: ten</code></td>
-</tr>
-<tr>
-<td style="text-align:center">gnosiology</td>
-<td style="text-align:center"><strong><em>the sciense or study of knowledge</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">Amadeus</td>
-<td style="text-align:center">a name<br /><code>Latin amor: love</code><br /><code>Latin deus: God</code></td>
-</tr>
-<tr>
-<td style="text-align:center">Theophilus</td>
-<td style="text-align:center">a name<br /><code>Greek philos: love</code><br /><code>Greek theos: God</code></td>
-</tr>
-<tr>
-<td style="text-align:center">Gottlieb</td>
-<td style="text-align:center">a name<br /><code>German lieb: love</code><br /><code>German gott: God</code></td>
-</tr>
-<tr>
-<td style="text-align:center">cellophane</td>
-<td style="text-align:center"><strong><em>cellulose made to be tranparent to show what’s wrapped in it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hypoglycemia</td>
-<td style="text-align:center"><strong><em>low blood sugar</em></strong><br /><code>glykys: sweet</code><br /><code>haima, hem, -em: blood</code></td>
-</tr>
-<tr>
-<td style="text-align:center">hyperglycemia</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">hemorrhage</td>
-<td style="text-align:center"><strong><em>excessive blood flow</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">Anemia</td>
-<td style="text-align:center">no blood<br /><strong><em>a pathological reduction of red blood corpuscles</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hematology</td>
-<td style="text-align:center"><strong><em>science of blood</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">Hemophilia</td>
-<td style="text-align:center">love of blood<br /><strong><em>a hereditary condition, occurring in males, in which the clood clots too slowly</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">Hemoglobin</td>
-<td style="text-align:center">blood gobules<br /><strong><em>the red coloring matter of the red blood corpuscles</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">Pantheon</td>
-<td style="text-align:center"><strong><em>a temple built in Rome in 27 B.C. for all the gods</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pandemonium</td>
-<td style="text-align:center">the dwelling place of all the demons<br /><strong><em>any wild and noisy disorder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">panorama</td>
-<td style="text-align:center"><strong><em>a view all around</em></strong><br /><code>horama: view</code></td>
-</tr>
-<tr>
-<td style="text-align:center">panoramic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">monarchy</td>
-<td style="text-align:center"><strong><em>rule by one person</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Intermission"><a href="#Intermission" class="headerlink" title="Intermission"></a>Intermission</h1><p>Words coined after someone’s name</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">bloomers</td>
-<td style="text-align:center">a kind of garment invented by Mrs. Elizabeth Smith Miller sponsored by Amelia J. Bloomer</td>
-</tr>
-<tr>
-<td style="text-align:center">boycott</td>
-<td style="text-align:center">Charles C. Boycott was an English land agent to collect high rents from Irish farmers. In protest, the farmers ostracized him</td>
-</tr>
-<tr>
-<td style="text-align:center">Marcel</td>
-<td style="text-align:center">the button curls invented by Marcel</td>
-</tr>
-<tr>
-<td style="text-align:center">silhouette</td>
-<td style="text-align:center">Finanace Minister of France Etienne de Dilhouette advocated the simple life. And the profile is the simplest form of portraiture, is you ge the connection.</td>
-</tr>
-<tr>
-<td style="text-align:center">derrick</td>
-<td style="text-align:center">A hangman, Derrick, hoisted to their death some of the most notorious criminals of the day</td>
-</tr>
-<tr>
-<td style="text-align:center">sadist</td>
-<td style="text-align:center">Cout de Sade found his greatest delight in torturing friends and mistresses.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Words coined after some place</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">bayonet</td>
-<td style="text-align:center">Bayonne, France, first was manufactured the daggerlike weapon that fits over the muzzle end of a rifle</td>
-</tr>
-<tr>
-<td style="text-align:center">cantaloupe</td>
-<td style="text-align:center">Cantalupo, Italy, the first place in Europe to grow those luscious melons</td>
-</tr>
-<tr>
-<td style="text-align:center">calico</td>
-<td style="text-align:center">We first imported it from Calicut, India</td>
-</tr>
-<tr>
-<td style="text-align:center">tuxedo</td>
-<td style="text-align:center">In the country club of the exclusive and wealthy Tuxedo Park, New York, community, the short dinner coat for men was popularized</td>
-</tr>
-<tr>
-<td style="text-align:center">Gypsies</td>
-<td style="text-align:center">It was once supposed that the colorful fortunetelling wanderers hailed from Egypt.</td>
-</tr>
-<tr>
-<td style="text-align:center">damask</td>
-<td style="text-align:center">an elaborately patterned silk first made in Damascus, Syria</td>
-</tr>
-<tr>
-<td style="text-align:center">satin</td>
-<td style="text-align:center">a silk fabric made in Tzu-t’ing, China, which was called Zatitun by Marco Polo</td>
-</tr>
-<tr>
-<td style="text-align:center">frankfurter<br />frank<br />hot dog</td>
-<td style="text-align:center">The Burghers in Frankfurt, Germany, once greatly enjoyed their smoked beef and porksausages.</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -4814,7 +3519,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-count">199</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -4852,7 +3557,7 @@ table th:first-of-type {
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
