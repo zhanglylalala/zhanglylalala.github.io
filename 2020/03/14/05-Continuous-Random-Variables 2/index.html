@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Continuous Random Variables A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)&#x3D;\displaystyl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05. Continuous Random Variables">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Continuous Random Variables A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)&#x3D;\displaystyl">
+<meta property="article:published_time" content="2020-03-14T07:46:33.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:35:30.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="理论">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="概率论">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>05. Continuous Random Variables | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          05. Continuous Random Variables
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-14 15:46:33" itemprop="dateCreated datePublished" datetime="2020-03-14T15:46:33+08:00">2020-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:30" itemprop="dateModified" datetime="2020-08-07T19:35:30+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h1><ol>
+<li>A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)=\displaystyle\int_Bf_X(x)dx$ for every subset $B$  of the real line. </li>
+<li>In particular, the probability that the value of $X$ falls within an interval is $P(a≤X≤b)=\displaystyle\int^b_af_X(x)dx$. </li>
+<li>The probability can be interpreted as the area under the graph of the PDF. </li>
+<li>For any single value $a$, we have $P(X=a)=\displaystyle\int^a_af_X(x)dx=0$. <br />So including or excluding the nedpoints of an interval has no effect on its probability. $P(a≤X≤b)=P(a≤X&lt;b)=P(a&lt;X≤b)=P(a&lt;X&lt;b)$</li>
+<li>$P(a≤X≤b)=P(X≤b)-P(X≤a)$</li>
+<li>$\displaystyle\int^\infty_{-\infty}f_X(x)dx=1$</li>
+<li>$P([x,x+\delta])=\displaystyle\int^{x+\delta}_xf_X(t)dt\approx f_X(x)\cdot\delta$. So we can view $f_X(X)$ as the probability mass per unit length near $x$. Even though a PDF is used to calculate event probabilities, $f_X(x)$ is not the probability of any particular event. </li>
+<li>$f_X(x)$ is not restricted to be less than or equal to one. </li>
+<li>If a random variable $X$ takes values in an interval $[a,b]$ and any two subintervals of the same length have the same probability, we refer to this type of random variable as uniform or uniformly distributed. <br /><script type="math/tex">f_X(x)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a}&if\ a≤x≤b\\0&otherwise \end{array}\right.</script></li>
+<li>The expected value of a continuous random variable $X$ is defined by $E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx$. </li>
+<li>If $X$ is a continuous random variable, $Y=g(X)$ is also a random variable but may be a decrete one. But $E[g(X)]=\displaystyle\int^\infty_{-\infty}g(x)f_X(x)dx$ is true for any kind of $Y$, descrete or continuous. </li>
+<li>The variance is still $var(X)=E[(X-E[X])^2]=\displaystyle\int_{-\infty}^\infty(x-E[X])^2f_X(x)dx$. <br />And $var(X)=E[(X-E[X])^2]$ still stands. </li>
+<li>For uniform random variable: <br />$E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx=\int^b_ax\frac{1}{b-a}dx=\frac{a+b}{2}$<br />$E[X^2]=\displaystyle\int^\infty_{-\infty}x^2f_X(x)dx=\int^b_a\frac{x^2}{b-a}dx=\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{a^2+ab+b^2}{3}-\frac{(a+b)^2}{4}=\frac{(b-a)^2}{12}$</li>
+<li>Exponential random variable: <br />PDF: $f_X(x)=\left\{\begin{array}{}\lambda e^{-\lambda x}&amp;if x≥0\\0&amp;otherwise \end{array}\right.$<br />$P(X≥a)=\displaystyle\int^\infty_a\lambda e^{-\lambda x}dx=e^{-\lambda a}$<br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\int^\infty_0x\lambda e^{-\lambda x}dx\\&amp;=(-xe^{-\lambda x})\Big|^\infty_0+\int^\infty_0e^{-\lambda x}dx\\&amp;=\frac{1}{\lambda} \end{split}\end{equation}$<br />$\begin{equation}\begin{split}E[X^2]&amp;=\displaystyle\int^\infty_0x^2\lambda e^{-\lambda x}dx\\&amp;=(-x^2e^{-\lambda x})\Big|^\infty_0+\int^\infty_02xe^{-\lambda x}dx\\&amp;=0+\frac{2}{\lambda}E[X]\\&amp;=\frac{2}{\lambda^2} \end{split}\end{equation}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1}{\lambda^2}$</li>
+</ol>
+<h1 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h1><ol>
+<li>The cumulative distribution function (CDF) of a random variable $X$ is denoted by $F_X$ and provides probability $P(X≤x)$. <br /><script type="math/tex">F_X(x)=P(X≤x)=\left\{\begin{array}{}\displaystyle\sum_{k≤x}p_X(k)&if\ X\ is\ discrete\\\int^x_{-\infty}f_X(t)dt&if\ X\ is\ continuous \end{array}\right.</script></li>
+<li>CDF accumulates probability up to the value $x$. </li>
+<li>The graph of CDF of a descrete random variable has a staircase form at the values of probability mass. At the points where a jump occurs, the value of $F_X$ is the larger of the two corresponding value, i.e. $F_X$ is continuous from the right. </li>
+<li>$F_X$ is monotonically nondecreasing: if $x≤y$, then $F_X(x)≤F_X(y)$. </li>
+<li>$\displaystyle\lim_{x\to-\infty}F_X=0$ and $\displaystyle\lim_{x\to\infty}F_X=1$</li>
+<li>If $X$ is discrete, then $F_X(x)$ is a piecewise constant function of $x$. If $X$ is continuous, then $F_X(x)$ is a continuous function of $x$. </li>
+<li>If $X$ is descrete, $p_X(k)=P(X≤k)-P(X≤k-1)=F_X(k)-F_X(k-1)$. If $X$ is continuous, $f_X(x)=\displaystyle\frac{dF_X}{dx}(x)$. </li>
+<li>If $X_1,X_2,…,X_n$ are independent, $F_X(x)=F_{X_1}(x)…F_{X_n}(x)$</li>
+<li>For geometric random variable, $F_{geo}(n)=\displaystyle\sum^n_{k=1}p(1-p)^{k-1}=1-(1-p)^2$<br />For exponential random variable, $F_{exp}(x)=\displaystyle\int^x_0\lambda e^{-\lambda t}dt=1-e^{-\lambda x}$ for $x&gt;0$ and $F_X(x)=0$, for $x≤0$. <br />$F_{geo}=F_{exp}$ when $x=n\delta$ ($\delta=-\displaystyle\frac{-ln(1-p)}{\lambda}$), with $n=1,2,…$. </li>
+</ol>
+<h1 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h1><ol>
+<li>A continuous random variable $X$ is said to be normal or Gaussian if it has a PDF of the form $f_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, where $\mu$ and $\sigma$ are two scalar parameters characterizing the PDF with $\sigma&gt;0$. </li>
+<li>The PDF is symmetric around $\mu$. So its mean $E[X]$ has to be $\mu$. </li>
+<li><br />$\begin{equation}\begin{split}var(X)&amp;=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}\int^\infty_{-\infty}(x-\mu)^2e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\int^\infty_{-\infty}y^2e^{-\frac{y^2}{2}}dy                         y=\frac{x-\mu}{\sigma}\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\Bigg[(-ye^{-\frac{y^2}{2}})\bigg|^\infty_{-\infty}+\int^\infty_{-\infty}e^{-\frac{y^2}{2}}dy\Bigg]\\&amp;=\sigma^2 \end{split}\end{equation}$</li>
+<li>The standard normal random variable is a normal random variable with zero mean and unit variance. CDF: $\Phi(y)=P(Y≤y)=\displaystyle\frac{1}{\sqrt{2\pi}}\int^y_{-\infty}e^{-\frac{t^2}{2}}dt$</li>
+<li>In standard normal random variable, for $y&lt;0$, $\Phi(y)=P(Y≤y)=P(Y≥-y)=1-P(Y≤-y)=1-\Phi(-y)$</li>
+<li>For any $X$, we can standardize by $Y=\displaystyle\frac{X-\mu}{\sigma}$. And in reverse, any $X=\sigma Y+\mu$. So $P(X≤x)=P(\displaystyle\frac{X-\mu}{\sigma}≤\frac{x-\mu}{\sigma})=P(Y≤\frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma})$</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+              <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 概率论</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/" rel="prev" title="04. Discrete Random Variables; Probability Mass Functions; Expectations">
+      <i class="fa fa-chevron-left"></i> 04. Discrete Random Variables; Probability Mass Functions; Expectations
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/" rel="next" title="06. Multiple Continuous Random Variables and Conditional PDFs">
+      06. Multiple Continuous Random Variables and Conditional PDFs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-Random-Variables"><span class="nav-number">1.</span> <span class="nav-text">Continuous Random Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cumulative-Distribution-Functions"><span class="nav-number">2.</span> <span class="nav-text">Cumulative Distribution Functions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Normal-Random-Variables"><span class="nav-number">3.</span> <span class="nav-text">Normal Random Variables</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

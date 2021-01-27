@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Core MotionBasic Core Motion is an API to access motion sensing hardware on your device.  Its primary inputs are Accelerometer, Gyro, Magnetometer. Not all devices have all inputs.  Class used to get">
+<meta property="og:type" content="article">
+<meta property="og:title" content="17. Core Motion and Camera">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/08/28/17-Core-Motion-and-Camera/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Core MotionBasic Core Motion is an API to access motion sensing hardware on your device.  Its primary inputs are Accelerometer, Gyro, Magnetometer. Not all devices have all inputs.  Class used to get">
+<meta property="article:published_time" content="2019-08-28T01:53:17.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:27:24.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="应用开发">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/08/28/17-Core-Motion-and-Camera/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>17. Core Motion and Camera | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/28/17-Core-Motion-and-Camera/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          17. Core Motion and Camera
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-28 09:53:17" itemprop="dateCreated datePublished" datetime="2019-08-28T09:53:17+08:00">2019-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:27:24" itemprop="dateModified" datetime="2020-08-07T19:27:24+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Core-Motion"><a href="#Core-Motion" class="headerlink" title="Core Motion"></a>Core Motion</h1><h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><ol>
+<li>Core Motion is an API to access motion sensing hardware on your device. </li>
+<li>Its primary inputs are <code>Accelerometer</code>, <code>Gyro</code>, <code>Magnetometer</code>. Not all devices have all inputs. </li>
+<li>Class used to get this input is <code>CMMotionManager</code>. Use only one instance per application (else performance hit). It is a “global resource,” so getting one via a class method somewhere is okay</li>
+<li>There are two main usages of it. The first step of both usage is <code>Check to see what hardware is available</code>. Then we can either <code>Start the sampling going and poll the motion manager for the latest sample it has</code> or <code>Set the rate at which you want data to be reported from the hardware and register a closure (and a queue to run it on) to call each time a sample is taken</code>. <a id="more"></a>
+</li>
+</ol>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ol>
+<li>Of all the variables to check availability of hardware sensors, there is one special called <code>deviceMotionAvailable</code>, which is a combination of all available (accelerometer, magnetometer, gyro). </li>
+<li>To start the hardware sensors collecting data, you only need to do this if you are going to poll for data. Generally used when some architecture in your app is already periodic. </li>
+<li>There are also some variables to check if the hardware is currently collecting data. </li>
+<li>It is a performance hit to be collecting data, so stop during times you don’t need the data. </li>
+<li><code>CMAccelerometerData</code> object provides <code>var acceleration: CMAcceleration</code> which has three properties <code>x</code>, <code>y</code>, and <code>z</code>. Their units are all g(9.8 m/s<sup>2</sup>). </li>
+<li><code>CMGyroData</code> object provides <code>var rotationRate: CMRotationRate</code> which is also three dimension with units of radians/s. </li>
+<li><code>CMMagnetometerData</code> object provides <code>var magneticField: CMMagneticField</code> which is also three dimension with units of microteslas. </li>
+</ol>
+<h2 id="Register-A-Block-to-Receive-Data"><a href="#Register-A-Block-to-Receive-Data" class="headerlink" title="Register A Block to Receive Data"></a>Register A Block to Receive Data</h2><ol>
+<li>Register a block to receive Accelerometer data. </li>
+<li>Register a block to receive Gyro data. </li>
+<li>Register a block to receive Magnetometer data. </li>
+<li>Register a block to receive DeviceMotion data. </li>
+<li>Set the rate at which your block gets executed</li>
+<li>Queue can be an OperationQueue() you create or Operation.mainQueue (or currentQueue)</li>
+<li>It is okay to add multiple handler blocksEven, though you are only allowed one CMMotionManager. However, each of the blocks will receive the data at the same rate (as set above) (Multiple objects are allowed to poll at the same time as well, of course.)<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 1</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startAccelerometerUpdatesToQueue</span><span class="params">(queue: OperationQueue, withHandler: CMAccelerometerHandler)</span></span></span><br><span class="line"><span class="keyword">typealias</span> <span class="type">CMAccelerationHandler</span> = (<span class="type">CMAccelerometerData?</span>, <span class="type">Error?</span>) -&gt; <span class="type">Void</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 2</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startGyroUpdatesToQueue</span><span class="params">(queue: OperationQueue, withHandler: CMGyroHandler)</span></span></span><br><span class="line"><span class="keyword">typealias</span> <span class="type">CMGyroHandler</span> = (<span class="type">CMGyroData?</span>, <span class="type">Error?</span>) -&gt; <span class="type">Void</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startMagnetometerUpdatesToQueue</span><span class="params">(queue: OperationQueue, withHandler: CMMagnetometerHandler)</span></span></span><br><span class="line"><span class="keyword">typealias</span> <span class="type">CMMagnetometerHandler</span> = (<span class="type">CMMagnetometerData?</span>, <span class="type">Error?</span>) -&gt; <span class="type">Void</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 4</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startDeviceMotionUpdates</span><span class="params">(using: CMAttitudeReferenceFrame, queue: OperationQueue, withHandler: <span class="params">(CMDeviceMotion?, Error?)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 5</span></span><br><span class="line"><span class="keyword">var</span> accelerometerUpdateInterval: <span class="type">TimeInterval</span></span><br><span class="line"><span class="keyword">var</span> gyroUpdateInterval: <span class="type">TimeInterval</span></span><br><span class="line"><span class="keyword">var</span> magnetometerUpdateInterval: <span class="type">TimeInterval</span></span><br><span class="line"><span class="keyword">var</span> deviceMotionUpdateInterval: <span class="type">TimeInterval</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="CMDeviceMotion"><a href="#CMDeviceMotion" class="headerlink" title="CMDeviceMotion"></a>CMDeviceMotion</h2><ol>
+<li>CMDeviceMotion is a “combined” motion data source. It uses information from all the hardware to improve the data from each. </li>
+<li>The Acceleration Data in CMDeviceMotion has two main variables <code>gravity</code> and <code>userAcceleration</code>. The later one is gravity factored out using gyro. </li>
+<li><code>rotationRate</code> is bias removed from raw data using accelerometer. </li>
+<li><code>attitude</code> is device’s attitude (orientation) in 3D space. </li>
+<li>In the nested class <code>CMAttitude</code>, there are three properties. <code>roll</code> is around longitudinal axis passing through top/bottom. <code>pitch</code> is around lateral axis passing through sides. <code>yaw</code> is around axis with origin at CofG and vertical to screen directed down. </li>
+<li><code>heading</code> is degrees, where 0 is north (true or magnetic depending on frame). </li>
+</ol>
+<h2 id="Accelerometer-Over-Time"><a href="#Accelerometer-Over-Time" class="headerlink" title="Accelerometer Over Time"></a>Accelerometer Over Time</h2><ol>
+<li>Sometimes you don’t need to look at the accelerometer in real time.</li>
+<li>You just want to know what happened over a period of time in the past.</li>
+<li>The class CMSensorRecorder can record (at 50hz) and then play back accelerometer data.</li>
+<li>Not all devices are capable of this (iPhone 7 and later, Apple Watch).</li>
+<li>We can check if recording is available with method <code>isAccelerometerRecordingAvailable()</code></li>
+<li>We can start recording data and retrieving the recorded data. </li>
+<li>You enumerate over the CMAccelerometerData objects in a CMSensorDataList with for-in. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 6</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">recordAccelerometer</span><span class="params">(forDuration: TimeInterval)</span></span> <span class="comment">// keep this short for performance</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">accelerometerData</span><span class="params">(from: Date, to: Date)</span></span> -&gt; <span class="type">CMSensorDataList</span> <span class="comment">// 3 day max</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 7</span></span><br><span class="line"><span class="keyword">for</span> dataPoint: <span class="type">CMRecordedAccelerometerData</span> <span class="keyword">in</span> sensorDataList &#123; . . . &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Activity-Monitoring"><a href="#Activity-Monitoring" class="headerlink" title="Activity Monitoring"></a>Activity Monitoring</h2><ol>
+<li>It’s rough estimate of what the user is doing. For example, stationary, walking, running, automotive, or cycling. </li>
+<li>You track this with a <code>CMMotionActivityManager</code> (not a CMMotionManager!). </li>
+<li><code>CMMotionActivity</code> is one of the above activities.</li>
+<li>You can also query historical activity. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startActivityUpdates</span><span class="params">(to: OperationQueue, withHandler: <span class="params">(CMMotionActivity?)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 4</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">queryActivityStarting</span><span class="params">(from: Date, to: Date, to: OperationQueue, withHandler: ...)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Pedometer"><a href="#Pedometer" class="headerlink" title="Pedometer"></a>Pedometer</h2><ol>
+<li>Getting the user’s “step” information only makes sense over time.</li>
+<li>Create a CMPedometer and then send it the message. </li>
+<li>The from Date is allowed to be in the past (but only last 7 days are recorded).</li>
+<li>Your handler will be called periodically with the struct CMPedometerData which has <code>startDate</code> and <code>endDate</code> of the data, <code>numberOfSteps</code>, <code>distance</code>, <code>averageActivePace</code>, and <code>currentPace</code> during the time also <code>floorsAscended</code> and <code>floorsDescended</code>. </li>
+<li>It can also get relative altitude changes. </li>
+<li>CMAltitudeData has both change in altitude in meters and raw atmospheric pressure data.<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 2</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startUpdates</span><span class="params">(from: Date, withHandler: <span class="params">(CMPedometerData?, Error?)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 5</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startRelativeAltitudeUpdates</span><span class="params">(to: OperationQueue, withHandler: <span class="params">(CMAltitudeData?, Error?)</span></span></span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Authorization"><a href="#Authorization" class="headerlink" title="Authorization"></a>Authorization</h2><ol>
+<li>Some information is considered “private” to the user (e.g. fitness data). Specifically <code>CMPedometer</code>, <code>CMSensorRecorder</code>, <code>CMMotionActivityManager</code> and <code>CMAltimeter</code>. </li>
+<li>iOS will automatically ask the user (once) for permission to access this information.</li>
+<li>You can find out what the status is at any time with this static func on each of these.</li>
+<li>Lack of authorization may also show up as an error when you request data. </li>
+<li>It has four status. <code>notDetermined</code> means that user has not yet been asked. <code>restricted</code> means that fitness data access disabled in Settings. <code>denied</code> means that user has explicitly denied your app access. <code>authorized</code> means that ``ready to go. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">authorizationStatus</span><span class="params">()</span></span> -&gt; <span class="type">CMAuthorizationStatus</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CMAuthorizationStatus</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">case</span> notDetermined</span><br><span class="line">	<span class="keyword">case</span> restricted</span><br><span class="line">	<span class="keyword">case</span> denied</span><br><span class="line">	<span class="keyword">case</span> authorized</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="UIImagePickerController"><a href="#UIImagePickerController" class="headerlink" title="UIImagePickerController"></a>UIImagePickerController</h1><ol>
+<li>It can get media from camera or photo library. </li>
+<li>You can only offer camera or photo library on iPad. </li>
+<li>We can check what operation is abailable with method <code>isSourceTypeAvailable</code>. It takes one parameter <code>sourceType</code> type of <code>UIImagePickerControllerSourceType</code> which can be <code>.photoLibrary</code> or <code>.camera</code> or <code>.savedPhotosAlbum</code>. It returns a Bool. </li>
+<li>We can also check what kind of media is available with method <code>availableMediaTypes</code>. It takes one parameter <code>for</code> type of <code>UIImagePickerControllerSourceType</code>. It returns an optional array of String. Depending on device, it will return one or more of these. <code>kUTTypeImage</code> means pretty much all sources provide this, hardly worth checking for even. <code>kUTTypeLivePhoto</code> means must also say kUTTypeImage for this one to work. <code>kUTTypeMovie</code> means audio and video together, only some sources provide this. These are declared in the <code>MobileCoreServices</code> framework.</li>
+<li>To set the picker, we need to first create an instance of <code>UIImagePickerController</code>. And set its <code>delegate</code> to self. After check the availability, we can set its <code>sourceType</code> and <code>mediaTypes</code>. mediaTypes is an array of String. To configure it, we need to cast the <code>kUTType…</code> into a String. </li>
+<li>If set <code>allowsEditing</code> true, then the user will have opportunity to edit the image/video inside the picker. When your delegate is notified that the user is done, you’ll get <code>both raw and edited</code> versions. </li>
+<li>We can set the quality of captured vedio to the variable <code>videoQuality</code>. It can be <code>.typeMedium (default)</code>, <code>.typeHigh</code>, <code>.type640x480</code>, <code>.typeLow</code>, <code>.typeIFrame1280x720</code> or <code>.typeIFrame960x540</code>. The last two is native on some devices. </li>
+<li>We can also set the maximun time to capture medias with <code>videoMaximumDuration</code> which is default 10 minutes. </li>
+<li>The captured media can be presented as a VC. </li>
+<li>On iPad, if you are not offering Camera (just photo library), you must present with popover. If you are offering the Camera on iPad, then full-screen is preferred.</li>
+<li>Delegate will be notified when user is done. </li>
+<li>Dismiss it when cancel happens. </li>
+<li>There is an <code>Info</code> array which contains all the media source. It’s a dictionary and its keys are multiple.<br><code>UIImagePickerControllerMediaType</code> → <code>kUTTypeImage</code>, <code>kUTTypeMovie</code>.<br><code>UIImagePickerControllerOriginalImage</code> and <code>UIImagePickerControllerEditedImage</code> → <code>UIImage</code>. <code>UIImagePickerControllerImageURL</code> → <code>URL (in a temp location, so move it to keep it)</code>.<br><code>UIImagePickerControllerCropRect</code> → <code>CGRect (in an NSValue)</code>.<br><code>UIImagePickerControllerMediaMetadata</code> → <code>Dictionary of info about the image</code>.<br><code>UIImagePickerControllerLivePhoto</code> → <code>a PHLivePhoto</code><br><code>UIImagePickerControllerPHAsset</code> → <code>a PHAsset (see PHPhotoLibrary)</code><br><code>UIImagePickerControllerMediaURL</code> → <code>URL of the video if kUTTypeMovie</code></li>
+<li>You can save the image you just took to the user’s Camera Roll. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// . 3</span></span><br><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">isSourceTypeAvailable</span><span class="params">(sourceType: UIImagePickerControllerSourceType)</span></span> -&gt; <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// . 4</span></span><br><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">availableMediaTypes</span><span class="params">(<span class="keyword">for</span>: UIImagePickerControllerSourceType)</span></span> -&gt; [<span class="type">String</span>]?</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 5</span></span><br><span class="line"><span class="keyword">let</span> picker = <span class="type">UIImagePickerController</span>()</span><br><span class="line"><span class="keyword">let</span> mediaTypeMovie = kUTTypeMovie <span class="keyword">as</span> <span class="type">String</span></span><br><span class="line">picker.delegate = <span class="keyword">self</span> <span class="comment">// self must implement UINavigationControllerDelegate too </span></span><br><span class="line"><span class="keyword">if</span> <span class="type">UIIPC</span>.isSourceTypeAvailable(.camera)</span><br><span class="line">&#123;</span><br><span class="line">	picker.sourceType = .camera</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">let</span> availableTypes = <span class="type">UIIPC</span>.availableMediaTypesForSourceType(.camera)</span><br><span class="line">  &#123;</span><br><span class="line">		<span class="keyword">if</span> availableTypes.<span class="built_in">contains</span>(mediaTypeMovie)</span><br><span class="line">    &#123;</span><br><span class="line">			picker.mediaTypes = [mediaTypeMovie]</span><br><span class="line">			<span class="comment">// proceed to put the picker up</span></span><br><span class="line">		&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .11</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">imagePickerController</span><span class="params">(UIImagePickerController, didFinishPickingMediaWithInfo info: [String:<span class="keyword">Any</span>])</span></span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// extract image/movie data/metadata here from info, more on the next slide </span></span><br><span class="line">  picker.presentingViewController?.dismiss(animated: <span class="literal">true</span>) &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 12</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">imagePickerControllerDidCancel</span><span class="params">(UIImagePickerController)</span></span></span><br><span class="line">&#123;</span><br><span class="line">	picker.presentingViewController?.dismiss(animated: <span class="literal">true</span>) &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// . 14</span></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">UIImageWriteToSavedPhotosAlbum</span></span></span><br><span class="line"><span class="function"><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="number">_</span> image: UIImage,</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="number">_</span> target: <span class="keyword">Any</span>?, // the object to send selector to when finished writing</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="number">_</span> selector: Selector? // selector to send to target when finished writing</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="number">_</span> context: UnsafeMutableRawPointer? // passed to the selector</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i> 应用开发</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/27/16-More-Segue/" rel="prev" title="16. More Segue">
+      <i class="fa fa-chevron-left"></i> 16. More Segue
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/19/01-The-geometry-of-linear-equations/" rel="next" title="01. The Geometry of Linear Equations">
+      01. The Geometry of Linear Equations <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Core-Motion"><span class="nav-number">1.</span> <span class="nav-text">Core Motion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">1.2.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-A-Block-to-Receive-Data"><span class="nav-number">1.3.</span> <span class="nav-text">Register A Block to Receive Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMDeviceMotion"><span class="nav-number">1.4.</span> <span class="nav-text">CMDeviceMotion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accelerometer-Over-Time"><span class="nav-number">1.5.</span> <span class="nav-text">Accelerometer Over Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity-Monitoring"><span class="nav-number">1.6.</span> <span class="nav-text">Activity Monitoring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pedometer"><span class="nav-number">1.7.</span> <span class="nav-text">Pedometer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authorization"><span class="nav-number">1.8.</span> <span class="nav-text">Authorization</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIImagePickerController"><span class="nav-number">2.</span> <span class="nav-text">UIImagePickerController</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="对顶栈HDOJ 4699  建立两个栈，一个栈存储光标前的内容，一个栈存储光标后的内容。两个数组$sum[i]$表示前$i$项前缀和，$ans[i]$表示前$i$项中最大前缀和 左移操作就把左栈栈顶的元素弹入右栈中 右移操作就把右栈栈顶的元素弹入左栈中，同时更新$sum$和$ans$ 删除操作就把左栈栈顶元素弹出 插入操作就把插入的元素压入左栈中，同时更新$sum$和$ans$ 询问操作就直接返回">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2020/08/26/%E6%A0%88/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="对顶栈HDOJ 4699  建立两个栈，一个栈存储光标前的内容，一个栈存储光标后的内容。两个数组$sum[i]$表示前$i$项前缀和，$ans[i]$表示前$i$项中最大前缀和 左移操作就把左栈栈顶的元素弹入右栈中 右移操作就把右栈栈顶的元素弹入左栈中，同时更新$sum$和$ans$ 删除操作就把左栈栈顶元素弹出 插入操作就把插入的元素压入左栈中，同时更新$sum$和$ans$ 询问操作就直接返回">
+<meta property="article:published_time" content="2020-08-26T09:32:01.000Z">
+<meta property="article:modified_time" content="2020-08-26T15:25:00.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2020/08/26/%E6%A0%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>栈 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/26/%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          栈
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-26 17:32:01 / Modified: 23:25:00" itemprop="dateCreated datePublished" datetime="2020-08-26T17:32:01+08:00">2020-08-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">基础数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="对顶栈"><a href="#对顶栈" class="headerlink" title="对顶栈"></a>对顶栈</h1><p><a href="https://ac.nowcoder.com/acm/contest/1005/A" target="_blank" rel="noopener">HDOJ 4699</a></p>
+<ol>
+<li>建立两个栈，一个栈存储光标前的内容，一个栈存储光标后的内容。两个数组$sum[i]$表示前$i$项前缀和，$ans[i]$表示前$i$项中最大前缀和</li>
+<li>左移操作就把左栈栈顶的元素弹入右栈中</li>
+<li>右移操作就把右栈栈顶的元素弹入左栈中，同时更新$sum$和$ans$</li>
+<li>删除操作就把左栈栈顶元素弹出</li>
+<li>插入操作就把插入的元素压入左栈中，同时更新$sum$和$ans$</li>
+<li>询问操作就直接返回$ans[k]$</li>
+<li>更新$sum$时直接叠加之前栈内已有所有元素和$sum[l.size()-1]$，即为$sum[l.size()]=sum[l.size()-1]+l.top()$</li>
+<li>更新$ans$时取之前的最大前缀和和当前前缀和最大值，即为$ans[l.size()]=max(ans[l.size()-1],sum[l.size()])$</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[MAXN], ans[MAXN];</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; l, r;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sum[l.<span class="built_in">size</span>()] = sum[l.<span class="built_in">size</span>() - <span class="number">1</span>] + l.top();</span><br><span class="line">    ans[l.<span class="built_in">size</span>()] = <span class="built_in">max</span>(ans[l.<span class="built_in">size</span>() - <span class="number">1</span>], sum[l.<span class="built_in">size</span>()]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> q;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">    <span class="keyword">char</span> op;</span><br><span class="line">    <span class="keyword">int</span> inp;</span><br><span class="line">    ans[<span class="number">0</span>] = -INF;</span><br><span class="line">    <span class="keyword">while</span> (q--)</span><br><span class="line">    &#123;</span><br><span class="line">        getchar();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;op);</span><br><span class="line">        <span class="keyword">if</span> (op == <span class="string">'L'</span> &amp;&amp; !l.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            r.push(l.top());</span><br><span class="line">            l.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'R'</span> &amp;&amp; !r.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            l.push(r.top());</span><br><span class="line">            r.pop();</span><br><span class="line">            update();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'I'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            l.push(inp);</span><br><span class="line">            update();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'Q'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans[inp]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="string">'D'</span> &amp;&amp; !l.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            l.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><p><a href="https://ac.nowcoder.com/acm/contest/1005/C" target="_blank" rel="noopener">POJ 2559</a></p>
+<ol>
+<li>我们对每一个矩形都考虑以这个矩形的高为高的最大面积</li>
+<li>如果这个矩形比它前一个矩形矮，则以它前面的矩阵为基准的所有情况都不会包括这个矩形及其以后的矩形，可以直接计算出前面的结果。而且在以这个矩形为基准的时候，前面的矩形比它高的部分对答案都没有贡献，所以可以把前面的矩形都替换成和它一样高的矩形</li>
+<li>如果这个矩形比它前一个矩形高，则以它为基准的答案可能包含后面的矩形，要继续遍历</li>
+<li>由此，我们设计一个栈：<br />如果当前矩形的高度大于等于栈顶矩形的高度，则直接入栈<br />如果当前矩形的高度小于栈顶矩形的高度，则把所有高于它的矩形从栈中弹出，并计算它们的面积，再把累积的宽度和新矩形的高度压入栈中</li>
+<li>从操作中可以看出栈内的元素必然是单调递增的，所以对于弹出计算面积时，只要累计弹出的第几个矩形，就是以这个矩形为基准的宽度</li>
+<li>遍历完后再把栈内的元素一一弹出计算</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>&lt;pair&lt;ll, ll&gt;&gt; rects; <span class="comment">// 第一个为高度，第二个为宽度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        ll <span class="built_in">height</span>;</span><br><span class="line">        <span class="keyword">char</span> ch;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!rects.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            rects.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;<span class="built_in">height</span>);</span><br><span class="line">            <span class="keyword">if</span> (rects.empty()) <span class="comment">// 栈为空，直接压入</span></span><br><span class="line">            &#123;</span><br><span class="line">                ans = <span class="built_in">height</span>;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (rects.top().first &gt; <span class="built_in">height</span>) <span class="comment">// 当前矩形的高度小于前一个矩形的高度</span></span><br><span class="line">            &#123;</span><br><span class="line">                ll accumulate = <span class="number">0</span>; <span class="comment">// 累计宽度</span></span><br><span class="line">                <span class="keyword">while</span> (!rects.empty() &amp;&amp; rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    accumulate += rects.top().second;</span><br><span class="line">                    ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans); <span class="comment">// 宽就是第几个出栈</span></span><br><span class="line">                    rects.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, accumulate + <span class="number">1</span>)); <span class="comment">// 把前面的都替换成和当前矩形一样高的</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">// 当前矩形的高度不低于前一个矩形，压入宽度为1</span></span><br><span class="line">            &#123;</span><br><span class="line">                rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll accumulate = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!rects.empty()) <span class="comment">// 最后再计算一次</span></span><br><span class="line">        &#123;</span><br><span class="line">            accumulate += rects.top().second;</span><br><span class="line">            ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">            rects.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode-cn.com/problems/maximal-rectangle/submissions/" target="_blank" rel="noopener">Leetcode 85</a></p>
+<p>这题可以变形成单调栈问题</p>
+<ol>
+<li>把每一个$1$都想象成一个小方块，小方块叠加变成矩形</li>
+<li>从第一行开始放置小方块，如果是$1$就放置一个小方块，如果是$0$就空着，最后要求的还是最大矩形的面积</li>
+<li>但是这个问题一列可能有不只一个矩形，中间可能有$0$把多个矩形空开，易知每一列都只能有一个矩形参与到答案中，所以遇到$0$的时候可以把矩形长度清空，因为包含当前矩形的答案已经遍历过了</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maximalRectangle</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; matrix)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (matrix.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">h</span><span class="params">(matrix[<span class="number">0</span>].<span class="built_in">size</span>(), <span class="number">0</span>)</span></span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.<span class="built_in">size</span>(); i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[i].<span class="built_in">size</span>(); j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (matrix[i][j] == <span class="string">'0'</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        h[j] = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        h[j]++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = <span class="built_in">max</span>(ans, largestRectangleArea(h));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">stack</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; rects;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.<span class="built_in">size</span>(); i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">height</span> = heights[i];</span><br><span class="line">    <span class="keyword">if</span> (rects.empty())</span><br><span class="line">    &#123;</span><br><span class="line">      ans = <span class="built_in">height</span>;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">int</span> accumulate = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (!rects.empty() &amp;&amp; rects.top().first &gt; <span class="built_in">height</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        accumulate += rects.top().second;</span><br><span class="line">        ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">        rects.pop();</span><br><span class="line">      &#125;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, accumulate + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      rects.push(make_pair(<span class="built_in">height</span>, <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> accumulate = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (!rects.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    accumulate += rects.top().second;</span><br><span class="line">    ans = <span class="built_in">max</span>(rects.top().first * accumulate, ans);</span><br><span class="line">    rects.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/24/%E8%A7%A3%E8%AF%BB%E5%9F%BA%E9%87%91%EF%BC%9A%E6%88%91%E7%9A%84%E6%8A%95%E8%B5%84%E8%A7%82%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="prev" title="解读基金：我的投资观与实践">
+      <i class="fa fa-chevron-left"></i> 解读基金：我的投资观与实践
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/27/06-How-To-Talk-About-Science-And-Scientists/" rel="next" title="06. How To Talk About Science And Scientists">
+      06. How To Talk About Science And Scientists <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对顶栈"><span class="nav-number">1.</span> <span class="nav-text">对顶栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单调栈"><span class="nav-number">2.</span> <span class="nav-text">单调栈</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">198</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
