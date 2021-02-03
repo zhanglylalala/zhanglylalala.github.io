@@ -191,6 +191,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E7%BA%BF%E6%AE%B5%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E7%BA%BF%E6%AE%B5%E6%A0%91/" class="post-title-link" itemprop="url">线段树</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:29:05" itemprop="dateCreated datePublished" datetime="2019-11-09T00:29:05+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:46:14" itemprop="dateModified" datetime="2020-08-07T19:46:14+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">区间问题</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>线段树就是把一个区间(线段)二分，依据第几次分，把各个部分存储在树的不同层，直到区间内只剩下一个元素。线段树的实现是利用数组实现的完全二叉树，其所需节点个数不会超过原始数组的4倍</p>
+<h1 id="完全二叉树-满树"><a href="#完全二叉树-满树" class="headerlink" title="完全二叉树(满树)"></a>完全二叉树(满树)</h1><p>1、<strong>定义</strong>：只有最后一层才有的叶子节点的二叉树<br>2、<strong>性质</strong>：完全二叉树可以用数组简单表示。若根节点是数组的0号元素，则对每一个节点k，如果有左右孩子，则左孩子是2k+1，右孩子是2k+2 = 2(k+1)<br>3、在线段树的实现中，若不幸地叶子节点出现在非最后一层，则一般会给其补两个虚拟的孩子，即直接跳过属于它的孩子的两个单元<br><img src="/img/线段树01.jpg" alt="20190328214250727.jpeg"></p>
+<h1 id="线段树的建立"><a href="#线段树的建立" class="headerlink" title="线段树的建立"></a>线段树的建立</h1><p>由于二叉树天然的递归特性，故我们常常用递归来构建线段树(以下以求区间最大值为例)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> segment[maxn &lt;&lt; <span class="number">2</span>], ori[maxn]; <span class="comment">//第一个为线段树，定义大小为原始数组的4倍，第二个为原始数组</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span>    <span class="comment">//rt为当前建立区间的根节点，即当前区间存储的下标，l、r为区间范围</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		segment[rt] = ori[l];</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		build((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, l, mid);    <span class="comment">//更新左子树</span></span><br><span class="line">		build((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, mid + <span class="number">1</span>, r);     <span class="comment">//更新右子树</span></span><br><span class="line">		segment[rt] = <span class="built_in">max</span>(segment[(rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>], segment[(rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>]);</span><br><span class="line">		<span class="comment">//根据左右子树就可以确定当前区间的值，则句根据线段树的作用不同而改变，例如求和，则改为左右子树和</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单点修改，区间查询"><a href="#单点修改，区间查询" class="headerlink" title="单点修改，区间查询"></a>单点修改，区间查询</h1><p>单点修改则需要修改所有包含该点的区间，由于不知道该点的单点区间到底是几号，故可以从上往下，采用和建树类似的方式递归求解</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> k, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"><span class="comment">//rt为当前根节点在数组的下标，k为修改节点，l、r为当前查询节点，val为修改值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		segment[rt] = val; <span class="comment">//单点区间直接修改值</span></span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span>(k &lt;= mid)   <span class="comment">//如果在左子树</span></span><br><span class="line">		update((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, k, l, mid, val);</span><br><span class="line">	<span class="keyword">else</span>     <span class="comment">//如果在右子树</span></span><br><span class="line">		update((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, k, mid + <span class="number">1</span>, r, val);</span><br><span class="line">	segment[rt] = <span class="built_in">max</span>(segmen[(rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>], segment[(rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>]);</span><br><span class="line">	<span class="comment">//先更新子树再更新根节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>区间查询：若当前区间包含于查询区间内，则返回</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span></span><br><span class="line"><span class="function"><span class="comment">//L、R为查询节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L &lt;= l &amp;&amp; r &lt;= R)   <span class="comment">//当前区间包含于查询区间内</span></span><br><span class="line">		<span class="keyword">return</span> segment[rt];</span><br><span class="line">	<span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span>(L &lt;= mid)    <span class="comment">//如果有部分查询区间位于左子树，就递归询问左子树</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = query((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, l, mid, L, R);</span><br><span class="line">		ans = <span class="built_in">max</span>(ans, temp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(R &gt; mid)   <span class="comment">//如果有部分查询区间位于右子树，就递归询问右子树</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = query((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R);</span><br><span class="line">		ans = <span class="built_in">max</span>(ans, temp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="区间修改，区间查询"><a href="#区间修改，区间查询" class="headerlink" title="区间修改，区间查询"></a>区间修改，区间查询</h1><p>以下以求和为例<br>1、lazy标记：提高程序效率，更新时先不更新子树，先标记起来，说明这颗子树需要更新但还没更新，等以后访问到这颗子树时再更新。lazy标记存储的一般都是需要更新的大小</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> sum, lo, hi;   <span class="comment">//lo和hi分别表示这个节点表示的左闭右开区间</span></span><br><span class="line">	<span class="keyword">int</span> lazy = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2、push down(向下更新)：只有在有lazy标记时才会更新，要向子树传值，和lazy标记</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushDown</span><span class="params">(<span class="keyword">int</span> rt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(segmen[rt].lazy)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> rc = (rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> lc = (rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">		segment[rc].sum = segment[rt].lazy * (segment[rc].hi - segment[lc].lo);</span><br><span class="line">		segment[lc].sum = segment[rt].laze * (segment[lc].hi - segment[lc].lo);</span><br><span class="line">		<span class="comment">//注意！！！是左右子树全部更新，全段更新</span></span><br><span class="line">		segment[rc].lazy += segment[rt].lazy;</span><br><span class="line">		segment[lc].lazy += segment[rt].lazy;</span><br><span class="line">		segment[rt].lazy = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、push up(向上更新)：根据子树求根的值</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">(<span class="keyword">int</span> rt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	segment[rt].sum = segment[(rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>].sum + segment[(rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>].sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4、区间修改<br>当且仅当目前尝试修改区间被要求修改区间包含时才会修改，这时才会给节点增加lazy标记。则意味着所有有lazy标记的节点都是在要求修改区间内，其表示区间内的所有元素都会修改，自然其左右子树的所有元素也都要修改，这就解释了为什么在pushDown中左右子树和update中根节点修改时要乘的是节点表示的整个区间，而不是其中的某一段区间</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R, <span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L &lt;= l &amp;&amp; r &lt;= R)   <span class="comment">//当前查询区间包含于修改区间</span></span><br><span class="line">	&#123;</span><br><span class="line">		segment[rt].sum += (segment[rt].hi - segment[rt].lo + <span class="number">1</span>) * val;  <span class="comment">//整个修改</span></span><br><span class="line">		segment[rt].lazy += val;   <span class="comment">//增加lazy标记</span></span><br><span class="line">		<span class="keyword">return</span> ;    <span class="comment">//不再继续更新</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(L &gt; r || R &lt; l)   <span class="comment">//若当前查询区间在修改区间外就不用做任何进一步操作</span></span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	pushDown(rt);    <span class="comment">//这个push down的作用是因为对同一段区间可能有多次修改</span></span><br><span class="line">	<span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span>(l &lt;= mid)   <span class="comment">//更新左子树</span></span><br><span class="line">		update((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, l, mid, L, R, val);</span><br><span class="line">	<span class="keyword">if</span>(r &gt; mid)    <span class="comment">//更新右子树</span></span><br><span class="line">		update((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R, val);</span><br><span class="line">	pushUp(rt);    <span class="comment">//回溯更新</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5、区间查询</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L &lt;= l &amp;&amp; r &lt;= R)   <span class="comment">//如果当前区间被包含在查询区间内，显然应当全部返回</span></span><br><span class="line">		<span class="keyword">return</span> segment[rt].sum;</span><br><span class="line">	<span class="keyword">if</span>(r &lt; L || R &lt; l)     <span class="comment">//如果当前区间在查询区间外，返回0</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	pushDown(rt);</span><br><span class="line">	<span class="keyword">int</span> mid = l + ((r - l) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> query((rt + <span class="number">1</span>) &lt;&lt; <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R) + query((rt &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>, l, mid, L, R);</span><br><span class="line">	<span class="comment">//左子树的值加上右子树的值就是当前区间与查询区间交集的和</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h1><p>区间合并问题的特点就是每一次询问的问题可以分治——答案要么全部在左子区间，要么在右子区间，要么跨越左右子区间。这时候线段树就要维护这几个值：l(区间左端点)、r(区间右端点)、ans(区间内答案)、lans(从最左端开始满足要求的答案)、rans(从最右端开始满足要求的答案)。有时根据需要还得多加几个元素<br><strong>push up</strong>：<br>&emsp;ans：根据定义，很显然所选的就是左子树的答案、右子树的答案和左子树的rans+右子树的lans中的最值<br>&emsp;lans：基础就是左子树的lans，但是要注意，如果左子树的lans等于左子树表示的区间长度的话，就还要加上右子树的lans<br>&emsp;rans：与左子树同理<br>其他的根据题目的不同随机应变</p>
+<h1 id="线段树基础三连"><a href="#线段树基础三连" class="headerlink" title="线段树基础三连"></a>线段树基础三连</h1><p>维护哪些值？<br>pushUp怎么写？<br>pushDown怎么写?</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1035,103 +1142,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E7%A8%B3%E5%AE%9A%E5%A9%9A%E5%A7%BB%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98-GS%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E7%A8%B3%E5%AE%9A%E5%A9%9A%E5%A7%BB%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98-GS%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">稳定婚姻匹配问题(GS算法)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:10:02" itemprop="dateCreated datePublished" datetime="2019-11-09T00:10:02+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:41:42" itemprop="dateModified" datetime="2020-08-07T17:41:42+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>有n个男生，m个女生，每个人都有自己心仪对象的榜单。若男生1和女生a在一起，男生2和女生b在一起，但男生1的榜单中b排在a前，女生b的榜单中1排在2前，则此时男生1和女生b就会私奔，1对a、2对b就会造成不稳定婚姻匹配。要求找出稳定婚姻匹配的方法</p>
-<h1 id="GS算法"><a href="#GS算法" class="headerlink" title="GS算法"></a>GS算法</h1><p><strong>数据存储</strong>：两个二维数组boyExpect和girlExpect分别存储每个人对自己理想对象的排名，例如boy[1][0]表示1号男生最喜欢的女生；两个一维数组boyMatched和girlMatched分别存储男生和女生现在的对象；一个一维数组boyPos存储男生当前表白到他榜单上的第几个女生；一个栈Stack来存储现在还单身的男生；两个一维数组boyNum和girlNum存储每个男生和每个女生榜单上的人数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> boyExpect[maxn][maxn], girlExpect[maxn][maxn], boyMarched[maxn], girlMatched[maxn];</span><br><span class="line"><span class="keyword">int</span> boyPos[maxn], boyNum[maxn], girlNum[maxn];</span><br><span class="line">Stack&lt;<span class="keyword">int</span>&gt; singleBoy;</span><br></pre></td></tr></table></figure>
-<p><strong>初始化</strong>：boyExpect和girlExpect、boyNum和girlNum随便初始化，boyMatched和girlMatched初始化成boy和girl里都没有的标号，表示尚未匹配，manPos初始化为0，Stack清空</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(boyPos, <span class="number">0</span>, <span class="keyword">sizeof</span>(boyPos));</span><br><span class="line"><span class="built_in">memset</span>(boyMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(boyMatched));</span><br><span class="line"><span class="built_in">memset</span>(girlMatched, <span class="number">0</span>, <span class="keyword">sizeof</span>(girlMatched));</span><br><span class="line"><span class="keyword">while</span>(!singleBoy.empty())</span><br><span class="line">	singleBoy.pop();</span><br></pre></td></tr></table></figure>
-<p><strong>处理</strong>：(以下以男生追女生为例，编号从1开始)<br>首先对所有男生进行一次遍历，每个男生想他们最心仪的女生表白一次，若那个女生尚未被表白或当前男友不如这个男生排名高，则两人私奔，女生的前男友变回单身状态，被推了单身栈中<br>不断循环，每次男生都想没拒绝过他的最心仪女生表白，进行那个残酷的选择，直到所有男生都有女友(单身栈为空)，算法结束<br><strong>代码</strong>：<br>1、每次男生表白之后，若女生有男友，则需要把两个男生进行比较，比较就要先找到男生在女生心中的排行</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getPos</span><span class="params">(<span class="keyword">int</span> girl, <span class="keyword">int</span> boy)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; girlNum[girl]; i++)</span><br><span class="line">		<span class="keyword">if</span>(girlExpect[i] == boy)</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、男生向女生表白</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">match</span><span class="params">(<span class="keyword">int</span> boy)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> girl = boyExpect[boy][boyPos[boy]];</span><br><span class="line">	<span class="keyword">if</span>(!girlMatched[girl])   <span class="comment">//若女生尚未被表白</span></span><br><span class="line">	&#123;</span><br><span class="line">		girlMatched[girl] = boy;</span><br><span class="line">		boyMatched[boy] = girl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>    <span class="comment">//若女生已经有男友</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> oldPos = getPos(girl, girlMatched[girl]);   <span class="comment">//现男友的排名</span></span><br><span class="line">		<span class="keyword">int</span> newPos = getPos(girl, boy);    <span class="comment">//正在追求女生的男生的排名</span></span><br><span class="line">		<span class="keyword">if</span>(oldPos &lt; newPos)    <span class="comment">//若现男友的排名高(排名的数字小)</span></span><br><span class="line">		&#123;</span><br><span class="line">			boyPos[boy]++;    <span class="comment">//正在追求女生的男生的追求目标向下移一个</span></span><br><span class="line">			singleBoy.push(boy);    <span class="comment">//那个可怜的男生进入单身栈</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>     <span class="comment">//若正在追求女生的男生排名高(排名数字小)</span></span><br><span class="line">		&#123;</span><br><span class="line">			boyPos[girlMatched[girl]]++;    <span class="comment">//现男友要追求他榜单里的下一个女生</span></span><br><span class="line">			boyMatched[girlMatched[girl]] = <span class="number">0</span>;    <span class="comment">//被甩了，不再拥有女友</span></span><br><span class="line">			singleBoy.push(girlMatched[girl]);    <span class="comment">//可怜地被打入单身栈</span></span><br><span class="line">			boyMatched[boy] = girl;    <span class="comment">//人生赢家有了女友</span></span><br><span class="line">			girlMatched[girl] = boy;   <span class="comment">//女生换了一个更好的男友</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3、主算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GS</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		match(i);</span><br><span class="line">	<span class="keyword">int</span> boy;</span><br><span class="line">	<span class="keyword">while</span>(!singleBoy.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		boy = singleBoy.top();</span><br><span class="line">		singleBoy.pop();</span><br><span class="line">		match(boy);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1203,7 +1213,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">200</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

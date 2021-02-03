@@ -191,6 +191,144 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2021/01/27/06-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/06-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">06. 数据链路层的应用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-27 21:57:20" itemprop="dateCreated datePublished" datetime="2021-01-27T21:57:20+08:00">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-02 16:01:25" itemprop="dateModified" datetime="2021-02-02T16:01:25+08:00">2021-02-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/" itemprop="url" rel="index">
+                    <span itemprop="name">考研</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="介质访问控制"><a href="#介质访问控制" class="headerlink" title="介质访问控制"></a>介质访问控制</h1><ol>
+<li>介质访问控制：MAC (media access control)</li>
+<li>点对点链路：两个相邻节点通过一个链路相连，没有第三者。应用于PPP协议，常用于广域网<br />广播式链路：所有主机共享通信介质。应用于早期的总线以太网、无线局域网，常用于局域网。典型拓扑结构有总线型、星型 (逻辑总线型)</li>
+<li>介质访问控制的目的是使得两对节点之间的通信不会发生相互干扰</li>
+<li>介质访问控制的两种方法<br />&emsp;静态划分信道：信道划分介质访问控制<br />&emsp;动态分配信道：轮询介质访问控制、随机访问介质访问控制</li>
+<li>动态分配信道是动态媒体接入控制/多点接入，随机访问介质访问控制所有用户可以随机发送信息，发送信息时占全部带宽</li>
+</ol>
+<h1 id="信道划分介质访问控制"><a href="#信道划分介质访问控制" class="headerlink" title="信道划分介质访问控制"></a>信道划分介质访问控制</h1><ol>
+<li>频分多路复用FDM：所有用户在同时占用不同的频率带宽资源<br />充分利用传输介质带宽，系统效率高，技术成熟，实现容易<br />频分多路复用属于并行通信</li>
+<li>时分多路复用TDM：将时间划分为一段段等长的时分复用帧 (TDM帧)，再将TMD帧划分成多个时隙，每一个用户轮流占用TDM帧内的一个时隙，每一个时隙只有一个用户发送<br />时隙个数按连接在集中器上的用户数划分<br />如果一个用户暂时没有数据要发送，则属于他的时隙内没有数据会被发送<br />时分多路复用属于并发通信</li>
+<li>统计时分复用STDM：每一个STDM帧中的时隙个数小于连接在集中器上的用户数。各用户有了数据就随时发往集中器的输入缓存，然后集中器按顺序依次扫描输入缓存，把缓存中的输入数据放入STDM帧中，一个STDM帧满了就发出<br />每个用户单次发送都有一个最大容量，即STDM帧的时隙大小，超出了最大容量就让别人先发，下一轮再继续发送<br />STDM帧不是固定分配时隙，是按需动态分配</li>
+<li>波分多路复用WDM：再一根光纤中传输多种不同波长的光信号，各路光信号互不干扰，再用波长分解器将各路波长分解出来</li>
+<li>码分多路复用CDM：常用码分多址CDMA<br />芯片序列：用一个字节表示一个比特1，这个字节就是芯片序列。发送1时发送芯片序列，发送0时发送芯片序列的反码<br />通常把0写成-1，要求多个站点的芯片序列相互正交<br />两个向量到公共信道上，线性相加；在数据终点，合并的数据和源站规格化内积</li>
+</ol>
+<h1 id="随机访问介质访问控制"><a href="#随机访问介质访问控制" class="headerlink" title="随机访问介质访问控制"></a>随机访问介质访问控制</h1><h2 id="ALOHA协议"><a href="#ALOHA协议" class="headerlink" title="ALOHA协议"></a>ALOHA协议</h2><ol>
+<li>纯ALOHA协议：不监听信道，不按时间槽发送，随机重发。想法就发<br />冲突检测：发送方没有收到接收方的确认就认定为冲突<br />冲突解决：超时后等一随机时间再重传</li>
+<li>时隙ALOHA协议：把时间分成若干个相同的时间片，所有用户在时间片开始时刻同步接入网络信道，若发生冲突，则必须等到下一个时间片开始时刻再发送</li>
+<li>纯ALOHA比时隙ALOHA吞吐量更低，效率更低</li>
+<li>纯ALOHA想发就发，时隙ALOHA只有在时间片段开始时才能发</li>
+</ol>
+<h2 id="CSMA协议"><a href="#CSMA协议" class="headerlink" title="CSMA协议"></a>CSMA协议</h2><ol>
+<li>CS (carrier sense)：载波监听，每一个站发送数据前检测一下总线上是否有其他计算机在发送数据</li>
+<li>MA (multiple access)：多点接入，多个计算机以多点接入的方式连接在一根总线上</li>
+<li>冲突检测：多个站点同时发送数据，总线上信号电压摆动值增大，超过一个门限值时，表示发生碰撞，发生冲突</li>
+<li>1-坚持CSMA：监听到信号忙后坚持监听，检测到信道空闲直接传输<br />冲突解决：等待一个随机长的时间再监听<br />优点：只要媒体空闲，马上发送，避免媒体利用率损失<br />缺点：假如有两个以上的站点有数据发送，冲突不可避免</li>
+<li>非坚持CSMA：监听到信道忙就等待一个随机时间之后再监听，检测到信道空闲就直接传输<br />冲突解决同1-坚持<br />优点：采用随机的重发延迟时间可以减少冲突发送的可能性<br />缺点：可能存在大家都在延迟等待过程中，使得媒体仍可能处于空闲状态，媒体使用率降低</li>
+<li>p-坚持CSMA：监听到信道忙就坚持监听，检测到信道空闲，以p概率直接传输，1-p概率等到下一个时间槽再传输<br />冲突解决同1-坚持<br />优点：既能像非坚持算法一样减少冲突，又能像1-坚持那样减少媒体空闲时间<br />缺点：发生冲突后还坚持把数据帧发送完，造成浪费<br />当$p=1$时，就是1-坚持CSMA算法</li>
+</ol>
+<h2 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h2><ol>
+<li>CD (collision detection)：碰撞检测，适配器边发送数据，边检测信道是否有冲突，当检测到冲突时停止发送数据</li>
+<li>设单程端到端传播时延为$\tau$， 当两个站点发送的数据交汇时发送冲突，当冲突的数据被发送方收到时就检测到冲突<br />检测用时为$2\times(冲突发生时间-发送的时间)$，则检测用时为$[0,2\tau]$<br />检测用时最久的情况：发送的数据即将到另一个站点时才发生冲突<br />检测用时最短的情况：发送的数据刚刚发送出去就发生冲突</li>
+<li>只要过了$2\tau$还没检测到碰撞，则说明肯定没有发送碰撞</li>
+<li>二进制指数退避算法确定重传时机<br />&emsp;确定基本退避 (推迟)时间为争用期$2\tau$<br />&emsp;定义参数$k=min(重传次数, 10)$<br />&emsp;从离散的整数集合$[0,1,\dots,2^k-2,2^k-1]$中随机选取一个数$r$，重传所需要的退避时间即为$2r\tau$<br />&emsp;当重传$16$次仍不能成功，说明网络太拥挤，认为此帧永远无法正确发出，抛弃此帧并向高层报告出错</li>
+<li>因为检测到冲突后会停止发送数据，为了便于确定是否是有效帧，规定$最小帧长≥2\tau\times数据传输速率$。凡是小于最小帧长的都是无效帧</li>
+</ol>
+<h2 id="CSMA-CA协议"><a href="#CSMA-CA协议" class="headerlink" title="CSMA/CA协议"></a>CSMA/CA协议</h2><ol>
+<li>无线局域网中无法做到全面检测碰撞，可能会有隐蔽站存在，所以需要新的协议</li>
+<li>CA：collision avoid</li>
+<li>发送数据前先检测信道是否空闲<br />空闲则发出RTS (request to send)，RTS包括发射端的地址、接收端的地址、下一份数据将持续发送的时间；信道忙则等待<br />接收端收到RTS后，响应CTS (clear to send)<br />发送端收到CTS后，开始发送数据帧，同时预约信道，告知其他站点自己要传多节的数据<br />接收端收到数据帧后检验数据是否正确，正确则响应ACK帧<br />发送方收到ACK帧就可以进行下一个数据帧的发送，若没有则一致重传，直到对定重传次数为止。也是采用二进制指数退避算法</li>
+<li>如果收到了多个RTS帧，则选择其中的一个站点发送CTS帧</li>
+</ol>
+<h2 id="CSMA-CD协议与CSMA-CA协议对比"><a href="#CSMA-CD协议与CSMA-CA协议对比" class="headerlink" title="CSMA/CD协议与CSMA/CA协议对比"></a>CSMA/CD协议与CSMA/CA协议对比</h2><ol>
+<li>二者都是先进行监听，再发送数据的协议</li>
+<li>二者出现冲突后都会进行有上限的重传，确定重传时机的算法都是二进制指数退避算法</li>
+<li>传输介质不同：CSMA/CD协议用于总线型的以太网，CSMA/CA协议用于无线局域网</li>
+<li>载波检测方式不同：CSMA/CD协议通过电缆中的电压变化来检测碰撞；CSMA/CA采用能量检测 (ED)、载波检测 (CS)和能量载波混合检测三种检测信道空闲的方式</li>
+<li>CSMA/CD检测冲突，CSMA/CA避免冲突</li>
+</ol>
+<h1 id="轮询访问介质访问控制"><a href="#轮询访问介质访问控制" class="headerlink" title="轮询访问介质访问控制"></a>轮询访问介质访问控制</h1><ol>
+<li>轮询协议：主节点轮流邀请从属结点发送数据<br />造成了轮询开销；当一个结点要发送数据时要等主结点邀请，造成等待延迟；存在单点故障问题</li>
+<li>令牌传递协议：令牌在结点之间轮转，只有持有令牌的结点才能发送数据。如果一个结点不需要发送数据，就把令牌传给下一个结点<br />令牌：一个特殊格式的MAC控制帧，不含任何信息，用于控制信道，确保同一时刻只有一个结点独占信道<br />每个结点都可以在一定的时间内 (令牌持有时间)获得发送数据的权利，并不是无限制地持有令牌<br />造成了令牌开销；当一个结点要发送数据时要等令牌传递到自己手上，造成等待延迟；存在单点故障问题当一个结点要发送数据时要等主结点邀请，造成等待延迟；存在单点故障问题应用于令牌环网 (物理上时星型拓扑，逻辑上是环型拓扑)<br />常用于负载较重、通信量较大的网络中</li>
+</ol>
+<h1 id="MAC三种方法比较"><a href="#MAC三种方法比较" class="headerlink" title="MAC三种方法比较"></a>MAC三种方法比较</h1><ol>
+<li>信道划分MAC协议：基于多路复用技术划分资源<br />当网络负载重时，共享信道效率高且公平<br />当网络负载轻时，每一个用户也只能使用自己分配到的一部分资源，共享信道效率低</li>
+<li>随机访问MAC协议：用户根据意愿随机发送信息，发送信息时独占全部信道带宽<br />当网络负载重时：产生冲突开销<br />当网络负载轻时：共享信道效率高，单个用户可以利用全部的信道带宽</li>
+<li>轮询访问MAC协议：既要不产生冲突，又要发送时占全部带宽</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/12/22/05-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2600,891 +2738,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/09/22/12-How-To-Flatter-Your-Friends/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/22/12-How-To-Flatter-Your-Friends/" class="post-title-link" itemprop="url">12. How To Flatter Your Friends</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-22 17:17:06" itemprop="dateCreated datePublished" datetime="2020-09-22T17:17:06+08:00">2020-09-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 16:35:56" itemprop="dateModified" datetime="2020-10-06T16:35:56+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">convivial</td>
-</tr>
-<tr>
-<td style="text-align:center">indefatigable</td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuous</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacious</td>
-</tr>
-<tr>
-<td style="text-align:center">magnanimous</td>
-</tr>
-<tr>
-<td style="text-align:center">versatile</td>
-</tr>
-<tr>
-<td style="text-align:center">stoical</td>
-</tr>
-<tr>
-<td style="text-align:center">intrepid</td>
-</tr>
-<tr>
-<td style="text-align:center">scintillating</td>
-</tr>
-<tr>
-<td style="text-align:center">urbane</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="vivo-to-live-vita-life"><a href="#vivo-to-live-vita-life" class="headerlink" title="vivo: to live; vita: life"></a>vivo: to live; vita: life</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">convivial</td>
-<td style="text-align:center"><code>convivo is the Latin verb to live together</code><br /><code>from convivo, convivum meant a feast or banquet</code><br /><code>from convivum, we get convivial</code><br /><strong><em>an adjective that describes the kind of person who likes to attend feasts and banquets, enjoying (and supplying the) jovial good fellowship characteristic of such getherings</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">conviviality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vevacious</td>
-<td style="text-align:center"><strong><em>full of the joy of living; animated; peppy</em></strong><br />a vevacious personality</td>
-</tr>
-<tr>
-<td style="text-align:center">vivacity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivid</td>
-<td style="text-align:center"><strong><em>possessing the freshness of life; strong; sharp</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vividness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">revive</td>
-<td style="text-align:center"><strong><em>bring back to life</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revival</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivisection</td>
-<td style="text-align:center"><strong><em>operating on a live animal</em></strong><br /><code>Latin sect: to cut</code></td>
-</tr>
-<tr>
-<td style="text-align:center">antivivisectionist</td>
-<td style="text-align:center"><strong><em>ones who object to the procedure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">viviparous</td>
-<td style="text-align:center"><strong><em>producing live babies</em></strong><br /><code>Latin pareo: to give birth (parent)</code></td>
-</tr>
-<tr>
-<td style="text-align:center">oviparous</td>
-<td style="text-align:center"><strong><em>producing yong from eggs</em></strong><br /><code>Latin ovum: egg</code></td>
-</tr>
-<tr>
-<td style="text-align:center">oval</td>
-<td style="text-align:center"><strong><em>egg-shaped</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovoid</td>
-<td style="text-align:center"><strong><em>egg-shaped</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovary</td>
-<td style="text-align:center"><strong><em>a female reproductive organ in which ova or eggs are produced</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovarian</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ovulate</td>
-<td style="text-align:center"><strong><em>to release an egg from the ovary</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ovum</td>
-<td style="text-align:center"><strong><em>the female germ cell which, when fertilized by a sperm, develops into an embryo</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fetus</td>
-<td style="text-align:center"><strong><em>developed from an embryo, an unborn offspring of a mammal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fetal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vital</td>
-<td style="text-align:center"><strong><em>essential to life; of crucial importance; full of life, strength, vigor, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vitality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitalize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">revitalize</td>
-<td style="text-align:center"><strong><em>re-energize</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">devitalize</td>
-<td style="text-align:center"><code>de-: essentially negative</code><br /><strong><em>to rob of life, to take life from</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">devitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">Vitamin</td>
-<td style="text-align:center"><strong><em>one of the many nutritional elements on which life is dependent</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="food"><a href="#food" class="headerlink" title="food"></a>food</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">gourmand</td>
-<td style="text-align:center"><strong><em>one who enjoys food with a sensual pleasure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gourmandize</td>
-<td style="text-align:center"><strong><em>the verb form of gourmand</em></strong><br /><code>to stuff oneself like a pig</code></td>
-</tr>
-<tr>
-<td style="text-align:center">gourmet</td>
-<td style="text-align:center"><strong><em>one who has a keen interest in food and liquor, but is much more fastidious, is more of a connoisseur</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">glutton</td>
-<td style="text-align:center"><strong><em>one who eats voraciously, with no discernment whatever, but merely for the purpose of stuffing himself</em></strong><br />a highly derogatory term</td>
-</tr>
-<tr>
-<td style="text-align:center">gluttonize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gluttonous</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="fatigue"><a href="#fatigue" class="headerlink" title="fatigue"></a>fatigue</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">indefatigable</td>
-<td style="text-align:center"><strong><em>unable to be fatigued</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fatigue</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">indefatigability</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="simple"><a href="#simple" class="headerlink" title="simple"></a>simple</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ingenuous</td>
-<td style="text-align:center">a complimentary term<br /><strong><em>frank, open, artless, not likely to try to put anything over on you, nor apt to hide feelings or thoughts that more sophisticated persons would consider it wise, tackful, or expedient to conceal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disingenuous</td>
-<td style="text-align:center"><strong><em>not frank or open, crafty, cunning, dishonest, artful, insincere, untrustworthy. And they are all of these while making a pretense of being simple, frank, and aboveboard.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenious</td>
-<td style="text-align:center"><strong><em>shrewd, clever, inventive</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuousness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">naïve</td>
-<td style="text-align:center"><em>a derogatory term<br /><strong>to imply that they have not learned the ways of the world, and are thereforeidealistic and trusting beyond the point of safety; such idealism and trust have probably come from ignorance or inexperience</strong></em></td>
-</tr>
-<tr>
-<td style="text-align:center">naïveté</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">credulous</td>
-<td style="text-align:center">a derogatory term<br /><strong><em>a willingness to believe almost anything, no matter how fantastic</em></strong><br />usually results from ignorance or inexperience, or perhaps from an inability to believe that human beings are capable of lying<br /><code>Latin credo: to believe</code></td>
-</tr>
-<tr>
-<td style="text-align:center">credulity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gullible</td>
-<td style="text-align:center">a derogatory term<br /><strong><em>easily tricked, easily fooled, easily imposed on</em></strong><br />stronger than credulous, and is more derogatory<br />results more from stupidity than from ignorance or inexperience</td>
-</tr>
-<tr>
-<td style="text-align:center">gullibility</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-credo-to-believe"><a href="#Latin-credo-to-believe" class="headerlink" title="Latin credo: to believe"></a>Latin credo: to believe</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">credit</td>
-<td style="text-align:center">if people believe in your honesty they will extend credit to you; they will credit what you say</td>
-</tr>
-<tr>
-<td style="text-align:center">credible</td>
-<td style="text-align:center"><code>suffix -ible: can be</code><br /><strong><em>something credible can be believed</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credibility</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incredulous</td>
-<td style="text-align:center"><strong><em>skepticism, of non-belief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incredulity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incredible</td>
-<td style="text-align:center"><strong><em>cannot be believed</em></strong><br /><strong><em>persons who are so unique that you can scarecely believe they exist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incredibility</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">credo</td>
-<td style="text-align:center"><strong><em>personal belief, code of ethics; the principles by which people guide their actions</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">creed</td>
-<td style="text-align:center"><strong><em>a close synonym of credo</em></strong><br /><strong><em>a religious belief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credence</td>
-<td style="text-align:center"><strong><em>belief of something as true</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credentials</td>
-<td style="text-align:center"><strong><em>a document or documents proving a person’s right to a title or privilege</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-specto-to-look"><a href="#Latin-specto-to-look" class="headerlink" title="Latin specto: to look"></a>Latin specto: to look</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">spectacle</td>
-<td style="text-align:center"><strong><em>something to look at; eyeglasses (spectacles)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">spectator</td>
-<td style="text-align:center"><strong><em>one who looks at what’s happening</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">inspect</td>
-<td style="text-align:center">look into something</td>
-</tr>
-<tr>
-<td style="text-align:center">retrospect</td>
-<td style="text-align:center">a backward look<br />preceeded by the preposition in</td>
-</tr>
-<tr>
-<td style="text-align:center">prospect</td>
-<td style="text-align:center">a forward look</td>
-</tr>
-<tr>
-<td style="text-align:center">prospective</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">conspicuous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacious</td>
-<td style="text-align:center"><strong><em>smart, sharp, able to look through and understand quickly, keen-minded, mentally sharp, astute</em></strong><br />applies to persons, their reasoning, mind<br /><code>prefix per-: through</code><br />looking through keenly, intellegently</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicuous</td>
-<td style="text-align:center"><strong><em>easily understood from one look</em></strong><br />applies to writing, style, books, and like things that have to be understood. <br />synonym of clear, simple, lucid</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicuity</td>
-<td style="text-align:center"><strong><em>the noun form of perspicuous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacity</td>
-<td style="text-align:center"><strong><em>noun form of perspicacious</em></strong><br />synonym of acumen</td>
-</tr>
-<tr>
-<td style="text-align:center">acumen</td>
-<td style="text-align:center"><strong><em>mental keenness, sharpness, quickness; keen insight</em></strong><br />Latin acuo: to sharpen</td>
-</tr>
-<tr>
-<td style="text-align:center">acute</td>
-<td style="text-align:center"><strong><em>sharp, sudden</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">acuity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">acupuncture</td>
-<td style="text-align:center"><strong><em>the insertion of a needle into the body for medical purposes</em></strong><br /><strong><em>punctus: point</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">punctuate</td>
-<td style="text-align:center"><strong><em>When you punctuate a sentence, you put various points (pediods, commas, etc.)where needed</em></strong><br /><strong><em>When lightning punctuates the storm, or when the silence is punctuated by the wailing of police sirens, points interrupt the atmosphere, the quiet</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">punctual</td>
-<td style="text-align:center">right on the point of time</td>
-</tr>
-<tr>
-<td style="text-align:center">punctuality</td>
-<td style="text-align:center">the noun form of punctual</td>
-</tr>
-<tr>
-<td style="text-align:center">punctilious</td>
-<td style="text-align:center"><strong><em>exact, scrupulous, very careful to observe the proper points of behavior, procedure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">puncture</td>
-<td style="text-align:center"><strong><em>to make a hole in it with a sharp point</em></strong><br /><strong><em>figuratively, to break illusions, fantasies, or ego, tire</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungent</td>
-<td style="text-align:center"><code>another form of the root punctus (pungo, to pierce sharply)</code><br /><strong><em>having a sharp, spicy smell or taste or wit</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungence</td>
-<td style="text-align:center"><strong><em>the noun form of pungent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungency</td>
-<td style="text-align:center"><strong><em>the noun form of pungent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">introspect</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">introspection</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">circumspect</td>
-<td style="text-align:center">to look around most carefully<br /><strong><em>care; watchfulness, caution</em></strong><br /><code>circum-: around</code></td>
-</tr>
-<tr>
-<td style="text-align:center">circumspection</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">specious</td>
-<td style="text-align:center"><strong><em>something looks good or sensible, but actually is not</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">speciousness</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-animus-mind"><a href="#Latin-animus-mind" class="headerlink" title="Latin animus: mind"></a>Latin animus: mind</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">magnanimous</td>
-<td style="text-align:center"><code>magnus: large, great</code><br /><strong><em>magnanimous people have such great, noble minds or souls  that they are beyong seeking petty revenge</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magnanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pusillanimous</td>
-<td style="text-align:center"><code>Latin pusillus: tiny</code><br /><strong><em>petty and mean</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pusillanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">unanimous</td>
-<td style="text-align:center"><strong><em>of one mind</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">equanimity</td>
-<td style="text-align:center">equal mind<br /><strong><em>evenness or calmness of mind; composure</em></strong><br /><code>Latin aequus: equal</code></td>
-</tr>
-<tr>
-<td style="text-align:center">animus</td>
-<td style="text-align:center"><strong><em>hostility, ill will, malevolence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">animosity</td>
-<td style="text-align:center"><strong><em>synonym of animus</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="verto-versus-to-turn"><a href="#verto-versus-to-turn" class="headerlink" title="verto, versus: to turn"></a>verto, versus: to turn</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">versatile</td>
-<td style="text-align:center"><strong><em>versatile people can turn their hand to many things successfully</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">versatility</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Greek-stoa-porch"><a href="#Greek-stoa-porch" class="headerlink" title="Greek stoa: porch"></a>Greek stoa: porch</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">stoical</td>
-<td style="text-align:center"><strong><em>bear their pain or sorrow without complaint</em></strong><br />Zeno stood on a porch and told his students people should free themselves from intense emotion, be unmoved by both joy and sorrow, and submit without complaint to unavoidable necesity</td>
-</tr>
-<tr>
-<td style="text-align:center">stoicism</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-trepio-to-tremble"><a href="#Latin-trepio-to-tremble" class="headerlink" title="Latin trepio: to tremble"></a>Latin trepio: to tremble</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">intrepid</td>
-<td style="text-align:center"><strong><em>fearless and not a single tremble when confronted by dangers</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrepidity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">trepidation</td>
-<td style="text-align:center"><strong><em>great fear, trembling, or alarm</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-scintilla-a-quick-bright-spark"><a href="#Latin-scintilla-a-quick-bright-spark" class="headerlink" title="Latin scintilla: a quick, bright spark"></a>Latin scintilla: a quick, bright spark</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">scintilla</td>
-<td style="text-align:center"><strong><em>a spark</em></strong><br /><strong><em>a very small partical</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">scintillate</td>
-<td style="text-align:center"><strong><em>someone who scintillates sparkles with charm and with</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">scintillation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-urbs-city"><a href="#Latin-urbs-city" class="headerlink" title="Latin urbs: city"></a>Latin urbs: city</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">urbane</td>
-<td style="text-align:center">people live in the city<br /><strong><em>urbane people are gracious, affable, cultivated, suave, tactful</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">urban</td>
-<td style="text-align:center"><strong><em>an adjective refers to cities</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">urbanity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">suburb</td>
-<td style="text-align:center"><code>prefix sub: under, near, close to</code><br />near the city<br /><strong><em>an outlying district of a city, especially a residential one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburban</td>
-<td style="text-align:center"><strong><em>the adjective of suburb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburbanite</td>
-<td style="text-align:center"><strong><em>suburban resident</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburbia</td>
-<td style="text-align:center"><strong><em>suburbs or suburbanites as a group</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">interurban</td>
-<td style="text-align:center"><strong><em>between cities</em></strong><br /><code>inter: between</code></td>
-</tr>
-<tr>
-<td style="text-align:center">intraurban</td>
-<td style="text-align:center"><strong><em>within a city</em></strong><br /><code>intra-: inside, within</code></td>
-</tr>
-<tr>
-<td style="text-align:center">exurb</td>
-<td style="text-align:center">out of the city<br /><code>ex-: out</code><br /><strong><em>lies weel beyond, way outside, a large city, and generally refers to region inhabited by well-to-do families</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurban</td>
-<td style="text-align:center"><strong><em>the adjective of exurb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurbanite</td>
-<td style="text-align:center"><strong><em>the resident of exurb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurbia</td>
-<td style="text-align:center"><strong><em>as a group; manners, customs</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rural</td>
-<td style="text-align:center"><code>Latin rus, ruris: country</code><br /><strong><em>country or farm regions, agriculture</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rustic</td>
-<td style="text-align:center"><strong><em>furniture or dwellings made of roughhwen wood, or furnishings suitable to a farmhouse; or, when applied to a person, is an antonym of urbane</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rusticity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rusticate</td>
-<td style="text-align:center"><strong><em>to spend time in the country</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">survive</td>
-<td style="text-align:center"><strong><em>to live on</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">survival</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivarium</td>
-<td style="text-align:center"><strong><em>enclosed area in which plants and small animals live in conditions resembling their natural habitat</em></strong><br /><code>suffix -ium: place where</code></td>
-</tr>
-<tr>
-<td style="text-align:center">solarium</td>
-<td style="text-align:center"><strong><em>a place for the sun to enter, or where one can sunbathe</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">aquarium</td>
-<td style="text-align:center"><strong><em>a place for water, or fish tank</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">podium</td>
-<td style="text-align:center"><strong><em>a place for the feet, or speaker’s platform</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">auditorium</td>
-<td style="text-align:center"><em>a place for hearing concerts, plays</em></td>
-</tr>
-<tr>
-<td style="text-align:center">vita</td>
-<td style="text-align:center">life<br /><strong><em>one’s professional or career résumé</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unicorn</td>
-<td style="text-align:center"><strong><em>animal with one horn</em></strong><br /><code>Latin unus: one</code><br /><code>Latin cornu: horn</code></td>
-</tr>
-<tr>
-<td style="text-align:center">uniform</td>
-<td style="text-align:center"><strong><em>of one form</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unify</td>
-<td style="text-align:center"><strong><em>to make one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unity</td>
-<td style="text-align:center"><strong><em>oneness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unicycle</td>
-<td style="text-align:center"><strong><em>one-wheeled vehicle</em></strong><br /><code>Greek kyklos: circle, wheel</code></td>
-</tr>
-<tr>
-<td style="text-align:center">anniversary</td>
-<td style="text-align:center"><strong><em>a year has turned</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">universe</td>
-<td style="text-align:center"><strong><em>every turning as one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">university</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">interstate</td>
-<td style="text-align:center"><strong><em>between states</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">international</td>
-<td style="text-align:center"><strong><em>between nations</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intermediate</td>
-<td style="text-align:center"><strong><em>in the middle between elementary and advanced</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">interrupt</td>
-<td style="text-align:center"><strong><em>to break in (between people conversing)</em></strong><br /><code>Latin rumpo, ruptus: to break</code></td>
-</tr>
-<tr>
-<td style="text-align:center">interpersonal</td>
-<td style="text-align:center"><strong><em>between persons</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrastate</td>
-<td style="text-align:center"><strong><em>within one state</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intranational</td>
-<td style="text-align:center"><strong><em>within one nation</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrapersonal</td>
-<td style="text-align:center"><strong><em>within one’s own person or mind</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrapsychic</td>
-<td style="text-align:center"><strong><em>synonym of intrapersonal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intramuscular</td>
-<td style="text-align:center"><strong><em>within the muscles</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -3556,7 +2809,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">200</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
