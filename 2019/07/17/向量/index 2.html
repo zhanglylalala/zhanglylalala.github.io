@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="向量 向量是数组的拓展，向量和数组都是一系列在物理上紧邻的值，都是循秩访问， 但是向量并不像数组，向量在体验上并没有空间限制 向量约定的接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="向量">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/17/%E5%90%91%E9%87%8F/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="向量 向量是数组的拓展，向量和数组都是一系列在物理上紧邻的值，都是循秩访问， 但是向量并不像数组，向量在体验上并没有空间限制 向量约定的接口">
+<meta property="og:image" content="http://http/img/%E5%90%91%E9%87%8F01.png">
+<meta property="article:published_time" content="2019-07-16T16:39:50.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:42:09.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="理论">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://http/img/%E5%90%91%E9%87%8F01.png">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/17/%E5%90%91%E9%87%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>向量 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/07/17/%E5%90%91%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          向量
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-17 00:39:50" itemprop="dateCreated datePublished" datetime="2019-07-17T00:39:50+08:00">2019-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:42:09" itemprop="dateModified" datetime="2020-08-07T19:42:09+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%82%93%E4%BF%8A%E8%BE%89/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构 (清华大学邓俊辉)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h1><ol>
+<li>向量是数组的拓展，向量和数组都是一系列在物理上紧邻的值，都是<code>循秩访问</code>， 但是向量并不像数组，向量在<code>体验上</code>并没有空间限制</li>
+<li>向量约定的接口<br><img src="/img/向量01.png" alt="向量接口"><a id="more"></a></li>
+<li>向量经过封装，元素的种类不限于基本类型</li>
+<li>向量除了上面定义的接口之外，还要定义几个<code>private</code>变量<br>_size：存储的元素个数<br>_capacity：能存储的元素个数<br>_elem：数组</li>
+</ol>
+<h1 id="构造与析构"><a href="#构造与析构" class="headerlink" title="构造与析构"></a>构造与析构</h1><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><ol>
+<li>传入一个长度参数(默认赋值，可以不传)，申请一个该长度的数组，_capacity赋为该长度，_size赋为0</li>
+<li>基于复制的构造：申请待复制内容<code>两倍</code>的容量。传入一个数组或向量和区间[ lo, hi ] (没传区间就完整复制)，申请数组空间后把区间内的值复制过去，_size赋值为区间长度</li>
+</ol>
+<h2 id="析构方法"><a href="#析构方法" class="headerlink" title="析构方法"></a>析构方法</h2><p>delete [] _elem</p>
+<h1 id="可扩充向量"><a href="#可扩充向量" class="headerlink" title="可扩充向量"></a>可扩充向量</h1><h2 id="动态空间管理"><a href="#动态空间管理" class="headerlink" title="动态空间管理"></a>动态空间管理</h2><ol>
+<li>向量<code>内部</code>还是使用和数组一样的静态空间管理策略，和数组一样有空间限制，可能会发生上溢和下溢，所以要实现一种动态空间管理策略，改进静态空间管理策略的劣势</li>
+<li>动态空间管理：当即将发生上溢或下溢时，申请一个合适大小的<code>新数组</code>，将原数组内的元素一一复制到新数组中，同时<code>销毁原数组</code></li>
+<li>得益于向量的封装，尽管扩容后数据区的物理地址有所改变，却不至出现野指针</li>
+</ol>
+<h2 id="合适大小"><a href="#合适大小" class="headerlink" title="合适大小"></a>合适大小</h2><p>评判标准：当连续插入n (<code>n &gt;&gt; 2</code>)个元素时的分摊时间复杂度</p>
+<h3 id="加量策略"><a href="#加量策略" class="headerlink" title="加量策略"></a>加量策略</h3><ol>
+<li>如果每次扩容都把容量增加一个<code>常数I</code>大小，即每次<code>_capacity += I</code></li>
+<li>设<code>n = m * I</code>，则每次扩容的耗时为<code>1, I, 2I, …, (m - 1)I</code>，总耗时就为<code>I * (m - 1) * m / 2 = O(n²)</code>，分摊复杂度就是<code>O(n)</code></li>
+<li>装填因子<code>λ ≈ 100%</code></li>
+</ol>
+<h3 id="加倍策略"><a href="#加倍策略" class="headerlink" title="加倍策略"></a>加倍策略</h3><ol>
+<li>如果每次扩容后的容量都变为原来的两倍， 即每次<code>_capacity &lt;&lt;= 1</code></li>
+<li>设<code>n = 2ᵐ</code>，则每次扩容的耗时为<code>1, 2, 4, …, 2ᵐ</code>，总耗时就为<code>2ᵐ⁺¹ - 1 = O(n)</code>，分摊复杂度就为<code>O(1)</code></li>
+<li>装填因子<code>λ &gt; 50%</code></li>
+</ol>
+<p>综上，用倍增策略时间复杂度远远优于递增策略，但空间利用率只是略低，所以倍增策略较好</p>
+<h1 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h1><p>在约定的接口中已经可以利用get和put来获得和修改值，但比较麻烦，通过重载<code>[]</code>可以向数组一样访问元素<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">T &amp; Vector&lt;T&gt;::<span class="keyword">operator</span>[](<span class="keyword">int</span> r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _elem[r];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>上面重载时返回的是一个引用，这样利用方括号获得的值不只可以用做右值参与计算(get操作)，还可以用做左值被赋值(put操作)</p>
+<h1 id="元素增加-删除"><a href="#元素增加-删除" class="headerlink" title="元素增加/删除"></a>元素增加/删除</h1><ol>
+<li>元素增加前需要先判断<code>是否需要扩容</code>，如果增加的元素不是在最后，要先从右往左把元素后移一位(复制到下一位)</li>
+<li>区间删除要把元素从左往右复制，结束后判断<code>是否需要缩容</code></li>
+<li>单元素的删除可以转化为区间删除，但是区间内只含一个元素</li>
+<li>如果是把区间删除转化成多个单元素删除，复杂度就会是O(mn)，m为区间内元素个数，n为区间后继元素个数，而不是原本的O(n)</li>
+</ol>
+<h1 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h1><p>遍历接口可以对向量内的所有元素都执行某一系列操作，可以通过传函数指针或函数对象的方法实现<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Vector&lt;T&gt;::traverse(<span class="keyword">void</span> (*visit)(T&amp;))   <span class="comment">// 函数指针</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _size; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        visit(_elem[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Vector&lt;T&gt;::traverse(VST&amp; visit) <span class="comment">// 函数对象</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _size; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        visit(_elem[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>传函数对象方法的使用：实现一个对单个T类型元素执行操作的类，用重载<code>()</code>的方式实现<br>例如将向量内所有元素分别加一<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Increase</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(T &amp; e)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        e++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vec.traverse(Increase&lt;T&gt;());</span><br></pre></td></tr></table></figure></p>
+<h1 id="唯一化"><a href="#唯一化" class="headerlink" title="唯一化"></a>唯一化</h1><ol>
+<li>无序向量的唯一化：从前往后遍历，对每一个元素，都尝试在它的前驱中找到和它一样的元素，如果找到就删去，否则留下</li>
+<li>有序向量的唯一化：另外加一个变量newSize记录遍历到当前去重后的数组大小，初始大小为1，从第二个元素开始，从前往后遍历，如果某一个元素和它的前一个元素不同，就把该元素复制到newSize位置上，newSize++。最后把_size更新为newSize</li>
+</ol>
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><p>无序向量的查找只能一一遍历，如果找到就返回位置，如果失败就返回一个特定的符号</p>
+<h2 id="语义约定"><a href="#语义约定" class="headerlink" title="语义约定"></a>语义约定</h2><ol>
+<li>要求：便于自身维护：<code>vec.insert(1 + vec.search(e), e)</code>。如果失败，也应给出适当的插入位置；若允许重复，按插入顺序排列</li>
+<li>约定：在区间[ lo, hi )中，返回不大于e的最后一个元素的秩。若<code>e &lt; vec[lo]</code>，返回<code>lo-1</code>；若<code>vec[hi - 1] &lt; e</code>，返回<code>hi-1</code></li>
+</ol>
+<h2 id="二分查找a"><a href="#二分查找a" class="headerlink" title="二分查找a"></a>二分查找a</h2><ol>
+<li>取mid为lo和hi的中点，若<code>e &lt; vec[mid]</code>，舍弃[ mid, hi )；若<code>vec[mid] &lt; e</code>， 舍弃[lo, mid]；若<code>e == vec[mid]</code>，返回相同值最大秩</li>
+<li>复杂度：O(log n)</li>
+<li>问题：待查找点在mid的左右两侧不同情况所需的比较次数不一样(由if语句的顺序决定)，平均查找长度为<code>O(1.5log n)</code></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Vector&lt;T&gt;::search(<span class="keyword">int</span> e, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (lo + ((hi - lo) &gt;&gt; <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span> (vec[mid] &gt; e)</span><br><span class="line">        &#123;</span><br><span class="line">            hi = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (vec[mid] &lt; e)</span><br><span class="line">        &#123;</span><br><span class="line">            lo = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (vec[mid + <span class="number">1</span>] == e)</span><br><span class="line">            &#123;</span><br><span class="line">                mid++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Fibonacci查找"><a href="#Fibonacci查找" class="headerlink" title="Fibonacci查找"></a>Fibonacci查找</h2><ol>
+<li>Fibonacci查找本质还是二分查找，但是通过选不同的切分点，让递归树偏向查找长度更低的那一侧。若区间长度为<code>n = fib(k) - 1</code>，就选<code>mid = fib(k - 1) - 1</code>，这样前、后子向量的长度为<code>fib(k - 1) - 1</code>、<code>fib(k - 2) - 1</code></li>
+<li>先前的二分查找是递归深度相同，比较次数大不同；Fibonacci查找是递归深度不同，比较次数差异减小，平均比较次数减小</li>
+<li>平均比较次数减小的证明：<br>设长度为n的区间，取<code>λn(0&lt;λ&lt;1)</code>为切分点，平均查找长度为<code>α(λ)log₂n</code><br>要平均查找长度最优，就要α(λ)最小<br>有递推式：$α(λ) \times log₂n = λ \times [1 + α(λ) \times log₂(λn)] + (1 - λ) \times [2 + α(λ) \times log₂((1 - λ)n)]]$<br>整理得：<strong>$α(λ) = \frac{ln2 \times (λ - 2)}{λ \times lnλ + (1 - λ) \times ln(1 - λ)}$</strong>，在<code>λ = φ</code>时有最小值<code>α(λ) = 1.440420…</code></li>
+</ol>
+<h2 id="二分查找b"><a href="#二分查找b" class="headerlink" title="二分查找b"></a>二分查找b</h2><ol>
+<li>改进思路：之前的二分查找查找效率低的原因就是有一侧分支必须经过两次判断才可以得到，所以直接不判等，将区间划为[ lo, mid )与[ mid, hi )，而不是[ lo, mid )、mid、(mid, hi)</li>
+<li>这种改进就是让最好的情况更坏，但是最坏的情况更好，不论是最好还是最坏，查找长度都是<code>log n</code>，所以平均查找长度<code>O(log n)</code></li>
+<li>注意到上面这种写法的话实际上是把区间分为了[ lo, mid ) 和 ( mid, hi )两个区间，但这两个区间都没有包含mid这个元素，以下证明正确性<br>不变性：在任意时刻，都有<code>[0, lo) ≤ e &lt; [hi, n)</code><br>如果<code>vec[mid] ≤ e</code>，则在<code>[lo, mid]</code>上都是<code>vec[i] ≤ e</code>，所以lo更新为mid + 1也可以维持不变性<br>如果<code>vec[mid] &gt; e</code>，则在<code>[mid, hi)</code>上都是<code>vec[i] &gt; e</code>，所以hi更新为mid也可以维持不变性</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Vector&lt;T&gt;::search(<span class="keyword">int</span> e, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (lo + ((hi - lo) &gt;&gt; <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">if</span> (vec[mid] &gt; e)</span><br><span class="line">        &#123;</span><br><span class="line">            hi = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            lo = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> --lo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插值查找"><a href="#插值查找" class="headerlink" title="插值查找"></a>插值查找</h2><ol>
+<li>适用范围：已知数组内的元素的分布有一定的规律，满足均匀独立分布，于是[ lo, hi )内的元素大致按线性的趋势增长</li>
+<li>原理式：如果满足上面的情况，则大致猜测e所在的位置mid有：$\frac{mid - lo}{hi - lo} = \frac{e - vec[lo]}{vec[hi] - vec[lo]}$，化简得$mid = lo + \frac{(hi - lo) \times (e - vec[lo])}{vec[hi] - vec[lo]}$</li>
+<li>时间复杂度：<code>O(log log n)</code><br>证明：在平均情况下，每次插值查找之后都会将区间长度<code>由n变为√n</code><br>解释1：不断下去，最后区间长度l = n<sup>(1/2)<sup>k</sup>&lt;/sup&gt;，要使l &lt; 2，就要(1/2)<sup>k</sup> &lt; log n，k &lt; log log n<br>解释2：看二进制位宽，二分查找把n变为n/2，位宽由log n变为log(n/2) = log n - log2 = log n - 1，查找查找把n变为√n，位宽由log n变为log √n = (1/2)log n，插值查找是对二进制位宽的二分查找，所以是O(log log n)</li>
+</ol>
+<h2 id="查找综合"><a href="#查找综合" class="headerlink" title="查找综合"></a>查找综合</h2><ol>
+<li>插值查找在最坏的情况下有O(n)，而且在数据规模不太大的情况下，相对于二分查找的改进也不够大</li>
+<li>查找原则：<br>大范围：插值查找<br>中范围：二分查找<br>小范围：顺序查找</li>
+</ol>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="起泡排序"><a href="#起泡排序" class="headerlink" title="起泡排序"></a>起泡排序</h2><ol>
+<li>原理：在一趟扫描中，交换所有的逆序对，且“指针”永远跟着较大的元素</li>
+<li>改进1：有时在经过若干次(少于n)的扫描后就已经有序，此时就可以退出算法</li>
+<li>改进2：在一次扫描后，一段较长的后缀已经有序，这段后缀就可以直接跳过，之后不必再扫描</li>
+<li>改进只能改平均复杂度的常数和最好情况的复杂度，最坏复杂度还是O(n<sup>2</sup>)</li>
+<li>起泡排序可以维持重复元素之间的相对次序(相等不交换)</li>
+</ol>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><ol>
+<li>空间改进：区间[mid, hi)可以不用复制，当区间[lo, mid)耗尽后自动退出</li>
+<li>归并排序的mid可以不选取lo和hi的中点，且总时间复杂度不会变</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/16/02-MVC/" rel="prev" title="02. MVC">
+      <i class="fa fa-chevron-left"></i> 02. MVC
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/17/Tricks%20in%20Xcode/" rel="next" title="Tricks in Xcode">
+      Tricks in Xcode <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#向量"><span class="nav-number">1.</span> <span class="nav-text">向量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造与析构"><span class="nav-number">2.</span> <span class="nav-text">构造与析构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">2.1.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#析构方法"><span class="nav-number">2.2.</span> <span class="nav-text">析构方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可扩充向量"><span class="nav-number">3.</span> <span class="nav-text">可扩充向量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态空间管理"><span class="nav-number">3.1.</span> <span class="nav-text">动态空间管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合适大小"><span class="nav-number">3.2.</span> <span class="nav-text">合适大小</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加量策略"><span class="nav-number">3.2.1.</span> <span class="nav-text">加量策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加倍策略"><span class="nav-number">3.2.2.</span> <span class="nav-text">加倍策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问元素"><span class="nav-number">4.</span> <span class="nav-text">访问元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元素增加-删除"><span class="nav-number">5.</span> <span class="nav-text">元素增加&#x2F;删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遍历"><span class="nav-number">6.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#唯一化"><span class="nav-number">7.</span> <span class="nav-text">唯一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查找"><span class="nav-number">8.</span> <span class="nav-text">查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语义约定"><span class="nav-number">8.1.</span> <span class="nav-text">语义约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找a"><span class="nav-number">8.2.</span> <span class="nav-text">二分查找a</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fibonacci查找"><span class="nav-number">8.3.</span> <span class="nav-text">Fibonacci查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分查找b"><span class="nav-number">8.4.</span> <span class="nav-text">二分查找b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插值查找"><span class="nav-number">8.5.</span> <span class="nav-text">插值查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找综合"><span class="nav-number">8.6.</span> <span class="nav-text">查找综合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序"><span class="nav-number">9.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起泡排序"><span class="nav-number">9.1.</span> <span class="nav-text">起泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">9.2.</span> <span class="nav-text">归并排序</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

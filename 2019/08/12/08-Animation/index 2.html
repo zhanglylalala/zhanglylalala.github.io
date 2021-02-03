@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="UIView Property AnimationUIView Animation Properties frame&#x2F;center bounds (transient size, does not conflict with animating center)transform (translation,  rotation and scale) alpha (opacity) backgroun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. Animation">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/08/12/08-Animation/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="UIView Property AnimationUIView Animation Properties frame&#x2F;center bounds (transient size, does not conflict with animating center)transform (translation,  rotation and scale) alpha (opacity) backgroun">
+<meta property="article:published_time" content="2019-08-12T02:47:49.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:26:48.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="应用开发">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/08/12/08-Animation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>08. Animation | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/12/08-Animation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          08. Animation
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-12 10:47:49" itemprop="dateCreated datePublished" datetime="2019-08-12T10:47:49+08:00">2019-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:26:48" itemprop="dateModified" datetime="2020-08-07T19:26:48+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="UIView-Property-Animation"><a href="#UIView-Property-Animation" class="headerlink" title="UIView Property Animation"></a>UIView Property Animation</h1><h2 id="UIView-Animation-Properties"><a href="#UIView-Animation-Properties" class="headerlink" title="UIView Animation Properties"></a>UIView Animation Properties</h2><ol>
+<li>frame/center</li>
+<li>bounds (transient size, does not conflict with animating center)transform (translation, </li>
+<li>rotation and scale)</li>
+<li>alpha (opacity)</li>
+<li>backgroundColor<a id="more"></a>
+</li>
+</ol>
+<h2 id="UIViewPropertyAnimator"><a href="#UIViewPropertyAnimator" class="headerlink" title="UIViewPropertyAnimator"></a>UIViewPropertyAnimator</h2><ol>
+<li>Use a static method of UIViewPropertyAnimation named runningPropertyAnimator and pass a bunch of parameters to it to set the animation we want. </li>
+<li><code>withDuration</code> is the time the animation takes</li>
+<li><code>delay</code> means that excute the animation so many <code>seconds</code> later</li>
+<li><code>options</code> is the type of animation</li>
+<li><code>animations</code> is a closure which takes nothing as parameter and returns nothing.<br>This is where we will modify the properties.<br><em><code>No matter when the animation will happen or end, this closure will be excuted immediately.</code></em></li>
+<li><code>completion</code> is an optional parameter. It is also a closure which takes one <code>UIViewAnimatingPosition</code> as parameter and returns nothing<br>It will be excuted when the animation is end.<br>UIViewAnimatingPosition can be <code>.start</code> if we run the animation backwards, <code>.end</code>, and <code>.current</code> if this animation was interrupted by others</li>
+<li>If multiple animations involve in multiple differet properties, then they can be excuted at the same time. But is two animation involve in the same property, only the later animation will be executed and the easier one will stop immediately. </li>
+<li>The animation presented on screen will delay while codes will be excuted continuously. <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">runningPropertyAnimator</span></span></span><br><span class="line"><span class="class">(</span></span><br><span class="line"><span class="class">    <span class="title">withDuration</span>: <span class="title">TimeInterval</span>,</span></span><br><span class="line"><span class="class">    <span class="title">delay</span>: <span class="title">TimeInterval</span>,</span></span><br><span class="line"><span class="class">    <span class="title">options</span>: <span class="title">UIViewAnimationOptions</span>,</span></span><br><span class="line"><span class="class">    <span class="title">animations</span>: () -&gt; <span class="title">Void</span>,</span></span><br><span class="line"><span class="class">    <span class="title">completion</span>: ((<span class="title">position</span>: <span class="title">UIViewAnimatingPosition</span>) -&gt; <span class="title">Void</span>)? = <span class="title">nil</span></span></span><br><span class="line"><span class="class">)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="UIViewAnimationOptions"><a href="#UIViewAnimationOptions" class="headerlink" title="UIViewAnimationOptions"></a>UIViewAnimationOptions</h2><ol>
+<li><code>beginFromCurrentState</code>: pick up from other, in-progress animations of these properties</li>
+<li><code>allowUserInteraction</code>: allow gestures to get processed while animation is in progress</li>
+<li><code>layoutSubviews</code>: animate the relayout of subviews with a parent’s animation</li>
+<li><code>repeat</code>: repeat indefinitely</li>
+<li><code>autoreverse</code>: play animation forwards, then backwards</li>
+<li><code>overrideInheritedDuration</code>: if not set,use duration of any in-progress animation</li>
+<li><code>overrideInheritedCurve</code>: if not set, use curve (e.g. ease-in/out) of in-progress animation</li>
+<li><code>allowAnimatedContent</code>: if not set, just interpolate between current and end “bits”</li>
+<li><code>curveEaseInEaseOut</code>: slower at the beginning, normal throughout, then slow at end</li>
+<li><code>curveEaseIn</code>: slower at the beginning, but then constant through the rest</li>
+<li><code>curveLinear</code>: same speed throughout</li>
+</ol>
+<h2 id="UIView-Animation"><a href="#UIView-Animation" class="headerlink" title="UIView Animation"></a>UIView Animation</h2><ol>
+<li>The difference between UIViewAnimation and UIViewPropertyAnimation is that UIViewAnimaiton can make <code>an entire view</code> modified at once. </li>
+<li>It sends message to the UIView instead of UIViewPropertyAnimation. </li>
+<li>In this case, we have a few more animation options to use.<br>Flip the entire view over <code>UIViewAnimationOptions.transitionFlipFrom{Left,Right,Top,Bottom}</code><br>Dissolve from old to new state <code>.transitionCrossDissolve</code><br>Curling up or down <code>.transitionCurl{Up,Down}</code></li>
+</ol>
+<h1 id="Dynamic-Animation"><a href="#Dynamic-Animation" class="headerlink" title="Dynamic Animation"></a>Dynamic Animation</h1><ol>
+<li>Set up physics relating animatable objects and let them run until they resolve to stasis.</li>
+<li>Easily possible to set it up so that stasis never occurs, but that could be performance problem.</li>
+</ol>
+<h2 id="Create-a-Dynamic-Animation"><a href="#Create-a-Dynamic-Animation" class="headerlink" title="Create a Dynamic Animation"></a>Create a Dynamic Animation</h2><ol>
+<li>Create an animator : <code>UIDynamicAnimator(referenceView: UIView)</code><br>Every animating views must be in a view hierarchy with referenceView at the top.</li>
+<li>We need to give the animator some Behaviors, so we need to create some <code>UIDynamicBehavior</code> instances then use <code>animator.addBehavior(…)</code></li>
+<li>To perform this animation, we also need to add items to the animator for it to perform. First we need to create some UIDynamicItem instances then add it to animator with syntax <code>animator.addItem(item)</code></li>
+<li>UIView implements UIDynamicItem. </li>
+<li>If you change center or transform while the animator is running, you must call this method in <code>updateItemUsingCurrentState(item: UIDynamicItem)</code></li>
+</ol>
+<h2 id="Behaviors"><a href="#Behaviors" class="headerlink" title="Behaviors"></a>Behaviors</h2><ol>
+<li>All behaviors know the UIDynamicAnimator they are part of</li>
+<li>They can only be part of one at a time.<br>var <code>dynamicAnimator</code>: UIDynamicAnimator? { get }</li>
+<li>The behavior will be sent this message when its animator changes …<br> func <code>willMove</code>(to: UIDynamicAnimator?)</li>
+</ol>
+<h3 id="UIGravityBehavior"><a href="#UIGravityBehavior" class="headerlink" title="UIGravityBehavior"></a>UIGravityBehavior</h3><ol>
+<li><code>var angle: CGFloat</code><br>It’s in radians; 0 is to the right; positive numbers are clockwise</li>
+<li><code>var magnitude: CGFloat</code><br>Every 1.0 is 1000 points/s<sup>2</sup></li>
+</ol>
+<h3 id="UIAttachmentBehavior"><a href="#UIAttachmentBehavior" class="headerlink" title="UIAttachmentBehavior"></a>UIAttachmentBehavior</h3><ol>
+<li><code>init(item: UIDynamicItem, attachedToAnchor: CGPoint)</code></li>
+<li><code>init(item: UIDynamicItem, attachedTo: UIDynamicItem)</code></li>
+<li><code>init(item: UIDynamicItem, offsetFromCenter: CGPoint, attachedTo[Anchor]...)</code></li>
+<li><code>var length: CGFloat</code><br>Distance between attached things (this is settable while animating!)</li>
+<li><code>var anchorPoint: CGPoint</code><br>Can also be set at any time, even while animating</li>
+<li>The attachment can oscillate like a spring and you can control frequency and damping</li>
+</ol>
+<h3 id="UICollisionBehavior"><a href="#UICollisionBehavior" class="headerlink" title="UICollisionBehavior"></a>UICollisionBehavior</h3><ol>
+<li><p>var <code>collisionMode</code>: UICollisionBehaviorMode<br><code>.items</code>, then any items you add to a UICollisionBehavior will bounce off of each other<br><code>.boundaries</code>, then you add UIBezierPath boundaries for items to bounce off of<br>It can also be <code>.everything</code></p>
+</li>
+<li><p>To add boundaries you need to use these methods<br><code>func addBoundary(withIdentifier: NSCopying, for: UIBezierPath)</code><br><code>func addBoundary(withIdentifier: NSCopying, from: CGPoint, to: CGPoint)</code><br><code>func removeBoundary(withIdentifier: NSCopying)</code></p>
+<p><code>`var translatesReferenceBoundsIntoBoundary: Bool</code><br>NSCopying means NSString or NSNumber, but remember you can as to String, Int. </p>
+</li>
+</ol>
+<h3 id="UISnapBehavior"><a href="#UISnapBehavior" class="headerlink" title="UISnapBehavior"></a>UISnapBehavior</h3><ol>
+<li>It will ease the view to a specific place. And just like there are four springs around the item in the new spot, it will vibrate after get to the new spot. </li>
+<li>You can control the damping of these “four springs” with <code>var damping: CGFloat</code></li>
+<li><code>init(item: UIDynamicItem, snapTo: CGPoint)</code></li>
+</ol>
+<h3 id="UIPushBehavior"><a href="#UIPushBehavior" class="headerlink" title="UIPushBehavior"></a>UIPushBehavior</h3><ol>
+<li><code>var mode: UIPushBehaviorMode</code><br>.continuous or .instantaneous</li>
+<li><code>var pushDirection: CGVector</code></li>
+<li><code>var angle: CGFloat</code><br>in radians and positive numbers are clockwise</li>
+<li><code>var magnitude: CGFloat</code><br>magnitude 1.0 moves a 100x100 view at 100 pts/s<sup>2</sup></li>
+<li>If you push .instantaneous,  after it’s done it just sits there wasting memory.</li>
+</ol>
+<h3 id="UIDynamicItemBehavior"><a href="#UIDynamicItemBehavior" class="headerlink" title="UIDynamicItemBehavior"></a>UIDynamicItemBehavior</h3><ol>
+<li>Controls the behavior of items as they are affected by other behaviors.</li>
+<li><code>var allowsRotation: Bool</code></li>
+<li><code>var friction: CGFloat</code></li>
+<li><code>var elasticity: CGFloat</code></li>
+<li>Can also get information about items with this behaviors<br><code>func linearVelocity(for: UIDynamicItem) -&gt; CGPoint</code><br><code>func addLinearVelocity(CGPoint, for: UIDynamicItem)</code><br><code>func angularVelocity(for: UIDynamicItem) -&gt; CGFloat</code></li>
+</ol>
+<h3 id="UIDynamicBehavior"><a href="#UIDynamicBehavior" class="headerlink" title="UIDynamicBehavior"></a>UIDynamicBehavior</h3><ol>
+<li>Superclass of behaviors.</li>
+<li>You can create your own subclass which is a combination of other behaviors.</li>
+<li>Usually you override init method(s) and addItem and removeItem to call. </li>
+<li><code>func addChildBehavior(UIDynamicBehavior)</code><br>This is a good way to encapsulate a physics behavior that is a composite of other behaviors. We can use it in the initializer.<br>You might also add some API which helps your subclass configure its children.</li>
+<li>All behaviors know the UIDynamicAnimator they are part of.<br>They can only be part of one at a time.<br><code>var dynamicAnimator: UIDynamicAnimator? { get }</code><br>And the behavior will be sent this message when its animator changes<br><code>func willMove(to: UIDynamicAnimator?)</code></li>
+</ol>
+<h3 id="UIDynamicBehavior’s-action-property"><a href="#UIDynamicBehavior’s-action-property" class="headerlink" title="UIDynamicBehavior’s action property"></a>UIDynamicBehavior’s action property</h3><ol>
+<li>Every time the behavior acts on items, this block of code that you can set is executed<br><code>var action: (() -&gt; Void)?</code></li>
+<li>You can set this to do anything you want. But it will <code>be called a lot</code>, so make it very efficient.</li>
+<li>If the action refers to properties in the behavior itself, watch out for memory cycles.</li>
+</ol>
+<h3 id="Stasis"><a href="#Stasis" class="headerlink" title="Stasis"></a>Stasis</h3><ol>
+<li>UIDynamicAnimator’s delegate tells you when animation pauses</li>
+<li>Just set the delegate<br>var delegate: UIDynamicAnimatorDelegate</li>
+<li>You’ll find out when stasis is reached and when animation will resume<br> func <code>dynamicAnimatorDidPause</code>(UIDynamicAnimator)<br> func <code>dynamicAnimatorWillResume</code>(UIDynamicAnimator)</li>
+</ol>
+<h1 id="Memory-Cycle-Avoidance"><a href="#Memory-Cycle-Avoidance" class="headerlink" title="Memory Cycle Avoidance"></a>Memory Cycle Avoidance</h1><h2 id="Closure-Capturing"><a href="#Closure-Capturing" class="headerlink" title="Closure Capturing"></a>Closure Capturing</h2><ol>
+<li>Closure can use the globle variables and can capture them. </li>
+<li>Closure can rename globle variables by adding <code>[localName = globleName] in</code> at the beginning. </li>
+<li>It can even change the influencing ARC of the local value, such as <code>[weak localName = globleName]</code></li>
+<li>If we make localName and globleName to be the same, we only need to write the name like <code>[weak globleName]</code></li>
+</ol>
+<h2 id="Memory-Cycle"><a href="#Memory-Cycle" class="headerlink" title="Memory Cycle"></a>Memory Cycle</h2><ol>
+<li>Closures are reference types and live in the heap and they capture variables in their surroundings and keep them in the heap with them.</li>
+<li>Memory Cycle means that several strong values point to each other. So that none of them can leave the heap. </li>
+<li>A memory cycle is not good, because it will take too much memory. </li>
+<li>For exemple, a closure inside a class calls another method in that class. The closure captured the class, the class stored the closure. So the closure point to the class and class point back to the closure. It create a cycle. Neither can leave the heap. </li>
+<li>Remember that <code>self is a strong variable</code>. </li>
+<li>All the closures in animation we make will not contructe a memory cycle. Because those closures instead of point to the class they are in, they point to the animator. </li>
+</ol>
+<h2 id="Break-a-Memory-Cycle"><a href="#Break-a-Memory-Cycle" class="headerlink" title="Break a Memory Cycle"></a>Break a Memory Cycle</h2><ol>
+<li>We can break a memory cycle by capturing globle variables as <code>weak</code> or <code>unowned</code>. </li>
+<li>When declared weak, that local variable becomes an optional. </li>
+<li>If we do so, the local variables point to nothing and break the memory cycle. </li>
+<li>We use unowned <code>if and only if</code> we can sure this is <code>the only time</code> we will use it and we won’t use it after it’s set nil. </li>
+<li>We can capture self with syntax <code>[weak self]</code></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" rel="tag"><i class="fa fa-tag"></i> 应用开发</a>
+              <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/10/07-Multiple-MVCs-and-Timer/" rel="prev" title="07. Multiple MVCs and Timer">
+      <i class="fa fa-chevron-left"></i> 07. Multiple MVCs and Timer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/15/09-View-Controller-Life-Cycle-and-Scroll-View/" rel="next" title="09. View Controller Life Cycle and Scroll View">
+      09. View Controller Life Cycle and Scroll View <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UIView-Property-Animation"><span class="nav-number">1.</span> <span class="nav-text">UIView Property Animation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView-Animation-Properties"><span class="nav-number">1.1.</span> <span class="nav-text">UIView Animation Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIViewPropertyAnimator"><span class="nav-number">1.2.</span> <span class="nav-text">UIViewPropertyAnimator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIViewAnimationOptions"><span class="nav-number">1.3.</span> <span class="nav-text">UIViewAnimationOptions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView-Animation"><span class="nav-number">1.4.</span> <span class="nav-text">UIView Animation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Animation"><span class="nav-number">2.</span> <span class="nav-text">Dynamic Animation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-Dynamic-Animation"><span class="nav-number">2.1.</span> <span class="nav-text">Create a Dynamic Animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Behaviors"><span class="nav-number">2.2.</span> <span class="nav-text">Behaviors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UIGravityBehavior"><span class="nav-number">2.2.1.</span> <span class="nav-text">UIGravityBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIAttachmentBehavior"><span class="nav-number">2.2.2.</span> <span class="nav-text">UIAttachmentBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollisionBehavior"><span class="nav-number">2.2.3.</span> <span class="nav-text">UICollisionBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UISnapBehavior"><span class="nav-number">2.2.4.</span> <span class="nav-text">UISnapBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIPushBehavior"><span class="nav-number">2.2.5.</span> <span class="nav-text">UIPushBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIDynamicItemBehavior"><span class="nav-number">2.2.6.</span> <span class="nav-text">UIDynamicItemBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIDynamicBehavior"><span class="nav-number">2.2.7.</span> <span class="nav-text">UIDynamicBehavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIDynamicBehavior’s-action-property"><span class="nav-number">2.2.8.</span> <span class="nav-text">UIDynamicBehavior’s action property</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stasis"><span class="nav-number">2.2.9.</span> <span class="nav-text">Stasis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memory-Cycle-Avoidance"><span class="nav-number">3.</span> <span class="nav-text">Memory Cycle Avoidance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Closure-Capturing"><span class="nav-number">3.1.</span> <span class="nav-text">Closure Capturing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Cycle"><span class="nav-number">3.2.</span> <span class="nav-text">Memory Cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Break-a-Memory-Cycle"><span class="nav-number">3.3.</span> <span class="nav-text">Break a Memory Cycle</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

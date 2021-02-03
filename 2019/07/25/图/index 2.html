@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="术语图用G &#x3D; (V; E)表示，V表示顶点集，E表示边集 边 邻接关系：节点之间的关系 关联关系：节点与边之间的关系 若边的两个顶点没有先后关系，就把那条边称为无向边，所有边都是无向边的图称为无向图 若边的两个顶点有先后关系，就把那条边称为有向边，所有边都是无向边的图称为有向图 即有有向边，又有无向边的图称为混合图 无向边可以拆为两条方向不同的有向边 n个顶点的无向完全图，有$\frac{n(n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/25/%E5%9B%BE/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="术语图用G &#x3D; (V; E)表示，V表示顶点集，E表示边集 边 邻接关系：节点之间的关系 关联关系：节点与边之间的关系 若边的两个顶点没有先后关系，就把那条边称为无向边，所有边都是无向边的图称为无向图 若边的两个顶点有先后关系，就把那条边称为有向边，所有边都是无向边的图称为有向图 即有有向边，又有无向边的图称为混合图 无向边可以拆为两条方向不同的有向边 n个顶点的无向完全图，有$\frac{n(n">
+<meta property="article:published_time" content="2019-07-25T08:33:35.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:41:42.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="理论">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/25/%E5%9B%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>图 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/07/25/%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-25 16:33:35" itemprop="dateCreated datePublished" datetime="2019-07-25T16:33:35+08:00">2019-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:41:42" itemprop="dateModified" datetime="2020-08-07T19:41:42+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%82%93%E4%BF%8A%E8%BE%89/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构 (清华大学邓俊辉)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h1><p>图用<code>G = (V; E)</code>表示，V表示顶点集，E表示边集</p>
+<h2 id="边"><a href="#边" class="headerlink" title="边"></a>边</h2><ol>
+<li>邻接关系：节点之间的关系</li>
+<li>关联关系：节点与边之间的关系</li>
+<li>若边的两个顶点没有先后关系，就把那条边称为<code>无向边</code>，所有边都是无向边的图称为<code>无向图</code></li>
+<li>若边的两个顶点有先后关系，就把那条边称为<code>有向边</code>，所有边都是无向边的图称为<code>有向图</code></li>
+<li>即有有向边，又有无向边的图称为混合图</li>
+<li>无向边可以拆为两条方向不同的有向边</li>
+<li>n个顶点的无向完全图，有$\frac{n(n-1)}{2}$条边，n个顶点的有向完全图中有$n(n-1)$条边，n个顶点的强连通图至少$n$个顶点(形成一个大环)<a id="more"></a>
+</li>
+</ol>
+<h2 id="路"><a href="#路" class="headerlink" title="路"></a>路</h2><ol>
+<li>简单路：每个顶点只出现一次(不一定要包含所有顶点)</li>
+<li>环路也分为简单环路和环路</li>
+<li>欧拉环路：每条边恰好出现一次(要包含所有边)</li>
+<li>汉密尔顿环路：每个顶点恰好出现一次(要包含所有的点)</li>
+</ol>
+<h1 id="图的实现"><a href="#图的实现" class="headerlink" title="图的实现"></a>图的实现</h1><ol>
+<li>邻接矩阵：若有n个节点，就建立一个n行n列的矩阵，如果节点i和节点j之间是邻接关系，就把第i行第j列的值设为1(无权图)或设为权值(带权图)</li>
+<li>关联矩阵：若有n个节点，e条边，就建立一个n行e列的矩阵，如果节点i和边j之间是关联关系，就把第i行第j列的值设为1(无权图)或设为权值(带权图)</li>
+<li>无向边的邻接矩阵要把每条边存储两遍，有向边只要存一遍</li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>
+<li>一个一维向量存储所有的顶点，一个二维向量存储所有的顶点之间的连边情况</li>
+<li>连边情况的存储用的是指针，指向一个存储了边的信息的结构体/对象，默认为NULL，表示没有连边</li>
+<li>加边：新建一个边的信息，并用一个指针指向它，并将指针存储在边的二维矩阵中，注意点出入度的增加</li>
+<li>删边：释放边的指针指向的内容，将边的指针设为NULL，减少点的出入度</li>
+<li>加点：给一位顶点向量加一个元素，二维向量的每一位最后都加一个空元素为原先的点到新点的边的情况(一开始为空)，二维向量还要再加一行，表示新点到其余点的边的情况(一开始也为空，且数量和现点数一样多，比原点数多一个)</li>
+<li>删点：删除顶点向量中对应的元素，二维向量中将其他点与它的连边删除，并移出二维向量，再把对应的那一维整个删除移出，修改所有点的出入度</li>
+</ol>
+<h1 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h1><p>简单，略</p>
+<h1 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h1><h2 id="标记边"><a href="#标记边" class="headerlink" title="标记边"></a>标记边</h2><ol>
+<li>树边：从当前点指向一个尚未访问的点的边<br>[当结束点尚未访问]</li>
+<li>后向边：从一个点指向其祖先的边(要回溯才能经过树边达到另一个点的边)<br>[当结束点被访问过，但还在访问其后代]</li>
+<li>前向边：从一个点指向其后代的边(要正向进行深搜才可以经过树边达到另一个点的边)<br>[当结束点被访问过，且访问时间晚于当前点]</li>
+<li>跨边：跨接两个无法经过树边达到的点的边<br>[当结束点被访问过，且访问时间早于当前点]</li>
+<li>后向边的出现就表示了图中有环路</li>
+</ol>
+<h2 id="DFS序"><a href="#DFS序" class="headerlink" title="DFS序"></a>DFS序</h2><ol>
+<li>标记时间：第一次访问一个节点的时间为dTime，访问完当前节点的所有邻居时的时间fTime(就算没有邻居要访问时间也要加一)</li>
+<li>DFS序：按访问顺序排列，每个节点出现且只出现两次，一次对应dTime，一次对应fTime</li>
+<li>括号引理：在DFS序中，被一个节点的两次出现夹在中间的所有节点都是这个节点的后代，否则就没有关系<br>若u是v的祖先    ⟺    dTime(u) &lt; dTime(v) &amp;&amp; fTime(v) &lt; fTime(u)<br>若u是v的后代    ⟺    dTime(u) &gt; dTime(v) &amp;&amp; fTime(v) &gt; fTime(u)<br>否则u和v没有关系</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/24/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="二叉树">
+      <i class="fa fa-chevron-left"></i> 二叉树
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/26/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" rel="next" title="二叉搜索树">
+      二叉搜索树 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边"><span class="nav-number">1.1.</span> <span class="nav-text">边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路"><span class="nav-number">1.2.</span> <span class="nav-text">路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的实现"><span class="nav-number">2.</span> <span class="nav-text">图的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">3.</span> <span class="nav-text">广度优先搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">4.</span> <span class="nav-text">深度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标记边"><span class="nav-number">4.1.</span> <span class="nav-text">标记边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS序"><span class="nav-number">4.2.</span> <span class="nav-text">DFS序</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

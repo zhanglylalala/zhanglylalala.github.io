@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Multiplication $A_{m\times n}B_{n\times p}&#x3D;C_{m\times p}$ Dot Product: (AB)_{ij} &#x3D; (row \ i \ of \ A) \cdot (column \ j \ of \ B) &#x3D; \displaystyle \sum^{n}_{k&#x3D;1}A_{ik}B_{kj} Matrix multiplies columns:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03. Multiplication and Inverse Matrices">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/10/29/03-Multiplication-and-Inverse-Matrices/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Multiplication $A_{m\times n}B_{n\times p}&#x3D;C_{m\times p}$ Dot Product: (AB)_{ij} &#x3D; (row \ i \ of \ A) \cdot (column \ j \ of \ B) &#x3D; \displaystyle \sum^{n}_{k&#x3D;1}A_{ik}B_{kj} Matrix multiplies columns:">
+<meta property="article:published_time" content="2019-10-29T06:37:48.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:18:23.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="理论">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="线性代数">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/10/29/03-Multiplication-and-Inverse-Matrices/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>03. Multiplication and Inverse Matrices | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/29/03-Multiplication-and-Inverse-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          03. Multiplication and Inverse Matrices
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-29 14:37:48" itemprop="dateCreated datePublished" datetime="2019-10-29T14:37:48+08:00">2019-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:18:23" itemprop="dateModified" datetime="2020-08-07T19:18:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication"></a>Multiplication</h1><ol>
+<li>$A_{m\times n}B_{n\times p}=C_{m\times p}$</li>
+<li>Dot Product: <script type="math/tex">(AB)_{ij} = (row \ i \ of \ A) \cdot (column \ j \ of \ B) = \displaystyle \sum^{n}_{k=1}A_{ik}B_{kj}</script></li>
+<li>Matrix multiplies columns: $AB=\left[\begin{matrix}Ab_1&amp;Ab_2&amp;…&amp;Ab_n\end{matrix}\right]$<br />It can also be seen as matrix $A$ times every column of $B$. So columns of $C$ are combinations of columns of $A$. </li>
+<li>Rows multiply matrix: <script type="math/tex">AB=\left[\begin{matrix}a_1B\\a_2B\\…\\a_nB\end{matrix}\right]</script><br />And naturally, it can be seen as rows of $A$ times matrix $B$. So rows of $C$ are combinations of rows of $B$.  </li>
+<li>Sum of matrices: <script type="math/tex">AB = \displaystyle \sum^{n}_{k = 1}(column \ k \ of \ A) \cdot (row \ k \ of \ B)</script> <br />It can also be columns times rows. The sum of each column of $A$ times corresponding rows of $B$. </li>
+<li>Multiplication can also be done by blocks. </li>
+<li>In matrices multiplication, <br />&emsp;Associative law is valid: <script type="math/tex">A(BC)=(AB)C</script><br />&emsp;Distributive law is correct: <script type="math/tex">A(B+C)=AB+AC\ \ (A+B)C=AC+BC</script>   <br />&emsp;Commutative law is false: <script type="math/tex">AB≠BA</script></li>
+<li>The complexity of matrix multiplication is <script type="math/tex">O(nmp)</script>. The result is an <script type="math/tex">n\times p</script> matrix and to get each entry, we need <script type="math/tex">m</script> multiplications and add them together. </li>
+<li>Matrices have exponents too. <script type="math/tex">A^p=AAA…A\ (p\ factors)</script></li>
+<li>$(A^p)(A^q)=A^{p+q}$<br /><script type="math/tex">(A^p)^q=A^{pq}</script><br /><script type="math/tex">A^0=I</script><br /><script type="math/tex">A^{-p}=(A^{-1})^p\ \ \ (p > 0)</script></li>
+<li>Matrices can be cut into blocks (smaller matrices). When addition or multiplication (both with scalar or another matrix) happen, the blocks act as numbers. </li>
+<li>Block elimination: <script type="math/tex">\left[\begin{matrix}I & 0 \\ -CA^{-1} & I\end{matrix}\right] \left[\begin{matrix}A&B\\C&D\end{matrix}\right]=\left[\begin{matrix}A&B\\0&D-CA^{-1}B\end{matrix}\right]</script><br /><script type="math/tex">D-CA^{-1}B</script> is called <code>Schur complement</code>. </li>
+<li>For square matrices, we can do better by breaking <script type="math/tex">n</script> by <script type="math/tex">n</script> matrices into $2$ by $2$ blocks. Instead of <script type="math/tex">O(n^3)</script>, this complexity is <script type="math/tex">O(n^{2.376})</script></li>
+</ol>
+<h1 id="Inverses"><a href="#Inverses" class="headerlink" title="Inverses"></a>Inverses</h1><h2 id="Does-It-Have-Inverse"><a href="#Does-It-Have-Inverse" class="headerlink" title="Does It Have Inverse"></a>Does It Have Inverse</h2><ol>
+<li>Define the <code>inverse</code> of $A$ is <script type="math/tex">AA^{-1}=A^{-1}A = I</script>. Here <script type="math/tex">A^{-1}</script>is the inverse of $A$. </li>
+<li>Only square matrices have inverses. </li>
+<li>Those with inverses are called invertible while the ones without inverses are called singular. </li>
+<li>A matrix is invertible <strong>if and only if</strong><br />&emsp;elimination produces $n$ pivots<br />&emsp;the only solution to <script type="math/tex">A\vec{x}=\vec{b}</script> is <script type="math/tex">\vec{x}=A^{-1}\vec{b}</script><br />&emsp;<script type="math/tex">A\vec{x}=\vec{0}</script> can only have the zero solution <script type="math/tex">\vec{x}=\vec{0}</script><br />&emsp;the determinant of <script type="math/tex">A</script> is not zero, because we need to divide it</li>
+<li>A $2$ by $2$ matrix is invertible if and only if <script type="math/tex">ad-bc</script> is not zero. <br /><script type="math/tex">\left[\begin{matrix}a&b\\c&d\end{matrix}\right]^{-1}=\displaystyle\frac{1}{ad-bc}\left[\begin{matrix}d&-b\\-c&a\end{matrix}\right]</script></li>
+<li>A diagonal matrix has an inverse if and only if  no diagonal entries are zero. <br /><script type="math/tex">\left[\begin{matrix}d_1\\&d_2\\&&\ddots\\&&&d_n\end{matrix}\right]^{-1}=\left[\begin{matrix}\frac{1}{d_1}\\&\frac{1}{d_2}\\&&\ddots\\&&&\frac{1}{d_n}\end{matrix}\right]</script><br />Furthermore, a triangular matrix is invertible if and only if no diagonal entries are zero. </li>
+<li><script type="math/tex">AB</script> is invertible if and only if <script type="math/tex">A</script> and <script type="math/tex">B</script> are separately invertible and have the same size. </li>
+<li>Diagonally dominant matrices are invertible. Each $a_{ii}$ on the diagonal is larger than the total sum along the rest of row $i$. On every row, $|a_{ii}|&gt;\displaystyle\sum_{j≠i}|a_{ij}|$. </li>
+</ol>
+<h2 id="What-Is-The-Inverse"><a href="#What-Is-The-Inverse" class="headerlink" title="What Is The Inverse"></a>What Is The Inverse</h2><ol>
+<li>To get the inverse, we need to solve the system of <script type="math/tex">AE = I</script>. <script type="math/tex">E</script> is completely unknown. So we can use the Gauss elimination to solve all entries of $E$ at the same time, which makes us solve <script type="math/tex">\left[\begin{matrix}A&I\end{matrix}\right]</script> as a “super” augmented matrix. </li>
+<li>In the end, we can eliminate to get <script type="math/tex">\left[\begin{matrix}I&E\end{matrix}\right]</script>. As is known to all that only <script type="math/tex">A^{-1} \left[\begin{matrix}A&I\end{matrix}\right] = \left[\begin{matrix}I&A^{-1}\end{matrix}\right]</script>, so we can know that $E$ is the inverse. </li>
+<li>This is the <code>Gauss-Jordan</code> way. </li>
+<li>$(AB)^{-1}=B^{-1}A^{-1}$. <br />$(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AIA^{-1}=AA^{-1}=I$</li>
+<li>For square matrices, an inverse on one side is automatically the inverse on the other side. </li>
+<li>Because inverse undoes whatever the original matrix does, for elimination matrices, the entry of <script type="math/tex">(i,\ j)</script> in the inverse matrix is <script type="math/tex">l</script> while in the original matrix <script type="math/tex">-l</script></li>
+<li>If the original matrix is symmetric, so is its inverse. </li>
+<li>The inverse of a band matrix is generally a dense matrix. </li>
+<li>If <script type="math/tex">A</script> is invertible and upper triangular, so is <script type="math/tex">A^{-1}</script>. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 线性代数</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/23/02-Elimination-with-Matrices/" rel="prev" title="02. Elimination with Matrices">
+      <i class="fa fa-chevron-left"></i> 02. Elimination with Matrices
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/04/day-01/" rel="next" title="day 01">
+      day 01 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiplication"><span class="nav-number">1.</span> <span class="nav-text">Multiplication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inverses"><span class="nav-number">2.</span> <span class="nav-text">Inverses</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Does-It-Have-Inverse"><span class="nav-number">2.1.</span> <span class="nav-text">Does It Have Inverse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Is-The-Inverse"><span class="nav-number">2.2.</span> <span class="nav-text">What Is The Inverse</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

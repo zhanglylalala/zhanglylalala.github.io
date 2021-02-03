@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="栈的实现 栈就是一种受限的序列，每种操作都只能对栈顶元素进行操作，要么弹出，要么推入 栈需要的接口就只有：size()获取栈的大小&#x2F;empty()判空、top()获得栈顶元素的值、pop()删除栈顶元素、push()推入一个元素 栈是受限的序列，在实现的时候就可以直接由向量或列表派生 栈顶应该设置成向量的末端还是首端？如果设置在首端，每次改变元素都要移动所有元素，所以应该设置在末端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈和队列">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/07/23/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="栈的实现 栈就是一种受限的序列，每种操作都只能对栈顶元素进行操作，要么弹出，要么推入 栈需要的接口就只有：size()获取栈的大小&#x2F;empty()判空、top()获得栈顶元素的值、pop()删除栈顶元素、push()推入一个元素 栈是受限的序列，在实现的时候就可以直接由向量或列表派生 栈顶应该设置成向量的末端还是首端？如果设置在首端，每次改变元素都要移动所有元素，所以应该设置在末端">
+<meta property="article:published_time" content="2019-07-23T06:11:16.000Z">
+<meta property="article:modified_time" content="2020-08-25T14:32:43.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="理论">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/07/23/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>栈和队列 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/07/23/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          栈和队列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-23 14:11:16" itemprop="dateCreated datePublished" datetime="2019-07-23T14:11:16+08:00">2019-07-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-25 22:32:43" itemprop="dateModified" datetime="2020-08-25T22:32:43+08:00">2020-08-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E9%82%93%E4%BF%8A%E8%BE%89/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构 (清华大学邓俊辉)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="栈的实现"><a href="#栈的实现" class="headerlink" title="栈的实现"></a>栈的实现</h1><ol>
+<li>栈就是一种受限的序列，每种操作都只能对栈顶元素进行操作，要么弹出，要么推入</li>
+<li>栈需要的接口就只有：<code>size()</code>获取栈的大小/<code>empty()</code>判空、<code>top()</code>获得栈顶元素的值、<code>pop()</code>删除栈顶元素、<code>push()</code>推入一个元素</li>
+<li>栈是受限的序列，在实现的时候就可以直接由向量或列表派生</li>
+<li>栈顶应该设置成向量的末端还是首端？如果设置在首端，每次改变元素都要移动所有元素，所以应该设置在末端<a id="more"></a>
+</li>
+</ol>
+<h1 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h1><p>常用场合：逆序输出、递归嵌套、延迟缓冲、栈式计算</p>
+<h2 id="逆序输出"><a href="#逆序输出" class="headerlink" title="逆序输出"></a>逆序输出</h2><p>应用：输出次序与处理过程颠倒，递归深度和输出长度不易预知</p>
+<h3 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h3><p>实现：取余入栈，出栈输出</p>
+<h2 id="递归嵌套"><a href="#递归嵌套" class="headerlink" title="递归嵌套"></a>递归嵌套</h2><p>应用：具有自相似性的问题可递归描述，但分支位置和嵌套深度不固定</p>
+<h3 id="括号匹配"><a href="#括号匹配" class="headerlink" title="括号匹配"></a>括号匹配</h3><ol>
+<li>问题：判断一系列括号是否正确匹配</li>
+<li>思路：消除一对紧邻的左右括号对剩下的表达式的匹配性没有影响</li>
+<li>实现：顺序扫描表达式，遇到左括号，就入栈；遇到右括号就取出栈顶元素，若是右括号和左括号不匹配或栈为空就返回false，否则继续。扫描完返回栈是否为空</li>
+<li>简化：在只有一种括号的情况下，也可以用一个计数器，左括号加一，右括号减一，若任何一个位置变为负数就返回false，否则为true</li>
+<li>扩展：多种括号，只能用栈，不能用计数器</li>
+</ol>
+<h3 id="栈混洗"><a href="#栈混洗" class="headerlink" title="栈混洗"></a>栈混洗</h3><ol>
+<li>问题：一个起始栈，一个结果栈和一个中转栈，每次要么把起始栈的栈顶压入中转栈，要么把中转栈的栈顶压入结果栈</li>
+<li>计数：记n个元素栈混洗的结果有$sp(n)$种，考虑首元素是第k个入栈的话结果就有$sp(k - 1) \cdot sp(n - k)$，第一个是在首素之前入栈的k - 1个元素的结果，第二个是在首元素之后入栈的n - k个元素的结果，首元素可以是第1个、第2个……第n个入栈，结果就是把上式k从1累加到n</li>
+<li>化简结果是卡特兰数：$\displaystyle\frac{(2n)!}{(n+1)!\cdot n!}=\frac{C^{2n}_{n}}{n+1}$</li>
+<li>甄别：判断一个序列是不是另一个序列栈混洗的结果。已知甄别的结果只和顺序有关，所以以下所讲的数实际是序号</li>
+<li>定理：对于不同的三个数$i &lt; j &lt; k$，必不存在相对次序为$… k … j … i …$的序列</li>
+<li>算法1：枚举所有三个元素对判断，复杂度$O(n^3)$</li>
+<li>算法2：枚举两个元素$i &lt; j$，判断$i$、$j$、$j + 1$，复杂度$O(n^2)$</li>
+<li>算法3：直接模拟，用三个栈模拟是否可以得到相应的栈，复杂度$O(n)$</li>
+<li>将栈混洗中转栈的每一次push都对应于一个左括号，pop对应于一个右括号，括号匹配就是一个栈混洗。$n$对括号合法匹配种数就是$sp(n)$</li>
+</ol>
+<h2 id="延迟缓冲"><a href="#延迟缓冲" class="headerlink" title="延迟缓冲"></a>延迟缓冲</h2><p>应用：线性扫描算法模式中，在预读足够长之后方能确定可处理的前缀</p>
+<h3 id="中缀表达式求值"><a href="#中缀表达式求值" class="headerlink" title="中缀表达式求值"></a>中缀表达式求值</h3><ol>
+<li>表述：中缀表达式就是操作符在操作数之间的表达式<br>算法：利用两个辅助栈，依次扫描表达式，如果是数就推入数栈，如果是操作符，就判断和操作符栈顶元素的优先级，如果优先级低就执行栈顶操作符<br>执行操作符：从数栈中弹出需要的操作数的个数，操作完成之后操作结果推入数栈，操作符扔掉</li>
+<li>算法：利用两个辅助栈，依次扫描表达式，如果是数就推入数栈，如果是操作符，就判断和操作符栈顶元素的优先级，如果优先级低就执行栈顶操作符</li>
+<li>执行操作符：从数栈中弹出需要的操作数的个数，操作完成之后操作结果推入数栈，操作符扔掉</li>
+<li>便于实现，可以在一开始就在操作符栈推入一个左括号，在表达式最后加一个右括号<br>要把表达式以字符串的形式读取，多位数的读取要注意</li>
+</ol>
+<h2 id="栈式计算"><a href="#栈式计算" class="headerlink" title="栈式计算"></a>栈式计算</h2><p>应用：基于栈结构的特定计算模式</p>
+<h3 id="逆波兰表达式-RPN"><a href="#逆波兰表达式-RPN" class="headerlink" title="逆波兰表达式(RPN)"></a>逆波兰表达式<code>(RPN)</code></h3><ol>
+<li>表述：从左到右哪个操作符先出现，哪个操作符就先计算，且所有的操作符都出现且立即出现在它涉及的操作数后面</li>
+<li>计算算法：利用一个数栈，扫描表达式，遇到数就入栈，操作符就出栈对应个数的操作数，计算后再把结果入栈</li>
+<li>获得算法：直接利用中缀表达式的计算方法，遇到数字就直接输出，但是每次可以进行计算的时候不是计算，而是输出操作符，但是不输出括号</li>
+</ol>
+<h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><ol>
+<li>队列只能在队尾插入，在队头删除、查询</li>
+<li>相比于栈的后入先出<code>Last In First Out(LIFO)</code>，队列是<code>First In Last Out(FIFO)</code></li>
+<li>队列需要实现的接口有：<code>size()</code>获取队列的大小 / <code>empty()</code>判空、<code>front()</code>获得队列顶元素的值、<code>dequeue()</code>删除队列首元素、<code>enqueue()</code>推入一个元素</li>
+<li>队列也可以用向量或列表派生，但是一般是用列表，向量的话不管用哪端做队头哪端做队尾，改变元素个数的时候都要$O(n)$的时间</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/22/%E5%88%97%E8%A1%A8/" rel="prev" title="列表">
+      <i class="fa fa-chevron-left"></i> 列表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/24/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="next" title="二叉树">
+      二叉树 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈的实现"><span class="nav-number">1.</span> <span class="nav-text">栈的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈的应用"><span class="nav-number">2.</span> <span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆序输出"><span class="nav-number">2.1.</span> <span class="nav-text">逆序输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进制转换"><span class="nav-number">2.1.1.</span> <span class="nav-text">进制转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归嵌套"><span class="nav-number">2.2.</span> <span class="nav-text">递归嵌套</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#括号匹配"><span class="nav-number">2.2.1.</span> <span class="nav-text">括号匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈混洗"><span class="nav-number">2.2.2.</span> <span class="nav-text">栈混洗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟缓冲"><span class="nav-number">2.3.</span> <span class="nav-text">延迟缓冲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中缀表达式求值"><span class="nav-number">2.3.1.</span> <span class="nav-text">中缀表达式求值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈式计算"><span class="nav-number">2.4.</span> <span class="nav-text">栈式计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逆波兰表达式-RPN"><span class="nav-number">2.4.1.</span> <span class="nav-text">逆波兰表达式(RPN)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#队列"><span class="nav-number">3.</span> <span class="nav-text">队列</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03. 词法分析">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="词法分析程序设计主要功能 读入源程序字符序列 对源程序预处理 识别源程序中的单词，创建符号表并在相应的符号表中登录信息 把单词和行号关联，以便编译器将错误信息与源程序位置联系起来 输出单词序列 组织：&amp;emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件&amp;emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式  单词 单词：具有独立含义">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9001.png">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9002.png">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9003.png">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9004.png">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9005.png">
+<meta property="og:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9006.png">
+<meta property="article:published_time" content="2020-05-10T06:59:42.000Z">
+<meta property="article:modified_time" content="2020-08-07T11:49:40.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://http/img/03.%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%9001.png">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>03. 词法分析 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          03. 词法分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-10 14:59:42" itemprop="dateCreated datePublished" datetime="2020-05-10T14:59:42+08:00">2020-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:40" itemprop="dateModified" datetime="2020-08-07T19:49:40+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="词法分析程序设计"><a href="#词法分析程序设计" class="headerlink" title="词法分析程序设计"></a>词法分析程序设计</h1><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ol>
+<li>读入源程序字符序列</li>
+<li>对源程序预处理</li>
+<li>识别源程序中的单词，创建符号表并在相应的符号表中登录信息</li>
+<li>把单词和行号关联，以便编译器将错误信息与源程序位置联系起来</li>
+<li>输出单词序列</li>
+<li>组织：<br />&emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件<br />&emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式</li>
+</ol>
+<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><ol>
+<li>单词：具有独立含义的最小语法单位</li>
+<li>分类：标识符 (变量名)、关键字、常数、运算符、分界符、字符串</li>
+<li>词法分析程序根据词类划分源码，输出二元式$&lt;类别,单词属性值&gt;$ (称为单词符号)。一类一码可以把类别省略，但本质还是二元组</li>
+<li>模式：一个单词的可能形式，定义类别为某一个类的单词的形式</li>
+<li>词素：源程序的一个字符序列，是单词符号的实例。单词属性值不一定是词素。比如源码中的变量名就是一个词素，但是在二元组中，单词属性值可能是$1$</li>
+</ol>
+<h2 id="正规表达式"><a href="#正规表达式" class="headerlink" title="正规表达式"></a>正规表达式</h2><ol>
+<li>正规表达式是表示字符串格式的模式，可以用来描述单词的结构</li>
+<li>正规集：正规式$(r)$所匹配的所有字符串的集合，实际上是一个正规语言，记为$L(r)$</li>
+<li>正则表达式定义：<br />&emsp;$\epsilon$是正规式，其匹配语言是$L(\epsilon)=\{\epsilon\}$<br />&emsp;如果$a\in\Sigma$，则$a$是一个正规式，其匹配语言是$L(a)=\{a\}$<br />&emsp;如果$r$和$s$都是正规式，则有：<br />&emsp;&emsp;$(r)|(s)$也是正规式，表示语言$L(r)\displaystyle\cup L(s)$<br />&emsp;&emsp;$(r)(s)$也是正规式，表示语言$L(r)\cdot L(s)$<br />&emsp;&emsp;$(r)^*$也是正规式，表示语言$(L(r))^*$<br />&emsp;&emsp;$(r)$也是正规式，表示语言$L(r)$</li>
+<li>运算符号优先级：$*=+&gt;\cdot&gt;|$</li>
+<li>或运算具有交换律和结合律，连接运算具有结合律和对或运算的分配律</li>
+<li>$\epsilon$是连接运算的单位元</li>
+</ol>
+<h1 id="有限状态自动机"><a href="#有限状态自动机" class="headerlink" title="有限状态自动机"></a>有限状态自动机</h1><ol>
+<li>状态：区分事物的标识</li>
+<li>有限状态自动机是离散状态系统</li>
+<li>定义：具有离散输入与离散输出的一种数学模型，用于识别输入的符号串是否属于某个语言的合法句子</li>
+<li>输入为符号串，输出为是或者否</li>
+<li>分类<br />&emsp;确定性有限自动机 (DFA)：输入符号定，下一动作定<br />&emsp;非确定性有限自动机 (NFA)：输入符号定，下一动作不定</li>
+<li>组成：字母表 (输入符号)、状态 (开始状态、接受或终结状态)、转移函数</li>
+<li>开始状态用一个箭头空指向该状态，也可以再加一个“start”</li>
+<li>接受状态，也称为终结状态，表示该串是可识别串，用两个圆圈表示</li>
+<li>转移函数有两个参数，当前状态和输入符号。输出下一状态</li>
+<li>从开始状态到终结状态之间的输入符号按顺序组成的串就是可识别的串</li>
+</ol>
+<h2 id="确定性有限自动机"><a href="#确定性有限自动机" class="headerlink" title="确定性有限自动机"></a>确定性有限自动机</h2><ol>
+<li>DFS表示为一个五元组$M=(Q,\Sigma,q_0,F,\delta)$<br />&emsp;$Q$表示有限状态集<br />&emsp;$\Sigma$表示字符表<br />&emsp;$q_0$表示初始状态，只能有一个$q_0\in Q$<br />&emsp;$F$表示接受或终止状态集，可以有多个元素$F\subseteq Q$<br />&emsp;$\delta$表示转移函数，$Q\times\Sigma\to Q$</li>
+<li>表示方法：状态转换图和状态转换表</li>
+<li>状态转换表中开始状态加$\to$，终结状态加$*$</li>
+</ol>
+<h2 id="非确定性有限自动机"><a href="#非确定性有限自动机" class="headerlink" title="非确定性有限自动机"></a>非确定性有限自动机</h2><ol>
+<li>NFA也是由五元组表示，但是转移函数的值域不同。</li>
+<li>NFA的转移函数也是一个当前状态+一个输入符号的定义域，但是值域不是一个状态，而是状态的集合。所以对$\delta$有$Q\times(\Sigma\cup\{\epsilon\})\to 2^Q$</li>
+<li>在非确定性有限自动机中，输入符号可以是$\epsilon$，表示两个状态识别的串是同一个串</li>
+<li>NFA的不确定性体现在两个方面<br />&emsp;第一种情况是识别一个符号的时候有两条路径可走<br />&emsp;第二种是$\epsilon$边的存在，使得同一个子串可以由两个不同的状态</li>
+<li>DFA是NFA的一个特例，但两种自动机识别语言的能力是一样的，即如果一个语言可以被DFA识别，则一定存在一个NFA可以识别该语言，反之亦然</li>
+<li>正规表达式直接转化成DFA比较难，一般是先转化为NFA，再把NFA转化为DFA</li>
+</ol>
+<h2 id="NFA到DFA的转换"><a href="#NFA到DFA的转换" class="headerlink" title="NFA到DFA的转换"></a>NFA到DFA的转换</h2><ol>
+<li>将NFA中一个状态输入同一个符号的所有下一状态作为DFA中的一个集合，以消除第一种不确定性</li>
+<li>$\epsilon$闭包：$t$是一个状态，则$\epsilon-closure(t)$是从状态$t$只经过$\epsilon$转换可以到达的状态集；$T$是一个状态集，$\epsilon-closure(T)$是从$T$中任一状态只经过$\epsilon$边就可以达到的状态集<br />$t$本身以及$T$中的所有状态都属于他们的$\epsilon$闭包<br />利用$\epsilon$闭包可以消除第二种不确定性</li>
+<li>定义$move(t,a)$表示从状态$t$经过$a$边能到达的状态集；$move(T,a)$表示从状态集$T$中的状态经非空的$a$转换可达到的状态集</li>
+<li>子集构造法<br />&emsp;DFA的开始状态是$\epsilon-closure(s_0)$，这就是第一个稳定的状态<br />&emsp;其余状态由$\epsilon-closure(move(T,a))$生成<br />&emsp;DFA的终态是包含原来终态的状态</li>
+<li>子集构造算法流程<br />&emsp;先获得开始状态$\epsilon-closure(s_0)$<br />&emsp;对每一个状态，先找到它在每一个输入下的稳定次态，即，枚举$\epsilon-colosure(move(T,a))$，对每一个可能的$a$<br />&emsp;每次找到一个新的状态，就加入DFA的状态集中，并在未来也对这个新状态进行枚举</li>
+</ol>
+<h2 id="从正规式到NFA的转换"><a href="#从正规式到NFA的转换" class="headerlink" title="从正规式到NFA的转换"></a>从正规式到NFA的转换</h2><ol>
+<li>直接从正规式的定义出发来定义正规式对应的NFA</li>
+<li>对$r=\epsilon$<br /><img src="/img/03.词法分析01.png" width="30%"></li>
+<li>对$r=a$<br /><img src="/img/03.词法分析02.png" width="30%"></li>
+<li>对$r=s|t$<br /><img src="/img/03.词法分析03.png" width="30%"></li>
+<li>对$r=st$，$s$和$t$有一个公用节点，表示$s$的接受状态和$t$的开始状态<br /><img src="/img/03.词法分析04.png" width="30%"></li>
+<li>对$r=(s)^*$<br /><img src="/img/03.词法分析05.png" width="30%"></li>
+<li>$r=(s)$的NFA和$r=s$的一样</li>
+<li>得到的NFA的性质<br />&emsp;$N(r)$的状态数最多是$r$中符号和算符总数的两倍<br />&emsp;$N(r)$只有一个开始状态和一个接受状态，接受状态没有向外的转换<br />&emsp;$N(r)$的每个状态有一个不是$\epsilon$边的指向其他状态的边，或者最多只有两条$\epsilon$边</li>
+</ol>
+<h2 id="DFA的化简"><a href="#DFA的化简" class="headerlink" title="DFA的化简"></a>DFA的化简</h2><ol>
+<li>任何DFA或NFA都存在唯一一个最简DFA与之等价，且任何DFA或NFA都可以转换为该最简DFA</li>
+<li>等价状态<br />&emsp;一致性：两个状态必须同为接受状态或非接受状态<br />&emsp;蔓延性：对所有输入符号，两个状态转移到等价状态</li>
+<li>寻找等价状态：隐含表法 (求同法)<br />&emsp;横少尾，纵少头的阶梯表<br />&emsp;可以直接确定等价的打钩，直接确定不等价的画叉<br />&emsp;取决于次态的写上次态，第一轮比完后再一一比较次态，直至全部判断完毕<br />&emsp;如果遇到相互依赖，循环不定的情况，默认他们都等价</li>
+<li>寻找等价状态：求异法<br />&emsp;先将状态划分为接受状态和非接受状态，再逐步划分精细化，最后得到不可在细分的划分<br />&emsp;考察每一个划分，要求其中的每一个元素在所有输入的情况下的次态组成的集合是该划分的子集<br />&emsp;如果有元素存在某一个输入对应的次态不是原划分的元素，就把该元素从原划分中剥离出去，直到没有元素应该被剥离</li>
+<li>在找到了等价状态之后，重新命名各个等效状态集，并把转移函数的输入中的状态改为原输入状态所属的等效状态，把输出状态改为原输出状态所属的等效状态</li>
+</ol>
+<h2 id="有限自动机到正规文法"><a href="#有限自动机到正规文法" class="headerlink" title="有限自动机到正规文法"></a>有限自动机到正规文法</h2><ol>
+<li>任意一个FA识别的语言都能用正规文法来生成</li>
+<li>每一个状态代表一个非终结符号</li>
+<li>如果状态$i$是一个接受状态，则设规则$A_i\to\epsilon$</li>
+<li>如果状态$i$是一个开始状态，则$A_i$是开始符号</li>
+<li>其他情况，如下图，则设规则$A_i\to aA_j$<br /><img src="/img/03.词法分析06.png" width="30%"></li>
+</ol>
+<h1 id="词法分析器的自动构造"><a href="#词法分析器的自动构造" class="headerlink" title="词法分析器的自动构造"></a>词法分析器的自动构造</h1><ol>
+<li>先用正规式表示出单词的结构，再由正规式生成NFA，最后再化简得到最简DFA</li>
+<li>给每个正规式构造相应的NFA，将所有的NFA用或运算并联起来</li>
+<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺序</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> 基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/02-%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95%E4%B8%8E%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80/" rel="prev" title="02. 形式文法与形式语言">
+      <i class="fa fa-chevron-left"></i> 02. 形式文法与形式语言
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" rel="next" title="04. 自顶向下语法分析">
+      04. 自顶向下语法分析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#词法分析程序设计"><span class="nav-number">1.</span> <span class="nav-text">词法分析程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要功能"><span class="nav-number">1.1.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单词"><span class="nav-number">1.2.</span> <span class="nav-text">单词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规表达式"><span class="nav-number">1.3.</span> <span class="nav-text">正规表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有限状态自动机"><span class="nav-number">2.</span> <span class="nav-text">有限状态自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定性有限自动机"><span class="nav-number">2.1.</span> <span class="nav-text">确定性有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定性有限自动机"><span class="nav-number">2.2.</span> <span class="nav-text">非确定性有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NFA到DFA的转换"><span class="nav-number">2.3.</span> <span class="nav-text">NFA到DFA的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从正规式到NFA的转换"><span class="nav-number">2.4.</span> <span class="nav-text">从正规式到NFA的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFA的化简"><span class="nav-number">2.5.</span> <span class="nav-text">DFA的化简</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有限自动机到正规文法"><span class="nav-number">2.6.</span> <span class="nav-text">有限自动机到正规文法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词法分析器的自动构造"><span class="nav-number">3.</span> <span class="nav-text">词法分析器的自动构造</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

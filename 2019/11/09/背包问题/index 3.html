@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="物品$n$种，背包最大容量为$m$，求背包能装的最大价值 01背包$01$背包的特点就是每一件物品要么选，要么不选定义状态$dp[i][j]$表示的是只考虑前$i$个物品当最大背包容量为$j$时能装的最大价值对于第$i$个物品，如果选的话就是$dp[i - 1][j - cost[i]] + weight[i]$    ，如果不选的话就是$dp[i - 1][j]$。就可以得到状态转移方程：$dp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="背包问题">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2019/11/09/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="物品$n$种，背包最大容量为$m$，求背包能装的最大价值 01背包$01$背包的特点就是每一件物品要么选，要么不选定义状态$dp[i][j]$表示的是只考虑前$i$个物品当最大背包容量为$j$时能装的最大价值对于第$i$个物品，如果选的话就是$dp[i - 1][j - cost[i]] + weight[i]$    ，如果不选的话就是$dp[i - 1][j]$。就可以得到状态转移方程：$dp">
+<meta property="article:published_time" content="2019-11-08T16:37:16.000Z">
+<meta property="article:modified_time" content="2020-08-13T04:20:29.000Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2019/11/09/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>背包问题 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          背包问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:37:16" itemprop="dateCreated datePublished" datetime="2019-11-09T00:37:16+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-13 12:20:29" itemprop="dateModified" datetime="2020-08-13T12:20:29+08:00">2020-08-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url" rel="index">
+                    <span itemprop="name">动态规划</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>物品$n$种，背包最大容量为$m$，求背包能装的最大价值</p>
+<h1 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h1><p>$01$背包的特点就是每一件物品要么选，要么不选<br>定义状态$dp[i][j]$表示的是只考虑前$i$个物品当最大背包容量为$j$时能装的最大价值<br>对于第$i$个物品，如果选的话就是$dp[i - 1][j - cost[i]] + weight[i]$    ，如果不选的话就是$dp[i - 1][j]$。就可以得到状态转移方程：<br />$dp[i][j] = max(dp[i - 1][j - cout[i]] + weight[i], dp[i - 1][j])$<br>此时的时间复杂度是$O(n  m)$， 空间复杂度为$O(n m)$<br>我们观察得：每次利用的$dp$数组仅仅是上一行的前半段，$dp[i][j]$要用的只有$dp[i - 1][j - cout[i]]$，再上一行，再后一个都不用。就可以想到对空间的优化——利用滚动数组，从后往前更新<br>初始化时，只需全部置为$0$即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> cost weight;</span><br><span class="line">&#125; things[maxn];</span><br><span class="line"><span class="keyword">int</span> dp[maxm];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zeroOne</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= things[i].cost; j--) <span class="comment">//j - things[i].cost大于等于0才有意义</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[j] = max(dp[j - things[i].cost] + things[i].weight, dp[j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>进阶问题</strong>：如果背包一定要装满？$dp$数组除了$dp[0]$外都初始化为$-INF$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">zeroOne</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, -INF, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= things[i].cost; j--) <span class="comment">//j - things[i].cost大于等于0才有意义</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (dp[j] &lt; dp[j - things[i].cost] + things[i].weight)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[j] = dp[j - things[i].cost] + things[i].weight</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h1><p>完全背包的特点就是每件物品的个数都是不限量的<br>思考$01$背包为什么不从前往后遍历：假如在$dp[k]$的时候考虑过了第$i$件之后，在$dp[k + cost[i]]$还会再考虑一次第$i$件，所以从前往后遍历的问题就是重复考虑，$01$背包是不允许重复的，但完全背包的特点就是重复。所以完全背包可以从前往后遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">complete</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = things[i].cost; j &lt;= m; j++) <span class="comment">//j - things[i].cost大于等于0才有意义</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[j] = max(dp[j - things[i].cost] + things[i].weight, dp[j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h1><p>多重背包就是每一种物品的个数不定，可能只有一个，也可能有多个<br><strong>朴素算法</strong>：把每一个物品都当成是一个独立的物种，变为$01$背包<br><strong>优化</strong>：朴素算法在物品个数多的时候时间复杂度太高，我们可以利用二进制压缩状态。例如第$i$种物品有$x$个，每个价值$y$。我们就可以合成$1$个价值$y$，$2$个价值$2y$，$4$个价值$4y$，我们就可以通过取不同的个数的组合，取得所有的个数可能</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> &amp; n, <span class="keyword">int</span> num, <span class="keyword">int</span> val, <span class="keyword">int</span> cost)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> bind = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		things[n].cost = bind * cost;</span><br><span class="line">		things[n].weight = bind * val;</span><br><span class="line">		n++;</span><br><span class="line">		num -= bind;</span><br><span class="line">		bind &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(num &lt; bind)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(num)</span><br><span class="line">	&#123;</span><br><span class="line">		things[n].cost = num * cost;</span><br><span class="line">		things[n].weight = num * val;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二维价值背包"><a href="#二维价值背包" class="headerlink" title="二维价值背包"></a>二维价值背包</h1><p>每一件物品都有一个费用，两个价值，要求两个价值的最大/最小选法。二维费用的价值一般会有一个优先级别，即在价值1最大的情况下，如果价值$1$相等，就取价值$2$最大的<br>类似01背包，给$dp$数组加一维，$dp[i][j]$表示在背包容量为$i$，价值$1$为$j$时，价值$2$的值。仿照$01$背包，遍历容量时要倒序遍历，但遍历价值$1$的值的时候不必倒序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cost[maxn], value1[maxn], value2[maxn], dp[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">twoDValue</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m, <span class="keyword">int</span> value1Limit)</span> <span class="comment">//n为物品种数，m为背包容量</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt; <span class="number">0</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = value1[i]; k &lt; value1Limit; k++)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[j][k] = max(dp[j][k], dp[j - cost[i]][k - value1[i]]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="分组背包"><a href="#分组背包" class="headerlink" title="分组背包"></a>分组背包</h1><p>分组背包的特点就是所有的物品被分入了若干组中，选的时候每个组至多只能选一件。我们可以把分组背包转化为$01$背包，每一个组变为$01$背包中的一个物品，然后尝试从中选择一件物品得到的最大价值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">group</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num; <span class="comment">//这个组内的物品个数</span></span><br><span class="line">	<span class="keyword">int</span> weight[MAXN], cost[MAXN];</span><br><span class="line">&#125; arr[MAXK];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">grouped</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> k)</span> <span class="comment">// k为组数，m为容量</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; arr[i].num; l++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (j &lt; arr[i].cost[l])</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				dp[j] = max(dp[j], dp[j - arr[i].cost[l]] + arr[i].weight[l]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="有依赖的背包"><a href="#有依赖的背包" class="headerlink" title="有依赖的背包"></a>有依赖的背包</h1><p>有依赖背包的特点就是有主件和附件之分，要买附件就一定要买主件，且不存在某种物品既依赖于一个物体又被另一个物体依赖。对于每一个主件及其附件的组合中，可以是只买主件、一个主件加一个附件……而且这其中只能选择一个方案加入最后的方案，就发现可以把每一个主件内的组合作为一个组，改变为上面的分组背包。但是这样每一个组内的物品种数为$2^{num} + 1$件($num$为附件个数)，导致复杂度有点高，但易知，对于同样花费的物品，我们只会选择其中价值最高的那种方案，所以我们可以对附件做一个$01$背包，再转化为分组背包求解。有时还可以优化：相同价值的物品，我们只会选择花费最小的那种，可以省下更多的空间，装更多的价值<br>模版题：<a href="https://www.luogu.org/problemnew/show/P1064" target="_blank" rel="noopener">洛谷 P1064</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mainObject</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>; <span class="comment">// 附件个数</span></span><br><span class="line">    <span class="keyword">int</span> mainWeight, mainCost; <span class="comment">// 主件的价值和花费</span></span><br><span class="line">    <span class="keyword">int</span> attachWeight[MAXM], attachCost[MAXM];</span><br><span class="line">    <span class="comment">// 先存储的是附件的价值和花费，01背包处理后变为该主件为代表的组内的选择方案</span></span><br><span class="line">    <span class="keyword">int</span> dp[MAXM]; <span class="comment">// 01背包记录</span></span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp; <span class="comment">// 记录当前价值是否已经记录过</span></span><br><span class="line">&#125; arr[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[MAXM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rely</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">int</span> n)</span> <span class="comment">// num为主件个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 01背包</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) <span class="comment">// 对每一个主件</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i].num == <span class="number">0</span>) <span class="comment">// 假如没有附件，该组别就只要加一个主件的方案</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[i].attachWeight[<span class="number">0</span>] = arr[i].mainWeight;</span><br><span class="line">            arr[i].attachCost[<span class="number">0</span>] = arr[i].mainCost;</span><br><span class="line">            arr[i].num++;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        clr(arr[i].dp, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 对每一个附件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr[i].num; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> cost = arr[i].attachCost[j];</span><br><span class="line">            <span class="keyword">int</span> weight = arr[i].attachWeight[j];</span><br><span class="line">            <span class="comment">// 注意！要给主件留出空间，所以k从n - 主件花费开始</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = n - arr[i].mainCost; k &gt;= cost; k--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[i].dp[k] &lt; arr[i].dp[k - cost] + weight)</span><br><span class="line">                &#123;</span><br><span class="line">                    arr[i].dp[k] = arr[i].dp[k - cost] + weight;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[i].num = <span class="number">0</span>; <span class="comment">// 重置组内方案数，重新统计</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n - arr[i].mainCost; j++)</span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">// 如果这个价值在之前已经记录过，由于花费越往后越高，不必再记录</span></span><br><span class="line">            <span class="keyword">if</span>(arr[i].mp.count(arr[i].dp[j]))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//没记录过且价值不为0</span></span><br><span class="line">            <span class="keyword">if</span> (arr[i].dp[j])</span><br><span class="line">            &#123;</span><br><span class="line">            	<span class="comment">// 记得买附件一定要买主件，所以还要加上主件的价值和花费</span></span><br><span class="line">                arr[i].attachCost[arr[i].num] = j + arr[i].mainCost;</span><br><span class="line">                arr[i].attachWeight[arr[i].num] = arr[i].dp[j] + arr[i].mainWeight;</span><br><span class="line">                arr[i].mp[arr[i].dp[j]] = <span class="number">1</span>; <span class="comment">// 记录</span></span><br><span class="line">                arr[i].num++; <span class="comment">// 方案数加一</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 最后还要几得把只买一个主件的方案加进去</span></span><br><span class="line">        arr[i].attachWeight[arr[i].num] = arr[i].mainWeight;</span><br><span class="line">        arr[i].attachCost[arr[i].num] = arr[i].mainCost;</span><br><span class="line">        arr[i].num++;</span><br><span class="line">        arr[i].mp.clear();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 分组背包</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; arr[i].num; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &lt; arr[i].attachCost[k])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (dp[j] &lt; dp[j - arr[i].attachCost[k]] + arr[i].attachWeight[k])</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j] = dp[j - arr[i].attachCost[k]] + arr[i].attachWeight[k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="求方案种数"><a href="#求方案种数" class="headerlink" title="求方案种数"></a>求方案种数</h1><p>另外开一个一维数组记录方案种数，同样利用滚动数组，有$num[j] += num[j - cost[i]]$表示考虑前i件时，背包容量为j的方案种数。初始化时只需要设$num[0]= 1$表示什么都不选也有一种方法。更新方式和对应的背包更新一样，以下以$01$背包为例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= cost[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[j] += dp[j - cost[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="如果给的值的范围变了"><a href="#如果给的值的范围变了" class="headerlink" title="如果给的值的范围变了"></a>如果给的值的范围变了</h1><p>以上算法的复杂度为$O(mn)$为背包容量乘以物品种数，但如果给的背包容量可能非常大，但物品的价值范围较小的话上面的算法的时间复杂度显然不够了，这时就要换一种思路：一价值为基础来算花费。定义$dp[i][j]$表示考虑前$i$个物品时，价值为$j$时的最小重量，则有状态转移方程：$dp[i][j] = min(dp[i][j], dp[i][j - weight[i]] + cost[i])$，这样初始化的时候就要改一下了，全部初始化为$INF$，表示价值为$j$目前什么都不考虑是做不到的，或者说要无限个空物品才可以达到；但是$j = 0$是可达的，方案就是什么都不选，所以$dp[0] = 0$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// n为物品种数，m为背包容量，maxV为所有物品中的最大价值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m, <span class="keyword">int</span> maxV)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fill(dp, dp + n * maxV, INF);</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = n * maxV; j &gt;= weight[i]; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[j] = min(dp[j], dp[j - weight[i]] + cost[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 答案就是最小花费小于背包容量中下标最大的</span></span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n * maxV; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (dp[i] &lt;= m)</span><br><span class="line">		&#123;</span><br><span class="line">			ans = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="如果给的物品的价值不是定值"><a href="#如果给的物品的价值不是定值" class="headerlink" title="如果给的物品的价值不是定值"></a>如果给的物品的价值不是定值</h1><p>如果价值不是定值，如这题<a href="https://www.luogu.org/problemnew/show/P1417" target="_blank" rel="noopener">洛谷 P1417</a>，价值和时间有关，就不能直接套用$01$背包的模版了。$01$背包遍历物品从1到n表示的是每个物品在轮到被选择之前的所有选择都是正确的，由于$01$背包价值的固定性，并不在乎选择的顺序。但是这题不同，这题如果之前的选择不够优，就有可能在选择的时候由于暂时的dp值更大而而导致了如贪心算法一样的片面性，所以我们要保证在选择之前的正确性才可以开始按顺序选择。<br>考虑相邻两物品$x,y$。假设现在已经耗费$p$的时间，那么$x$、$y$先后做的价值：<br>$a[x] - (p + c[x]) <em> b[x] + a[y] - (p + c[x] + c[y]) </em> b[y]$(先做$x$后做$y$)<br>$a[y] - (p + c[y]) <em> b[y] + a[x] - (p + c[y] + c[x]) </em> b[x]$(先做$y$后做$x$)<br>为了让先考虑$x$再考虑$y$的顺序是最优解，我们就要让先$x$后$y$的价值更大，让$1式&gt;2式$解得：$c[x] <em> b[y] &lt; c[y] </em> b[x]$，先$i$项已经考虑过的物品就可以合成一个物品，所以我们只需要按这个顺序对物品进行排序，再按顺序求解就可以得到最优解<br>P.S. 最大值不一定出现在最大时间处</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">info</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll a, b, c;</span><br><span class="line">&#125; dish[MAXN];</span><br><span class="line">ll dp[MAXT];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(info a, info b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.c * b.b &lt; a.b * b.c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, n;</span><br><span class="line">    scTwoInt(t, n);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].a);</span><br><span class="line">    &#125;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].b);</span><br><span class="line">    &#125;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;dish[i].c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(dish + <span class="number">1</span>, dish + <span class="number">1</span> + n, cmp);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        repME(j, t, dish[i].c)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - dish[i].c] + dish[i].a - dish[i].b * j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    repLE(i, <span class="number">1</span>, t)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = max(ans, dp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二维价值背包-1"><a href="#二维价值背包-1" class="headerlink" title="二维价值背包"></a>二维价值背包</h1><p><a href="https://vjudge.net/problem/POJ-1015" target="_blank" rel="noopener">POJ 1015</a><br>把所有人获得的得分的$d - p$作为价值$1$，$d + p$作为价值$2$，每个人的费用都是$1$。价值$1$的范围是$[-20m, 20m]$，所以为了防止$dp$数组的第二维访问错误，我们要把所有的价值$1$加$20m$。又要记录路径，我们可以利用一个二维的$vector$数组来存储路径，每对一个元素更新值的时候就更新对应的$vector$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">200</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM = <span class="number">20</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXSUB = <span class="number">800</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[MAXM][MAXSUB], diff[MAXN], sum[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path[MAXM][MAXSUB];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, d, p, kase = <span class="number">1</span>;;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m) &amp;&amp; n &amp;&amp; m)</span><br><span class="line">    &#123;</span><br><span class="line">        rep(i, <span class="number">0</span>, m + <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            rep(j, <span class="number">0</span>, MAXSUB)</span><br><span class="line">            &#123;</span><br><span class="line">                path[i][j].<span class="built_in">clear</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        rep(i, <span class="number">0</span>, n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;p, &amp;d);</span><br><span class="line">            diff[i] = p - d;</span><br><span class="line">            sum[i] = p + d;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        clr(dp, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">int</span> add = <span class="number">20</span> * m;</span><br><span class="line">        dp[<span class="number">0</span>][add] = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt; <span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span>  k = diff[i]; k &lt;= <span class="number">2</span> * add; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(k &lt; <span class="number">0</span> || k - diff[i] &gt; <span class="number">2</span> * add)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(dp[j - <span class="number">1</span>][k - diff[i]] == <span class="number">-1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(dp[j - <span class="number">1</span>][k - diff[i]] + sum[i] &gt; dp[j][k])</span><br><span class="line">                    &#123;</span><br><span class="line">                        dp[j][k] = dp[j - <span class="number">1</span>][k - diff[i]] + sum[i];</span><br><span class="line">                        <span class="comment">//更新路径</span></span><br><span class="line">                        path[j][k] = path[j - <span class="number">1</span>][k - diff[i]];</span><br><span class="line">                        path[j][k].push_back(i);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> state = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(dp[m][add + state] == <span class="number">-1</span> &amp;&amp; dp[m][add - state] == <span class="number">-1</span>)  <span class="comment">//找出合法的最小价值1</span></span><br><span class="line">        &#123;</span><br><span class="line">            state++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">		<span class="comment">//更新成更大的那个价值2</span></span><br><span class="line">        <span class="keyword">if</span>(dp[m][add + state] &lt; dp[m][add - state])</span><br><span class="line">        &#123;</span><br><span class="line">            state = add - state;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            state = add + state;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> ansD = (dp[m][state] - (state - add)) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ansP = (dp[m][state] + (state - add)) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Jury #%d\n"</span>, kase++);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Best jury has value %d for prosecution and value %d for defence:\n"</span>, ansP, ansD);</span><br><span class="line">        rep(i, <span class="number">0</span>, path[m][state].<span class="built_in">size</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" %d"</span>, path[m][state][i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="背包的本质"><a href="#背包的本质" class="headerlink" title="背包的本质"></a>背包的本质</h1><p>背包问题的本质就是给定一系列物品，对于物品的选与不选的问题。而且物品的选择不会影响到下一个物品的选择范围(就算是分组背包和依赖背包也可以经过变化，变为不影响选择的问题，主要是要与数塔问题进行区分)<br>例题：<a href="https://www.luogu.org/problemnew/show/P1282" target="_blank" rel="noopener">洛谷 P1282</a><br>这题每一套多米诺骨牌就是一个物品，选与不选的问题就是翻与不翻的问题，这就可以转化为一个$01$背包。但是要注意的是这题翻与不翻可能会出现负价值，所以这题不能用滚动数组($01$背包能用滚动数组是因为只与两维都不大于当前的值有关，但这题负价值的存在就导致了第二维还与大于当前的值有关)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">12005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM = <span class="number">1005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXA = <span class="number">6005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ori[MAXM][<span class="number">2</span>], dp[MAXM][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    scInt(n);</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        scTwoInt(ori[i][<span class="number">0</span>], ori[i][<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    fill(dp[<span class="number">0</span>], dp[<span class="number">0</span>] + MAXN, INF);</span><br><span class="line">    dp[<span class="number">0</span>][MAXA] = <span class="number">0</span>;</span><br><span class="line">    repLE(i, <span class="number">1</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        repLE(j, <span class="number">-5000</span>, <span class="number">5000</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> dis = ori[i][<span class="number">0</span>] - ori[i][<span class="number">1</span>];</span><br><span class="line">            dp[i][j + MAXA] = min(dp[i - <span class="number">1</span>][j - dis + MAXA], dp[i - <span class="number">1</span>][j + dis + MAXA] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> ans = INF;</span><br><span class="line">    repLE(i, <span class="number">0</span>, <span class="number">5000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans = min(dp[n][i + MAXA], dp[n][-i + MAXA]);</span><br><span class="line">        <span class="keyword">if</span>(ans &lt;= <span class="number">1e3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二维费用背包"><a href="#二维费用背包" class="headerlink" title="二维费用背包"></a>二维费用背包</h1><p><a href="https://ac.nowcoder.com/acm/contest/911/H" target="_blank" rel="noopener">新疆省赛-H</a><br>这题对每个数只需要考虑$2$和$5$的因数个数，把个数记为费用$1$，因数$5$的个数记为费用$2$，求能得到的最多因数$2$的个数。费用$1$的界就是$k$，费用$2$的界是前$i$个数中因数$5$的个数的总和</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLess(ele, init, lim) for(int ele = init; ele &lt; lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repLE(ele, init, lim) for(int ele = init; ele &lt;= lim; ele++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repMore(ele, init, lim) for(int ele = init; ele &gt; lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repME(ele, init, lim) for(int ele = init; ele &gt;= lim; ele--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scInt(to) scanf(<span class="meta-string">"%d"</span>, &amp;to)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scTwoInt(one, two) scanf(<span class="meta-string">"%d%d"</span>, &amp;one, &amp;two)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> scThreeInt(one, two, three) scanf(<span class="meta-string">"%d%d%d"</span>, &amp;one, &amp;two, &amp;three)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> clr(arr, init) memset(arr, init, sizeof(arr))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rc ((o &lt;&lt; 1) + 1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lc (o &lt;&lt; 1)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> EPS = <span class="number">1e-8</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">205</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ll a;</span><br><span class="line">    <span class="keyword">int</span> matchFive, matchEven;</span><br><span class="line">&#125; arr[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[MAXN][<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, k;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k))</span><br><span class="line">    &#123;</span><br><span class="line">        repLess(i, <span class="number">0</span>, n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;arr[i].a);</span><br><span class="line">            arr[i].matchFive = arr[i].matchEven = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (arr[i].a % <span class="number">2</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                arr[i].matchEven++;</span><br><span class="line">                arr[i].a /= <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (arr[i].a % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                arr[i].matchFive++;</span><br><span class="line">                arr[i].a /= <span class="number">5</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        clr(dp, -INF);</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        repLess(i, <span class="number">0</span>, n)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += arr[i].matchFive;</span><br><span class="line">            repME(j, k, <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                repME(l, sum, arr[i].matchFive)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j][l] = max(dp[j - <span class="number">1</span>][l - arr[i].matchFive] + arr[i].matchEven, dp[j][l]);</span><br><span class="line">                    ans = max(min(l, dp[j][l]), ans);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对每一个选择的物品还可以进行别的操作"><a href="#对每一个选择的物品还可以进行别的操作" class="headerlink" title="对每一个选择的物品还可以进行别的操作"></a>对每一个选择的物品还可以进行别的操作</h1><p>如<a href="https://www.luogu.com.cn/problem/P6433" target="_blank" rel="noopener">洛谷 P6433</a></p>
+<p>如果出所有题需要的总时间小于等于$m$，则可以出完所有题，贪心地让父母拿走价值最小的题，让老师翻倍价值最大的$k$道题</p>
+<p>如果出所有题需要的时间大于$m$，则至少有一道题出不完，贪心地让父母拿走出不完的题。对于所有的题就是一个背包，背包容量是$m$，每件物品的空间是$x$。贪心地知道，让老师翻倍的题必然都是出完的题 (或者所有出完的题都翻倍了还有多的老师，则多余的老师无所谓)。所以对于每一道题，都三种方案：不出这题，出这题不翻倍，出这题且翻倍</p>
+<p>类似01背包，可得$dp[j][t]$表示时间$j$，翻倍$t$次的情况下的最佳答案</p>
+<p>$dp[j][t] = max(dp[j][t],dp[j-x[i]][t] + a[i], dp[j-x[i]][t-1]+a[i]*2)$</p>
+<p>对所有$t=0$的情况要特判一下</p>
+<p>类似01背包的道理，$j$和$t$都要倒序枚举</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pack</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, x;</span><br><span class="line"></span><br><span class="line">&#125; things[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(pack a, pack b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.a &gt; b.a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, k;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;things[i].a, &amp;things[i].x);</span><br><span class="line">        sum += things[i].x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum &lt;= m)</span><br><span class="line">    &#123;</span><br><span class="line">        sort(things + <span class="number">1</span>, things + <span class="number">1</span> + n, cmp);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            things[i].a *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            ans += things[i].a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        clr(dp, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= things[i].x; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="built_in">min</span>(k, i); t &gt; <span class="number">0</span>; t--)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[j][t] = <span class="built_in">max</span>(dp[j - things[i].x][t] + things[i].a, <span class="built_in">max</span>(dp[j][t], dp[j - things[i].x][t - <span class="number">1</span>] + things[i].a * <span class="number">2</span>));</span><br><span class="line">                    ans = <span class="built_in">max</span>(ans, dp[j][t]);</span><br><span class="line">                &#125;</span><br><span class="line">                dp[j][<span class="number">0</span>] = <span class="built_in">max</span>(dp[j - things[i].x][<span class="number">0</span>] + things[i].a, dp[j][<span class="number">0</span>]);</span><br><span class="line">                ans = <span class="built_in">max</span>(ans, dp[j][<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/09/DP%E4%B9%8B%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" rel="prev" title="DP之子序列问题">
+      <i class="fa fa-chevron-left"></i> DP之子序列问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/09/%E6%95%B0%E4%BD%8DDP/" rel="next" title="数位DP">
+      数位DP <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01背包"><span class="nav-number">1.</span> <span class="nav-text">01背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完全背包"><span class="nav-number">2.</span> <span class="nav-text">完全背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多重背包"><span class="nav-number">3.</span> <span class="nav-text">多重背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维价值背包"><span class="nav-number">4.</span> <span class="nav-text">二维价值背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组背包"><span class="nav-number">5.</span> <span class="nav-text">分组背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有依赖的背包"><span class="nav-number">6.</span> <span class="nav-text">有依赖的背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求方案种数"><span class="nav-number">7.</span> <span class="nav-text">求方案种数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果给的值的范围变了"><span class="nav-number">8.</span> <span class="nav-text">如果给的值的范围变了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果给的物品的价值不是定值"><span class="nav-number">9.</span> <span class="nav-text">如果给的物品的价值不是定值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维价值背包-1"><span class="nav-number">10.</span> <span class="nav-text">二维价值背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#背包的本质"><span class="nav-number">11.</span> <span class="nav-text">背包的本质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维费用背包"><span class="nav-number">12.</span> <span class="nav-text">二维费用背包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对每一个选择的物品还可以进行别的操作"><span class="nav-number">13.</span> <span class="nav-text">对每一个选择的物品还可以进行别的操作</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

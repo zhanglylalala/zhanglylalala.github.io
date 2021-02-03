@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="传输介质 传输介质 (传输媒体 &#x2F; 传输媒介)：数据传输系统中在发送设备和接收设备之间的物理通路 传输媒体不是物理层，在物理层下面。在传输媒体中传输的是信号，但传输媒体并不 知道所传输的信号代表什么意思，电气特性由物理层规定 传输介质分导向性传输介质和非导向性传输介质非导向性介质：自由空间，介质可以是空气、真空、海水等  导向性传输介质导向性介质：电磁波被导向着沿着固体媒介传播 双绞线 双绞线：由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04. 传输介质和设备">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2020/12/22/04-%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8%E5%92%8C%E8%AE%BE%E5%A4%87/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="传输介质 传输介质 (传输媒体 &#x2F; 传输媒介)：数据传输系统中在发送设备和接收设备之间的物理通路 传输媒体不是物理层，在物理层下面。在传输媒体中传输的是信号，但传输媒体并不 知道所传输的信号代表什么意思，电气特性由物理层规定 传输介质分导向性传输介质和非导向性传输介质非导向性介质：自由空间，介质可以是空气、真空、海水等  导向性传输介质导向性介质：电磁波被导向着沿着固体媒介传播 双绞线 双绞线：由">
+<meta property="article:published_time" content="2020-12-22T07:32:26.000Z">
+<meta property="article:modified_time" content="2021-01-27T13:40:33.062Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="408">
+<meta property="article:tag" content="考研">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2020/12/22/04-%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8%E5%92%8C%E8%AE%BE%E5%A4%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>04. 传输介质和设备 | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/12/22/04-%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8%E5%92%8C%E8%AE%BE%E5%A4%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          04. 传输介质和设备
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-22 15:32:26" itemprop="dateCreated datePublished" datetime="2020-12-22T15:32:26+08:00">2020-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-27 21:40:33" itemprop="dateModified" datetime="2021-01-27T21:40:33+08:00">2021-01-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/" itemprop="url" rel="index">
+                    <span itemprop="name">考研</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="传输介质"><a href="#传输介质" class="headerlink" title="传输介质"></a>传输介质</h1><ol>
+<li>传输介质 (传输媒体 / 传输媒介)：数据传输系统中在发送设备和接收设备之间的物理通路</li>
+<li>传输媒体不是物理层，在物理层下面。在传输媒体中传输的是信号，但传输媒体并不 知道所传输的信号代表什么意思，电气特性由物理层规定</li>
+<li>传输介质分导向性传输介质和非导向性传输介质<br />非导向性介质：自由空间，介质可以是空气、真空、海水等</li>
+</ol>
+<h2 id="导向性传输介质"><a href="#导向性传输介质" class="headerlink" title="导向性传输介质"></a>导向性传输介质</h2><p>导向性介质：电磁波被导向着沿着固体媒介传播</p>
+<h3 id="双绞线"><a href="#双绞线" class="headerlink" title="双绞线"></a>双绞线</h3><ol>
+<li>双绞线：由两根采用一定规则并排绞合的、相互绝缘的铜导线组成</li>
+<li>绞合可以减少对相邻导线的电磁干扰</li>
+<li>双绞线的外面再加一层由金属丝编织成的屏蔽层就从非屏蔽双绞线变为屏蔽双绞线</li>
+<li>双绞线再局域网和传统电话网中普遍使用。模拟传输和数字传输都可以使用双绞线，其通信距离一般为几公里到数十公里。距离太远时，对于模拟传输要用放大器放大衰减的信号；对于数字传输，要用中继器将失真的信号整形</li>
+</ol>
+<h3 id="同轴电缆"><a href="#同轴电缆" class="headerlink" title="同轴电缆"></a>同轴电缆</h3><ol>
+<li>同轴电缆：导体铜质芯线、绝缘层、网络编织屏蔽层和塑料外层构成</li>
+<li>基带同轴电缆：<script type="math/tex">50\ \Omega</script>同轴电缆主要用于传送基带数字信号<br />宽带同轴电缆：<script type="math/tex">75\ \Omega</script>同轴电缆主要用于有线电视系统</li>
+<li>相比于双绞线，抗干扰特性好，被广泛用于传输较高速率的数据，其传输距离更远，但价格较贵</li>
+</ol>
+<h3 id="光纤"><a href="#光纤" class="headerlink" title="光纤"></a>光纤</h3><ol>
+<li>光纤：利用光导纤维传递光脉冲来通信。有光脉冲表示1，无光脉冲表示0</li>
+<li>光纤通信系统的带宽远远大于目前其他各种传输媒体的带宽</li>
+<li>发送端：电脉冲作用下发光二极管或半导体激光器产生出光脉冲<br />接收端：用光电二极管做成光检测器，把光脉冲还原成电脉冲</li>
+<li>光纤由纤芯和包层构成。光波在纤芯中通过不断全反射，沿纤芯传播</li>
+<li>单模光纤：光纤较细，光波在里面几乎沿直线传播，但只有一种光信号。要求光源时定向性很好的激光二极管。衰耗小，适合远距离传输<br />多模光纤：光纤较粗，可以有多种光信号传播。光源通常时发光二极管。易失真，适合近距离传输</li>
+<li>光缆：多根光纤组成的线，一根光缆可以只有一根光纤，也可以有数百根</li>
+<li>光纤传输损耗小，中继距离长，对远距离传输特别经济<br />抗雷电和电磁干扰性能好<br />无串音干扰，保密性好，也不易被窃听或截取数据<br />体积小，重量轻</li>
+</ol>
+<h2 id="非导向性传输介质"><a href="#非导向性传输介质" class="headerlink" title="非导向性传输介质"></a>非导向性传输介质</h2><ol>
+<li>无线电波：信号向所有方向传播；较强穿透能力，可传远距离，广泛用于通信领域。</li>
+<li>微波：信号方向固定传播，通信频率较高、频段范围宽，数据率高<br />地面微波接力通信：在地面上建立多个微波基站，信号在基站间转发传输<br />卫星通信：基站建立在太空中，信号固定方向传播。通信容量大，距离远，覆盖广，广播通信和多址通信；传播时延长，受气候影响大，误码率较高，成本高</li>
+<li>红外线、激光：信号固定方向传播。把要传输的信号分别转换为各自的信号格式，再传播</li>
+</ol>
+<h1 id="物理层设备"><a href="#物理层设备" class="headerlink" title="物理层设备"></a>物理层设备</h1><ol>
+<li>中继器：对信号进行再生和还原，对衰减的信号进行放大，保持与原数据相同，以增加信号传输的距离，延长网络长度</li>
+<li>中继器的两端的网络部分是网段，而不是子网，适用于完全相同的两类网络的互连，且两个网段的速率要相同。两端可以连接相同的传输媒体，也可以连接不同的传输媒体，但一定要是同一个协议</li>
+<li>中继器只将任何电缆段上的数据发送到另一电缆上，他仅作用于信号的电气部分，并不管数据中是否有错误数据或不适于网段的数据</li>
+<li>过多的中继器会导致延迟增大，所以网络标准中都对信号的延迟范围做了具体的规定，因而中继器只能在规定的范围内进行，否则会网络故障<br />5-4-3规则：五段传输媒体，四个中继器，三个终端</li>
+<li>集线器：多口中继器，会把信号发给每一个端口，不是定向传输。不能分割冲突域，如果有很多终端连接到一个集线器上，则会平分带宽</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> 基础</a>
+              <a href="/tags/408/" rel="tag"><i class="fa fa-tag"></i> 408</a>
+              <a href="/tags/%E8%80%83%E7%A0%94/" rel="tag"><i class="fa fa-tag"></i> 考研</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/18/%E5%9F%BA%E9%87%91%E5%AE%9A%E6%8A%95/" rel="prev" title="基金定投">
+      <i class="fa fa-chevron-left"></i> 基金定投
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/22/05-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD/" rel="next" title="05. 数据链路层的功能">
+      05. 数据链路层的功能 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传输介质"><span class="nav-number">1.</span> <span class="nav-text">传输介质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导向性传输介质"><span class="nav-number">1.1.</span> <span class="nav-text">导向性传输介质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双绞线"><span class="nav-number">1.1.1.</span> <span class="nav-text">双绞线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同轴电缆"><span class="nav-number">1.1.2.</span> <span class="nav-text">同轴电缆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#光纤"><span class="nav-number">1.1.3.</span> <span class="nav-text">光纤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非导向性传输介质"><span class="nav-number">1.2.</span> <span class="nav-text">非导向性传输介质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物理层设备"><span class="nav-number">2.</span> <span class="nav-text">物理层设备</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
