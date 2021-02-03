@@ -222,7 +222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-03 15:07:11" itemprop="dateModified" datetime="2021-02-03T15:07:11+08:00">2021-02-03</time>
+                <time title="Modified: 2021-02-03 17:57:47" itemprop="dateModified" datetime="2021-02-03T17:57:47+08:00">2021-02-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -312,6 +312,7 @@
 </ol>
 <h1 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h1><ol>
 <li>局域网：LAN (Local Area Network)， 指在某一区域内由多台计算机互连组成的计算机组，使用广播信道</li>
+<li>局域网只覆盖了物理层和数据链路层</li>
 <li>特点<br />&emsp;覆盖的地理范围较小，只在一个相对独立的局部范围内互联<br />&emsp;使用专门铺设的传输介质进行联网，数据传输率高<br />&emsp;通信延迟时间短，误码率低，可靠性高<br />&emsp;各站为平等关系，共享传输信道<br />&emsp;多采用分布式控制和广播式通信，能进行广播和组播</li>
 <li>局域网三要素：网络拓扑、传输介质、介质访问控制方法</li>
 <li>有线局域网常用介质：双绞线、同轴电缆、光纤<br />无线局域网常用介质：电磁波</li>
@@ -329,9 +330,104 @@
 <li>速率高于<script type="math/tex">100\ Mb/s</script>的以太网称为高速以太网<br />100BASE-T以太网，在双绞线上传送<script type="math/tex">100\ MB/s</script>基带信号的星型拓扑以太网，仍使用IEEE 802.3的CSMA/CD协议，支持全双工和半双工<br />吉比特以太网：在光纤或双绞线上传送<script type="math/tex">1\ Gb/s</script>信号，支持全双工和半双工<br />10吉比特以太网：在光纤上传送<script type="math/tex">10\ Gb/s</script>信号，只支持全双工</li>
 </ol>
 <h2 id="无线局域网"><a href="#无线局域网" class="headerlink" title="无线局域网"></a>无线局域网</h2><ol>
-<li>基本服务集：利用一个基站 (AP)互相通信的一组设备，一个基站对应一个基本服务集</li>
-<li>独立基本服务集：无需通过额外访问点的协助即可直接进行通信</li>
-<li>802.11的MAC帧头格式<br /><img src="/img/06.数据链路层的应用02.png"><br /></li>
+<li>无线局域网分为有固定基础设施无线局域网和无固定基础设施无线局域网的自组织网络</li>
+<li>基本服务集 (BSS)：利用一个基站 (AP)或分配系统 (DS)互相通信的一组设备，一个基站对应一个基本服务集，用基本服务集标识 (BSSID)区分</li>
+<li>BSS中的AP或DS就是有固定基础设施无线局域网中的固定基础设施</li>
+<li>独立基本服务集 (IBSS)：无需通过DS的协助即可直接进行通信，是一种特殊的BSS</li>
+<li>IBSS就是无固定基础设施无线局域网的自组织网络</li>
+<li>802.11的MAC帧头格式<br /><img src="/img/06.数据链路层的应用02.png"><br />这里的地址也是MAC地址<br />地址1是直接接受这个帧的设备的地址，地址2是直接发送这个帧的设备的地址，地址3和地址4机动使用，但是要求能识别源设备，目的设备或涉及的BSSID</li>
+<li>当帧从IBSS中发出时，被这个IBSS内的另一个设备接收，所以To DS和From DS都为0，地址1就是目的设备地址，地址2就是源设备地址，还差一个BSSID，就填在地址3上，地址4不使用</li>
+<li>当帧要从设备发送到另一个AP时，To DS为1，From DS为0，地址1就是目的AP的BSSID，地址2就是源设备地址，还差一个目的设备地址填在地址3，地址4不使用</li>
+<li>当帧要从AP发送到目标设备时，To DS为0，From DS为1，地址1就是目标设备地址，地址2就是BSSID，还差一个源设备地址填在地址3上，地址4不使用</li>
+<li>当帧要在无线分布系统间传输时，To DS和From DS都为1，地址1就是目的AP地址，地址2就是本AP地址，还差目的设备地址填在地址3、源设备地址填在地址4</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">To DS</th>
+<th style="text-align:center">From DS</th>
+<th style="text-align:center">地址1</th>
+<th style="text-align:center">地址2</th>
+<th style="text-align:center">地址3</th>
+<th style="text-align:center">地址4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IBSS</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">目的设备</td>
+<td style="text-align:center">源设备</td>
+<td style="text-align:center">BSSID</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">To AP</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">BSSID</td>
+<td style="text-align:center">源设备</td>
+<td style="text-align:center">目的设备</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">From AP</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">目的设备</td>
+<td style="text-align:center">BSSID</td>
+<td style="text-align:center">源设备</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">WDS</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">接收端</td>
+<td style="text-align:center">发送端</td>
+<td style="text-align:center">目的设备</td>
+<td style="text-align:center">源设备</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="广域网"><a href="#广域网" class="headerlink" title="广域网"></a>广域网</h1><ol>
+<li>广域网 (WAN, Wide Area Network)：跨接很大的物理范围，主要使用分组交换技术，将不同地区的局域网或计算机系统互连起来</li>
+<li>因特网是最大的广域网</li>
+<li>广域网覆盖了物理层、数据链路层、网络层</li>
+</ol>
+<h2 id="PPP协议"><a href="#PPP协议" class="headerlink" title="PPP协议"></a>PPP协议</h2><ol>
+<li>点对点协议 (PPP, Point-to-Point Protocol)：最广泛使用的数据链路层广域网协议，只支持全双工链路</li>
+<li>PPP协议应满足的要求：简单，封装成帧，透明传输，支持多种网络层协议，支持多种类型链路，差错检测，检测连接状态 (链路是否正常工作)，限制最大传送单元MTU，网络层地址协商，数据压缩协商</li>
+<li>PPP协议无需满足的要求：纠错，流量控制，可靠传输，编号，多点线路</li>
+<li>PPP协议的三个部分：一个将IP数据报封装到串行链路 (同步串行/异步串行)的方法、链路层控制协议LCP建立并维护数据链路连接、网络层控制协议NCP (每个不同的网络层协议都需要一个NCP来为网络层协议建立和配置逻辑连接)</li>
+<li>PPP协议帧格式<br /><img src="/img/06.数据链路层的应用03.png"><br />两个帧定界符都是<script type="math/tex">7E\ (0111\ 1110)</script>，转义字符为<script type="math/tex">7D\ (0111\ 1101)</script><br />地址字段和控制字段暂时没有意义<br />协议字段标识IP数据报、LCP的数据、网络层控制数据</li>
+<li>PPP协议的步骤<br />&emsp;原本设备之间无链路，物理层建立了连接，成立了物理链路<br />&emsp;然后LCP配置协商，就建立LCP链路<br />&emsp;鉴别LCP，成功了就时已鉴别的LCP链路<br />&emsp;网络层协议再经过NCP配置协商，成功了就建立已鉴别的LCP链路和NCP链路</li>
+</ol>
+<h2 id="HDLC协议"><a href="#HDLC协议" class="headerlink" title="HDLC协议"></a>HDLC协议</h2><ol>
+<li>高级数据链路控制 (HDLC, High-Level Data Link Control)面向比特的数据链路层协议，采用0比特插入法，全双工通信，对信息帧进行顺序编号，课防止漏收或重收，传输可靠性高</li>
+<li>主站：发送命令 (包括数据信息)帧、接收响应帧，并负责对整个链路的控制系统的初启、流程的控制、差错检测或恢复</li>
+<li>从站：接收由主站发来的命令帧，向主站发送响应帧，并配合主站参与差错恢复等链路控制</li>
+<li>复合站：既能发送，又能接收命令帧和响应帧，并负责整个链路的控制</li>
+<li>三种数据操作方式：正常响应方式、异步平衡方式、异步响应方式</li>
+<li>HDLC的帧格式<br /><img src="/img/06.数据链路层的应用04.png"><br />基本与PPP协议帧一致，信息部分采用零比特传输<br />信息帧的控制部分第一位为0，用来传输数据信息，或使用捎带技术对数据进行确认<br />监督帧的控制部分为10，用于流量控制和差错控制，执行对信息帧的确认、请求重发和请求暂停发送等功能<br />无编号帧的控制部分为11，用于提供对链路的建立、拆除等多种控制功能</li>
+</ol>
+<h1 id="链路层设备"><a href="#链路层设备" class="headerlink" title="链路层设备"></a>链路层设备</h1><ol>
+<li>光纤调制器：实现光信号和电信号的转化</li>
+<li>冲突域：每一个集线器及其连接的设备构成一个冲突域，在同一个冲突域中的每一个节点都能收到所有被发送的帧，同一时间只能有一台设备发送信息的范围<br />用一个集线器连接多个集线器就可以扩展冲突域</li>
+<li>广播域：网络中内接收任何一设备发出的广播帧的所有设备的集合</li>
+<li>网段：使用同一个物理层设备能过直接通讯的部分</li>
+<li>网桥：根据MAC的目的地址对帧进行转发和过滤 (丢弃)，不会和集线器一样向所有接口转发收到的帧</li>
+<li>网桥的每一个端口都是一个网段，可以过滤通信量，增大吞吐量；扩大了物理范围；提高了可靠性</li>
+<li>网桥分类<br />&emsp;透明网桥：以太网上的站点并不知道锁发送的帧要经过哪几个网桥，网桥通过自学习算法确定如何转发过滤，即插即用<br />&emsp;源路由网桥：在发送帧时，把详细的最佳路由信息 (路由最少 / 时间最短)放在帧的首部</li>
+<li>自学习算法：每个网桥自我维护一个转发表，并对每一个接口进行编号<br />当收到一个帧时，<br />&emsp;如果转发表内没有发送设备的信息，就记录下该发送设备的信息并标记为收到该帧的接口<br />&emsp;如果转发表内没有接收设备的信息，就把帧从除接收接口外的所有接口转发出去，无需记录信息<br />&emsp;如果转发表内有接收设备的信息<br />&emsp;&emsp;如果转发表的接口不是接收接口，就按转发表的信息从特定接口转发<br />&emsp;&emsp;如果转发表的接口时接收接口，就直接丢弃帧 </li>
+<li>源路由网桥中的源站以广播的方式向欲通信的目的站发送一个发现帧来确定最佳路由信息</li>
+<li>以太网交换机：有多个接口的网桥，每一个端口都是一个冲突域</li>
+<li>以太网交换机的两种交换方式<br />&emsp;直通式交换机：查完目的地址就立刻转发。延时小，可靠性低，无法支持具有不同速率的端口交换<br />&emsp;存储转发式交换机：将帧放入高速缓存，并检查是否正确，正确则转发，错误则丢弃。延迟大，可靠性高，可以支持具有不同速率的端口交换<br />&emsp;混合式交换机</li>
+<li>物理层设备既不能隔离冲突域，也不能隔离广播域<br />链路层设备只能隔离冲突域，不能隔离广播域<br />网络层设备既能隔离冲突域，也能隔离广播域</li>
 </ol>
 
       
