@@ -191,6 +191,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/11-Vector-Fields-in-3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/01/11-Vector-Fields-in-3D/" class="post-title-link" itemprop="url">11. Vector Fields in 3D</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-01 21:46:57" itemprop="dateCreated datePublished" datetime="2020-03-01T21:46:57+08:00">2020-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:35:55" itemprop="dateModified" datetime="2020-08-07T22:35:55+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
+<li>At every point, <script type="math/tex">\vec{F}=<P,Q,R></script>, <script type="math/tex">P,Q,R</script> are all functions of <script type="math/tex">x,y,z</script>. </li>
+<li>In 3D, flux through a surface, which requires a surface integral. </li>
+<li><script type="math/tex">Flux=\displaystyle\iint_S\vec{F}\cdot\vec{n}\ dS</script>. Sometimes <script type="math/tex">d\vec{S}=\vec{n}dS</script>. </li>
+<li>If <script type="math/tex">S</script> is horizontal, namely <script type="math/tex">z=a</script>, <script type="math/tex">\vec{n}=\pm\vec{k}</script>. <script type="math/tex">dS=dx\ dy</script>. <br />If <script type="math/tex">S</script> is a sphere of radius <script type="math/tex">a</script> centered at origin, <script type="math/tex">n=\pm\displaystyle\frac{<x,y,z>}{a}</script>. <script type="math/tex">dS=a^2sin\ \theta\ d\phi\ d\theta</script><br />If <script type="math/tex">S</script> is a sylinder of radius <script type="math/tex">a</script> symmetric to z-axis, <script type="math/tex">\vec{n}=\displaystyle\pm\frac{<x,y,0>}{a}</script>. <script type="math/tex">dS=adz\ d\theta</script><br />If <script type="math/tex">S</script> is graph <script type="math/tex">z=f(x,y)</script>, <script type="math/tex">\vec{n}dS=\pm<-f_x,-f_y,1>dx\ dy</script>. MARK: <script type="math/tex"><-f_x,-f_y,1></script> is not <script type="math/tex">\vec{n}</script> and <script type="math/tex">dx\ dy</script> is not <script type="math/tex">dS</script>. <br />If <script type="math/tex">S</script> is parametric description, namely <script type="math/tex">S=\left\{\begin{array}{}x=x(u,v)\\y=y(u,v)\\z=z(u,v) \end{array}\right.</script>, <script type="math/tex"><x,y,z>=\vec{r}(u,v)</script>. Then <script type="math/tex">\vec{n}dS=\pm(\displaystyle\frac{\partial\vec{r}}{\partial u}\times\frac{\partial\vec{r}}{\partial v})du\ dv</script><br />If we know a normal vector <script type="math/tex">\vec{N}</script> (not necessarily unit) to surface <script type="math/tex">S</script>, see below. </li>
+<li>To set up bounds on <script type="math/tex">dx\ dy</script>, look at shadow of <script type="math/tex">S</script> in xy-plane. </li>
+<li>Interpretation of <script type="math/tex">\vec{n}dS</script>: <br />&emsp;One is the area. Normally the area is a parallelogram, so <script type="math/tex">\vec{n}dS</script> is the cross product of two adjacent edges. <br />&emsp;Let’s say <script type="math/tex">\alpha</script> is the angle between <script type="math/tex">\Delta S</script> and its projection at xy-plane <script type="math/tex">\Delta A</script>. <script type="math/tex">\Delta A=\Delta S\ cos\ \alpha</script><br />&emsp;Easy to know that <script type="math/tex">\alpha</script> is also the angle between normal vector of <script type="math/tex">\Delta S</script> <script type="math/tex">\vec{N}</script> and unit vector which goes along z-axis <script type="math/tex">\vec{k}</script>. <script type="math/tex">cos\ \alpha=\displaystyle\frac{\vec{N}\cdot\vec{k}}{|\vec{N}|}</script><br />&emsp;<script type="math/tex">\Delta S=\displaystyle\frac{1}{cos\ \alpha}\Delta A=\frac{|\vec{N}|}{\vec{N}\cdot\vec{k}}</script><br />&emsp;<script type="math/tex">\vec{n}\Delta S=\displaystyle\frac{|\vec{N}|\vec{n}}{\vec{N}\cdot\vec{k}}\Delta A=\pm\frac{\vec{N}}{\vec{N}\cdot\vec{k}}\Delta A</script><br />&emsp;So <script type="math/tex">\vec{n}dS=\pm\displaystyle\frac{\vec{N}}{\vec{N}\cdot\vec{k}}dx\ dy</script></li>
+</ol>
+<h1 id="Divergence-Theorem"><a href="#Divergence-Theorem" class="headerlink" title="Divergence Theorem"></a>Divergence Theorem</h1><ol>
+<li>Divergence theorem： If <script type="math/tex">S</script> is a closed surface enclosing a region <script type="math/tex">D</script>, oriented with <script type="math/tex">\vec{n}</script> outwards and <script type="math/tex">\vec{F}</script> defined and differentiable everywhere in D, <script type="math/tex">\displaystyle\iint_S\vec{F}dS=\iiint_Ddiv\ \vec{F}dV</script>. <script type="math/tex">div\ (P\vec{i}+Q\vec{j}+R\vec{k})=P_x+Q_y+Z_k</script>.</li>
+<li><script type="math/tex">\triangledown</script> notation: <script type="math/tex">\triangledown=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}></script>. </li>
+<li>Gradient: <script type="math/tex">\triangledown f=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>f=<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}></script></li>
+<li>Divergence: <script type="math/tex">\triangledown\cdot\vec{F}=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>\cdot<P,Q,R>=P_x+Q_y+R_z</script></li>
+<li><script type="math/tex; mode=display">\triangledown^2 f=\triangledown\cdot\triangledown f=\triangledown\cdot<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}>=<\displaystyle\frac{\partial^2 f}{\partial x^2},\frac{\partial^2 f}{\partial y^2},\frac{\partial^2 f}{\partial z^2}>=P_{xx}+Q_{yy}+R_{zz}</script></li>
+<li><script type="math/tex; mode=display">\triangledown\times f=\left|\begin{matrix}\vec{i}&\vec{j}&\vec{k}\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R \end{matrix}\right|=(R_y-Q_z)\vec{i}-(R_x-P_z)\vec{j}+(Q_x-P_y)\vec{k}</script></li>
+<li>Physical interpretation: <script type="math/tex">div\ \vec{F}=</script> source rate <script type="math/tex">=</script> amount of flux generated  per unit volume</li>
+<li>If we sum the divergence in <script type="math/tex">D</script>, we get amount of fluid leaving <script type="math/tex">D</script> per unit time. </li>
+<li>Diffusion equation<br /><script type="math/tex">u=</script> concentration at a given point <script type="math/tex">=u(x,y,z,t)</script>. <br /><script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=k\triangledown^2u=k\triangledown\cdot\triangledown u=k(u_{xx}+u_{yy}+u_{zz})</script>. <br /><script type="math/tex">\vec{F}=</script> velocity field of flowing things. <br />Phycics: Things flows from high concentration towards low concentration. So <script type="math/tex">\vec{F}</script> is directed along <script type="math/tex">-\triangledown u</script>, namely <script type="math/tex">\vec{F}=-k\triangledown u</script>. <br />Math:  Flux out of <script type="math/tex">D</script> through <script type="math/tex">S</script>: <script type="math/tex">\displaystyle\iint\vec{F}\cdot\vec{n}dS=amount\ of\ smoke\ through\ S\ per\ unit\ time=-\frac{d}{dt}(\iiint_DudV)</script>. <br /><script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=\iint_S\vec{F}\cdot\vec{n}dS</script>. So <script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=-\frac{d}{dt}(\iiint_DudV)=\iiint_D-\frac{\partial u}{\partial t}dV</script><br />So <script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=-div\ \vec{F}=kdiv\ (\triangledown u)=k\triangledown^2u</script>. </li>
+</ol>
+<h1 id="Work"><a href="#Work" class="headerlink" title="Work"></a>Work</h1><ol>
+<li><script type="math/tex">\vec{F}=P\vec{i}+Q\vec{j}+R\vec{k}</script>, <script type="math/tex">d\vec{r}=<dx,dy,dz></script>. <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz</script>. </li>
+<li>Fundamental theorem of calculus for line integral is still true in 3D. </li>
+<li>Test for gradient fiels: <script type="math/tex">\left\{\begin{array}{}P_y=f_{xy}=f_{yx}=Q_x\\P_z=f_{xz}=f_{zx}=R_x\\Q_z=f_{yz}=f_{zy}=R_{y} \end{array}\right.</script></li>
+<li>Find potential: <br />&emsp;<script type="math/tex">f(x,y,z)=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>.<br />&emsp;Antiderivatives: Integral <script type="math/tex">P</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)}_{certain}+\underbrace{G(y,z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}</script> with <script type="math/tex">Q</script> to get <script type="math/tex">G_y</script>. Integral <script type="math/tex">G_y</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)+G(y,z)}_{certain}+\underbrace{H(z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial z}</script> with <script type="math/tex">R</script> to get <script type="math/tex">H'</script>. Integral to get <script type="math/tex">H</script>. </li>
+<li><script type="math/tex">curl\ \vec{F}=(R_y-Q_z)\vec{i}+(P_z-R_x)\vec{j}+(Q_x-P_y)\vec{k}=\triangledown\times f</script>. </li>
+<li>If <script type="math/tex">\vec{F}</script> is defined in a symply connected region, <script type="math/tex">\vec{F}</script> is conservative if and only if <script type="math/tex">curl\ \vec{F}=0</script>. </li>
+<li>Curl meansures rotation component in a velocity field. </li>
+</ol>
+<h1 id="Stokes’-Theorem"><a href="#Stokes’-Theorem" class="headerlink" title="Stokes’ Theorem"></a>Stokes’ Theorem</h1><ol>
+<li>Stokes theorem: If <script type="math/tex">C</script> is a closed curve and <script type="math/tex">S</script> is any surface bounded by <script type="math/tex">C</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_S(\triangledown\times\vec{F})\cdot\vec{n}dS</script>. </li>
+<li>Need orientations of <script type="math/tex">C</script> and <script type="math/tex">S</script> to compatible. <br />When walking along <script type="math/tex">C</script>, keep all <script type="math/tex">S</script> in your left-hand side. <br />Or right-hand rule: thumb along <script type="math/tex">C</script> positively, index tangent to <script type="math/tex">S</script> (towards interior of <script type="math/tex">S</script>) and middle finger parallel to <script type="math/tex">\vec{n}</script>. </li>
+<li>Green’s theorem is special case of Stokes in xy-plane. </li>
+<li>A region is simply-connected if every closed loop inside it bounds a surface inside it. </li>
+<li>If <script type="math/tex">\vec{F}</script> is defined in a simply-connected region and <script type="math/tex">curl\ \vec{F}=0</script> then <script type="math/tex">\vec{F}</script> is a gradient and <script type="math/tex">\displaystyle\int_C\vec{F}\cdot d\vec{r}</script> is path-independent. </li>
+<li>Orientability: non-orientable surfaces have only one side, like Mobius surface. Flux cannot be defined in this kind of surface. </li>
+<li><script type="math/tex">div\ (curl\ \vec{F}) =div\ (\triangledown\times\vec{F})=0</script>. (For real vectors <script type="math/tex">\vec{u}\cdot(\vec{u}\times\vec{v})=0</script>)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/10-Triple-Integrals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1081,108 +1199,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/22/01-Vectors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/22/01-Vectors/" class="post-title-link" itemprop="url">01. Vectors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-22 10:22:24" itemprop="dateCreated datePublished" datetime="2020-02-22T10:22:24+08:00">2020-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:43" itemprop="dateModified" datetime="2020-08-07T22:35:43+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>Vector has both <code>direction</code> and <code>magnitude (length)</code>. </li>
-<li><strong>a</strong><script type="math/tex">=\vec{a}=a_1\vec{i}+a_2\vec{j}+…=<a_1,a_2,…></script> (<script type="math/tex">\vec{i},\vec{j},…</script> are unit vectors going along the axises). </li>
-<li><script type="math/tex; mode=display">|\vec{a}|$$ is a scalar equal to the length of $$\vec{a}$$. $$|\vec{a}|=\sqrt{a_1^2+a_2^2+…}</script></li>
-<li><script type="math/tex">dir(\vec{a})</script> is the unit vector in the same direction of <script type="math/tex">\vec{a}</script>. We can aquire <script type="math/tex">dir(\vec{a})</script> by dividing <script type="math/tex">\vec{a}</script> with its length. </li>
-<li>If a point <script type="math/tex">P(x,y,z)</script> is in the plane <script type="math/tex">P_1P_2P_3</script>, then <script type="math/tex">det(\vec{P_1P_2},\vec{P_1P_3},\vec{P_1P})=0</script> in other words <script type="math/tex">\vec{P_1P}</script> is perpendicular to <script type="math/tex">\vec{P_1P_2}\times\vec{P_1P_3}</script>. </li>
-<li>The plane perpendicular to <script type="math/tex">\vec{N}=<a,b,c></script> is <script type="math/tex">ax+by+cz=0</script>, namely <script type="math/tex"><x,y,z>\cdot\vec{N}=0</script>.</li>
-<li>The line through point <script type="math/tex">P_0</script> and parallel to <script type="math/tex">\vec{v}</script> is <script type="math/tex">P(t)=P_0+t\vec{v}</script>, namely <script type="math/tex">\left\{\begin{matrix}x=x_0+at\\y=y_0+bt\\z=z_0+ct \end{matrix}\right.</script>, which is a parametric equation. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dt}(\vec{a}\times\vec{b})=\frac{d\vec{a}}{dt}\vec{b}+\vec{a}\frac{d\vec{b}}{dt}</script></li>
-<li>Velocity is a vector while speed is a scalar which equals to the length of velocity. </li>
-<li><script type="math/tex; mode=display">\vec{v}=\displaystyle\Bigg|\frac{d\vec{r}}{dt}\Bigg|≠\frac{d|\vec{r}|}{dt}$$ and $$speed=\displaystyle\frac{ds}{dt}=|\vec{v}|</script></li>
-<li><script type="math/tex">\displaystyle\vec{v}=\frac{d\vec{r}}{dt}=\frac{d\vec{r}}{ds}\frac{ds}{dt}=\vec{T}|\vec{v}|</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and tangent line of arclength. </li>
-<li><script type="math/tex; mode=display">\displaystyle\vec{\Delta r}=\vec{T}\Delta s\Leftrightarrow\frac{\vec{\Delta r}}{\Delta t}=\vec{T}\frac{\Delta s}{\Delta t}\Leftrightarrow\frac{d\vec{r}}{dt}=\vec{T}\frac{ds}{dt}</script></li>
-<li>Kepler’s second law: <br />&emsp;<script type="math/tex">Area\approx\displaystyle\frac{1}{2}|\vec{r}\times\vec{\Delta r}|\approx\frac{1}{2}|\vec{r}\times\vec{v}|\Delta t</script>. Since area is a constant, <script type="math/tex">|\vec{r}\times\vec{v}|</script> is a constant. <br />&emsp;<script type="math/tex">\displaystyle\frac{d}{dt}(\vec{r}\times\vec{v})=\frac{d\vec{r}}{dt}\times\vec{v}+\vec{r}\times\frac{d\vec{v}}{dt}=\vec{v}\times\vec{v}+\vec{r}\times\vec{a}=\vec{r}\times\vec{a}=0</script>. So <script type="math/tex">\vec{r}</script> and <script type="math/tex">\vec{a}</script> is parallel. So the orbit of a planet is in a plane. </li>
-</ol>
-<p>See more about vectors and matrices on <a href="http://www.laughingtree.cn/categories/Mathematics/Linear-Algebra-MIT-18-06/" target="_blank" rel="noopener">Linear Algebra (18.06)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1249,7 +1270,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-count">201</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
