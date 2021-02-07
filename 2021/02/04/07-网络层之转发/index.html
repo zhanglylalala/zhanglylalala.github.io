@@ -58,11 +58,11 @@
 <meta property="og:image" content="http://http/img/07.%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B9%8B%E8%BD%AC%E5%8F%9102.png">
 <meta property="og:image" content="http://http/img/07.%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B9%8B%E8%BD%AC%E5%8F%9103.png">
 <meta property="article:published_time" content="2021-02-04T07:09:14.000Z">
-<meta property="article:modified_time" content="2021-02-05T07:23:00.640Z">
+<meta property="article:modified_time" content="2021-02-07T04:37:27.269Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="基础">
-<meta property="article:tag" content="考研">
 <meta property="article:tag" content="408">
+<meta property="article:tag" content="考研">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://http/img/07.%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B9%8B%E8%BD%AC%E5%8F%9101.png">
 
@@ -232,7 +232,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-05 15:23:00" itemprop="dateModified" datetime="2021-02-05T15:23:00+08:00">2021-02-05</time>
+                <time title="Modified: 2021-02-07 12:37:27" itemprop="dateModified" datetime="2021-02-07T12:37:27+08:00">2021-02-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -333,8 +333,11 @@
 <h1 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h1><ol>
 <li>IPv6从根本上解决地址耗尽问题</li>
 <li>IPv6的数据报固定40B的基本首部，路由器处不能分片。除了基本首部，还有不定长的扩展首部，与数据部分一起放在有效载荷中</li>
-<li>IPv6数据报格式<br /><img src="/img/07.网络层之转发03.png" width="50%"></li>
-<li></li>
+<li>IPv6数据报格式<br /><img src="/img/07.网络层之转发03.png" width="50%">流：互联网络上从特定源点到特定终点的一系列数据报<br />流标签：类似IPv4数据报的标识，标识一个同属一个流的多个数据报<br />下一个首部：标识下一个扩展首部或上层协议首部 (如果没有扩展首部)<br />跳数限制：相当于IPv4中的TTL</li>
+<li>IPv6与IPv4对比<br />&emsp;地址从32位扩大到 64位<br />&emsp;移除校验和字段，减少处理时间<br />&emsp;将可选字段移出首部，变为扩展字段，更为灵活。路由器通常不对扩展首部检查，提高路由器处理效率<br />&emsp;自支持即插即用，自动配置，无需DHCP协议<br />&emsp;首部长度必须是8B的整数倍<br />&emsp;只能在主机处分片，IPv4还可以在路由器处分片<br />&emsp;ICMPv6附加报文类型：分组过大<br />&emsp;支持资源预分配，支持实施视像等要求，保证一定的带宽和时延的应用<br />&emsp;取消协议字段，改成下一首部字段<br />&emsp;取消总长度字段，该用有效载荷长度字段<br />&emsp;取消服务类型字段</li>
+<li>地址表示<br />&emsp;一般采用冒号十六进制记法，每4位十六进制一组，用冒号分隔开<br />&emsp;如果一组4位十六进制全部是0，可以只写一个0，不必写4个<br />&emsp;如果连续多组的4位十六进制都是0，则可以用两个连续的冒号表示，在一个地址中只能用一次</li>
+<li>基本地址类型<br />&emsp;单播地址：一对一通信，可做源地址和目的地址<br />&emsp;多播地址：一对多通信，可做目的地址<br />&emsp;任播地址：一对多个中的一个通信，可做目的地址</li>
+<li>IPv6向IPv4过渡的策略<br />&emsp;双栈协议：一台设备同时启用IPv4协议栈和IPv6协议栈。如果是路由器，不同接口分别配置IPv4和IPv6地址；如果是计算机，同时有IPv4和IPv6地址<br />&emsp;隧道技术：隧道协议将其他协议的数据帧或包重新封装后通过隧道发送</li>
 </ol>
 
     </div>
@@ -347,8 +350,8 @@
           
           <div class="post-tags">
               <a href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> 基础</a>
-              <a href="/tags/%E8%80%83%E7%A0%94/" rel="tag"><i class="fa fa-tag"></i> 考研</a>
               <a href="/tags/408/" rel="tag"><i class="fa fa-tag"></i> 408</a>
+              <a href="/tags/%E8%80%83%E7%A0%94/" rel="tag"><i class="fa fa-tag"></i> 考研</a>
           </div>
 
         
