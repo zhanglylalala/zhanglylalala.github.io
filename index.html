@@ -222,7 +222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-07 12:40:33" itemprop="dateModified" datetime="2021-02-07T12:40:33+08:00">2021-02-07</time>
+                <time title="Modified: 2021-02-07 12:41:31" itemprop="dateModified" datetime="2021-02-07T12:41:31+08:00">2021-02-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,7 +261,7 @@
 </ol>
 <h1 id="IP数据报"><a href="#IP数据报" class="headerlink" title="IP数据报"></a>IP数据报</h1><ol>
 <li>IP数据报分为首部和数据部分，首部又分为固定部分20B和可变部分</li>
-<li>IP数据报格式<br /><img src="/img/07.网络层之转发01.png">版本：指明是IPv4还是IPv6<br />首部长度：单位是4B，表示固定部分+可变部分的长度<br />区分服务：指示期望获得哪种类型的服务<br />总长度：首部长度+数据部分长度，单位是1B<br />生存时间TTL：IP分组的保质期，经过一个路由器-1，变成0则丢弃。防止无法到达的数据报无限制地在线路上传播<br />协议：数据部分的协议。ICMP为1， IGMP为2，TCP为6，EGP为8，IGP为9，UDP为17，IPv6为41，ESP为50，OSPF为89<br />首部检验和：只检验首部，不管数据部分<br />可选字段：0～40B，用来支持排错、测量以及安全等措施<br />填充：用0把首部补足为4B的整数倍</li>
+<li>IP数据报格式<br /><img src="/img/07.网络层之转发01.png" width="50%">版本：指明是IPv4还是IPv6<br />首部长度：单位是4B，表示固定部分+可变部分的长度<br />区分服务：指示期望获得哪种类型的服务<br />总长度：首部长度+数据部分长度，单位是1B<br />生存时间TTL：IP分组的保质期，经过一个路由器-1，变成0则丢弃。防止无法到达的数据报无限制地在线路上传播<br />协议：数据部分的协议。ICMP为1， IGMP为2，TCP为6，EGP为8，IGP为9，UDP为17，IPv6为41，ESP为50，OSPF为89<br />首部检验和：只检验首部，不管数据部分<br />可选字段：0～40B，用来支持排错、测量以及安全等措施<br />填充：用0把首部补足为4B的整数倍</li>
 <li>IP数据报分片：如果所传送的数据报长度超过链路的MTU值，就需要把数据报分为多个片来传输<br />同一个数据报的不同分片的IP数据报中的标识位相同<br />IP数据报的标志位三位中只有后两位有意义<br />&emsp;中间位DF (Don’t Fragment)，$DF=1$禁止分片，$DF=0$允许分片<br />&emsp;最低位MF (More Fragment)，$MF=1$后面还有分片，$MF=0$这是最后一个分片<br />片偏移表示这个分组的第一个字节在原完整数据报中的位置，单位是8B<br />由片偏移可以得知，除了最后一个分片，每个分片的长度一定是8B的整数倍</li>
 <li>MTU的值包括了首部的大小</li>
 </ol>
