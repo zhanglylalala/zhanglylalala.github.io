@@ -57,11 +57,11 @@
 <meta property="og:image" content="http://http/img/09.%E4%BC%A0%E8%BE%93%E5%B1%8201.png">
 <meta property="og:image" content="http://http/img/09.%E4%BC%A0%E8%BE%93%E5%B1%8202.png">
 <meta property="article:published_time" content="2021-02-08T12:35:17.000Z">
-<meta property="article:modified_time" content="2021-02-08T15:24:47.267Z">
+<meta property="article:modified_time" content="2021-02-08T15:28:17.198Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="基础">
-<meta property="article:tag" content="408">
 <meta property="article:tag" content="考研">
+<meta property="article:tag" content="408">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://http/img/09.%E4%BC%A0%E8%BE%93%E5%B1%8201.png">
 
@@ -225,7 +225,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-02-08 20:35:17 / Modified: 23:24:47" itemprop="dateCreated datePublished" datetime="2021-02-08T20:35:17+08:00">2021-02-08</time>
+              <time title="Created: 2021-02-08 20:35:17 / Modified: 23:28:17" itemprop="dateCreated datePublished" datetime="2021-02-08T20:35:17+08:00">2021-02-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
 <h1 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h1><ol>
 <li>UDP只在IP数据报服务之上增加了复用分用和差错检测功能</li>
 <li>主要特点<br />无连接，减少开销和发送数据之前的时延<br />使用最大努力交付，不保证可靠交付<br />面向报文，适合一次性传输少量数据的网络应用<br />无拥塞控制，适合很多实时应用<br />首部开销小，只用8B<br />应用层给UDP多长的报文，UDP旧照样发送，一次发一个完整报文</li>
-<li>UDP首部格式<br /><img src="/img/09.传输层01.png" width="25%"><br />UDP长度：UDP用户数据报整个长度<br />UDP检验和：检测整个UDP数据报是否有错，有错则丢弃</li>
+<li>UDP首部格式<br /><img src="/img/09.传输层01.png" width="25%">UDP长度：UDP用户数据报整个长度<br />UDP检验和：检测整个UDP数据报是否有错，有错则丢弃</li>
 <li>分用时，找不到对应的端口号，就丢弃报文，并给发送法发送ICMP端口不可达差错报告报文</li>
 <li>发送端生成校验和<br />在首部的前面添加伪IP首部，包括4B的源IP地址、4B的目的IP地址、1B的0、1B的协议 (UDP代码为17)、2B的UDP长度<br />在校验和字段填充全0<br />用全0填充数据部分，使得数据部分的总长度为4B的整数倍<br />每2B为一组，把每一组逐个相加<br />&emsp;方法一：二进制直接计算，每次只加两个行，如果最高位有进位，就加在末位上<br />&emsp;方法二：换算成4位十六进制，所有数一起加。先算最右边一列，取其个位数，其余作为进位与最右边第二列相加，以此类推。最高位的进位最后加在最低位上，再转化为8位二进制数<br />把相加的结果取反，填入检验和字段<br />去掉伪首部即可发送</li>
 <li>接收端验证校验和<br />填上和发送端一样的伪首部，并在数据末位补0<br />每2B为一组，和发送端一样求和<br />若结果为全1，则无差错，否则丢弃数据报，或交给应用层附上差错警告</li>
@@ -277,7 +277,7 @@
 <h1 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h1><ol>
 <li>主要特点<br />面向连接 (虚连接)的传输层协议<br />每一条TCP连接只能有两个端点，每一条TCP连接只能是点对点的<br />提供可靠交付的服务，无差错、不丢失、不重复、按序到达<br />提供全双工通信，包含发送缓存和接收缓存<br />面向字节流，把应用程序交下来的数据看成仅仅是一连串的无结构的字节流</li>
 <li>发送缓存收留准备发送的数据、已发送但尚未收到确认的数据<br />接收缓存收留按序到达但尚未被应用程序读取的数据、不按序到达的数据</li>
-<li>TCP报文段首部格式<br /><img src="/img/09.传输层02.png" width="50%"><br />TCP报文段的固定首部为20B<br />序号：本报文段传送的数据的第一个字节的序号<br />确认号：期望收到对方下一个报文段的第一个数据字节的序号。若确认号为$N$，则证明到序号$N-1$为止的所有数据都以正确收到<br />数据偏移 (首部长度)：TCP报文段的数据起始处距离TCP报文段的起始处有多远，单位是4B<br />紧急位URG：$URG=1$时，表示此报文段有紧急数据，应尽快传送，不用在缓存中排队<br />确认位ACK：$ACK=1$时，确认号有效，在连接建立后所有传送的报文段都必须把ACK置为1<br />推送位PSH：$PSH=1$时，接收方尽快交付接收应用进程，不再等到缓存填满再向上交付<br />复位RST：$RST=1$时，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立传输连接<br />同步位SYN：$SYN=1$时，表明时一个连接请求/连接接受报文<br />终止位FIN：$FIN=1$时，表明报文段发送方数据已发送完，要求释放连接<br />窗口：发送本报文段的一方的接收窗口，现在允许对方发送的数据量<br />检验和：同UDP检验和<br />紧急指针：当$URG=1$时，指出本报文段中紧急数据的字节数<br />选项：最大报文段长度MSS、窗口扩大、时间戳、选择确认等</li>
+<li>TCP报文段首部格式<br /><img src="/img/09.传输层02.png" width="50%">TCP报文段的固定首部为20B<br />序号：本报文段传送的数据的第一个字节的序号<br />确认号：期望收到对方下一个报文段的第一个数据字节的序号。若确认号为$N$，则证明到序号$N-1$为止的所有数据都以正确收到<br />数据偏移 (首部长度)：TCP报文段的数据起始处距离TCP报文段的起始处有多远，单位是4B<br />紧急位URG：$URG=1$时，表示此报文段有紧急数据，应尽快传送，不用在缓存中排队<br />确认位ACK：$ACK=1$时，确认号有效，在连接建立后所有传送的报文段都必须把ACK置为1<br />推送位PSH：$PSH=1$时，接收方尽快交付接收应用进程，不再等到缓存填满再向上交付<br />复位RST：$RST=1$时，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立传输连接<br />同步位SYN：$SYN=1$时，表明时一个连接请求/连接接受报文<br />终止位FIN：$FIN=1$时，表明报文段发送方数据已发送完，要求释放连接<br />窗口：发送本报文段的一方的接收窗口，现在允许对方发送的数据量<br />检验和：同UDP检验和<br />紧急指针：当$URG=1$时，指出本报文段中紧急数据的字节数<br />选项：最大报文段长度MSS、窗口扩大、时间戳、选择确认等</li>
 </ol>
 <h2 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h2><ol>
 <li>TCP连接采用C/S方式，主动发起连接建立的应用进程叫客户，被动等待连接建立的应用进程叫服务器</li>
@@ -297,7 +297,7 @@
 <li>发送方的发送窗口为接收方的接收窗口rwnd和拥塞窗口cwnd的最小值</li>
 <li>TCP为每一个连接舍友一个持续计时器，只要TCP连接的一方收到对方的零窗口通知，就启动持续计时器。若一持续计时器的时间到期，就发送一个零窗口探测报文段。接收方收到探测报文段时就给出现在的窗口值。若窗口仍是0，发送方就重新设置持续计时器</li>
 <li>拥塞控制：防止过多的数据注入到网络中</li>
-<li>慢开始和拥塞避免算法<br />发送方一开始$cwnd=1$<br />每发送一批数据<br />慢开始：如果一个RTT内收到了它们的确认，$cwnd=\left\{\begin{matrix}min\{2*cwnd,ssthresh\}&amp;cwnd<ssthresh\\cwnd+1&cwnd≥ssthresh\end{matrix}\right.$，并发送下一批数据<br />拥塞避免：如果一个RTT内没有收到它们的确认，$cwnd=1$，且$ssthresh=\displaystyle\frac{cwnd}{2}$</li>
+<li>慢开始和拥塞避免算法<br />发送方一开始$cwnd=1$<br />每发送一批数据<br />慢开始：如果一个RTT内收到了它们的确认，$cwnd=\left\{\begin{matrix}min\{2*cwnd,ssthresh\}&amp;cwnd&lt; ssthresh\\cwnd+1&amp;cwnd≥ssthresh\end{matrix}\right.$，并发送下一批数据<br />拥塞避免：如果一个RTT内没有收到它们的确认，$cwnd=1$，且$ssthresh=\displaystyle\frac{cwnd}{2}$</li>
 <li>快重传和快恢复算法，开端和慢开始一样，从1开始，逐渐翻倍，达到ssthresh就逐渐+1<br />快重传：如果连续收到三个冗余ACK，直接重传<br />快恢复：重传前，$cwnd=ssthresh=\displaystyle\frac{cwnd}2$</li>
 </ol>
 
@@ -311,8 +311,8 @@
           
           <div class="post-tags">
               <a href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> 基础</a>
-              <a href="/tags/408/" rel="tag"><i class="fa fa-tag"></i> 408</a>
               <a href="/tags/%E8%80%83%E7%A0%94/" rel="tag"><i class="fa fa-tag"></i> 考研</a>
+              <a href="/tags/408/" rel="tag"><i class="fa fa-tag"></i> 408</a>
           </div>
 
         
