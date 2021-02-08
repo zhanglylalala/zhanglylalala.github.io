@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2021/02/07/08-%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2021/02/08/09-%E4%BC%A0%E8%BE%93%E5%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,126 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/07/08-%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9/" class="post-title-link" itemprop="url">08. 路由选择</a>
+            <a href="/2021/02/08/09-%E4%BC%A0%E8%BE%93%E5%B1%82/" class="post-title-link" itemprop="url">09. 传输层</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-08 20:35:17 / Modified: 23:24:47" itemprop="dateCreated datePublished" datetime="2021-02-08T20:35:17+08:00">2021-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/" itemprop="url" rel="index">
+                    <span itemprop="name">考研</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%80%83%E7%A0%94/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
+<li>功能：提供进程与进程之间的逻辑通信 (网络层提供主机之间的逻辑通信)；复用和分用；对收到的报文进行差错检测</li>
+<li>面向连接的TCP协议：传送数据前必须建立连接，数据传送结束后要释放连接。不提供广播或多播服务<br />由于TCP要提供可靠的面向连接，不可避免增加了许多开销：确认、流量控制、计时器、连接管理<br />TCP可靠，面向连接，时延大，适用于大文件</li>
+<li>无连接的UDP协议：传送数据前不需要建立连接，收到UDP报文后也不需要给出任何确认<br />UDP不可靠，无连接，时延小，适用于小文件</li>
+<li>复用：应用层素有的应用进程都可以通过传输层再传输到网络层<br />分用：传输层从网络层收到数据后交付指明的应用进程</li>
+<li>逻辑端口/软件端口：端口是传输层的服务访问点 (SAP)，标识主机中的应用进程<br />端口是有本地意义，不同计算机的相同端口没有联系</li>
+<li>端口号长度为16位，共65536个<br />服务端使用的端口号<br />&emsp;熟知端口号：给TCP/IP最重要的一些应用程序，让所有用户都知道，$0\sim1023$<br />&emsp;登记端口号：为没有熟知端口号的应用程序使用，$1024\sim49151$<br />客户端使用的端口号：仅在客户进程运行时才动态选择，$49152\sim65535$</li>
+<li>常用熟知端口号<br />FTP数据传输进程：20<br />FTP控制进程：21<br />TELNET：23<br />SMTP：25<br />DNS：53<br />TFTP：69<br />HTTP：80<br />POP：110<br />SNMP：161<br />HTTPS：443</li>
+<li>网络中采用发送方和接收方的套接字组合来识别端口，套接字唯一标识了网络中的一个主机和它上面的进程。$套接字Socket=(主机IP地址,端口号)$</li>
+</ol>
+<h1 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h1><ol>
+<li>UDP只在IP数据报服务之上增加了复用分用和差错检测功能</li>
+<li>主要特点<br />无连接，减少开销和发送数据之前的时延<br />使用最大努力交付，不保证可靠交付<br />面向报文，适合一次性传输少量数据的网络应用<br />无拥塞控制，适合很多实时应用<br />首部开销小，只用8B<br />应用层给UDP多长的报文，UDP旧照样发送，一次发一个完整报文</li>
+<li>UDP首部格式<br /><img src="/img/09.传输层01.png" width="25%"><br />UDP长度：UDP用户数据报整个长度<br />UDP检验和：检测整个UDP数据报是否有错，有错则丢弃</li>
+<li>分用时，找不到对应的端口号，就丢弃报文，并给发送法发送ICMP端口不可达差错报告报文</li>
+<li>发送端生成校验和<br />在首部的前面添加伪IP首部，包括4B的源IP地址、4B的目的IP地址、1B的0、1B的协议 (UDP代码为17)、2B的UDP长度<br />在校验和字段填充全0<br />用全0填充数据部分，使得数据部分的总长度为4B的整数倍<br />每2B为一组，把每一组逐个相加<br />&emsp;方法一：二进制直接计算，每次只加两个行，如果最高位有进位，就加在末位上<br />&emsp;方法二：换算成4位十六进制，所有数一起加。先算最右边一列，取其个位数，其余作为进位与最右边第二列相加，以此类推。最高位的进位最后加在最低位上，再转化为8位二进制数<br />把相加的结果取反，填入检验和字段<br />去掉伪首部即可发送</li>
+<li>接收端验证校验和<br />填上和发送端一样的伪首部，并在数据末位补0<br />每2B为一组，和发送端一样求和<br />若结果为全1，则无差错，否则丢弃数据报，或交给应用层附上差错警告</li>
+</ol>
+<h1 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h1><ol>
+<li>主要特点<br />面向连接 (虚连接)的传输层协议<br />每一条TCP连接只能有两个端点，每一条TCP连接只能是点对点的<br />提供可靠交付的服务，无差错、不丢失、不重复、按序到达<br />提供全双工通信，包含发送缓存和接收缓存<br />面向字节流，把应用程序交下来的数据看成仅仅是一连串的无结构的字节流</li>
+<li>发送缓存收留准备发送的数据、已发送但尚未收到确认的数据<br />接收缓存收留按序到达但尚未被应用程序读取的数据、不按序到达的数据</li>
+<li>TCP报文段首部格式<br /><img src="/img/09.传输层02.png" width="50%"><br />TCP报文段的固定首部为20B<br />序号：本报文段传送的数据的第一个字节的序号<br />确认号：期望收到对方下一个报文段的第一个数据字节的序号。若确认号为$N$，则证明到序号$N-1$为止的所有数据都以正确收到<br />数据偏移 (首部长度)：TCP报文段的数据起始处距离TCP报文段的起始处有多远，单位是4B<br />紧急位URG：$URG=1$时，表示此报文段有紧急数据，应尽快传送，不用在缓存中排队<br />确认位ACK：$ACK=1$时，确认号有效，在连接建立后所有传送的报文段都必须把ACK置为1<br />推送位PSH：$PSH=1$时，接收方尽快交付接收应用进程，不再等到缓存填满再向上交付<br />复位RST：$RST=1$时，表明TCP连接中出现严重差错，必须释放连接，然后再重新建立传输连接<br />同步位SYN：$SYN=1$时，表明时一个连接请求/连接接受报文<br />终止位FIN：$FIN=1$时，表明报文段发送方数据已发送完，要求释放连接<br />窗口：发送本报文段的一方的接收窗口，现在允许对方发送的数据量<br />检验和：同UDP检验和<br />紧急指针：当$URG=1$时，指出本报文段中紧急数据的字节数<br />选项：最大报文段长度MSS、窗口扩大、时间戳、选择确认等</li>
+</ol>
+<h2 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h2><ol>
+<li>TCP连接采用C/S方式，主动发起连接建立的应用进程叫客户，被动等待连接建立的应用进程叫服务器</li>
+<li>TCP连接建立过程<br />客户端发送连接请求报文段，无应用层数据，$SYN=1,seq=x$，$x$随机<br />服务器端为该TCP连接分配缓存和变量，并向客户端返回确认报文段啊，允许连接，无应用层数据，$SYN=1,ACK=1,seq=y,ack=x+1$，$y$随机<br />客户端为该TCP连接分配缓存和变量，并向服务器端返回确认的确认报文段，可以携带数据，$SYN=0,ACK=1,seq=x+1,ack=y+1$</li>
+<li>SYN洪泛攻击：攻击者向服务器发送连接请求报文，当服务器返回ACK后，不对其再进行确认，那个TCP就会处于挂起状态，即半连接状态，服务器不断重复发送ACK给攻击者。若攻击者大量发送TCP连接，每一个都无法完成三次握手，就会耗费大量的服务器资源，最后可能死机</li>
+<li>TCP连接释放<br />客户端发送连接释放报文段，停止发送数据，主动关闭TCP连接。$FIN=1,seq=u$<br />服务器端回送一个确认报文段，客户到服务器这个方向的连接就释放了，处于半关闭状态。$ACK=1,seq=v,ack=u+1$<br />服务器端发完数据，就发出连接释放报文段，主动关闭TCP连接。$FIN=1,ACK=1,seq=w,ack=u+1$<br />客户端回送一个确认报文段，$ACK=1,seq=u+1,ack=w+1$。再等到时间等待计时器设置的2MSL (最大报文段寿命)后，连接彻底关闭<br />等待2MSL是为了防止确认报文段丢失，导致连接不能彻底关闭</li>
+</ol>
+<h2 id="TCP可靠传输"><a href="#TCP可靠传输" class="headerlink" title="TCP可靠传输"></a>TCP可靠传输</h2><ol>
+<li>TCP实现可靠传输的手段：校验、序号、确认、重传</li>
+<li>TCP一个字节占一个序号，使用累计确认</li>
+<li>超时重传：TCP采用自适应释放，动态改变重传时间RTTs (加权平均往返时间)</li>
+<li>快速重传：每当比期望序号大的失序报文到达时，发送一个冗余ACK，指明下一个期待字节的序号，发送方收到3个对于一个报文段的冗余ACK时，就认为报文段丢失，重传该报文段</li>
+</ol>
+<h2 id="TCP流量控制和拥塞控制"><a href="#TCP流量控制和拥塞控制" class="headerlink" title="TCP流量控制和拥塞控制"></a>TCP流量控制和拥塞控制</h2><ol>
+<li>流量控制：让发送方慢点，要让接收方来得及截搜。TCP利用<a href="http://www.laughingtree.cn/2020/12/22/05-数据链路层的功能/#流量控制和可靠传输" target="_blank" rel="noopener">滑动窗口机制</a>实现流量传输。</li>
+<li>接收方可以根据自己接收缓存的大小，动态调整发送方的发送窗口大小，即接收窗口rwnd，通过确认报文段的窗口字段发送</li>
+<li>发送方的发送窗口为接收方的接收窗口rwnd和拥塞窗口cwnd的最小值</li>
+<li>TCP为每一个连接舍友一个持续计时器，只要TCP连接的一方收到对方的零窗口通知，就启动持续计时器。若一持续计时器的时间到期，就发送一个零窗口探测报文段。接收方收到探测报文段时就给出现在的窗口值。若窗口仍是0，发送方就重新设置持续计时器</li>
+<li>拥塞控制：防止过多的数据注入到网络中</li>
+<li>慢开始和拥塞避免算法<br />发送方一开始$cwnd=1$<br />每发送一批数据<br />慢开始：如果一个RTT内收到了它们的确认，$cwnd=\left\{\begin{matrix}min\{2*cwnd,ssthresh\}&amp;cwnd<ssthresh\\cwnd+1&cwnd≥ssthresh\end{matrix}\right.$，并发送下一批数据<br />拥塞避免：如果一个RTT内没有收到它们的确认，$cwnd=1$，且$ssthresh=\displaystyle\frac{cwnd}{2}$</li>
+<li>快重传和快恢复算法，开端和慢开始一样，从1开始，逐渐翻倍，达到ssthresh就逐渐+1<br />快重传：如果连续收到三个冗余ACK，直接重传<br />快恢复：重传前，$cwnd=ssthresh=\displaystyle\frac{cwnd}2$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2021/02/07/08-%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B9%8B%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/07/08-%E7%BD%91%E7%BB%9C%E5%B1%82%E4%B9%8B%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9/" class="post-title-link" itemprop="url">08. 网络层之路由选择</a>
         </h1>
 
         <div class="post-meta">
@@ -222,7 +341,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-08 20:34:01" itemprop="dateModified" datetime="2021-02-08T20:34:01+08:00">2021-02-08</time>
+                <time title="Modified: 2021-02-08 21:38:36" itemprop="dateModified" datetime="2021-02-08T21:38:36+08:00">2021-02-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1605,349 +1724,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/10/05/16-How-To-Talk-About-Variery-Of-Personal-Characteristics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/05/16-How-To-Talk-About-Variery-Of-Personal-Characteristics/" class="post-title-link" itemprop="url">16. How To Talk About Variery Of Personal Characteristics</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-05 13:08:51" itemprop="dateCreated datePublished" datetime="2020-10-05T13:08:51+08:00">2020-10-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 13:14:47" itemprop="dateModified" datetime="2020-10-06T13:14:47+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">obsequious</td>
-<td style="text-align:center"><code>Latin sequor: follow</code><br /><code>Latin suffix -ousfull: full of</code><br />of following after<br /><strong><em>whose who follow rather than lead are usualy in a menial, subordinate, or inferior position that have to follow the lead of their customers or emplyers, bending their own wills according to the desires of those they serve</em></strong><br />they are forced, often contrary to their natural temperaments</td>
-</tr>
-<tr>
-<td style="text-align:center">obsequies</td>
-<td style="text-align:center">in a funeral cortege, the mourners follow after the corpse<br /><strong><em>the burial ceremonies, the funeral rites</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">subsequent</td>
-<td style="text-align:center"><strong><em>one that follows another</em></strong><br />a subsequent letter, paragraph, time, etc.</td>
-</tr>
-<tr>
-<td style="text-align:center">sequel</td>
-<td style="text-align:center"><strong><em>a literary work that follows another, continuing the same subject dealing with the same people or village, etc.</em></strong> <br /><strong><em>an occurrence that grows out of or follows another</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">sequence</td>
-<td style="text-align:center"><strong><em>one item following another</em></strong><br /><strong><em>in order</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">querulous</td>
-<td style="text-align:center"><code>latin queror: to complain</code><br /><strong><em>complaining</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supercilious</td>
-<td style="text-align:center"><code>Latin cilium: eyelid</code><br /><code>super: above</code><br />above the eyelid is the eyebrow<br />raising eyebrows in contempt, disdain, and sneering arrogance<br /><strong><em>contemptuous, sneering, overbearingly conceited</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">obstreperous</td>
-<td style="text-align:center"><code>Latin strepo: to make a noise</code><br /><strong><em>noisy and difficult to control</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">impecunious</td>
-<td style="text-align:center"><code>Latin pecus: cattle</code><br /> don’t have any cattle<br /><strong><em>having little or no money, but not necessarily imply iving in reduced circumstances or want, but quite simply being short of cash</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pecuniary</td>
-<td style="text-align:center"><strong><em>pertaining to money</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalrous</td>
-<td style="text-align:center"><code>Latin caballus: in inferior horse</code><br /><code>from caballus, derived French cheval: horse</code><br />in medieval times only gentlemen and knights rode on horses<br /><strong><em>an adjective that describes a knightly attitude to women</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cavalcade</td>
-<td style="text-align:center"><strong><em>a procession of persons on horseback, as in a parade</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cavalier</td>
-<td style="text-align:center"><strong><em>as a noun, a nounted soldier</em></strong><br /><strong><em>as an adjective, describes actions and attitudes that are haughty, unmindful of others’ feelings, too offhand, such attributes often being accociated with people in power</em></strong><br />a cavalier action seems arrogant and makes others feel unimportant</td>
-</tr>
-<tr>
-<td style="text-align:center">cavalry</td>
-<td style="text-align:center"><strong><em>the mounted, or “horsed” part of an army</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalry</td>
-<td style="text-align:center"><strong><em>noun form of chivalrous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalric</td>
-<td style="text-align:center"><strong><em>less commonly used adjective form of chivalrous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equestrian</td>
-<td style="text-align:center"><code>Latin equus: horse</code><br /><strong><em>a horseman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equestrienne</td>
-<td style="text-align:center"><strong><em>a howsewoman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equine</td>
-<td style="text-align:center"><strong><em>horselike</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">innocuous</td>
-<td style="text-align:center"><code>Latin noceo: injure</code><br /><strong><em>harmless; inoffensive</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">innocent</td>
-<td style="text-align:center"><strong><em>not guilty of crime or injury</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">noxious</td>
-<td style="text-align:center"><strong><em>harmful, poisonous; unwholesome</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">bibulous</td>
-<td style="text-align:center"><code>Latin bibo: drink</code><br /><strong><em>an adjective to describe one who has an overfondness for drinks with a pronounced alcoholic content</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">imbibe</td>
-<td style="text-align:center"><strong><em>to drink in, soak up, absorb</em></strong><br />without specifying what is drunk, the implication is always liquor<br />it can also be used in other patterns</td>
-</tr>
-<tr>
-<td style="text-align:center">bib</td>
-<td style="text-align:center"><strong><em>upper part of an apron, or an apronlike napkin tied around a child’s neck</em></strong><br />prevents what is drunk or eaten from spilling over, or dribbling down, on the wearer’s clothing</td>
-</tr>
-<tr>
-<td style="text-align:center">cadaverous</td>
-<td style="text-align:center"><code>Latin cado: to fall</code><br />one’s final fall is death<br /><strong><em>pale, gaunt, thin, haggard, eyes deep-sunk, limbs wasted, like a corpse</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadaver</td>
-<td style="text-align:center"><strong><em>a corpse, especially one used for surgical dissection</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">decadent</td>
-<td style="text-align:center">falling down<br /><code>de-: down</code><br /><strong><em>deteriorating, becomming corrupt or demoralized</em></strong><br />generally used figuratively, it refers not to actual physical decay as a dead body, but to moral or spiritual decay</td>
-</tr>
-<tr>
-<td style="text-align:center">decadence</td>
-<td style="text-align:center"><strong><em>a state of decadent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">descend</td>
-<td style="text-align:center">climb down</td>
-</tr>
-<tr>
-<td style="text-align:center">decline</td>
-<td style="text-align:center">turn down</td>
-</tr>
-<tr>
-<td style="text-align:center">dolorous</td>
-<td style="text-align:center"><code>Latin doleo: to suffer or grieve</code><br /><strong><em>mournful and sad because of physical pain or mental distress</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dolor</td>
-<td style="text-align:center"><strong><em>a poetic synonym of grief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">doleful</td>
-<td style="text-align:center"><strong><em>exaggerated dismalness, sadness, or dreariness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">condole</td>
-<td style="text-align:center">to suffer or grieve with<br /><strong><em>less commonly used synonym of commiserate</em></strong><br />you condole with somebody who has sustained a loss, usually by death</td>
-</tr>
-<tr>
-<td style="text-align:center">condolence</td>
-<td style="text-align:center">Let me offer you my condolences</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">non sequitur</td>
-<td style="text-align:center">does not follow<br /><strong><em>a conclusion not based on the evidence</em></strong><br /><strong><em>any statement that appears to have no connection or relevance to what was said before</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">consecutive</td>
-<td style="text-align:center"><code>secutus is the other form of sequor</code><br /><strong><em>following in proper order</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">persecute</td>
-<td style="text-align:center">to follow through and thourght<br /><strong><em>to annoy, harass continually for no good reason</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prosecute</td>
-<td style="text-align:center">to follow before<br /><strong><em>to pursue something diligently or vigorously in order to complete it successfully</em></strong><br /><strong><em>to state, to engage in, legal proceedings against, especially in an official capacity</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superior</td>
-<td style="text-align:center"><strong><em>above others (in quality, position, etc.)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superficial</td>
-<td style="text-align:center"><strong><em>above the surface, not in depth</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superfluous</td>
-<td style="text-align:center"><strong><em>flowing above what is necessary; more than needed</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superfluity</td>
-<td style="text-align:center"><strong><em>the noun form of superfluous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supernatural</td>
-<td style="text-align:center"><strong><em>above the natural</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supervise</td>
-<td style="text-align:center"><strong><em>to oversee; be in charge of</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadence</td>
-<td style="text-align:center"><strong><em>fall and rise of the voice in speaking</em></strong><br /><strong><em>inflection, rhythm beat</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadent</td>
-<td style="text-align:center"><strong><em>the adjective of cadence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">occidental</td>
-<td style="text-align:center">the sun falls in the west<br /><strong><em>the adjective of western countries</em></strong><br /><strong><em>the adjective of a native of such a country</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">occident</td>
-<td style="text-align:center"><strong><em>the noun form of occidental</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">orient</td>
-<td style="text-align:center"><code>Latin orior: to rise</code><br />the sun rises in the east<br /><strong><em>eastern countries</em></strong><br />to turn, or face, east<br /><strong><em>to adjust to a place or situation</em></strong><br /><strong><em>become familiar with, and comfortable in a place, job, situation, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">orientation</td>
-<td style="text-align:center"><strong><em>the noun form of orient</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disorient</td>
-<td style="text-align:center"><strong><em>to remove someone’s orientation, or to confuse or bewilder, especially in reference to locality, direction, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disorientation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">deciduous</td>
-<td style="text-align:center">falling down<br /><strong><em>refers to trees whose leaves fall (down) every autumn</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incident</td>
-<td style="text-align:center"><strong><em>which falls upon, befalls, or happens</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">indolent</td>
-<td style="text-align:center">not suffering<br />idle; lazy; disliking effort or work</td>
-</tr>
-<tr>
-<td style="text-align:center">indolence</td>
-<td style="text-align:center"><strong><em>the noun of indolence</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -2019,7 +1795,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">202</span>
+          <span class="site-state-item-count">203</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
