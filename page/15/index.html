@@ -191,6 +191,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/2-sat%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/2-sat%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">2-sat算法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:45:46" itemprop="dateCreated datePublished" datetime="2019-11-09T00:45:46+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 17:43:29" itemprop="dateModified" datetime="2020-08-07T17:43:29+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>2-sat算法为可满足算法中的特例，对于k-sat算法，若k &gt; 2，则问题是一个NP完全问题，但2-sat不是。2-sat问题一般是：每一个集合里都有两个元素，不同集合里的元素之间可能有矛盾，现在要从每一个集合里都取出一个元素作为代表，且取出的元素两两之间没有矛盾</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p><strong>构图</strong>：记i和i’是同一个集合里的两个元素，则易得如果i和j有矛盾，则选了i就必选j’，选了j就必选i’。如果选了i就必选j’我们就连一条从i到j’的有向边<br><strong>主体思想</strong>：从一个点出发沿着有向边一直走，选择路过的每一个点<br><strong>失败判断</strong>：走到一个点，那个点所在的集合内的两个点都被标记了<br><strong>失败后的处理</strong>：先清空标记，把失败这次的开始节点换成该集合内的另一个节点，如果还失败就说明无解<br><strong>代码</strong>(假设2i - 1和2i是在同一个集合里)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; mp[MAXN];</span><br><span class="line"><span class="keyword">int</span> mark[MAXN], ans[MAXN];</span><br><span class="line"><span class="comment">//mark记录在该次遍历中经过的点，用于清除记录(如果失败)，ans就标记的是选中的点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getAnother</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//获得该集合内另一点的标号</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> ? x + <span class="number">1</span> : x - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//建图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> m)</span>   <span class="comment">//m：矛盾对的个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        mp[arr[i].x].push_back(getAnother(arr[i].y));</span><br><span class="line">        mp[arr[i].y].push_back(getAnother(arr[i].x));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n, <span class="keyword">int</span> &amp; len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ans[getAnother(x)]) <span class="comment">//一个集合内有两个点被标记</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans[x])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[x] = <span class="number">1</span>;</span><br><span class="line">    mark[len++] = x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mp[x].<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfs(mp[x][i], n, len))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">two_sat</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="comment">//遍历所有的集合</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!ans[i &lt;&lt; <span class="number">1</span>] &amp;&amp; !ans[(i &lt;&lt; <span class="number">1</span>) - <span class="number">1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            len = <span class="number">0</span>; <span class="comment">//在这次遍历中直到失败/结束访问的节点的个数</span></span><br><span class="line">            <span class="keyword">if</span>(!dfs((i &lt;&lt; <span class="number">1</span>) - <span class="number">1</span>, n, len)) <span class="comment">//失败</span></span><br><span class="line">            &#123;</span><br><span class="line">            	<span class="comment">//先清除记录</span></span><br><span class="line">                <span class="keyword">while</span>(len)</span><br><span class="line">                &#123;</span><br><span class="line">                    ans[mark[--len]] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//再从集合内另一个点开始遍历</span></span><br><span class="line">                <span class="keyword">if</span>(!dfs((i &lt;&lt; <span class="number">1</span>), n, len))</span><br><span class="line">                &#123;</span><br><span class="line">                	<span class="comment">//再失败就说明无解</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p>有向图中经常会有环，根据上面对边的定义，可以发现环中的每一个元素要么都选要么都不选，而且这个问题中的环都是对称的，我们就可以利用强连通分量把多个形成环的点缩成一个点，减少点数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%90%9C%E7%B4%A2%E4%B9%8B%E6%9E%9A%E4%B8%BE-%E7%86%84%E7%81%AF%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1024,92 +1115,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%8B%93%E5%B1%95KMP%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E6%8B%93%E5%B1%95KMP%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">拓展KMP算法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:34:03" itemprop="dateCreated datePublished" datetime="2019-11-09T00:34:03+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:42:47" itemprop="dateModified" datetime="2020-08-07T17:42:47+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E4%B8%B2/" itemprop="url" rel="index">
-                    <span itemprop="name">串</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>EX-KMP算法是在KMP算法的基础上改变的</p>
-<h1 id="算法目的"><a href="#算法目的" class="headerlink" title="算法目的"></a>算法目的</h1><p>求出主串每一个后缀和模式串的最长公共前缀，也可以理解为主串从每一个位置开始到结尾的子串和模式串的最长公共前缀</p>
-<h1 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h1><p>我们用一个数组extend来保存结果，受到KMP算法的启发，我们对模式串进行自匹配，得到nex数组。在拓展KMP算法中，预处理和主算法之间几乎没有区别，只是改了比较的两个数组，自匹配是模式串和模式串匹配，主算法是主串和模式串匹配</p>
-<h1 id="extend匹配方法"><a href="#extend匹配方法" class="headerlink" title="extend匹配方法"></a>extend匹配方法</h1><p>exKMP和KMP的核心思想一样，都是利用之前的匹配结果来避免不必要的匹配过程。假设我们已经完成了主串第k位及其以前的匹配，我们要开始匹配主串的第k+1位和模式串的第0位开始的串。<br>1、因为我们要利用以前的匹配结果，所以以前的匹配结果越远越好，又我们是从主串的第k+1位开始往后匹配，我们只需要主串上的最后匹配位置P越靠后就好，而无需管该次匹配的开始位置p0在哪，不需使该次匹配的长度最长<br>2、易知k+1到p~0~点距离是k+1-p~0~，我们假设第k+1位开始匹配的最长公共前缀的长度是len，则我们为了利用之前的结果，得知主串<strong>S(p~0~..&lt;p~0~+extend[p~0~]) = 模式串T(0..&lt;extend[p~0~])</strong>。又有<strong>T(0..&lt;nex[k-p~0~+1]) = T(k-p~0~+1..&lt;k-p~0~+1+nex[k-p~0~+1]</strong>，我们在模式串和主串匹配时把模式串前移k-p~0~+1，使k+1与p~0~重合<br>3、我们可以得到<strong>S(p~0~..&lt;p~0~+nex[k-p~0~+1])=T(0…nex[k-p~0~+1])=T(k-p~0~+1…k-p~0~+nex[k-p~0~+1])=S(k+1…k+nex[k-p~0~+1])</strong>。这就够了吗？不是的，我们可以注意到，在推导过程中，在最后<strong>S(k+1…k+nex[k-p~0~+1])</strong>中，最远可以到<strong>k+nex[k-p~0~+1]</strong>，如果这个值已经超出了我们的已匹配范围(<strong>p~0~+extend[p~0~]-1</strong>)就不能利用结果<br>故我们得出若<strong>k+nex[k-p~0~+1]&lt;p~0~+extend[p~0~]</strong>，则<strong>T(0…nex[k-p~0~+1])=S(k+1…k+nex[k-p~0~+1])</strong>，即<strong>第k+1位的匹配长度为nex[k-p~0~+1]</strong><br>4、若<strong>nex[k-p~0~+1] &gt;= extend[p~0~]</strong>，我们只需要从P+1开始匹配，并更新P和p~0~</p>
-<h1 id="nex匹配方法"><a href="#nex匹配方法" class="headerlink" title="nex匹配方法"></a>nex匹配方法</h1><p>匹配过程中的主串和模式串都是主算法中的模式串，extend和nex数组都是主算法中的nex</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nex[maxn], ex[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildNex</span><span class="params">(<span class="keyword">int</span> modeLen, <span class="built_in">string</span> modeString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    nex[<span class="number">0</span>] = modeLen;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos + <span class="number">1</span> &lt; modeLen &amp;&amp; modeString[mainPos + <span class="number">1</span>] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    nex[<span class="number">1</span>] = mainPos;</span><br><span class="line">    p0 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">2</span>; mainPos &lt; modeLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + nex[mainPos - p0] &lt; p0 + nex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            nex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = nex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; modeLen &amp;&amp; modeString[j] == modeString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            nex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildExtend</span><span class="params">(<span class="built_in">string</span> mainString, <span class="built_in">string</span> modeString, <span class="keyword">int</span> mainLen, <span class="keyword">int</span> modeLen)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    buildNex(mainLen, modeString);</span><br><span class="line">    <span class="keyword">int</span> mainPos = <span class="number">0</span>, p0;</span><br><span class="line">    p0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(mainPos &lt; modeLen &amp;&amp; mainPos &lt; mainLen &amp;&amp; mainString[mainPos] == modeString[mainPos])</span><br><span class="line">    &#123;</span><br><span class="line">        mainPos++;</span><br><span class="line">    &#125;</span><br><span class="line">    ex[<span class="number">0</span>] = mainPos;</span><br><span class="line">    <span class="keyword">for</span>(mainPos = <span class="number">1</span>; mainPos &lt; mainLen; mainPos++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mainPos + ex[mainPos - p0] &lt; p0 + ex[p0])</span><br><span class="line">        &#123;</span><br><span class="line">            ex[mainPos] = nex[mainPos - p0];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> j = ex[p0] + p0 - mainPos;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(mainPos + j &lt; mainLen &amp;&amp; j &lt; modeLen &amp;&amp; modeString[j] == mainString[mainPos + j])</span><br><span class="line">            &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            ex[mainPos] = j;</span><br><span class="line">            p0 = mainPos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1181,7 +1186,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-count">204</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1219,7 +1224,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

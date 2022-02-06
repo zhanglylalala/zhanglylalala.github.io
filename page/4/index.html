@@ -191,6 +191,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E4%BA%8C%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/%E4%BA%8C%E5%88%86/" class="post-title-link" itemprop="url">二分</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-07 22:42:19" itemprop="dateCreated datePublished" datetime="2020-08-07T22:42:19+08:00">2020-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-21 16:16:03" itemprop="dateModified" datetime="2020-08-21T16:16:03+08:00">2020-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本二分查找"><a href="#基本二分查找" class="headerlink" title="基本二分查找"></a>基本二分查找</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN];</span><br><span class="line"><span class="comment">// arr按非降排序</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_search_int</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi, <span class="keyword">int</span> target)</span> <span class="comment">// 查找区间为 [lo, hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (arr[mid] &lt; target)</span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">binary_search_real</span><span class="params">(<span class="keyword">double</span> lo, <span class="keyword">double</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (lo + EPS &lt; hi) <span class="comment">// EPS通常比要求的精度小两个数量级</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">double</span> mid = (lo + hi) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (cmp(mid))</span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> lo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二分答案"><a href="#二分答案" class="headerlink" title="二分答案"></a>二分答案</h1><p>有些题直接求答案不好求，但是一个结果是不是答案很容易判断，这时就可以写一个检查函数，检查一个结果是不是答案<br>例如：<a href="https://ac.nowcoder.com/acm/contest/918/I" target="_blank" rel="noopener">USACO</a><br>在知道了一个界限之后我们就很容易写出检查函数——一辆一辆塞，塞满或者达到界限为止</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arrive[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n, <span class="keyword">int</span> c, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">1</span>, fir = arrive[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (arrive[i] - fir &lt;= x &amp;&amp; sum + <span class="number">1</span> &lt;= c)</span><br><span class="line">        &#123;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            sum = <span class="number">1</span>;</span><br><span class="line">            fir = arrive[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt &lt;= m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;c);</span><br><span class="line">    repLess(i, <span class="number">0</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arrive[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arrive, arrive + n);</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = arrive[n - <span class="number">1</span>] - arrive[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (check(mid, n, c, m))</span><br><span class="line">        &#123;</span><br><span class="line">            r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            l = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (check(l, n, c, m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三分查找求单峰函数极值"><a href="#三分查找求单峰函数极值" class="headerlink" title="三分查找求单峰函数极值"></a>三分查找求单峰函数极值</h1><ol>
+<li><p>要求单峰函数在极值的两侧都是严格单调，极大值左侧严格递增，右侧严格递减；极小值左侧严格递减，右侧严格递增。且只有一个极值</p>
+</li>
+<li><p>先考虑极大值情况，把区间用两个点$lmid$、$rmid$ 划分成三段区间</p>
+<p>&emsp;如果$f(lmid)&lt;f(rmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的左侧，但极大值都在$lmid$的右侧，此时可以赋值$l=lmid$</p>
+<p>&emsp;如果$f(rmid)&lt;f(lmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$rmid$的左侧，此时可以赋值$r=rmid$</p>
+</li>
+<li><p>再考虑极小值情况</p>
+<p>&emsp;如果$f(lmid)&lt;f(rmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$rmid$的左侧，此时可以赋值$r=rmid$</p>
+<p>&emsp;如果$f(rmid)&lt;f(lmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$lmid$的右侧，此时可以赋值$l=lmid$</p>
+</li>
+</ol>
+<h1 id="最近点对问题"><a href="#最近点对问题" class="headerlink" title="最近点对问题"></a>最近点对问题</h1><p>问题：给平面内一系列的点，找出其中距离最近的两个点<br />二分：先把所有点按$x$轴排序，分成左右两段，所有组合只有三种情况——两个点都在左半段；两个点都在右半段；一个点在左半段，一个点在右半段<br />二分解决左半段和右半段的问题，再枚举跨越两段的情况，找到最小值<br />枚举跨越两段的情况时，只需要枚举距离中点不超过只在左段或只在右段的最小距离<br />复杂度为<script type="math/tex">O(nlog\ n\ log\ n)</script></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (lo == hi - <span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> INF;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">double</span> ans = <span class="built_in">min</span>(solve(lo, mid), solve(mid, hi));</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = mid - <span class="number">1</span>; i &gt;= lo; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (dist(i, mid) &gt;= ans)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = mid; j &lt; hi; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (dist(mid, j) &gt;= ans)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      ans = <span class="built_in">min</span>(ans, dist(i, j));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>扩展：把点分为两类，要找出一类点到另一类点的最短距离 <a href="https://ac.nowcoder.com/acm/contest/1004/D" target="_blank" rel="noopener">POJ 3714</a></p>
+<p>在枚举的时候特判一下两个点的类别不同即可</p>
+<h1 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h1><ol>
+<li><code>lower_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于或等于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li><code>upper_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li>这两个函数都是返回一个指针，减掉$begin$，就可以得到其与$begin$的相对位置，是一个整型</li>
+<li>如果要找的是小于或等于查找值的最大位置的话<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置就是等于查找值的位置<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;任何情况下得到的位置都是大于查找值，且其上一个位置等于查找值 (查找值存在)，或小于查找值 (查找值不存在)，所以都要减$1$<br />综上，我们采用​<code>upper_bound(begin, end, num) - begin - 1</code>的策略</li>
+<li>如果要找的是小于查找值的最大位置的话<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置的上一个位置是查找值，再上一个位置才小于查找值，则需要减$2$<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置是查找值，上一个位置小于查找值，要减$1$<br />&emsp;&emsp;如果查找值不存在，得到的位置大于查找值，但由于查找值不存在，其上一个位置小于查找值，要减$1$<br />综上，我们采用<code>lower_bound(begin, end, num) - begin - 1</code>的策略</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E6%8E%92%E5%BA%8F-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1539,124 +1646,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:51:12" itemprop="dateModified" datetime="2020-08-07T19:51:12+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
-<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
-<li>语法正确的程序不一定语义正确</li>
-<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
-</ol>
-<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
-<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
-<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
-<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
-<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
-<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承属性：由该节点的兄弟节点及父节点的属性值计算出来</li>
-<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
-<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
-<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
-<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合属性，一般由词法分析器提供</li>
-<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
-<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
-<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
-<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
-<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
-</ol>
-<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
-<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
-<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
-<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
-<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
-</ol>
-<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
-<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
-<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
-<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有关</li>
-<li>每一个$S-$属性定义都是$L-$属性定义</li>
-<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
-<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
-<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
-<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1728,7 +1717,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">203</span>
+          <span class="site-state-item-count">204</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1766,7 +1755,7 @@ table th:first-of-type {
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
