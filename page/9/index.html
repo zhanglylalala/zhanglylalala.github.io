@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">34</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">28</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/25/04-Differentials-and-Gradient/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/05-Exponential-and-Logarithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/25/04-Differentials-and-Gradient/" class="post-title-link" itemprop="url">04. Differentials and Gradient</a>
+            <a href="/2020/02/10/05-Exponential-and-Logarithm/" class="post-title-link" itemprop="url">05. Exponential and Logarithm</a>
         </h1>
 
         <div class="post-meta">
@@ -215,405 +215,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-25 20:38:19" itemprop="dateCreated datePublished" datetime="2020-02-25T20:38:19+08:00">2020-02-25</time>
+              <time title="Created: 2020-02-10 11:38:22" itemprop="dateCreated datePublished" datetime="2020-02-10T11:38:22+08:00">2020-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:06" itemprop="dateModified" datetime="2020-08-07T22:36:06+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Differential"><a href="#Differential" class="headerlink" title="Differential"></a>Differential</h1><ol>
-<li>For <script type="math/tex">f(x, y, z)</script>, <script type="math/tex">df=f_xdx+f_ydy+f_zdz</script>. </li>
-<li><script type="math/tex">df</script> is not <script type="math/tex">\Delta f</script>. </li>
-<li>It encodes how changes in <script type="math/tex">x,y,z</script> affect <script type="math/tex">f</script>. </li>
-<li>It’s a placeholder for smal variations <script type="math/tex">\Delta x,\Delta y, \Delta z</script> to get approximation formula <script type="math/tex">\Delta f\approx f_x\Delta x+f_y\Delta y+f_z\Delta z</script>. </li>
-<li><code>Chain rule</code>: When <script type="math/tex">x=x(t),y=y(t),z=z(t)</script>, it can be divided by something like <script type="math/tex">dt</script> to get a rate of change. <br /><script type="math/tex">\displaystyle\frac{df}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}+f_z\frac{dz}{dt}</script></li>
-<li><script type="math/tex; mode=display">d(uv)=f_udu+f_vdv=vdu+udv$$ and $$\displaystyle\frac{d(uv)}{dt}=v\frac{du}{dt}+u\frac{dv}{dt}</script></li>
-<li><script type="math/tex; mode=display">\displaystyle d(\frac{u}{v})=f_udu+f_vdc=\frac{1}{v}du+\frac{-u}{v^2}dv$$ and $$\displaystyle\frac{d(\frac{u}{v})}{dt}=\frac{1}{v}\frac{du}{dt}+\frac{-u}{v^2}\frac{dv}{dt}</script></li>
-<li><code>Chain rule with more variables</code>: <script type="math/tex">f=f(x,y),x=x(u,v),y=y(u,v)</script><br /><script type="math/tex">\begin{equation}\begin{split}df&=f_xdx+f_ydy\\&=f_x(x_udu+x_vdv)+f_y(y_udu+y_vdv)\\&=(f_xx_u+f_yy_u)du+(f_xx_v+f_yy_u)dv\\&=f_udu+f_vdv\end{split}\end{equation}</script><br />Here we also knows <script type="math/tex">\displaystyle\frac{\partial f}{\partial u}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial u}</script></li>
-</ol>
-<h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
-<li>The differential of <script type="math/tex">w=w(x,y,z)</script> and <script type="math/tex">x=x(t),y=y(t),z=z(t)</script> is <script type="math/tex">\displaystyle\frac{dw}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}+f_z\frac{dz}{dt}</script>. We define <script type="math/tex">\displaystyle\frac{dw}{dt}=\triangledown w\cdot\frac{d\vec{r}}{dt}</script>. </li>
-<li>So <script type="math/tex">\triangledown w=<f_x,f_y,f_z></script> and <script type="math/tex">\displaystyle\frac{d\vec{r}}{dt}=<\frac{dx}{dt},\frac{dy}{dt},\frac{dz}{dt}></script>. </li>
-<li><script type="math/tex">\triangledown w</script> is perpendicular to level surface <script type="math/tex">w=c</script> and points towards higher values of <script type="math/tex">w</script>. <br />Take a curve <script type="math/tex">\vec{r}=\vec{r}(t)</script> that stays on the level <script type="math/tex">w=c</script>, so the velocity along that direction is <script type="math/tex">\vec{v}=\displaystyle\frac{d\vec{r}}{dt}</script> which is tangent to the level. <br />By the chain rule, <script type="math/tex">\displaystyle\frac{dw}{dt}=\triangledown w\cdot \frac{d\vec{r}}{dt}=\triangledown w\cdot\vec{v}=0</script>, since <script type="math/tex">w=c</script> is a constant. So <script type="math/tex">\triangledown w\perp\vec{v}</script> <br />Further more, <script type="math/tex">\triangledown w</script> is perpendicular to any vector tangent to level <script type="math/tex">w=c</script>. <br />This is an important way to find the tangent plane of a level surface, since <script type="math/tex">\triangledown w</script> is the normal vector of that plane. </li>
-<li>The partial derivatives can tells us how <script type="math/tex">w</script> changes when we move along the axises. If we want to know the answer when we move in direction of unit vector <script type="math/tex">\vec{u}</script>, we need the directional derivatives. </li>
-<li>The directional derivative of <script type="math/tex">w</script> at the direction of <script type="math/tex">\vec{u}</script> at point <script type="math/tex">(x,y)</script> is the slope of graph by a vertical plane parallel to <script type="math/tex">\vec{u}</script>. </li>
-<li>This represent the changing rate of <script type="math/tex">w</script> at different direction. </li>
-<li><script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=\triangledown w\frac{d\vec{r}}{ds}=\triangledown w\cdot \vec{u}</script>. This is the component of <script type="math/tex">\triangledown w</script> in direction of <script type="math/tex">\vec{u}</script>. <script type="math/tex">s</script> is the distance we move along <script type="math/tex">\vec{u}</script>. Since the velocity is <script type="math/tex">1</script>, this is <script type="math/tex">t</script>. </li>
-<li><script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=|\triangledown w||\vec{u}|cos\ \theta=|\triangledown w|cos\ \theta</script>. <script type="math/tex">\theta</script> is the angle between <script type="math/tex">\vec{u}</script> and <script type="math/tex">\triangledown w</script><br />When <script type="math/tex">\theta</script> is <script type="math/tex">0</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=|\triangledown w|</script>, this is the fastest increase of <script type="math/tex">w</script>. <br />When <script type="math/tex">\theta = \pi</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=-|\triangledown w|</script>, this is the fastest decrease of <script type="math/tex">w</script>. <br />When <script type="math/tex">\theta=\displaystyle\frac{\pi}{2}</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=0</script>, <script type="math/tex">\vec{u}</script> is tangen to the level curve and this is where <script type="math/tex">w</script> doesn’t change. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/03-Max-min-Problems-and-Least-Squares/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/23/03-Max-min-Problems-and-Least-Squares/" class="post-title-link" itemprop="url">03. Max-min Problems and Least Squares</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-23 23:14:10" itemprop="dateCreated datePublished" datetime="2020-02-23T23:14:10+08:00">2020-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:39" itemprop="dateModified" datetime="2020-08-07T22:35:39+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Max-min-Problems"><a href="#Max-min-Problems" class="headerlink" title="Max-min Problems"></a>Max-min Problems</h1><ol>
-<li>At a local min or max <script type="math/tex">f_x=0</script> and <script type="math/tex">f_y=0</script>. <br />According to the approximation equation <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script> we know this is right. </li>
-<li>Max or min also means the tangent plane is horizontal. </li>
-<li><script type="math/tex">(x_0,y_0)</script> is a critical point of <script type="math/tex">f</script> if <script type="math/tex">f_x(x_0,y_0)=0</script> and <script type="math/tex">f_y(x_0,y_0)=0</script>. </li>
-<li>A critical point can be a <code>local min</code>, a <code>local max</code> or a <code>saddle point</code>. </li>
-<li>A global min/max occurs either at a critical point or on boundary / at infinity. </li>
-<li><code>Second derivative test</code>: <br />&emsp;There are three second derivatives <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial x^2}=f_{xx}</script>, <script type="math/tex">f_{xy}=\displaystyle\frac{\partial^2f}{\partial x\partial y}=\frac{\partial^2f}{\partial y\partial x}=f_{yx}</script> and <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial y^2}=f_{yy}</script>. <br />&emsp;At a critical point <script type="math/tex">P(x_0,y_0)</script> of <script type="math/tex">f</script>, let <script type="math/tex">A=f_{xx}(x_0,y_0),B=f_{xy}(x_0,y_0)</script> and <script type="math/tex">C=f_{yy}(x_0,y_0)</script>. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A>0</script>, <script type="math/tex">P</script> is a local minimum. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A<0</script>, <script type="math/tex">P</script> s a local maximum. <br />&emsp;If <script type="math/tex">AC-B^2<0</script>, <script type="math/tex">P</script> s a saddle point. <br />&emsp;If <script type="math/tex">AC-B^2=0</script>, cannot conclude. </li>
-</ol>
-<h1 id="Least-Square"><a href="#Least-Square" class="headerlink" title="Least Square"></a>Least Square</h1><ol>
-<li>Given some datas, find best fit line <script type="math/tex">y=ax+b</script>. In this equation, <script type="math/tex">a</script> and <script type="math/tex">b</script> are unknowns instead of <script type="math/tex">x</script> and <script type="math/tex">y</script>. </li>
-<li>Best means minimizing total square deviation. </li>
-<li>Deviation for each data point is <script type="math/tex">y_i-(ax_i+b)</script>. </li>
-<li>So we are trying to minimize <script type="math/tex">D=\displaystyle\sum^n_{i=1}[y_i-(ax_i+b)]^2</script></li>
-<li><script type="math/tex">\begin{equation}\begin{split}&\left\{\begin{array}{}\frac{\partial D}{\partial a}=\sum^n_{i=1}2(y_i-(ax_i+b))(-x_i)=0\\\frac{\partial D}{\partial b}=\sum^n_{i=1}2(y_i-(ax_i+b))(-1)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}\sum^n_{i=1}(x_i^2a+x_ib-x_iy_i)=0\\\sum^n_{i=1}(x_ia+b-y)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}(\sum^n_{i=1}x_i^2)a+(\sum^n_{i=1}x_i)b=\sum^n_{i=1}x_iy_i\\(\sum^n_{i=1}x_i)a+nb=\sum^n_{i=1}y_i \end{array}\right. \end{split}\end{equation}</script><br />This is a <script type="math/tex">2\times2</script> linear equation of <script type="math/tex">a</script> and <script type="math/tex">b</script>. </li>
-<li>If the best explanation of a set of datas is <script type="math/tex">y=ce^{ax}</script>, we can make it <script type="math/tex">ln\ y=ln\ c+ax</script> so that it becomes linear again. </li>
-<li>Similarly we can define the best quadratic <script type="math/tex">y=ax^2+bx+c</script> with the same deviation. </li>
-</ol>
-<p>See the linear algebra version of least square: <a href="http://www.laughingtree.cn/2020/02/01/13-Least-Squares/" target="_blank" rel="noopener">Least square</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/" class="post-title-link" itemprop="url">02. Contow Plot and Partial Derivatives</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-23 17:38:13" itemprop="dateCreated datePublished" datetime="2020-02-23T17:38:13+08:00">2020-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:28" itemprop="dateModified" datetime="2020-08-07T22:35:28+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Contow-Plot"><a href="#Contow-Plot" class="headerlink" title="Contow Plot"></a>Contow Plot</h1><ol>
-<li>Normally a function can be represented by equations or graphs. </li>
-<li>However, functions with multivariables are hard to draw on paper. For two-variablefunctions there is another way to draw is <code>Contow plot</code>: <br />&emsp;In Contow plot, we draw on an <script type="math/tex">x-y</script> plane where we link all points with the same <script type="math/tex">f(x,y)</script> value chosen at regular intevals. <br />&emsp;Namely, we slice the graph with horizontal planes <script type="math/tex">z=c</script>. </li>
-<li>Every slice of <script type="math/tex">f(x,y)</script> by <script type="math/tex">z=c</script> is a lever curve of <script type="math/tex">f</script>.  </li>
-<li>Contow plot tells us what <script type="math/tex">f</script> will increase or decrease when we move <script type="math/tex">x</script> or <script type="math/tex">y</script>, but it won’t tell how much or how fast. </li>
-</ol>
-<h1 id="Partial-Derivatives"><a href="#Partial-Derivatives" class="headerlink" title="Partial Derivatives"></a>Partial Derivatives</h1><ol>
-<li>This is where <code>partial derivatives</code> come in. <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=\lim_{\Delta x\to 0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x}</script>. Similarly we can define the partial derivative on other variables. </li>
-<li>The partial derivative of <script type="math/tex">f(x,y)</script> at point <script type="math/tex">(x_0,y_0)</script> on <script type="math/tex">x</script> means the slope of <script type="math/tex">f(x,y)</script> at slice of <script type="math/tex">y=y_0</script> at <script type="math/tex">x=x_0</script>. </li>
-<li>To compute <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=f_x</script>, we just see <script type="math/tex">x</script> as the only variable and see all others constants. </li>
-<li>Linear approximation equation: <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script><br />Quadratic approximation equation: <script type="math/tex">\Delta z\approx f_x(x-x_0)+f_y(y-y_0)+\displaystyle\frac{1}{2}f_{xx}(x-x_0)^2+f_{xy}(x-x_0)(y-y_0)+\frac{1}{2}(y-y_0)^2</script></li>
-<li>The two tangent lines represented by <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=a</script> and <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}=b</script> set the tangent plane of <script type="math/tex">f</script> at <script type="math/tex">(x_0,y_0)</script> whose equation is <script type="math/tex">z=z_0+a(x-x_0)+b(y-y_0)</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/22/01-Vectors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/22/01-Vectors/" class="post-title-link" itemprop="url">01. Vectors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-22 10:22:24" itemprop="dateCreated datePublished" datetime="2020-02-22T10:22:24+08:00">2020-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:43" itemprop="dateModified" datetime="2020-08-07T22:35:43+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>Vector has both <code>direction</code> and <code>magnitude (length)</code>. </li>
-<li><strong>a</strong><script type="math/tex">=\vec{a}=a_1\vec{i}+a_2\vec{j}+…=<a_1,a_2,…></script> (<script type="math/tex">\vec{i},\vec{j},…</script> are unit vectors going along the axises). </li>
-<li><script type="math/tex; mode=display">|\vec{a}|$$ is a scalar equal to the length of $$\vec{a}$$. $$|\vec{a}|=\sqrt{a_1^2+a_2^2+…}</script></li>
-<li><script type="math/tex">dir(\vec{a})</script> is the unit vector in the same direction of <script type="math/tex">\vec{a}</script>. We can aquire <script type="math/tex">dir(\vec{a})</script> by dividing <script type="math/tex">\vec{a}</script> with its length. </li>
-<li>If a point <script type="math/tex">P(x,y,z)</script> is in the plane <script type="math/tex">P_1P_2P_3</script>, then <script type="math/tex">det(\vec{P_1P_2},\vec{P_1P_3},\vec{P_1P})=0</script> in other words <script type="math/tex">\vec{P_1P}</script> is perpendicular to <script type="math/tex">\vec{P_1P_2}\times\vec{P_1P_3}</script>. </li>
-<li>The plane perpendicular to <script type="math/tex">\vec{N}=<a,b,c></script> is <script type="math/tex">ax+by+cz=0</script>, namely <script type="math/tex"><x,y,z>\cdot\vec{N}=0</script>.</li>
-<li>The line through point <script type="math/tex">P_0</script> and parallel to <script type="math/tex">\vec{v}</script> is <script type="math/tex">P(t)=P_0+t\vec{v}</script>, namely <script type="math/tex">\left\{\begin{matrix}x=x_0+at\\y=y_0+bt\\z=z_0+ct \end{matrix}\right.</script>, which is a parametric equation. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dt}(\vec{a}\times\vec{b})=\frac{d\vec{a}}{dt}\vec{b}+\vec{a}\frac{d\vec{b}}{dt}</script></li>
-<li>Velocity is a vector while speed is a scalar which equals to the length of velocity. </li>
-<li><script type="math/tex; mode=display">\vec{v}=\displaystyle\Bigg|\frac{d\vec{r}}{dt}\Bigg|≠\frac{d|\vec{r}|}{dt}$$ and $$speed=\displaystyle\frac{ds}{dt}=|\vec{v}|</script></li>
-<li><script type="math/tex">\displaystyle\vec{v}=\frac{d\vec{r}}{dt}=\frac{d\vec{r}}{ds}\frac{ds}{dt}=\vec{T}|\vec{v}|</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and tangent line of arclength. </li>
-<li><script type="math/tex; mode=display">\displaystyle\vec{\Delta r}=\vec{T}\Delta s\Leftrightarrow\frac{\vec{\Delta r}}{\Delta t}=\vec{T}\frac{\Delta s}{\Delta t}\Leftrightarrow\frac{d\vec{r}}{dt}=\vec{T}\frac{ds}{dt}</script></li>
-<li>Kepler’s second law: <br />&emsp;<script type="math/tex">Area\approx\displaystyle\frac{1}{2}|\vec{r}\times\vec{\Delta r}|\approx\frac{1}{2}|\vec{r}\times\vec{v}|\Delta t</script>. Since area is a constant, <script type="math/tex">|\vec{r}\times\vec{v}|</script> is a constant. <br />&emsp;<script type="math/tex">\displaystyle\frac{d}{dt}(\vec{r}\times\vec{v})=\frac{d\vec{r}}{dt}\times\vec{v}+\vec{r}\times\frac{d\vec{v}}{dt}=\vec{v}\times\vec{v}+\vec{r}\times\vec{a}=\vec{r}\times\vec{a}=0</script>. So <script type="math/tex">\vec{r}</script> and <script type="math/tex">\vec{a}</script> is parallel. So the orbit of a planet is in a plane. </li>
-</ol>
-<p>See more about vectors and matrices on <a href="http://www.laughingtree.cn/categories/Mathematics/Linear-Algebra-MIT-18-06/" target="_blank" rel="noopener">Linear Algebra (18.06)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/16-Series/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/20/16-Series/" class="post-title-link" itemprop="url">16. Series</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-20 23:01:26" itemprop="dateCreated datePublished" datetime="2020-02-20T23:01:26+08:00">2020-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:28" itemprop="dateModified" datetime="2020-08-07T19:22:28+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:23:02" itemprop="dateModified" datetime="2020-08-07T19:23:02+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -644,20 +253,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Infinite-Series"><a href="#Infinite-Series" class="headerlink" title="Infinite Series"></a>Infinite Series</h1><ol>
-<li><script type="math/tex">S_N=\displaystyle\sum^N_{n=0}a_n</script>. <script type="math/tex">S=\displaystyle\sum^\infty_{n= 0}a_n=\lim_{N\to\infty}\sum^N_{n=0}a_n</script>. <script type="math/tex">S</script> converges if limit exists. </li>
-<li><script type="math/tex">S_N</script> is larger than the lower Riemann sum of <script type="math/tex">\displaystyle\int^N_1f(x)dx</script> when <script type="math/tex">\Delta x=1</script> and is less than the upper Riemann sum of when <script type="math/tex">\Delta x=1</script>. </li>
-<li><code>Integral comparison</code>: If <script type="math/tex">f(x)</script> is decreasing, <script type="math/tex">f(x)>0</script>, then <script type="math/tex">\Bigg|\displaystyle\sum^\infty_{n=0}f(n)-\int^\infty_1f(x)dx\Bigg|<f(1)</script>. <script type="math/tex">\displaystyle\sum^\infty_{n=0}f(n)</script> and <script type="math/tex">\int^\infty_1f(x)dx</script> either both converge or both diverge. </li>
-<li>If <script type="math/tex">f(n)\sim g(n)</script>, and <script type="math/tex">g(n)>0</script> as <script type="math/tex">n\to\infty</script> for all <script type="math/tex">n</script> then <script type="math/tex">\displaystyle\sum^\infty_{n=0} f(n),\sum^\infty_{n=0} g(n)</script> either both converge or both diverge. </li>
+          <h1 id="Exponential"><a href="#Exponential" class="headerlink" title="Exponential"></a>Exponential</h1><ol>
+<li><script type="math/tex">y=a^x</script>, <script type="math/tex">a</script> is a constant, and <script type="math/tex">a>0</script>. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dx}y=\lim_{\Delta x\to 0}\frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim_{\Delta x\to 0}{\frac{a^x\cdot a^{\Delta x}-a^x}{\Delta x}}=a^x\lim_{\Delta x\to 0}{\frac{a^{\Delta x}-1}{\Delta x}}</script></li>
+<li>The limit <script type="math/tex">\displaystyle\lim_{\Delta x\to 0}\frac{a^{\Delta x}-1}{\Delta x}</script> is not easy to calculate. We can know that this is a constant associate with <script type="math/tex">a</script> only and assign <script type="math/tex">M(a)</script> equals that limit. </li>
+<li>Plug in <script type="math/tex">x=0</script>, <script type="math/tex">\displaystyle\frac{d}{dx}y\bigg|_{x=0}=a^0M(a)=M(a)</script>. So <script type="math/tex">M(a)</script> is the slope of graph at <script type="math/tex">x=0</script>. </li>
+<li>Assume there exists an <script type="math/tex">e</script> that <script type="math/tex">M(e)=1</script>. <br />&emsp;Proof: <script type="math/tex">\displaystyle\frac{d}{dx}a^{kx}=\frac{d}{dx}(a^k)^x=M(a^k)a^{kx}=kM(a)a^{kx}</script><br />&emsp;Assign <script type="math/tex">a^k=e</script>, <script type="math/tex">M(e)a^{kx}=kM(a)a^{kx}</script>, so <script type="math/tex">k=\displaystyle\frac{1}{M(a)}</script>. </li>
+<li>So when <script type="math/tex">a=e</script>, <script type="math/tex">\displaystyle\frac{d}{dx}y=e^xM(e)=e^x</script>. Use this, we can define the inverse function of exponential, logarithm, and find its inverse easily. </li>
+<li>With the help of logarithm (see below), we have two way to get the derivative of exponential. <br />&emsp;Method 1 (<code>base e</code>): <script type="math/tex">\displaystyle\frac{d}{dx}a^x=\frac{d}{dx}(e^{ln\ a})^x=\frac{d}{dx}e^{xln\ a}=ln\ a\cdot e^{xln\ a}=ln\ a\cdot a^x</script><br />&emsp;Method 2 (<code>logarithm differentialtion</code>): <script type="math/tex">\displaystyle\frac{d}{dx}ln\ y=\frac{1}{y}\frac{dy}{dx}</script>. So <script type="math/tex">(ln\ y)'=(ln\ a^x)'=(xln\ a)'=ln\ a=\displaystyle\frac{y'}{y}</script>. <br />&emsp;&emsp;So <script type="math/tex">y'=yln\ a=a^xln\ a</script><br />These two methods always work together. </li>
+<li><script type="math/tex; mode=display">y=x^x$$<br />So $$ln\ y=ln\ x^x=xln\ x$$<br />$$\begin{equation}\begin{split}\displaystyle\frac{d}{dx}ln\ y&=\frac{d}{dx}xln\ x\\\frac{y'}{y}&=ln\ x+1\\y'&=x^x(ln\ x+1)\end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">y=x^n\ \ (n\in R)$$<br />$$\displaystyle\frac{d}{dx}x^n=\frac{d}{dx}(e^{ln\ x})^n=\frac{d}{dx}e^{nln\ x}=\frac{n}{x}e^{nln\ x}=nx^{n-1}$$<br />$$\displaystyle\frac{d}{dx}x^n=\frac{d}{dx}e^{ln\ x^n}=\frac{d}{dx}e^{nln\ x}=nx^{n-1}</script></li>
 </ol>
-<h1 id="Power-Series"><a href="#Power-Series" class="headerlink" title="Power Series"></a>Power Series</h1><ol>
-<li>Geometric series: <script type="math/tex">1+x+x^2+x^3+…=\displaystyle\frac{1}{1-x}</script> when <script type="math/tex">|x|<1</script>. <br />&emsp;Proof: Assume <script type="math/tex">1+x+x^2+…=S</script>. Multiply with <script type="math/tex">x</script>, <script type="math/tex">x+x^2+x^2+…=Sx</script>. <br />&emsp;Subtract the second equation from the first one <script type="math/tex">1=S(1-x)</script>. So <script type="math/tex">S=\displaystyle\frac{1}{1-x}</script>. </li>
-<li>General power series: <script type="math/tex">a_0+a_1x+a_2x^2+…=\displaystyle\sum^\infty_{n=0}a_nx^n</script>. </li>
-<li><script type="math/tex">|x|<R</script> (<script type="math/tex">R</script> is the radius of convergence <script type="math/tex">0≤R≤\infty</script>) where seriese converges and <script type="math/tex">|a_nx^n|</script> tends to zero exponentially fast. <script type="math/tex">|x|>R,\  \displaystyle\sum^\infty_{n=0}a_nx^n</script> diverges, and <script type="math/tex">|a_nx^n|</script> doesn’t tend to zero at all. <script type="math/tex">|x|=R</script> is a very delicate borderline. </li>
-<li>Rules for convergent power series are just like polynomials. We can do add, multiplication, division, substitution, differentiation and integrate them. </li>
-<li><code>Taylor&#39;s formula</code>: <script type="math/tex">f(x)=\displaystyle\sum^\infty_{n=0}\frac{f^{(n)}(0)}{n!}x^n</script>, for any <script type="math/tex">f(x)</script>. </li>
-<li><script type="math/tex; mode=display">e^x=\displaystyle\sum^\infty_{n=0}\frac{1}{n!}x^n$$<br />So $$e=e^x\Big|_{x=1}=\displaystyle\sum^\infty_{x=0}\frac{1}{n!}</script></li>
-<li>Another expresion of Taylor’s formula is <script type="math/tex">a_n=\displaystyle\frac{f^{(n)}(0)}{n!}</script>. </li>
+<h1 id="Logarithm"><a href="#Logarithm" class="headerlink" title="Logarithm"></a>Logarithm</h1><ol>
+<li>Logarithm is the inverse function of exponential. </li>
+<li>The inverse of <script type="math/tex">y=e^x</script> is <script type="math/tex">u=ln\ x</script>. </li>
+<li>So <script type="math/tex">x=e^u</script>. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}e^u&=\frac{d}{dx}x\\\frac{d}{du}e^u\frac{du}{dx}&=1\\e^u\frac{du}{dx}&=1\\u'&=\frac{1}{e^u} \end{split}\end{equation}</script><br />Conclusion, <script type="math/tex">\displaystyle\frac{d}{dx}ln\ x=\frac{1}{x}</script></li>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\lim_{x\to\infty}(1+\frac{1}{x})^x \end{split}\end{equation}$$<br />$$\begin{equation}\begin{split}\displaystyle\lim_{x\to\infty}ln(1+\frac{1}{x})^x&=\lim_{x\to\infty}{xln(1+\frac{1}{x})}\\&=\lim_{\Delta x\to 0}\frac{ln(1+\Delta x)-ln\ 1}{\Delta x}\\&=\frac{d}{dx}ln\ x\bigg|_{x=1}\\&=1 \end{split}\end{equation}$$<br />And $$\displaystyle\lim_{x\to\infty}(1+\frac{1}{x})^x=e^{ln\ \lim_{x\to\infty}(1+\frac{1}{x})^x}=e^{\lim_{x\to\infty}ln(1+\frac{1}{x})^x}=e^1=e</script></li>
 </ol>
 
       
@@ -678,7 +289,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/04-Implicit-differentiation-inverses/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -692,7 +303,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/" class="post-title-link" itemprop="url">15. Indeterminate Forms-L'Hôspital's Rule and Improper Integrals</a>
+            <a href="/2020/02/10/04-Implicit-differentiation-inverses/" class="post-title-link" itemprop="url">04. Implicit differentiation, inverses</a>
         </h1>
 
         <div class="post-meta">
@@ -702,14 +313,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-20 09:19:17" itemprop="dateCreated datePublished" datetime="2020-02-20T09:19:17+08:00">2020-02-20</time>
+              <time title="Created: 2020-02-10 10:50:12" itemprop="dateCreated datePublished" datetime="2020-02-10T10:50:12+08:00">2020-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:33" itemprop="dateModified" datetime="2020-08-07T19:22:33+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:20:09" itemprop="dateModified" datetime="2020-08-07T19:20:09+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -740,24 +351,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Indeterminate-Forms"><a href="#Indeterminate-Forms" class="headerlink" title="Indeterminate Forms"></a>Indeterminate Forms</h1><ol>
-<li><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}</script>, if <script type="math/tex">f(a)=g(a)=0</script>, then this is an indeterminate form of <script type="math/tex">\displaystyle\frac{0}{0}</script>. </li>
-<li>To solve this limit, if <script type="math/tex">g'(a) ≠ 0</script> just divide the numerator and denominator with <script type="math/tex">x-a</script>. <br /><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{\frac{f(x)}{x-a}}{\frac{g(x)}{(x-a)}}=\frac{\lim_{x\to a}\frac{f(x)-f(a)}{x-a}}{\lim_{x\to a}\frac{g(x)-g(a)}{x-a}}=\frac{f'(a)}{g'(a)}</script></li>
-<li><code>L&#39;Hôspital&#39;s Rule</code>: <script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}</script>. If derivate once cannot solve the problem, derivate again until the denominator is not zero. </li>
-<li><script type="math/tex">\displaystyle\frac{\infty}{\infty}</script> form is also OK for L’Hôspital’s Rule. So does when right hand side is either finite or <script type="math/tex">\pm\infty</script> and <script type="math/tex">a</script> can be anything including <script type="math/tex">\pm\infty</script>. </li>
-<li>For <script type="math/tex">0</script> and <script type="math/tex">\infty</script> product problem, rewrite the equation to the ratio form to become <script type="math/tex">\displaystyle\frac{0}{0}</script> or <script type="math/tex">\displaystyle\frac{\infty}{\infty}</script>. </li>
-<li>Another form is <script type="math/tex">0^0</script>. <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=\lim_{x\to 0^+}e^{xln\ x}</script>. And <script type="math/tex">\displaystyle\lim_{x\to 0^+}xln\ x=0</script>. So <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=e^0=1</script>. </li>
+          <h1 id="Implicit-Differentiation"><a href="#Implicit-Differentiation" class="headerlink" title="Implicit Differentiation"></a>Implicit Differentiation</h1><ol>
+<li>An implicit function is a function that <script type="math/tex">y</script> cannot be expressed by <script type="math/tex">x</script> explicitly. </li>
+<li>The way to find its defferentiation is to defferentiate both side of the equation at the same time. Inevitably, we need to solve <script type="math/tex">\displaystyle\frac{d}{dx}g(x)</script>, with the chain rule, this is <script type="math/tex">\displaystyle\frac{d}{dy}g(x)\frac{dy}{dx}</script>. And <script type="math/tex">\displaystyle\frac{dy}{dx}</script> is our target. </li>
+<li>The defferentiation of <script type="math/tex">y=x^{\frac{a}{b}}</script><br />This equals to the defferentiation of <script type="math/tex">y^b=x^a</script>. <br />This is an implicit equation. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}y^b&=\frac{d}{dx}x^a\\\frac{d}{dy}y^b\frac{dy}{dx}&=ax^{a-1}\\by^{b-1}\frac{dy}{dx}&=ax^{a-1}\\\frac{dy}{dx}&=\frac{a}{b}\frac{x^{a-1}}{y^{b-1}}\\&=\frac{a}{b}\frac{x^{a-1}}{x^{\frac{a}{b}(b-a)}}\\&=\frac{a}{b}x^{\frac{a}{b}-1} \end{split}\end{equation}</script><br />Assign <script type="math/tex">\displaystyle\frac{a}{b}=n</script>, <script type="math/tex">\displaystyle\frac{d}{dx}x^n=nx^{n-1}\ \ (n\in R)</script></li>
 </ol>
-<h1 id="Improper-Integrals"><a href="#Improper-Integrals" class="headerlink" title="Improper Integrals"></a>Improper Integrals</h1><ol>
-<li>Definition: <script type="math/tex">\displaystyle\int^\infty_af(x)dx=\lim_{x\to \infty}\int^x_af(x)dx</script>. </li>
-<li>The integral converges if limit exists and diverges if limit doesn’t exist. </li>
-<li>This is the total area of <script type="math/tex">f(x)</script> from <script type="math/tex">a</script> to <script type="math/tex">\infty</script>. </li>
-<li>If the integral converges, the total area is finite. And if the integral diverges, the total area is infinite. </li>
-<li><script type="math/tex">\displaystyle\int^\infty_1\frac{dx}{x^p}</script> diverges if <script type="math/tex">p≤1</script> and converges if <script type="math/tex">p>1</script> (the value is <script type="math/tex">\displaystyle\frac{1}{p-1}</script>). </li>
-<li>If <script type="math/tex">\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=1</script>, then <script type="math/tex">f(x)</script> is similar to <script type="math/tex">g(x)</script> as <script type="math/tex">x\to\infty</script>, denoted by <script type="math/tex">f(x)\sim g(x)</script>. </li>
-<li>Limit Comparison: If <script type="math/tex">f(x)\sim g(x)</script> as <script type="math/tex">x\to\infty</script>, then <script type="math/tex">\displaystyle\int^\infty_af(x)dx</script> and <script type="math/tex">\displaystyle\int^\infty_ag(x)dx</script> either both converge or both diverge. </li>
-<li>Sometimes when calculation or comparison, the end of the interval can be ignored since it doesn’t effect the answer. </li>
-<li>Second type of improper integrals is defined <script type="math/tex">f(x)</script> is undefined at <script type="math/tex">x=a</script> when calculate the integral of <script type="math/tex">[a,b]</script>. <script type="math/tex">\displaystyle\int^b_af(x)dx=\lim_{x\to a^+}\int^b_xf(x)dx</script>. </li>
+<h1 id="Inverse"><a href="#Inverse" class="headerlink" title="Inverse"></a>Inverse</h1><ol>
+<li>Inverse function: for <script type="math/tex">y=f(x)</script>, <script type="math/tex">g(y)=x</script> is the inverse of <script type="math/tex">f</script>, denoted as <script type="math/tex">f^{-1}</script>. For all inverse function, <script type="math/tex">g(f(x))=x</script>. </li>
+<li>The inverse function is always symmetric to the origin function and the mirror line is <script type="math/tex">y=x</script>. </li>
+<li>Implicit defferentiation allows us to find the derivative of any inverse function provided we know the derivative of function. </li>
+<li>We can restore the given equation <script type="math/tex">y=f^{-1}(x)</script> to the origin function <script type="math/tex">f(y)=x</script> and then defferentiate. </li>
+<li>To calculate the defferentiation of <script type="math/tex">y=sin^{-1}\ x</script>, we just calculate the  derivative of <script type="math/tex">sin\ y=x</script>. <br />Use the implicit differentiation to get <script type="math/tex">y'cos\ y=1</script>. So <script type="math/tex">y'=\displaystyle\frac{1}{cos\ y}=\frac{1}{\sqrt{1-sin^2y}}=\frac{1}{\sqrt{1-x^2}}</script>. </li>
+<li><script type="math/tex">y=tan^{-1}x</script>. <br />Take the original equation: <script type="math/tex">tan\ y=x</script><br />Differentiate both side of equation: <script type="math/tex">\displaystyle\frac{d}{dx}tan\ y=1</script><br />Use the chain rule: <script type="math/tex">\displaystyle\frac{y'}{cos^2y}=1</script><br />So we get <script type="math/tex">y'=cos^2y</script><br />From the picture we can know that <script type="math/tex">cos^2y=\displaystyle\frac{1}{x^2+1}</script>. Finally <script type="math/tex">y'=\displaystyle\frac{1}{x^2+1}</script><br /><img src="/img/04.Implicitdifferentiation,inverses01.png" width="15%"></li>
 </ol>
 
       
@@ -778,7 +383,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/03-Derivative-Rules-and-Formulas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -792,7 +397,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/" class="post-title-link" itemprop="url">14. Geometric problems and Polar Coordinates</a>
+            <a href="/2020/02/10/03-Derivative-Rules-and-Formulas/" class="post-title-link" itemprop="url">03. Derivative Rules and Formulas</a>
         </h1>
 
         <div class="post-meta">
@@ -802,14 +407,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-17 19:07:04" itemprop="dateCreated datePublished" datetime="2020-02-17T19:07:04+08:00">2020-02-17</time>
+              <time title="Created: 2020-02-10 10:49:31" itemprop="dateCreated datePublished" datetime="2020-02-10T10:49:31+08:00">2020-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:42" itemprop="dateModified" datetime="2020-08-07T19:22:42+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:20:16" itemprop="dateModified" datetime="2020-08-07T19:20:16+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -840,18 +445,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a>Geometry</h1><ol>
-<li>The arclength in the interval <script type="math/tex">[a,b]</script>. <br />Just like what we did at integral, divide the interval into small pieces. <br />So <script type="math/tex">ds^2=dx^2+dy^2</script>. So <script type="math/tex">ds=\sqrt{dx^2+dy^2}=\sqrt{1+(\displaystyle\frac{dy}{dx})^2}dx</script>. <br />Integrate both side, <script type="math/tex">S=\displaystyle\int^{s_n}_{s_0}ds=\int^b_a\sqrt{1+(\frac{dy}{dx})^2}dx</script>. </li>
-<li>Surface area of rotation. <br />Divide the graph into small piece. The width of each piece is <script type="math/tex">ds</script> (arclength) and the length is <script type="math/tex">2\pi y</script> or <script type="math/tex">2\pi x</script>. <br /><br />And <script type="math/tex">ds=\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script><br />So <script type="math/tex">A=\displaystyle\int dA=\int(2\pi y)ds=\int(2\pi y)\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script></li>
-<li>If parametric function is involved, <script type="math/tex">\left\{\begin{array}{}x=f(t)\\y=g(x)\end{array}\right.</script>. <br />In the arclength, <script type="math/tex">ds=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}dt</script>. <br />The speed is <script type="math/tex">\displaystyle\frac{ds}{dt}=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}</script></li>
+          <h1 id="Derivative-Rules"><a href="#Derivative-Rules" class="headerlink" title="Derivative Rules"></a>Derivative Rules</h1><ol>
+<li>General formulas: <br />&emsp;<script type="math/tex">(u+v)'=u'+v'</script><br />&emsp;<script type="math/tex">(cu)'=cu'</script><br />&emsp;Product rule: <script type="math/tex">(uv)'=u'v+uv'</script><br />&emsp;&emsp;Proof: <br />&emsp;&emsp;<script type="math/tex">\begin{equation}\begin{split}\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\Delta (uv)}{\Delta x}}&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{u(x+\Delta x)v(x+\Delta x)-u(x)v(x)}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to0}\displaystyle\frac{[u(x+\Delta x)-u(x)]v(x+\Delta x)+[v(x+\Delta x)-v(x)]u(x)}{\Delta x}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{u(x+\Delta x)-u(x)}{\Delta x}\cdot v(x+\Delta x)+\displaystyle\frac{v(x+\Delta x)-v(x)}{\Delta x}\cdot u(x)}\\&=u'v+uv'\end{split}\end{equation}</script><br />&emsp;Quotient rule: <script type="math/tex">(\displaystyle\frac{u}{v})'=\displaystyle\frac{u'v-uv'}{v^2}</script><br />&emsp;&emsp;Proof:<br />&emsp;&emsp; <script type="math/tex">\begin{equation}\begin{split}\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\Delta (\frac{u}{v})}{\Delta x}}&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\frac{u+\Delta u}{v+\Delta v}-\frac{u(x)}{v(x)}}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\frac{uv+(\Delta u)v-uv-u(\Delta v)}{(v+\Delta v)v}}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\frac{(\Delta u)v-u(\Delta v)}{(v+\Delta v)v}}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}\displaystyle\frac{\frac{\Delta u}{\Delta x}v+u\frac{\Delta v}{\Delta x}}{(v+\Delta v)v}\\&=\displaystyle\frac{u'v-uv'}{v^2} \end{split}\end{equation}</script></li>
+<li><code>Composition Rule (Chain Rule)</code>: <script type="math/tex">[f(g(x))]'=g'(x)\cdot f'(g(x))</script><br />&emsp;Proof: <script type="math/tex">\displaystyle\frac{df}{dx}=\frac{df}{dt}\cdot\frac{dt}{dt}</script>. Let <script type="math/tex">t=g(x)</script>. </li>
+<li>Higher derivative: <br />&emsp;First derivative is <script type="math/tex">u'</script> or <script type="math/tex">\displaystyle\frac{du}{dx}</script><br />&emsp;Second derivative is <script type="math/tex">u''=(u')'</script>, or <script type="math/tex">\displaystyle\frac{d}{dx}\frac{du}{dx}=\frac{d^2u}{dx^2}</script><br />&emsp;Third derivative is <script type="math/tex">u'''=(u'')'</script>, or <script type="math/tex">\displaystyle\frac{d^3u}{dx^3}</script><br />&emsp;<script type="math/tex">nth</script> derivative (<script type="math/tex">n>3</script>) is <script type="math/tex">u^{(n)}</script></li>
+<li><script type="math/tex">\displaystyle\frac{d}{dx}</script> is the operator of derivative and can be denoted as <script type="math/tex">D</script>. So <script type="math/tex">Dy</script> is the derivative of <script type="math/tex">y</script>, while <script type="math/tex">D^{n}y</script> is the <script type="math/tex">nth</script> derivative of <script type="math/tex">y</script>. </li>
 </ol>
-<h1 id="Polar-Coordinates"><a href="#Polar-Coordinates" class="headerlink" title="Polar Coordinates"></a>Polar Coordinates</h1><ol>
-<li>Any points in the plane will be represented by <strong>the distance to origin</strong> <script type="math/tex">r</script> and <strong>angle of ray from origin with horizontal axis</strong> <script type="math/tex">\theta</script>. </li>
-<li><script type="math/tex">x=rcos\ \theta</script> and <script type="math/tex">y=rsin\ \theta</script>. These formulas are always true. </li>
-<li><script type="math/tex">r=\pm\sqrt{x^2+y^2}</script> and <script type="math/tex">\theta=tan^{-1}\displaystyle\frac{y}{x}</script>. These formulas are a bit ambiguous. We also need the graph to know the exact value of <script type="math/tex">r</script> and <script type="math/tex">\theta</script>. </li>
-<li>Typical conventions: <script type="math/tex">0≤r<\infty</script> and <script type="math/tex">-\pi<\theta≤\pi</script> or <script type="math/tex">0≤\theta<2\pi</script>. These are just typical conventions not always necessary. </li>
-<li>When transform a rectangular equation into a polar equation, remember to check the range of <script type="math/tex">\theta</script> and <script type="math/tex">r</script>. </li>
-<li>The area of <script type="math/tex">r=r(\theta)</script>: Divide the whole area into small pieces of fan-shape with center in origin. Then <script type="math/tex">dA=\displaystyle\frac{1}{2}r^2d\theta</script>. So the whole area is <script type="math/tex">A=\displaystyle\int^{\theta_2}_{\theta_1}\frac{1}{2}r^2d\theta</script>. </li>
+<h1 id="Formulas"><a href="#Formulas" class="headerlink" title="Formulas"></a>Formulas</h1><ol>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}sin\ x&=\displaystyle\lim_{\Delta x\to 0}\displaystyle\frac{sin(x+\Delta x)-sin\ x}{\Delta x}\\&=\displaystyle\lim_{\Delta x\to 0}\displaystyle\frac{sin\ x\cdot cos\ \Delta x+cos\ x\cdot sin\ \Delta x-sin\ x}{\Delta x}\\&=\displaystyle\lim_{\Delta x\to 0}{sin\ x(\frac{cos\ \Delta x-1}{\Delta x})+cos\ x(\displaystyle\frac{sin\ \Delta x}{\Delta x})}\\&=cos\ x\end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}cos\ x&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{cos(x+\Delta x)-cos\ x}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{cos\ x\cdot\ cos\ \Delta x-sin\ x\cdot sin\ \Delta x-cos\ x}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{cos\ x(\displaystyle\frac{cos\ \Delta x-1}{\Delta x})+sin\ x(\displaystyle\frac{sin\ \Delta x}{\Delta x})}\\& =-sin\ x \end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}tan\ x &=\frac{d}{dx}\frac{sin\ x}{cos\ x}\\&=\frac{cos^2x+sin^2x}{cos^2x}\\&=\frac{1}{cos^2x}\end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}{\displaystyle\frac{1}{x}}&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{\frac{1}{x-\Delta x}-\frac{1}{x}}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{1}{\Delta x}(\displaystyle\frac{-\Delta x}{x^2-x\Delta x})} \\&=-\displaystyle\frac{1}{x^2}\end{split}\end{equation}</script></li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dx}x^n=nx^{n-1}\ \ (n≥0)</script></li>
+<li><script type="math/tex">\displaystyle\frac{d}{dx}x^{-n}=\displaystyle\frac{d}{dx}\frac{1}{x^{n}}=\frac{0\cdot x^{n}-1\cdot nx^{n-1}}{x^{2n}}=\frac{-n}{x^{n+1}}</script>, let <script type="math/tex">n=-n</script>, <script type="math/tex">\displaystyle\frac{d}{dx}x^n=nx^{n-1}</script>. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dx}x^n=nx^{n-1}\ \ (x\in Z)</script></li>
 </ol>
 
       
@@ -872,7 +479,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/17/13-Partial-Fractions-Integration-by-Parts/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/02-Limits-continuity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -886,7 +493,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/17/13-Partial-Fractions-Integration-by-Parts/" class="post-title-link" itemprop="url">13. Partial Fractions and Integration by Parts</a>
+            <a href="/2020/02/10/02-Limits-continuity/" class="post-title-link" itemprop="url">02. Limits, continuity</a>
         </h1>
 
         <div class="post-meta">
@@ -896,14 +503,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-17 10:18:43" itemprop="dateCreated datePublished" datetime="2020-02-17T10:18:43+08:00">2020-02-17</time>
+              <time title="Created: 2020-02-10 10:48:18" itemprop="dateCreated datePublished" datetime="2020-02-10T10:48:18+08:00">2020-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:48" itemprop="dateModified" datetime="2020-08-07T19:22:48+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:23:30" itemprop="dateModified" datetime="2020-08-07T19:23:30+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -934,20 +541,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Partial-Fractions"><a href="#Partial-Fractions" class="headerlink" title="Partial Fractions"></a>Partial Fractions</h1><ol>
-<li>This kind of problem has form <script type="math/tex">\displaystyle\frac{P(x)}{Q(x)}</script> where <script type="math/tex">P(x)</script> and <script type="math/tex">Q(x)</script> are polynomials with only whole powers. </li>
-<li>If <script type="math/tex">Q(x)</script> can be factored into distinct linear terms and degree of <script type="math/tex">P(x)</script> is smaller than <script type="math/tex">Q(x)</script> the strategy here is: <br />&emsp;<code>Factor</code>: Factor the denominator <script type="math/tex">Q(x)</script> in to <script type="math/tex">(a_1x+b_1)(a_2x+b_2)…</script><br />&emsp;<code>Set-up</code>: Assume the original equation is equal to <script type="math/tex">\displaystyle\frac{A}{a_1x+b_1}+\frac{B}{a_2x+b_2}+…</script><br />&emsp;<code>Cover-up</code>: Solve the unknowns <script type="math/tex">A,B,…</script><br />&emsp;&emsp;When solving the unknowns, a quicker way is to multiply <script type="math/tex">a_ix+b_i</script> and then plug in <script type="math/tex">x=-\displaystyle\frac{b_i}{a_i}</script> to make all other terms <script type="math/tex">0</script>. </li>
-<li>If <script type="math/tex">Q(x)</script> has repeated linear terms, in set-up step, we need to contain all terms with power from <script type="math/tex">1</script> to <script type="math/tex">n</script> for all terms <script type="math/tex">(a_ix+b_i)^n</script> in <script type="math/tex">Q(x)</script>. And in the cover-up step, all the lower order term needs some special number. </li>
-<li>If <script type="math/tex">Q(x)</script> has nonlinear terms, in set-up step, the numerators are <script type="math/tex">Ax^{n-1}+Bx^{n-2}+…Cx+D</script> for all terms <script type="math/tex">a_ix^n+b_ix^{n-1}+…+c_ix+d_i</script>. And we can use the cover-up to solution the ordinary terms, but for the higher order terms, we must compare the coefficients of the two sides after multiplied the denominator. </li>
-<li>If the dgree of <script type="math/tex">P(x)</script> is larger than <script type="math/tex">Q(x)</script>, we use the long-division to factor <script type="math/tex">P(x)</script> into <script type="math/tex">quotient\cdot Q(x)+remainder</script>. So the original equation is <script type="math/tex">quotient+\displaystyle\frac{remainder}{Q(x)}</script>. The first part is easy and the second part is one of the aforementioned situations. </li>
-<li>After all those steps, when integrating, we split all terms into terms with only one term in the numerators. </li>
+          <h1 id="Limits"><a href="#Limits" class="headerlink" title="Limits"></a>Limits</h1><ol>
+<li>Easy limits: this is the limits that only need to plug in the variable. </li>
+<li>Derivatives are always harder. We need cancellation to make it work. </li>
+<li><code>Right-hand limit</code>: variable approaches the constant from the right-hand side of the x-axis. <script type="math/tex">x\to x_0^+=\left\{\begin{array}{lr}x\to x_0\\x>x_0\end{array}\right.</script>. <br /><code>Left-hand limit</code>: variable approaches the constant from the left-hand side of the x-axis. <script type="math/tex">x\to x_0^-=\left\{\begin{array}{lr}x\to x_0\\x<x_0\end{array}\right.</script>. </li>
 </ol>
-<h1 id="Integration-by-Parts"><a href="#Integration-by-Parts" class="headerlink" title="Integration by Parts"></a>Integration by Parts</h1><ol>
-<li>In derivative, <script type="math/tex">(uv)'=u'v+uv'</script>. Rewrite it to <script type="math/tex">uv'=(uv)'-u'v</script>. Integrate both sides of euqation, <script type="math/tex">\displaystyle\int uv'dx= uv-\int u'vdx</script>. </li>
-<li>Use the substitution to the equation, <script type="math/tex">\displaystyle\int udv=uv-\int vdu</script></li>
-<li><code>Reduction formula</code>: <br />If <script type="math/tex">F_n(x)=\displaystyle\int(ln\ x)^ndx</script>, then <script type="math/tex">F_n=x(ln\ x)^n-nF_{n-1}(x)</script>. <br />If <script type="math/tex">G_n(x)=\displaystyle\int x^ne^xdx</script>, then <script type="math/tex">G_n(x)=x^ne^x-nG_{n-1}(x)</script>. </li>
-<li>We usually choose the function with easier differentiation to be <script type="math/tex">u</script> and others to be <script type="math/tex">v</script>, or the difficult integral to be <script type="math/tex">u</script>. </li>
-<li>To use this technique to solve a problem, we must make sure that <script type="math/tex">du</script> did make the problem easier instead of the same or even harder. </li>
+<h1 id="Continuity"><a href="#Continuity" class="headerlink" title="Continuity"></a>Continuity</h1><ol>
+<li><script type="math/tex">f</script> is <code>continuous</code> at <script type="math/tex">x_0</script> means <script type="math/tex">\displaystyle\lim_{x\to x_0}f(x)=f(x_0)</script>. <br />&emsp;The limit exists from both left and right hand side and <script type="math/tex">\displaystyle\lim_{x\to x_0^+}f(x)=\displaystyle\lim_{x\to x_0^-}f(x)</script>. <br />&emsp;<script type="math/tex">f(x_0)</script> is defined. <br />&emsp;They are equal. </li>
+<li>The continuous can also be expressed by <script type="math/tex">\displaystyle\lim_{x\to x_0}{f(x)-f(x_0)}=0</script>. </li>
+<li><code>Jump discontinuity</code>: the limit from left and right exist but not equal. </li>
+<li><code>Removable discontinuity</code>: the limit from left and right are equal but <script type="math/tex">f(x_0)</script> is not defined. </li>
+<li><code>Infinite discontinuity</code>: the limit from left and right approaches to infinity, not necessarily equal. </li>
+<li><code>Other discontinuities</code>: no left or right limits. </li>
+<li>If <script type="math/tex">f</script> is differentiable at <script type="math/tex">x_0</script>, then <script type="math/tex">f</script> is continuous at <script type="math/tex">x_0</script>. <br />Proof: <script type="math/tex">\displaystyle\lim_{x\to x_0}{f(x)-f(x_0)}=\displaystyle\lim_{x\to x_0}{\displaystyle\frac{f(x)-f(x_0)}{x-x_0}(x-x_0)}=f'(x_0)\cdot 0=0</script>. </li>
+</ol>
+<h1 id="Two-Important-Equations"><a href="#Two-Important-Equations" class="headerlink" title="Two Important Equations"></a>Two Important Equations</h1><ol>
+<li><script type="math/tex">\displaystyle\lim_{x\to 0}{\displaystyle\frac{sin\ x}{x}}=1</script><br />&emsp;Geometric proof: <br />&emsp;&emsp;In the graph below is a unit circle. The green line is <script type="math/tex">2sin\ \theta</script> and the red curve is <script type="math/tex">2\theta</script>. <br />&emsp;&emsp;So the limit is <script type="math/tex">\displaystyle\frac{length\ of\ straight\ line}{length\ of\ curve}</script> as <script type="math/tex">\theta</script> approaches to <script type="math/tex">0</script>. <br />&emsp;&emsp;And the result is the curve become more and more like a straight line which equals to the line. <br />&emsp;&emsp;So the limit is <script type="math/tex">1</script>. <br />&emsp;&emsp;<img src="/img/02.Limitscontinuity01.png" width="15%"></li>
+<li><script type="math/tex">\displaystyle\lim_{x\to 0}{\displaystyle\frac{1-cos\ x}{x}}=0</script><br />&emsp;&emsp;Geometric proof: <br />&emsp;&emsp;In the graph below, that green line is <script type="math/tex">1-cos\ \theta</script>. The red line is <script type="math/tex">\theta</script>. <br />&emsp;&emsp;So the limit is <script type="math/tex">\displaystyle\frac{length\ of\ straight\ line}{length\ of\ curve}</script> as <script type="math/tex">\theta</script> approaches to <script type="math/tex">0</script>. <br />&emsp;&emsp;And as <script type="math/tex">\theta</script> approaching, that green line decays way faster than the red line. <br />&emsp;&emsp;So the limit is <script type="math/tex">0</script>. <br />&emsp;&emsp;<img src="/img/02.Limitscontinuity02.png" width="15%"></li>
 </ol>
 
       
@@ -968,7 +578,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/16/12-Trigonometric-Integrals-and-substitution/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/08/01-Derivative-Slope/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -982,7 +592,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/16/12-Trigonometric-Integrals-and-substitution/" class="post-title-link" itemprop="url">12. Trigonometric Integrals and Substitution</a>
+            <a href="/2020/02/08/01-Derivative-Slope/" class="post-title-link" itemprop="url">01. Derivative, Slope</a>
         </h1>
 
         <div class="post-meta">
@@ -992,14 +602,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-16 09:58:21" itemprop="dateCreated datePublished" datetime="2020-02-16T09:58:21+08:00">2020-02-16</time>
+              <time title="Created: 2020-02-08 11:32:38" itemprop="dateCreated datePublished" datetime="2020-02-08T11:32:38+08:00">2020-02-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:19:29" itemprop="dateModified" datetime="2020-08-07T19:19:29+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:19:14" itemprop="dateModified" datetime="2020-08-07T19:19:14+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1030,13 +640,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Trigonometric-Integrals"><a href="#Trigonometric-Integrals" class="headerlink" title="Trigonometric Integrals"></a>Trigonometric Integrals</h1><ol>
-<li>Trigonomatric formulas: <br />&emsp;Double Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}cos (2\theta)=cos^2\ \theta-sin^2\ \theta\\sin(2\theta)=2sin\ \theta\ cos\ \theta\end{array}\right.</script><br />&emsp;Half Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}\displaystyle cos^2\theta=\frac{1+cos\ (2\theta)}{2}\\sin^2\theta=\displaystyle\frac{1-cos\ (2\theta)}{2}\end{array}\right.</script><br />&emsp;<script type="math/tex">sec\ \theta=\displaystyle\frac{1}{cos\ \theta}</script><br />&emsp;<script type="math/tex">csc\ \theta=\displaystyle\frac{1}{sin\ \theta}</script><br />&emsp;<script type="math/tex">cot\ \theta=\displaystyle\frac{cos\ \theta}{sin\ \theta}</script><br />&emsp;<script type="math/tex">sec^2\ \theta=1+tan^2\ \theta</script><br />&emsp;<script type="math/tex">(tan\ \theta)'=sec^2\ \theta</script><br />&emsp;<script type="math/tex">(sec\ \theta)'=sec\ \theta\ tan\ \theta</script><br />&emsp;<script type="math/tex">\displaystyle\int tan\ x\ dx=-ln\ |cos(x)|+c</script></li>
-<li><script type="math/tex; mode=display">\displaystyle\int sec\ x\ dx$$<br />&emsp;Add the derivative of $$sec\ x$$ and $$tan\ x$$ together to get $$(sec\ x+tan\ x)'=(sec\ x+tan\ x)sec\ x$$. <br />&emsp;Assign $$u=sec\ x+tan\ x$$. $$sec\ x=\displaystyle\frac{u'}{u}=\frac{d}{dx}ln(u)$$. <br />&emsp;So $$\displaystyle\int sec\ x\ dx=\int\frac{d}{dx}ln\ (u)dx=ln\ (u)+c=ln\ (sec\ x+tan\ x)+c</script></li>
-<li><script type="math/tex">\displaystyle\int sin^n(x)cos^m(x)dx</script><br />If at least one exponent is odd. <br />&emsp;Use <script type="math/tex">sin^2x+cos^2x=1</script> to eliminate the odd exponent to <script type="math/tex">1</script>. <br />&emsp;Then we can assign <script type="math/tex">u</script> to the other one and use the substitution. <br />If both exponents are even. <br />&emsp;Use the half angle formulas to eliminate both <script type="math/tex">sin</script> and <script type="math/tex">cos</script>. <br />&emsp;If after elimination we are still in this case, just do it again until the situation becomes the the aforementioned case. </li>
-<li><script type="math/tex; mode=display">\displaystyle\int \sqrt{a^2-y^2}dy$$. Assign $$y=asin\ \theta$$. <br />$$\begin{equation}\begin{split}\displaystyle\int acos\ \theta\ (acos\ \theta)d\theta&=a^2\int cos^2\theta\ d\theta\\&=a^2\int \frac{1+cos(2\theta)}{2}d\theta\\&=a^2(\frac{\theta}{2}+\frac{sin\ (2\theta)}{4})+c\\&=a^2(\frac{\theta}{2}+\frac{sin\ \theta\ cos\ \theta}{2})+c\\&=\frac{a^2\ \theta}{2}+\frac{(a\ sin\ \theta)(a\ cos\ \theta)}{2}+c\\&= \frac{a^2\ arcsin(\frac{y}{a})}{2}+\frac{y\sqrt{a^2-y^2}}{2}+c\end{split}\end{equation}</script></li>
-<li>When involve <script type="math/tex">a^2-x^2</script>, we can think about making <script type="math/tex">x=acos\ \theta</script> or <script type="math/tex">x=asin\ \theta</script>. <script type="math/tex">a^2-x^2=a^2sin^2\theta</script> and <script type="math/tex">dx=-asin\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">a^2+x^2</script>, we can think about <script type="math/tex">x=atan\ \theta</script>, then <script type="math/tex">a^2+x^2=sec^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">x^2-a^2</script>, we can think about <script type="math/tex">x=asec\ \theta</script>, then <script type="math/tex">x^2-a^2=tan^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ tan\ \theta</script></li>
-<li>In the form of <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{x^2+2ax}}</script> or similar forms, we can complete the square to <script type="math/tex">(x+a)^2-a^2</script>, and use substitution <script type="math/tex">u=x+a</script> to change the original form to <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{u^2-a^2}}</script>. Now the problem returns to the trigonometric substitution. </li>
+          <h1 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h1><ol>
+<li>Geomatric interpretation is to find the <code>tangent line</code> to <script type="math/tex">y=f(x)</script> at point <script type="math/tex">P=(x_0,y_0)</script>. </li>
+<li>To find that tangent line, we have to find the equation <script type="math/tex">y-y_0=m(x-x_0)</script>. <br />This contains two part to solve: <br />&emsp;Point <script type="math/tex">y_0=f(x_0)</script><br />&emsp;Slope: <script type="math/tex">m=f'(x_0)</script>. </li>
+<li>Definition of <code>derivative</code>: the slope of the tangent line. </li>
+<li>As another point <script type="math/tex">Q</script> approaches the fixed point <script type="math/tex">P</script>, the slope of <script type="math/tex">QP</script> is approaching the slope of that tangent line. <br />So tangent line = limit of <code>secant line</code> <script type="math/tex">PQ</script> as <script type="math/tex">Q \rightarrow P</script> while <script type="math/tex">P</script> is fixed. </li>
+<li>The slope of <script type="math/tex">PQ</script> is <script type="math/tex">\displaystyle\frac{\Delta f}{\Delta x}</script> (<script type="math/tex">\Delta f</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in y-axis, <script type="math/tex">\Delta x</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in x-axis). <br />So we get the <code>difference quotient</code>:  <script type="math/tex">m=f'(x_0)=\displaystyle\lim_{\Delta x\to 0}{\frac{\Delta f}{\Delta x}}=\displaystyle\lim_{\Delta x \to 0}{\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}}</script>. </li>
+<li><code>Binomial theorem</code>: <script type="math/tex">(x+\Delta x)^n=x^n+nx^{n-1}\Delta+O((\Delta x)^2)</script>. <script type="math/tex">O((\Delta x)^2)</script> means terms with <script type="math/tex">(\Delta x)^2</script> or higher. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}x^n&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x+\Delta x)^n-x^n}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x^n+nx^{n-1}\Delta x+O((\Delta x)^2))-x^n}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{nx^{n-1}\Delta x+O((\Delta x)^2)}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{nx^{n-1}+\displaystyle\frac{O((\Delta x)^2)}{\Delta x}}\\&=nx^{n-1}\end{split}\end{equation}</script><br />This extends to polynomials. </li>
+<li>Physical Interpretation is that <script type="math/tex">\displaystyle\frac{\Delta y}{\Delta x}</script> is the average rate of change while <script type="math/tex">\displaystyle\frac{dy}{dx}</script> is the instantaneous rate of change. </li>
 </ol>
 
       
@@ -1057,7 +668,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/14/11-Application-of-Integrals/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -1071,7 +682,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/14/11-Application-of-Integrals/" class="post-title-link" itemprop="url">11. Application of Integrals</a>
+            <a href="/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/" class="post-title-link" itemprop="url">27. Left and Right Inverses; Pseudoinverse</a>
         </h1>
 
         <div class="post-meta">
@@ -1081,14 +692,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-14 19:39:22" itemprop="dateCreated datePublished" datetime="2020-02-14T19:39:22+08:00">2020-02-14</time>
+              <time title="Created: 2020-02-07 12:28:16" itemprop="dateCreated datePublished" datetime="2020-02-07T12:28:16+08:00">2020-02-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:23:26" itemprop="dateModified" datetime="2020-08-07T19:23:26+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:15:52" itemprop="dateModified" datetime="2020-08-07T19:15:52+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1102,8 +713,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
                   </a>
                 </span>
             </span>
@@ -1119,33 +730,484 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Areas-Between-Curves"><a href="#Areas-Between-Curves" class="headerlink" title="Areas Between Curves"></a>Areas Between Curves</h1><ol>
-<li>The area between <script type="math/tex">f(x)</script> and <script type="math/tex">g(x)</script> (<script type="math/tex">f(x) > g(x)</script>) is <script type="math/tex">\displaystyle\int^b_a(f(x)-g(x))dx</script>. </li>
-<li>When calculating this kind of question, always draw a picture to figure out the order. </li>
-<li>Sometimes we can also integrate on y-axis instead of x-axis. </li>
+          <h1 id="Inverse-of-Rectangular-Matrices"><a href="#Inverse-of-Rectangular-Matrices" class="headerlink" title="Inverse of Rectangular Matrices"></a>Inverse of Rectangular Matrices</h1><ol>
+<li><script type="math/tex">A</script> is an <script type="math/tex">m</script> by <script type="math/tex">n</script> matrix. If <script type="math/tex">m=n</script>, it’s nature to get an inverse of <script type="math/tex">A</script>. </li>
+<li>But if <script type="math/tex">m≠n</script>, <script type="math/tex">A</script> can have two different inverses, right inverse and left inverse. </li>
+<li><script type="math/tex">AA^T(AA^T)^{-1}=I</script>. So the right inverse of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{right}=A^T(AA^T)^{-1}</script>. <br />Similarity, <script type="math/tex">(A^TA)^{-1}A^TA=I</script>. So the left inver of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{left}=(A^TA)^{-1}A^T</script>. </li>
+<li><script type="math/tex">A^{-1}_{right}A=A^T(AA^T)^{-1}A=P_{row\ space}</script>. This is the projection matrix to row space. <br /><script type="math/tex">AA^{-1}_{left}=A(A^TA)^{-1}A^T=P_{column\ space}</script>. This is the projection matrix to column space. </li>
 </ol>
-<h1 id="Volumn"><a href="#Volumn" class="headerlink" title="Volumn"></a>Volumn</h1><ol>
-<li>Slice the object and the function of its area is <script type="math/tex">A(x)</script>, then <script type="math/tex">\Delta V=A(x)\Delta X</script>. So <script type="math/tex">V=\displaystyle\int A(x)dx</script>. </li>
-<li>Solids of revolution: graph of function <script type="math/tex">y=f(x)</script> revolve around x-axis to form a solid object. Slice the object into disks, then we can get <script type="math/tex">V=\displaystyle\int\pi y^2dx</script>. </li>
-<li>The volumn of portion of width <script type="math/tex">x\ (0≤x≤a)</script> of a ball is <script type="math/tex">V(x)=\pi(a^3-\displaystyle\frac{x^3}{3})</script></li>
-<li>Another way to calculate the volumn of revolution instead of disks is shells. See the volumn as thin column shells, the volumn is the sum of areas of columns. </li>
-<li>When calculate the volumn, beware of the limits of integrals. Remember the symmetric of revolution. Don’t over calculate the volumns. </li>
-<li><strong>Beaware of the units!!!!!</strong> The x and y values has to be both the same. In <script type="math/tex">y=x^2</script>, <script type="math/tex">x=100\ cm</script> and <script type="math/tex">x=1\ m</script> is different since the first has <script type="math/tex">y=10000\ cm</script> while the second has <script type="math/tex">y=1\ m</script>. </li>
+<h1 id="Pseudoinverse"><a href="#Pseudoinverse" class="headerlink" title="Pseudoinverse"></a>Pseudoinverse</h1><ol>
+<li>If <script type="math/tex">\vec{x}≠\vec{y}</script> both in row space, then <script type="math/tex">A\vec{x}≠ A\vec{y}</script> both in column space. <br />&emsp;Proof: Suppose <script type="math/tex">A\vec{x}=A\vec{y}</script>. Then <script type="math/tex">A\vec{x}-A\vec{y}=A(\vec{x}-\vec{y})</script>. <script type="math/tex">\vec{x}-\vec{y}</script> is in the row space, So <script type="math/tex">A(\vec{x}-\vec{y})</script> is also in the column space. But <script type="math/tex">A\vec{x}-A\vec{y}=\vec{0}</script>. So <script type="math/tex">\vec{x}-\vec{y}</script> is also in nullspace. So <script type="math/tex">\vec{x}-\vec{y}=\vec{0}</script>, i.e. <script type="math/tex">\vec{x}=\vec{y}</script>. </li>
+<li>So every vector in row space has and only has one vector in column space that is <script type="math/tex">A\vec{x}</script>. </li>
+<li><script type="math/tex">A</script> is a map from row space to column space. And the pseudoinverse <script type="math/tex">A^+</script> is the map from columns space to row space. For every <script type="math/tex">\vec{x}</script> in row space, <script type="math/tex">A^+(A\vec{y})=\vec{y}</script>. </li>
+<li><script type="math/tex">A^+</script> on the left brings projection to the row space while on the right brings the projection to the columns. </li>
+<li>The pseudoinverse of <script type="math/tex">\Sigma</script> in the SVD is <script type="math/tex">\Sigma^+=\left[\begin{matrix}\frac{1}{\sigma_1}\\&\ddots\\&&\frac{1}{\sigma_r}&&\\&\end{matrix}\right]</script>. <script type="math/tex">\Sigma\Sigma^+</script> gives <script type="math/tex">\left[\begin{matrix}1\\&\ddots\\&&1\\&&&\end{matrix}\right]</script> not <script type="math/tex">I</script>. </li>
+<li>Any vector <script type="math/tex">A=U\Sigma V^T</script>, <script type="math/tex">A^+=V\Sigma^+U^T</script>. </li>
 </ol>
-<h1 id="Average-Value"><a href="#Average-Value" class="headerlink" title="Average Value"></a>Average Value</h1><ol>
-<li><code>Continuous average Ave(f)</code>: <script type="math/tex">\displaystyle\frac{1}{b-a}\int^b_af(x)dx</script>. </li>
-<li>Riemann sum: <script type="math/tex">\begin{equation}(y_1+\dots+y_n)\Delta x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\int^b_af(x)dx\end{equation}</script>. <br />Divide by <script type="math/tex">b-a</script>, <script type="math/tex">\begin{equation}\displaystyle\frac{(y_1+…+y_n)\Delta x}{b-a}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script>. <br />And <script type="math/tex">\Delta x=\displaystyle\frac{b-a}{n}</script>. So <script type="math/tex">\begin{equation}\displaystyle\frac{y_1+…+y_n}{n}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script></li>
-<li>Even calculate the same thing, if we respect to different variables, the result can be different. </li>
-<li>Weighted average: <script type="math/tex">\displaystyle\frac{\int^b_af(x)w(x)dx}{\int^b_aw(x)dx}</script>. <script type="math/tex">w(x)</script> is the weigh function</li>
-<li>Probability: <script type="math/tex">a<x_1<x_2<b</script>, <script type="math/tex">P(x_1<x<x_2)=\displaystyle\frac{\int^{x_2}_{x_1}w(x)dx}{\int^b_aw(x)dx}</script>. </li>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/26-Linear-Transformations-and-Their-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/26-Linear-Transformations-and-Their-Matrices/" class="post-title-link" itemprop="url">26. Linear Transformations and Their Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 21:12:44" itemprop="dateCreated datePublished" datetime="2020-02-06T21:12:44+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:48" itemprop="dateModified" datetime="2020-08-07T19:15:48+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linear-Transformation"><a href="#Linear-Transformation" class="headerlink" title="Linear Transformation"></a>Linear Transformation</h1><ol>
+<li>When a matrix <script type="math/tex">A</script> multiplies a vector <script type="math/tex">\vec{v}</script>, it transforms <script type="math/tex">\vec{v}</script> into another vector <script type="math/tex">A\vec{v}</script>. </li>
+<li>In goes <script type="math/tex">\vec{v}</script>, out comes <script type="math/tex">T(\vec{v})=A\vec{v}</script>. </li>
+<li><code>Linear transformation</code>: <script type="math/tex">T(c\vec{v}+d\vec{w})=cT(\vec{v})+dT(\vec{w})</script>. </li>
+<li><script type="math/tex">T(\vec{0}+\vec{0})=T(\vec{0})+T(\vec{0})\Rightarrow T(\vec{0})=\vec{0}</script>. </li>
+<li><code>Identity transformation</code>: <script type="math/tex">T(\vec{v})=\vec{v}</script>. </li>
+<li>The <code>linear-plus-shift transformation (affine)</code>: <script type="math/tex">T(\vec{v})=A\vec{v}+\vec{u_0}</script>. This is not linear transformation. </li>
+<li>Every point on the input line goes onto the output line and equally spaced points go to equally spaced points. </li>
 </ol>
-<h1 id="Numerical-Integration"><a href="#Numerical-Integration" class="headerlink" title="Numerical Integration"></a>Numerical Integration</h1><ol>
-<li>Riemann sums: Add up rectangulars. The sum is <script type="math/tex">\Delta x(y_0+y_1+\dots+y_{n-1})</script>. </li>
-<li>Trapezoidal rule: Add up trapezoids. The upper base is <script type="math/tex">y_i</script>, lower base is <script type="math/tex">y_{i-1}</script>, the height is <script type="math/tex">\Delta x</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\Delta x(\displaystyle\frac{y_0+y_1}{2}+\frac{y_1+y_2}{2}+\dots+\frac{y_{n-1}+y_{n}}{2})\\=&\Delta x(\frac{y_0}{2}+y_2+\dots+y_{n-1}+\frac{y_n}{2})\end{split}\end{equation}</script></li>
-<li>The trapezoidal rule is <script type="math/tex">\displaystyle\frac{left\ Riemann\ sum(y_0\ to\ y_{n-1})+right\ Riemann\ sum(y_n\ to\ y_1)}{2}</script></li>
-<li>Simpson’s rule: Deal with two chunks one time. Add up parabolas cover two chunks together. The area is base times average height. The average heights turn out to be <script type="math/tex">\displaystyle\frac{y_{n-1}+4y_n+y_{n+1}}{6}</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\displaystyle\frac{2\Delta x}{6}((y_0+4y_1+y2)+(y_2+4y_3+y_4)+…+(y_{n-2}+4y_{n-1}+y_n))\\=&\frac{\Delta x}{3}(y_0+4y_1+2y_2+4y_3+2y_4+…+2y_{n-2}+4y_{n-1}+y_n)\end{split}\end{equation}</script> </li>
-<li>Simpson’s rule is amazingly accuracy, <script type="math/tex">|Simpson's\ rule-Exact\ answer|\approx(\Delta x)^4</script></li>
-<li>Simpson’s rule is derived using the exact answer for all degree <script type="math/tex">2</script> polynomials. </li>
+<h1 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h1><ol>
+<li><script type="math/tex">n</script>-dimension linearity: <script type="math/tex">\vec{u}=\sum c_i\vec{v_i}</script>, <script type="math/tex">T(\vec{u})=\sum c_iT(\vec{v_i})</script>. </li>
+<li>Suppose we know <script type="math/tex">T(\vec{v})</script> for all vectors <script type="math/tex">\vec{v_1},…,\vec{v_n}</script> in a basis. Then we can know <script type="math/tex">T(\vec{u})</script> for every vector <script type="math/tex">\vec{u}</script> in the spacef for all vectors are a combination of basis. </li>
+<li>Derivative can be expressed by <script type="math/tex">T(u)=\displaystyle\frac{du}{dx}</script>. For a quadratics fuction <script type="math/tex">y=a+bx+cx^2</script>, <script type="math/tex">T(\vec{u})</script> also satisfies the linearity, and <script type="math/tex">1,x,x^2</script> can be its basis. This can be written as <script type="math/tex">T(\vec{u})=A\vec{u}=\left[\begin{matrix}0&1&0\\0&0&2\end{matrix}\right]\left[\begin{matrix}a\\b\\c\end{matrix}\right]=\left[\begin{matrix}b\\2c\end{matrix}\right]</script>. </li>
+<li>Integration <script type="math/tex">T^+</script> is also linear. For <script type="math/tex">T^+(u)=\displaystyle^x_0(D+Ex)dx=Dx+\displaystyle\frac{1}{2}Ex^2</script>. The input basis is <script type="math/tex">1,x</script>. The output basis is <script type="math/tex">1,x,x^2</script>. <script type="math/tex">T^+(\vec{u})=A^+\vec{u}=\left[\begin{matrix}0&0\\1&0\\0&\frac{1}{2}\end{matrix}\right]\left[\begin{matrix}D\\E\end{matrix}\right]=\left[\begin{matrix}0\\D\\\frac{1}{2}E\end{matrix}\right]</script>. </li>
+<li><code>The Fundamental Theorem of Calculus</code>: integration is the pseudo inverse of differentiation. <br /><script type="math/tex">A^+A=\left[\begin{matrix}0&0&0\\0&1&0\\0&0&1\end{matrix}\right]</script>. <script type="math/tex">AA^+=\left[\begin{matrix}1&0\\0&1\end{matrix}\right]</script>. </li>
+<li><code>Range of T</code>: all outputs of <script type="math/tex">T(\vec{v})</script>. Corresponds to column space. </li>
+<li><code>Kernel of T</code>: all inputs for which <script type="math/tex">T(\vec{v})=\vec{0}</script>. Corresponds to nullspace. </li>
+</ol>
+<h1 id="Change-of-Basis"><a href="#Change-of-Basis" class="headerlink" title="Change of Basis"></a>Change of Basis</h1><ol>
+<li><script type="math/tex">T(\vec{v})=\vec{v}</script> don’t change basis of the vector. </li>
+<li>When the input basis is in the columns of a matrix <script type="math/tex">V</script>, and the output basis is in the columns of <script type="math/tex">W</script>, the change of basis matrixfor <script type="math/tex">T=I</script> is <script type="math/tex">B=W^{-1}V</script>. <br /><script type="math/tex">\vec{u}=Vc=Wd</script>, so <script type="math/tex">d=W^{-1}Vd</script>. </li>
+<li>Construct input from output or construct matrix from input basis and output basis: <script type="math/tex">T(v_j)=\displaystyle\sum^m_{i=1}{a_{ij}w_i}</script>. </li>
+<li>Choose bases that diagonalize the matrix. </li>
+<li>If transformation is from <script type="math/tex">R^n</script> to <script type="math/tex">R^n</script>, <script type="math/tex">A</script> must be square. We can choose the eigenvectors to be the basis. This will make <script type="math/tex">A</script> the diagonal matrix with eigenvalues. </li>
+<li>The new basis of input space is <script type="math/tex">B_{in}=B</script>, and the new basis of output space is <script type="math/tex">B_{out}=B^{-1}</script>. The new transmation matrix <script type="math/tex">A_{new}=B^{-1}AB</script>. </li>
+<li>For different spaces <script type="math/tex">V</script> and <script type="math/tex">W</script>, we take the singular vectors. </li>
+<li>In image compression, we first get a signal <script type="math/tex">P</script>, but <script type="math/tex">P</script> is too large to storage. Then we choose a good basis <script type="math/tex">W</script>. Change columns of <script type="math/tex">P</script> into that basis. For every column, we calculate the new coefficients <script type="math/tex">\vec{c}=W^{-1}P</script>. Then if there are some coefficient that doesn’t matter, we can throw them away to get a new <script type="math/tex">\hat{\vec{c}}</script> with many zeros. Then reconstruct the image from <script type="math/tex">\hat{\vec{c}}</script>. </li>
+<li>A good basis is: <br />&emsp;Fast to calculate. <br />&emsp;Few is enough. </li>
+<li>Two more basis: <code>Fourier basis</code>, <code>Wavelet basis</code>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/25-Singular-Value-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/25-Singular-Value-Decomposition/" class="post-title-link" itemprop="url">25. Singular Value Decomposition</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 15:36:27" itemprop="dateCreated datePublished" datetime="2020-02-06T15:36:27+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:37" itemprop="dateModified" datetime="2020-08-07T19:15:37+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h1><ol>
+<li><code>SVD</code> is used to decomposite matrices into small pieces. This is often used in the image storage. </li>
+<li>In <a href="http://www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/" target="_blank" rel="noopener">09. The Four Fundamental Subspaces</a>, we know that every matrix can be written as the sum of several rank <script type="math/tex">1</script> matrices, i.e. all matrices has the form <script type="math/tex">A=\sum \vec{u}\vec{v}^T</script>. </li>
+<li>To factorize a matrix, we need two sets of vectors. We use the eigenvectors <script type="math/tex">\vec{u}</script> of <script type="math/tex">AA^T</script> and the eigenvectors <script type="math/tex">\vec{v}</script> of <script type="math/tex">A^TA</script>. </li>
+<li>We usually make eigenvectors orthonormal, so the expression of <script type="math/tex">A</script> is <script type="math/tex">A=\displaystyle\sum^r_{i=1} \sigma_i\vec{u_i}\vec{v_i}^T</script>. </li>
+<li>The <script type="math/tex">\vec{u}</script>‘s from the SVD are called <code>left singular vectors</code> and the <script type="math/tex">\vec{v}</script>‘s are <code>right singular vectors</code>. The <script type="math/tex">\sigma</script>‘s are <code>singular values</code>. </li>
+<li><script type="math/tex; mode=display">AA^T\vec{u_i}=\sigma_1^2\vec{u_i}$$<br />$$A^TA\vec{v_i}=\sigma_i^2\vec{v_i}$$<br />$$A\vec{v_i}=\sigma_i\vec{u_i}</script></li>
+<li>The <script type="math/tex">\sigma</script>‘s are the square root of the equal eigenvalues of <script type="math/tex">AA^T</script> and <script type="math/tex">A^TA</script>. </li>
+</ol>
+<h1 id="Bases-and-Matrices-in-the-SVD"><a href="#Bases-and-Matrices-in-the-SVD" class="headerlink" title="Bases and Matrices in the SVD"></a>Bases and Matrices in the SVD</h1><ol>
+<li>Basis of the four fundamental subspaces: <br />&emsp;<script type="math/tex">\vec{u_1},…\vec{u_r}</script> is an <strong>orthonormal</strong> basis for the <strong>column space</strong>. <br />&emsp;<script type="math/tex">\vec{u_{r+1}},…,\vec{u_m}</script> is an <strong>orthonormal</strong> basis for the <strong>left nulspace</strong>. <br />&emsp;<script type="math/tex">\vec{v_1},…,\vec{v_r}</script> is an <strong>orthonormal</strong> basis for the <strong>row space</strong>. <br />&emsp;<script type="math/tex">\vec{v_{r+1}},…,\vec{v_n}</script> is an <strong>orthonormal</strong> basis for the <strong>nullspace</strong>. </li>
+<li><code>Reduced SVD</code>: Since <script type="math/tex">A\vec{v_i}=\sigma_i\vec{u_i}</script>, we can have <script type="math/tex">AV_r=U_r\Sigma_r</script>, i.e. <br />$$$$A\left[\begin{matrix}\vec{v_1}&amp;\dots&amp;\vec{v_r}\end{matrix}\right]=\left[\begin{matrix}\vec{u_1}&amp;\dots&amp;\vec{u_r}\end{matrix}\right]\left[\begin{matrix}\sigma_1\\&amp;\ddots\\&amp;&amp;\sigma_r\end{matrix}\right]$$$$. <br />This form only contains the row space and the column space. </li>
+<li><code>Full SVD</code>: Include all <script type="math/tex">\vec{v}</script>‘s and <script type="math/tex">\vec{u}</script>‘s, <br /><script type="math/tex">$$A\left[\begin{matrix}\vec{v_1}&\dots&\vec{v_r}&\dots&\vec{v_n}\end{matrix}\right]=\left[\begin{matrix}\vec{u_1}&\dots&\vec{u_r}&\dots&\vec{u_m}\end{matrix}\right]\left[\begin{matrix}\sigma_1\\&\ddots\\&&\sigma_r\\&&&\end{matrix}\right]$$$$. <br />The new</script>\Sigma<script type="math/tex">is suppose to be an</script>m<script type="math/tex">by</script>n<script type="math/tex">matrix, so it has</script>m-r<script type="math/tex">extra zero rows and</script>n-r$$ extra zero columns. This form contains all four fundamental subspaces. </li>
+<li>In equation <script type="math/tex">A=\vec{u_1}\sigma_1\vec{v_1}^T+…+\vec{u_r}\sigma_r\vec{v_r}^T</script>, if we put <script type="math/tex">\sigma_i</script> in decending order, this equation gives the <script type="math/tex">r</script> rank-one pieces of <script type="math/tex">A</script> in order of importance. </li>
+<li>When <script type="math/tex">A</script> is a positive simidefinite (or definite) symmetric matrix, <script type="math/tex">A=U\Sigma V^T=X\Lambda X^{-1}=Q\Lambda Q^T</script>. </li>
+<li>Singular values are more stable then eigenvalues. The changes of singular values won’t be larger than the change in <script type="math/tex">A</script> while the changes in eigenvalues can be a lot larger. <br />Here by change in <script type="math/tex">A</script> means one entry of <script type="math/tex">A</script> is shifted by <script type="math/tex">x</script>. </li>
+<li>How the SVD picks off the largest term? <br /><code>Rayleigh quotient</code>: <script type="math/tex">r(x)=\displaystyle\frac{\vec{x}^TS\vec{x}}{\vec{x}^T\vec{x}}</script>. <br />The eigenvectors and eigenvalues can be found with this quotient. First, we try to find <script type="math/tex">\lambda_1=max\ r(x)</script>, we find the vector <script type="math/tex">\vec{q_1}</script> and the value <script type="math/tex">\lambda_1</script>. Second, we try to find <script type="math/tex">\lambda_2=max\ r(x)</script> among all <script type="math/tex">\vec{x}</script>‘s with <script type="math/tex">\vec{q_1}^T\vec{x}=0</script>, and so on to find all eigenvalues and vectors. <br />As for singular values, <script type="math/tex">\sigma=max\ \displaystyle\frac{||A\vec{x}||}{||\vec{x}||}</script>. Maximize <script type="math/tex">\displaystyle\frac{||A\vec{x}||}{||\vec{x}||}</script> also maximize <script type="math/tex">(\displaystyle\frac{||A\vec{x}||}{||\vec{x}||})^2=\displaystyle\frac{\vec{x}^TA^TA\vec{x}}{\vec{x}^T\vec{x}}=\displaystyle\frac{\vec{x}^TS\vec{x}}{\vec{x}^T\vec{x}}=r(x)</script>. So we can find singular values just like when we find eigenvalues. <br />What we find here is in <script type="math/tex">V</script>, later we use <script type="math/tex">A\vec{v}=\sigma\vec{u}</script> to find the corresponding <script type="math/tex">\vec{u}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/24-Positive-Definite-Matrices-and-Minima/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/24-Positive-Definite-Matrices-and-Minima/" class="post-title-link" itemprop="url">24. Positive Definite Matrices and Minima</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 10:47:53" itemprop="dateCreated datePublished" datetime="2020-02-06T10:47:53+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:17:15" itemprop="dateModified" datetime="2020-08-07T19:17:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Positive-Definite-Matrices"><a href="#Positive-Definite-Matrices" class="headerlink" title="Positive Definite Matrices"></a>Positive Definite Matrices</h1><ol>
+<li><code>Positive definite matrix</code>: A symmetric matrix with all eigenvalues positive. </li>
+<li>A <script type="math/tex">2</script> by <script type="math/tex">2</script> matrix <script type="math/tex">S=\left[\begin{matrix}a&b\\b&c\end{matrix}\right]</script> is a positive definite, if and only if <script type="math/tex">a>0</script> and <script type="math/tex">ac-b^2>0</script>. <br /><script type="math/tex">ac-b^2>0</script> means <script type="math/tex">ac>0</script>, so <script type="math/tex">a</script> and <script type="math/tex">c</script> have the same sign. And <script type="math/tex">a>0</script>, so <script type="math/tex">c>0</script>. <br />Trace <script type="math/tex">a+c >0</script>, determinant <script type="math/tex">ac-b^2>0</script>, so <script type="math/tex">\lambda_1+\lambda_2>0</script> and <script type="math/tex">\lambda_1\lambda_2>0</script>. <br />So <script type="math/tex">\lambda_1>0</script> and <script type="math/tex">\lambda_2>0</script>. </li>
+<li>The eigenvalues of <script type="math/tex">S</script> are positive if and only if the pivots are all positive. </li>
+<li>All <script type="math/tex">n</script> upper-left subdeterminants are positive. </li>
+</ol>
+<h1 id="Energy-based-Definition"><a href="#Energy-based-Definition" class="headerlink" title="Energy-based Definition"></a>Energy-based Definition</h1><ol>
+<li><script type="math/tex">S</script> is positive definite if <script type="math/tex">\vec{x}^TS\vec{x}>0</script> for every nonzero vector <script type="math/tex">\vec{x}</script> not only eigenvectors. </li>
+<li>If <script type="math/tex">S</script> and <script type="math/tex">T</script> are symmetric positive definite, so is <script type="math/tex">S+T</script>. <br />&emsp;<script type="math/tex">\vec{x}^T(S+T)\vec{x}=\vec{x}^TS\vec{x}+\vec{x}^TT\vec{x}>0</script>. </li>
+<li>If the columns of <script type="math/tex">A</script> are independent, then <script type="math/tex">S=A^TA</script> is positive definite. <br />&emsp;<script type="math/tex">\vec{x}^TS\vec{x}=\vec{x}^TA^TA\vec{x}=(A\vec{x})^T(A\vec{x})=||A\vec{x}||^2≥0</script>. <br />&emsp;Since <script type="math/tex">A</script> has independent columns, <script type="math/tex">A\vec{x}≠\vec{0}</script> except when <script type="math/tex">\vec{x}=\vec{0}</script>. But <script type="math/tex">\vec{x}≠\vec{0}</script>. So <script type="math/tex">||A\vec{x}||^2>0</script>. </li>
+<li>The <code>Cholesky factor</code>: <script type="math/tex">S=LDL^T=(L\sqrt D)(L\sqrt D)^T</script>. </li>
+<li>The eigenvalues can also give a factor: <script type="math/tex">S=(Q\sqrt\Lambda Q^T)(Q\sqrt\Lambda Q^T)^T</script>. </li>
+</ol>
+<h1 id="Positive-Semidefinite-Matrices"><a href="#Positive-Semidefinite-Matrices" class="headerlink" title="Positive Semidefinite Matrices"></a>Positive Semidefinite Matrices</h1><ol>
+<li>If we failed the tests of positive definite matrix at <script type="math/tex">0</script>. Like the smallest eigenvalue is <script type="math/tex">0</script>, one of the determinants is <script type="math/tex">0</script> or <script type="math/tex">\vec{x}^TS\vec{x}=0</script>, then we call those matrices <code>positive semidefinite matrices</code>. </li>
+<li>A matrix is positive semidefinite: <br />&emsp;All eigenvalues <script type="math/tex">\lambda≥0</script><br />&emsp;All <script type="math/tex">\vec{x}^TS\vec{x}≥0</script><br />&emsp;All upper-left determinant <script type="math/tex">≥0</script><br />&emsp;All pivots <script type="math/tex">≥0</script></li>
+</ol>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><ol>
+<li>Ellipse <script type="math/tex">ax^2+2bxy+cy^2=1</script>, can be written as the matrix form <script type="math/tex">\vec{x}^TS\vec{x}=\left[\begin{matrix}x&y\end{matrix}\right]\left[\begin{matrix}a&b\\b&c\end{matrix}\right]\left[\begin{matrix}x\\y\end{matrix}\right]=1</script>. </li>
+<li>The axes of the tilted ellipse along the direction of eigenvectors of <script type="math/tex">S</script> and their half-lengths are <script type="math/tex">\displaystyle\frac{1}{\lambda_1}</script> and <script type="math/tex">\displaystyle\frac{1}{\lambda_2}</script>. </li>
+<li>We can also factorize <script type="math/tex">S=Q\Lambda Q^T</script> and multiply by <script type="math/tex">\vec{x}</script>. <script type="math/tex">\vec{x}^TS\vec{x}=\vec{X}\Lambda\vec{Y}=\lambda_1\vec{X}+\lambda_2\vec{Y}=1</script>. </li>
+<li>Function <script type="math/tex">F(x,y)</script> have a minimum if <script type="math/tex">\displaystyle\frac{\partial F}{\partial x}=\displaystyle\frac{\partial F}{\partial y}=0</script> and <script type="math/tex">S=\left[\begin{matrix}\frac{\partial^2F}{\partial x^2}&\frac{\partial^2F}{\partial x\partial y}\\\frac{\partial^2F}{\partial y\partial x}&\frac{\partial^2F}{\partial y^2}\end{matrix}\right]</script> is positive definite. </li>
+<li>Extend the law to <script type="math/tex">n</script> variables function, <script type="math/tex">\displaystyle\frac{\partial F}{\partial x_i}=0</script> and <script type="math/tex">S=\left[\begin{matrix}\frac{\partial^2F}{\partial x_1^2}&\frac{\partial^2F}{\partial x_1\partial x_2}&…&\frac{\partial^2F}{\partial x_1\partial x_n}\\\frac{\partial^2F}{\partial x_2\partial x_1}&\frac{\partial^2F}{\partial x_2^2}&…&\frac{\partial^2F}{\partial x_2\partial x_n}\\\vdots&\vdots&\ddots&\vdots\\\frac{\partial^2F}{\partial x_n \partial x_1}&\frac{\partial^2F}{\partial x_n\partial x_2}&…&\frac{\partial^2F}{\partial x_n^2}\end{matrix}\right]</script> is positive definite. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/05/23-Complex-Matrices-Fast-Fourier-Transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/05/23-Complex-Matrices-Fast-Fourier-Transform/" class="post-title-link" itemprop="url">23. Complex Matrices; Fast Fourier Transform</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-05 14:44:04" itemprop="dateCreated datePublished" datetime="2020-02-05T14:44:04+08:00">2020-02-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:17:51" itemprop="dateModified" datetime="2020-08-07T19:17:51+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Complex-Numbers"><a href="#Complex-Numbers" class="headerlink" title="Complex Numbers"></a>Complex Numbers</h1><h2 id="Basic-Rules"><a href="#Basic-Rules" class="headerlink" title="Basic Rules"></a>Basic Rules</h2><ol>
+<li>Two basic equations: <br /><script type="math/tex">i^2=-1</script><br /><script type="math/tex">e^{2\pi i}=1</script></li>
+<li>A <code>complex number</code> is a <code>real number</code> plus an <code>imaginary number</code>. Addition keeps the real and imaginary parts separate. </li>
+<li>The <code>real part</code> is <script type="math/tex">a=Re(a+bi)</script> while the imaginary part is <script type="math/tex">b=Im(a+bi)</script>. </li>
+<li>In the complex plane, real numbers go along x-axis and pure imaginary number are on the y-axis. The complex number <script type="math/tex">a+bi</script> is at the point with coordinates <script type="math/tex">(a,b)</script>. </li>
+<li>The complex plane <script type="math/tex">C^1</script> is like the ordinary two-dimensional plane <script type="math/tex">R^2</script>. </li>
+<li>The <code>complex conjugate</code> of <script type="math/tex">z=a+bi</script> is <script type="math/tex">\overline z=a-bi</script>. <script type="math/tex">\overline z</script> is the image of <script type="math/tex">z</script> on the other side of the real axis. </li>
+<li><script type="math/tex; mode=display">\overline{z_1}+\overline{z_2}=\overline{z_1+z_2}$$<br />$$\overline{z_1}\times\overline{z_2}=\overline{z_1\times z_2}</script></li>
+<li>When <script type="math/tex">A</script> is real, then <script type="math/tex">A\vec{x}=\lambda\vec{x} \Leftrightarrow A\overline{\vec{x}}=\overline{\lambda}\overline{\vec{x}}</script>. </li>
+<li><script type="math/tex">|z|^2=z\overline z=a^2+b^2=r^2</script>. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{1}{z}=\frac{1}{z}\frac{\overline z}{\overline z}=\frac{1}{a+bi}\frac{a-bi}{a-bi}=\frac{a-bi}{a^2+b^2}</script></li>
+</ol>
+<h2 id="Polar-Form"><a href="#Polar-Form" class="headerlink" title="Polar Form"></a>Polar Form</h2><ol>
+<li>In <code>polar form</code> <script type="math/tex">z=a+bi=rcos\ \theta+irsin\ \theta=re^{i\theta}</script></li>
+<li>The angle of a complex number in polar form doubles when the number is squared. </li>
+<li>If <script type="math/tex">z</script> is at angle <script type="math/tex">\theta</script>, its conjugate <script type="math/tex">\overline z</script> is at <script type="math/tex">-\theta</script>. </li>
+<li><script type="math/tex">z=r(cos\ \theta+isin\ \theta)</script>, then <script type="math/tex">z^n=r^n(cos\ n\theta+isin\ n\theta)</script>. <br /><script type="math/tex">x=r'(cos\ \theta '+isin\ \theta ')</script>, <script type="math/tex">zx=rr'(cos\ (\theta+\theta ')+isin\ (\theta+\theta'))</script>. </li>
+<li>Euler’s formula: <script type="math/tex">e^{i\theta}=cos\ \theta+isin\ \theta</script>. So <script type="math/tex">z=re^{i\theta}</script>. <br />When <script type="math/tex">\theta=2\pi</script>, <script type="math/tex">e^{2\pi i}=1</script></li>
+<li><script type="math/tex; mode=display">e^{i\theta}e^{i\theta '}=e^{i(\theta+\theta')}</script></li>
+<li><script type="math/tex; mode=display">(re^{i\theta})^n=r^ne^{in\theta}</script></li>
+<li>Set <script type="math/tex">w=e^{\frac{2\pi i}{n}}</script>, the <script type="math/tex">nth</script> power of <script type="math/tex">1,w,w^2,…,w^{n-1}</script> all equal 1. </li>
+</ol>
+<h1 id="Hermitian-and-Unitary-Matrices"><a href="#Hermitian-and-Unitary-Matrices" class="headerlink" title="Hermitian and Unitary Matrices"></a>Hermitian and Unitary Matrices</h1><h2 id="Hermitian"><a href="#Hermitian" class="headerlink" title="Hermitian"></a>Hermitian</h2><ol>
+<li><script type="math/tex; mode=display">\overline{z}^Tz=\left[\begin{matrix}\overline{z_1}&…&\overline{z_n}\end{matrix}\right]\left[\begin{matrix}z_1\\\vdots\\z_n\end{matrix}\right]=|z_1|^2+…+|z_n|^2=||z||^2</script></li>
+<li><script type="math/tex">z</script> <code>Hermitian</code> is the conjugate transpose of <script type="math/tex">z</script>, <script type="math/tex">\overline{z}^T=z^H</script>. It also works on matrices. </li>
+<li>The inner product of real or complex vectors <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script> is <script type="math/tex">\vec{u}^H\vec{v}=\left[\begin{matrix}\overline{u_1}&…&\overline{u_n}\end{matrix}\right]\left[\begin{matrix}v_1\\\vdots\\v_n\end{matrix}\right]=\overline{u_1}v_1+…+\overline{u_n}v_n</script>. </li>
+<li>A zero inner product still means that the (complex) ectros are othogonal. </li>
+<li><script type="math/tex">(A\vec{u})^H\vec{v}=\vec{u}^H(A^H\vec{v})</script>. </li>
+<li><script type="math/tex">A^H</script> is also called the adjoint of <script type="math/tex">A</script>. </li>
+<li><script type="math/tex">(AB)^H=B^HA^H</script>. </li>
+</ol>
+<h2 id="Hermitian-Matrix"><a href="#Hermitian-Matrix" class="headerlink" title="Hermitian Matrix"></a>Hermitian Matrix</h2><ol>
+<li>The <code>Hermitian matrix</code> has <script type="math/tex">S=S^H</script>. </li>
+<li>The condition on the entries is <script type="math/tex">s_{ij}=\overline{s_{ji}}</script>. </li>
+<li>The main diagonal of a Hermitian matrix must be real. </li>
+<li>If <script type="math/tex">\vec{z}</script> is any real or complex column vectors, the number <script type="math/tex">\vec{z}^HS\vec{z}</script> is real. <br /><script type="math/tex">(\vec{z}^HS\vec{z})^H=\vec{z}^HS\vec{z}</script></li>
+<li>Every eigenvalue of <script type="math/tex">S</script> is real. <br /><script type="math/tex">S\vec{z}=\lambda \vec{z}</script>, <script type="math/tex">\vec{z}^HS\vec{z}=\lambda \vec{z}^H\vec{z}</script>. <script type="math/tex">z^HSz</script> is real and <script type="math/tex">z^Hz</script> is length squared. So <script type="math/tex">\lambda</script> is real. </li>
+<li>The eigenvectors of <script type="math/tex">S</script> are orthogonal (when they correspond to different eigenvalues). If <script type="math/tex">S\vec{z}=\lambda \vec{z}</script> and <script type="math/tex">S\vec{y}=\beta\vec{y}</script>, then <script type="math/tex">\vec{y}^H\vec{z}=0</script>. <br /><script type="math/tex">\vec{y}^HS\vec{z}=\vec{y}^H\lambda\vec{z}</script> and <script type="math/tex">\vec{y}^HS^H\vec{z}=\beta\vec{y}^H\vec{z}</script>. So <script type="math/tex">\lambda\vec{y}^H\vec{z}=\beta\vec{y}^H\vec{z}</script>. Since <script type="math/tex">\lambda≠\beta</script>, <script type="math/tex">\vec{y}^H\vec{z}=0</script>. </li>
+<li>We can choose orthonormal eigenvectors of <script type="math/tex">S</script> to form an orthogonal matrix <script type="math/tex">Q</script>. This <script type="math/tex">Q</script> is like <script type="math/tex">X</script> in the symmetric matrix, but <script type="math/tex">Q^HQ=I</script>. </li>
+</ol>
+<h2 id="Unitary-matrix"><a href="#Unitary-matrix" class="headerlink" title="Unitary matrix"></a>Unitary matrix</h2><ol>
+<li>A <code>unitary matrix</code> <script type="math/tex">Q</script> is a complex square matrix that has orthonormal columns. </li>
+<li>Every matrix <script type="math/tex">Q</script> with orthonormal columns has <script type="math/tex">Q^HQ=I</script>. If <script type="math/tex">Q</script> is square, it’s unitary matrix. Thene <script type="math/tex">Q^{-1}=Q^H</script>. </li>
+<li><script type="math/tex">||Q\vec{z}||=||\vec{z}||</script>, Therefore <script type="math/tex">Q\vec{z}=\lambda\vec{z}</script> leads to <script type="math/tex">|\lambda|=1</script>. </li>
+</ol>
+<h1 id="Fast-Fourier-Transform"><a href="#Fast-Fourier-Transform" class="headerlink" title="Fast Fourier Transform"></a>Fast Fourier Transform</h1><ol>
+<li><script type="math/tex">w_n</script> is a root of <script type="math/tex">z^n=1</script>. So is <script type="math/tex">1, w_n,w_n^2,…,w_n^{n-1}</script>. They evenly spaced around the unit circle in the complex plane. Their angle difference is <script type="math/tex">\displaystyle\frac{2\pi}{n}</script>. </li>
+<li><code>Fourier matrix</code> is a <script type="math/tex">n</script> by <script type="math/tex">n</script> matrix with <script type="math/tex">w</script> which is the root of <script type="math/tex">z^n=1</script>. <script type="math/tex">F_n=\left[\begin{matrix}1&1&1&\dots&1\\1&w&w^2&\dots&w^{n-1}\\1&w^2&w^4&\dots&w^{2(n-1)}\\\vdots&\vdots&\vdots&&\vdots\\1&w^{n-1}&w^{2(n-1)}&\dots&w^{(n-1)^2}\end{matrix}\right]</script>, the entry in row <script type="math/tex">j</script>, column <script type="math/tex">k</script> (<script type="math/tex">j</script> and <script type="math/tex">k</script> start from <script type="math/tex">0</script> not <script type="math/tex">1</script>) is <script type="math/tex">w^{jk}</script>. Row zero and column zero contain <script type="math/tex">w^0=1</script>. </li>
+<li><script type="math/tex">F</script> is not Hermitian. But <script type="math/tex">\displaystyle\frac{1}{\sqrt n}F</script> is a unitary matrix, which means <script type="math/tex">(\displaystyle\frac{1}{\sqrt n}F^H)(\displaystyle\frac{1}{\sqrt n}F)=I</script>. So <script type="math/tex">F^HF=nI</script> and <script type="math/tex">F^{-1}=\displaystyle\frac{1}{n}\overline F</script>. </li>
+<li>Ordinary we use <script type="math/tex">n^2</script> multiplications to calculate <script type="math/tex">F\vec{c}</script> (<script type="math/tex">\vec{c}</script> has <script type="math/tex">n</script> complex components). But <code>Fast Fourier Transform</code> can do it in <script type="math/tex">\displaystyle\frac{1}{2}nlog_2n</script>. </li>
+<li>The first component of the output is <script type="math/tex">y_0=\displaystyle\sum^{n-1}_{i=0}{c_i}</script>. This is the value of Fourier series <script type="math/tex">\sum c_ke^{ikx}</script> at <script type="math/tex">x=0</script>. <br />The <script type="math/tex">ith</script> component of the output is <script type="math/tex">y_i</script>, which is the value of Fourier series at <script type="math/tex">x=\theta</script> (<script type="math/tex">i</script> starts at <script type="math/tex">0</script>, <script type="math/tex">\theta</script> is the angle of <script type="math/tex">w^i</script>). </li>
+<li><script type="math/tex">m=\displaystyle\frac{1}{2}n</script>. The key to FFT is to connect <script type="math/tex">F_n</script> with <script type="math/tex">F_m</script>. <br /><script type="math/tex">F_n=\left[\begin{matrix}I_m&D_m\\I_m&-D_m\end{matrix}\right]\left[\begin{matrix}F_m&\\&F_m\end{matrix}\right]\left[\begin{matrix}even-odd\\permutation\end{matrix}\right]</script>. <br /><script type="math/tex">D_m</script> is athe diagonal matrix with entries <script type="math/tex">1,w,…,w^{m-1}</script>. <br />The last permutation matrix puts all the even rows ahead of all the odd rows (for example, exchange rows <script type="math/tex">0,1,2,3</script> into <script type="math/tex">0,2,1,3</script>). </li>
+<li>The last permutation matrix split <script type="math/tex">\vec{c}</script> into even part <script type="math/tex">\vec{c}'</script> and odd part <script type="math/tex">\vec{c}''</script>. <script type="math/tex">\vec{y}'=F_m\vec{c}'</script> and <script type="math/tex">\vec{y}''=F_m\vec{c}''</script>. Reconstruct <script type="math/tex">\vec{y}</script> from <script type="math/tex">\vec{y}'</script> and <script type="math/tex">\vec{y}''</script>: <br /><script type="math/tex">\vec{y_j}=\vec{y_j}'+(w_n)^j\vec{y_j}''</script> for <script type="math/tex">j=0,…,m-1</script><br /><script type="math/tex">\vec{y_{j+m}}=\vec{y_j}'-(w_n)^j\vec{y_j}''</script> for <script type="math/tex">j=0,…,m-1</script></li>
+<li>This method comes from <script type="math/tex">y_j=\displaystyle\sum^{n-1}_{k=0}w^{jk}c_k=\displaystyle\sum^{m-1}_{k=0}{w^{2jk}c_{2k}}+\displaystyle\sum^{m-1}_{k=0}{w^{j(2k+1)}c_{2k+1}}\ (m=\displaystyle\frac{1}{2}n)</script></li>
+<li>This still need to calculate <script type="math/tex">F_m\vec{c}</script>. we can recurse it to a base that cost only few multiplications to calculate. </li>
+</ol>
+<h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
+<li>An infinite dimension vector means that vector is infinitely long or we can say that vector is a function. </li>
+<li>The vector <script type="math/tex">\vec{v}</script> and the function <script type="math/tex">f(x)</script> are in our infinite-dimensional <code>Hilbert spaces</code> if and only if their lengths <script type="math/tex">||\vec{v}||</script> and <script type="math/tex">||f||</script> are finite. </li>
+<li><script type="math/tex">||\vec{v}||=\vec{v}\cdot\vec{v}=\displaystyle\sum^\infty_{i=0}{v_i^2}</script>. <br /><script type="math/tex">||f||=(f,f)=\displaystyle\int^{b}_a{|f(x)|^2dx}</script>, when <script type="math/tex">f(x)</script> is defined for <script type="math/tex">a≤x≤b</script>. <br />The inner product between functions are defined at <a href="http://www.laughingtree.cn/2020/01/19/05-Transposes-Permutations-Spaces-R-n/" target="_blank" rel="noopener">05. Transposes, Permutations, Spaces Rⁿ</a></li>
+<li><code>Schwarz Inequality</code>: <script type="math/tex">|\vec{v}\cdot\vec{w}|≤||\vec{v}||\ ||\vec{w}||</script>. </li>
+<li>The Fourier series are defined as <script type="math/tex">f(x)=a_0+a_1cos\ x+b_1sin\ x+a_2cos\ 2x+b_2sin\ 2x+…</script></li>
+<li>The cycle of Fourier series is <script type="math/tex">2\pi</script>. </li>
+<li>The basis of Fourier series in the function space is <script type="math/tex">1,cos\ x,sin\ x,cos\ 2x, sin\ 2x, …</script>. This is an orthogonal basis. </li>
+<li>The length of Fourier series: <br /><script type="math/tex">\begin{align}(f,f)&=\displaystyle\int^{2\pi}_0{(a_0+a_1cos\ x+b_1sin\ x+a_2cos\ 2x+b_2sin\ 2x+…)^2dx}\\&=\displaystyle\int^{2\pi}_0{(a_0^2+a_1^2cos^2\ x+b_1^2sin^2\ x+a_2^2cos^2\ 2x+b_2^2sin^2\ 2x+…)dx}\\&=2\pi a_0^2+\pi(a_1^2+b_1^2+a_2^2+b_2^2+…)\end{align}</script><br />From equation <script type="math/tex">(1)</script> to <script type="math/tex">(2)</script>, we use the orthogonal. All terms except ones that multiplies itself will integrate to <script type="math/tex">0</script>. </li>
+<li>Further more, we can choose orthonormal basis <script type="math/tex">\displaystyle\frac{1}{\sqrt{2\pi}},\displaystyle\frac{cos\ x}{\sqrt{\pi}},\displaystyle\frac{sin\ x}{\sqrt{\pi}},\displaystyle\frac{cos\ 2x}{\sqrt{\pi}},\displaystyle\frac{sin\ 2x}{\sqrt{\pi}},…</script><br />Then we can have the length without <script type="math/tex">\pi</script>‘s, <script type="math/tex">||F||^2=(F,F)=A_0^2+A_1^2+B_1^2+A_2^2+B_2^2+…</script></li>
+<li>The function space contains <script type="math/tex">f(x)</script> exactly when the Hilbert space contains the vector <script type="math/tex">\vec{v}=(a_0,a_1,b_1,a_2,b_2,…)</script> of <code>Fourier coefficients</code> of <script type="math/tex">f(x)</script>. Both must have finite length. </li>
+<li>For coefficient <script type="math/tex">a_k</script>, <script type="math/tex">\displaystyle\int^{2\pi}_{0}{f(x)cos\ kx\ dx}=\displaystyle\int^{2\pi}_{0}{a_kcos^2\ kx\ dx}=\pi a_k</script>. <br />For coefficient <script type="math/tex">b_k</script>, <script type="math/tex">\displaystyle\int^{2\pi}_{0}{f(x)sin\ kx\ dx}=\displaystyle\int^{2\pi}_{0}{b_ksin^2\ kx\ dx}=\pi b_k</script>. <br />For constant term <script type="math/tex">a_0=\displaystyle\int^{2\pi}_0{f(x)\cdot1dx}=average\ value\ of\ f(x)</script>.    </li>
 </ol>
 
       
@@ -1166,7 +1228,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1233,20 +1295,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">204</span>
+          <span class="site-state-item-count">188</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
