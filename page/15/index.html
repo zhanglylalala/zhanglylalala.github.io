@@ -191,6 +191,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">树状数组</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 00:27:24" itemprop="dateCreated datePublished" datetime="2019-11-09T00:27:24+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-21 11:59:18" itemprop="dateModified" datetime="2020-08-21T11:59:18+08:00">2020-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" itemprop="url" rel="index">
+                    <span itemprop="name">区间问题</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><p><strong>主要用法</strong>：单点修改，区间求和，如果涉及到区间修改，要么转为单点修改，要么用线段树<br><strong>原理</strong>：利用二叉索引树，把区间依次分为多个子区间。</p>
+<h1 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h1><p><strong>本质</strong>：求一个数二进制的最低位的$1$所代表的数字，如：$lowbit(6) = 2$<br><strong>求法</strong>：与其相反数做位与操作<br><strong>原理</strong>：负数在计算机内到存储方式是正数逐位取反再加一，取反之后原本末尾的$0$都变为$1$，最低位$1$变为$0$，加一之后反码末尾的$1$都变为$0$，恢复和原本的正数一样，进位进到最低位的$1$时停止进位，最低位的$1$恢复成和原本的正数一样，但更高位的数仍维持和反码一样，意味着在逐位取和的过程中更高位都会变为$0$，最低位$1$及以下的数不变，由此得到最低位$1$代表的数字<br>如：<br>原数$1001110 | 10$<br>取反$0110001 | 01$<br>加一$0110001 | 10$<br>逐位取和$10 \rightarrow 2$</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x &amp; -x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二叉索引树"><a href="#二叉索引树" class="headerlink" title="二叉索引树"></a>二叉索引树</h1><p>二叉索引树长相如图：<img src="/img/树状数组01.png" style="zoom:67%;" /><br>1、<strong>含义</strong>：每一个黑点都代表的是一个原始数组单元内存储的信息的位置。白条加黑点代表的是该单元内存储的长条覆盖范围内的数据和。例如数组的$4$号元素，表示的是从$1$号加到$4$号的和<br>2、可以观察到树状数组和原始数组的大小一样<br>3、在树状数组中，每一个节点到包含它的父节点的方法就是加上$lowbit$，而求从$1$号到$x$号的节点和要从$x$号节点开始依次减去$lowbit$<br>单点修改代码<br>4、树状数组必须从$1$开始存储，从$0$开始的话$lowbit(0)=0$，会卡死循环</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[maxn], ori[maxn];   <span class="comment">//sum为树状数组，ori为原始数据</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> val, <span class="keyword">int</span> n)</span> <span class="comment">//要把x号元素增加val，n为元素个数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(x &lt; n)</span><br><span class="line">  &#123;</span><br><span class="line">    sum[x] += val;</span><br><span class="line">    x += lowbit(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>区间查询代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span>   <span class="comment">//求从1号元素到x号元素到和</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(x &gt; <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    ans += sum[x];</span><br><span class="line">    x -= lowbit(x);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="单点与区间的转换"><a href="#单点与区间的转换" class="headerlink" title="单点与区间的转换"></a>单点与区间的转换</h1><p>利用<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">差分</a>，把单点的查询转换成从第一项开始的区间和查询，区间的修改转化为两个单点的修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> val, <span class="keyword">int</span> n)</span> <span class="comment">// 区间[l, r]内的所有数增加val</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  add(l, val, n);</span><br><span class="line">  add(r + <span class="number">1</span>, -val, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题集"><a href="#题集" class="headerlink" title="题集"></a>题集</h1><h2 id="DFS序-树状数组"><a href="#DFS序-树状数组" class="headerlink" title="DFS序+树状数组"></a>DFS序+树状数组</h2><p><a href="https://ac.nowcoder.com/acm/contest/7199/A" target="_blank" rel="noopener">华华和月月种树</a></p>
+<ol>
+<li>先离线得到树所有的节点，利用<a href="http://www.laughingtree.cn/2019/11/09/搜索/" target="_blank" rel="noopener">DFS序</a>，把子树修改问题转化为区间修改问题，再利用差分，把区间修改问题转化为单点修改问题</li>
+<li>操作时不管子树中的节点当时是否已经建立，但由于每个节点刚刚创建的时候权值为$0$，所以在节点创建的时候把这个新节点的权值清空即可</li>
+<li>在获得了DFS序之后，相当于把点“离散”了，所有操作都是基于DFS序进行。修改时改的子树对应与连续的DFS序，相当于区间，查询的时候查的是节点的DFS序号的前缀和</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">int</span> index, a, o;</span><br><span class="line">&#125; queries[MAXN &lt;&lt; <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (queries[i].o == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      update(dfsNum[queries[i].a], dfsNum[queries[i].a], - query(dfsNum[queries[i].a])); <span class="comment">// 新节点，权值清零</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (queries[i].o == <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      update(dfsNum[queries[i].index], dfsNum[queries[i].index] + <span class="built_in">size</span>[queries[i].index] - <span class="number">1</span>, queries[i].a); <span class="comment">// 区间修改</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (queries[i].o == <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, query(dfsNum[queries[i].index])); <span class="comment">// 单点询问</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> m;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;queries[i].o, &amp;queries[i].index);</span><br><span class="line">        <span class="keyword">if</span> (queries[i].o == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            sons[queries[i].index].pb(++cnt);</span><br><span class="line">            queries[i].a = cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (queries[i].o == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;queries[i].a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  dfs(<span class="number">0</span>); <span class="comment">// 获得DFS序</span></span><br><span class="line">  sovle(m);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E5%B9%B6%E6%9F%A5%E9%9B%86%E9%A2%98%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1029,101 +1132,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/09/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D-%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94-Hopcroft-Karp%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">二分图匹配(匈牙利算法的优化—— Hopcroft-Karp算法)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-09 00:08:35" itemprop="dateCreated datePublished" datetime="2019-11-09T00:08:35+08:00">2019-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-08 19:38:42" itemprop="dateModified" datetime="2020-08-08T19:38:42+08:00">2020-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E4%BA%8C%E5%88%86%E5%9B%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">二分图</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="匈牙利算法的不足"><a href="#匈牙利算法的不足" class="headerlink" title="匈牙利算法的不足"></a>匈牙利算法的不足</h1><p>匈牙利算法在进行DFS时，没次都最多只能找到一条增广路，导致了我们要遍历所有的点和边才可以找到最大匹配。而Hopcroft-Karp算法就从这里开始改进——每次先通过BFS标出层次，再通过DFS验证增广路，可以一次找到多条路</p>
-<h1 id="Hopcroft-Karp算法"><a href="#Hopcroft-Karp算法" class="headerlink" title="Hopcroft-Karp算法"></a>Hopcroft-Karp算法</h1><p>1、BFS标记层次：虽然说再进行BFS时只标记层次，不标记匹配增广路，但利用一些增广路的性质可以优化<br>&emsp;增广路都是从一个未匹配点开始，我们就只需要在开始的时候把所有的未匹配点推入队列<br>&emsp;增广路都是在另一个未匹配点结束，我们就只需标记到另一个未匹配点所在的那层即可<br>&emsp;<strong>数据存储</strong>：$map$存边，$dN$和$dM$分别表示$N$点集和$M$点集中各个点的层次，$matchN$、$matchM$分别存储点集$N$和点集$M$的匹配情况，整型全局变量$dist$表示当前遍历的最大层次同时标记还有没有增广路</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[maxN][maxM], dN[maxN], dM[maxM], matchN[maxN], matchM[maxM];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span>  <span class="comment">//n是点集N的个数，m是点集M的个数，这里假设从点集N去匹配点集M</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">	dist = INF;</span><br><span class="line">	<span class="built_in">memset</span>(dN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dN));</span><br><span class="line">	<span class="built_in">memset</span>(dM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dM));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//所以未匹配点都加入队列</span></span><br><span class="line">		<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			que.push(i);</span><br><span class="line">			dN[i] = <span class="number">0</span>;  <span class="comment">//这些未匹配点都是起点，所以是第0层</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> dotN = que.front();</span><br><span class="line">		que.pop();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//根据BFS的性质，当出现第一个超出遍历层数的点出现，之后的点都会超出，不必再继续遍历</span></span><br><span class="line">		<span class="keyword">if</span>(dN[dotN] &gt; dist)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == <span class="number">-1</span>) <span class="comment">//相连且没有遍历过</span></span><br><span class="line">			&#123;</span><br><span class="line">				dM[dotM] = dN[dotN] + <span class="number">1</span>; <span class="comment">//dotN再走一步就可以到dotM，所以dotM的层数就是dotN加一</span></span><br><span class="line">				<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span>) <span class="comment">//如果是未匹配点，遍历到这层就结束</span></span><br><span class="line">				&#123;</span><br><span class="line">					dist = dM[dotM]; <span class="comment">//这次遍历到最大层数</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="comment">//如果是匹配点</span></span><br><span class="line">				&#123;</span><br><span class="line">					dN[matchM[dotM]] = dM[dotM] + <span class="number">1</span>;</span><br><span class="line">					que.push(matchM[dotM]); <span class="comment">//队列里装的永远都是点集N里的点</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dist != INF; <span class="comment">//如果dist == INF就说明没有增广路路，可以结束循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2、DFS验证增广路：和匈牙利算法的DFS差不多，但是要求长度在$dist$以内，且是连续层次的点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> vis[maxM];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> dotN, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> dotM = <span class="number">0</span>; dotM &lt; m; dotM++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[dotM] &amp;&amp; <span class="built_in">map</span>[dotN][dotM] &amp;&amp; dM[dotM] == dN[dotN] + <span class="number">1</span>) <span class="comment">//连边且层次连续</span></span><br><span class="line">		&#123;</span><br><span class="line">			vis[dotM] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] != <span class="number">-1</span> &amp;&amp; dM[dotM] &gt; dist) <span class="comment">//长度超过dist还没找到未匹配点即路未结束</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(matchM[dotM] == <span class="number">-1</span> || DFS(matchM[dotM], m))</span><br><span class="line">			&#123;</span><br><span class="line">				matchM[dotM] = dotN;</span><br><span class="line">				matchN[dotN] = dotM;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>3、主算法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxMatch</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(matchN, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchN));</span><br><span class="line">	<span class="built_in">memset</span>(matchM, <span class="number">-1</span>, <span class="keyword">sizeof</span>(matchM));</span><br><span class="line">	<span class="keyword">while</span>(BFS(n, m))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(matchN[i] == <span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				ans += DFS(i, m);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://vjudge.net/problem/HDU-2389" target="_blank" rel="noopener">HDOJ 2389</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1195,7 +1203,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">188</span>
+          <span class="site-state-item-count">189</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
