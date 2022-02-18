@@ -191,6 +191,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/24-Positive-Definite-Matrices-and-Minima/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/24-Positive-Definite-Matrices-and-Minima/" class="post-title-link" itemprop="url">24. Positive Definite Matrices and Minima</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 10:47:53" itemprop="dateCreated datePublished" datetime="2020-02-06T10:47:53+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:17:15" itemprop="dateModified" datetime="2020-08-07T19:17:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Positive-Definite-Matrices"><a href="#Positive-Definite-Matrices" class="headerlink" title="Positive Definite Matrices"></a>Positive Definite Matrices</h1><ol>
+<li><code>Positive definite matrix</code>: A symmetric matrix with all eigenvalues positive. </li>
+<li>A <script type="math/tex">2</script> by <script type="math/tex">2</script> matrix <script type="math/tex">S=\left[\begin{matrix}a&b\\b&c\end{matrix}\right]</script> is a positive definite, if and only if <script type="math/tex">a>0</script> and <script type="math/tex">ac-b^2>0</script>. <br /><script type="math/tex">ac-b^2>0</script> means <script type="math/tex">ac>0</script>, so <script type="math/tex">a</script> and <script type="math/tex">c</script> have the same sign. And <script type="math/tex">a>0</script>, so <script type="math/tex">c>0</script>. <br />Trace <script type="math/tex">a+c >0</script>, determinant <script type="math/tex">ac-b^2>0</script>, so <script type="math/tex">\lambda_1+\lambda_2>0</script> and <script type="math/tex">\lambda_1\lambda_2>0</script>. <br />So <script type="math/tex">\lambda_1>0</script> and <script type="math/tex">\lambda_2>0</script>. </li>
+<li>The eigenvalues of <script type="math/tex">S</script> are positive if and only if the pivots are all positive. </li>
+<li>All <script type="math/tex">n</script> upper-left subdeterminants are positive. </li>
+</ol>
+<h1 id="Energy-based-Definition"><a href="#Energy-based-Definition" class="headerlink" title="Energy-based Definition"></a>Energy-based Definition</h1><ol>
+<li><script type="math/tex">S</script> is positive definite if <script type="math/tex">\vec{x}^TS\vec{x}>0</script> for every nonzero vector <script type="math/tex">\vec{x}</script> not only eigenvectors. </li>
+<li>If <script type="math/tex">S</script> and <script type="math/tex">T</script> are symmetric positive definite, so is <script type="math/tex">S+T</script>. <br />&emsp;<script type="math/tex">\vec{x}^T(S+T)\vec{x}=\vec{x}^TS\vec{x}+\vec{x}^TT\vec{x}>0</script>. </li>
+<li>If the columns of <script type="math/tex">A</script> are independent, then <script type="math/tex">S=A^TA</script> is positive definite. <br />&emsp;<script type="math/tex">\vec{x}^TS\vec{x}=\vec{x}^TA^TA\vec{x}=(A\vec{x})^T(A\vec{x})=||A\vec{x}||^2≥0</script>. <br />&emsp;Since <script type="math/tex">A</script> has independent columns, <script type="math/tex">A\vec{x}≠\vec{0}</script> except when <script type="math/tex">\vec{x}=\vec{0}</script>. But <script type="math/tex">\vec{x}≠\vec{0}</script>. So <script type="math/tex">||A\vec{x}||^2>0</script>. </li>
+<li>The <code>Cholesky factor</code>: <script type="math/tex">S=LDL^T=(L\sqrt D)(L\sqrt D)^T</script>. </li>
+<li>The eigenvalues can also give a factor: <script type="math/tex">S=(Q\sqrt\Lambda Q^T)(Q\sqrt\Lambda Q^T)^T</script>. </li>
+</ol>
+<h1 id="Positive-Semidefinite-Matrices"><a href="#Positive-Semidefinite-Matrices" class="headerlink" title="Positive Semidefinite Matrices"></a>Positive Semidefinite Matrices</h1><ol>
+<li>If we failed the tests of positive definite matrix at <script type="math/tex">0</script>. Like the smallest eigenvalue is <script type="math/tex">0</script>, one of the determinants is <script type="math/tex">0</script> or <script type="math/tex">\vec{x}^TS\vec{x}=0</script>, then we call those matrices <code>positive semidefinite matrices</code>. </li>
+<li>A matrix is positive semidefinite: <br />&emsp;All eigenvalues <script type="math/tex">\lambda≥0</script><br />&emsp;All <script type="math/tex">\vec{x}^TS\vec{x}≥0</script><br />&emsp;All upper-left determinant <script type="math/tex">≥0</script><br />&emsp;All pivots <script type="math/tex">≥0</script></li>
+</ol>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><ol>
+<li>Ellipse <script type="math/tex">ax^2+2bxy+cy^2=1</script>, can be written as the matrix form <script type="math/tex">\vec{x}^TS\vec{x}=\left[\begin{matrix}x&y\end{matrix}\right]\left[\begin{matrix}a&b\\b&c\end{matrix}\right]\left[\begin{matrix}x\\y\end{matrix}\right]=1</script>. </li>
+<li>The axes of the tilted ellipse along the direction of eigenvectors of <script type="math/tex">S</script> and their half-lengths are <script type="math/tex">\displaystyle\frac{1}{\lambda_1}</script> and <script type="math/tex">\displaystyle\frac{1}{\lambda_2}</script>. </li>
+<li>We can also factorize <script type="math/tex">S=Q\Lambda Q^T</script> and multiply by <script type="math/tex">\vec{x}</script>. <script type="math/tex">\vec{x}^TS\vec{x}=\vec{X}\Lambda\vec{Y}=\lambda_1\vec{X}+\lambda_2\vec{Y}=1</script>. </li>
+<li>Function <script type="math/tex">F(x,y)</script> have a minimum if <script type="math/tex">\displaystyle\frac{\partial F}{\partial x}=\displaystyle\frac{\partial F}{\partial y}=0</script> and <script type="math/tex">S=\left[\begin{matrix}\frac{\partial^2F}{\partial x^2}&\frac{\partial^2F}{\partial x\partial y}\\\frac{\partial^2F}{\partial y\partial x}&\frac{\partial^2F}{\partial y^2}\end{matrix}\right]</script> is positive definite. </li>
+<li>Extend the law to <script type="math/tex">n</script> variables function, <script type="math/tex">\displaystyle\frac{\partial F}{\partial x_i}=0</script> and <script type="math/tex">S=\left[\begin{matrix}\frac{\partial^2F}{\partial x_1^2}&\frac{\partial^2F}{\partial x_1\partial x_2}&…&\frac{\partial^2F}{\partial x_1\partial x_n}\\\frac{\partial^2F}{\partial x_2\partial x_1}&\frac{\partial^2F}{\partial x_2^2}&…&\frac{\partial^2F}{\partial x_2\partial x_n}\\\vdots&\vdots&\ddots&\vdots\\\frac{\partial^2F}{\partial x_n \partial x_1}&\frac{\partial^2F}{\partial x_n\partial x_2}&…&\frac{\partial^2F}{\partial x_n^2}\end{matrix}\right]</script> is positive definite. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/05/23-Complex-Matrices-Fast-Fourier-Transform/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1158,115 +1263,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/" class="post-title-link" itemprop="url">14. Orthogonal Matrices and Gram-Schmidt</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-02 09:28:35" itemprop="dateCreated datePublished" datetime="2020-02-02T09:28:35+08:00">2020-02-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:17:05" itemprop="dateModified" datetime="2020-08-07T19:17:05+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Orthogonal-Matrices"><a href="#Orthogonal-Matrices" class="headerlink" title="Orthogonal Matrices"></a>Orthogonal Matrices</h1><ol>
-<li><code>Orthonormal</code> is a basis consisting of orthogonal unit vectors. </li>
-<li>A matrix with orthonormal columns is assigned the special letter <script type="math/tex">Q</script>. </li>
-<li><script type="math/tex">Q^TQ=I</script><br />Prove: <br /><script type="math/tex">Q^TQ=\left[\begin{matrix}q_1^T\\q_2^T\\\vdots\\q_n^T\end{matrix}\right]\left[\begin{matrix}q_1&q_2&\dots&q_n\end{matrix}\right]</script><br />Except for <script type="math/tex">q_i^Tq_i</script> is <script type="math/tex">1</script>, for any <script type="math/tex">q_i^Tq_j\ (i≠j)</script> is <script type="math/tex">0</script>. So only diagonals are <script type="math/tex">1</script> and all others are <script type="math/tex">0</script>. </li>
-<li><script type="math/tex">Q</script> is not required to be square. </li>
-<li>When <script type="math/tex">Q</script> is square, <script type="math/tex">Q^TQ=I</script> means that <script type="math/tex">Q^{-1}=Q^T</script>. So <script type="math/tex">QQ^T=I</script> is also true under this condition. In this square case, we call <script type="math/tex">Q</script> an <code>orthogonal matrix</code>. </li>
-<li>Every permutaion matrix is an orthogonal matrix. </li>
-<li>If <script type="math/tex">\vec{u}</script> is any unit vector, set <script type="math/tex">Q=I-2\vec{u}\vec{u}^T</script>. <br />Then <script type="math/tex">Q^T=I-2\vec{u}\vec{u}^T=Q</script> and <script type="math/tex">Q^TQ=I-4\vec{u}\vec{u}^T-4\vec{u}\vec{u}^T\vec{u}\vec{u}^T=I\ (\vec{u}^T\vec{u}=||\vec{u}||^2=1)</script><br />This <script type="math/tex">Q</script> is called the reflection matrix. It’s symmetrix and orthogonal. <br /><script type="math/tex">Q^2=Q^TQ=QQ^T=Q^{-1}Q=I</script><br />Any vector times <script type="math/tex">Q</script> will be reflected and the mirror is the space perpendicular to <script type="math/tex">\vec{u}</script>. The vectors in the mirror doesn’t change. </li>
-<li>Multiplication by any orthogonal martix <script type="math/tex">Q</script>, lengths don’t change. <br />Proof: <script type="math/tex">||Q\vec{x}||^2=(Q\vec{x})^T(Q\vec{x})=\vec{x}^TQ^TQ\vec{x}=\vec{x}^T\vec{x}=||\vec{x}||^2</script></li>
-<li><script type="math/tex">Q</script> also preserves dot products: <script type="math/tex">(Q\vec{x})^T(Q\vec{y})=\vec{x}^TQ^TQ\vec{y}=\vec{x}^T\vec{y}</script>. </li>
-</ol>
-<h1 id="Projection"><a href="#Projection" class="headerlink" title="Projection"></a>Projection</h1><ol>
-<li>The least squares solution of <script type="math/tex">Q\vec{x}=\vec{b}</script> is <script type="math/tex">\hat{\vec{x}}=Q^T\vec{b}</script>. The projection matrix is <script type="math/tex">QQ^T</script>. <br /><code>MARK</code>: <script type="math/tex">QQ^T</script> is <script type="math/tex">I</script> only when <script type="math/tex">Q</script> is square. </li>
-<li>Projection: <script type="math/tex">\vec{p}=Q\hat{\vec{x}}=QQ^T\vec{b}=\sum{\vec{q_i}(\vec{q_i}^T\vec{b})}</script></li>
-<li>If <script type="math/tex">Q</script> is square: <br />Every <script type="math/tex">\vec{p_i}=\vec{q_i}(\vec{q_i}^T\vec{b})</script> is the projection of <script type="math/tex">\vec{b}</script> into a 1-dimentional  space. We can break <script type="math/tex">\vec{b}</script> into its projections and reconstruct <script type="math/tex">\vec{b}</script> from its projections. <br />Its columns space is the whole space. The projection of <script type="math/tex">\vec{b}</script> is itself. <script type="math/tex">P=I</script></li>
-</ol>
-<h1 id="Gram-Schmidt-Process"><a href="#Gram-Schmidt-Process" class="headerlink" title="Gram-Schmidt Process"></a>Gram-Schmidt Process</h1><ol>
-<li><code>The Gram-Schmidt process</code> is the process to create orthonormal vectors. </li>
-<li>The first direnction (column vector) is accepted as it comes. </li>
-<li>The next direction must be perpendicular to all the accepted directions. And we get the next direction by subtracting all its projections in the accepted directions from itself. This leaves only the perpendicular part. </li>
-<li>The process takes independent <script type="math/tex">\vec{a_i}</script> to orthonormal <script type="math/tex">\vec{q_i}</script>. <br />Start with <script type="math/tex">\vec{q_1}=\frac{\vec{a_1}}{||\vec{a_1}||}</script>. <br /><script type="math/tex">\vec{q_i}=\frac{\vec{a_i}-\vec{p}}{||\vec{a_i}-\vec{p}||}</script>. And <script type="math/tex">\vec{p_i}=\displaystyle\sum^{i-1}_{j=1}{(\vec{a_i}^T\vec{q_j})\vec{q_j}}</script></li>
-<li>If we take all column vectors <script type="math/tex">\vec{a}</script> into matrix <script type="math/tex">A</script> and all <script type="math/tex">\vec{q}</script> into <script type="math/tex">Q</script>. Since all vectors in <script type="math/tex">Q</script> is merely linear combination of <script type="math/tex">A</script>, their share the same column space. That’s how we know we can factorize <script type="math/tex">A</script> into something with <script type="math/tex">Q</script>. This is <script type="math/tex">A=QR</script>. </li>
-<li>Multiply by <script type="math/tex">Q^T</script>: <script type="math/tex">Q^TA=Q^TQR=R</script>. So <script type="math/tex">R=Q^TA=\left[\begin{matrix}\vec{q_1}^T\vec{a_1}&\vec{q_1}^T\vec{a_2}&\dots&\vec{q_1}^T\vec{a_n}\\&\vec{q_2}^T\vec{a_2}&\dots&\vec{q_2}^T\vec{a_n}\\&&\ddots&\vdots\\&&&\vec{q_n}^T\vec{a_n}\end{matrix}\right]</script>. </li>
-<li><script type="math/tex">R</script> is upper triangular because latter <script type="math/tex">\vec{q}</script>‘s are orthogonal to earlier <script type="math/tex">\vec{a}</script>‘s. </li>
-<li>The lengths of all <script type="math/tex">\vec{a}</script>‘s are in the diagonal of <script type="math/tex">R</script>. </li>
-<li><script type="math/tex; mode=display">A^TA=(QR)^T(QR)=R^TQ^TQR=R^TR</script></li>
-<li>The least squares equation <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> becomes <script type="math/tex">R^TR\hat{\vec{x}}=R^TQ^T\vec{b}</script> and finally <script type="math/tex">R\hat{\vec{x}}=Q^T\vec{b}</script>. <br />The least squares solution <script type="math/tex">\hat{\vec{x}}=R^{-1}Q^T\vec{b}</script></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1338,7 +1334,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

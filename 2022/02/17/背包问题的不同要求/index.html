@@ -48,23 +48,19 @@
   };
 </script>
 
-  <meta name="description" content="Implicit Differentiation An implicit function is a function that y cannot be expressed by x explicitly.  The way to find its defferentiation is to defferentiate both side of the equation at the same t">
+  <meta name="description" content="求方案种数另外开一个一维数组记录方案种数，同样利用滚动数组，有$num[j] +&#x3D; num[j - cost[i]]$表示考虑前i件时，背包容量为j的方案种数。初始化时只需要设$num[0]&#x3D; 1$表示什么都不选也有一种方法。更新方式和对应的背包更新一样，以下以$01$背包为例 123456789101112void solve(int n, int m)&amp;#123;	memset(dp, 0,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="04. Implicit differentiation, inverses">
-<meta property="og:url" content="http://http//www.laughingtree.cn/2020/02/10/04-Implicit-differentiation-inverses/index.html">
+<meta property="og:title" content="背包问题的不同要求">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/02/17/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8D%E5%90%8C%E8%A6%81%E6%B1%82/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="Implicit Differentiation An implicit function is a function that y cannot be expressed by x explicitly.  The way to find its defferentiation is to defferentiate both side of the equation at the same t">
-<meta property="og:image" content="http://http/img/04.Implicitdifferentiation,inverses01.png">
-<meta property="article:published_time" content="2020-02-10T02:50:12.000Z">
-<meta property="article:modified_time" content="2020-08-07T11:20:09.000Z">
+<meta property="og:description" content="求方案种数另外开一个一维数组记录方案种数，同样利用滚动数组，有$num[j] +&#x3D; num[j - cost[i]]$表示考虑前i件时，背包容量为j的方案种数。初始化时只需要设$num[0]&#x3D; 1$表示什么都不选也有一种方法。更新方式和对应的背包更新一样，以下以$01$背包为例 123456789101112void solve(int n, int m)&amp;#123;	memset(dp, 0,">
+<meta property="article:published_time" content="2022-02-17T14:20:12.000Z">
+<meta property="article:modified_time" content="2022-02-18T03:07:46.063Z">
 <meta property="article:author" content="LiyunZhang">
-<meta property="article:tag" content="理论">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="微积分">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://http/img/04.Implicitdifferentiation,inverses01.png">
 
-<link rel="canonical" href="http://http//www.laughingtree.cn/2020/02/10/04-Implicit-differentiation-inverses/">
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/02/17/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8D%E5%90%8C%E8%A6%81%E6%B1%82/">
 
 
 <script id="page-configurations">
@@ -76,7 +72,7 @@
   };
 </script>
 
-  <title>04. Implicit differentiation, inverses | LaughingTree</title>
+  <title>背包问题的不同要求 | LaughingTree</title>
   
 
 
@@ -200,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/10/04-Implicit-differentiation-inverses/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/02/17/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8D%E5%90%8C%E8%A6%81%E6%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -213,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          04. Implicit differentiation, inverses
+          背包问题的不同要求
         </h1>
 
         <div class="post-meta">
@@ -223,14 +219,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-10 10:50:12" itemprop="dateCreated datePublished" datetime="2020-02-10T10:50:12+08:00">2020-02-10</time>
+              <time title="Created: 2022-02-17 22:20:12" itemprop="dateCreated datePublished" datetime="2022-02-17T22:20:12+08:00">2022-02-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:20:09" itemprop="dateModified" datetime="2020-08-07T19:20:09+08:00">2020-08-07</time>
+                <time title="Modified: 2022-02-18 11:07:46" itemprop="dateModified" datetime="2022-02-18T11:07:46+08:00">2022-02-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +234,14 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url" rel="index">
+                    <span itemprop="name">动态规划</span>
                   </a>
                 </span>
             </span>
@@ -261,20 +257,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Implicit-Differentiation"><a href="#Implicit-Differentiation" class="headerlink" title="Implicit Differentiation"></a>Implicit Differentiation</h1><ol>
-<li>An implicit function is a function that <script type="math/tex">y</script> cannot be expressed by <script type="math/tex">x</script> explicitly. </li>
-<li>The way to find its defferentiation is to defferentiate both side of the equation at the same time. Inevitably, we need to solve <script type="math/tex">\displaystyle\frac{d}{dx}g(x)</script>, with the chain rule, this is <script type="math/tex">\displaystyle\frac{d}{dy}g(x)\frac{dy}{dx}</script>. And <script type="math/tex">\displaystyle\frac{dy}{dx}</script> is our target. </li>
-<li>The defferentiation of <script type="math/tex">y=x^{\frac{a}{b}}</script><br />This equals to the defferentiation of <script type="math/tex">y^b=x^a</script>. <br />This is an implicit equation. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}y^b&=\frac{d}{dx}x^a\\\frac{d}{dy}y^b\frac{dy}{dx}&=ax^{a-1}\\by^{b-1}\frac{dy}{dx}&=ax^{a-1}\\\frac{dy}{dx}&=\frac{a}{b}\frac{x^{a-1}}{y^{b-1}}\\&=\frac{a}{b}\frac{x^{a-1}}{x^{\frac{a}{b}(b-a)}}\\&=\frac{a}{b}x^{\frac{a}{b}-1} \end{split}\end{equation}</script><br />Assign <script type="math/tex">\displaystyle\frac{a}{b}=n</script>, <script type="math/tex">\displaystyle\frac{d}{dx}x^n=nx^{n-1}\ \ (n\in R)</script></li>
-</ol>
-<h1 id="Inverse"><a href="#Inverse" class="headerlink" title="Inverse"></a>Inverse</h1><ol>
-<li>Inverse function: for <script type="math/tex">y=f(x)</script>, <script type="math/tex">g(y)=x</script> is the inverse of <script type="math/tex">f</script>, denoted as <script type="math/tex">f^{-1}</script>. For all inverse function, <script type="math/tex">g(f(x))=x</script>. </li>
-<li>The inverse function is always symmetric to the origin function and the mirror line is <script type="math/tex">y=x</script>. </li>
-<li>Implicit defferentiation allows us to find the derivative of any inverse function provided we know the derivative of function. </li>
-<li>We can restore the given equation <script type="math/tex">y=f^{-1}(x)</script> to the origin function <script type="math/tex">f(y)=x</script> and then defferentiate. </li>
-<li>To calculate the defferentiation of <script type="math/tex">y=sin^{-1}\ x</script>, we just calculate the  derivative of <script type="math/tex">sin\ y=x</script>. <br />Use the implicit differentiation to get <script type="math/tex">y'cos\ y=1</script>. So <script type="math/tex">y'=\displaystyle\frac{1}{cos\ y}=\frac{1}{\sqrt{1-sin^2y}}=\frac{1}{\sqrt{1-x^2}}</script>. </li>
-<li><script type="math/tex">y=tan^{-1}x</script>. <br />Take the original equation: <script type="math/tex">tan\ y=x</script><br />Differentiate both side of equation: <script type="math/tex">\displaystyle\frac{d}{dx}tan\ y=1</script><br />Use the chain rule: <script type="math/tex">\displaystyle\frac{y'}{cos^2y}=1</script><br />So we get <script type="math/tex">y'=cos^2y</script><br />From the picture we can know that <script type="math/tex">cos^2y=\displaystyle\frac{1}{x^2+1}</script>. Finally <script type="math/tex">y'=\displaystyle\frac{1}{x^2+1}</script><br /><img src="/img/04.Implicitdifferentiation,inverses01.png" width="15%"></li>
-</ol>
-
+        <h1 id="求方案种数"><a href="#求方案种数" class="headerlink" title="求方案种数"></a>求方案种数</h1><p>另外开一个一维数组记录方案种数，同样利用滚动数组，有$num[j] += num[j - cost[i]]$表示考虑前i件时，背包容量为j的方案种数。初始化时只需要设$num[0]= 1$表示什么都不选也有一种方法。更新方式和对应的背包更新一样，以下以$01$背包为例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= cost[i]; j--)</span><br><span class="line">    &#123;</span><br><span class="line">      dp[j] += dp[j - cost[i]];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="判断是否可以"><a href="#判断是否可以" class="headerlink" title="判断是否可以"></a>判断是否可以</h1><h2 id="转化为判断选择了物品i的话剩下的是否可以"><a href="#转化为判断选择了物品i的话剩下的是否可以" class="headerlink" title="转化为判断选择了物品i的话剩下的是否可以"></a>转化为判断选择了物品i的话剩下的是否可以</h2><p><a href="https://leetcode-cn.com/problems/word-break/" target="_blank" rel="noopener">LeetCode-139: Word Break</a></p>
+<p>递推思维：判断子串$s[0..&lt;i]$是否可以用word_dict表示，只要$\exist j &lt; i$，使得$s[0..&lt;j]$可以用word_dict表示，而$s[j..&lt;i]$在word_dict中</p>
+<p>dp数组：$dp[i]$表示$s[0..&lt;i ]$是否可以用word_dict表示</p>
+<p>初始化：$dp[0]$表示$s[0..&lt;0]$是否可以被表示，这是空串，一定可以，所以$dp[0]=true$</p>
+<p>递推式：$dp[i]=true$当且仅当$\exist j&lt;i$，使得$dp[j]=true$，且$s[j..&lt;i]$在word_dict中</p>
+<p>求解顺序：从$i=1$开始，遍历到$i=s.length()$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">305</span>];</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; wordDict.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            mp[wordDict[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s.length(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (mp.find(s.substr(j, i - j)) != mp.end() &amp;&amp; dp[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[i] = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[s.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>
     </div>
 
     
@@ -284,9 +276,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%90%86%E8%AE%BA/" rel="tag"><i class="fa fa-tag"></i> 理论</a>
-              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 数学</a>
-              <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" rel="tag"><i class="fa fa-tag"></i> 微积分</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
           </div>
 
         
@@ -295,13 +285,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/10/03-Derivative-Rules-and-Formulas/" rel="prev" title="03. Derivative Rules and Formulas">
-      <i class="fa fa-chevron-left"></i> 03. Derivative Rules and Formulas
+    <a href="/2022/02/17/%E5%8F%AF%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="prev" title="可转化为背包问题">
+      <i class="fa fa-chevron-left"></i> 可转化为背包问题
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/10/05-Exponential-and-Logarithm/" rel="next" title="05. Exponential and Logarithm">
-      05. Exponential and Logarithm <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -361,7 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Implicit-Differentiation"><span class="nav-number">1.</span> <span class="nav-text">Implicit Differentiation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inverse"><span class="nav-number">2.</span> <span class="nav-text">Inverse</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#求方案种数"><span class="nav-number">1.</span> <span class="nav-text">求方案种数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断是否可以"><span class="nav-number">2.</span> <span class="nav-text">判断是否可以</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#转化为判断选择了物品i的话剩下的是否可以"><span class="nav-number">2.1.</span> <span class="nav-text">转化为判断选择了物品i的话剩下的是否可以</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

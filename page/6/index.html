@@ -191,6 +191,140 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/10-Poisson-Porcess/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/16/10-Poisson-Porcess/" class="post-title-link" itemprop="url">10. Poisson Porcess</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-16 23:41:53" itemprop="dateCreated datePublished" datetime="2020-03-16T23:41:53+08:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:58:54" itemprop="dateModified" datetime="2020-08-07T19:58:54+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><ol>
+<li>The Poisson process is a continuous-time analog of the Bernoulli process. </li>
+<li><script type="math/tex">\lambda</script> is the rate of one Poisson process. Namely the rate of arrivals per unit time. </li>
+<li>We define <script type="math/tex">P(k,\tau)=P(there\ are\ exactly\ k\ arrivals\ during\ an\ interval\ of\ length\ \tau)</script></li>
+<li>This probability is the same for all intervals of the same length <script type="math/tex">\tau</script>. Namely, arrivals are equally likely at all times. </li>
+<li>The number of arrivals during a particular interval is independent of the history of arrivals outside this interval. </li>
+<li><script type="math/tex">P(0,\tau)=1-\lambda\tau+o(\tau)</script><br /><script type="math/tex">P(1,\tau)=\lambda\tau+o_1(\tau)</script><br /><script type="math/tex">P(k,\tau)=o_k(\tau)\ \ (k>1)</script>. <br /><script type="math/tex">\displaystyle\lim_{\tau\to0}\frac{o(\tau)}{\tau}=0</script>, <script type="math/tex">\displaystyle\lim_{\tau\to0}\frac{o_k(\tau)}{\tau}</script>. </li>
+<li>The <script type="math/tex">o(\tau)</script> and <script type="math/tex">o_k(\tau)</script> are meant to be negligible in comparison to <script type="math/tex">\tau</script>, when the interaval length <script type="math/tex">\tau</script> is very small. </li>
+</ol>
+<h1 id="Number-of-Arrivals-in-an-Interval"><a href="#Number-of-Arrivals-in-an-Interval" class="headerlink" title="Number of Arrivals in an Interval"></a>Number of Arrivals in an Interval</h1><ol>
+<li>First fix the time interval of length <script type="math/tex">\tau</script> and partition it into <script type="math/tex">\displaystyle\frac{\tau}{\delta}</script> periods of length <script type="math/tex">\delta</script>, where <script type="math/tex">\delta</script> is a very small number. </li>
+<li>Because <script type="math/tex">P(k,\tau)=o_k(\tau)</script> when <script type="math/tex">k≥2</script>, the probability of more than two arrivals during any period can be neglected. </li>
+<li>Each period has one arrival with probability approximately equal to <script type="math/tex">\lambda\delta</script> and is independent of each other. </li>
+<li>Therefore, the process can be approximated by a Bernoulli process with parameter <script type="math/tex">\lambda\delta</script>. </li>
+<li>Hence, the PMF is <script type="math/tex">P(k,\tau)=e^{-\lambda\tau}\displaystyle\frac{(\lambda\tau)^k}{k!}</script>, the expected number of arrivals is <script type="math/tex">E[N\tau]=np=\lambda\tau</script> and the variance is <script type="math/tex">var(N_\tau)=\lambda\tau</script>. <script type="math/tex">N_\tau</script> denotes the number of arrivals during a time interval of length <script type="math/tex">\tau</script>. </li>
+<li>The probability law for the time <script type="math/tex">T</script> of the first arrival, assuming that the process starts at time zero: <br /><script type="math/tex">F_T(t)=P(T≤t)=1-P(T>t)=1-P(0,t)=1-e^{-\lambda t}</script>. </li>
+<li>The PDF formula: <script type="math/tex">f_T(t)=\lambda e^{-\lambda t}</script> <script type="math/tex">(t≥0)</script>. </li>
+<li>The probability of <script type="math/tex">k</script> arrivals during a set of times of total length <script type="math/tex">\tau</script> is always given by <script type="math/tex">P(k,\tau)</script>, even if that set is not an interval. </li>
+</ol>
+<h1 id="Independence-and-Memorylessness"><a href="#Independence-and-Memorylessness" class="headerlink" title="Independence and Memorylessness"></a>Independence and Memorylessness</h1><ol>
+<li>For any given time <script type="math/tex">t>0</script>, the history of the process after time <script type="math/tex">t</script> is also a Poisson process, and is independent from the history of the process until <script type="math/tex">t</script>. </li>
+<li>Let <script type="math/tex">t</script> be a given time and let <script type="math/tex">\overline{T}</script> be the time of the first arrival after time <script type="math/tex">t</script>. Then <script type="math/tex">\overline{T}-t</script> has an exponential distribution with parameter <script type="math/tex">\lambda</script>, and is independent of the history of the process until time <script type="math/tex">t</script>. </li>
+</ol>
+<h1 id="The-kth-Arrival-Time"><a href="#The-kth-Arrival-Time" class="headerlink" title="The kth Arrival Time"></a>The kth Arrival Time</h1><ol>
+<li>The definition is the same as in the Bernoulli process. </li>
+<li>$E[Y_k]=E[T_1]+…+E[T_k]=\displaystyle\frac{k}{\lambda}$</li>
+<li>$var(Y_k)=var(T_1)+…+var(T_k)=\displaystyle\frac{k}{\lambda^2}$</li>
+<li>The PDF of <script type="math/tex">Y_k</script> (Erlang PDF of order <script type="math/tex">k</script>) is <script type="math/tex">f_{Y_k}(y)=\displaystyle\frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k-1)!}\ \ (y≥0)</script>. </li>
+<li>For a small <script type="math/tex">\delta</script>, the product <script type="math/tex">\delta\cdot f_{Y_k}(y)</script> approximates the probability that the <script type="math/tex">k</script>th arrival occurs between times <script type="math/tex">y</script> and <script type="math/tex">y+\delta</script>. </li>
+<li>When <script type="math/tex">\delta</script> is very small, the probability of more thant one arrival during the interval <script type="math/tex">[y,y+\delta]</script> is negligible. Thus the <script type="math/tex">k</script>th arrival occurs between <script type="math/tex">y</script> and <script type="math/tex">y+\delta</script> if and only if: <br />&emsp;There is an arrival during the interval <script type="math/tex">[y,y+\delta]</script><br />&emsp;There are exactly <script type="math/tex">k-1</script> arrivals before time <script type="math/tex">y</script>. <br /><script type="math/tex">\delta f_{Y_k}(y)\approx \lambda\delta \cdot P(k-1,y)=\lambda\delta\displaystyle\frac{\lambda^{k-1}y^{k-1}e^{-\lambda y}}{(k-1)!}</script><br />So <script type="math/tex">f_{Y_k}(y)=\displaystyle\frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k-1)!}</script></li>
+<li>CDF: <script type="math/tex">F_{Y_k}(y)=P(Y_k≤y)=\displaystyle\sum^\infty_{n=k}P(n,y)=1-\sum^{k-1}_{n=0}P(n,y)=1-\sum^{k-1}_{n=0}\frac{(\lambda y)^ne^{-\lambda y}}{n!}</script></li>
+</ol>
+<h1 id="Splitting-and-Merging"><a href="#Splitting-and-Merging" class="headerlink" title="Splitting and Merging"></a>Splitting and Merging</h1><ol>
+<li>As in the Bernoulli process, start with one Poisson process with rate <script type="math/tex">\lambda</script> and split its arrivals at rate <script type="math/tex">q</script> into two independent new processes with new rates <script type="math/tex">\lambda q</script> and <script type="math/tex">\lambda(1-q)</script>. </li>
+<li>Alternatively, start with two Poisson processes with rates <script type="math/tex">\lambda_1</script> and <script type="math/tex">\lambda_2</script> and merge them into one process with rate <script type="math/tex">\lambda_1+\lambda_2</script>. <br/><script type="math/tex">P(0\ arrivals\ in\ the\ merged\ process)\approx(1-\lambda_1\delta)(1-\lambda_2\delta)\approx1-(\lambda_1+\lambda_2)\delta</script><br /><script type="math/tex">P(1\ arrivals\ in\ the\ merged\ process)\approx\lambda_1\delta(1-\lambda_2\delta)+(1-\lambda_1\delta)\lambda_2\delta\approx(\lambda_1+\lambda_2)\delta</script></li>
+<li>Any particular arrival of the merged process has probability <script type="math/tex">\displaystyle\frac{\lambda_1}{\lambda_1+\lambda_2}</script> of originating from the first process, and probability <script type="math/tex">\displaystyle\frac{\lambda_2}{\lambda_1+\lambda_2}</script> of originating from the second process. <br /><script type="math/tex">P(1\ arrival\ of\ first\ process|1\ arrival)=\displaystyle\frac{P(1\ arrival\ of\ first\ process)}{P(1\ arrival)}\approx\frac{\lambda_1\delta}{(\lambda_1+\lambda_2)\delta}=\frac{\lambda_1}{\lambda_1+\lambda+2}</script></li>
+</ol>
+<h1 id="Sums-of-Random-Variables"><a href="#Sums-of-Random-Variables" class="headerlink" title="Sums of Random Variables"></a>Sums of Random Variables</h1><ol>
+<li>Let <script type="math/tex">N,X_1,X_2,…</script> be independent random variables. <script type="math/tex">N</script> takes nonnegative integer values. Let <script type="math/tex">Y=X_1+…+X_N</script>. <script type="math/tex">Y=0</script> when <script type="math/tex">N=0</script>. </li>
+<li>If <script type="math/tex">X_i</script> is Bernoulli with parameter <script type="math/tex">p</script>, and <script type="math/tex">N</script> is binomial with parameters <script type="math/tex">m</script> and <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is binomial with parameters <script type="math/tex">m</script> and <script type="math/tex">pq</script>. </li>
+<li>If <script type="math/tex">X_i</script> is Bernoulli with parameter <script type="math/tex">p</script> and <script type="math/tex">N</script> is Poisson with parameter <script type="math/tex">\lambda</script>, then <script type="math/tex">Y</script> is Poisson with parameter <script type="math/tex">\lambda p</script>. </li>
+<li>If <script type="math/tex">X_i</script> is geometric with parameter <script type="math/tex">p</script>, and <script type="math/tex">N</script> is geometric with parameter <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is geometirc with parametric <script type="math/tex">pq</script>. </li>
+<li>If <script type="math/tex">X_i</script> is exponential with parameter <script type="math/tex">\lambda</script>, and <script type="math/tex">N</script> is geometric with parameter <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is exponential with parameter <script type="math/tex">\lambda q</script>. </li>
+<li>If <script type="math/tex">N_t</script> denotes the number of arrivals of a Poisson process with parameter <script type="math/tex">\lambda</script> within an interval of length <script type="math/tex">t</script>, and <script type="math/tex">T</script> is an interval with length that is exponentially distributed with parameter <script type="math/tex">\upsilon</script> and is independent of the Poisson process, then <script type="math/tex">N_T+1</script> is geometrically distributed with parameter <script type="math/tex">\displaystyle\frac{\upsilon}{\lambda+\upsilon}</script>. </li>
+<li>The sum of a large number of independent arrival processes (not necessarily Poisson) can be approximated by a Poisson process with arrival rate equal to the sum of the individual arrival rates. <br />The component processes must have a small rate relative to the total, so that none of them imposes its probabilistic character on the total arrival process. </li>
+</ol>
+<h1 id="Random-Incidence-Paradox"><a href="#Random-Incidence-Paradox" class="headerlink" title="Random Incidence Paradox"></a>Random Incidence Paradox</h1><ol>
+<li><script type="math/tex">t^*</script> is a fixed time instance with at least one prior arrival. <script type="math/tex">L</script> is the inter arrival interval that contains <script type="math/tex">t^*</script>. </li>
+<li>Let <script type="math/tex">L</script> be <script type="math/tex">[U,V]</script>. Split <script type="math/tex">L</script> into two parts <script type="math/tex">L=(t^*-U)+(V-t^*)</script>. </li>
+<li><script type="math/tex">t^*-U</script> is determined by the past history of the process before <script type="math/tex">t^*</script> while <script type="math/tex">V-t^*</script> is determined by the future of the process after time <script type="math/tex">t^*</script>. </li>
+<li>These two are independent and both are exponential with parameter <script type="math/tex">\lambda</script>. So <script type="math/tex">L</script> is the sum of two independent exponential random variables with parameter <script type="math/tex">\lambda</script>, i.e. Erlang of order two, with mean <script type="math/tex">\displaystyle\frac{2}{\lambda}</script>. </li>
+<li>This is not right, the mean should be <script type="math/tex">\displaystyle\frac{1}{\lambda}</script>. The problem is that when we insert that time instance <script type="math/tex">t^*</script> into time line, it is more likely to fall into larger intervals rather than  smaller intervals. So the expectation of the interval is larger. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/09-Bernoulli-Process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1252,124 +1386,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/11-Vector-Fields-in-3D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/01/11-Vector-Fields-in-3D/" class="post-title-link" itemprop="url">11. Vector Fields in 3D</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-01 21:46:57" itemprop="dateCreated datePublished" datetime="2020-03-01T21:46:57+08:00">2020-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:55" itemprop="dateModified" datetime="2020-08-07T22:35:55+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
-<li>At every point, <script type="math/tex">\vec{F}=<P,Q,R></script>, <script type="math/tex">P,Q,R</script> are all functions of <script type="math/tex">x,y,z</script>. </li>
-<li>In 3D, flux through a surface, which requires a surface integral. </li>
-<li><script type="math/tex">Flux=\displaystyle\iint_S\vec{F}\cdot\vec{n}\ dS</script>. Sometimes <script type="math/tex">d\vec{S}=\vec{n}dS</script>. </li>
-<li>If <script type="math/tex">S</script> is horizontal, namely <script type="math/tex">z=a</script>, <script type="math/tex">\vec{n}=\pm\vec{k}</script>. <script type="math/tex">dS=dx\ dy</script>. <br />If <script type="math/tex">S</script> is a sphere of radius <script type="math/tex">a</script> centered at origin, <script type="math/tex">n=\pm\displaystyle\frac{<x,y,z>}{a}</script>. <script type="math/tex">dS=a^2sin\ \theta\ d\phi\ d\theta</script><br />If <script type="math/tex">S</script> is a sylinder of radius <script type="math/tex">a</script> symmetric to z-axis, <script type="math/tex">\vec{n}=\displaystyle\pm\frac{<x,y,0>}{a}</script>. <script type="math/tex">dS=adz\ d\theta</script><br />If <script type="math/tex">S</script> is graph <script type="math/tex">z=f(x,y)</script>, <script type="math/tex">\vec{n}dS=\pm<-f_x,-f_y,1>dx\ dy</script>. MARK: <script type="math/tex"><-f_x,-f_y,1></script> is not <script type="math/tex">\vec{n}</script> and <script type="math/tex">dx\ dy</script> is not <script type="math/tex">dS</script>. <br />If <script type="math/tex">S</script> is parametric description, namely <script type="math/tex">S=\left\{\begin{array}{}x=x(u,v)\\y=y(u,v)\\z=z(u,v) \end{array}\right.</script>, <script type="math/tex"><x,y,z>=\vec{r}(u,v)</script>. Then <script type="math/tex">\vec{n}dS=\pm(\displaystyle\frac{\partial\vec{r}}{\partial u}\times\frac{\partial\vec{r}}{\partial v})du\ dv</script><br />If we know a normal vector <script type="math/tex">\vec{N}</script> (not necessarily unit) to surface <script type="math/tex">S</script>, see below. </li>
-<li>To set up bounds on <script type="math/tex">dx\ dy</script>, look at shadow of <script type="math/tex">S</script> in xy-plane. </li>
-<li>Interpretation of <script type="math/tex">\vec{n}dS</script>: <br />&emsp;One is the area. Normally the area is a parallelogram, so <script type="math/tex">\vec{n}dS</script> is the cross product of two adjacent edges. <br />&emsp;Let’s say <script type="math/tex">\alpha</script> is the angle between <script type="math/tex">\Delta S</script> and its projection at xy-plane <script type="math/tex">\Delta A</script>. <script type="math/tex">\Delta A=\Delta S\ cos\ \alpha</script><br />&emsp;Easy to know that <script type="math/tex">\alpha</script> is also the angle between normal vector of <script type="math/tex">\Delta S</script> <script type="math/tex">\vec{N}</script> and unit vector which goes along z-axis <script type="math/tex">\vec{k}</script>. <script type="math/tex">cos\ \alpha=\displaystyle\frac{\vec{N}\cdot\vec{k}}{|\vec{N}|}</script><br />&emsp;<script type="math/tex">\Delta S=\displaystyle\frac{1}{cos\ \alpha}\Delta A=\frac{|\vec{N}|}{\vec{N}\cdot\vec{k}}</script><br />&emsp;<script type="math/tex">\vec{n}\Delta S=\displaystyle\frac{|\vec{N}|\vec{n}}{\vec{N}\cdot\vec{k}}\Delta A=\pm\frac{\vec{N}}{\vec{N}\cdot\vec{k}}\Delta A</script><br />&emsp;So <script type="math/tex">\vec{n}dS=\pm\displaystyle\frac{\vec{N}}{\vec{N}\cdot\vec{k}}dx\ dy</script></li>
-</ol>
-<h1 id="Divergence-Theorem"><a href="#Divergence-Theorem" class="headerlink" title="Divergence Theorem"></a>Divergence Theorem</h1><ol>
-<li>Divergence theorem： If <script type="math/tex">S</script> is a closed surface enclosing a region <script type="math/tex">D</script>, oriented with <script type="math/tex">\vec{n}</script> outwards and <script type="math/tex">\vec{F}</script> defined and differentiable everywhere in D, <script type="math/tex">\displaystyle\iint_S\vec{F}dS=\iiint_Ddiv\ \vec{F}dV</script>. <script type="math/tex">div\ (P\vec{i}+Q\vec{j}+R\vec{k})=P_x+Q_y+Z_k</script>.</li>
-<li><script type="math/tex">\triangledown</script> notation: <script type="math/tex">\triangledown=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}></script>. </li>
-<li>Gradient: <script type="math/tex">\triangledown f=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>f=<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}></script></li>
-<li>Divergence: <script type="math/tex">\triangledown\cdot\vec{F}=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>\cdot<P,Q,R>=P_x+Q_y+R_z</script></li>
-<li><script type="math/tex; mode=display">\triangledown^2 f=\triangledown\cdot\triangledown f=\triangledown\cdot<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}>=<\displaystyle\frac{\partial^2 f}{\partial x^2},\frac{\partial^2 f}{\partial y^2},\frac{\partial^2 f}{\partial z^2}>=P_{xx}+Q_{yy}+R_{zz}</script></li>
-<li><script type="math/tex; mode=display">\triangledown\times f=\left|\begin{matrix}\vec{i}&\vec{j}&\vec{k}\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R \end{matrix}\right|=(R_y-Q_z)\vec{i}-(R_x-P_z)\vec{j}+(Q_x-P_y)\vec{k}</script></li>
-<li>Physical interpretation: <script type="math/tex">div\ \vec{F}=</script> source rate <script type="math/tex">=</script> amount of flux generated  per unit volume</li>
-<li>If we sum the divergence in <script type="math/tex">D</script>, we get amount of fluid leaving <script type="math/tex">D</script> per unit time. </li>
-<li>Diffusion equation<br /><script type="math/tex">u=</script> concentration at a given point <script type="math/tex">=u(x,y,z,t)</script>. <br /><script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=k\triangledown^2u=k\triangledown\cdot\triangledown u=k(u_{xx}+u_{yy}+u_{zz})</script>. <br /><script type="math/tex">\vec{F}=</script> velocity field of flowing things. <br />Phycics: Things flows from high concentration towards low concentration. So <script type="math/tex">\vec{F}</script> is directed along <script type="math/tex">-\triangledown u</script>, namely <script type="math/tex">\vec{F}=-k\triangledown u</script>. <br />Math:  Flux out of <script type="math/tex">D</script> through <script type="math/tex">S</script>: <script type="math/tex">\displaystyle\iint\vec{F}\cdot\vec{n}dS=amount\ of\ smoke\ through\ S\ per\ unit\ time=-\frac{d}{dt}(\iiint_DudV)</script>. <br /><script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=\iint_S\vec{F}\cdot\vec{n}dS</script>. So <script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=-\frac{d}{dt}(\iiint_DudV)=\iiint_D-\frac{\partial u}{\partial t}dV</script><br />So <script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=-div\ \vec{F}=kdiv\ (\triangledown u)=k\triangledown^2u</script>. </li>
-</ol>
-<h1 id="Work"><a href="#Work" class="headerlink" title="Work"></a>Work</h1><ol>
-<li><script type="math/tex">\vec{F}=P\vec{i}+Q\vec{j}+R\vec{k}</script>, <script type="math/tex">d\vec{r}=<dx,dy,dz></script>. <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz</script>. </li>
-<li>Fundamental theorem of calculus for line integral is still true in 3D. </li>
-<li>Test for gradient fiels: <script type="math/tex">\left\{\begin{array}{}P_y=f_{xy}=f_{yx}=Q_x\\P_z=f_{xz}=f_{zx}=R_x\\Q_z=f_{yz}=f_{zy}=R_{y} \end{array}\right.</script></li>
-<li>Find potential: <br />&emsp;<script type="math/tex">f(x,y,z)=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>.<br />&emsp;Antiderivatives: Integral <script type="math/tex">P</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)}_{certain}+\underbrace{G(y,z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}</script> with <script type="math/tex">Q</script> to get <script type="math/tex">G_y</script>. Integral <script type="math/tex">G_y</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)+G(y,z)}_{certain}+\underbrace{H(z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial z}</script> with <script type="math/tex">R</script> to get <script type="math/tex">H'</script>. Integral to get <script type="math/tex">H</script>. </li>
-<li><script type="math/tex">curl\ \vec{F}=(R_y-Q_z)\vec{i}+(P_z-R_x)\vec{j}+(Q_x-P_y)\vec{k}=\triangledown\times f</script>. </li>
-<li>If <script type="math/tex">\vec{F}</script> is defined in a symply connected region, <script type="math/tex">\vec{F}</script> is conservative if and only if <script type="math/tex">curl\ \vec{F}=0</script>. </li>
-<li>Curl meansures rotation component in a velocity field. </li>
-</ol>
-<h1 id="Stokes’-Theorem"><a href="#Stokes’-Theorem" class="headerlink" title="Stokes’ Theorem"></a>Stokes’ Theorem</h1><ol>
-<li>Stokes theorem: If <script type="math/tex">C</script> is a closed curve and <script type="math/tex">S</script> is any surface bounded by <script type="math/tex">C</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_S(\triangledown\times\vec{F})\cdot\vec{n}dS</script>. </li>
-<li>Need orientations of <script type="math/tex">C</script> and <script type="math/tex">S</script> to compatible. <br />When walking along <script type="math/tex">C</script>, keep all <script type="math/tex">S</script> in your left-hand side. <br />Or right-hand rule: thumb along <script type="math/tex">C</script> positively, index tangent to <script type="math/tex">S</script> (towards interior of <script type="math/tex">S</script>) and middle finger parallel to <script type="math/tex">\vec{n}</script>. </li>
-<li>Green’s theorem is special case of Stokes in xy-plane. </li>
-<li>A region is simply-connected if every closed loop inside it bounds a surface inside it. </li>
-<li>If <script type="math/tex">\vec{F}</script> is defined in a simply-connected region and <script type="math/tex">curl\ \vec{F}=0</script> then <script type="math/tex">\vec{F}</script> is a gradient and <script type="math/tex">\displaystyle\int_C\vec{F}\cdot d\vec{r}</script> is path-independent. </li>
-<li>Orientability: non-orientable surfaces have only one side, like Mobius surface. Flux cannot be defined in this kind of surface. </li>
-<li><script type="math/tex">div\ (curl\ \vec{F}) =div\ (\triangledown\times\vec{F})=0</script>. (For real vectors <script type="math/tex">\vec{u}\cdot(\vec{u}\times\vec{v})=0</script>)</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1441,7 +1457,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

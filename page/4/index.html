@@ -191,6 +191,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:51:12" itemprop="dateModified" datetime="2020-08-07T19:51:12+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
+<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
+<li>语法正确的程序不一定语义正确</li>
+<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
+</ol>
+<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
+<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
+<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
+<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
+<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
+<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承属性：由该节点的兄弟节点及父节点的属性值计算出来</li>
+<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
+<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
+<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
+<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合属性，一般由词法分析器提供</li>
+<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
+<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
+<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
+<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
+<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
+</ol>
+<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
+<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
+<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
+<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
+<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
+</ol>
+<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
+<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
+<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
+<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有关</li>
+<li>每一个$S-$属性定义都是$L-$属性定义</li>
+<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
+<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
+<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
+<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1327,265 +1445,6 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/05/05-Training-Neural-Networks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/05/05-Training-Neural-Networks/" class="post-title-link" itemprop="url">05. Training Neural Networks</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-05 18:19:58" itemprop="dateCreated datePublished" datetime="2020-04-05T18:19:58+08:00">2020-04-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:34" itemprop="dateModified" datetime="2020-08-07T19:47:34+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h1><h2 id="Sigmoid-Function"><a href="#Sigmoid-Function" class="headerlink" title="Sigmoid Function"></a>Sigmoid Function</h2><ol>
-<li>Form: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$</li>
-<li>It squashes numbers to range $[0,1]$. </li>
-<li>It has excellent interpretation as a saturating “firing rate” of a neuron. </li>
-<li>However, when $x$ is very negative or very positive, the gradient of the sigmoid gate is zero, which kills the gradient flow. </li>
-<li>The Sigmoid outputs are not zero-centred. When the input of a neuron is always positive, the gradients on $W$ are always all positive or negative. This might cause an insufficiency update of $W$. (Same reason we want zero-mean data)</li>
-<li>Moreover, the exponential calculation is a bit compute expensively. </li>
-</ol>
-<h2 id="tanh-x"><a href="#tanh-x" class="headerlink" title="tanh(x)"></a>tanh(x)</h2><ol>
-<li>It squashes numbers to range $[-1,1]$. </li>
-<li>It is zero-centred. </li>
-<li>Nevertheless, it still kills the gradient when saturated. </li>
-</ol>
-<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><ol>
-<li>Form: $f(x)=max(0,x)$. </li>
-<li>It does not saturate in the positive regime and computationally efficient. </li>
-<li>In practice, It converges about $6$ times faster than sigmoid/tanh. </li>
-<li>Furthermore, it is more biologically plausible than sigmoid. </li>
-<li>However, it is not zero-centred output, and it also kills the gradient in the negative region. </li>
-<li>At some particular situation called dead ReLU, ReLU will never activate and never update. This happens when the initialization is bad or when the learning rate is too high. So people may initial ReLU neurons will slightly positive biases to increase the likelihood of being active ReLU. </li>
-</ol>
-<h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky_ReLU"></a>Leaky_ReLU</h2><ol>
-<li>Form: $f(x)=max(0.01x,x)$. </li>
-<li>It does not saturate and is computationally efficient. It converges as fast as ReLU. </li>
-<li>More importantly, it will not die. </li>
-<li>Another form is the parametric rectifier (PReLU) $f(x)=max(\alpha x, x)$, where $\alpha$ can be learned in backpropagation. </li>
-</ol>
-<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><ol>
-<li>Exponential Linear Units: <script type="math/tex">f(x)=\left\{\begin{array}{}x&if\ x>0\\\alpha(e^x-1)&if\ x≤0 \end{array}\right.</script>. </li>
-<li>It has all benefits of ReLU except its computation requires exponential. </li>
-<li>It is closer to zero mean outputs. </li>
-<li>It has a negative saturation regime compared with Leaky_ReLU. </li>
-<li>It adds some robustness to noise with flex parameter $\alpha$. </li>
-</ol>
-<h2 id="Maxout-Neuron"><a href="#Maxout-Neuron" class="headerlink" title="Maxout Neuron"></a>Maxout Neuron</h2><ol>
-<li>Form: $f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$. </li>
-<li>It can generalize the ReLU and the Leaky_ReLU. </li>
-<li>It has a linear regime and does not die and does not saturate. </li>
-<li>Nevertheless, it doubles the number of parameters per neuron. </li>
-</ol>
-<h2 id="In-practice"><a href="#In-practice" class="headerlink" title="In practice"></a>In practice</h2><ol>
-<li>Use ReLU. Be careful with the learning rates. </li>
-<li>Sometimes try out Leaky ReLU / Maxout / ELU. </li>
-<li>Maybe even try out tanh but do not expect much. </li>
-<li>Do not use sigmoid. </li>
-</ol>
-<h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><ol>
-<li>In data preprocessing, we usually want to zero-mean them by subtracting the mean from them and normalize them by dividing them with the standard deviation. </li>
-<li>In practice, we may also see the PCA and Whitening of the data. </li>
-<li>We do not normalize the data much when dealing with images. Moreover, we do not do PCA and Whitening for images. </li>
-<li>Sometimes we also subtract per-channel mean to create zero-mean data. </li>
-<li>The mean subtracted is the mean of all training data. </li>
-<li>We do not do these things to each batch later once more. </li>
-</ol>
-<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><ol>
-<li>When the initialization with all elements being zeros is used, the gradient of earlier layers in backpropagation will become all zeros. </li>
-<li>The first idea is to start with small random numbers. This works for small networks. However, with deeper networks, all activations become zero. </li>
-<li>Furthermore, if we initiate $W$ with too large numbers, the gradient will be all zero and the update will stop. </li>
-<li>Xavier initialization: This works all well, but when using the ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in)</span><br></pre></td></tr></table></figure></li>
-<li>He et al. fixed the break of ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><ol>
-<li>This operation tries to make the input of each layer unit gaussian activations. </li>
-<li>First, compute the empirical mean and variance independently for each dimension.<br />Second, normalize $\hat{x}^{(k)}=\displaystyle\frac{x^{(k)}-E[x^{(k)}]}{\sqrt{var(x^{(k)})}}$. </li>
-<li>This layer is usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. </li>
-<li>We also can allow the network to squash the range if it wants to. $y^{(k)}=\gamma^{(k)}\hat{x}^{(k)}+\beta^{(k)}$. Note that the network can learn $\gamma^{(k)}=\sqrt{var(x^{(k)})}$ and $\beta^{k}=E[x^{(k)}]$ to recover the identity mapping, but not definitely. </li>
-<li>It improves gradient flow through the network, allows higher learning rates, reduces the strong dependence on initialization, acts as a form of regularization, and slightly reduces the need for dropout, maybe. </li>
-<li>At test time, we use the mean and standard deviation calculated at training. So we skip the step of calculation at test time. </li>
-</ol>
-<h1 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h1><ol>
-<li>The first step is to preprocess the data, as mentioned above. </li>
-<li>The second step is to choose the architecture with which we want to start. </li>
-<li>The third step is to double-check the loss is reasonable. Do the forward process without regularization once and see if the loss is reasonable. Do it again with regularization and see if the loss is larger. </li>
-<li>Then make sure that it can overfit a tiny portion of the training data. Namely, the loss goes to $0$, and the accuracy goes to $1$. </li>
-<li>After that, use the full training set, and start with small regularization and find learning rate that makes the loss go down. If the loss is not going down, the learning rate is too low. If the loss is $NaN$, the learning rate is too high. <br />Do not focus on accuracy. Because when the accuracy is low, the distribution of loss is very dense. The raise of accuracy due to luck. </li>
-</ol>
-<h1 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h1><ol>
-<li>In cross-validation strategy, we first take a coarse search with a few epochs, to narrow down the range of parameters. </li>
-<li>Then we can do a finer search with longer running time at the rough range we get to find the specific best hyperparameter. </li>
-<li>We had better keep the best hyperparameters in the middle of the searching range. </li>
-<li>It is best to optimize in log space. </li>
-<li>Another two strategies are the random search and the grid search. If the loss is more sensitive to one of the hyperparameters, the random search can cover the situation better. </li>
-<li>If the loss curve: <br />&emsp;exploded: very high learning rate<br />&emsp;decrease slowly: very low learning rate<br />&emsp;decrease rapidly first, then barely changed: very high learning rate<br />&emsp;barely changed first, but begin to decay after a while: bad initialization<br />&emsp;has big gap between training and test: overfitting, try to increase the regularization strength<br />&emsp;has no gap between: increase model capability. </li>
-</ol>
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="Problems-with-gradient-descend"><a href="#Problems-with-gradient-descend" class="headerlink" title="Problems with gradient descend"></a>Problems with gradient descend</h2><ol>
-<li>Some loss function changes quickly in one direction and slowly in another. Namely, loss function has a high condition number: the ratio of the largest to the smallest singular value of the Hessian matrix is massive. </li>
-<li>If the loss function has a local minimum or a saddle point, the gradient near it will be zero, and the gradient descend will get stuck. </li>
-<li>The data may contain noise, which will cause the gradient to descend inaccurately. </li>
-</ol>
-<h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><ol>
-<li>A straightforward strategy is to use the <code>SGD + momentum</code>. </li>
-<li>The SGD has the formula: $x_{t+1}=x_t-\alpha\triangledown f(x_t)$. We can preserve a velocity as a running mean of gradients. <br />Velocity: $v_{t+1}=\rho v_t+\triangledown f(x_t)$<br />Descend: $x_{t+1}=x_t-\alpha v_{t+1}$. </li>
-<li>Rho gives “friction”; typically <script type="math/tex">\rho=0.9\ or\ 0.99</script>. </li>
-<li>So we update the parameters at the direction of speed instead of the gradient of the gradient. </li>
-<li>Another kind of momentum is the Nesterov momentum. It updates the speed with the gradient at the endpoint of current speed. <br />Velocity: $v_{t+1}=\rho v_t-\alpha\triangledown f(x_t+\rho v_t)$. <br />Parameters: $x_{t+1}=x_t+v_{t+1}$. </li>
-<li>In Nesterov momentum, we can substitute $\tilde{x}_t=x_t+\rho v_t$. So that $v_{t+1}=\rho v_t-\alpha\triangledown f(\tilde{x})$ and $\tilde{x}_{t+1}=\tilde{x}_t+v_{t+1}+\rho(v_{t+1}-v_t)$. </li>
-<li>Add a momentum solved all the problems we have above. <br />&emsp;At local minima or saddle points, the velocity will maintain the update instead of stuck there. <br />&emsp;If the loss function is poor conditioning, the zig-zag gradients will cancel out by the velocity fast since the velocity is the mean of gradients. <br />&emsp;Moreover, the velocity is less sensitive to the noise. </li>
-</ol>
-<h2 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h2><ol>
-<li><p>AdaGrad scales the update step size by the square root of the accumulative of the square the gradient. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">grad_square += dx * dx</span><br><span class="line">x -= learning_rate * dx / (np.sqrt(grad_square) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The $1e-7$ is only to make sure we will not divide by zero. </p>
-</li>
-<li>However, as the training time goes by, the grad_square grows larger and larger, so the step size of the update becomes smaller. </li>
-<li>A better form of AdaGrad is RMSProp. This method allows the grad_square to decay to prevent it from getting too large. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_square = decay_rate * grad_square + (<span class="number">1</span> - decay_rate) * dx * dx</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><ol>
-<li>What the momentum does is to replace the gradient with the velocity when updating the parameters. What the AdaGrad does is to scale the update step size. </li>
-<li><p>In Adam, we do them both. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx</span><br><span class="line">second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx</span><br><span class="line">x -= learning_rate * first_moment / (np.sqrt(second_moment) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Usually, we set betas some number close to $1$. This will cause the second_moment too small at first, which will lead to a giant step at the beginning. </p>
-</li>
-<li>To solve the problem, we scale the moments before the update by a size decaying as time goes by. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first_unbias = first_moment / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">second_unbias = second_moment / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line"><span class="comment"># t means this is the t-th epoch of iterate</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h2><ol>
-<li>No matter which optimization strategy is used, the learning rate is always a hyperparameter. </li>
-<li>In practice, we do not have to stick to one constant learning rate to the end. We can change the learning rate as training goes deeper. </li>
-<li>One strategy is to decay the learning rate every few epochs. </li>
-<li>Alternatively, we can decay it exponentially. $\alpha = \alpha_0e^{-kt}$</li>
-<li>What’ more, we can decay it as $\alpha=\displaystyle\frac{\alpha_0}{1+kt}$. </li>
-<li>The change of learning rate can cause an underivable point on the graph of the loss function. </li>
-</ol>
-<h2 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h2><ol>
-<li>What we discussed before is all first-order optimization, which uses the gradient form linear approximation ($\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)$) to step to minimize the approximation. </li>
-<li>In second-order optimization, we use the gradient and the Hessian matrix to form a quadratic approximation <br />$\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)+\sum_{x_i}\sum_{x_j}\frac{1}{2}f_{x_ix_j}(x-x_i)(x-x_j)$</li>
-<li>The $(i,j)$ element of the Hessian matrix is $f_{x_ix_j}$. </li>
-<li>In the vector form, $J(\vec{\theta})=J(\vec{\theta_0})+(\vec{\theta}-\vec{\theta_0})^T\triangledown_{\vec{\theta}}J(\vec{\theta_0})+\displaystyle\frac{1}{2}(\theta-\theta_0)^TH(\theta-\theta_0)$</li>
-<li>Solve for the critical point, and we obtain the Newton parameter update: $\vec{\theta}^*=\vec{\theta_0}-H^{-1}\triangledown_{\vec{\theta}}J(\vec{\theta_0})$. </li>
-<li>This method avoids the hyperparameters. It does not contain the learning rate. </li>
-<li>Nevertheless, the Hessian matrix has $N^2$ elements. To invert it requires $O(N^3)$. </li>
-<li>Quasi-Newton methods (BGFS most popular): instead of inverting the Hessian ($O(n^3)$), approximate inverse Hessian with rank $1$ updates over time ($O(n^2)$ each). </li>
-<li>L-BFGS (Limited memory BFGS): Does not form/store the full inverse Hessian. It cannot handle stochastic problems well.</li>
-</ol>
-<h2 id="In-Practice"><a href="#In-Practice" class="headerlink" title="In Practice"></a>In Practice</h2><ol>
-<li>Adam optimization is often the best choice. </li>
-<li>If full batch updates can be afforded then maybe try out L-BFGS (and do not forget to disable all sources of noise). </li>
-</ol>
-<h1 id="Decrease-the-Gap"><a href="#Decrease-the-Gap" class="headerlink" title="Decrease the Gap"></a>Decrease the Gap</h1><p>Usually, there will exist a gap between the loss functions of the training set and the test set. </p>
-<h2 id="Model-Ensembles"><a href="#Model-Ensembles" class="headerlink" title="Model Ensembles"></a>Model Ensembles</h2><ol>
-<li>The first strategy to decrease the gap is to train multiple independent models and average their results at test time. </li>
-<li>This will have a slight improvement at test. </li>
-<li>Instead of training independent models, use multiple snapshots of a single model during training. Cyclic learning rate schedules can make this work even better. </li>
-<li>Instead of using the actual parameter vector, keep a moving average of the parameter vector and use that at test time (Polyak averaging)</li>
-</ol>
-<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><ol>
-<li>This strategy can improve single-model performance. </li>
-<li>Using dropout, we randomly set some neurons to zero in each forward pass. Probability of dropping is a hyperparameter $p$, which is typical $0.5$. </li>
-<li>By the mean of setting to zero, we set the input of activation to zero. </li>
-<li>It forces the network to have a redundant representation and prevents co-adaptation of features. Dropout often happens at fully-connected layers, but sometimes convolution layers. </li>
-<li>Dropout is training a large ensemble of models that share parameters. </li>
-<li>Each dropout decision is called a dropout mask, and each binary mask is one model. </li>
-<li>Nevertheless, dropout makes our output random with $y=f(x,z)$, where $z$ is the random dropout mask. </li>
-<li>In order to average out the randomness at test-time, we want $y=E_z[f(x,z)]=\displaystyle\int p(z)f(x,z)dz$. </li>
-<li>However, the integral is hard to calculate, so we want an approximation of it by consider it discrete. Funnily, the approximation is to scale each activation with the probability $p$. </li>
-<li>With dropout, we might need  a bit longer time to train, but after training, the model will have a better generalization. </li>
-</ol>
-<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><ol>
-<li>This strategy creates new images from the old ones with some operations. </li>
-<li>The common operations for data augmentation: <br />&emsp;Horizontal flips<br />&emsp;Random crops and scales<br />&emsp;Color jitter</li>
-</ol>
-<h2 id="Common-Pattern"><a href="#Common-Pattern" class="headerlink" title="Common Pattern"></a>Common Pattern</h2><ol>
-<li>The common strategy is to add random noise at training and marginalize over the noise at test. </li>
-<li>Batch normalization fits this common pattern, too. In training, it normalizes using stats from random minibatches, while in the test, it uses fixed stats to normalize. </li>
-<li>Another strategy which is similar to the dropout is drop-connect. Instead of dropout neurons before activation, it drops connections between layers by setting part of the weight matrix to zero. </li>
-<li>Two more unusual strategies are the fractional max pooling and the stochastic depth. </li>
-</ol>
-<h1 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h1><ol>
-<li>This is a backup plan when the dataset is not large. </li>
-<li>First, train the network at another dataset on the internet. Then finetune the linear classifier with our dataset. </li>
-<li>If our dataset is tiny, then we can use linear classifier on top layer and train with some very similar dataset. If our dataset is quite large, then we can finetune a few layers. </li>
-<li>With more similar datasets, the layer needed to finetune is less. </li>
-<li>Transfer learning with CNNs is pervasive. This is the norm, not an exception. e</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1657,7 +1516,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-count">190</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
