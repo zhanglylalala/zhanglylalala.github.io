@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">28</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,105 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/25-Singular-Value-Decomposition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/25-Singular-Value-Decomposition/" class="post-title-link" itemprop="url">25. Singular Value Decomposition</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 15:36:27" itemprop="dateCreated datePublished" datetime="2020-02-06T15:36:27+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:37" itemprop="dateModified" datetime="2020-08-07T19:15:37+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h1><ol>
+<li><code>SVD</code> is used to decomposite matrices into small pieces. This is often used in the image storage. </li>
+<li>In <a href="http://www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/" target="_blank" rel="noopener">09. The Four Fundamental Subspaces</a>, we know that every matrix can be written as the sum of several rank <script type="math/tex">1</script> matrices, i.e. all matrices has the form <script type="math/tex">A=\sum \vec{u}\vec{v}^T</script>. </li>
+<li>To factorize a matrix, we need two sets of vectors. We use the eigenvectors <script type="math/tex">\vec{u}</script> of <script type="math/tex">AA^T</script> and the eigenvectors <script type="math/tex">\vec{v}</script> of <script type="math/tex">A^TA</script>. </li>
+<li>We usually make eigenvectors orthonormal, so the expression of <script type="math/tex">A</script> is <script type="math/tex">A=\displaystyle\sum^r_{i=1} \sigma_i\vec{u_i}\vec{v_i}^T</script>. </li>
+<li>The <script type="math/tex">\vec{u}</script>‘s from the SVD are called <code>left singular vectors</code> and the <script type="math/tex">\vec{v}</script>‘s are <code>right singular vectors</code>. The <script type="math/tex">\sigma</script>‘s are <code>singular values</code>. </li>
+<li><script type="math/tex; mode=display">AA^T\vec{u_i}=\sigma_1^2\vec{u_i}$$<br />$$A^TA\vec{v_i}=\sigma_i^2\vec{v_i}$$<br />$$A\vec{v_i}=\sigma_i\vec{u_i}</script></li>
+<li>The <script type="math/tex">\sigma</script>‘s are the square root of the equal eigenvalues of <script type="math/tex">AA^T</script> and <script type="math/tex">A^TA</script>. </li>
+</ol>
+<h1 id="Bases-and-Matrices-in-the-SVD"><a href="#Bases-and-Matrices-in-the-SVD" class="headerlink" title="Bases and Matrices in the SVD"></a>Bases and Matrices in the SVD</h1><ol>
+<li>Basis of the four fundamental subspaces: <br />&emsp;<script type="math/tex">\vec{u_1},…\vec{u_r}</script> is an <strong>orthonormal</strong> basis for the <strong>column space</strong>. <br />&emsp;<script type="math/tex">\vec{u_{r+1}},…,\vec{u_m}</script> is an <strong>orthonormal</strong> basis for the <strong>left nulspace</strong>. <br />&emsp;<script type="math/tex">\vec{v_1},…,\vec{v_r}</script> is an <strong>orthonormal</strong> basis for the <strong>row space</strong>. <br />&emsp;<script type="math/tex">\vec{v_{r+1}},…,\vec{v_n}</script> is an <strong>orthonormal</strong> basis for the <strong>nullspace</strong>. </li>
+<li><code>Reduced SVD</code>: Since <script type="math/tex">A\vec{v_i}=\sigma_i\vec{u_i}</script>, we can have <script type="math/tex">AV_r=U_r\Sigma_r</script>, i.e. <br />$$$$A\left[\begin{matrix}\vec{v_1}&amp;\dots&amp;\vec{v_r}\end{matrix}\right]=\left[\begin{matrix}\vec{u_1}&amp;\dots&amp;\vec{u_r}\end{matrix}\right]\left[\begin{matrix}\sigma_1\\&amp;\ddots\\&amp;&amp;\sigma_r\end{matrix}\right]$$$$. <br />This form only contains the row space and the column space. </li>
+<li><code>Full SVD</code>: Include all <script type="math/tex">\vec{v}</script>‘s and <script type="math/tex">\vec{u}</script>‘s, <br /><script type="math/tex">$$A\left[\begin{matrix}\vec{v_1}&\dots&\vec{v_r}&\dots&\vec{v_n}\end{matrix}\right]=\left[\begin{matrix}\vec{u_1}&\dots&\vec{u_r}&\dots&\vec{u_m}\end{matrix}\right]\left[\begin{matrix}\sigma_1\\&\ddots\\&&\sigma_r\\&&&\end{matrix}\right]$$$$. <br />The new</script>\Sigma<script type="math/tex">is suppose to be an</script>m<script type="math/tex">by</script>n<script type="math/tex">matrix, so it has</script>m-r<script type="math/tex">extra zero rows and</script>n-r$$ extra zero columns. This form contains all four fundamental subspaces. </li>
+<li>In equation <script type="math/tex">A=\vec{u_1}\sigma_1\vec{v_1}^T+…+\vec{u_r}\sigma_r\vec{v_r}^T</script>, if we put <script type="math/tex">\sigma_i</script> in decending order, this equation gives the <script type="math/tex">r</script> rank-one pieces of <script type="math/tex">A</script> in order of importance. </li>
+<li>When <script type="math/tex">A</script> is a positive simidefinite (or definite) symmetric matrix, <script type="math/tex">A=U\Sigma V^T=X\Lambda X^{-1}=Q\Lambda Q^T</script>. </li>
+<li>Singular values are more stable then eigenvalues. The changes of singular values won’t be larger than the change in <script type="math/tex">A</script> while the changes in eigenvalues can be a lot larger. <br />Here by change in <script type="math/tex">A</script> means one entry of <script type="math/tex">A</script> is shifted by <script type="math/tex">x</script>. </li>
+<li>How the SVD picks off the largest term? <br /><code>Rayleigh quotient</code>: <script type="math/tex">r(x)=\displaystyle\frac{\vec{x}^TS\vec{x}}{\vec{x}^T\vec{x}}</script>. <br />The eigenvectors and eigenvalues can be found with this quotient. First, we try to find <script type="math/tex">\lambda_1=max\ r(x)</script>, we find the vector <script type="math/tex">\vec{q_1}</script> and the value <script type="math/tex">\lambda_1</script>. Second, we try to find <script type="math/tex">\lambda_2=max\ r(x)</script> among all <script type="math/tex">\vec{x}</script>‘s with <script type="math/tex">\vec{q_1}^T\vec{x}=0</script>, and so on to find all eigenvalues and vectors. <br />As for singular values, <script type="math/tex">\sigma=max\ \displaystyle\frac{||A\vec{x}||}{||\vec{x}||}</script>. Maximize <script type="math/tex">\displaystyle\frac{||A\vec{x}||}{||\vec{x}||}</script> also maximize <script type="math/tex">(\displaystyle\frac{||A\vec{x}||}{||\vec{x}||})^2=\displaystyle\frac{\vec{x}^TA^TA\vec{x}}{\vec{x}^T\vec{x}}=\displaystyle\frac{\vec{x}^TS\vec{x}}{\vec{x}^T\vec{x}}=r(x)</script>. So we can find singular values just like when we find eigenvalues. <br />What we find here is in <script type="math/tex">V</script>, later we use <script type="math/tex">A\vec{v}=\sigma\vec{u}</script> to find the corresponding <script type="math/tex">\vec{u}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1169,105 +1268,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/15-Properties-of-Determinants/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/02/15-Properties-of-Determinants/" class="post-title-link" itemprop="url">15. Properties of Determinants</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-02 15:03:35" itemprop="dateCreated datePublished" datetime="2020-02-02T15:03:35+08:00">2020-02-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:53" itemprop="dateModified" datetime="2020-08-07T19:16:53+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>The determinant of the identity matrix is <script type="math/tex">1</script>. </li>
-<li>The determinant changes sign when two rows (or columns) are exchanged. </li>
-<li>The determinant is a linear function of each row separately. <br />If one raw is mutiplied by <script type="math/tex">t</script>, the determinant is multiplied by <script type="math/tex">t</script>. <br /><code>MARK</code>: If multiply an <script type="math/tex">n</script> by <script type="math/tex">n</script> matrix with a scalar <script type="math/tex">t</script>, the determinant becomes <script type="math/tex">t^n</script> for all rows are multiplied by <script type="math/tex">t</script><br />If two matrices share all rows <strong>but one</strong>, the determinant of the sum of that two matrices is the sum of the determinant of the two separate matrices. <br /><code>MARK</code>: <script type="math/tex">|A+B|≠|A|+|B|</script></li>
-<li>If two rows of <script type="math/tex">A</script> are equal, then <script type="math/tex">|A|=0</script>. <br />If exhange that two rows, the determinnat changes sign but is stil the same determinant with the same value. Only <script type="math/tex">0</script> can do that. </li>
-<li>Subtracting a multiple of one row from another leaves <script type="math/tex">|A|</script> unchanged. <br />We can split the subtraction into a substraction of two matrices. The subtracting matrix has to have two dependent rows, which makes its determinant zero. </li>
-<li>A matrix with a row of zeros has <script type="math/tex">|A|=0</script>. <br />Multiply the zero row with any nonzero scalar. The determinant is not changed. </li>
-<li>If <script type="math/tex">A</script> is triangular then <script type="math/tex">|A|=\displaystyle\prod^{n}_{i=1}{a_{ii}}=product\ of\ diagonal\ entries</script>. <br />If all entries of <script type="math/tex">A</script> is not zero, eliminate the triangular matrix to a diagonal matrix. Factor all entries from their row to get <script type="math/tex">|A|=\displaystyle\prod^{n}_{i=1}{a_{ii}} \times |I|=\displaystyle\prod^{n}_{i=1}{a_{ii}}</script>. <br />If one entry of <script type="math/tex">A</script> is zero, we can eliminate to make that row a zero row to know its determinant is zero. </li>
-<li>If <script type="math/tex">A</script> is singular then <script type="math/tex">|A|=0</script>. If <script type="math/tex">A</script> is invertible then <script type="math/tex">|A|≠0</script>. <br />Eliminate <script type="math/tex">A</script> to triangular <script type="math/tex">U</script>, if <script type="math/tex">A</script> is singular, <script type="math/tex">U</script> must has a zero in the diagonal to make the determinant zero or the determinant is the mutiplication of diagonal nonzero. </li>
-<li><script type="math/tex">|AB|=|A||B|</script>. <br />If <script type="math/tex">B=A^{-1}</script>, <script type="math/tex">|A||A^{-1}|=|AA^{-1}|=|I|=1</script>. So <script type="math/tex">|A^{-1}|=\frac{1}{|A|}</script>. </li>
-<li>The transpose <script type="math/tex">A^T</script> has the same determinant as <script type="math/tex">A</script>. <br />Factor them into <script type="math/tex">PA=LU</script> and <script type="math/tex">A^TP^T=U^TL^T</script>. <br />So <script type="math/tex">|P||A|=|L||U|</script> and <script type="math/tex">|A^T||P^T|=|U^T||L^T|</script>. <br /><script type="math/tex">|L|=|L^T|=1</script> (diagonal is all 1s). <script type="math/tex">|U|=|U^T|</script> (pivots don’t change). <br /><script type="math/tex">|P||P^T|=1</script>, so <script type="math/tex">|P|=|P^T|=\pm 1</script>. <br />Conclusion, <script type="math/tex">|A|=|A^T|</script></li>
-<li>With rule 10, all properties of rows can be applied to columns (just need a little transpose). </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1334,14 +1339,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">190</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
