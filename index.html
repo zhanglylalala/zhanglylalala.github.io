@@ -191,6 +191,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/03/03/02-Logistical-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/03/02-Logistical-Regression/" class="post-title-link" itemprop="url">02. Logistical Regression</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-03 21:26:38" itemprop="dateCreated datePublished" datetime="2022-03-03T21:26:38+08:00">2022-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-04 22:19:47" itemprop="dateModified" datetime="2022-03-04T22:19:47+08:00">2022-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Stanford-CS229/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习 (Stanford CS229)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Locally-weighted-regression"><a href="#Locally-weighted-regression" class="headerlink" title="Locally weighted regression"></a>Locally weighted regression</h1><ol>
+<li><p>Parametric learning algorithm: fit fixed set of parameters $(\Theta_i)$ to data</p>
+<p>Non-parametric learning algorithm: the amount of data / parameters you need to keep grows linearly with size of data</p>
+</li>
+<li><p>Linear Regression: Fit $\Theta$ to minimize $\frac12\displaystyle\sum^M_{i=1}(y^{(i)}-\Theta^Tx^{(i)})^2$, and return $\Theta^Tx$</p>
+<p>Locally weightted regression: Fit $\Theta$ To minimize $\displaystyle\sum^M_{i=1}w^{(i)}(y^{(i)}-\Theta^Tx^{(i)})^2$, where $w^{(i)}$ is a “weighted” function $w^{(i)}=exp(-\displaystyle\frac{(x^{(i)}-x)^2}{2\tau^2})$. If $|x^{(i)}-x|$ is small, $w^{(i)}\thickapprox1$, and if $|x^{(i)}-x|$ is large, $w^{(i)}\thickapprox0$</p>
+</li>
+<li><p>The net effect of locally weighted regression is that pay less attention to the examples that is far from the prediction one, and pay more attention to the one that is close. </p>
+</li>
+<li><p>$\tau$ is a hyperparameters to decide the bandwidth that we care much. It affects about overfit and unfit. </p>
+</li>
+<li><p>Why least squares?</p>
+<p>Assume $y^{(i)}=\Theta^Tx^{(i)}+\epsilon^{(i)}$, where $\epsilon^{(i)}$ is the error that I.I.D. $N(0,\sigma^2)$</p>
+<p>$P(\epsilon^{(i)})=\displaystyle\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(\epsilon^{(i)})^2}{2\sigma^2})$, substitute $\epsilon^{(i)}=y^{(i)}-\Theta^Tx^{(i)}$ to get $P(y^{(i)}|x^{(i)};\Theta)=\displaystyle\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2})$, namely $y^{(i)}|x^{(i)};\Theta$ is $N(\Theta^Tx^{(i)}, \sigma^2)$</p>
+<p>Hence the likelihood of $\Theta:L(\Theta)=\displaystyle\prod^M_{i=1}P(y^{(i)}|x^{(i)};\Theta)=\prod^M_{i=1}\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2})$</p>
+<p>$l(\Theta)=log L(\Theta)=-\displaystyle\sum^M_{i=1}\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2}-m log(\sqrt{2\pi}\sigma)$</p>
+<p>Since $m log(\sqrt{2\pi}\sigma)$ is $\Theta$ irrelevant and $\sigma^2$ is a constant, to maximize $L(\Theta)$ is to minimize $\displaystyle\frac12\sum^{M}_{i=1}(y^{(i)}-\Theta^Tx^{(i)})^2$</p>
+</li>
+</ol>
+<h1 id="Logistic-regression"><a href="#Logistic-regression" class="headerlink" title="Logistic regression"></a>Logistic regression</h1><ol>
+<li><p>$y\in\{0,1\}$ is called binary classification. Linear regression is not a good algorithm for classification, for it might bias to fit a distant data. </p>
+</li>
+<li><p>Logistic regression: $h_\Theta(x)\in[0, 1]$</p>
+</li>
+<li><p>Sigmoid / logistic function: $g(z)=\displaystyle\frac1{1+e^{-z}}$, and in logistic regression $h_\Theta(x)=g(\Theta^Tx)$</p>
+</li>
+<li><p>$P(y=1|x;\Theta)=h_\Theta(x)$, conversely $P(y=0|x;\Theta)=1-h_\Theta(x)$. Namely $P(y|x;\Theta)=h_\Theta(x)^y(1-h_\Theta(x))^{1-y}$</p>
+</li>
+<li><p>$L(\Theta)=\displaystyle\prod^M_{i=1}h_\Theta(x^{(i)})^{y^{(i)}}(1-h_\Theta(x^{(i)})^{1-y^{(i)}}$</p>
+<p>$l(\Theta)=\displaystyle\sum^M_{i=1}y^{(i)}log h_\Theta(x^{(i)})+(1-y^{(i)})log (1-h_\Theta(x^{(i)}))$</p>
+</li>
+<li><p>Choose $\Theta$ to maximize $l(\Theta)$ (Batch gradient ascent): $\Theta_j:=\Theta_j+\alpha\displaystyle\frac{\part}{\part\Theta_j}l(\Theta)=\Theta_j+\alpha\sum^M_{i=1}(y^{(i)}-h(x^{(i)})x_j^{(i)}$</p>
+</li>
+</ol>
+<h1 id="Newton’s-method"><a href="#Newton’s-method" class="headerlink" title="Newton’s method"></a>Newton’s method</h1><ol>
+<li><p>Have $f$, want to find $\Theta$, s.t. $f(\Theta)=0$</p>
+</li>
+<li><p>Start with $\Theta^{(0)}$, $\Theta^{(t+1)}:=\Theta^{(t)}-\displaystyle\frac{f(\Theta^{(t)})}{f’(\Theta^{(t)})}$. Set $\Theta^{t + 1}$ as the zero point of the tan line of $f$ at $\Theta^{(t)}$</p>
+</li>
+<li><p>Quradratic convergence: the errors decrease in quadratic. </p>
+</li>
+<li><p>When $\Theta$ is a vector: $\Theta^{t + 1}:=\Theta^{(t)}+H^{-1}\grad_\Theta l(\Theta)$, where $H$ is the Hessian matrix, $H_{ij}=\displaystyle\frac{\part^2l}{\part\Theta_i\part\Theta_j}$. </p>
+<p>So the disadvantage of Newton’s method is that each step is much more expensive in high dimensional. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/02/28/01-Linear-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -4340,797 +4466,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/09/01/10-How-To-Talk-About-Various-Speech-Habits/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/01/10-How-To-Talk-About-Various-Speech-Habits/" class="post-title-link" itemprop="url">10. How To Talk About Various Speech Habits</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-01 11:48:39" itemprop="dateCreated datePublished" datetime="2020-09-01T11:48:39+08:00">2020-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-07 09:55:44" itemprop="dateModified" datetime="2020-09-07T09:55:44+08:00">2020-09-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">taciturn</td>
-<td style="text-align:center"><strong><em>silence, unrespongsiveness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">laconic</td>
-<td style="text-align:center"><strong><em>economy, brevity, meaningfulness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">inarticulate</td>
-<td style="text-align:center"><strong><em>awkwardness, sputtering, incoherence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">garrulous</td>
-<td style="text-align:center"><strong><em>rambling chatter</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">banal</td>
-<td style="text-align:center"><strong><em>hackneyed, unoriginal phraseology</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbose</td>
-<td style="text-align:center"><strong><em>wordliness, repetitiousness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">voluble</td>
-<td style="text-align:center"><strong><em>fluency, rapidity</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cogent</td>
-<td style="text-align:center"><strong><em>logic, clarity, persuasiveness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vociferous</td>
-<td style="text-align:center"><strong><em>noise, vehemence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">loquacious</td>
-<td style="text-align:center"><strong><em>talkativeness</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="taceo-to-be-silent"><a href="#taceo-to-be-silent" class="headerlink" title="taceo: to be silent"></a>taceo: to be silent</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">taciturn</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">taciturnity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">reticent</td>
-<td style="text-align:center">synonym of taciturn</td>
-</tr>
-<tr>
-<td style="text-align:center">reserved</td>
-<td style="text-align:center">synonym of taciturn</td>
-</tr>
-<tr>
-<td style="text-align:center">secretive</td>
-<td style="text-align:center">synonym of taciturn</td>
-</tr>
-<tr>
-<td style="text-align:center">close-lipped</td>
-<td style="text-align:center">synonym of taciturn</td>
-</tr>
-<tr>
-<td style="text-align:center">close-mouthed</td>
-<td style="text-align:center">synonym of taciturn</td>
-</tr>
-<tr>
-<td style="text-align:center">tacit</td>
-<td style="text-align:center"><strong><em>understood or implied without being stated</em></strong><br />a tacit agreement, arrangement, acceptance, rejection, assent, refusal, etc. A person is never called tacit.</td>
-</tr>
-<tr>
-<td style="text-align:center">tacitly</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tacitness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">reticent</td>
-<td style="text-align:center"><strong><em>not reaveling one’s thoughts or feelings readily</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">reticence</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-loquor-to-speak"><a href="#Latin-loquor-to-speak" class="headerlink" title="Latin loquor: to speak"></a>Latin loquor: to speak</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">loquacious</td>
-<td style="text-align:center">talk a lot because you like to talk and boubtless have a lot to say</td>
-</tr>
-<tr>
-<td style="text-align:center">loquacity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">loquaciousness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">soliloquy</td>
-<td style="text-align:center"><strong><em>a speech to oneself</em></strong><br /><strong><em>the part when characters speak their thoughts aloud in a play</em></strong><br /><code>solus: along</code></td>
-</tr>
-<tr>
-<td style="text-align:center">soliloquist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">soliloquize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ventriloquist</td>
-<td style="text-align:center"><strong><em>a person who can spead or utter sounds so that they seem to come from somewhere else</em></strong><br /><code>Latin venter, ventris: belly</code><br />the art of speaking from the belly</td>
-</tr>
-<tr>
-<td style="text-align:center">ventriloquistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ventriloquy</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">colloquial</td>
-<td style="text-align:center"><code>con- is spelled col- before a root starting with l; cor- before a root starting with r; com- before a root starting with m, p, or b</code></td>
-</tr>
-<tr>
-<td style="text-align:center">colloquialism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">circumlocution</td>
-<td style="text-align:center"><code>circum-: around</code><br />talking around<br /><strong><em>roundabout or indirect expression</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">circumlocutory</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eloquent</td>
-<td style="text-align:center">speaks out<br /><code>e-: from ex-, out</code><br /><strong><em>fluen or persuasive in speaking or writing</em></strong><br /><strong><em>eloquent suggests artistic expression, strong emotional appeal, the skillful use of language to move and arouse a listener</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magniloquent</td>
-<td style="text-align:center"><code>magnus: large</code><br /><strong><em>the use of high-flown, grandiose, even pompout language; of large and impressive words; of lofty flowery, or over-elegant phraseology</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">grandiloquent</td>
-<td style="text-align:center"><code>grandis: grand</code><br />synonym of magniloquent</td>
-</tr>
-<tr>
-<td style="text-align:center">verbose</td>
-<td style="text-align:center"><code>Latin verbum: word</code><br /><strong><em>You smother your ideas with excess words, with such an overabundance of words that your listener either drops into a state of helpless confusion or falls asleep.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbosity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">voluble</td>
-<td style="text-align:center"><code>Latin volvo, volutus: to roll</code><br />words effortlessly roll of the voluble speaker’s tongue<br /><strong><em>You speak rapidly, fluently, glibly, without hesitation, stutter, or stammer; you are vocal, verbal, and highly articulate.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">volubility</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">garrulous</td>
-<td style="text-align:center"><code>Latin garrio: to chatter</code><br /><strong><em>You talk constantly, and usually aimlessly and meaninglessly, about trifles.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">garrulity</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="laconic"><a href="#laconic" class="headerlink" title="laconic"></a>laconic</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">laconic</td>
-<td style="text-align:center"><strong><em>pithy, concise, economical in the use of words almost to the point of curtness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">laconicness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">laconicity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">laconicism</td>
-<td style="text-align:center"><strong><em>the expression itself is pithy and concise</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-Cogo-to-drive-together-compel-force"><a href="#Latin-Cogo-to-drive-together-compel-force" class="headerlink" title="Latin Cogo: to drive together, compel, force"></a>Latin Cogo: to drive together, compel, force</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">congent</td>
-<td style="text-align:center">a term of admiration<br /><strong><em>a cogent argument compels acceptance because of its logic, its persuasiveness, its appeal to one’s sense of reason</em></strong><br /><strong><em>cogent implies irresistible logical reasoning and intellectual keenness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">congency</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Magnus-large"><a href="#Magnus-large" class="headerlink" title="Magnus: large"></a>Magnus: large</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">magnanimous</td>
-<td style="text-align:center"><strong><em>big-hearted, generous, forgiving</em></strong><br />great-minded</td>
-</tr>
-<tr>
-<td style="text-align:center">magnate</td>
-<td style="text-align:center"><strong><em>a person of great power or influence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magnify</td>
-<td style="text-align:center"><strong><em>to make larger, or make seem larger</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magnificent</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">magnitude</td>
-<td style="text-align:center"><code>suffix -tude: noun</code></td>
-</tr>
-<tr>
-<td style="text-align:center">magnum</td>
-<td style="text-align:center"><strong><em>a large bottle, generally two fifths of a gallon</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magnun opus</td>
-<td style="text-align:center"><strong><em>the greatest work, or masterpiece, of an artist, writer, or composer</em></strong><br /><code>Latin opus: work</code><br />a big work</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="verbum-word"><a href="#verbum-word" class="headerlink" title="verbum: word"></a>verbum: word</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">verb</td>
-<td style="text-align:center"><strong><em>the important word in a sentence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbatim</td>
-<td style="text-align:center">word-for-word<br /><strong><em>in exactly the same word as were used originally</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbal</td>
-<td style="text-align:center"><code>suffix -al: adjective</code><br /><strong><em>an adjective of verb, or words in general</em></strong><br /><strong><em>oral or spoken</em></strong><br /><strong><em>describing people, a ready ability to put feelings or thoughts into words</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbalize</td>
-<td style="text-align:center"><strong><em>to put into words</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">verbiage</td>
-<td style="text-align:center"><strong><em>an excess of words</em></strong><br /><strong><em>a style or manner of using words</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="volvo-volutus-to-roll"><a href="#volvo-volutus-to-roll" class="headerlink" title="volvo, volutus: to roll"></a>volvo, volutus: to roll</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">revolve</td>
-<td style="text-align:center"><strong><em>row again and again, to keep turning round</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revolution</td>
-<td style="text-align:center"><strong><em>a radical change of any sort</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revolutionary</td>
-<td style="text-align:center"><code>suffix -ary: adjective or noun</code></td>
-</tr>
-<tr>
-<td style="text-align:center">contrary</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">commentary</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">involve</td>
-<td style="text-align:center">roll in</td>
-</tr>
-<tr>
-<td style="text-align:center">involvement</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">evolve</td>
-<td style="text-align:center">roll out<br /><strong><em>to unfold, gradually develop</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">evolution</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">evolutionary</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="venter-ventris-belly"><a href="#venter-ventris-belly" class="headerlink" title="venter, ventris: belly"></a>venter, ventris: belly</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ventral</td>
-<td style="text-align:center"><strong><em>the ventral side of an animal is the front or anterior side — the belly side</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ventricle</td>
-<td style="text-align:center"><strong><em>a hollow part in an organ or cavity as a belly</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ventricular</td>
-<td style="text-align:center"><strong><em>the adjective of ventricle</em></strong><br /><strong><em>having a belly-like bulge</em></strong><br /><code>the nouns ending in -cle from adjectives ending in -cular</code></td>
-</tr>
-<tr>
-<td style="text-align:center">auricle</td>
-<td style="text-align:center"><code>Latin auris: ear</code><br /><strong><em>It is an ear-shaped structure of the heart</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">auricular</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">avuncular</td>
-<td style="text-align:center">referring to an uncle<br /><strong><em>behaving in a kind and friendly way towards yong people, similar to the way an uncle treats hes nieces or nephews</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dorsal</td>
-<td style="text-align:center"><code>Latin dorsum: back</code><br /><strong><em>a back side</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">endorse</td>
-<td style="text-align:center"><strong><em>express your approval or support</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">endorsement</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-vox-vocis-voice"><a href="#Latin-vox-vocis-voice" class="headerlink" title="Latin vox, vocis: voice"></a>Latin vox, vocis: voice</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">vociferous</td>
-<td style="text-align:center"><code>fero: to bear or carry</code><br />carries a lot of voice</td>
-</tr>
-<tr>
-<td style="text-align:center">vociferousness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vociferate</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vociferation</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="somnus-sleep"><a href="#somnus-sleep" class="headerlink" title="somnus: sleep"></a>somnus: sleep</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">somniferous</td>
-<td style="text-align:center"><strong><em>carrying, bearing , or bringing sleep</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">insomnia</td>
-<td style="text-align:center"><strong><em>the abnormal inability to fail asleep when sleep is required or desired</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">insomniac</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">insomnious</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">somnolent</td>
-<td style="text-align:center"><strong><em>sleepy, drowsy</em></strong><br /><code>suffix -lent: adjective</code></td>
-</tr>
-<tr>
-<td style="text-align:center">somnolence</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">somnambulism</td>
-<td style="text-align:center"><code>ambulo: to walk</code><br /><strong><em>walking in one’s sleep</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">somnambulist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">somnambulistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">soporific</td>
-<td style="text-align:center"><code>Latin sopor: sleep</code><br /><strong><em>somniferous</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="ambulo-to-walk"><a href="#ambulo-to-walk" class="headerlink" title="ambulo: to walk"></a>ambulo: to walk</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ambulatory</td>
-<td style="text-align:center"><strong><em>(medicine) being able to walk</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">perambulator</td>
-<td style="text-align:center"><strong><em>a baby carriage, a vehicle for walking an infant throught the streets</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">perambulate</td>
-<td style="text-align:center"><strong><em>to walk through</em></strong><br /><strong><em>to stroll around</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">perambulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">amble</td>
-<td style="text-align:center"><strong><em>walk aimlessly</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ambulance</td>
-<td style="text-align:center"><strong><em>two stretcher-bearers who walked off the battle field with a wounded soldier</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">preamble</td>
-<td style="text-align:center">walks before<br /><strong><em>an introduction or introductory statement</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="noun-suffixes"><a href="#noun-suffixes" class="headerlink" title="noun suffixes"></a>noun suffixes</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">inarticulate</td>
-<td style="text-align:center"><code>Latin articulus: a joint</code><br /><strong><em>The inarticulate person has trouble joining words together coherently</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">inarticulateness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">articulate</td>
-<td style="text-align:center"><strong><em>The articulate person joins their words together easily</em></strong><br /><strong><em>To articulate is to join words</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">articulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">banal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">banality</td>
-<td style="text-align:center">&emsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">modus operandi</td>
-<td style="text-align:center"><strong><em>method (mode) of working (or operating)</em></strong><br /><code>operandi: of working</code><br /><code>operans: working</code></td>
-</tr>
-<tr>
-<td style="text-align:center">modus vivendi</td>
-<td style="text-align:center">method of living<br /><strong><em>the style of life characteristic of a person or group</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">circumference</td>
-<td style="text-align:center"><strong><em>the enclosing boundary of a curved geometric figure, especially a circle</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">circumcise</td>
-<td style="text-align:center"><strong><em>cut of the foreskin of a yong boy or man as a religious rite</em></strong><br /><strong><em>remove the external genitalia of a young girl or woman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">circumnavigation</td>
-<td style="text-align:center"><strong><em>the action or process of sailing or otherwise traveling all around something, especially the world</em></strong><br /><code>navis: ship</code></td>
-</tr>
-<tr>
-<td style="text-align:center">circumscription</td>
-<td style="text-align:center"><strong><em>Figuratively, to write a lin around one’s freedom of action, so that one is restricted, limited, hemmed in</em></strong><br /><strong><em>the action of drawing a figure around another</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">somniloquent</td>
-<td style="text-align:center"><strong><em>adjective meaning talking in one’s sleep</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">somniloquence</td>
-<td style="text-align:center"><strong><em>the noun of somniloquent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">somniloquy</td>
-<td style="text-align:center"><strong><em>the noun of somniloquent</em></strong><br /><strong><em>also designating the words spoken by the sleeper</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">somniloquist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">aurist</td>
-<td style="text-align:center"><strong><em>an ear specialist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">otologist</td>
-<td style="text-align:center"><code>Greek otos: ear</code><br /><strong><em>an ear specialist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">otology</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">otological</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">laryngologist</td>
-<td style="text-align:center"><strong><em>a larynx or throat specialist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gastrologist</td>
-<td style="text-align:center"><strong><em>a stomach specialist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">enterologist</td>
-<td style="text-align:center"><strong><em>an intestinal specialist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">proctologist</td>
-<td style="text-align:center"><strong><em>a specialist in diseases of the rectum</em></strong><br /><code>Greek proktos: anus</code></td>
-</tr>
-<tr>
-<td style="text-align:center">aural</td>
-<td style="text-align:center"><strong><em>refers the ears or to the sense or phenomenon of hearing</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">monophonic</td>
-<td style="text-align:center"><code>phone: sound</code></td>
-</tr>
-<tr>
-<td style="text-align:center">binaural</td>
-<td style="text-align:center"><strong><em>having two ears or involving the use of both ears</em></strong><br /><strong><em>descriptive of sound from two sources</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">stereophonic</td>
-<td style="text-align:center"><code>stereos: deep, solid</code></td>
-</tr>
-<tr>
-<td style="text-align:center">noctambulist</td>
-<td style="text-align:center">one who walks at night</td>
-</tr>
-<tr>
-<td style="text-align:center">noctambulism</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">somnific</td>
-<td style="text-align:center"><strong><em>soporific</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">circumambulate</td>
-<td style="text-align:center">to walk around</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -5202,7 +4537,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">192</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

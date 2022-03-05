@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Locally weighted regression Parametric learning algorithm: fit fixed set of parameters $(\Theta_i)$ to data Non-parametric learning algorithm: the amount of data &#x2F; parameters you need to keep grows li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02. Logistical Regression">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/03/03/02-Logistical-Regression/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Locally weighted regression Parametric learning algorithm: fit fixed set of parameters $(\Theta_i)$ to data Non-parametric learning algorithm: the amount of data &#x2F; parameters you need to keep grows li">
+<meta property="article:published_time" content="2022-03-03T13:26:38.000Z">
+<meta property="article:modified_time" content="2022-03-04T14:19:47.270Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/03/03/02-Logistical-Regression/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>02. Logistical Regression | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">23</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/03/03/02-Logistical-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          02. Logistical Regression
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-03 21:26:38" itemprop="dateCreated datePublished" datetime="2022-03-03T21:26:38+08:00">2022-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-04 22:19:47" itemprop="dateModified" datetime="2022-03-04T22:19:47+08:00">2022-03-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Stanford-CS229/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习 (Stanford CS229)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Locally-weighted-regression"><a href="#Locally-weighted-regression" class="headerlink" title="Locally weighted regression"></a>Locally weighted regression</h1><ol>
+<li><p>Parametric learning algorithm: fit fixed set of parameters $(\Theta_i)$ to data</p>
+<p>Non-parametric learning algorithm: the amount of data / parameters you need to keep grows linearly with size of data</p>
+</li>
+<li><p>Linear Regression: Fit $\Theta$ to minimize $\frac12\displaystyle\sum^M_{i=1}(y^{(i)}-\Theta^Tx^{(i)})^2$, and return $\Theta^Tx$</p>
+<p>Locally weightted regression: Fit $\Theta$ To minimize $\displaystyle\sum^M_{i=1}w^{(i)}(y^{(i)}-\Theta^Tx^{(i)})^2$, where $w^{(i)}$ is a “weighted” function $w^{(i)}=exp(-\displaystyle\frac{(x^{(i)}-x)^2}{2\tau^2})$. If $|x^{(i)}-x|$ is small, $w^{(i)}\thickapprox1$, and if $|x^{(i)}-x|$ is large, $w^{(i)}\thickapprox0$</p>
+</li>
+<li><p>The net effect of locally weighted regression is that pay less attention to the examples that is far from the prediction one, and pay more attention to the one that is close. </p>
+</li>
+<li><p>$\tau$ is a hyperparameters to decide the bandwidth that we care much. It affects about overfit and unfit. </p>
+</li>
+<li><p>Why least squares?</p>
+<p>Assume $y^{(i)}=\Theta^Tx^{(i)}+\epsilon^{(i)}$, where $\epsilon^{(i)}$ is the error that I.I.D. $N(0,\sigma^2)$</p>
+<p>$P(\epsilon^{(i)})=\displaystyle\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(\epsilon^{(i)})^2}{2\sigma^2})$, substitute $\epsilon^{(i)}=y^{(i)}-\Theta^Tx^{(i)}$ to get $P(y^{(i)}|x^{(i)};\Theta)=\displaystyle\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2})$, namely $y^{(i)}|x^{(i)};\Theta$ is $N(\Theta^Tx^{(i)}, \sigma^2)$</p>
+<p>Hence the likelihood of $\Theta:L(\Theta)=\displaystyle\prod^M_{i=1}P(y^{(i)}|x^{(i)};\Theta)=\prod^M_{i=1}\frac1{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2})$</p>
+<p>$l(\Theta)=log L(\Theta)=-\displaystyle\sum^M_{i=1}\frac{(y^{(i)}-\Theta^Tx^{(i)})^2}{2\sigma^2}-m log(\sqrt{2\pi}\sigma)$</p>
+<p>Since $m log(\sqrt{2\pi}\sigma)$ is $\Theta$ irrelevant and $\sigma^2$ is a constant, to maximize $L(\Theta)$ is to minimize $\displaystyle\frac12\sum^{M}_{i=1}(y^{(i)}-\Theta^Tx^{(i)})^2$</p>
+</li>
+</ol>
+<h1 id="Logistic-regression"><a href="#Logistic-regression" class="headerlink" title="Logistic regression"></a>Logistic regression</h1><ol>
+<li><p>$y\in\{0,1\}$ is called binary classification. Linear regression is not a good algorithm for classification, for it might bias to fit a distant data. </p>
+</li>
+<li><p>Logistic regression: $h_\Theta(x)\in[0, 1]$</p>
+</li>
+<li><p>Sigmoid / logistic function: $g(z)=\displaystyle\frac1{1+e^{-z}}$, and in logistic regression $h_\Theta(x)=g(\Theta^Tx)$</p>
+</li>
+<li><p>$P(y=1|x;\Theta)=h_\Theta(x)$, conversely $P(y=0|x;\Theta)=1-h_\Theta(x)$. Namely $P(y|x;\Theta)=h_\Theta(x)^y(1-h_\Theta(x))^{1-y}$</p>
+</li>
+<li><p>$L(\Theta)=\displaystyle\prod^M_{i=1}h_\Theta(x^{(i)})^{y^{(i)}}(1-h_\Theta(x^{(i)})^{1-y^{(i)}}$</p>
+<p>$l(\Theta)=\displaystyle\sum^M_{i=1}y^{(i)}log h_\Theta(x^{(i)})+(1-y^{(i)})log (1-h_\Theta(x^{(i)}))$</p>
+</li>
+<li><p>Choose $\Theta$ to maximize $l(\Theta)$ (Batch gradient ascent): $\Theta_j:=\Theta_j+\alpha\displaystyle\frac{\part}{\part\Theta_j}l(\Theta)=\Theta_j+\alpha\sum^M_{i=1}(y^{(i)}-h(x^{(i)})x_j^{(i)}$</p>
+</li>
+</ol>
+<h1 id="Newton’s-method"><a href="#Newton’s-method" class="headerlink" title="Newton’s method"></a>Newton’s method</h1><ol>
+<li><p>Have $f$, want to find $\Theta$, s.t. $f(\Theta)=0$</p>
+</li>
+<li><p>Start with $\Theta^{(0)}$, $\Theta^{(t+1)}:=\Theta^{(t)}-\displaystyle\frac{f(\Theta^{(t)})}{f’(\Theta^{(t)})}$. Set $\Theta^{t + 1}$ as the zero point of the tan line of $f$ at $\Theta^{(t)}$</p>
+</li>
+<li><p>Quradratic convergence: the errors decrease in quadratic. </p>
+</li>
+<li><p>When $\Theta$ is a vector: $\Theta^{t + 1}:=\Theta^{(t)}+H^{-1}\grad_\Theta l(\Theta)$, where $H$ is the Hessian matrix, $H_{ij}=\displaystyle\frac{\part^2l}{\part\Theta_i\part\Theta_j}$. </p>
+<p>So the disadvantage of Newton’s method is that each step is much more expensive in high dimensional. </p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/28/01-Linear-Regression/" rel="prev" title="01. Linear Regression">
+      <i class="fa fa-chevron-left"></i> 01. Linear Regression
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Locally-weighted-regression"><span class="nav-number">1.</span> <span class="nav-text">Locally weighted regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic-regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Newton’s-method"><span class="nav-number">3.</span> <span class="nav-text">Newton’s method</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

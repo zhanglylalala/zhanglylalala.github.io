@@ -191,6 +191,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/10/02-Conditioning-and-Bayes-rule/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/10/02-Conditioning-and-Bayes-rule/" class="post-title-link" itemprop="url">02. Conditioning and Bayes' rule</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-10 09:11:31" itemprop="dateCreated datePublished" datetime="2020-03-10T09:11:31+08:00">2020-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:33:15" itemprop="dateModified" datetime="2020-08-07T19:33:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Conditional-Probability"><a href="#Conditional-Probability" class="headerlink" title="Conditional Probability"></a>Conditional Probability</h1><ol>
+<li>$P(A|B)$ means the conditional probability of $A$ given $B$. </li>
+<li>$P(A|B)=\displaystyle\frac{P(A\cap B)}{P(B)}$, if $P(B)&gt;0$. If $P(B)=0$, the probability $P(A|B)$ is undefined. </li>
+<li>Three probability laws: <br />&emsp;$P(A|B)&gt;0$<br />&emsp;$P(\Omega|B)=1$<br />&emsp;$P(A_1\cup A_2|B)=P(A_1|B)+P(A_2|B)$ if $A_1$ and $A_2$ are two disjoint sets. </li>
+<li>For any two sets $A$ and $C$, $P(A\cup C|B)≤P(A|B)+P(C|B)$</li>
+<li>$P(B|B)=\displaystyle\frac{P(B)}{P(B)}=1$</li>
+<li>We might discard all possible outcomes outside $B$ and treat the conditional probabilities as a probability law defined on the new universe $B$. </li>
+<li>Often $P(A\cap B)$ is not easy to calculate directly. But we can calculate $P(A|B)$ first and then use $P(A\cap B)=P(B)P(A|B)$ to get the answer. </li>
+<li>Calculate various probabilities in conjunction with a tree-based sequential description of an experiment: <br />&emsp;First set up the tree so that an event of interest is associated with a leaf. <br />&emsp;Every node represents the probability of an event which is the conjunction of all passed events from root to it. <br />&emsp;Every path is the conditional probability of the next event given the conjunction of all the afore-passed events. </li>
+<li>Multiplication rule: <br /><script type="math/tex">\begin{equation}\begin{split}P(\bigcap^n_{i=1}A_i)&=\displaystyle P(A_1)\frac{P(A_1\cap A_2)}{P(A_1)}\frac{P(A_1\cap A_2\cap A_3)}{P(A_1\cap A_2)}…\frac{P(\bigcap^n_{i=1}A_i)}{P(\bigcap^{n-1}_{i=1}A_i)} \\&=P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)…P(A_n|\bigcap^{n-1}_{i=1}A_i)\end{split}\end{equation}</script></li>
+</ol>
+<h1 id="Total-Probability-Theorem-and-Bayes’-Rule"><a href="#Total-Probability-Theorem-and-Bayes’-Rule" class="headerlink" title="Total Probability Theorem and Bayes’ Rule"></a>Total Probability Theorem and Bayes’ Rule</h1><ol>
+<li>A set of sets is a partition of the sample space if and only if each possible outcomes is included in exactly one of the sets. </li>
+<li>Total probability theorem: Let $A_1,…,A_2$ be disjoint events that form a partion of the sample space and assume that $P(A_i)&gt;0$, for all $i$. <br />For any event $B$, <br /><script type="math/tex">\begin{equation}\begin{split}P(B)&=P(\Omega\cap B)=P((A_1\cup A_2\cup…\cup A_n)\cap B)\\&=P((A_1\cap B)\cup(A_2\cap B)\cup…\cup(A_n\cap B))\\&=P(A_1\cap B)+P(A_2\cap B)+…+P(A_n\cap B)\\&=P(A_1)P(B|A_1)+P(A_2)P(B|A_2)+…+P(A_n)P(B|A_n) \end{split}\end{equation}</script></li>
+<li>We are partition the sample space into a number of scenarios. Then the probability that $B$ occurs is a weighted average of its conditional probability under each scenarios, where each scenario is weighted according to its unconditional probability. </li>
+<li>Bayes’ rule: The condition of Bayes’ rule is the same as total probability theorem<br />Since $P(A_i\cap B)=P(B)P(A_i|B)=P(A_i)P(B|A_i)$<br /><script type="math/tex">\begin{equation}\begin{split}P(A_i|B)&=\displaystyle\frac{P(A_i)P(B|A_i)}{P(B)}\ \ \ \ \ \ \ \ Plug\ in\ total\ probability\ theorem\\&=\frac{P(A_i)P(B|A_i)}{P(A_1)P(B|A_1)+…+P(A_n)P(B|A_n)} \end{split}\end{equation}</script></li>
+<li>Bayes’ rule is often used for inference. We observe the effect, and we wish to infer the cause.<br />The events $A_i$’s are associated with the causes and the event $B$ represents the effect. <br />The probability $P(B|A_i)$ that the effect will be observed when the cause is represent amounts to a probabilistic model of the cause-effect relation. <br />The probability $P(A_i|B)$ is the probability that the cause $A_i$ is present when the effect has been observed. <br />We refer $P(A_i|B)$ as the posterior probability of event $A_i$ given the information. $P(A_i)$ is called the prior probability. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/04/01-Probability-Models-and-Axioms/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1136,105 +1235,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/03-Max-min-Problems-and-Least-Squares/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/23/03-Max-min-Problems-and-Least-Squares/" class="post-title-link" itemprop="url">03. Max-min Problems and Least Squares</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-23 23:14:10" itemprop="dateCreated datePublished" datetime="2020-02-23T23:14:10+08:00">2020-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:39" itemprop="dateModified" datetime="2020-08-07T22:35:39+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Max-min-Problems"><a href="#Max-min-Problems" class="headerlink" title="Max-min Problems"></a>Max-min Problems</h1><ol>
-<li>At a local min or max <script type="math/tex">f_x=0</script> and <script type="math/tex">f_y=0</script>. <br />According to the approximation equation <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script> we know this is right. </li>
-<li>Max or min also means the tangent plane is horizontal. </li>
-<li><script type="math/tex">(x_0,y_0)</script> is a critical point of <script type="math/tex">f</script> if <script type="math/tex">f_x(x_0,y_0)=0</script> and <script type="math/tex">f_y(x_0,y_0)=0</script>. </li>
-<li>A critical point can be a <code>local min</code>, a <code>local max</code> or a <code>saddle point</code>. </li>
-<li>A global min/max occurs either at a critical point or on boundary / at infinity. </li>
-<li><code>Second derivative test</code>: <br />&emsp;There are three second derivatives <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial x^2}=f_{xx}</script>, <script type="math/tex">f_{xy}=\displaystyle\frac{\partial^2f}{\partial x\partial y}=\frac{\partial^2f}{\partial y\partial x}=f_{yx}</script> and <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial y^2}=f_{yy}</script>. <br />&emsp;At a critical point <script type="math/tex">P(x_0,y_0)</script> of <script type="math/tex">f</script>, let <script type="math/tex">A=f_{xx}(x_0,y_0),B=f_{xy}(x_0,y_0)</script> and <script type="math/tex">C=f_{yy}(x_0,y_0)</script>. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A>0</script>, <script type="math/tex">P</script> is a local minimum. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A<0</script>, <script type="math/tex">P</script> s a local maximum. <br />&emsp;If <script type="math/tex">AC-B^2<0</script>, <script type="math/tex">P</script> s a saddle point. <br />&emsp;If <script type="math/tex">AC-B^2=0</script>, cannot conclude. </li>
-</ol>
-<h1 id="Least-Square"><a href="#Least-Square" class="headerlink" title="Least Square"></a>Least Square</h1><ol>
-<li>Given some datas, find best fit line <script type="math/tex">y=ax+b</script>. In this equation, <script type="math/tex">a</script> and <script type="math/tex">b</script> are unknowns instead of <script type="math/tex">x</script> and <script type="math/tex">y</script>. </li>
-<li>Best means minimizing total square deviation. </li>
-<li>Deviation for each data point is <script type="math/tex">y_i-(ax_i+b)</script>. </li>
-<li>So we are trying to minimize <script type="math/tex">D=\displaystyle\sum^n_{i=1}[y_i-(ax_i+b)]^2</script></li>
-<li><script type="math/tex">\begin{equation}\begin{split}&\left\{\begin{array}{}\frac{\partial D}{\partial a}=\sum^n_{i=1}2(y_i-(ax_i+b))(-x_i)=0\\\frac{\partial D}{\partial b}=\sum^n_{i=1}2(y_i-(ax_i+b))(-1)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}\sum^n_{i=1}(x_i^2a+x_ib-x_iy_i)=0\\\sum^n_{i=1}(x_ia+b-y)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}(\sum^n_{i=1}x_i^2)a+(\sum^n_{i=1}x_i)b=\sum^n_{i=1}x_iy_i\\(\sum^n_{i=1}x_i)a+nb=\sum^n_{i=1}y_i \end{array}\right. \end{split}\end{equation}</script><br />This is a <script type="math/tex">2\times2</script> linear equation of <script type="math/tex">a</script> and <script type="math/tex">b</script>. </li>
-<li>If the best explanation of a set of datas is <script type="math/tex">y=ce^{ax}</script>, we can make it <script type="math/tex">ln\ y=ln\ c+ax</script> so that it becomes linear again. </li>
-<li>Similarly we can define the best quadratic <script type="math/tex">y=ax^2+bx+c</script> with the same deviation. </li>
-</ol>
-<p>See the linear algebra version of least square: <a href="http://www.laughingtree.cn/2020/02/01/13-Least-Squares/" target="_blank" rel="noopener">Least square</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1306,7 +1306,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">192</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
