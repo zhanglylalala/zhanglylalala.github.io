@@ -222,7 +222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-17 16:12:20" itemprop="dateModified" datetime="2022-04-17T16:12:20+08:00">2022-04-17</time>
+                <time title="Modified: 2022-04-17 16:13:20" itemprop="dateModified" datetime="2022-04-17T16:13:20+08:00">2022-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,6 +316,7 @@
 <li>If processors request data at too high a rate, the memory system cannot keep up. No amount of latency hiding helps this.</li>
 <li>Organize computation to fetch data from memory less often.<br>Reuse data previously loaded by the same thread (traditional intra-thread temporal locality optimizations).<br>Share data across threads (inter-thread cooperation)</li>
 <li>Request data less often (instead, do more arithmetic: it’s “free”).<br>Arithmetic intensity: Ratio of math operations to data access operations in an instruction stream.<br>The main point is that programs must have high arithmetic intensity to utilize modern processors efficiently.<br>If a data needed can be recalculated in ALUs, than don’t access memory, do the calculation. </li>
+<li></li>
 </ol>
 
       
