@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="Speedup Speedup (using P processors) &#x3D; execution time (using 1 processor) &#x2F; execution time (using P processors)  When using P processors, we can only get a speedup less than P times.One reason is that">
+  <meta name="description" content="Speedup Speedup (using P processors) &#x3D; execution time (using 1 processor) &#x2F; execution time (using P processors) When using P processors, we can only get a speedup less than P times.One reason is that">
 <meta property="og:type" content="article">
 <meta property="og:title" content="01. Modern Multicore Processors">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2022/04/13/01-Modern-Multicore-Processors/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="Speedup Speedup (using P processors) &#x3D; execution time (using 1 processor) &#x2F; execution time (using P processors)  When using P processors, we can only get a speedup less than P times.One reason is that">
+<meta property="og:description" content="Speedup Speedup (using P processors) &#x3D; execution time (using 1 processor) &#x2F; execution time (using P processors) When using P processors, we can only get a speedup less than P times.One reason is that">
 <meta property="article:published_time" content="2022-04-13T07:48:23.000Z">
-<meta property="article:modified_time" content="2022-04-17T08:07:21.156Z">
+<meta property="article:modified_time" content="2022-04-17T08:12:20.745Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-17 16:07:21" itemprop="dateModified" datetime="2022-04-17T16:07:21+08:00">2022-04-17</time>
+                <time title="Modified: 2022-04-17 16:12:20" itemprop="dateModified" datetime="2022-04-17T16:12:20+08:00">2022-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,110 +258,68 @@
 
       
         <h1 id="Speedup"><a href="#Speedup" class="headerlink" title="Speedup"></a>Speedup</h1><ol>
-<li><p>Speedup (using P processors) = execution time (using 1 processor) / execution time (using P processors)</p>
-</li>
-<li><p>When using P processors, we can only get a speedup less than P times.<br>One reason is that although cores are in the same chip, when they want to communicate with each other, they have to transmit information through wires, which takes some time.<br>Another reason is that the imbalance in work assignment, which caused that one core has too heavy assignment while other cores has nothing to do but wait.<br>Communication costs can dominate a parallel computation, severely limiting speedup. Especially when you assign tasks to too many cores, each core gets little computation. </p>
-</li>
+<li>Speedup (using P processors) = execution time (using 1 processor) / execution time (using P processors)</li>
+<li>When using P processors, we can only get a speedup less than P times.<br>One reason is that although cores are in the same chip, when they want to communicate with each other, they have to transmit information through wires, which takes some time.<br>Another reason is that the imbalance in work assignment, which caused that one core has too heavy assignment while other cores has nothing to do but wait.<br>Communication costs can dominate a parallel computation, severely limiting speedup. Especially when you assign tasks to too many cores, each core gets little computation. </li>
 </ol>
 <h1 id="Parallelism"><a href="#Parallelism" class="headerlink" title="Parallelism"></a>Parallelism</h1><p>Why parallelism?<br>Before 2004, the performance of single-processor grew exponentially. However, in 2004, Intel hit the Power Density Wall. If you get more than 100 watts in a chip, it goes to hot and will melt. And the battery won’t hold long.</p>
 <h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP:"></a>ILP:</h2><ol>
-<li><p>Instruction-Level Parallelism. Extract several instructions from the same instruction stream, and multiple ALU performs multiple operations parallel (within a core). This has to be done in a semantics of program. </p>
-</li>
-<li><p>Superscalar processor: exploit ILP within an instruction stream. Parallelism automatically and dynamically discovered by the hardware during execution (not programmer visible)</p>
-</li>
-<li><p>Example: Pentium 4<br>Its inctruction decoder will yank a whole bunch of instructions out of instruction stream, and map them to a new kind of computation called data flow computation that will track which value is generated and feed which instruction there<br>Decoders map them to independent processing units that can each performs a subset of the whole operations.<br>Control logics try to predict what’s going on and deal with it when it predicts incorrectly. The Branch Target Buffer keeps a record of all the control flow instructions to predict where they will go again. If it predicts wrong, it will back out and doesn’t commit to those results generated, flushes them away<br>Meltdown inspector: This logic leaks informations about what other processors are doing. </p>
-</li>
-<li><p>Most available ILP is exploited by a processor capable of issuing four instructions per clock, and only little performance benefit from building a processor that can issue more. </p>
-</li>
+<li>Instruction-Level Parallelism. Extract several instructions from the same instruction stream, and multiple ALU performs multiple operations parallel (within a core). This has to be done in a semantics of program. </li>
+<li>Superscalar processor: exploit ILP within an instruction stream. Parallelism automatically and dynamically discovered by the hardware during execution (not programmer visible)</li>
+<li>Example: Pentium 4<br>Its inctruction decoder will yank a whole bunch of instructions out of instruction stream, and map them to a new kind of computation called data flow computation that will track which value is generated and feed which instruction there<br>Decoders map them to independent processing units that can each performs a subset of the whole operations.<br>Control logics try to predict what’s going on and deal with it when it predicts incorrectly. The Branch Target Buffer keeps a record of all the control flow instructions to predict where they will go again. If it predicts wrong, it will back out and doesn’t commit to those results generated, flushes them away<br>Meltdown inspector: This logic leaks informations about what other processors are doing. </li>
+<li>Most available ILP is exploited by a processor capable of issuing four instructions per clock, and only little performance benefit from building a processor that can issue more. </li>
 </ol>
 <h2 id="Multi-Core"><a href="#Multi-Core" class="headerlink" title="Multi-Core"></a>Multi-Core</h2><p>Before multi-core era, Majority of chip transistors used to perform operations that help a single instruction stream run fast.<br>More transistors mean larger cache, smarter out-of-order logic, smarter branch predictor, etc. Also, more transistors get smaller transistors, and thus higher clock frequencies</p>
 <h3 id="Simpler-cores"><a href="#Simpler-cores" class="headerlink" title="Simpler cores"></a>Simpler cores</h3><ol>
-<li><p>It uses increasing transistor count to add more cores to the processor, rather than use transistors to increase sophistication of processor logic that accelerates a single instruction stream (e.g., out-of-order and speculative operations)</p>
-</li>
-<li><p>Each core is slower at running a single instruction stream than our original large core, but the sum performance is faster. With a smaller core, the communication cost inside of a chip will be cheaper. </p>
-</li>
-<li><p>However, the original programs express no parallelism and run as one thread on one of the processor cores.</p>
-</li>
-<li><p>One way to express paralllelism is by using pthreads. It will create threads to deal with tasks we assigned. </p>
-</li>
-<li><p>Another way is called data-parallele expression. The programmer declare loop iterations to be independent, and a compiler might automatically generate parallel threaded code</p>
-</li>
+<li>It uses increasing transistor count to add more cores to the processor, rather than use transistors to increase sophistication of processor logic that accelerates a single instruction stream (e.g., out-of-order and speculative operations)</li>
+<li>Each core is slower at running a single instruction stream than our original large core, but the sum performance is faster. With a smaller core, the communication cost inside of a chip will be cheaper. </li>
+<li>However, the original programs express no parallelism and run as one thread on one of the processor cores.</li>
+<li>One way to express paralllelism is by using pthreads. It will create threads to deal with tasks we assigned. </li>
+<li>Another way is called data-parallele expression. The programmer declare loop iterations to be independent, and a compiler might automatically generate parallel threaded code</li>
 </ol>
 <h3 id="SIMD-processing"><a href="#SIMD-processing" class="headerlink" title="SIMD processing"></a>SIMD processing</h3><ol>
-<li><p>Amortize cost/complexity of managing an instruction stream across many ALUs. Same instruction broadcast to all ALUs, executed in parallel on all ALUs</p>
-</li>
-<li><p>Each core has  an independent vector register set different from the regular register set. And Each core has multiple ALUs to execute the same instruction to different data. </p>
-</li>
-<li><p>Only a very structual, carefully written code can do an automatical vectorization by compliers. </p>
-</li>
-<li><p>When conditional executions are occurred, it will run the condition first, and create a mask according to the result, which is used to disable the ALUs that should not execute current instructions. Those active ALUs will execute the instructions, and a new mask is created. This procession will continue until all ALUs have execute all conditional instructions they should execute, and then they can execute remaining unconditional codes together again.<br>When a core can handle n elements at the same time, the performance in the worst case is 1 / n of the peak performance. </p>
-</li>
-<li><p>Instruction stream coherence (“coherent execution”): Same instruction sequence applies to all elements operated upon simultaneously.<br>“Divergent” execution: A lack of instruction stream coherence</p>
-</li>
-<li><p>Coherent execution is necessary for efficient use of SIMD processing resources. However, coherent execution is not necessary for efficient parallelization across cores, since each core has the capability to fetch/decode a different instruction stream</p>
-</li>
+<li>Amortize cost/complexity of managing an instruction stream across many ALUs. Same instruction broadcast to all ALUs, executed in parallel on all ALUs</li>
+<li>Each core has  an independent vector register set different from the regular register set. And Each core has multiple ALUs to execute the same instruction to different data. </li>
+<li>Only a very structual, carefully written code can do an automatical vectorization by compliers. </li>
+<li>When conditional executions are occurred, it will run the condition first, and create a mask according to the result, which is used to disable the ALUs that should not execute current instructions. Those active ALUs will execute the instructions, and a new mask is created. This procession will continue until all ALUs have execute all conditional instructions they should execute, and then they can execute remaining unconditional codes together again.<br>When a core can handle n elements at the same time, the performance in the worst case is 1 / n of the peak performance. </li>
+<li>Instruction stream coherence (“coherent execution”): Same instruction sequence applies to all elements operated upon simultaneously.<br>“Divergent” execution: A lack of instruction stream coherence</li>
+<li>Coherent execution is necessary for efficient use of SIMD processing resources. However, coherent execution is not necessary for efficient parallelization across cores, since each core has the capability to fetch/decode a different instruction stream</li>
 </ol>
 <h4 id="SIMD-on-modern-CPUs"><a href="#SIMD-on-modern-CPUs" class="headerlink" title="SIMD on modern CPUs"></a>SIMD on modern CPUs</h4><ol>
-<li><p>SSE instructions: 128-bit operations: 4x32 bits or 2x64 bits (4-wide float vectors)<br>AVX instructions: 256 bit operations: 8x32 bits or 4x64 bits (8-wide float vectors)<br>AVX512 instructions: 512 bit operations: 16x32 bits or 8x64 bits (8-wide float vectors)</p>
-</li>
-<li><p>Instructions are generated by the complier. Parallelism is explicitly requested by programmer using intrinsics, and conveyed using parallel language semantics. Finally, it is inferred by dependency analysis of loops by “auto-vectorizing” compiler. </p>
-</li>
-<li><p>Explicit SIMD: SIMD parallelization is performed at compile time. We can inspect program binary and see SIMD instructions. </p>
-</li>
+<li>SSE instructions: 128-bit operations: 4x32 bits or 2x64 bits (4-wide float vectors)<br>AVX instructions: 256 bit operations: 8x32 bits or 4x64 bits (8-wide float vectors)<br>AVX512 instructions: 512 bit operations: 16x32 bits or 8x64 bits (8-wide float vectors)</li>
+<li>Instructions are generated by the complier. Parallelism is explicitly requested by programmer using intrinsics, and conveyed using parallel language semantics. Finally, it is inferred by dependency analysis of loops by “auto-vectorizing” compiler. </li>
+<li>Explicit SIMD: SIMD parallelization is performed at compile time. We can inspect program binary and see SIMD instructions. </li>
 </ol>
 <h4 id="SIMD-on-modern-GPUs"><a href="#SIMD-on-modern-GPUs" class="headerlink" title="SIMD on modern GPUs"></a>SIMD on modern GPUs</h4><ol>
-<li><p>In GPUs, it usually is SPMD (Single Program Multiple Data), and uses SIMD to implement much of the logic. </p>
-</li>
-<li><p>Implicit SIMD: Compiler generates a scalar binary (scalar instructions). But N instances of the program are <em>always run</em> together on the processor. In other words, the interface to the hardware itself is data-parallel. </p>
-</li>
-<li><p>Hardware (not compiler) is responsible for simultaneously executing the same instruction from multiple instances on different data on SIMD ALUs</p>
-</li>
-<li><p>SIMD width of most modern GPUs ranges from 8 to 32</p>
-</li>
+<li>In GPUs, it usually is SPMD (Single Program Multiple Data), and uses SIMD to implement much of the logic. </li>
+<li>Implicit SIMD: Compiler generates a scalar binary (scalar instructions). But N instances of the program are <em>always run</em> together on the processor. In other words, the interface to the hardware itself is data-parallel. </li>
+<li>Hardware (not compiler) is responsible for simultaneously executing the same instruction from multiple instances on different data on SIMD ALUs</li>
+<li>SIMD width of most modern GPUs ranges from 8 to 32</li>
 </ol>
 <h1 id="Access-Memory"><a href="#Access-Memory" class="headerlink" title="Access Memory"></a>Access Memory</h1><ol>
-<li><p>Memory latency: The amount of time for a memory request (e.g., load, store) from a processor to be serviced by the memory system. Memory “access time” is a measure of latency. </p>
-</li>
-<li><p>Memory bandwidth: The rate at which the memory system can provide data to a processor</p>
-</li>
-<li><p>Stall: A processor “stalls” when it cannot run the next instruction in<br>an instruction stream because of a dependency on a previous<br>instruction. Accessing memory is a major source of stalls</p>
-</li>
-<li><p>One way to reduce stall is reducing latency.<br>One stratege is cache, which also provides high bandwidth data transfer to CPU. </p>
-</li>
-<li><p>Another way is hiding latency, namely the latency of the memory operation is not changed, it just no longer causes reduced processor utilization.<br>One common strategy is the prefetch. All modern CPUs have logic for prefetching data into caches. Prefetching can also reduce performance if the guess is wrong (hogs bandwidth, pollutes caches)<br>The other is using multi-threading. The idea is to interleave processing of multiple threads on the same core to hide stalls.</p>
-</li>
+<li>Memory latency: The amount of time for a memory request (e.g., load, store) from a processor to be serviced by the memory system. Memory “access time” is a measure of latency. </li>
+<li>Memory bandwidth: The rate at which the memory system can provide data to a processor</li>
+<li>Stall: A processor “stalls” when it cannot run the next instruction in an instruction stream because of a dependency on a previous instruction. Accessing memory is a major source of stalls</li>
+<li>One way to reduce stall is reducing latency.<br>One stratege is cache, which also provides high bandwidth data transfer to CPU. </li>
+<li>Another way is hiding latency, namely the latency of the memory operation is not changed, it just no longer causes reduced processor utilization.<br>One common strategy is the prefetch. All modern CPUs have logic for prefetching data into caches. Prefetching can also reduce performance if the guess is wrong (hogs bandwidth, pollutes caches)<br>The other is using multi-threading. The idea is to interleave processing of multiple threads on the same core to hide stalls.</li>
 </ol>
 <h2 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h2><ol>
-<li><p>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</p>
-</li>
-<li><p>With more storing executiong contexts in the cache, the working set per thread is smaller, and the latency hiding ability is higher.<br>And since the cache space per thread is less, may go to memory more often. Thus relies heavily on memory bandwidth.<br>When the thread is much enough to achieve 100% utilization of the core, additional threads yield no benefit. </p>
-</li>
-<li><p>The instruction decoder will choose instructions from multiple threads, and fire them to the execution units the threads shared. And the memory interface unit will detect dependencies automatically.</p>
-</li>
-<li><p>Interleaved multi-threading (a.k.a. temporal multi-threading): Each clock, the core chooses a thread, and runs an instruction from the thread on the ALUs</p>
-</li>
-<li><p>Simultaneous multi-threading (SMT): Each clock, core chooses instructions from multiple threads to run on ALUs. It is an extension of superscalar CPU design</p>
-</li>
-<li><p>The operating system is responsible for mapping your pthreads to the processor’s thread execution contexts</p>
-</li>
+<li>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</li>
+<li>With more storing executiong contexts in the cache, the working set per thread is smaller, and the latency hiding ability is higher.<br>And since the cache space per thread is less, may go to memory more often. Thus relies heavily on memory bandwidth.<br>When the thread is much enough to achieve 100% utilization of the core, additional threads yield no benefit. </li>
+<li>The instruction decoder will choose instructions from multiple threads, and fire them to the execution units the threads shared. And the memory interface unit will detect dependencies automatically.</li>
+<li>Interleaved multi-threading (a.k.a. temporal multi-threading): Each clock, the core chooses a thread, and runs an instruction from the thread on the ALUs</li>
+<li>Simultaneous multi-threading (SMT): Each clock, core chooses instructions from multiple threads to run on ALUs. It is an extension of superscalar CPU design</li>
+<li>The operating system is responsible for mapping your pthreads to the processor’s thread execution contexts</li>
 </ol>
 <h2 id="CPUs-and-GPUs"><a href="#CPUs-and-GPUs" class="headerlink" title="CPUs and GPUs"></a>CPUs and GPUs</h2><ol>
-<li><p>CPU has big caches, few threads, modest memory BW, and rely mainly on caches and prefetching.<br>GPU has small caches, many threads, huge memory BW, and rely mainly on multi-threading. </p>
-</li>
-<li><p>The bandwidth of GPUs is a lot faster than CPUs. </p>
-</li>
-<li><p>In GPUs, ALUs run at twice the clock rate of rest of chip. So each decoded instruction runs on 32 pieces of data on the 16 ALUs over two ALU clocks. (but to the programmer, it behaves like a 32-wide SIMD operation)<br>Warp: An instruction operating on a whole vector of data at a time.<br>SM: Streaming Multi-processor. Each SM has multiple warp selector. Each selector has multiple ALUs with different functions. The selectors in the same SM have shared momery and L1 cache. And all selectors can run parallel. </p>
-</li>
-<li><p>A core can have multiple scalar ALUs and multiple vector ALUs. Each vector ALU can perform either both MUL and ADD or ADD only.<br>And the maximum number of threads activated in a core is determined by the number of the execution contexts. </p>
-</li>
+<li>CPU has big caches, few threads, modest memory BW, and rely mainly on caches and prefetching.<br>GPU has small caches, many threads, huge memory BW, and rely mainly on multi-threading. </li>
+<li>The bandwidth of GPUs is a lot faster than CPUs. </li>
+<li>In GPUs, ALUs run at twice the clock rate of rest of chip. So each decoded instruction runs on 32 pieces of data on the 16 ALUs over two ALU clocks. (but to the programmer, it behaves like a 32-wide SIMD operation)<br>Warp: An instruction operating on a whole vector of data at a time.<br>SM: Streaming Multi-processor. Each SM has multiple warp selector. Each selector has multiple ALUs with different functions. The selectors in the same SM have shared momery and L1 cache. And all selectors can run parallel. </li>
+<li>A core can have multiple scalar ALUs and multiple vector ALUs. Each vector ALU can perform either both MUL and ADD or ADD only.<br>And the maximum number of threads activated in a core is determined by the number of the execution contexts. </li>
 </ol>
 <h2 id="Bandwidth"><a href="#Bandwidth" class="headerlink" title="Bandwidth"></a>Bandwidth</h2><ol>
-<li><p>If processors request data at too high a rate, the memory system cannot keep up. No amount of latency hiding helps this.</p>
-</li>
-<li><p>Organize computation to fetch data from memory less often. Reuse data previously loaded by the same thread (traditional intra-thread temporal locality optimizations).<br>Share data across threads (inter-thread cooperation)</p>
-</li>
-<li><p>Request data less often (instead, do more arithmetic: it’s “free”).<br>Arithmetic intensity: Ratio of math operations to data access operations in an instruction stream.<br>The main point is that programs must have high arithmetic intensity to utilize modern processors efficiently.<br>If a data needed can be recalculated in ALUs, than don’t access memory, do the calculation. </p>
-</li>
+<li>If processors request data at too high a rate, the memory system cannot keep up. No amount of latency hiding helps this.</li>
+<li>Organize computation to fetch data from memory less often.<br>Reuse data previously loaded by the same thread (traditional intra-thread temporal locality optimizations).<br>Share data across threads (inter-thread cooperation)</li>
+<li>Request data less often (instead, do more arithmetic: it’s “free”).<br>Arithmetic intensity: Ratio of math operations to data access operations in an instruction stream.<br>The main point is that programs must have high arithmetic intensity to utilize modern processors efficiently.<br>If a data needed can be recalculated in ALUs, than don’t access memory, do the calculation. </li>
 </ol>
 
     </div>
