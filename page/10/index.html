@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,191 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/08/01-Derivative-Slope/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/08/01-Derivative-Slope/" class="post-title-link" itemprop="url">01. Derivative, Slope</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-08 11:32:38" itemprop="dateCreated datePublished" datetime="2020-02-08T11:32:38+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:19:14" itemprop="dateModified" datetime="2020-08-07T19:19:14+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
+                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h1><ol>
+<li>Geomatric interpretation is to find the <code>tangent line</code> to <script type="math/tex">y=f(x)</script> at point <script type="math/tex">P=(x_0,y_0)</script>. </li>
+<li>To find that tangent line, we have to find the equation <script type="math/tex">y-y_0=m(x-x_0)</script>. <br />This contains two part to solve: <br />&emsp;Point <script type="math/tex">y_0=f(x_0)</script><br />&emsp;Slope: <script type="math/tex">m=f'(x_0)</script>. </li>
+<li>Definition of <code>derivative</code>: the slope of the tangent line. </li>
+<li>As another point <script type="math/tex">Q</script> approaches the fixed point <script type="math/tex">P</script>, the slope of <script type="math/tex">QP</script> is approaching the slope of that tangent line. <br />So tangent line = limit of <code>secant line</code> <script type="math/tex">PQ</script> as <script type="math/tex">Q \rightarrow P</script> while <script type="math/tex">P</script> is fixed. </li>
+<li>The slope of <script type="math/tex">PQ</script> is <script type="math/tex">\displaystyle\frac{\Delta f}{\Delta x}</script> (<script type="math/tex">\Delta f</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in y-axis, <script type="math/tex">\Delta x</script> is the difference of <script type="math/tex">Q</script> and <script type="math/tex">P</script> in x-axis). <br />So we get the <code>difference quotient</code>:  <script type="math/tex">m=f'(x_0)=\displaystyle\lim_{\Delta x\to 0}{\frac{\Delta f}{\Delta x}}=\displaystyle\lim_{\Delta x \to 0}{\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}}</script>. </li>
+<li><code>Binomial theorem</code>: <script type="math/tex">(x+\Delta x)^n=x^n+nx^{n-1}\Delta+O((\Delta x)^2)</script>. <script type="math/tex">O((\Delta x)^2)</script> means terms with <script type="math/tex">(\Delta x)^2</script> or higher. <br /><script type="math/tex">\begin{equation}\begin{split}\displaystyle\frac{d}{dx}x^n&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x+\Delta x)^n-x^n}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{(x^n+nx^{n-1}\Delta x+O((\Delta x)^2))-x^n}{\Delta x}}\\&=\displaystyle\lim_{\Delta x\to 0}{\displaystyle\frac{nx^{n-1}\Delta x+O((\Delta x)^2)}{\Delta x}}=\displaystyle\lim_{\Delta x\to 0}{nx^{n-1}+\displaystyle\frac{O((\Delta x)^2)}{\Delta x}}\\&=nx^{n-1}\end{split}\end{equation}</script><br />This extends to polynomials. </li>
+<li>Physical Interpretation is that <script type="math/tex">\displaystyle\frac{\Delta y}{\Delta x}</script> is the average rate of change while <script type="math/tex">\displaystyle\frac{dy}{dx}</script> is the instantaneous rate of change. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/07/27-Left-and-Right-Inverses-Pseudoinverse/" class="post-title-link" itemprop="url">27. Left and Right Inverses; Pseudoinverse</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-07 12:28:16" itemprop="dateCreated datePublished" datetime="2020-02-07T12:28:16+08:00">2020-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:52" itemprop="dateModified" datetime="2020-08-07T19:15:52+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Inverse-of-Rectangular-Matrices"><a href="#Inverse-of-Rectangular-Matrices" class="headerlink" title="Inverse of Rectangular Matrices"></a>Inverse of Rectangular Matrices</h1><ol>
+<li><script type="math/tex">A</script> is an <script type="math/tex">m</script> by <script type="math/tex">n</script> matrix. If <script type="math/tex">m=n</script>, it’s nature to get an inverse of <script type="math/tex">A</script>. </li>
+<li>But if <script type="math/tex">m≠n</script>, <script type="math/tex">A</script> can have two different inverses, right inverse and left inverse. </li>
+<li><script type="math/tex">AA^T(AA^T)^{-1}=I</script>. So the right inverse of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{right}=A^T(AA^T)^{-1}</script>. <br />Similarity, <script type="math/tex">(A^TA)^{-1}A^TA=I</script>. So the left inver of <script type="math/tex">A</script> is <script type="math/tex">A^{-1}_{left}=(A^TA)^{-1}A^T</script>. </li>
+<li><script type="math/tex">A^{-1}_{right}A=A^T(AA^T)^{-1}A=P_{row\ space}</script>. This is the projection matrix to row space. <br /><script type="math/tex">AA^{-1}_{left}=A(A^TA)^{-1}A^T=P_{column\ space}</script>. This is the projection matrix to column space. </li>
+</ol>
+<h1 id="Pseudoinverse"><a href="#Pseudoinverse" class="headerlink" title="Pseudoinverse"></a>Pseudoinverse</h1><ol>
+<li>If <script type="math/tex">\vec{x}≠\vec{y}</script> both in row space, then <script type="math/tex">A\vec{x}≠ A\vec{y}</script> both in column space. <br />&emsp;Proof: Suppose <script type="math/tex">A\vec{x}=A\vec{y}</script>. Then <script type="math/tex">A\vec{x}-A\vec{y}=A(\vec{x}-\vec{y})</script>. <script type="math/tex">\vec{x}-\vec{y}</script> is in the row space, So <script type="math/tex">A(\vec{x}-\vec{y})</script> is also in the column space. But <script type="math/tex">A\vec{x}-A\vec{y}=\vec{0}</script>. So <script type="math/tex">\vec{x}-\vec{y}</script> is also in nullspace. So <script type="math/tex">\vec{x}-\vec{y}=\vec{0}</script>, i.e. <script type="math/tex">\vec{x}=\vec{y}</script>. </li>
+<li>So every vector in row space has and only has one vector in column space that is <script type="math/tex">A\vec{x}</script>. </li>
+<li><script type="math/tex">A</script> is a map from row space to column space. And the pseudoinverse <script type="math/tex">A^+</script> is the map from columns space to row space. For every <script type="math/tex">\vec{x}</script> in row space, <script type="math/tex">A^+(A\vec{y})=\vec{y}</script>. </li>
+<li><script type="math/tex">A^+</script> on the left brings projection to the row space while on the right brings the projection to the columns. </li>
+<li>The pseudoinverse of <script type="math/tex">\Sigma</script> in the SVD is <script type="math/tex">\Sigma^+=\left[\begin{matrix}\frac{1}{\sigma_1}\\&\ddots\\&&\frac{1}{\sigma_r}&&\\&\end{matrix}\right]</script>. <script type="math/tex">\Sigma\Sigma^+</script> gives <script type="math/tex">\left[\begin{matrix}1\\&\ddots\\&&1\\&&&\end{matrix}\right]</script> not <script type="math/tex">I</script>. </li>
+<li>Any vector <script type="math/tex">A=U\Sigma V^T</script>, <script type="math/tex">A^+=V\Sigma^+U^T</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1061,223 +1246,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/18-Eigenvalues-and-Eigenvectors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/18-Eigenvalues-and-Eigenvectors/" class="post-title-link" itemprop="url">18. Eigenvalues and Eigenvectors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-03 17:29:46" itemprop="dateCreated datePublished" datetime="2020-02-03T17:29:46+08:00">2020-02-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:17:20" itemprop="dateModified" datetime="2020-08-07T19:17:20+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Eigenvalues-and-Eigenvectors"><a href="#Eigenvalues-and-Eigenvectors" class="headerlink" title="Eigenvalues and Eigenvectors"></a>Eigenvalues and Eigenvectors</h1><ol>
-<li>An <code>eigenvector</code> is a vector doesn’t change direction even when multiplied by <script type="math/tex">A</script>. </li>
-<li>So the basis equation is <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. The number <script type="math/tex">\lambda</script> is an <code>eigenvalue</code> of <script type="math/tex">A</script>. </li>
-<li><script type="math/tex">\lambda=0</script> means the eigenvector is in <script type="math/tex">N(A)</script>. <br /><script type="math/tex">\lambda=1</script> means the eigenvector is a steady state that doesn’t change. </li>
-<li>If <script type="math/tex">\lambda</script> is the eigenvalue and <script type="math/tex">\vec{x}</script> is the eigenvector of <script type="math/tex">A</script>, for <script type="math/tex">B=A^n</script>, its eigenvector stays the same while its eigenvalue <script type="math/tex">\lambda'=\lambda^n</script>. And the eigenvalue of <script type="math/tex">A^{-1}</script> is <script type="math/tex">\lambda^{-1}</script>. </li>
-<li>For the projection matrix <script type="math/tex">P</script>, <script type="math/tex">P\vec{x}=\vec{x}</script>. Its eigenvalue is <script type="math/tex">1</script> and <script type="math/tex">0</script>. The eigenvectors for <script type="math/tex">\lambda=1</script> and <script type="math/tex">\lambda=0</script> fill the column space (in the projection plane) and nullspace (perpendicular to the projection plane). </li>
-<li>If each column of a matrix adds to <script type="math/tex">1</script>, that martix is <code>Markov matrix</code>. <script type="math/tex">\lambda=1</script> is its largest eigenvalue. </li>
-<li>The reflection matrix <script type="math/tex">R=\left[\begin{matrix}0&1\\1&0\end{matrix}\right]</script> has eigenvalues <script type="math/tex">1</script> and <script type="math/tex">-1</script>. </li>
-<li>When a matrix is shifted by <script type="math/tex">I</script>, each <script type="math/tex">\lambda</script> is shifted by <script type="math/tex">1</script>. NO change in eigenvectors. </li>
-<li>If <script type="math/tex">A</script> is singular, <script type="math/tex">0</script> must be one of the eigenvalues. </li>
-<li>The eigenvalues might not be real numbers. </li>
-<li>An orthogonal martix (<script type="math/tex">Q^TQ=I</script>) corresponds to a complex number with <script type="math/tex">|\lambda|=1</script>. </li>
-<li><script type="math/tex">A</script> and <script type="math/tex">A^T</script> share the same eigenvalues. </li>
-</ol>
-<h1 id="Equation-for-the-Eigenvalues"><a href="#Equation-for-the-Eigenvalues" class="headerlink" title="Equation for the Eigenvalues"></a>Equation for the Eigenvalues</h1><ol>
-<li>For projection matrices we found <script type="math/tex">\lambda</script>‘s and <script type="math/tex">\vec{x}</script>‘s by geometry: <script type="math/tex">P\vec{x}=\vec{x}</script> and <script type="math/tex">P\vec{x}=\vec{0}</script>. </li>
-<li>For others, we need to solve the equation <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. <br />First move <script type="math/tex">\lambda\vec{x}</script> to the left side, to get <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script>. <br />This means that eigenvectors make up <script type="math/tex">N(A-\lambda I)</script>. <br />If that new equation has a nonzero solution, <script type="math/tex">A-\lambda I</script> must be singular, which leads us to its determinant is zero. </li>
-<li>The equation we really need to solve is <script type="math/tex">|A-\lambda I|=0</script>. This is called the <code>eigenequation</code> or <code>characteristic equation</code>. </li>
-<li>When <script type="math/tex">A</script> is <script type="math/tex">n</script> by <script type="math/tex">n</script>, <script type="math/tex">A</script> has <script type="math/tex">n</script> eigenvalues (they might repeat). Each <script type="math/tex">\lambda</script> leads to one <script type="math/tex">\vec{x}</script>. We can solve <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script> or <script type="math/tex">A\vec{x}=\lambda \vec{x}</script> to find eigenvectors. </li>
-</ol>
-<h1 id="Determinant-and-Trace"><a href="#Determinant-and-Trace" class="headerlink" title="Determinant and Trace"></a>Determinant and Trace</h1><ol>
-<li>Elimination does noe preserve the <script type="math/tex">\lambda</script>‘s. </li>
-<li>The product of the <script type="math/tex">n</script> eigenvalues equals the determinant. </li>
-<li>The sum of the <script type="math/tex">n</script> eigenvalues equals the sum of the <script type="math/tex">n</script> diagonal entries. We can the sum <code>trance of martix</code>. </li>
-<li>The diagonal of triangualr martix is the eigenvalues. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/" class="post-title-link" itemprop="url">17. Cramers Rule, Inverse Matrix, and Volume</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-03 11:06:45" itemprop="dateCreated datePublished" datetime="2020-02-03T11:06:45+08:00">2020-02-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:23" itemprop="dateModified" datetime="2020-08-07T19:16:23+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Cramer’s-Rule"><a href="#Cramer’s-Rule" class="headerlink" title="Cramer’s Rule"></a>Cramer’s Rule</h1><ol>
-<li>This is a new way to solve <script type="math/tex">A\vec{x}=\vec{b}</script>. </li>
-<li>First let’s sovle the first unknown <script type="math/tex">x_1</script>. <br />Replace the first column of <script type="math/tex">I</script> with <script type="math/tex">\vec{x}</script>. <br /><script type="math/tex">A</script> multiplies that matrix will give a new matrix <script type="math/tex">B</script>. <script type="math/tex">B</script> is actually <script type="math/tex">A</script> replacing first column with <script type="math/tex">\vec{b}</script>. </li>
-<li>Calculate their determinants, <script type="math/tex">|A|(x_1)=|B|</script>. To get <script type="math/tex">x_1=\frac{|A|}{|B|}</script></li>
-<li>Just like how we solved <script type="math/tex">x_1</script>, replace the second column of <script type="math/tex">A</script> with <script type="math/tex">\vec{x}</script>, the third, …, the nth. We can solve all components of <script type="math/tex">\vec{x}</script>. </li>
-<li><code>Cramer&#39;s Ruie</code>: <script type="math/tex">x_i=\frac{|B_i|}{|A|}</script>. Here <script type="math/tex">B_i</script> has the ith column of <script type="math/tex">A</script> replaced by <script type="math/tex">\vec{b}</script>. </li>
-<li>With Cramer’s Rule, we can find another solution to <script type="math/tex">A^{-1}</script>. <br />To solve the equation of <script type="math/tex">AA^{-1}=I</script>, we can split it into <script type="math/tex">n</script> <script type="math/tex">A\vec{x}=\vec{b}</script> form equations. <br />Now all <script type="math/tex">\vec{b}</script>s are a column with only a <script type="math/tex">1</script> and <script type="math/tex">n-1</script> 0s. Calculate the <script type="math/tex">|B_{ij}|</script> (the determinant we need to solve the <script type="math/tex">jth</script> component of the <script type="math/tex">ith</script> equation) with cofactor along that column <script type="math/tex">\vec{b}</script>, we can find <script type="math/tex">|B_{ij}|=|C_{ji}|</script>. <br />So <script type="math/tex">(A^{-1})_{ij}=\frac{C_{ji}}{|A|}</script>.   <code>MARK</code>: NOT <script type="math/tex">C_{ij}</script>. Because the <script type="math/tex">1</script> in <script type="math/tex">B_{ij}</script> is in the <script type="math/tex">ith</script> column <script type="math/tex">jth</script> row. <br />Put the <script type="math/tex">C_{ij}</script> into the corresponding entry of a matrix, we can get the <code>cofactor matrix</code> <script type="math/tex">C</script>. <script type="math/tex">A^{-1}=\frac{C^T}{|A|}</script></li>
-<li>We can directly calculate the result <script type="math/tex">I'</script> of <script type="math/tex">AC^T</script>. <br />In the diagonal, we have <script type="math/tex">I'_{ii}=(row\ i\ of\ A)\cdot(column\ i\ of\ C^T)=\sum a_{ik}C_{ik}=|A|</script>. <br />Off the main diagonal, we have <script type="math/tex">I'_{ij}=(row\ i\ of\ A)\cdot(column\ j\ of\ C^T)=\sum a_{ik}C_{jk}</script>. This is the value of a new matrix with <script type="math/tex">jth</script> row of <script type="math/tex">A</script> replaced by <script type="math/tex">ith</script>. <br />So that determinant has two equal rows which makes its value <script type="math/tex">0</script>. <br />Concolusion, <script type="math/tex">I'</script> has <script type="math/tex">|A|</script> in its main diagonal and <script type="math/tex">0</script>s in other entries. <br /><script type="math/tex">AC^T=|A|I \Longrightarrow A\frac{C^T}{|A|}=I \Longrightarrow A^{-1}=\frac{C^T}{|A|}</script></li>
-<li>If <script type="math/tex">A</script> is a triangular matrix, if <script type="math/tex">a_{ij}</script> is in the nonezero part of martix, <script type="math/tex">C_{ij}</script> has zeros in the diagonal. So <script type="math/tex">C_{ij}=0</script> when <script type="math/tex">a_{ij}≠0</script>. And after transpose, we can get a matrix <script type="math/tex">C^T</script> the same shape as <script type="math/tex">A</script>. So the inverse of a triangular is also a triangualar. </li>
-</ol>
-<h1 id="Area-of-a-Triangular"><a href="#Area-of-a-Triangular" class="headerlink" title="Area of a Triangular"></a>Area of a Triangular</h1><ol>
-<li>If three points of <script type="math/tex">A</script> is <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_3,y_3)</script>, its area is <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1&1\\x_2&y_2&1\\x_3&y_3&1\end{array}\right|</script>. </li>
-<li>If <script type="math/tex">(x_3,y_3)=(0,0)</script>, <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script></li>
-<li>A triangular is half of a parallelogram. If the four points of a parallelogram are <script type="math/tex">(0,0)</script>, <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_1+x_2,y_1+y_2)</script>, its area is <script type="math/tex">S=\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script>. </li>
-<li>This law can expand to higher dimension, like the volume in 3-dimension. The volume of box <script type="math/tex">V=|3\ by\ 3\ determinant|</script>. That determinant is formed by three independent edge vectors. </li>
-</ol>
-<h1 id="Cross-Product"><a href="#Cross-Product" class="headerlink" title="Cross Product"></a>Cross Product</h1><ol>
-<li>The <code>cross product</code> is a vector in the same dimension written <script type="math/tex">\vec{u}\times \vec{v}</script> called “<script type="math/tex">\vec{u}</script> cross <script type="math/tex">\vec{v}</script>“. </li>
-<li>The components of this cross product are <script type="math/tex">2</script> by <script type="math/tex">2</script> cofactors. </li>
-<li>If we write <script type="math/tex">\vec{u}=\left[\begin{matrix}u_1\\u_2\\u_3\end{matrix}\right]=u_1\vec{i}+u_2\vec{j}+u_3\vec{k}</script> and <script type="math/tex">\vec{v}=\left[\begin{matrix}v_1\\v_2\\v_3\end{matrix}\right]=v_1\vec{i}+v_2\vec{j}+v_3\vec{k}</script>, then <script type="math/tex">\vec{u}\times\vec{v}=\left|\begin{array}{cccc}\vec{i}&\vec{j}&\vec{k}\\u_1&u_2&u_3\\v_1&v_2&v_3\end{array}\right|</script>. </li>
-<li><script type="math/tex">\vec{v}\times\vec{u}=-(\vec{u}\times\vec{v})</script> for it exchanging the lower two rows. </li>
-<li><script type="math/tex">\vec{u}\times\vec{v}</script> is perpedicular to <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
-<li>The cross product of two dependent vector with itself is zero. </li>
-<li><script type="math/tex; mode=display">||\vec{u}\times\vec{v}||=||\vec{u}||\ ||\vec{v}||\ |sin\ \theta|</script></li>
-<li>The length os <script type="math/tex">\vec{u}\times\vec{v}</script> is the area of parallelogram with sides <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
-<li>The direction obeys the <code>right hand rule</code>. </li>
-<li>Triple product <script type="math/tex">(\vec{u}\times\vec{v})\cdot\vec{w}</script> can replace the vector row in the cross product determinant with <script type="math/tex">\vec{w}^T</script>. </li>
-<li>The triple product is the volumn of box. The cross product is the vector perpendicular to the base and its length is the area. The dot product is the area times the height in its direction.  </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1349,20 +1317,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">192</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
