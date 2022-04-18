@@ -191,6 +191,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/22/15-Classical-Statistical-Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/22/15-Classical-Statistical-Inference/" class="post-title-link" itemprop="url">15. Classical Statistical Inference</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-22 10:11:49" itemprop="dateCreated datePublished" datetime="2020-03-22T10:11:49+08:00">2020-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:01" itemprop="dateModified" datetime="2020-08-07T19:35:01+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>In classical statistics, we see the unknowns as constants instead of random variables in Bayesian statistics. </li>
+<li>The distribution of $X$ depends on $\theta$. This is not a conditional distribution $p_{X|\Theta}$ or $f_{X|\Theta}$ in the Bayesian statistics but only a common distribution $p_X(x;\theta)$ or $f_X(x;\theta)$. </li>
+<li>For vectors $X$ and $\theta$: $p_{X_1,…X_2}(x_1,…,x_n;\theta_1,…,\theta_m)$. </li>
+<li>Problem types: <br />&emsp;Hypothesis testing: choose the correct model from several discrete model. Each model contains only one model. <br />&emsp;Composite hypotheses: some models might consist of more than one models. <br />&emsp;Estimation: design an estimator $\hat\Theta$ to keep estimation error $\hat\Theta-\theta$ small. </li>
+</ol>
+<h1 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h1><ol>
+<li>Pick $\theta$ that makes data most likely. <script type="math/tex">\hat\theta_{ML}=arg\ max_\theta\ p_X(x;\theta)</script>. </li>
+<li>In Bayesian MAP estimation, we actually only need to maximize <script type="math/tex">\hat\theta_{MAP}=arg\ max_\theta\ p_{X|\Theta}(x|\theta)p_\Theta(\theta)</script>. If $p_\Theta(\theta)$ is a constant, these two is going to maximize the same thing. </li>
+<li>The estimate $\theta$ is the realized value of estimator $\hat\Theta$. </li>
+<li>In many applications, the observations $X_i$ are assumed to be independent, in which case, the likelihood function is of the form $p_X(x_1,…,x_n;\theta)=\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)$. <br />In this case, it is often use the logarithm form, which is called log-likelihood function, to find the maximum. <br /><script type="math/tex">log\ p_X(x_1,…,x_n;\theta)=log\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)=\sum^n_{i=1}log\ p_{X_i}(x_i;\theta)</script></li>
+</ol>
+<h2 id="Desired-Properties-of-Estimators"><a href="#Desired-Properties-of-Estimators" class="headerlink" title="Desired Properties of Estimators"></a>Desired Properties of Estimators</h2><ol>
+<li>Unbiased: $E_\theta[\hat\Theta]=\displaystyle\int f_{\hat\Theta}(\hat\theta;\theta)\hat\theta d\hat\theta =\theta$. $\theta$ is the true value. </li>
+<li>Consistent: $\hat\Theta_n\to\theta$. </li>
+<li>Small mean squared error: $E_\theta[(\hat\Theta-\theta)^2]=var_\theta(\hat\Theta-\theta)+(E_\theta[\hat\Theta-\theta])^2=var_\theta(\hat\Theta)+(bias_\theta)^2$</li>
+</ol>
+<h1 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h1><ol>
+<li>An estimate $\hat\Theta_n$ may not be informative enough. </li>
+<li>An $(1-\alpha)$ confidence interval is a random interval $[\Theta_n^-,\Theta_n^+]$, such that $P(\Theta^-_n≤\theta≤\Theta^+_n)≥1-\alpha,\forall\alpha$. </li>
+<li>We usually use the normal table to calculate the confidence interval of sample mean. <br />&emsp;According to the central limit theorem, $P\left(\displaystyle\frac{|\hat\Theta_n-\theta|}{\displaystyle\frac{\sigma}{\sqrt{n}}}≤z \right)\approx\Phi(z)$. <br />&emsp;So $P\left(\hat\Theta_n-\displaystyle\frac{z\sigma}{\sqrt{n}}≤\theta≤\hat\Theta_n+\frac{z\sigma}{\sqrt{n}} \right)\approx1-\alpha$<br />&emsp;$\Phi(z)=1-\displaystyle\frac{\alpha}{2}$. </li>
+<li>If we don’t know about $\sigma$. <br />&emsp;Option $1$: use the upper bound on $\sigma$. <br />&emsp;Option $2$: use ad hoc estimate of $\sigma$. <br />&emsp;Option $3$: use the generic estimate of variance<br />&emsp;&emsp;$\sigma^2=E[(X_i-\theta)^2]$, so $\hat\sigma^2=\displaystyle\frac{1}{n}\sum^n_{i=1}(X_i-\theta)^2$. But $\theta$ is still unknown, so we use the estimator instead. <br />&emsp;&emsp;$\hat{S}_n^2=\displaystyle\frac{1}{n-1}\sum^n_{i=1}(X_i-\hat\Theta_n)^2$. And $E[\hat{S}^2_n]=\hat\sigma^2\to\sigma^2$. </li>
+</ol>
+<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><ol>
+<li>Model: $y\approx\theta_0+\theta_1x$ to minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>Interpretation: $Y_i=\theta_0+\theta_1x_i+W_i$, $W_i\sim N(0,\sigma^2)$. </li>
+<li>Likelihood function $f_{X,Y|\theta}(x,y;\theta)=c\cdot exp\{\displaystyle-\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2\}$. So we need to maximize it. </li>
+<li>Take the logs, maximize <script type="math/tex">-log\ c\cdot\displaystyle\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2</script>. The same as minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>The solution is $\hat\theta_1=\displaystyle\frac{\displaystyle\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum^n_{i=1}(x_i-\bar{x})^2}$ and $\hat\theta_0=\bar{y}-\hat\theta_1\bar{x}$. </li>
+<li>This form can be interpreted as estimates of $\hat\theta_1=\displaystyle\frac{cov(X,Y)}{var(X)}$ and $\hat\theta_0=E[Y]-\hat\theta_1E[X]$. </li>
+<li>Multiple linear regression: <br />&emsp;Model: $y\approx\theta_0+\theta_1x_1+\theta_2x_2+…$. <br />&emsp;Formulation: <script type="math/tex">min_{\theta_0,\theta_1,…}\ \displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_1-\theta_2x_2-…)^2</script>. </li>
+<li>General method: set the derivative to zero. </li>
+<li>We can also choose different variables $y\approx\theta_0+\theta_1h(x)$. Since $\theta_0$ and $\theta_1$ are the unknowns, this is still a linear function. </li>
+<li>Some concerns: <br />&emsp;noise might affect the result<br />&emsp;multiple variables have different correlation<br />&emsp;the regression function only shows the prediction based on other variables, but says nothing about the causal relations. </li>
+</ol>
+<h1 id="Binary-Hypothesis-Testing"><a href="#Binary-Hypothesis-Testing" class="headerlink" title="Binary Hypothesis Testing"></a>Binary Hypothesis Testing</h1><ol>
+<li>Null hypothesis $H_0$: $X\sim p_X(x;H_0)$ or $X\sim f_X(x;H_0)$<br />Alternative hypothesis $H_1$: $X\sim p_X(x;H_1)$ or $X\sim f_X(x;H_1)$. </li>
+<li>Partition the space of possible data vectors Rejection region R: reject $H_0$ if and only if $x\in R$. </li>
+<li>Types of errors: <br />&emsp;False rejection: $H_0$ is true but rejected: $\alpha(R)=P(X\in R;H_0)$. <br />&emsp;False acceptance: $H_0$ is false but accepted: $\beta(R)=P(X\notin R;H_1)$. <br />&emsp;$\alpha$ and $\beta$ have a trade off relation. When $\alpha$ increases, $\beta$ decreases and vice versa. </li>
+<li>Likelihood ratio test of Bayesian test: choose $H_1$ if <br />$P(H_1|X=x)&gt;P(H_0|X=x)$ or $\displaystyle\frac{P(X=x|H_1)P(H_1)}{P(X=x)}&gt;\frac{P(X=x|H_0)P(H_0)}{P(X=x)}$ or $\displaystyle\frac{P(X=x|H_1)}{P(X=x|H_0)}&gt;\frac{P(H_0)}{P(H_1)}$. </li>
+<li>Likelihood ratio test of Nonbayesian test: choose $H_1$ if <br />$L(x)=\displaystyle\frac{P(X=x;H_1)}{P(X=x;H_0)}&gt;\epsilon$ when $X$ is discrete and if $\displaystyle\frac{f_X(x;H_1)}{f_X(x;H_0)}&gt;\epsilon$ when $X$ is continuous. <br />Normally, we can concise the inequality to $\displaystyle\sum_if(X_i)&gt;\epsilon’$, which is called the statistic. <br />Then fix the false rejection probability $\alpha$, and choose $\epsilon$ so that <script type="math/tex">P(reject\ H_0;H0)=\alpha</script>, or $P\left(\displaystyle\sum_if(X_i)&gt;\epsilon’;H_0\right)=\alpha$. <br />Usually, we can solve the later equation with CLT when statistic is large. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/21/14-Bayesian-Statistical-Inference/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1271,122 +1394,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/14/05-Continuous-Random-Variables/" class="post-title-link" itemprop="url">05. Continuous Random Variables</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-14 15:46:33" itemprop="dateCreated datePublished" datetime="2020-03-14T15:46:33+08:00">2020-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:30" itemprop="dateModified" datetime="2020-08-07T19:35:30+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h1><ol>
-<li>A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)=\displaystyle\int_Bf_X(x)dx$ for every subset $B$  of the real line. </li>
-<li>In particular, the probability that the value of $X$ falls within an interval is $P(a≤X≤b)=\displaystyle\int^b_af_X(x)dx$. </li>
-<li>The probability can be interpreted as the area under the graph of the PDF. </li>
-<li>For any single value $a$, we have $P(X=a)=\displaystyle\int^a_af_X(x)dx=0$. <br />So including or excluding the nedpoints of an interval has no effect on its probability. $P(a≤X≤b)=P(a≤X&lt;b)=P(a&lt;X≤b)=P(a&lt;X&lt;b)$</li>
-<li>$P(a≤X≤b)=P(X≤b)-P(X≤a)$</li>
-<li>$\displaystyle\int^\infty_{-\infty}f_X(x)dx=1$</li>
-<li>$P([x,x+\delta])=\displaystyle\int^{x+\delta}_xf_X(t)dt\approx f_X(x)\cdot\delta$. So we can view $f_X(X)$ as the probability mass per unit length near $x$. Even though a PDF is used to calculate event probabilities, $f_X(x)$ is not the probability of any particular event. </li>
-<li>$f_X(x)$ is not restricted to be less than or equal to one. </li>
-<li>If a random variable $X$ takes values in an interval $[a,b]$ and any two subintervals of the same length have the same probability, we refer to this type of random variable as uniform or uniformly distributed. <br /><script type="math/tex">f_X(x)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a}&if\ a≤x≤b\\0&otherwise \end{array}\right.</script></li>
-<li>The expected value of a continuous random variable $X$ is defined by $E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx$. </li>
-<li>If $X$ is a continuous random variable, $Y=g(X)$ is also a random variable but may be a decrete one. But $E[g(X)]=\displaystyle\int^\infty_{-\infty}g(x)f_X(x)dx$ is true for any kind of $Y$, descrete or continuous. </li>
-<li>The variance is still $var(X)=E[(X-E[X])^2]=\displaystyle\int_{-\infty}^\infty(x-E[X])^2f_X(x)dx$. <br />And $var(X)=E[(X-E[X])^2]$ still stands. </li>
-<li>For uniform random variable: <br />$E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx=\int^b_ax\frac{1}{b-a}dx=\frac{a+b}{2}$<br />$E[X^2]=\displaystyle\int^\infty_{-\infty}x^2f_X(x)dx=\int^b_a\frac{x^2}{b-a}dx=\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{a^2+ab+b^2}{3}-\frac{(a+b)^2}{4}=\frac{(b-a)^2}{12}$</li>
-<li>Exponential random variable: <br />PDF: $f_X(x)=\left\{\begin{array}{}\lambda e^{-\lambda x}&amp;if x≥0\\0&amp;otherwise \end{array}\right.$<br />$P(X≥a)=\displaystyle\int^\infty_a\lambda e^{-\lambda x}dx=e^{-\lambda a}$<br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\int^\infty_0x\lambda e^{-\lambda x}dx\\&amp;=(-xe^{-\lambda x})\Big|^\infty_0+\int^\infty_0e^{-\lambda x}dx\\&amp;=\frac{1}{\lambda} \end{split}\end{equation}$<br />$\begin{equation}\begin{split}E[X^2]&amp;=\displaystyle\int^\infty_0x^2\lambda e^{-\lambda x}dx\\&amp;=(-x^2e^{-\lambda x})\Big|^\infty_0+\int^\infty_02xe^{-\lambda x}dx\\&amp;=0+\frac{2}{\lambda}E[X]\\&amp;=\frac{2}{\lambda^2} \end{split}\end{equation}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1}{\lambda^2}$</li>
-</ol>
-<h1 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h1><ol>
-<li>The cumulative distribution function (CDF) of a random variable $X$ is denoted by $F_X$ and provides probability $P(X≤x)$. <br /><script type="math/tex">F_X(x)=P(X≤x)=\left\{\begin{array}{}\displaystyle\sum_{k≤x}p_X(k)&if\ X\ is\ discrete\\\int^x_{-\infty}f_X(t)dt&if\ X\ is\ continuous \end{array}\right.</script></li>
-<li>CDF accumulates probability up to the value $x$. </li>
-<li>The graph of CDF of a descrete random variable has a staircase form at the values of probability mass. At the points where a jump occurs, the value of $F_X$ is the larger of the two corresponding value, i.e. $F_X$ is continuous from the right. </li>
-<li>$F_X$ is monotonically nondecreasing: if $x≤y$, then $F_X(x)≤F_X(y)$. </li>
-<li>$\displaystyle\lim_{x\to-\infty}F_X=0$ and $\displaystyle\lim_{x\to\infty}F_X=1$</li>
-<li>If $X$ is discrete, then $F_X(x)$ is a piecewise constant function of $x$. If $X$ is continuous, then $F_X(x)$ is a continuous function of $x$. </li>
-<li>If $X$ is descrete, $p_X(k)=P(X≤k)-P(X≤k-1)=F_X(k)-F_X(k-1)$. If $X$ is continuous, $f_X(x)=\displaystyle\frac{dF_X}{dx}(x)$. </li>
-<li>If $X_1,X_2,…,X_n$ are independent, $F_X(x)=F_{X_1}(x)…F_{X_n}(x)$</li>
-<li>For geometric random variable, $F_{geo}(n)=\displaystyle\sum^n_{k=1}p(1-p)^{k-1}=1-(1-p)^2$<br />For exponential random variable, $F_{exp}(x)=\displaystyle\int^x_0\lambda e^{-\lambda t}dt=1-e^{-\lambda x}$ for $x&gt;0$ and $F_X(x)=0$, for $x≤0$. <br />$F_{geo}=F_{exp}$ when $x=n\delta$ ($\delta=-\displaystyle\frac{-ln(1-p)}{\lambda}$), with $n=1,2,…$. </li>
-</ol>
-<h1 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h1><ol>
-<li>A continuous random variable $X$ is said to be normal or Gaussian if it has a PDF of the form $f_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, where $\mu$ and $\sigma$ are two scalar parameters characterizing the PDF with $\sigma&gt;0$. </li>
-<li>The PDF is symmetric around $\mu$. So its mean $E[X]$ has to be $\mu$. </li>
-<li><br />$\begin{equation}\begin{split}var(X)&amp;=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}\int^\infty_{-\infty}(x-\mu)^2e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\int^\infty_{-\infty}y^2e^{-\frac{y^2}{2}}dy                         y=\frac{x-\mu}{\sigma}\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\Bigg[(-ye^{-\frac{y^2}{2}})\bigg|^\infty_{-\infty}+\int^\infty_{-\infty}e^{-\frac{y^2}{2}}dy\Bigg]\\&amp;=\sigma^2 \end{split}\end{equation}$</li>
-<li>The standard normal random variable is a normal random variable with zero mean and unit variance. CDF: $\Phi(y)=P(Y≤y)=\displaystyle\frac{1}{\sqrt{2\pi}}\int^y_{-\infty}e^{-\frac{t^2}{2}}dt$</li>
-<li>In standard normal random variable, for $y&lt;0$, $\Phi(y)=P(Y≤y)=P(Y≥-y)=1-P(Y≤-y)=1-\Phi(-y)$</li>
-<li>For any $X$, we can standardize by $Y=\displaystyle\frac{X-\mu}{\sigma}$. And in reverse, any $X=\sigma Y+\mu$. So $P(X≤x)=P(\displaystyle\frac{X-\mu}{\sigma}≤\frac{x-\mu}{\sigma})=P(Y≤\frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma})$</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1458,7 +1465,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">194</span>
+          <span class="site-state-item-count">195</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
