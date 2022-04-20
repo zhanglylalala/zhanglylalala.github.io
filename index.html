@@ -333,10 +333,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-04-18 11:53:04 / Modified: 18:02:33" itemprop="dateCreated datePublished" datetime="2022-04-18T11:53:04+08:00">2022-04-18</time>
+              <time title="Created: 2022-04-18 11:53:04" itemprop="dateCreated datePublished" datetime="2022-04-18T11:53:04+08:00">2022-04-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-20 17:10:59" itemprop="dateModified" datetime="2022-04-20T17:10:59+08:00">2022-04-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -381,9 +387,9 @@
 </li>
 </ol>
 <h2 id="Ways-of-assignment"><a href="#Ways-of-assignment" class="headerlink" title="Ways of assignment"></a>Ways of assignment</h2><ol>
-<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is $programIndex+i\times programCount,i=0,\dots,(N-programIndex)/programCount$</p>
+<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is <script type="math/tex">programIndex+i\times programCount,i=0,\dots,(N-programIndex)/programCount</script></p>
 </li>
-<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is $programIndex\times count+i, i=0,\dots,count,count=N/programCount$</p>
+<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is <script type="math/tex">programIndex\times count+i, i=0,\dots,count,count=N/programCount</script></p>
 </li>
 <li><p>When using the block assignment, there might exist some situation when the cost of processing later data is more expensive than processing former data, which will make the assignment uneven. So the interleaved assignment is less risky. </p>
 </li>
