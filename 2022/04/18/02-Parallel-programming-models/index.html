@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="ISPC (Intel SPMD Program Compiler)Format of ISPC ISPC is an SPMD compiler, not an SIMD.   The code that need to be paralleled will be written in a file with surfix of “.ispc” as a function. And we wil">
 <meta property="article:published_time" content="2022-04-18T03:53:04.000Z">
-<meta property="article:modified_time" content="2022-04-20T11:00:40.221Z">
+<meta property="article:modified_time" content="2022-04-29T08:03:37.750Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-20 19:00:40" itemprop="dateModified" datetime="2022-04-20T19:00:40+08:00">2022-04-20</time>
+                <time title="Modified: 2022-04-29 16:03:37" itemprop="dateModified" datetime="2022-04-29T16:03:37+08:00">2022-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,6 +316,10 @@
 </li>
 <li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all ages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
 </li>
+<li><p>Synchronous (blocking) send and receive<br>Send(): call returns when sender receives acknowledgement that message data resides in address space of receiver<br>Recv(): call returns when data from received message is copied into address space of receiver and acknowledgement sent back to sender<br>So when using message passing model, we need to be careful for the order of send() and recv() in each threads because it may easily raise a deadlock.<br>If the first call of all threads is send(), then no one is receiving and all is waiting someone to receive what they have sent.<br>One common way to program is to arrage one thread to send first and the receiver of that send to receive first. </p>
+</li>
+<li><p>Non-blocking asynchronous send/recv<br>Send() call returns immediately, while recv() posts intent to receive in the future and returns immediately.<br>We can use checksend(), checkrecv() to determine actual status of send/receipt.<br>Buffer provided to send() cannot be modified by calling thread since message processing occurs concurrently with thread execution</p>
+</li>
 </ol>
 <h2 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h2><ol>
 <li><p>Data parallel has a very rigid computation struture. If it works well, it will work very well. But sometimes it just won’t work. </p>
@@ -333,6 +337,14 @@
 <li><p>Drawback of stream programming: Need library of operators to describe complex data flows, so it might go wrong. </p>
 </li>
 <li><p><code>stream_gather(input, indices, tmp_input)</code>: Put elements in input to tmp_input according to indices. This is called before the kernel function, and the kernel function will deal with gathered stream.<br><code>stream_scatter(tmp_output, indices, output)</code>: Similar to stream_gather, but it is called after the kernel function, and kernel function will deal with original stream.<br>The parameters of both function are all stream. </p>
+</li>
+</ol>
+<h2 id="Synchronization-and-Communication"><a href="#Synchronization-and-Communication" class="headerlink" title="Synchronization and Communication"></a>Synchronization and Communication</h2><ol>
+<li><p>In shared address space, mutual exclusion is required for shared variables, and barriers are used to express dependencies between phases of computation.<br>They can communicate through implicit loads/stores to shared variables. </p>
+</li>
+<li><p>In message passing model, the synchronizations and communications are both performed by sending and receiving messages. </p>
+</li>
+<li><p>In data parallel model, a single logical thread is in control, but iterations of forall loop may be parallelized by the system. There is an implicit barrier at end offorallloop body.<br>They can also communicate throught implicit loads and stores, like shared address space. There is also some special built-in primitives for more complex communication patterns, e.g., reduce</p>
 </li>
 </ol>
 <h2 id="Modern-practice"><a href="#Modern-practice" class="headerlink" title="Modern practice"></a>Modern practice</h2><ol>
@@ -426,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ISPC-Intel-SPMD-Program-Compiler"><span class="nav-number">1.</span> <span class="nav-text">ISPC (Intel SPMD Program Compiler)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Format-of-ISPC"><span class="nav-number">1.1.</span> <span class="nav-text">Format of ISPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ways-of-assignment"><span class="nav-number">1.2.</span> <span class="nav-text">Ways of assignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-layers"><span class="nav-number">1.3.</span> <span class="nav-text">System layers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Communication"><span class="nav-number">2.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shared-Address-Space"><span class="nav-number">2.1.</span> <span class="nav-text">Shared Address Space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Message-Passing"><span class="nav-number">2.2.</span> <span class="nav-text">Message Passing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Parallel"><span class="nav-number">2.3.</span> <span class="nav-text">Data Parallel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modern-practice"><span class="nav-number">2.4.</span> <span class="nav-text">Modern practice</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ISPC-Intel-SPMD-Program-Compiler"><span class="nav-number">1.</span> <span class="nav-text">ISPC (Intel SPMD Program Compiler)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Format-of-ISPC"><span class="nav-number">1.1.</span> <span class="nav-text">Format of ISPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ways-of-assignment"><span class="nav-number">1.2.</span> <span class="nav-text">Ways of assignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-layers"><span class="nav-number">1.3.</span> <span class="nav-text">System layers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Communication"><span class="nav-number">2.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shared-Address-Space"><span class="nav-number">2.1.</span> <span class="nav-text">Shared Address Space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Message-Passing"><span class="nav-number">2.2.</span> <span class="nav-text">Message Passing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Parallel"><span class="nav-number">2.3.</span> <span class="nav-text">Data Parallel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Synchronization-and-Communication"><span class="nav-number">2.4.</span> <span class="nav-text">Synchronization and Communication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modern-practice"><span class="nav-number">2.5.</span> <span class="nav-text">Modern practice</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

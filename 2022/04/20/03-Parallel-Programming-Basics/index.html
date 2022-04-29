@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Decomposition Decomposition: The problem to solve is usually a chunk of work. So the first step we need to do is to decomposite them into subproblems (a.k.a tasks, work to do)  We usually want the num">
 <meta property="article:published_time" content="2022-04-20T06:27:45.000Z">
-<meta property="article:modified_time" content="2022-04-20T10:59:50.713Z">
+<meta property="article:modified_time" content="2022-04-29T07:35:29.265Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -218,10 +218,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-04-20 14:27:45 / Modified: 18:59:50" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
+              <time title="Created: 2022-04-20 14:27:45" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-29 15:35:29" itemprop="dateModified" datetime="2022-04-29T15:35:29+08:00">2022-04-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -258,7 +264,7 @@
 </li>
 <li><p>The key aspect of decomposition is to identifyi dependencies. We want subproblems to be independent, so that they can be paralleled. </p>
 </li>
-<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution ≤ 1/S</p>
+<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution $≤ \frac1S$. Actually, speedup $\le\frac{t}{st+\frac{(1-s)t}{p}}=\frac1{s+\frac{1-s}{p}}$</p>
 </li>
 <li><p>In most cases, the programmer is responsible for performing decomposition. </p>
 </li>
@@ -283,6 +289,10 @@
 <li><p>There are things that we will worry about, like structure communication, synchronization, orgnizing data structure in memory, and scheduling tasks</p>
 </li>
 <li><p>The goal is to reduce costs of communication/sync, preserve locality of data reference, reduce overheadof synchronization or communication, etc.</p>
+</li>
+<li><p>In shared address space model, lock/unlock is common used for preserving atomicity, and barriers can divide computation into phases. When threads execute to barriers, they will stop and wait. Until enough number of threads hit the barrier, those stalled threads are allowed to execute rest codes. </p>
+</li>
+<li><p>A common used optimization strategy is that try to use less lock/unlock and barriers.<br>Everytime when we operate a shared variable, we need to use the lock/unlock to keep atomicity. But maybe we can operate on partial variable locally and then merge the partial results together.<br>When we use barrier to keep a shared variable valid when it might be changed at the next phase, we can use different shared variable in successive phases. This is to trade off footprint for removing dependencies. </p>
 </li>
 </ol>
 <h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><ol>

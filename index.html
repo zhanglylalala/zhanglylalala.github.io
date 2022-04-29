@@ -214,10 +214,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-04-20 14:27:45 / Modified: 18:59:50" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
+              <time title="Created: 2022-04-20 14:27:45" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-29 15:35:29" itemprop="dateModified" datetime="2022-04-29T15:35:29+08:00">2022-04-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -254,7 +260,7 @@
 </li>
 <li><p>The key aspect of decomposition is to identifyi dependencies. We want subproblems to be independent, so that they can be paralleled. </p>
 </li>
-<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution ≤ 1/S</p>
+<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution $≤ \frac1S$. Actually, speedup $\le\frac{t}{st+\frac{(1-s)t}{p}}=\frac1{s+\frac{1-s}{p}}$</p>
 </li>
 <li><p>In most cases, the programmer is responsible for performing decomposition. </p>
 </li>
@@ -279,6 +285,10 @@
 <li><p>There are things that we will worry about, like structure communication, synchronization, orgnizing data structure in memory, and scheduling tasks</p>
 </li>
 <li><p>The goal is to reduce costs of communication/sync, preserve locality of data reference, reduce overheadof synchronization or communication, etc.</p>
+</li>
+<li><p>In shared address space model, lock/unlock is common used for preserving atomicity, and barriers can divide computation into phases. When threads execute to barriers, they will stop and wait. Until enough number of threads hit the barrier, those stalled threads are allowed to execute rest codes. </p>
+</li>
+<li><p>A common used optimization strategy is that try to use less lock/unlock and barriers.<br>Everytime when we operate a shared variable, we need to use the lock/unlock to keep atomicity. But maybe we can operate on partial variable locally and then merge the partial results together.<br>When we use barrier to keep a shared variable valid when it might be changed at the next phase, we can use different shared variable in successive phases. This is to trade off footprint for removing dependencies. </p>
 </li>
 </ol>
 <h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><ol>
@@ -341,7 +351,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-20 19:00:40" itemprop="dateModified" datetime="2022-04-20T19:00:40+08:00">2022-04-20</time>
+                <time title="Modified: 2022-04-29 16:03:37" itemprop="dateModified" datetime="2022-04-29T16:03:37+08:00">2022-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -431,6 +441,10 @@
 </li>
 <li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all ages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
 </li>
+<li><p>Synchronous (blocking) send and receive<br>Send(): call returns when sender receives acknowledgement that message data resides in address space of receiver<br>Recv(): call returns when data from received message is copied into address space of receiver and acknowledgement sent back to sender<br>So when using message passing model, we need to be careful for the order of send() and recv() in each threads because it may easily raise a deadlock.<br>If the first call of all threads is send(), then no one is receiving and all is waiting someone to receive what they have sent.<br>One common way to program is to arrage one thread to send first and the receiver of that send to receive first. </p>
+</li>
+<li><p>Non-blocking asynchronous send/recv<br>Send() call returns immediately, while recv() posts intent to receive in the future and returns immediately.<br>We can use checksend(), checkrecv() to determine actual status of send/receipt.<br>Buffer provided to send() cannot be modified by calling thread since message processing occurs concurrently with thread execution</p>
+</li>
 </ol>
 <h2 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h2><ol>
 <li><p>Data parallel has a very rigid computation struture. If it works well, it will work very well. But sometimes it just won’t work. </p>
@@ -448,6 +462,14 @@
 <li><p>Drawback of stream programming: Need library of operators to describe complex data flows, so it might go wrong. </p>
 </li>
 <li><p><code>stream_gather(input, indices, tmp_input)</code>: Put elements in input to tmp_input according to indices. This is called before the kernel function, and the kernel function will deal with gathered stream.<br><code>stream_scatter(tmp_output, indices, output)</code>: Similar to stream_gather, but it is called after the kernel function, and kernel function will deal with original stream.<br>The parameters of both function are all stream. </p>
+</li>
+</ol>
+<h2 id="Synchronization-and-Communication"><a href="#Synchronization-and-Communication" class="headerlink" title="Synchronization and Communication"></a>Synchronization and Communication</h2><ol>
+<li><p>In shared address space, mutual exclusion is required for shared variables, and barriers are used to express dependencies between phases of computation.<br>They can communicate through implicit loads/stores to shared variables. </p>
+</li>
+<li><p>In message passing model, the synchronizations and communications are both performed by sending and receiving messages. </p>
+</li>
+<li><p>In data parallel model, a single logical thread is in control, but iterations of forall loop may be parallelized by the system. There is an implicit barrier at end offorallloop body.<br>They can also communicate throught implicit loads and stores, like shared address space. There is also some special built-in primitives for more complex communication patterns, e.g., reduce</p>
 </li>
 </ol>
 <h2 id="Modern-practice"><a href="#Modern-practice" class="headerlink" title="Modern practice"></a>Modern practice</h2><ol>
