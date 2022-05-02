@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">24</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">30</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,104 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/29/08-Gradient%20Field/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/29/08-Gradient%20Field/" class="post-title-link" itemprop="url">08. Gradient Field</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-29 20:34:47" itemprop="dateCreated datePublished" datetime="2020-02-29T20:34:47+08:00">2020-02-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:36:23" itemprop="dateModified" datetime="2020-08-07T22:36:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
+<li>Gradient field: <script type="math/tex">\vec{F}=\triangledown f</script> (<script type="math/tex">f(x,y)</script> is called potential). </li>
+<li>Fundamental theorem of calculus for line integrals: <script type="math/tex">\displaystyle\int_C\triangledown f\cdot d\vec{r}=f(P_1)-f(P_0)</script> (<script type="math/tex">C</script> starts from <script type="math/tex">P_0</script> ends at <script type="math/tex">P_1</script>)<br />Proof: <script type="math/tex">\begin{equation}\begin{split}\displaystyle\int_C\triangledown f\cdot d\vec{r}&=\int_C\triangledown f\cdot\frac{d\vec{r}}{dt}dt=\int_C<f_x,f_y>\cdot<\frac{dx}{dt},\frac{dy}{dt}>dt\\&=\int_C(f_x\frac{dx}{dt}+f_y\frac{dy}{dt})dt=\int^{t_2}_{t_1}\frac{df}{dt}dt\ \ \ (chain\ rule)\\&=\int^{t_2}_{t_1}df=f(P_1)-f(P_2) \end{split}\end{equation}</script></li>
+<li>Path independence: The integral doesn’t depend on the path we take. As long as the start and end points are the same, integrals are the same. <br /><script type="math/tex">\displaystyle\int_{C_1}\triangledown fd\vec{r}=\int_{C_2}\triangledown fd\vec{r}</script></li>
+<li><script type="math/tex">\triangledown f</script> Is conservative. If <script type="math/tex">C</script> is any closed curve, the work along <script type="math/tex">C</script> is zero. </li>
+<li>Not every field is a gradient field. </li>
+<li>Conservativeness means no energy can be extracted from the field for free. </li>
+<li><script type="math/tex">Mdx+Ndy</script> is an exact differential which equals to <script type="math/tex">df</script>. </li>
+<li>If <script type="math/tex">\vec{F}=\triangledown f</script>, then <script type="math/tex">M=f_x</script> and <script type="math/tex">N=f_y</script>. Also <script type="math/tex">f_{xy}=f_{yx}</script>. So if <script type="math/tex">\vec{F}</script> is a gradient field, <script type="math/tex">M_y=N_x</script>. <br />If <script type="math/tex">M_y=N_x</script> and <script type="math/tex">\vec{F}</script> is defined in entire plane (or simply concrete region), we can know <script type="math/tex">\vec{F}</script> is a gradient field. </li>
+<li>When <script type="math/tex">\vec{F}</script> is a gradient field, we can find the potential: <br />&emsp;The first method is computing the line integral from the known point to the target. <br />&emsp;The second method is antiderivatives. With <script type="math/tex">f_x</script>, we can know <script type="math/tex">f=F(x)+G(y)</script> (<script type="math/tex">F(x)</script> is the main answer of antiderivative which may contain <script type="math/tex">y</script> while <script type="math/tex">G(y)</script> is the optional term of antiderivative which becomes zero when derivative with respect to <script type="math/tex">x</script>). <br />Now derivative the <script type="math/tex">f</script> with respect to <script type="math/tex">y</script> to get <script type="math/tex">f_y=F_y+G'(y)</script>. After compared to the known <script type="math/tex">f_y</script>, we can get the expression of <script type="math/tex">G'(y)</script>. Then calculate <script type="math/tex">G(y)</script> ans substitute to <script type="math/tex">f</script>. </li>
+</ol>
+<h1 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h1><ol>
+<li><script type="math/tex; mode=display">curl(\vec{F})=N_x-M_y$$. Test for conservativeness is $$curl\ \vec{F}=0</script></li>
+<li>Curl measures twice angular velocity of rotation component of velocity field and torque exerted on a test object in the field. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{torque}{moment\ of\ inertia}=\frac{d}{dt}(angular\ velocity)</script></li>
+<li>If force <script type="math/tex">\vec{F}</script> derives from a potential, <script type="math/tex">curl\ \vec{F}=0</script> means <script type="math/tex">\vec{F}</script> doesn’t induce any rotation motion. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1067,100 +1165,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/" class="post-title-link" itemprop="url">14. Geometric problems and Polar Coordinates</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-17 19:07:04" itemprop="dateCreated datePublished" datetime="2020-02-17T19:07:04+08:00">2020-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:42" itemprop="dateModified" datetime="2020-08-07T19:22:42+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a>Geometry</h1><ol>
-<li>The arclength in the interval <script type="math/tex">[a,b]</script>. <br />Just like what we did at integral, divide the interval into small pieces. <br />So <script type="math/tex">ds^2=dx^2+dy^2</script>. So <script type="math/tex">ds=\sqrt{dx^2+dy^2}=\sqrt{1+(\displaystyle\frac{dy}{dx})^2}dx</script>. <br />Integrate both side, <script type="math/tex">S=\displaystyle\int^{s_n}_{s_0}ds=\int^b_a\sqrt{1+(\frac{dy}{dx})^2}dx</script>. </li>
-<li>Surface area of rotation. <br />Divide the graph into small piece. The width of each piece is <script type="math/tex">ds</script> (arclength) and the length is <script type="math/tex">2\pi y</script> or <script type="math/tex">2\pi x</script>. <br /><br />And <script type="math/tex">ds=\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script><br />So <script type="math/tex">A=\displaystyle\int dA=\int(2\pi y)ds=\int(2\pi y)\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script></li>
-<li>If parametric function is involved, <script type="math/tex">\left\{\begin{array}{}x=f(t)\\y=g(x)\end{array}\right.</script>. <br />In the arclength, <script type="math/tex">ds=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}dt</script>. <br />The speed is <script type="math/tex">\displaystyle\frac{ds}{dt}=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}</script></li>
-</ol>
-<h1 id="Polar-Coordinates"><a href="#Polar-Coordinates" class="headerlink" title="Polar Coordinates"></a>Polar Coordinates</h1><ol>
-<li>Any points in the plane will be represented by <strong>the distance to origin</strong> <script type="math/tex">r</script> and <strong>angle of ray from origin with horizontal axis</strong> <script type="math/tex">\theta</script>. </li>
-<li><script type="math/tex">x=rcos\ \theta</script> and <script type="math/tex">y=rsin\ \theta</script>. These formulas are always true. </li>
-<li><script type="math/tex">r=\pm\sqrt{x^2+y^2}</script> and <script type="math/tex">\theta=tan^{-1}\displaystyle\frac{y}{x}</script>. These formulas are a bit ambiguous. We also need the graph to know the exact value of <script type="math/tex">r</script> and <script type="math/tex">\theta</script>. </li>
-<li>Typical conventions: <script type="math/tex">0≤r<\infty</script> and <script type="math/tex">-\pi<\theta≤\pi</script> or <script type="math/tex">0≤\theta<2\pi</script>. These are just typical conventions not always necessary. </li>
-<li>When transform a rectangular equation into a polar equation, remember to check the range of <script type="math/tex">\theta</script> and <script type="math/tex">r</script>. </li>
-<li>The area of <script type="math/tex">r=r(\theta)</script>: Divide the whole area into small pieces of fan-shape with center in origin. Then <script type="math/tex">dA=\displaystyle\frac{1}{2}r^2d\theta</script>. So the whole area is <script type="math/tex">A=\displaystyle\int^{\theta_2}_{\theta_1}\frac{1}{2}r^2d\theta</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1232,20 +1236,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">196</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
