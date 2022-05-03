@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="Go Commands go run xxx.go: run a go file.   go install: it will compile and create a executable file with the name being the same as the folder   Hello World12345678910&#x2F;&#x2F; 1. Use package just like Java">
+  <meta name="description" content="Go Commands go run xxx.go: run a go file.   go install: it will compile and create a executable file with the name being the same as the folder   Hello World Use package in the first line just like Ja">
 <meta property="og:type" content="article">
 <meta property="og:title" content="00. Go Crash">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2022/05/02/00-Go-Crash/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="Go Commands go run xxx.go: run a go file.   go install: it will compile and create a executable file with the name being the same as the folder   Hello World12345678910&#x2F;&#x2F; 1. Use package just like Java">
+<meta property="og:description" content="Go Commands go run xxx.go: run a go file.   go install: it will compile and create a executable file with the name being the same as the folder   Hello World Use package in the first line just like Ja">
 <meta property="article:published_time" content="2022-05-02T08:23:53.000Z">
-<meta property="article:modified_time" content="2022-05-02T09:14:43.831Z">
+<meta property="article:modified_time" content="2022-05-03T03:54:47.873Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="分布式">
@@ -219,10 +219,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-05-02 16:23:53 / Modified: 17:14:43" itemprop="dateCreated datePublished" datetime="2022-05-02T16:23:53+08:00">2022-05-02</time>
+              <time title="Created: 2022-05-02 16:23:53" itemprop="dateCreated datePublished" datetime="2022-05-02T16:23:53+08:00">2022-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-03 11:54:47" itemprop="dateModified" datetime="2022-05-03T11:54:47+08:00">2022-05-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -258,8 +264,79 @@
 <li><p><code>go install</code>: it will compile and create a executable file with the name being the same as the folder</p>
 </li>
 </ol>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Use package just like Java</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. Import only one package with ""</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. Every programs begins from a main function like C/C++</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello word!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Declaration"><a href="#Declaration" class="headerlink" title="Declaration"></a>Declaration</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 1. In golang, "declared but not used" is an wrror not a warning</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2. Declare a variable with keyword var.</span></span><br><span class="line">	<span class="comment">// Not necessary to write it when declared, when the type can be inferred</span></span><br><span class="line">	<span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line">	<span class="comment">// Although sometimes the inference can be ambiguous, and we want to specify it.</span></span><br><span class="line">	<span class="comment">// The type of the variable is after the name, seperated by a space</span></span><br><span class="line">    <span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3. Declare a constant with keyword const. A constant can be declared and not used.</span></span><br><span class="line">	<span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line">	<span class="comment">// isCool = false // This line will raise an error</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 4. The shorthand declaration can only be used inside a function</span></span><br><span class="line">	size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br><span class="line">	<span class="comment">// You can also declare or assign multiple variables within a line</span></span><br><span class="line">	name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">	name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(age, name, email)</span><br><span class="line">	fmt.Printf(<span class="string">"%T %T\n"</span>, age, age32)</span><br><span class="line">	fmt.Printf(<span class="string">"%T\n"</span>, size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><ol>
+<li><p>Use package in the first line just like Java. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Import only one package with “”</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Every programs begins from a main function like C/C++</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Variables-and-Constants"><a href="#Variables-and-Constants" class="headerlink" title="Variables and Constants"></a>Variables and Constants</h1><ol>
+<li><p>In golang, “declared but not used” is an wrror not a warning</p>
+</li>
+<li><p>Declare a variable with keyword var. Not necessary to write the type when declared, when it can be inferred.<br>Although sometimes the inference can be ambiguous, and we want to specify it. The type of the variable is after the name, seperated by a space</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line"><span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Declare a constant with keyword const. A constant can be declared and not used.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line"><span class="comment">// isCool = false // This line will raise an error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The shorthand declaration can only be used inside a function.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>You can also declare or assign multiple variables within a line</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"><span class="keyword">var</span> name_var, email_var = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h1><ol>
+<li><p>The package declared in the first line allows us to import the functions implemented below elsewhere. </p>
+</li>
+<li><p>Although the package can have a different name with the directory it is in. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">package</span> main <span class="comment">// this is allowed</span></span><br></pre></td></tr></table></figure>
+<p>But then this package cannot be imported by other files. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in another file</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/main"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//     "package go_crash_course/03_package/main is not in GOROOT"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Only the packages with the same name as their directory can be imported. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/strutil</span></span><br><span class="line"><span class="keyword">package</span> strutil</span><br></pre></td></tr></table></figure>
+<p>When import a local package, the current directory is src so the path starts from something in the src folder. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/strutil"</span></span><br></pre></td></tr></table></figure>
+<p>And you cannot use a relative path to import. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./strutil"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//    "./strutil" is relative, but relative import paths are not supported in module mode</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><ol>
+<li><p>The implement of a function starts with a keyword <code>func</code>. The <code>{</code> must be in the same line as <code>func</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The parameters are in the order of (name type). </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Printlln(<span class="string">"Hello "</span> + name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When we have multiple parameters with the same type, we can write their type only after the last paramater.<br>Some parameter can remain unsed in function. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(num1, num2 <span class="keyword">int</span>, num3 <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Println(num1 + num2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The type of return value is specified after the parameters. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"Hello "</span> + name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Arrays-and-Slices"><a href="#Arrays-and-Slices" class="headerlink" title="Arrays and Slices"></a>Arrays and Slices</h1><ol>
+<li><p>We can Declare an array similar to C/C++, just move the length before the type. And we can also access the elements with subscript. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitArr [<span class="number">3</span>]<span class="keyword">string</span></span><br><span class="line">fruitArr[<span class="number">0</span>] = <span class="string">"Apple"</span></span><br><span class="line">fruitArr[<span class="number">1</span>] = fruitArr[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>We can delcare and assign an array with shorthand declaration</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitArr := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can declare a slice when we don’t specify the length of an array. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitSlice []<span class="keyword">string</span></span><br><span class="line">fruitSliceShort := []<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>When we try to access a subscript out of the current length of a slice, an “index out of range” error will raise. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice[<span class="number">0</span>] = <span class="string">"Apple"</span> <span class="comment">// error</span></span><br><span class="line">fruitSliceShort[<span class="number">3</span>] = <span class="string">"Cherry"</span> <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<p>However, we can change the length of a slice with <code>append</code> while an array cannot do so. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice = <span class="built_in">append</span>(fruitSlice, <span class="string">"Apple"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Some common operations of array and slice: print, length, access a range like Python</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(fruitArr)</span><br><span class="line">fmt.Println(fruitSlice)</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitArr))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitSlice))</span><br><span class="line"></span><br><span class="line"><span class="comment">// [lo:hi] can access the elements with subscripts in [lo, hi)</span></span><br><span class="line">fmt.Println(fruitArr[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">fmt.Println(fruitSliceShort[<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
     </div>
 
@@ -343,7 +420,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-Commands"><span class="nav-number">1.</span> <span class="nav-text">Go Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Declaration"><span class="nav-number">3.</span> <span class="nav-text">Declaration</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-Commands"><span class="nav-number">1.</span> <span class="nav-text">Go Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables-and-Constants"><span class="nav-number">3.</span> <span class="nav-text">Variables and Constants</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Packages"><span class="nav-number">4.</span> <span class="nav-text">Packages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Functions"><span class="nav-number">5.</span> <span class="nav-text">Functions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Arrays-and-Slices"><span class="nav-number">6.</span> <span class="nav-text">Arrays and Slices</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

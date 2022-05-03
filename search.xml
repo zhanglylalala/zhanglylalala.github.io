@@ -72,7 +72,7 @@
 <li>Another way is hiding latency, namely the latency of the memory operation is not changed, it just no longer causes reduced processor utilization.<br>One common strategy is the prefetch. All modern CPUs have logic for prefetching data into caches. Prefetching can also reduce performance if the guess is wrong (hogs bandwidth, pollutes caches)<br>The other is using multi-threading. The idea is to interleave processing of multiple threads on the same core to hide stalls.</li>
 </ol>
 <h2 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h2><ol>
-<li>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</li>
+<li>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</li>
 <li>With more storing executiong contexts in the cache, the working set per thread is smaller, and the latency hiding ability is higher.<br>And since the cache space per thread is less, may go to memory more often. Thus relies heavily on memory bandwidth.<br>When the thread is much enough to achieve 100% utilization of the core, additional threads yield no benefit. </li>
 <li>The instruction decoder will choose instructions from multiple threads, and fire them to the execution units the threads shared. And the memory interface unit will detect dependencies automatically.</li>
 <li>Interleaved multi-threading (a.k.a. temporal multi-threading): Each clock, the core chooses a thread, and runs an instruction from the thread on the ALUs</li>
@@ -604,10 +604,10 @@
 </li>
 </ol>
 <h2 id="Ways-of-assignment"><a href="#Ways-of-assignment" class="headerlink" title="Ways of assignment"></a>Ways of assignment</h2><ol>
-<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is $ programIndex+i\times programCount,i=0,\dots,(N-programIndex)/programCount $</p>
-</li>
-<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is $programIndex\times count+i, i=0,\dots,count,count=N/programCount$</p>
-</li>
+<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is: </p>
+<script type="math/tex; mode=display">programIndex+i\times programCount,i\in[0,\frac{N-programIndex}{programCount})</script></li>
+<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is: </p>
+<script type="math/tex; mode=display">programIndex\times count+i, i\in[0,count),count=\frac{N}{programCount}</script></li>
 <li><p>When using the block assignment, there might exist some situation when the cost of processing later data is more expensive than processing former data, which will make the assignment uneven. So the interleaved assignment is less risky. </p>
 </li>
 <li><p>Since ISPC only generate one thread, the continuous access of data in block assignment is not more cache-friend then the discontinuous access in interleaved assignment.<br>If there are several threads, than block assignment might be more cache-friend. </p>
@@ -27989,8 +27989,79 @@ table th:first-of-type {
 <li><p><code>go install</code>: it will compile and create a executable file with the name being the same as the folder</p>
 </li>
 </ol>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. Use package just like Java</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. Import only one package with ""</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. Every programs begins from a main function like C/C++</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello word!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Declaration"><a href="#Declaration" class="headerlink" title="Declaration"></a>Declaration</h1><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 1. In golang, "declared but not used" is an wrror not a warning</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2. Declare a variable with keyword var.</span></span><br><span class="line">	<span class="comment">// Not necessary to write it when declared, when the type can be inferred</span></span><br><span class="line">	<span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line">	<span class="comment">// Although sometimes the inference can be ambiguous, and we want to specify it.</span></span><br><span class="line">	<span class="comment">// The type of the variable is after the name, seperated by a space</span></span><br><span class="line">    <span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3. Declare a constant with keyword const. A constant can be declared and not used.</span></span><br><span class="line">	<span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line">	<span class="comment">// isCool = false // This line will raise an error</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 4. The shorthand declaration can only be used inside a function</span></span><br><span class="line">	size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br><span class="line">	<span class="comment">// You can also declare or assign multiple variables within a line</span></span><br><span class="line">	name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">	name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(age, name, email)</span><br><span class="line">	fmt.Printf(<span class="string">"%T %T\n"</span>, age, age32)</span><br><span class="line">	fmt.Printf(<span class="string">"%T\n"</span>, size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><ol>
+<li><p>Use package in the first line just like Java. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Import only one package with “”</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Every programs begins from a main function like C/C++</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Variables-and-Constants"><a href="#Variables-and-Constants" class="headerlink" title="Variables and Constants"></a>Variables and Constants</h1><ol>
+<li><p>In golang, “declared but not used” is an wrror not a warning</p>
+</li>
+<li><p>Declare a variable with keyword var. Not necessary to write the type when declared, when it can be inferred.<br>Although sometimes the inference can be ambiguous, and we want to specify it. The type of the variable is after the name, seperated by a space</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line"><span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Declare a constant with keyword const. A constant can be declared and not used.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line"><span class="comment">// isCool = false // This line will raise an error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The shorthand declaration can only be used inside a function.</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>You can also declare or assign multiple variables within a line</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"><span class="keyword">var</span> name_var, email_var = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h1><ol>
+<li><p>The package declared in the first line allows us to import the functions implemented below elsewhere. </p>
+</li>
+<li><p>Although the package can have a different name with the directory it is in. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">package</span> main <span class="comment">// this is allowed</span></span><br></pre></td></tr></table></figure>
+<p>But then this package cannot be imported by other files. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// in another file</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/main"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//     "package go_crash_course/03_package/main is not in GOROOT"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Only the packages with the same name as their directory can be imported. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/strutil</span></span><br><span class="line"><span class="keyword">package</span> strutil</span><br></pre></td></tr></table></figure>
+<p>When import a local package, the current directory is src so the path starts from something in the src folder. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/strutil"</span></span><br></pre></td></tr></table></figure>
+<p>And you cannot use a relative path to import. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./strutil"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//    "./strutil" is relative, but relative import paths are not supported in module mode</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><ol>
+<li><p>The implement of a function starts with a keyword <code>func</code>. The <code>{</code> must be in the same line as <code>func</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The parameters are in the order of (name type). </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Printlln(<span class="string">"Hello "</span> + name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When we have multiple parameters with the same type, we can write their type only after the last paramater.<br>Some parameter can remain unsed in function. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(num1, num2 <span class="keyword">int</span>, num3 <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Println(num1 + num2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The type of return value is specified after the parameters. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"Hello "</span> + name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Arrays-and-Slices"><a href="#Arrays-and-Slices" class="headerlink" title="Arrays and Slices"></a>Arrays and Slices</h1><ol>
+<li><p>We can Declare an array similar to C/C++, just move the length before the type. And we can also access the elements with subscript. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitArr [<span class="number">3</span>]<span class="keyword">string</span></span><br><span class="line">fruitArr[<span class="number">0</span>] = <span class="string">"Apple"</span></span><br><span class="line">fruitArr[<span class="number">1</span>] = fruitArr[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>We can delcare and assign an array with shorthand declaration</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">fruitArr := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can declare a slice when we don’t specify the length of an array. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitSlice []<span class="keyword">string</span></span><br><span class="line">fruitSliceShort := []<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>When we try to access a subscript out of the current length of a slice, an “index out of range” error will raise. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">fruitSlice[<span class="number">0</span>] = <span class="string">"Apple"</span> <span class="comment">// error</span></span><br><span class="line">fruitSliceShort[<span class="number">3</span>] = <span class="string">"Cherry"</span> <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<p>However, we can change the length of a slice with <code>append</code> while an array cannot do so. </p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">fruitSlice = <span class="built_in">append</span>(fruitSlice, <span class="string">"Apple"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Some common operations of array and slice: print, length, access a range like Python</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">fmt.Println(fruitArr)</span><br><span class="line">fmt.Println(fruitSlice)</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitArr))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitSlice))</span><br><span class="line"></span><br><span class="line"><span class="comment">// [lo:hi] can access the elements with subscripts in [lo, hi)</span></span><br><span class="line">fmt.Println(fruitArr[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">fmt.Println(fruitSliceShort[<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>计算机科学与技术</category>
