@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="ISPC (Intel SPMD Program Compiler)Format of ISPC ISPC is an SPMD compiler, not an SIMD.   The code that need to be paralleled will be written in a file with surfix of “.ispc” as a function. And we wil">
 <meta property="article:published_time" content="2022-04-18T03:53:04.000Z">
-<meta property="article:modified_time" content="2022-05-03T07:17:10.660Z">
+<meta property="article:modified_time" content="2022-05-03T07:40:40.444Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-03 15:17:10" itemprop="dateModified" datetime="2022-05-03T15:17:10+08:00">2022-05-03</time>
+                <time title="Modified: 2022-05-03 15:40:40" itemprop="dateModified" datetime="2022-05-03T15:40:40+08:00">2022-05-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
 </li>
 <li><p>The data requested by all instances at the same time is a vector. In interleaved assignment, the data in a vector is memory continuous, while it is not in block assignment. So in memory access, interleaved assignment is faster. </p>
 </li>
-<li><p>foreach (i = 0 … N) says that these loop iterations can be paralleled, and ISPC implementation assigns iterations to program instances in gang. Current ISPC implementation will perform a static interleaved assignment</p>
+<li><p><code>foreach (i = 0 ... N)</code> says that these loop iterations can be paralleled, and ISPC implementation assigns iterations to program instances in gang. Current ISPC implementation will perform a static interleaved assignment</p>
 </li>
 </ol>
 <h2 id="System-layers"><a href="#System-layers" class="headerlink" title="System layers"></a>System layers</h2><ol>
@@ -290,9 +290,9 @@
 </li>
 <li><p>Different parallel models can have different combinations of concerned layers. </p>
 </li>
-<li><p>If we express parallelism with pthread, it goes through all layers. First the parallel application calls pthread_create() to access pthread library implementation. Then the pthread library uses System call API to ask OS support: kernel thread management. Finally, the OS uses x86-64 to control modern multi-core CPU. </p>
+<li><p>If we express parallelism with pthread, it goes through all layers. First the parallel application calls <code>pthread_create()</code> to access pthread library implementation. Then the pthread library uses <code>System call API</code> to ask OS support: kernel thread management. Finally, the OS uses <code>x86-64</code> to control modern multi-core CPU. </p>
 </li>
-<li><p>If we express parallelism with ISPC without “task”, it doesn’t need the support of OS. The parallel application uses ISPC language to ask for service of ISPC compiler. And the complier will produce machine language of x86-64 including AVX vector instruction to control a single-core of CPU. </p>
+<li><p>If we express parallelism with ISPC without “task”, it doesn’t need the support of OS. The parallel application uses ISPC language to ask for service of ISPC compiler. And the complier will produce machine language of x86-64 including <code>AVX vector instruction</code> to control a single-core of CPU. </p>
 </li>
 </ol>
 <h1 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h1><h2 id="Shared-Address-Space"><a href="#Shared-Address-Space" class="headerlink" title="Shared Address Space"></a>Shared Address Space</h2><ol>
@@ -302,7 +302,7 @@
 </li>
 <li><p>Symmetric (shared-memory) multi-processor (SMP): all processors have uniform memory access time, namely the cost of accessing an uncached memory address is the same for all processors<br>This is unscalarable since the access latency will increase fast with more and more processors and memory chips.<br>The cores can share memory through a shared L3 cahce or a crossbar switch with die area of one core</p>
 </li>
-<li><p>Non-uniform memory access (NUMA): All processors can access any memory location, but… the cost of memory access (latency and/or bandwidth) is different for different processors. Each processor has a memory chip that is close to it.<br>This is more scalarable since the low latency and high bandwidth to local memory.<br>Cost is increased programmer effort for performance tuning. Finding, exploiting locality is important to performance (want most memory accesses to be to local memories)</p>
+<li><p>Non-uniform memory access (NUMA): All processors can access any memory location, but the cost of memory access (latency and/or bandwidth) is different for different processors. Each processor has a memory chip that is close to it.<br>This is more scalarable since the low latency and high bandwidth to local memory.<br>Cost is the increased programmer effort for performance tuning. Finding, exploiting locality is important to performance (want most memory accesses to be to local memories)</p>
 </li>
 </ol>
 <h2 id="Message-Passing"><a href="#Message-Passing" class="headerlink" title="Message Passing"></a>Message Passing</h2><ol>
@@ -314,7 +314,7 @@
 </li>
 <li><p>We can implement the message passing model with shared memory space.<br>Sending message is copying memory from message library buffers, while receiving message is copying data from message library buffers</p>
 </li>
-<li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all ages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
+<li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all pages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
 </li>
 <li><p>Synchronous (blocking) send and receive<br>Send(): call returns when sender receives acknowledgement that message data resides in address space of receiver<br>Recv(): call returns when data from received message is copied into address space of receiver and acknowledgement sent back to sender<br>So when using message passing model, we need to be careful for the order of send() and recv() in each threads because it may easily raise a deadlock.<br>If the first call of all threads is send(), then no one is receiving and all is waiting someone to receive what they have sent.<br>One common way to program is to arrage one thread to send first and the receiver of that send to receive first. </p>
 </li>
@@ -324,7 +324,7 @@
 <h2 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h2><ol>
 <li><p>Data parallel has a very rigid computation struture. If it works well, it will work very well. But sometimes it just won’t work. </p>
 </li>
-<li><p>Nowadays, data parallel usually takes the form of SPMD instead of SIMD. Programs perform same function on different data elements in a collection<br>map(function, collection): Synchronization is implicit at the end of the map. Map returns when function has been applied to all elements ofcollection</p>
+<li><p>Nowadays, data parallel usually takes the form of SPMD instead of SIMD. Programs perform same function on different data elements in a collection<br><code>map(function, collection)</code>: Synchronization is implicit at the end of the map. Map returns when function has been applied to all elements ofcollection</p>
 </li>
 <li><p>When the function is too complicated, the result might be non-deterministic.<br>Data-parallel model (foreach) provides no specification of order in which iterations occur and no primitives for fine-grained mutual exclusion/synchronization.</p>
 </li>
