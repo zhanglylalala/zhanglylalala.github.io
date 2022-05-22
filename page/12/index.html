@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/04/21-Markov-Matrices-Fourier-Series/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/31/11-Orthogonal-Vectors-and-Subspaces/" class="post-title-link" itemprop="url">11. Orthogonal Vectors and Subspaces</a>
+            <a href="/2020/02/04/21-Markov-Matrices-Fourier-Series/" class="post-title-link" itemprop="url">21. Markov Matrices; Fourier Series</a>
         </h1>
 
         <div class="post-meta">
@@ -215,14 +215,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-31 21:44:03" itemprop="dateCreated datePublished" datetime="2020-01-31T21:44:03+08:00">2020-01-31</time>
+              <time title="Created: 2020-02-04 17:07:05" itemprop="dateCreated datePublished" datetime="2020-02-04T17:07:05+08:00">2020-02-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:18:08" itemprop="dateModified" datetime="2020-08-07T19:18:08+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:14:33" itemprop="dateModified" datetime="2020-08-07T19:14:33+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,28 +253,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Orthogonality"><a href="#Orthogonality" class="headerlink" title="Orthogonality"></a>Orthogonality</h1><ol>
-<li>Two vectors are <code>orthogonal</code> when their dot product is zero: <script type="math/tex">\vec{v}\cdot \vec{w}=\vec{v}^T\vec{w}=0</script>. </li>
-<li>If two vectors are orthogonal, <script type="math/tex">||\vec{v}||^2+||\vec{w}||^2=||\vec{v}+\vec{w}||^2=||\vec{v}-\vec{w}||^2</script>. </li>
-<li>For two subspaces <script type="math/tex">V</script> and <script type="math/tex">W</script>, if <script type="math/tex">\forall\ \vec{v}\ \forall\ \vec{w},\ \vec{v}^T\vec{w}=0</script>, we say <script type="math/tex">V</script> and <script type="math/tex">W</script> are <code>orthogonal</code> or <code>perpendicular</code>. </li>
-<li>The row space is perpendicular to the nullsapce. Every row of <script type="math/tex">A</script> is perpendicular to every solution of <script type="math/tex">A\vec{x}=\vec{0}</script><br />The column space is perpendicular to the left nullspace. Every row of <script type="math/tex">A^T</script> is perpendicular to every solution of <script type="math/tex">A^T\vec{y}=\vec{0}</script> </li>
-<li>If two orthogonal subspaces have intersection, the intersection can and only can contain <script type="math/tex">\vec{0}</script>, or the vector in the intersection cannot be perpendicular to itself. </li>
+          <h1 id="Markov-Matrices"><a href="#Markov-Matrices" class="headerlink" title="Markov Matrices"></a>Markov Matrices</h1><ol>
+<li>If every entry of <script type="math/tex">A</script> is positive and every column of <script type="math/tex">A</script> adds to <script type="math/tex">1</script>, <script type="math/tex">A</script> is a <code>Markov Matrices</code>. </li>
+<li>Columns of Markov matrices are probability vectors. </li>
+<li><script type="math/tex">1</script> is an eigenvalue for any Markov matrix. <br />Proof: columns of <script type="math/tex">A-I</script> add to <script type="math/tex">0</script>. So the sum of rows is <script type="math/tex">\vec{0}^T</script>. So <script type="math/tex">A-I</script> is singular, with determinant <script type="math/tex">0</script>. </li>
+<li><script type="math/tex">\vec{u_k}=A\vec{u_{k-1}}</script>, after <script type="math/tex">k</script> steps we have <script type="math/tex">A^k\vec{u_0}</script>. The vectors will approach a steady state <script type="math/tex">\vec{u_\infty}</script>. </li>
+<li>The steady state equation <script type="math/tex">A\vec{u_\infty}=\vec{u_\infty}</script> makes <script type="math/tex">\vec{u_\infty}</script> and eigenvector with eigenvalue <script type="math/tex">1</script>. </li>
+<li><script type="math/tex">\vec{u_\infty}=\displaystyle\lim_{k\to \infty}{A^k\vec{u_0}}</script>. So <script type="math/tex">\vec{u_\infty}</script> depends on <script type="math/tex">A^k</script>. Since a Markov matrix is always diagonalizable, <script type="math/tex">A^k=X\Lambda^kX^{-1}</script>. <br /><script type="math/tex">1</script> must be one of the eigenvalues. we can write <script type="math/tex">\vec{u_k}=c_11^k\vec{x_1}+c_2(\lambda_2)^k\vec{x_2}+…+c_n(\lambda_n)^k\vec{x_n}</script>. Since <script type="math/tex">|\lambda_i|<1</script>, when <script type="math/tex">k</script> approaches to infinity, <script type="math/tex">k</script> power of all other eigenvalues approach zero. <br />So <script type="math/tex">\vec{u_\infty}=c_1\vec{x_1}</script>. </li>
 </ol>
-<h1 id="Orthogonal-Complements"><a href="#Orthogonal-Complements" class="headerlink" title="Orthogonal Complements"></a>Orthogonal Complements</h1><ol>
-<li>The orthogonal complements of a subspace <script type="math/tex">V</script> contains every vector that is perpendicular to <script type="math/tex">V</script>. It’s denoted by <script type="math/tex">V^\perp</script>. </li>
-<li>Both row space and nullspace are the orhogonal complement of the other. <br />Both column space and left nullspace are the orhogonal complement of the other. </li>
-<li><script type="math/tex">\forall\ \vec{x_r}\in C(A^T),\ \forall\ \vec{x_n}\in\ N(A),\ A(\vec{x_r}+\vec{x_n})=A\vec{x_r}+A\vec{x_n}=A\vec{x}+\vec{0}=A\vec{x}=\vec{b}</script>. Every <script type="math/tex">\vec{b}</script> (a vector in <script type="math/tex">C(A)</script>) corresponds to one <script type="math/tex">\vec{x_r}</script>. </li>
-</ol>
-<h1 id="Combining-Basis"><a href="#Combining-Basis" class="headerlink" title="Combining Basis"></a>Combining Basis</h1><ol>
-<li>Any <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script> must span <script type="math/tex">R^n</script>. Any n vectors that span <script type="math/tex">R^n</script> must be independent. </li>
-<li>If the <script type="math/tex">n</script> columns of <script type="math/tex">A</script> are independent, they span <script type="math/tex">R^n</script>. So <script type="math/tex">A\vec{x}=\vec{b}</script> is solvable. <br />If the n columns of <script type="math/tex">A</script> span <script type="math/tex">R^n</script>, they are independent. So <script type="math/tex">A\vec{x}=\vec{b}</script> has only one solution. </li>
-<li>The <script type="math/tex">r</script> basis of <script type="math/tex">C(A^T)</script> combine <script type="math/tex">n-r</script> basis of <script type="math/tex">N(A)</script> is <script type="math/tex">n</script> independent vectors in <script type="math/tex">R^n</script>. So each <script type="math/tex">\vec{x}</script> is the sum <script type="math/tex">\vec{x_r}+\vec{x_n}</script>. <br />Prove of independence: <br />If a combination of all <script type="math/tex">n</script> vectors gives <script type="math/tex">\vec{x_r}+\vec{x_n}=\vec{0}</script>, then <script type="math/tex">\vec{x_r}=-\vec{x_n}</script> is in both subspaces. So <script type="math/tex">\vec{x_r}=\vec{x_n}=\vec{0}</script>. </li>
-</ol>
-<h1 id="When-Ax-b-fails"><a href="#When-Ax-b-fails" class="headerlink" title="When Ax=b fails"></a>When Ax=b fails</h1><ol>
-<li>In application, <script type="math/tex">A\vec{x}=\vec{b}</script> is usually unsovable, especially when there are way more equations then the unknowns, the <script type="math/tex">\vec{b}</script> often has noise. </li>
-<li>In order to make good use of data, we usually multiply two side with <script type="math/tex">A^T</script> to solve <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script>. </li>
-<li><script type="math/tex">N(A^TA)=N(A)</script>, and <script type="math/tex">rank\ of\ A^TA=rank\ of\ A</script>. </li>
-<li><script type="math/tex">A^TA</script> is invertible when <script type="math/tex">A</script> has independent columns and this is when <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> has a solution. <br />Prove independence: <br />To find <script type="math/tex">N(A^TA)</script>, we find the solution space of <script type="math/tex">A^TA\vec{x}=\vec{0}</script>. <br />Multiply by <script type="math/tex">\vec{x}^T</script>, we get <script type="math/tex">\vec{x}^TA^TA\vec{x}=(A\vec{x})^T(A\vec{x})=\vec{0}</script>. <br />This means <script type="math/tex">A\vec{x}=\vec{0}</script>. <br />If <script type="math/tex">A</script> has independent columns, that equation leads to <script type="math/tex">\vec{x}=0</script>, i.e. <script type="math/tex">N(A^TA)=Z</script>. </li>
+<h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
+<li>Dot product between functions is <script type="math/tex">f^Tg=\displaystyle\int_0^{2\pi}{f(x)g(x)\ dx}</script>. Functions <script type="math/tex">f</script> and <script type="math/tex">g</script> are orthogonal if <script type="math/tex">f^Tg=0</script>. </li>
+<li>Projection into orthonormal basis. If <script type="math/tex">\vec{v}=Q\vec{x}</script>, then <script type="math/tex">x_i=\vec{q_i}^T\vec{v}</script>. </li>
+<li><code>Fourier series</code>: <script type="math/tex">f(x)=a_01+a_1cos\ x+b_1sin\ x+a_2cos\ 2x+b_2sin\ 2x+…</script></li>
+<li>Notice that <script type="math/tex">f(x)</script> are similar to the projection since <script type="math/tex">1,cos\ x,sin\ x,cos\ 2x, sin\ 2x</script> are all orthonormal basis. </li>
+<li>We can find the coeffecients with <script type="math/tex">\vec{q_i}^T\vec{v}</script>. </li>
 </ol>
 
       
@@ -295,7 +287,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/31/10-Graphs-Networks-Incidence-Matrices/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/04/20-Differential-Equations-and-exp-At/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -309,7 +301,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/31/10-Graphs-Networks-Incidence-Matrices/" class="post-title-link" itemprop="url">10. Graphs, Networks, Incidence Matrices</a>
+            <a href="/2020/02/04/20-Differential-Equations-and-exp-At/" class="post-title-link" itemprop="url">20. Differential Equations and exp(At)</a>
         </h1>
 
         <div class="post-meta">
@@ -319,14 +311,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-31 14:08:23" itemprop="dateCreated datePublished" datetime="2020-01-31T14:08:23+08:00">2020-01-31</time>
+              <time title="Created: 2020-02-04 11:52:09" itemprop="dateCreated datePublished" datetime="2020-02-04T11:52:09+08:00">2020-02-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:16" itemprop="dateModified" datetime="2020-08-07T19:14:16+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:17:37" itemprop="dateModified" datetime="2020-08-07T19:17:37+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -357,37 +349,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h1><ol>
-<li><code>Graph</code> is a model consisting of <code>nodes</code> connected by <code>edges</code>. </li>
-<li>A graph where every pair of nodes is connected by an edge is called <code>complete</code>. </li>
-<li>A graph without closed loop is a <code>tree</code>. </li>
-<li>The complete graph has a maximum number of edges <script type="math/tex">\displaystyle\frac{1}{2}n(n-1)</script>. <br />The tree has a minimum number of edges <script type="math/tex">n-1</script>. </li>
+          <h1 id="First-Order-Equations"><a href="#First-Order-Equations" class="headerlink" title="First Order Equations"></a>First Order Equations</h1><ol>
+<li>System of <script type="math/tex">n</script> equations form an equation of vector <script type="math/tex">\frac{d\vec{u}}{dt}=A\vec{u}</script> starting from the vector <script type="math/tex">\vec{u}(0)=\left[\begin{matrix}u_1(0)\\\dots\\u_n(0)\end{matrix}\right]</script> at <script type="math/tex">t=0</script>. </li>
+<li>Every this kind of equation is actually <script type="math/tex">n</script> equations. We can solve them separately and then combine them together. </li>
+<li>These differential equations are linear. If <script type="math/tex">\vec{u}(t)</script> and <script type="math/tex">\vec{v}(t)</script> are solutions, so is <script type="math/tex">C\vec{u}(t)+D\vec{v}(t)</script>. </li>
+<li>Choose <script type="math/tex">\vec{u}=e^{\lambda t}\vec{x}</script> when <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. <script type="math/tex">\frac{d\vec{u}}{dt}=\lambda e^{\lambda t}\vec{x}</script> agrees with <script type="math/tex">A\vec{u}=Ae^{\lambda t}\vec{x}</script>. <script type="math/tex">\lambda</script> is the eigenvalue of <script type="math/tex">A</script> and <script type="math/tex">\vec{x}</script> is the corresponding eigenvector. </li>
+<li>The solution grows when <script type="math/tex">\lambda >0</script> and decays when <script type="math/tex">\lambda <0</script>. If <script type="math/tex">\lambda</script> is a complex number, its real part decides growth or decay. the imaginary part <script type="math/tex">\omega</script> gives oscillation <script type="math/tex">e^{i\omega t}</script> like a sine wave. </li>
+<li>That solution still has an undeterminted constant <script type="math/tex">C</script> in every term and it’s given by the <script type="math/tex">u_0(t)</script>. We just need to write <script type="math/tex">u_0(t)</script> with eigenvectors of <script type="math/tex">A</script>. </li>
+<li>If <script type="math/tex">\vec{u}(0)=c_1\vec{x_1}+…+c_n\vec{x_n}</script>, the final solution is <script type="math/tex">u(t)=c_1e^{\lambda_1t}\vec{x_1}+…+c_ne^{\lambda_nt}\vec{x_n}</script>. </li>
+<li>If two <script type="math/tex">\lambda</script>‘s are equal, with only one eigenvector, another solution is needed. </li>
 </ol>
-<h1 id="Incidence-Matrix"><a href="#Incidence-Matrix" class="headerlink" title="Incidence Matrix"></a>Incidence Matrix</h1><ol>
-<li><code>Incidence matrix</code> is a $m$ by $n$ matrix that tells how the <script type="math/tex">n</script> nodes are connected by the <script type="math/tex">m</script> edges. </li>
-<li>Every entry of an incidence matrix is <script type="math/tex">0</script>, <script type="math/tex">1</script>, or <script type="math/tex">-1</script>. <script type="math/tex">0</script> represents that that node has nothing to do with that edge. If the $i$th edge starts from the $j_1$th node and ends at the $j_2$th node, $(i,j_1)=-1$ while $(i,j_2)=1$. </li>
-<li>Elimination of the incidence matrix reduces every graph to a tree. </li>
-<li>Loops produce dependent rows in the matrix and zero rows in the echelon form <script type="math/tex">U</script> and <script type="math/tex">R</script>. </li>
-<li>When <script type="math/tex">\vec{x}</script> is the voltage at the nodes, <script type="math/tex">A\vec{x}</script> gives the differences along all edges. </li>
-<li>The nullspace of <script type="math/tex">A</script> means all differences between the voltage of <script type="math/tex">A</script> are $0$. So The nullspace of <script type="math/tex">A</script> contains all vectors with all components equal. <script type="math/tex">dim(N(A))=1</script></li>
-<li>The dimension of row space of <script type="math/tex">A</script> is the number of edges of a tree <script type="math/tex">n-1</script>. A vector <script type="math/tex">\vec{v}</script> is in the row space if and only if it is perpendicular to any vectors in the nullspace, i.e. the sum of all components equals to zero. </li>
-<li>If we add differences around a closed loop in the graph, they cancel to leave zero. <br /><code>Kirchhoff&#39;s Voltage Law</code>: The components of <script type="math/tex">A\vec{x}=\vec{b}</script> add to zero around every loop. For example, for every triangle, <script type="math/tex">b_1+b_2-b_3=0</script><br />We can use this law to test if a vector is in the column space. </li>
-<li><code>Kirchhoff&#39;s Current Law</code>: <script type="math/tex">A^T\vec{y}=\vec{0}</script>, flow in equals flow out at each node. <br />Now each component in <script type="math/tex">\vec{y}</script> means the flow in each edge. <br />Every equation in <script type="math/tex">A^T\vec{y}</script> stands for the sum of in (<script type="math/tex">1</script>) and out (<script type="math/tex">-1</script>) of each node in the flow net, i.e. the value of each nodes gain (positive) or loss (negative). <br />The easiest way to satisfy this law is to flow around a loop. Each loop is a special solution to <script type="math/tex">A^T\vec{y}=\vec{0}</script> (backward edge is <script type="math/tex">-1</script>). <br />So <script type="math/tex">dim(N(A^T))=m-r=m-n+1</script> is the number of small independent loops in the graph. </li>
-<li><code>Euler&#39;s formula</code>: <code>(number of nodes) - (number of edges) + (number of small loops) = n - m + (m-n+1) = 1​</code></li>
+<h1 id="Second-Order-Equations"><a href="#Second-Order-Equations" class="headerlink" title="Second Order Equations"></a>Second Order Equations</h1><ol>
+<li>To solve the equation <script type="math/tex">m\frac{d^2y}{dt^2}+b\frac{dy}{dt}+ky=\vec{0}</script>. </li>
+<li>We can have two euquations <script type="math/tex">\frac{dy}{dt}=y'</script> and <script type="math/tex">\frac{dy'}{dt}=-\frac{k}{m}y-\frac{b}{m}y'</script>. So we can create a differential equation <script type="math/tex">\frac{d}{dt}\left[\begin{matrix}y\\y'\end{matrix}\right]=\left[\begin{matrix}0&1\\-\frac{k}{m}&-\frac{b}{m}\end{matrix}\right]\left[\begin{matrix}y\\y'\end{matrix}\right]</script>. <br />Now we only need to solve the new equation. <br />To find eigenvalues and eigenvectors of <script type="math/tex">A</script>, solve <script type="math/tex">|A-\lambda I|=\left|\begin{matrix}-\lambda&1\\ - \frac{k}{m}&-\frac{b}{m}-\lambda\end{matrix}\right|=0</script>. <br />We get two eigenvalues <script type="math/tex">\lambda_1</script> and <script type="math/tex">\lambda_2</script> and two eigenvectors <script type="math/tex">\left[\begin{matrix}1\\\lambda_1\end{matrix}\right]</script> and <script type="math/tex">\left[\begin{matrix}1\\\lambda_2\end{matrix}\right]</script>. <br />So <script type="math/tex">\vec{u(t)}=c_1e^{\lambda_1 t}\left[\begin{matrix}1\\\lambda_1\end{matrix}\right]+c_2e^{\lambda_2t}\left[\begin{matrix}1\\\lambda_2\end{matrix}\right]</script>. <br /><script type="math/tex">y</script> is the first component of <script type="math/tex">\vec{u}(t)</script>, <script type="math/tex">y=c_1e^{\lambda_1t}+c_2e^{\lambda_2t}</script>. </li>
+<li>Substitute <script type="math/tex">y=e^{\lambda t}</script> to get <script type="math/tex">(m\lambda^2+b\lambda+k)e^{\lambda t}=0</script>. <br />That equation depends on <script type="math/tex">m\lambda^2+b\lambda+k=0</script>. It has two root <script type="math/tex">\lambda_1</script>and <script type="math/tex">\lambda_2</script>. <br />So <script type="math/tex">y=c_1e^{\lambda_1t}+c_2e^{\lambda_2t}</script>. </li>
 </ol>
-<h1 id="With-Sources"><a href="#With-Sources" class="headerlink" title="With Sources"></a>With Sources</h1><ol>
-<li>As is known, when the resistances on the edges are all <script type="math/tex">1</script>, the <code>Ohm&#39;s Law</code> gives <script type="math/tex">\vec{y}=-A\vec{x}</script>. Substituting this to the Current Law, we get <script type="math/tex">A^T\vec{y}=-A^TA\vec{y}=\vec{0}</script>. </li>
-<li><script type="math/tex">A^TA</script> is called the <code>Laplacian matrix</code>. </li>
-<li>Without any sources, the solution will be no flow: <script type="math/tex">\vec{x}=\vec{0}</script>, <script type="math/tex">\vec{y}=\vec{0}</script>. </li>
-<li>With sources, we need to solve the <script type="math/tex">-A^TA\vec{x}=\vec{f}</script>. Each component of <script type="math/tex">\vec{f}</script> is the source of nodes. </li>
-<li>The Laplacian matrix is not invertible. It shares the same nullspace with <script type="math/tex">A</script>. So one node has to be grounded by setting it to <script type="math/tex">0</script>. </li>
-</ol>
-<h1 id="With-Resistances"><a href="#With-Resistances" class="headerlink" title="With Resistances"></a>With Resistances</h1><ol>
-<li>If the resistances on the edges are not all <script type="math/tex">1</script>, the Ohm’s Law will be <script type="math/tex">R\vec{y}=-A\vec{x}</script>. The <code>conductances</code> are <script type="math/tex">C=R^{-1}</script>. So <script type="math/tex">\vec{y}=-CA\vec{x}</script>. </li>
-<li><script type="math/tex">C</script> is the <code>conductances matrix</code>. It is a diagonal matrix with conductances in its diagonal. </li>
-<li>For every conductance, <script type="math/tex">c=\displaystyle\frac{1}{resistance}</script>. </li>
-<li><code>Ohm&#39;s Law</code>: <code>Current along with edge = conductance ✕ voltage difference​</code>. </li>
-<li>Combining Ohm’s Law with Kirchhoff’s Current Law, we get <script type="math/tex">A^TCA\vec{x}=\vec{0}</script>. </li>
+<h1 id="Exponential-of-a-Matrix"><a href="#Exponential-of-a-Matrix" class="headerlink" title="Exponential of a Matrix"></a>Exponential of a Matrix</h1><ol>
+<li>According to Taylor Formula <script type="math/tex">e^x=1+\displaystyle\sum^\infty_{i=1}\frac{1}{i\ !}x^i</script>, we define <script type="math/tex">e^{At}=I+\displaystyle\sum^\infty_{i=1}{\frac{1}{i\ !}(At)^i}</script></li>
+<li><script type="math/tex">\frac{de^{At}}{dt}=A+A^2t+\frac{1}{2}A^3t^2+…=Ae^{At}</script>. </li>
+<li>The eigenvalues of <script type="math/tex">e^{At}</script> are <script type="math/tex">e^{\lambda t}</script>. </li>
+<li>We can write the solution of frist order equation <script type="math/tex">\vec{u}(t)=e^{At}\vec{u}(0)</script>. </li>
+<li>If <script type="math/tex">A</script> is diagonalizable, substitute <script type="math/tex">A</script> with <script type="math/tex">X\Lambda X^{-1}</script>, <script type="math/tex">e^{At}=Xe^{\Lambda T}X^{-1}</script>. </li>
+<li><script type="math/tex; mode=display">(e^{At})^{-1}=e^{-At}</script></li>
+<li>When <script type="math/tex">A</script> is antisymmetric, <script type="math/tex">e^{At}</script> is orthogonal. Inverse = transpose = <script type="math/tex">e^{-AT}</script>. </li>
 </ol>
 
       
@@ -408,7 +392,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/30/09-The-Four-Fundamental-Subspaces/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/19-Diagonalization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -422,7 +406,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/30/09-The-Four-Fundamental-Subspaces/" class="post-title-link" itemprop="url">09. The Four Fundamental Subspaces</a>
+            <a href="/2020/02/03/19-Diagonalization/" class="post-title-link" itemprop="url">19. Diagonalization</a>
         </h1>
 
         <div class="post-meta">
@@ -432,14 +416,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-30 19:53:40" itemprop="dateCreated datePublished" datetime="2020-01-30T19:53:40+08:00">2020-01-30</time>
+              <time title="Created: 2020-02-03 23:13:27" itemprop="dateCreated datePublished" datetime="2020-02-03T23:13:27+08:00">2020-02-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:17" itemprop="dateModified" datetime="2020-08-07T19:16:17+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:15:23" itemprop="dateModified" datetime="2020-08-07T19:15:23+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -470,26 +454,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>The four fundamental subspaces are: </p>
-<ol>
-<li>The <code>row space</code>: <script type="math/tex">C(A^T)</script>, a subspace of <script type="math/tex">R^n</script></li>
-<li>The <code>column space</code>: <script type="math/tex">C(A)</script>, a subspace of <script type="math/tex">R^m</script></li>
-<li>The <code>nullspace</code>: <script type="math/tex">N(A)</script>, a subspace of <script type="math/tex">R^n</script></li>
-<li>The <code>left nullspace</code>: <script type="math/tex">N(A^T)</script>, a subspace of <script type="math/tex">R^m</script>. This is the solution space of <script type="math/tex">\vec{y}^TA=A^Ty=\vec{0}^T</script></li>
+          <h1 id="Diagonization"><a href="#Diagonization" class="headerlink" title="Diagonization"></a>Diagonization</h1><ol>
+<li>Suppose the <script type="math/tex">n</script> by <script type="math/tex">n</script> martix <script type="math/tex">A</script> has <script type="math/tex">n</script> independent eigenvectors <script type="math/tex">\vec{x_1},\ …,\ \vec{x_n}</script>. Put them into the columns of an <code>eigenvector martix</code> <script type="math/tex">X</script>. <br /><script type="math/tex">X^{-1}AX=\Lambda=\left[\begin{matrix}\lambda_1\\&\ddots\\&&\lambda_n\end{matrix}\right]</script></li>
+<li>We can also get <script type="math/tex">A=X\Lambda X^{-1}</script>. </li>
+<li><script type="math/tex; mode=display">AX =A\left[\begin{matrix}\\\vec{x_1}&…&\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\A\vec{x_1}&&A\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\\lambda_1\vec{x_1}&…&\lambda_n\vec{x_n}\\&\end{matrix}\right]=\left[\begin{matrix}\\\vec{x_1}&…&\vec{x_n}\\&\end{matrix}\right]\left[\begin{matrix}\lambda_1\\&\ddots\\&&\lambda_n\end{matrix}\right]=X\Lambda</script></li>
+<li>The powers of <script type="math/tex">A</script>: <script type="math/tex">A^k=(X\Lambda X^{-1})(X\Lambda X^{-1})…(X\Lambda X^{-1})=X\Lambda^k X^{-1}</script> (<script type="math/tex">k</script> can even be <script type="math/tex">-1</script>)</li>
+<li>if <script type="math/tex">n</script> eigenvalues are different, <script type="math/tex">n</script> eigenvectors are different, <script type="math/tex">A</script> is diagonizable. </li>
+<li>If <script type="math/tex">A</script> has repeated eigenvalues, <script type="math/tex">A</script> still has a chance to be diagonizable. </li>
+<li>Eigenvectors can be multiplied by any nonzero constants. </li>
+<li>The eigenvectors in <script type="math/tex">X</script> come in the same order as the eigenvalues in <script type="math/tex">\Lambda</script>. </li>
+<li>Invertibility only affects if one eigenvalue is <script type="math/tex">0</script>. But diagonalizability is concerned with the number of different eigenvalues. </li>
 </ol>
-<h1 id="The-Four-Subspaces-for-R"><a href="#The-Four-Subspaces-for-R" class="headerlink" title="The Four Subspaces for R"></a>The Four Subspaces for R</h1><ol>
-<li>The dimension of the row space is the rank <script type="math/tex">r</script>. The nonzero rows of <script type="math/tex">R</script> form a basis. </li>
-<li>The dimension of the column space is the rank <script type="math/tex">r</script>. The pivot columns of <script type="math/tex">R</script> form a basis. </li>
-<li>The nullspace has dimension <script type="math/tex">n-r</script>. The special solutions form a basis. </li>
-<li>The left nullspace has dimension <script type="math/tex">m-r</script>. <br /><script type="math/tex">\vec{y}^TR</script> is the row linear combination of <script type="math/tex">R</script>. To make the combination <script type="math/tex">\vec{0}^T</script>, we can only use the last <script type="math/tex">m-r</script> zero rows because the pivots can never be eliminated again. <br />So the left nullspace is a space with vectors containing the first <script type="math/tex">r</script> $0$s and then  <script type="math/tex">m-r</script> free variables. </li>
+<h1 id="Fibonacci"><a href="#Fibonacci" class="headerlink" title="Fibonacci"></a>Fibonacci</h1><ol>
+<li>If <script type="math/tex">n</script> eigenvectors are independent, all vectors in <script type="math/tex">R^n</script> can be represented by eigenvectors. </li>
+<li>If <script type="math/tex">\vec{u_{k+1}}=A\vec{u_k}</script> for any dimension vector <script type="math/tex">\vec{u_i}</script> and given a known vector <script type="math/tex">\vec{u_0}</script>. This is the classical Fibonacci formula. </li>
+<li>We can factorize <script type="math/tex">\vec{u_0}=c_1\vec{x_1}+…+c_n\vec{x_n}</script>. Here <script type="math/tex">\vec{x_i}</script>‘s are eigenvecgtors of <script type="math/tex">A</script>. </li>
+<li>For <script type="math/tex">\vec{u_k}</script>, we can find <script type="math/tex">\vec{u_k}=A^k\vec{u_0}=c_1A^k\vec{x_1}+…+c_nA^k\vec{x_n}=c_1\lambda^k\vec{x_1}+…+c_n\lambda^k\vec{x_n}</script>. </li>
+<li>When <script type="math/tex">k \rightarrow \infty</script>, all terms with <script type="math/tex">|\lambda_i| < 1</script> approach to zero which can be ignored. </li>
+<li>For Fibonacci, two eigenvalues are <script type="math/tex">\frac{1 \pm\sqrt5}{2}</script>. <script type="math/tex">|\frac{1-\sqrt5}{2}| < 1</script>, so its value are mostly determined by <script type="math/tex">\frac{1+\sqrt5}{2}</script>. </li>
 </ol>
-<h1 id="The-Four-Subspaces-for-A"><a href="#The-Four-Subspaces-for-A" class="headerlink" title="The Four Subspaces for A"></a>The Four Subspaces for A</h1><ol>
-<li><script type="math/tex">A</script> has the same row space as <script type="math/tex">R</script>. Same dimension <script type="math/tex">r</script> and same basis. We can choose the <script type="math/tex">r</script> rows that end up nonzero rows in <script type="math/tex">R</script>. </li>
-<li>The column space of <script type="math/tex">A</script> has dimension <script type="math/tex">r</script>. Nevertheless, <script type="math/tex">A</script> and <script type="math/tex">R</script> have different column space. The <script type="math/tex">r</script> pivot columns of <script type="math/tex">A</script> form basis of <script type="math/tex">C(A)</script>. </li>
-<li><script type="math/tex">A</script> has the same nullspace as  <script type="math/tex">R</script>. </li>
-<li>The left nullspace of <script type="math/tex">A</script> has dimension <script type="math/tex">m-r</script>. The basis vectors are the vectors that create zero rows. </li>
-<li>The Counting Theorem<br />&emsp;In <script type="math/tex">R^n</script>, <script type="math/tex">dim(row\ space)+dim(nullspace)=n</script><br />&emsp;In <script type="math/tex">R^m</script>, <script type="math/tex">dim(column\ space)+dim(left\ nullspace)=m</script></li>
-<li>For any matrix <script type="math/tex">A</script>, we can eliminate to get <script type="math/tex">EA=R</script>. If we take <script type="math/tex">C=E^{-1}</script>, then <script type="math/tex">A=CR</script>. <br />Furthermore, the basis of <script type="math/tex">N(A^T)</script> is the rows of <script type="math/tex">E</script> that is zero rows in <script type="math/tex">R</script>. <br />Since identity matrix is in pivot columns of <script type="math/tex">R</script>, we know that the pivot columns of <script type="math/tex">C</script> is the same as <script type="math/tex">A</script>. <br />Also, we can write <script type="math/tex">A=\left[\begin{matrix}\vec{u_1}&\vec{u_2}&…&\vec{u_n}\end{matrix}\right]\left[\begin{matrix}\vec{v_1}^T\\\vec{v_2}^T\\…\\\vec{v_r}^T\\zero\ rows\end{matrix}\right]=\vec{u_1}\vec{v_1}^T+\vec{u_2}\vec{v_2}^T+…+\vec{u_r}\vec{v_r}^T</script><br />Every <script type="math/tex">\vec{u_i}\vec{v_i}^T</script> is a rank <script type="math/tex">1</script> matrix. So every rank <script type="math/tex">r</script> matrix can be the sum of <script type="math/tex">r</script> rank <script type="math/tex">1</script> matrices. <br />So the basis of <script type="math/tex">C(A)</script> is pivot columns. </li>
+<h1 id="Similar-Matrices"><a href="#Similar-Matrices" class="headerlink" title="Similar Matrices"></a>Similar Matrices</h1><ol>
+<li>All matrices with the same <script type="math/tex">\Lambda</script> are called <code>similar</code>. </li>
+<li>Extend this idea to non-diagonizable matrices, if <script type="math/tex">B</script> is any invertible matrix, <script type="math/tex">C</script> is any matrix, <script type="math/tex">A=BCB^{-1}</script>. Then we say <script type="math/tex">A</script> and <script type="math/tex">C</script> are similar. </li>
+<li>Similar matrices have the same eigenvalues. <br />&emsp; Proof: if <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>, multily a <script type="math/tex">B^{-1}</script> on the left and add a <script type="math/tex">BB^{-1}</script> between <script type="math/tex">A</script> and <script type="math/tex">\vec{x}</script>. <br />&emsp;We get <script type="math/tex">(B^{-1}AB)B^{-1}\vec{x}=\lambda B^{-1}\vec{x}</script>. So <script type="math/tex">CB^{-1}\vec{x}=\lambda B^{-1}\vec{x}</script>. <br />So <script type="math/tex">\lambda</script> is also an eigenvalue of <script type="math/tex">C</script> and its corresponding eigenvector is <script type="math/tex">B^{-1}\vec{x}</script>. </li>
+<li>If <script type="math/tex">C=I</script>, <script type="math/tex">BIB^{-1}=I</script>. Only <script type="math/tex">I</script> is similar to <script type="math/tex">I</script>. So <script type="math/tex">I</script> is the only diagonizable matrix with all eigenvalues <script type="math/tex">\lambda=1</script>. </li>
+<li><code>Jordan block</code>: for a <script type="math/tex">n</script> by <script type="math/tex">n</script> square block, it has <script type="math/tex">n</script> repeated eigenvalues on the main diagonal and the left of each eigenvalue is a <script type="math/tex">1</script> except the last one and all other entries are <script type="math/tex">0</script>. <script type="math/tex">J_i=\left[\begin{matrix}\lambda_i&1\\&\lambda_i&1\\&&\ddots&\ddots\\&&&\lambda_i&1\\&&&&\lambda_i\end{matrix}\right]</script>. </li>
+<li>Each Jordan block has only one eigenvectors. </li>
+<li><code>Jordan form matrix</code>: This is a kind of matrices with Jordan blocks on the diagonal and <script type="math/tex">0</script>‘s on other place. </li>
+<li>The number of eigenvectors of a Jordan matrix is the number of Jordan blocks. </li>
+<li>Jordan matrix is the representation of a similar family. </li>
+</ol>
+<h1 id="Multiplicity"><a href="#Multiplicity" class="headerlink" title="Multiplicity"></a>Multiplicity</h1><ol>
+<li>The <code>geometric multiplicity (GM)</code> is the independent eigenvectors for <script type="math/tex">\lambda</script>. GM is the dimension of <script type="math/tex">N(A-\lambda I)</script>. </li>
+<li>The <code>algebraic multiplicity (AM)</code> is the repetition of <script type="math/tex">\lambda</script> among the eigenvalues. AM is depend on the roots of <script type="math/tex">|A-\lambda I|=0</script>. </li>
+<li>Always <script type="math/tex">GM ≤ AM</script> for each <script type="math/tex">\lambda</script>. </li>
+<li>When <script type="math/tex">GM < AM</script>, <script type="math/tex">A</script> is not diagonalizable. <script type="math/tex">A</script> is diagonizable if and only if <script type="math/tex">GM=AM</script>.</li>
 </ol>
 
       
@@ -510,7 +509,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/08-Independence-Basis-and-Dimension/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/18-Eigenvalues-and-Eigenvectors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -524,7 +523,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/28/08-Independence-Basis-and-Dimension/" class="post-title-link" itemprop="url">08. Independence, Basis, and Dimension</a>
+            <a href="/2020/02/03/18-Eigenvalues-and-Eigenvectors/" class="post-title-link" itemprop="url">18. Eigenvalues and Eigenvectors</a>
         </h1>
 
         <div class="post-meta">
@@ -534,14 +533,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-28 23:26:57" itemprop="dateCreated datePublished" datetime="2020-01-28T23:26:57+08:00">2020-01-28</time>
+              <time title="Created: 2020-02-03 17:29:46" itemprop="dateCreated datePublished" datetime="2020-02-03T17:29:46+08:00">2020-02-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:51" itemprop="dateModified" datetime="2020-08-07T19:14:51+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:17:20" itemprop="dateModified" datetime="2020-08-07T19:17:20+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -572,41 +571,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>The columns of <script type="math/tex">A</script> are <code>linearly independent</code> when the only solution to <script type="math/tex">A\vec{x}=\vec{0}</script> is <script type="math/tex">\vec{x}=\vec{0}</script>, i.e. the nullspace <script type="math/tex">N(A)</script> contains only the zero vector. No other combination <script type="math/tex">A\vec{x}</script> of the columns gives the zero vector. </li>
-<li>Another definition of independence: <script type="math/tex">x_1\vec{v}_1+x_2\vec{v}_2+…+x_n\vec{v}_n=\vec{0}</script> only happens when all <script type="math/tex">x</script>‘s are zero. </li>
-<li>Independence is a relationship among vectors instead of matrices. </li>
-<li>The columns of <script type="math/tex">A</script> are independent exactly when <script type="math/tex">A</script> has full column rank. </li>
-<li>Any set of <script type="math/tex">n</script> vectors in <script type="math/tex">R^m</script> must be linearly dependent if <script type="math/tex">n > m</script>. </li>
-<li><code>Linear dependence</code> can also be described as follows. <br />&emsp;One vector is a combination of other vectors. <br />&emsp;Some combination gives the zero vector, other than the trivial combination with every <script type="math/tex">x=0</script>. </li>
+          <h1 id="Eigenvalues-and-Eigenvectors"><a href="#Eigenvalues-and-Eigenvectors" class="headerlink" title="Eigenvalues and Eigenvectors"></a>Eigenvalues and Eigenvectors</h1><ol>
+<li>An <code>eigenvector</code> is a vector doesn’t change direction even when multiplied by <script type="math/tex">A</script>. </li>
+<li>So the basis equation is <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. The number <script type="math/tex">\lambda</script> is an <code>eigenvalue</code> of <script type="math/tex">A</script>. </li>
+<li><script type="math/tex">\lambda=0</script> means the eigenvector is in <script type="math/tex">N(A)</script>. <br /><script type="math/tex">\lambda=1</script> means the eigenvector is a steady state that doesn’t change. </li>
+<li>If <script type="math/tex">\lambda</script> is the eigenvalue and <script type="math/tex">\vec{x}</script> is the eigenvector of <script type="math/tex">A</script>, for <script type="math/tex">B=A^n</script>, its eigenvector stays the same while its eigenvalue <script type="math/tex">\lambda'=\lambda^n</script>. And the eigenvalue of <script type="math/tex">A^{-1}</script> is <script type="math/tex">\lambda^{-1}</script>. </li>
+<li>For the projection matrix <script type="math/tex">P</script>, <script type="math/tex">P\vec{x}=\vec{x}</script>. Its eigenvalue is <script type="math/tex">1</script> and <script type="math/tex">0</script>. The eigenvectors for <script type="math/tex">\lambda=1</script> and <script type="math/tex">\lambda=0</script> fill the column space (in the projection plane) and nullspace (perpendicular to the projection plane). </li>
+<li>If each column of a matrix adds to <script type="math/tex">1</script>, that martix is <code>Markov matrix</code>. <script type="math/tex">\lambda=1</script> is its largest eigenvalue. </li>
+<li>The reflection matrix <script type="math/tex">R=\left[\begin{matrix}0&1\\1&0\end{matrix}\right]</script> has eigenvalues <script type="math/tex">1</script> and <script type="math/tex">-1</script>. </li>
+<li>When a matrix is shifted by <script type="math/tex">I</script>, each <script type="math/tex">\lambda</script> is shifted by <script type="math/tex">1</script>. NO change in eigenvectors. </li>
+<li>If <script type="math/tex">A</script> is singular, <script type="math/tex">0</script> must be one of the eigenvalues. </li>
+<li>The eigenvalues might not be real numbers. </li>
+<li>An orthogonal martix (<script type="math/tex">Q^TQ=I</script>) corresponds to a complex number with <script type="math/tex">|\lambda|=1</script>. </li>
+<li><script type="math/tex">A</script> and <script type="math/tex">A^T</script> share the same eigenvalues. </li>
 </ol>
-<h1 id="Basis-for-a-Vector-Space"><a href="#Basis-for-a-Vector-Space" class="headerlink" title="Basis for a Vector Space"></a>Basis for a Vector Space</h1><ol>
-<li>A set of vectors <code>spans</code> a space if their linear combinations fill the space. </li>
-<li>The vectors which span a space could be dependent or independent. </li>
-<li>A <code>basis for a vector space</code> is a sequence of vectors that are linearly independent and span the space. </li>
-<li>There is only one way to write a vector <script type="math/tex">\vec{v}</script> as a combination of the basis vectors. <br />Prove: <br />&emsp;Suppose <script type="math/tex">\vec{v}=a_1\vec{v_1}+a_2\vec{v_2}+…+a_n\vec{v_n}</script> and <script type="math/tex">\vec{v}=b_1\vec{v_1}+b_2\vec{v_2}+…+b_n\vec{v_n}</script>. <br />&emsp;Subtract those two equations to get <script type="math/tex">\vec{0}=(a_1-b_1)\vec{v_1}+(a_2-b_2)\vec{v_2}+…+(a_n-b_n)\vec{v_n}</script><br />&emsp;So <script type="math/tex">a_i-b_i=0(\forall \ i≤n)</script>, i.e. <script type="math/tex">a_i=b_i(\forall \ i ≤ n)</script>. </li>
-<li>The columns of the <script type="math/tex">n</script> by <script type="math/tex">n</script> identity matrix give the <code>standard basis</code> for <script type="math/tex">R^n</script>. </li>
-<li>The basis is not unique. </li>
-<li>The vectors are a basis for <script type="math/tex">R^n</script> exactly when they are the columns of an <script type="math/tex">n</script> by <script type="math/tex">n</script> invertible matrix. </li>
-<li>The pivot columns (row) of <script type="math/tex">A</script> <strong>(not <script type="math/tex">R</script>)</strong> are a basis for its column (row) space. </li>
-<li>Two way to find a basis from a sequence of vectors: <br />&emsp;Make them the rows of <script type="math/tex">A</script> , and eliminate to find the nonzero rows of <script type="math/tex">R</script>. <br />&emsp;Put the vectors into the columns of <script type="math/tex">A</script>. Eliminate to find the pivot columns of <script type="math/tex">A</script>. </li>
-<li>The zero vector will never be allowed into any basis because then linear independence is lost. </li>
-<li>Every basis of the space has the same number of vectors. </li>
-<li>The special solutions are a basis of $N(A)$. </li>
+<h1 id="Equation-for-the-Eigenvalues"><a href="#Equation-for-the-Eigenvalues" class="headerlink" title="Equation for the Eigenvalues"></a>Equation for the Eigenvalues</h1><ol>
+<li>For projection matrices we found <script type="math/tex">\lambda</script>‘s and <script type="math/tex">\vec{x}</script>‘s by geometry: <script type="math/tex">P\vec{x}=\vec{x}</script> and <script type="math/tex">P\vec{x}=\vec{0}</script>. </li>
+<li>For others, we need to solve the equation <script type="math/tex">A\vec{x}=\lambda\vec{x}</script>. <br />First move <script type="math/tex">\lambda\vec{x}</script> to the left side, to get <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script>. <br />This means that eigenvectors make up <script type="math/tex">N(A-\lambda I)</script>. <br />If that new equation has a nonzero solution, <script type="math/tex">A-\lambda I</script> must be singular, which leads us to its determinant is zero. </li>
+<li>The equation we really need to solve is <script type="math/tex">|A-\lambda I|=0</script>. This is called the <code>eigenequation</code> or <code>characteristic equation</code>. </li>
+<li>When <script type="math/tex">A</script> is <script type="math/tex">n</script> by <script type="math/tex">n</script>, <script type="math/tex">A</script> has <script type="math/tex">n</script> eigenvalues (they might repeat). Each <script type="math/tex">\lambda</script> leads to one <script type="math/tex">\vec{x}</script>. We can solve <script type="math/tex">(A-\lambda I)\vec{x}=\vec{0}</script> or <script type="math/tex">A\vec{x}=\lambda \vec{x}</script> to find eigenvectors. </li>
 </ol>
-<h1 id="Dimension-of-a-Vectors-Space"><a href="#Dimension-of-a-Vectors-Space" class="headerlink" title="Dimension of a Vectors Space"></a>Dimension of a Vectors Space</h1><ol>
-<li>The number of vectors, in any and every basis, is the <code>dimension</code> of the space. </li>
-<li>All basis of the same space has the same number. </li>
-<li>The dimension of the column space equals the rank of the matrix. </li>
-<li>The dimension of <script type="math/tex">Z</script> is zero. The empty set (containing no vectors) is a basis for <script type="math/tex">Z</script>. </li>
-<li>The dimension of the column space: $dim(C(A))=rank(A)$</li>
-<li>The dimension of the nullspace: <script type="math/tex">dim(N(A))=number\ of\ free\ variables=n-rank(A)</script></li>
-</ol>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><ol>
-<li>The idea of independence, basis and dimension are not restricted to column vectors. Matrix and functions can also have these. </li>
-<li>In matrices, it is much like in column space, except components in different rows. </li>
-<li>In function, space usually is given by differential equation. It is also quite like <script type="math/tex">A\vec{x}=\vec{b}</script>. However, we solve it with calculus. </li>
-<li>In function spaces, it also has nullspace and particular solution. </li>
+<h1 id="Determinant-and-Trace"><a href="#Determinant-and-Trace" class="headerlink" title="Determinant and Trace"></a>Determinant and Trace</h1><ol>
+<li>Elimination does noe preserve the <script type="math/tex">\lambda</script>‘s. </li>
+<li>The product of the <script type="math/tex">n</script> eigenvalues equals the determinant. </li>
+<li>The sum of the <script type="math/tex">n</script> eigenvalues equals the sum of the <script type="math/tex">n</script> diagonal entries. We can the sum <code>trance of martix</code>. </li>
+<li>The diagonal of triangualr martix is the eigenvalues. </li>
 </ol>
 
       
@@ -627,7 +616,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/28/07-Solving-Ax-b-Row-Reduced-Form-R/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -641,7 +630,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/28/07-Solving-Ax-b-Row-Reduced-Form-R/" class="post-title-link" itemprop="url">07. Solving Ax = b: Row Reduced Form R</a>
+            <a href="/2020/02/03/17.%20Cramers-Rule-Inverse-Matrix-and-Volume/" class="post-title-link" itemprop="url">17. Cramers Rule, Inverse Matrix, and Volume</a>
         </h1>
 
         <div class="post-meta">
@@ -651,14 +640,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-28 15:33:44" itemprop="dateCreated datePublished" datetime="2020-01-28T15:33:44+08:00">2020-01-28</time>
+              <time title="Created: 2020-02-03 11:06:45" itemprop="dateCreated datePublished" datetime="2020-02-03T11:06:45+08:00">2020-02-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:14:37" itemprop="dateModified" datetime="2020-08-07T19:14:37+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:16:23" itemprop="dateModified" datetime="2020-08-07T19:16:23+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -689,53 +678,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="One-Particular-Solution"><a href="#One-Particular-Solution" class="headerlink" title="One Particular Solution"></a>One Particular Solution</h1><ol>
-<li><script type="math/tex">A\vec{x}=\vec{b}</script> and <script type="math/tex">R\vec{x}=\vec{d}</script> are solvable only when all-zero rows of <script type="math/tex">R</script> having zeros in <script type="math/tex">\vec{d}</script>. </li>
-<li>We can get one <code>particular solution</code> by setting free variables to zeros. </li>
-<li>This particular solution is pivot rows of <script type="math/tex">\vec{d}</script> in pivots’ position and zeros in the free variables’ position. </li>
-<li>With full column rank, <script type="math/tex">A\vec{x}=\vec{b}</script> has one solution or no solution. </li>
+          <h1 id="Cramer’s-Rule"><a href="#Cramer’s-Rule" class="headerlink" title="Cramer’s Rule"></a>Cramer’s Rule</h1><ol>
+<li>This is a new way to solve <script type="math/tex">A\vec{x}=\vec{b}</script>. </li>
+<li>First let’s sovle the first unknown <script type="math/tex">x_1</script>. <br />Replace the first column of <script type="math/tex">I</script> with <script type="math/tex">\vec{x}</script>. <br /><script type="math/tex">A</script> multiplies that matrix will give a new matrix <script type="math/tex">B</script>. <script type="math/tex">B</script> is actually <script type="math/tex">A</script> replacing first column with <script type="math/tex">\vec{b}</script>. </li>
+<li>Calculate their determinants, <script type="math/tex">|A|(x_1)=|B|</script>. To get <script type="math/tex">x_1=\frac{|A|}{|B|}</script></li>
+<li>Just like how we solved <script type="math/tex">x_1</script>, replace the second column of <script type="math/tex">A</script> with <script type="math/tex">\vec{x}</script>, the third, …, the nth. We can solve all components of <script type="math/tex">\vec{x}</script>. </li>
+<li><code>Cramer&#39;s Ruie</code>: <script type="math/tex">x_i=\frac{|B_i|}{|A|}</script>. Here <script type="math/tex">B_i</script> has the ith column of <script type="math/tex">A</script> replaced by <script type="math/tex">\vec{b}</script>. </li>
+<li>With Cramer’s Rule, we can find another solution to <script type="math/tex">A^{-1}</script>. <br />To solve the equation of <script type="math/tex">AA^{-1}=I</script>, we can split it into <script type="math/tex">n</script> <script type="math/tex">A\vec{x}=\vec{b}</script> form equations. <br />Now all <script type="math/tex">\vec{b}</script>s are a column with only a <script type="math/tex">1</script> and <script type="math/tex">n-1</script> 0s. Calculate the <script type="math/tex">|B_{ij}|</script> (the determinant we need to solve the <script type="math/tex">jth</script> component of the <script type="math/tex">ith</script> equation) with cofactor along that column <script type="math/tex">\vec{b}</script>, we can find <script type="math/tex">|B_{ij}|=|C_{ji}|</script>. <br />So <script type="math/tex">(A^{-1})_{ij}=\frac{C_{ji}}{|A|}</script>.   <code>MARK</code>: NOT <script type="math/tex">C_{ij}</script>. Because the <script type="math/tex">1</script> in <script type="math/tex">B_{ij}</script> is in the <script type="math/tex">ith</script> column <script type="math/tex">jth</script> row. <br />Put the <script type="math/tex">C_{ij}</script> into the corresponding entry of a matrix, we can get the <code>cofactor matrix</code> <script type="math/tex">C</script>. <script type="math/tex">A^{-1}=\frac{C^T}{|A|}</script></li>
+<li>We can directly calculate the result <script type="math/tex">I'</script> of <script type="math/tex">AC^T</script>. <br />In the diagonal, we have <script type="math/tex">I'_{ii}=(row\ i\ of\ A)\cdot(column\ i\ of\ C^T)=\sum a_{ik}C_{ik}=|A|</script>. <br />Off the main diagonal, we have <script type="math/tex">I'_{ij}=(row\ i\ of\ A)\cdot(column\ j\ of\ C^T)=\sum a_{ik}C_{jk}</script>. This is the value of a new matrix with <script type="math/tex">jth</script> row of <script type="math/tex">A</script> replaced by <script type="math/tex">ith</script>. <br />So that determinant has two equal rows which makes its value <script type="math/tex">0</script>. <br />Concolusion, <script type="math/tex">I'</script> has <script type="math/tex">|A|</script> in its main diagonal and <script type="math/tex">0</script>s in other entries. <br /><script type="math/tex">AC^T=|A|I \Longrightarrow A\frac{C^T}{|A|}=I \Longrightarrow A^{-1}=\frac{C^T}{|A|}</script></li>
+<li>If <script type="math/tex">A</script> is a triangular matrix, if <script type="math/tex">a_{ij}</script> is in the nonezero part of martix, <script type="math/tex">C_{ij}</script> has zeros in the diagonal. So <script type="math/tex">C_{ij}=0</script> when <script type="math/tex">a_{ij}≠0</script>. And after transpose, we can get a matrix <script type="math/tex">C^T</script> the same shape as <script type="math/tex">A</script>. So the inverse of a triangular is also a triangualar. </li>
 </ol>
-<h1 id="Complete-Solution"><a href="#Complete-Solution" class="headerlink" title="Complete Solution"></a>Complete Solution</h1><ol>
-<li>The particular solution will be one point on the solution space. Adding the nullspace vectors will make the solutions complete. </li>
-<li><code>Complete solution = one particular solution + all nullspace solutions</code>. </li>
-<li><script type="math/tex">\vec{x}_{particular}</script> comes from <script type="math/tex">\vec{d}</script>, while <script type="math/tex">\vec{x}_{special}</script> comes from the free columns of <script type="math/tex">R</script>. </li>
-<li>When writing the complete solution, we multiply the special solutions to their free variable then add them together. However, nothing will multiply the particular solution. </li>
-<li>The picture of the complete solution is the nullspace shifted by the particular solution. </li>
-<li>Four possibilities for linear equations: <br /></li>
+<h1 id="Area-of-a-Triangular"><a href="#Area-of-a-Triangular" class="headerlink" title="Area of a Triangular"></a>Area of a Triangular</h1><ol>
+<li>If three points of <script type="math/tex">A</script> is <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_3,y_3)</script>, its area is <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1&1\\x_2&y_2&1\\x_3&y_3&1\end{array}\right|</script>. </li>
+<li>If <script type="math/tex">(x_3,y_3)=(0,0)</script>, <script type="math/tex">S=\frac{1}{2}\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script></li>
+<li>A triangular is half of a parallelogram. If the four points of a parallelogram are <script type="math/tex">(0,0)</script>, <script type="math/tex">(x_1, y_1)</script>, <script type="math/tex">(x_2,y_2)</script>, <script type="math/tex">(x_1+x_2,y_1+y_2)</script>, its area is <script type="math/tex">S=\left|\begin{array}{ccc}x_1&y_1\\x_2&y_2\end{array}\right|</script>. </li>
+<li>This law can expand to higher dimension, like the volume in 3-dimension. The volume of box <script type="math/tex">V=|3\ by\ 3\ determinant|</script>. That determinant is formed by three independent edge vectors. </li>
 </ol>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Condition</th>
-<th style="text-align:center">R</th>
-<th style="text-align:center">Solution</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">$r=m=n$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I\end{matrix}\right]$</td>
-<td style="text-align:center">only $1$ solution</td>
-</tr>
-<tr>
-<td style="text-align:center">$r=m &lt; n$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I&amp;F\end{matrix}\right]$</td>
-<td style="text-align:center">infinitely many solutions (<code>full row rank</code>)</td>
-</tr>
-<tr>
-<td style="text-align:center">$r=n &lt; m$</td>
-<td style="text-align:center">$R=\left[\begin{matrix}I \ 0\end{matrix}\right]$</td>
-<td style="text-align:center">$0$ or $1$ solution (<code>full column solution</code>)</td>
-</tr>
-<tr>
-<td style="text-align:center"><script type="math/tex">r<m\ \ r<n</script></td>
-<td style="text-align:center">$R=\left[\begin{matrix}I&amp;F\\0&amp;0\end{matrix}\right]$</td>
-<td style="text-align:center">$0$ solution or infinitely many solutions</td>
-</tr>
-</tbody>
-</table>
-</div>
+<h1 id="Cross-Product"><a href="#Cross-Product" class="headerlink" title="Cross Product"></a>Cross Product</h1><ol>
+<li>The <code>cross product</code> is a vector in the same dimension written <script type="math/tex">\vec{u}\times \vec{v}</script> called “<script type="math/tex">\vec{u}</script> cross <script type="math/tex">\vec{v}</script>“. </li>
+<li>The components of this cross product are <script type="math/tex">2</script> by <script type="math/tex">2</script> cofactors. </li>
+<li>If we write <script type="math/tex">\vec{u}=\left[\begin{matrix}u_1\\u_2\\u_3\end{matrix}\right]=u_1\vec{i}+u_2\vec{j}+u_3\vec{k}</script> and <script type="math/tex">\vec{v}=\left[\begin{matrix}v_1\\v_2\\v_3\end{matrix}\right]=v_1\vec{i}+v_2\vec{j}+v_3\vec{k}</script>, then <script type="math/tex">\vec{u}\times\vec{v}=\left|\begin{array}{cccc}\vec{i}&\vec{j}&\vec{k}\\u_1&u_2&u_3\\v_1&v_2&v_3\end{array}\right|</script>. </li>
+<li><script type="math/tex">\vec{v}\times\vec{u}=-(\vec{u}\times\vec{v})</script> for it exchanging the lower two rows. </li>
+<li><script type="math/tex">\vec{u}\times\vec{v}</script> is perpedicular to <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
+<li>The cross product of two dependent vector with itself is zero. </li>
+<li><script type="math/tex; mode=display">||\vec{u}\times\vec{v}||=||\vec{u}||\ ||\vec{v}||\ |sin\ \theta|</script></li>
+<li>The length os <script type="math/tex">\vec{u}\times\vec{v}</script> is the area of parallelogram with sides <script type="math/tex">\vec{u}</script> and <script type="math/tex">\vec{v}</script>. </li>
+<li>The direction obeys the <code>right hand rule</code>. </li>
+<li>Triple product <script type="math/tex">(\vec{u}\times\vec{v})\cdot\vec{w}</script> can replace the vector row in the cross product determinant with <script type="math/tex">\vec{w}^T</script>. </li>
+<li>The triple product is the volumn of box. The cross product is the vector perpendicular to the base and its length is the area. The dot product is the area times the height in its direction.  </li>
+</ol>
 
       
     </div>
@@ -755,7 +726,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/26/06-Column-Space-and-Nullspace/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/16-Determinant-Formulas-and-Cofactors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -769,7 +740,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/26/06-Column-Space-and-Nullspace/" class="post-title-link" itemprop="url">06. Column Space and Nullspace</a>
+            <a href="/2020/02/02/16-Determinant-Formulas-and-Cofactors/" class="post-title-link" itemprop="url">16. Determinant Formulas and Cofactors</a>
         </h1>
 
         <div class="post-meta">
@@ -779,14 +750,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-26 12:06:36" itemprop="dateCreated datePublished" datetime="2020-01-26T12:06:36+08:00">2020-01-26</time>
+              <time title="Created: 2020-02-02 17:24:27" itemprop="dateCreated datePublished" datetime="2020-02-02T17:24:27+08:00">2020-02-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:05" itemprop="dateModified" datetime="2020-08-07T19:16:05+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:15:19" itemprop="dateModified" datetime="2020-08-07T19:15:19+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -817,42 +788,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Column-Space"><a href="#Column-Space" class="headerlink" title="Column Space"></a>Column Space</h1><ol>
-<li>For a matrix <script type="math/tex">A</script>, its <code>column space</code> contains not only <script type="math/tex">n</script> columns of <script type="math/tex">A</script>, but also all combinations <script type="math/tex">A\vec{x}</script>. The column space of <script type="math/tex">A</script> is denoted as <script type="math/tex">C(A)</script>. </li>
-<li>To solve <script type="math/tex">A\vec{x}=\vec{b}</script> is to express <script type="math/tex">\vec{b}</script> as a combination of columns. The <script type="math/tex">\vec{b}</script> has to be in the column space of $A$, or no solution! </li>
-<li>The column space of <script type="math/tex">A_{m\times n}</script> is a subspace of <script type="math/tex">R^m</script> (not <script type="math/tex">R^n</script>), for each column has $n$ components.  </li>
-<li>The column space is the smallest subspace containing all column vectors. </li>
-<li>The row space of <script type="math/tex">A</script> is <script type="math/tex">C(A^T)</script>. </li>
+          <h1 id="Pivot-Formula"><a href="#Pivot-Formula" class="headerlink" title="Pivot Formula"></a>Pivot Formula</h1><ol>
+<li>We can eliminate to factorize <script type="math/tex">PA=LU</script>. So <script type="math/tex">|P||A|=|L||U|= \displaystyle\prod^{n}_{i=1}1\displaystyle \prod^{n}_{i=1}{d_i}</script>, which gives us <script type="math/tex">|A|=\pm(d_1d_2…d_n)</script>. Here <script type="math/tex">d_i</script> is the pivots in the diagonal of <script type="math/tex">U</script>. </li>
+<li>Without row exchanges, if we take the upper left <script type="math/tex">k</script> by <script type="math/tex">k</script> square in <script type="math/tex">A</script> as <script type="math/tex">A_k</script>, the kth pivot is <script type="math/tex">d_k=\frac{|A_k|}{|A_{k-1}|}</script>. </li>
 </ol>
-<h1 id="Nullspace"><a href="#Nullspace" class="headerlink" title="Nullspace"></a>Nullspace</h1><ol>
-<li>For equation <script type="math/tex">A\vec{x}=\vec{0}</script>, if <script type="math/tex">A</script> is invertible, it has only one solution <script type="math/tex">\vec{x}=\vec{0}</script>. Otherwise, there are nonzero solutions. </li>
-<li>The <code>nullspace</code> <script type="math/tex">N(A)</script> consists of all solutions to <script type="math/tex">A\vec{x}=\vec{0}</script>. </li>
-<li>Prove that the nullspace is a vector space: <br />&emsp;<script type="math/tex">\forall\ \vec{x}, \ \vec{y}\ \in\ N(A),\ A\vec{x}=\vec{0}, \ A\vec{y}=\vec{0}</script><br />&emsp;<script type="math/tex">A\vec{x}+A\vec{y}=\vec{0}+\vec{0}=\vec{0}=A(\vec{x}+\vec{y})</script><br />&emsp;<script type="math/tex">A(\vec{x}+\vec{y})=\vec{0}</script>. So <script type="math/tex">\vec{x}+\vec{y}</script> is in the <script type="math/tex">N(A)</script><br />&emsp;<script type="math/tex">A(c\vec{x})=cA\vec{x}=c\vec{0}=\vec{0}</script>. So <script type="math/tex">c\vec{x}</script> is in the <script type="math/tex">N(A)</script>. <br />&emsp;Conclusion, <script type="math/tex">N(A)</script> is a vector space. </li>
-<li><script type="math/tex">N(A)</script> is a subspace of <script type="math/tex">R^n</script>. </li>
-<li>A nullspace can be described by special solutions to <script type="math/tex">A\vec{x}=\vec{0}</script>. </li>
-<li>The <code>free components</code> correspond to columns with no pivots. </li>
-<li>If we have <script type="math/tex">k</script> free components, we can get <script type="math/tex">k</script> special solutions. The only thing to do is to set one free component to $1$ and all others to $0$. </li>
-<li>For invertible matrix <script type="math/tex">A</script>, <script type="math/tex">N(A)=Z</script>. Further for any matrix <script type="math/tex">A</script>, if <script type="math/tex">N(A)=Z</script>, that means the columns of <script type="math/tex">A</script> are <code>independent</code>. </li>
-<li>For matrices <script type="math/tex">A_{m\times n}</script> with <script type="math/tex">n > m</script>, there must be at least <script type="math/tex">n-m</script> free variables. </li>
-<li>The <code>dimension of a nullspace</code> is the number of free variables. </li>
-<li>Every free column is a combination of earlier pivot columns. It is the special solutions (set the corresponding free component to $1$) that tell us those combinations. </li>
+<h1 id="The-Big-Formula"><a href="#The-Big-Formula" class="headerlink" title="The Big Formula"></a>The Big Formula</h1><ol>
+<li>One row a time, we use the linearity to split determinant into <script type="math/tex">n</script> determinant with only one nonzero entry in the current row. <br />After <script type="math/tex">n</script> rows, we get <script type="math/tex">n^n</script> determinant and most of them are zero. <br />For example, <script type="math/tex">\left|\begin{array}{aa}a&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\c&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\0&d\end{array}\right|+\left|\begin{array}{aa}a&0\\c&0\end{array}\right|+\left|\begin{array}{aa}0&b\\0&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&0\end{array}\right|</script><br />The new determinants are nonzero if and only if all none zero entries are not one the same row and the same column. </li>
+<li>All the “survived” determinants are a form of permutation and we can calculate with permutation by factoring all entries out. </li>
+<li>Each product had one entry from each row and also one entry from each column. </li>
+<li>The formula has <script type="math/tex">n!</script> terms to add up. Half the terms have minus signs while the other half have plus signs determined by the permutation matrix. </li>
+<li>The <script type="math/tex">n!</script> possibilities are <script type="math/tex">n</script> columns <script type="math/tex">(1,2,…,n)</script> go into each possible order <script type="math/tex">(\alpha,\beta,…,\omega)</script>. And the result is the sum over all <script type="math/tex">n!</script> column permutations <script type="math/tex">P=(\alpha,\beta,…,\omega)</script>. <script type="math/tex">|A|=\sum|P|a_{1\alpha}a_{2\beta}…a_{n\omega}</script>. </li>
+<li>When <script type="math/tex">U</script> is upper triangular, only one of the <script type="math/tex">n!</script> products can be nonzero. </li>
 </ol>
-<h1 id="Reduced-Row-Echelon-Form"><a href="#Reduced-Row-Echelon-Form" class="headerlink" title="Reduced Row Echelon Form"></a>Reduced Row Echelon Form</h1><ol>
-<li>The <code>reduced row echelon form (rref)</code> has $1$s in the pivots’ position and $0$s above and bellow, which is denoted by <script type="math/tex">rref(A)</script> or <script type="math/tex">R</script>. </li>
-<li>The eliminations will not change the nullspace, i.e. <script type="math/tex">N(A)=N(U)=N(R)</script></li>
-<li>The pivot columns of <script type="math/tex">R</script> contain <script type="math/tex">I</script>. </li>
-<li>With some row and column exchanges, put all pivot column before free columns and pivot rows before free rows. This form of <script type="math/tex">R</script> is like <script type="math/tex">R=\left[\begin{matrix}I & F \\ 0&0\end{matrix}\right]</script>. Since all special solutions form a nullspace matrix called <script type="math/tex">N</script>, <script type="math/tex">RN=0</script>. After solving this equation, we can get <script type="math/tex">N=\left[\begin{matrix}-F\\I\end{matrix}\right]</script>. In <script type="math/tex">N</script>, pivots are above free variables. </li>
-</ol>
-<h1 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h1><ol>
-<li>The <code>rank of a matrix</code> is the number of pivots. Rank is denoted by <script type="math/tex">r</script>. </li>
-<li>The actual size of <script type="math/tex">A</script> is given by its rank. </li>
-<li>All three matrices <script type="math/tex">A</script>, <script type="math/tex">U</script> and <script type="math/tex">R</script> have <script type="math/tex">r</script> independent rows. </li>
-<li>The rank <script type="math/tex">r</script> is the dimension of the column space and the dimension of the row space. </li>
-<li><script type="math/tex">n - r</script> is the dimension of the nullspace and the number of free variables. </li>
-<li>$r(A)=r(A^T)$</li>
-<li>Matrix <script type="math/tex">A</script> has full row rank means: <br />&emsp;The column space is the whole space <script type="math/tex">R^m</script><br />&emsp;There are <script type="math/tex">n-r=n-m</script> special solutions in the nullspace of <script type="math/tex">A</script></li>
-<li>Matrix <script type="math/tex">A</script> has full column rank means: <br />&emsp;The nullspace <script type="math/tex">N(A)</script> contains only the zero vector. <br />&emsp;If <script type="math/tex">A\vec{x}=\vec{b}</script> has a solution, then it has only one solution. </li>
-<li>Every rank one matrix is one column times one row <script type="math/tex">A=\vec{u}\vec{v}^T</script></li>
+<h1 id="Cofactors"><a href="#Cofactors" class="headerlink" title="Cofactors"></a>Cofactors</h1><ol>
+<li>We note a submatrix <script type="math/tex">M_{ij}</script> of size <script type="math/tex">n-1</script> which comes from the original matrix without row <script type="math/tex">i</script> and column <script type="math/tex">j</script>. </li>
+<li>The <code>cofactors</code> <script type="math/tex">C_{ij}=(-1)^{i+j}|M_{ij}|</script>. </li>
+<li>The determinant is the sum of all entries in one row times its cofactor. By its cofactor, we mean that the cofactor of <script type="math/tex">a_{ij}</script> is <script type="math/tex">C_{ij}</script>. </li>
+<li><script type="math/tex">|A|=\displaystyle\sum^{n}_{j=1}{a_{ij}C_{ij}}</script>. </li>
+<li>This is a recursive way to calculate determinants. The determinant to calculate goes from order <script type="math/tex">n</script> to order <script type="math/tex">n-1</script> and finally comes to order <script type="math/tex">1</script> which don’t need calculation. </li>
+<li>Cofactors are useful when matrices have many zeros. </li>
 </ol>
 
       
@@ -873,7 +827,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/19/05-Transposes-Permutations-Spaces-R-n/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/15-Properties-of-Determinants/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -887,7 +841,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/19/05-Transposes-Permutations-Spaces-R-n/" class="post-title-link" itemprop="url">05. Transposes, Permutations, Spaces Rⁿ</a>
+            <a href="/2020/02/02/15-Properties-of-Determinants/" class="post-title-link" itemprop="url">15. Properties of Determinants</a>
         </h1>
 
         <div class="post-meta">
@@ -897,14 +851,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-19 08:47:59" itemprop="dateCreated datePublished" datetime="2020-01-19T08:47:59+08:00">2020-01-19</time>
+              <time title="Created: 2020-02-02 15:03:35" itemprop="dateCreated datePublished" datetime="2020-02-02T15:03:35+08:00">2020-02-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:16:40" itemprop="dateModified" datetime="2020-08-07T19:16:40+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:16:53" itemprop="dateModified" datetime="2020-08-07T19:16:53+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -935,45 +889,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Transpose"><a href="#Transpose" class="headerlink" title="Transpose"></a>Transpose</h1><ol>
-<li>Definition: The <code>transpose</code> of a matrix is to put the columns of the original matrix in the row of the new matrix. In another words, flip the matrix over its main diagonal. We denote the transpose of matrix as <script type="math/tex">A^T</script></li>
-<li>$(A^T)_{ij}=A_{ji}$</li>
-<li>The <code>dot product (inner product)</code> of vectors can be written as the transposed form <script type="math/tex">x\cdot y = x^Ty</script></li>
-<li>The <code>outer product</code> of vectors can be written as <script type="math/tex">xy^T</script></li>
-<li>An essential property of transpose is that <script type="math/tex">Ax\cdot y=x\cdot A^Ty</script></li>
-<li>$(A+B)^T = A^T +B^T$</li>
-<li><script type="math/tex">(AB)^T=B^TA^T</script>. <script type="math/tex">AB</script> is the combination of columns of <script type="math/tex">A</script> while <script type="math/tex">B^TA^T</script> is the combination of rows of <script type="math/tex">A^T</script>. They are the same numbers but in different directions. So after transpose of <script type="math/tex">AB</script>, they are the same. </li>
-<li><script type="math/tex">(A^{-1})^T=(A^T)^{-1}</script>. <script type="math/tex">AA^{-1}=T\ \Rightarrow\ (AA^{-1})^T=I^T=I\ \Rightarrow\ (A^{-1})^TA^T=I</script>. <script type="math/tex">A^T</script> is invertible exactly when <script type="math/tex">A</script> is invertible. </li>
-</ol>
-<h2 id="Transpose-of-Derivative"><a href="#Transpose-of-Derivative" class="headerlink" title="Transpose of Derivative"></a>Transpose of Derivative</h2><ol>
-<li>The inner product of functions are <script type="math/tex">x(t)^Ty(t)=(x,\ y)=\displaystyle \int^{\infty}_{-\infty}{x(t)y(t)\ dt}</script></li>
-<li>$A$ is the derivative, $A=\displaystyle\frac{d}{dt}$</li>
-<li><script type="math/tex">(Ax)^Ty=\displaystyle \int^{\infty}_{-\infty}{\frac{dx}{dt}y(t)\ dt}=\displaystyle \int^{\infty}_{-\infty}{x(t)(-\frac{dy}{dt})\ dt}=-x^T(A^Ty)</script> （Integration by parts）</li>
-<li>So <script type="math/tex">A^T=-\displaystyle\frac{d}{dt}=-A</script></li>
-</ol>
-<h1 id="Symmetric-Matrix"><a href="#Symmetric-Matrix" class="headerlink" title="Symmetric Matrix"></a>Symmetric Matrix</h1><ol>
-<li>A <code>symmetric matrix</code> is a matrix that transpose does not change, i.e. <script type="math/tex">S^T=S</script></li>
-<li>The inverse of a symmetric matrix is also symmetric. </li>
-<li>To create a symmetric matrix, we can multiply <script type="math/tex">A</script> and <script type="math/tex">A^T</script>. <br />$S = AA^T$, i.e. <script type="math/tex">S_{ij}=(row\ i\ of\ A)\cdot (column\ j\ of\ A^T)</script><br />also <script type="math/tex">(row\ i\ of\ A)^T=column\ i\ of\ A^T</script> and <script type="math/tex">(column\ j\ of\ A^T)^T=row\ j\ of\ A</script><br />So <script type="math/tex">S_{ij}=(column\ i\ of\ A^T)^T\cdot(row\ j\ of A)^T=((row\ j\ of A)\cdot (column\ i\ of A^T))^T=S_{ji}^T=S_{ji}</script></li>
-<li>A symmetric matrix can be factorized into <script type="math/tex">LDL^T</script>. We do half operations to calculate because we only have to eliminate half of the matrix, so in the first stage, multiplication can be reduced by half. Naturally, only half of the storage is needed to store. </li>
-<li>For symmetric, <script type="math/tex">A^T=A</script><br />For <code>antisymmetric</code>, <script type="math/tex">A^T=-A</script></li>
-</ol>
-<h1 id="Permutation-Matrix"><a href="#Permutation-Matrix" class="headerlink" title="Permutation Matrix"></a>Permutation Matrix</h1><ol>
-<li>A <code>permutation matrix</code> is an identity matrix in different row orders. </li>
-<li>There are <script type="math/tex">n!</script> permutation matrices. </li>
-<li><script type="math/tex">P^T</script> is also a permutation matrix. Any product <script type="math/tex">P_1P_2</script> is a permutation matrix, too. </li>
-<li>Permutation matrix can be used to do row exchanges, which makes the elimination with row exchanges <script type="math/tex">PA=LU</script></li>
-<li>For a permutation matrix, <script type="math/tex">P^{-1}=P^T</script></li>
-</ol>
-<h1 id="Vector-Space"><a href="#Vector-Space" class="headerlink" title="Vector Space"></a>Vector Space</h1><ol>
-<li>A vector space is a space where <script type="math/tex">\forall \vec{x},\ \vec{y}\in S,\forall c,\ d\in R,\ (c\vec{x}+d\vec{y})\in S</script></li>
-<li><script type="math/tex">R^n</script> is a vector space which contains all real column vectors with <script type="math/tex">n</script> components. </li>
-<li>A vector whose <script type="math/tex">n</script> components are complex numbers lies in the space <script type="math/tex">C^n</script>. </li>
-<li>Whatever it is in the vector space, they must obey these rules: <br />&emsp;We can add any vectors in <script type="math/tex">S</script> and multiply by any scalar. <br />&emsp;The result stays in the space. <br />&emsp;Commutative law and distributive law are valid. <br />&emsp;Exist a unique “zero vector”, that <script type="math/tex">\vec{0}+\vec{v}=\vec{v}</script>. <br />The “vectors” in a vector space can be matrices or functions of <script type="math/tex">\vec{x}</script>, too. </li>
-<li>The vector space with only <script type="math/tex">\vec{0}</script> is noted as <script type="math/tex">Z</script>. <script type="math/tex">Z</script> is zero-dimensional and the smallest possible vector space. </li>
-<li>A subspace is another space that holds no more vectors then the superspace. </li>
-<li>The Subspace of <script type="math/tex">R^n</script> still has <script type="math/tex">n</script> components, so they are not <script type="math/tex">R^m\ (m < n)</script>. </li>
-<li>The union of two subspace is not always another subspace. <br />&emsp;If the two vectors are not from the same subspace, their combination could go out of the two subspace. <br />&emsp;Nevertheless, the intersection of two subspace is another subspace.<br />&emsp;If <script type="math/tex">\vec{x}</script> and <script type="math/tex">\vec{y}</script> are in the intersection of subspace <script type="math/tex">S</script> and <script type="math/tex">T</script>, all the linear combination of <script type="math/tex">\vec{x}</script> and <script type="math/tex">\vec{y}</script> is in <script type="math/tex">S</script> and <script type="math/tex">T</script>, i.e. all the linear combination is in the intersection of <script type="math/tex">S</script> and <script type="math/tex">T</script>.  </li>
+          <ol>
+<li>The determinant of the identity matrix is <script type="math/tex">1</script>. </li>
+<li>The determinant changes sign when two rows (or columns) are exchanged. </li>
+<li>The determinant is a linear function of each row separately. <br />If one raw is mutiplied by <script type="math/tex">t</script>, the determinant is multiplied by <script type="math/tex">t</script>. <br /><code>MARK</code>: If multiply an <script type="math/tex">n</script> by <script type="math/tex">n</script> matrix with a scalar <script type="math/tex">t</script>, the determinant becomes <script type="math/tex">t^n</script> for all rows are multiplied by <script type="math/tex">t</script><br />If two matrices share all rows <strong>but one</strong>, the determinant of the sum of that two matrices is the sum of the determinant of the two separate matrices. <br /><code>MARK</code>: <script type="math/tex">|A+B|≠|A|+|B|</script></li>
+<li>If two rows of <script type="math/tex">A</script> are equal, then <script type="math/tex">|A|=0</script>. <br />If exhange that two rows, the determinnat changes sign but is stil the same determinant with the same value. Only <script type="math/tex">0</script> can do that. </li>
+<li>Subtracting a multiple of one row from another leaves <script type="math/tex">|A|</script> unchanged. <br />We can split the subtraction into a substraction of two matrices. The subtracting matrix has to have two dependent rows, which makes its determinant zero. </li>
+<li>A matrix with a row of zeros has <script type="math/tex">|A|=0</script>. <br />Multiply the zero row with any nonzero scalar. The determinant is not changed. </li>
+<li>If <script type="math/tex">A</script> is triangular then <script type="math/tex">|A|=\displaystyle\prod^{n}_{i=1}{a_{ii}}=product\ of\ diagonal\ entries</script>. <br />If all entries of <script type="math/tex">A</script> is not zero, eliminate the triangular matrix to a diagonal matrix. Factor all entries from their row to get <script type="math/tex">|A|=\displaystyle\prod^{n}_{i=1}{a_{ii}} \times |I|=\displaystyle\prod^{n}_{i=1}{a_{ii}}</script>. <br />If one entry of <script type="math/tex">A</script> is zero, we can eliminate to make that row a zero row to know its determinant is zero. </li>
+<li>If <script type="math/tex">A</script> is singular then <script type="math/tex">|A|=0</script>. If <script type="math/tex">A</script> is invertible then <script type="math/tex">|A|≠0</script>. <br />Eliminate <script type="math/tex">A</script> to triangular <script type="math/tex">U</script>, if <script type="math/tex">A</script> is singular, <script type="math/tex">U</script> must has a zero in the diagonal to make the determinant zero or the determinant is the mutiplication of diagonal nonzero. </li>
+<li><script type="math/tex">|AB|=|A||B|</script>. <br />If <script type="math/tex">B=A^{-1}</script>, <script type="math/tex">|A||A^{-1}|=|AA^{-1}|=|I|=1</script>. So <script type="math/tex">|A^{-1}|=\frac{1}{|A|}</script>. </li>
+<li>The transpose <script type="math/tex">A^T</script> has the same determinant as <script type="math/tex">A</script>. <br />Factor them into <script type="math/tex">PA=LU</script> and <script type="math/tex">A^TP^T=U^TL^T</script>. <br />So <script type="math/tex">|P||A|=|L||U|</script> and <script type="math/tex">|A^T||P^T|=|U^T||L^T|</script>. <br /><script type="math/tex">|L|=|L^T|=1</script> (diagonal is all 1s). <script type="math/tex">|U|=|U^T|</script> (pivots don’t change). <br /><script type="math/tex">|P||P^T|=1</script>, so <script type="math/tex">|P|=|P^T|=\pm 1</script>. <br />Conclusion, <script type="math/tex">|A|=|A^T|</script></li>
+<li>With rule 10, all properties of rows can be applied to columns (just need a little transpose). </li>
 </ol>
 
       
@@ -994,7 +921,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/01/14/04-Factorization-into-A-LU/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -1008,7 +935,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/14/04-Factorization-into-A-LU/" class="post-title-link" itemprop="url">04. Factorization into A = LU</a>
+            <a href="/2020/02/02/14-Orthogonal-Matrices-and-Gram-Schmidt/" class="post-title-link" itemprop="url">14. Orthogonal Matrices and Gram-Schmidt</a>
         </h1>
 
         <div class="post-meta">
@@ -1018,14 +945,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-01-14 23:21:00" itemprop="dateCreated datePublished" datetime="2020-01-14T23:21:00+08:00">2020-01-14</time>
+              <time title="Created: 2020-02-02 09:28:35" itemprop="dateCreated datePublished" datetime="2020-02-02T09:28:35+08:00">2020-02-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:17:56" itemprop="dateModified" datetime="2020-08-07T19:17:56+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:17:05" itemprop="dateModified" datetime="2020-08-07T19:17:05+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1056,21 +983,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Factorization"><a href="#Factorization" class="headerlink" title="Factorization"></a>Factorization</h1><ol>
-<li>According to Gauss Elimination, we can know that <script type="math/tex">E_{nn-1}…E_{ij}…E_{21}A = U</script>. We denote this equation as <script type="math/tex">L'A = U</script></li>
-<li>So it is natural that <script type="math/tex">A = E_{21}^{-1}…E_{ij}^{-1}…E_{nn-1}^{-1}U</script></li>
-<li>We denote <script type="math/tex">E_{21}^{-1}…E_{ij}^{-1}…E_{nn-1}^{-1}</script> as <script type="math/tex">L</script>, which makes <script type="math/tex">A = LU</script></li>
-<li>Every time a multiplier multiplies a row with a pivot. What is changed is the rows below it. Whatever is above that row (including that row) remains unchanged. So the multipliers in the elimination work on $U$, instead of $A$. </li>
-<li>What happens to $A$ is a lot more complicated than $U$. That means <script type="math/tex">L'</script> is a lot more complicated than <script type="math/tex">L</script>. </li>
-<li>When the matrix multiplication messed up all numbers in <script type="math/tex">L'</script>, while, amazingly, all entries of <script type="math/tex">L</script> is precisely the multiplier. Each multiplier goes directly into its <script type="math/tex">(i,\ j)</script> position in <script type="math/tex">L</script>. </li>
-<li>We can even take a further step to divide each row of <script type="math/tex">U</script> by their pivots to extract the pivots in another matrix <script type="math/tex">D</script>. All pivots in $D$ are in their old place in <script type="math/tex">U</script>. This makes the equation <script type="math/tex">A = LDU</script>. Furthermore, both <script type="math/tex">L</script> and <script type="math/tex">U</script> have $1$s in diagonal. </li>
-<li>Now we can solve the equation in two steps: <script type="math/tex">L\vec{c}=\vec{b}</script> and <script type="math/tex">U\vec{x}=\vec{c}</script></li>
+          <h1 id="Orthogonal-Matrices"><a href="#Orthogonal-Matrices" class="headerlink" title="Orthogonal Matrices"></a>Orthogonal Matrices</h1><ol>
+<li><code>Orthonormal</code> is a basis consisting of orthogonal unit vectors. </li>
+<li>A matrix with orthonormal columns is assigned the special letter <script type="math/tex">Q</script>. </li>
+<li><script type="math/tex">Q^TQ=I</script><br />Prove: <br /><script type="math/tex">Q^TQ=\left[\begin{matrix}q_1^T\\q_2^T\\\vdots\\q_n^T\end{matrix}\right]\left[\begin{matrix}q_1&q_2&\dots&q_n\end{matrix}\right]</script><br />Except for <script type="math/tex">q_i^Tq_i</script> is <script type="math/tex">1</script>, for any <script type="math/tex">q_i^Tq_j\ (i≠j)</script> is <script type="math/tex">0</script>. So only diagonals are <script type="math/tex">1</script> and all others are <script type="math/tex">0</script>. </li>
+<li><script type="math/tex">Q</script> is not required to be square. </li>
+<li>When <script type="math/tex">Q</script> is square, <script type="math/tex">Q^TQ=I</script> means that <script type="math/tex">Q^{-1}=Q^T</script>. So <script type="math/tex">QQ^T=I</script> is also true under this condition. In this square case, we call <script type="math/tex">Q</script> an <code>orthogonal matrix</code>. </li>
+<li>Every permutaion matrix is an orthogonal matrix. </li>
+<li>If <script type="math/tex">\vec{u}</script> is any unit vector, set <script type="math/tex">Q=I-2\vec{u}\vec{u}^T</script>. <br />Then <script type="math/tex">Q^T=I-2\vec{u}\vec{u}^T=Q</script> and <script type="math/tex">Q^TQ=I-4\vec{u}\vec{u}^T-4\vec{u}\vec{u}^T\vec{u}\vec{u}^T=I\ (\vec{u}^T\vec{u}=||\vec{u}||^2=1)</script><br />This <script type="math/tex">Q</script> is called the reflection matrix. It’s symmetrix and orthogonal. <br /><script type="math/tex">Q^2=Q^TQ=QQ^T=Q^{-1}Q=I</script><br />Any vector times <script type="math/tex">Q</script> will be reflected and the mirror is the space perpendicular to <script type="math/tex">\vec{u}</script>. The vectors in the mirror doesn’t change. </li>
+<li>Multiplication by any orthogonal martix <script type="math/tex">Q</script>, lengths don’t change. <br />Proof: <script type="math/tex">||Q\vec{x}||^2=(Q\vec{x})^T(Q\vec{x})=\vec{x}^TQ^TQ\vec{x}=\vec{x}^T\vec{x}=||\vec{x}||^2</script></li>
+<li><script type="math/tex">Q</script> also preserves dot products: <script type="math/tex">(Q\vec{x})^T(Q\vec{y})=\vec{x}^TQ^TQ\vec{y}=\vec{x}^T\vec{y}</script>. </li>
 </ol>
-<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ol>
-<li>To factorize <script type="math/tex">A</script> into <script type="math/tex">LU</script>, how many operations we have to take? The answer is the number of operations we have to take to eliminate. </li>
-<li>To get the first pivot, we have to eliminate the first column. This stage needs to eliminate <script type="math/tex">n-1</script> elements. Each element needs <script type="math/tex">n</script> subtractions and <script type="math/tex">n</script> multiplications-totally <script type="math/tex">2n(n - 1) = 2n^2 - 2n = O(n^2)</script> operations. </li>
-<li>To get <script type="math/tex">U</script>, we have to eliminate each column as the first column while the size of each column is $1$ less than the former one. So totally about <script type="math/tex">n^2 + (n-1)^2 +…+1^2 = \frac{1}{3}n(n-\frac{1}{2})(n-1) = O(n^3)</script></li>
-<li>For the right side, when eliminating the first row, it needs <script type="math/tex">n-1</script> multiplications and <script type="math/tex">n-1</script> subtractions. So totally <script type="math/tex">2(n-1)+2(n-2)+…+2=O(n^2)</script></li>
+<h1 id="Projection"><a href="#Projection" class="headerlink" title="Projection"></a>Projection</h1><ol>
+<li>The least squares solution of <script type="math/tex">Q\vec{x}=\vec{b}</script> is <script type="math/tex">\hat{\vec{x}}=Q^T\vec{b}</script>. The projection matrix is <script type="math/tex">QQ^T</script>. <br /><code>MARK</code>: <script type="math/tex">QQ^T</script> is <script type="math/tex">I</script> only when <script type="math/tex">Q</script> is square. </li>
+<li>Projection: <script type="math/tex">\vec{p}=Q\hat{\vec{x}}=QQ^T\vec{b}=\sum{\vec{q_i}(\vec{q_i}^T\vec{b})}</script></li>
+<li>If <script type="math/tex">Q</script> is square: <br />Every <script type="math/tex">\vec{p_i}=\vec{q_i}(\vec{q_i}^T\vec{b})</script> is the projection of <script type="math/tex">\vec{b}</script> into a 1-dimentional  space. We can break <script type="math/tex">\vec{b}</script> into its projections and reconstruct <script type="math/tex">\vec{b}</script> from its projections. <br />Its columns space is the whole space. The projection of <script type="math/tex">\vec{b}</script> is itself. <script type="math/tex">P=I</script></li>
+</ol>
+<h1 id="Gram-Schmidt-Process"><a href="#Gram-Schmidt-Process" class="headerlink" title="Gram-Schmidt Process"></a>Gram-Schmidt Process</h1><ol>
+<li><code>The Gram-Schmidt process</code> is the process to create orthonormal vectors. </li>
+<li>The first direnction (column vector) is accepted as it comes. </li>
+<li>The next direction must be perpendicular to all the accepted directions. And we get the next direction by subtracting all its projections in the accepted directions from itself. This leaves only the perpendicular part. </li>
+<li>The process takes independent <script type="math/tex">\vec{a_i}</script> to orthonormal <script type="math/tex">\vec{q_i}</script>. <br />Start with <script type="math/tex">\vec{q_1}=\frac{\vec{a_1}}{||\vec{a_1}||}</script>. <br /><script type="math/tex">\vec{q_i}=\frac{\vec{a_i}-\vec{p}}{||\vec{a_i}-\vec{p}||}</script>. And <script type="math/tex">\vec{p_i}=\displaystyle\sum^{i-1}_{j=1}{(\vec{a_i}^T\vec{q_j})\vec{q_j}}</script></li>
+<li>If we take all column vectors <script type="math/tex">\vec{a}</script> into matrix <script type="math/tex">A</script> and all <script type="math/tex">\vec{q}</script> into <script type="math/tex">Q</script>. Since all vectors in <script type="math/tex">Q</script> is merely linear combination of <script type="math/tex">A</script>, their share the same column space. That’s how we know we can factorize <script type="math/tex">A</script> into something with <script type="math/tex">Q</script>. This is <script type="math/tex">A=QR</script>. </li>
+<li>Multiply by <script type="math/tex">Q^T</script>: <script type="math/tex">Q^TA=Q^TQR=R</script>. So <script type="math/tex">R=Q^TA=\left[\begin{matrix}\vec{q_1}^T\vec{a_1}&\vec{q_1}^T\vec{a_2}&\dots&\vec{q_1}^T\vec{a_n}\\&\vec{q_2}^T\vec{a_2}&\dots&\vec{q_2}^T\vec{a_n}\\&&\ddots&\vdots\\&&&\vec{q_n}^T\vec{a_n}\end{matrix}\right]</script>. </li>
+<li><script type="math/tex">R</script> is upper triangular because latter <script type="math/tex">\vec{q}</script>‘s are orthogonal to earlier <script type="math/tex">\vec{a}</script>‘s. </li>
+<li>The lengths of all <script type="math/tex">\vec{a}</script>‘s are in the diagonal of <script type="math/tex">R</script>. </li>
+<li><script type="math/tex; mode=display">A^TA=(QR)^T(QR)=R^TQ^TQR=R^TR</script></li>
+<li>The least squares equation <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script> becomes <script type="math/tex">R^TR\hat{\vec{x}}=R^TQ^T\vec{b}</script> and finally <script type="math/tex">R\hat{\vec{x}}=Q^T\vec{b}</script>. <br />The least squares solution <script type="math/tex">\hat{\vec{x}}=R^{-1}Q^T\vec{b}</script></li>
 </ol>
 
       
@@ -1091,7 +1030,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/25/day-15/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/01/13-Least-Squares/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -1105,7 +1044,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/25/day-15/" class="post-title-link" itemprop="url">day 15</a>
+            <a href="/2020/02/01/13-Least-Squares/" class="post-title-link" itemprop="url">13. Least Squares</a>
         </h1>
 
         <div class="post-meta">
@@ -1115,14 +1054,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-25 21:12:29" itemprop="dateCreated datePublished" datetime="2019-11-25T21:12:29+08:00">2019-11-25</time>
+              <time title="Created: 2020-02-01 16:00:15" itemprop="dateCreated datePublished" datetime="2020-02-01T16:00:15+08:00">2020-02-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:36:39" itemprop="dateModified" datetime="2020-08-07T17:36:39+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 17:44:26" itemprop="dateModified" datetime="2020-08-07T17:44:26+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1130,14 +1069,14 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/%E6%9B%B2%E6%A0%B9%E4%B8%87%E8%AF%8D%E7%8F%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">曲根万词班</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
                   </a>
                 </span>
             </span>
@@ -1153,830 +1092,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">jovial</td>
-<td style="text-align:center">adj. 快乐的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">jolly</td>
-<td style="text-align:center">adj. 快乐的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">convivial</td>
-<td style="text-align:center">adj. 欢乐的；轻松活泼的；欢宴的</td>
-<td style="text-align:center">convival friends 酒肉朋友</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pastime</td>
-<td style="text-align:center">n. 娱乐</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">diversion</td>
-<td style="text-align:center">n. 消遣，娱乐</td>
-<td style="text-align:center">来自divert</td>
-<td style="text-align:center">divers·ion</td>
-</tr>
-<tr>
-<td style="text-align:center">recreation</td>
-<td style="text-align:center">n. 消遣，娱乐</td>
-<td style="text-align:center">物质丰富，再创作出娱乐活动</td>
-<td style="text-align:center">re·creat·ion</td>
-</tr>
-<tr>
-<td style="text-align:center">abdicate</td>
-<td style="text-align:center">v. 放弃</td>
-<td style="text-align:center">说(dic)离开(ab)</td>
-<td style="text-align:center">ab·dic·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">snug</td>
-<td style="text-align:center">adj. 温暖而舒适的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cosy</td>
-<td style="text-align:center">adj. 舒适的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">purify</td>
-<td style="text-align:center">v. 使纯净</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">expurgate</td>
-<td style="text-align:center">v. 删除</td>
-<td style="text-align:center"><code>purg - pure</code><br />向外净化</td>
-<td style="text-align:center">ex·purg·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">purgative</td>
-<td style="text-align:center">n. 泻药</td>
-<td style="text-align:center">大肠清洁剂</td>
-<td style="text-align:center">purg·ative</td>
-</tr>
-<tr>
-<td style="text-align:center">purge</td>
-<td style="text-align:center">v. 清洗，净化</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">demolish</td>
-<td style="text-align:center">v. 破坏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mollify</td>
-<td style="text-align:center">v. 减轻；安慰</td>
-<td style="text-align:center"><code>moll - soft</code><br />软化受伤的心</td>
-<td style="text-align:center">moll·ify</td>
-</tr>
-<tr>
-<td style="text-align:center">emollient</td>
-<td style="text-align:center">n. 润肤剂</td>
-<td style="text-align:center">让皮肤柔软</td>
-<td style="text-align:center">e·moll·ient</td>
-</tr>
-<tr>
-<td style="text-align:center">thralldom</td>
-<td style="text-align:center">n. 奴役</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bondage</td>
-<td style="text-align:center">n. 奴役</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">lull</td>
-<td style="text-align:center">v. 使安静</td>
-<td style="text-align:center">呼噜声大<br />lull sb. to sleep</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gull</td>
-<td style="text-align:center">n. 海鸥</td>
-<td style="text-align:center">海鸥咕咕叫</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gullible</td>
-<td style="text-align:center">adj. 轻信的</td>
-<td style="text-align:center">海鸥见到东西就去吃</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mull</td>
-<td style="text-align:center">v. 沉思</td>
-<td style="text-align:center">muse</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">null</td>
-<td style="text-align:center">adj. 无效的</td>
-<td style="text-align:center">null and void</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">hull</td>
-<td style="text-align:center">n. 船身</td>
-<td style="text-align:center">水手的house</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">cull</td>
-<td style="text-align:center">n. 屠宰<br />v. 精选</td>
-<td style="text-align:center">cut肉</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">plaintiff</td>
-<td style="text-align:center">n. 原告</td>
-<td style="text-align:center">plain + tiff<br />发起在法院清晰的吵架的人</td>
-<td style="text-align:center">plain·tiff</td>
-</tr>
-<tr>
-<td style="text-align:center">defendant</td>
-<td style="text-align:center">n. 被告</td>
-<td style="text-align:center">为自己辩护</td>
-<td style="text-align:center">defend·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">strenuous</td>
-<td style="text-align:center">adj. 辛苦的</td>
-<td style="text-align:center">strenuous exercise 剧烈运动<br />来自strength</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitiate</td>
-<td style="text-align:center">v. 使污浊；使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nullify</td>
-<td style="text-align:center">v. 使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">annul</td>
-<td style="text-align:center">v. 使无效</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">aggrieve</td>
-<td style="text-align:center">v. 使苦恼；迫害</td>
-<td style="text-align:center">来自grieve</td>
-<td style="text-align:center">ag·grieve</td>
-</tr>
-<tr>
-<td style="text-align:center">persecute</td>
-<td style="text-align:center">v. 迫害</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">callous</td>
-<td style="text-align:center">adj. 无情的；长茧的</td>
-<td style="text-align:center"><code>call - hand</code><br />粗活干多了，手上长老茧<br />心里长茧，心变硬了，无情</td>
-<td style="text-align:center">call·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">calloused</td>
-<td style="text-align:center">adj. 长满老茧的</td>
-<td style="text-align:center">calloused hands</td>
-<td style="text-align:center">callous·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">callosity</td>
-<td style="text-align:center">n. 无情；老茧</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">call·osity</td>
-</tr>
-<tr>
-<td style="text-align:center">dissent</td>
-<td style="text-align:center">n./v. 反对</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fabulous</td>
-<td style="text-align:center">adj. 惊人的</td>
-<td style="text-align:center"><code>fab - to speak</code><br />惊讶地大叫</td>
-<td style="text-align:center">fab·ulous</td>
-</tr>
-<tr>
-<td style="text-align:center">affable</td>
-<td style="text-align:center">adj. 和蔼可亲的</td>
-<td style="text-align:center">容易一起讲话的</td>
-<td style="text-align:center">af·fab·le</td>
-</tr>
-<tr>
-<td style="text-align:center">ineffable</td>
-<td style="text-align:center">adj. 不可言喻的</td>
-<td style="text-align:center">讲不出来的</td>
-<td style="text-align:center">in·ef·fab·le</td>
-</tr>
-<tr>
-<td style="text-align:center">gorgeous</td>
-<td style="text-align:center">adj. 惊人的，极好的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">infuriate</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center">来自fury</td>
-<td style="text-align:center">in·furi·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">furious</td>
-<td style="text-align:center">adj. 生气的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">furi·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">incense</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incentive</td>
-<td style="text-align:center">adj. 激励的</td>
-<td style="text-align:center">来自incense (s → t)<br />在怒气激励下</td>
-<td style="text-align:center">incent·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">exasperate</td>
-<td style="text-align:center">v. 激怒；恶化</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vex</td>
-<td style="text-align:center">v. 激怒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incite</td>
-<td style="text-align:center">v. 激起，煽动</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">foment</td>
-<td style="text-align:center">v. 激起，煽动</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mordant</td>
-<td style="text-align:center">adj. 尖酸的，讽刺的</td>
-<td style="text-align:center"><code>mors - bite</code><br />像要咬人一样</td>
-<td style="text-align:center">mord·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">remorse</td>
-<td style="text-align:center">n. 后悔</td>
-<td style="text-align:center">后悔得反咬自己一口</td>
-<td style="text-align:center">re·morse</td>
-</tr>
-<tr>
-<td style="text-align:center">prowess</td>
-<td style="text-align:center">n. 勇敢；高超的技艺</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissipate</td>
-<td style="text-align:center">v. 驱散，散开；浪费</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">colossal</td>
-<td style="text-align:center">adj. 巨大的</td>
-<td style="text-align:center">共同损失巨大的</td>
-<td style="text-align:center">co·loss·al</td>
-</tr>
-<tr>
-<td style="text-align:center">stupendous</td>
-<td style="text-align:center">adj. 巨大的；惊人的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">prodigious</td>
-<td style="text-align:center">adj. 惊人的</td>
-<td style="text-align:center">prod - pro<br />一直向前行动</td>
-<td style="text-align:center">prod·ig·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">prodigy</td>
-<td style="text-align:center">n. 奇才</td>
-<td style="text-align:center">在领域内一直往前不会受到阻碍</td>
-<td style="text-align:center">prod·ig·y</td>
-</tr>
-<tr>
-<td style="text-align:center">prodigal</td>
-<td style="text-align:center">adj. 浪费的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gargantuan</td>
-<td style="text-align:center">adj. 巨大的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dismal</td>
-<td style="text-align:center">adj. 沮丧的，忧郁的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">dis·mal</td>
-</tr>
-<tr>
-<td style="text-align:center">downcast</td>
-<td style="text-align:center">adj. 沮丧的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">melancholy</td>
-<td style="text-align:center">adj. 沮丧的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">genial</td>
-<td style="text-align:center">adj. 亲切的；愉快的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">inveterate</td>
-<td style="text-align:center">adj. 根深蒂固的，习惯的</td>
-<td style="text-align:center">inveterate smoker 老烟枪<br />veteran</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ineradicable</td>
-<td style="text-align:center">adj. 根深蒂固的</td>
-<td style="text-align:center"><code>rad - remove</code><br />擦不掉的习惯</td>
-<td style="text-align:center">in·e·rad·ic·able</td>
-</tr>
-<tr>
-<td style="text-align:center">ingrained</td>
-<td style="text-align:center">adj. 根深蒂固的，难以改变的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">addictive</td>
-<td style="text-align:center">adj. 根深蒂固的</td>
-<td style="text-align:center">加上难以去掉</td>
-<td style="text-align:center">add·ictive</td>
-</tr>
-<tr>
-<td style="text-align:center">sojourn</td>
-<td style="text-align:center">n./v. 暂住，寄居</td>
-<td style="text-align:center"><code>journ - day</code><br /><code>so - sub</code><br />住下的日子</td>
-<td style="text-align:center">so·journ</td>
-</tr>
-<tr>
-<td style="text-align:center">diurnal</td>
-<td style="text-align:center">adj. 白天的</td>
-<td style="text-align:center"><code>di - day</code><br />journ - urn</td>
-<td style="text-align:center">di·urn·al</td>
-</tr>
-<tr>
-<td style="text-align:center">nocturnal</td>
-<td style="text-align:center">adj. 夜间的</td>
-<td style="text-align:center"><code>noct - night</code></td>
-<td style="text-align:center">noct·urn·al</td>
-</tr>
-<tr>
-<td style="text-align:center">adjourn</td>
-<td style="text-align:center">v. 推迟，延期</td>
-<td style="text-align:center">加几天</td>
-<td style="text-align:center">ad·journ</td>
-</tr>
-<tr>
-<td style="text-align:center">lodge</td>
-<td style="text-align:center">v. 暂住</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">turmoil</td>
-<td style="text-align:center">n. 混乱，骚乱</td>
-<td style="text-align:center"><code>turb - to stir(disturn)</code></td>
-<td style="text-align:center">tur·moil</td>
-</tr>
-<tr>
-<td style="text-align:center">perturb</td>
-<td style="text-align:center">v. 打扰</td>
-<td style="text-align:center">一直stir</td>
-<td style="text-align:center">per·turb</td>
-</tr>
-<tr>
-<td style="text-align:center">turbulence</td>
-<td style="text-align:center">n. 气流；骚乱</td>
-<td style="text-align:center">气流扰乱</td>
-<td style="text-align:center">turb·ul·ence</td>
-</tr>
-<tr>
-<td style="text-align:center">turbid</td>
-<td style="text-align:center">adj. 浑浊的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">limpid</td>
-<td style="text-align:center">adj. 清澈的，透明的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tumult</td>
-<td style="text-align:center">n. 混乱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">commotion</td>
-<td style="text-align:center">n. 混乱，骚乱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">haggard</td>
-<td style="text-align:center">adj. 憔悴的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">irreparable</td>
-<td style="text-align:center">adj. 无法挽救的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paternal</td>
-<td style="text-align:center">adj. 父系的</td>
-<td style="text-align:center"><code>pater - father/country</code></td>
-<td style="text-align:center">patern·al</td>
-</tr>
-<tr>
-<td style="text-align:center">patron</td>
-<td style="text-align:center">n. 老顾客</td>
-<td style="text-align:center">对店就像父亲一样</td>
-<td style="text-align:center">patr·on</td>
-</tr>
-<tr>
-<td style="text-align:center">patronize</td>
-<td style="text-align:center">v. 赞助；庇护</td>
-<td style="text-align:center">父亲赞助生活</td>
-<td style="text-align:center">patr·on·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">repatriate</td>
-<td style="text-align:center">v. 遣返</td>
-<td style="text-align:center">返回祖国</td>
-<td style="text-align:center">re·patri·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">expatriate</td>
-<td style="text-align:center">v. 驱逐</td>
-<td style="text-align:center">赶出祖国</td>
-<td style="text-align:center">ex·patri·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">compatriot</td>
-<td style="text-align:center">n. 同胞</td>
-<td style="text-align:center">同一个国家的人</td>
-<td style="text-align:center">com·patri·ot</td>
-</tr>
-<tr>
-<td style="text-align:center">patriotism</td>
-<td style="text-align:center">n. 爱国主义</td>
-<td style="text-align:center">爱祖国</td>
-<td style="text-align:center">patri·ot·ism</td>
-</tr>
-<tr>
-<td style="text-align:center">maternal</td>
-<td style="text-align:center">adj. 母系的</td>
-<td style="text-align:center"><code>mater - mother</code></td>
-<td style="text-align:center">matern·al</td>
-</tr>
-<tr>
-<td style="text-align:center">maternity</td>
-<td style="text-align:center">n. 母性</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">matern·ity</td>
-</tr>
-<tr>
-<td style="text-align:center">metropolis</td>
-<td style="text-align:center">n. 大都市</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">metro·polis</td>
-</tr>
-<tr>
-<td style="text-align:center">matriarchy</td>
-<td style="text-align:center">n. 女族长制；母系氏族</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">matri·archy</td>
-</tr>
-<tr>
-<td style="text-align:center">fraternal</td>
-<td style="text-align:center">adj. 兄弟的</td>
-<td style="text-align:center"><code>frater - brother</code></td>
-<td style="text-align:center">frater·nal</td>
-</tr>
-<tr>
-<td style="text-align:center">quarantine</td>
-<td style="text-align:center">n./v. 隔离，验证疫期</td>
-<td style="text-align:center">qua(rter)ran(→ tin)tine<br />被关在罐子里一季度</td>
-<td style="text-align:center">qua·ran·tine</td>
-</tr>
-<tr>
-<td style="text-align:center">segregate</td>
-<td style="text-align:center">v. 隔离(种族)</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">se·gre·gate</td>
-</tr>
-<tr>
-<td style="text-align:center">insulate</td>
-<td style="text-align:center">v. 隔离</td>
-<td style="text-align:center">sul - sole</td>
-<td style="text-align:center">in·sul·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">bigoted</td>
-<td style="text-align:center">adj. 固执的；偏见的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">tenacious</td>
-<td style="text-align:center">adj. 固执的</td>
-<td style="text-align:center"><code>ten - tain - to keep</code><br />保留很多，不变</td>
-<td style="text-align:center">ten·acious</td>
-</tr>
-<tr>
-<td style="text-align:center">adamant</td>
-<td style="text-align:center">adj. 坚决的，坚定不移的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mulish</td>
-<td style="text-align:center">adj. 固执的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">willful</td>
-<td style="text-align:center">adj. 任性的</td>
-<td style="text-align:center">充满个人意愿</td>
-<td style="text-align:center">will·ful</td>
-</tr>
-<tr>
-<td style="text-align:center">deficient</td>
-<td style="text-align:center">adj. 不足的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sufficient</td>
-<td style="text-align:center">adj. 充足的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">paucity</td>
-<td style="text-align:center">n. 缺乏，不足</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dearth</td>
-<td style="text-align:center">n. 缺乏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scarcity</td>
-<td style="text-align:center">n. 不足</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">elude</td>
-<td style="text-align:center">v. 躲避</td>
-<td style="text-align:center"><code>lude - to play</code><br />逃出去玩</td>
-<td style="text-align:center">e·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">elusive</td>
-<td style="text-align:center">adj. 逃避的；晦涩难懂的</td>
-<td style="text-align:center">来自elude</td>
-<td style="text-align:center">e·lus·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">allude</td>
-<td style="text-align:center">v. 暗示，暗指</td>
-<td style="text-align:center">开玩笑，暗指</td>
-<td style="text-align:center">al·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">collude</td>
-<td style="text-align:center">v. 串通</td>
-<td style="text-align:center">一起玩</td>
-<td style="text-align:center">col·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">delude</td>
-<td style="text-align:center">v. 欺骗</td>
-<td style="text-align:center">玩下流把戏</td>
-<td style="text-align:center">de·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">ludicrous</td>
-<td style="text-align:center">adj. 滑稽可笑的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">ludi·cr·ous</td>
-</tr>
-<tr>
-<td style="text-align:center">prelude</td>
-<td style="text-align:center">n. 前奏</td>
-<td style="text-align:center">之前play的乐曲</td>
-<td style="text-align:center">pre·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">interlude</td>
-<td style="text-align:center">n. 间奏</td>
-<td style="text-align:center">中间play的乐曲</td>
-<td style="text-align:center">inter·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">postlude</td>
-<td style="text-align:center">n. 尾声</td>
-<td style="text-align:center">后面play的乐曲</td>
-<td style="text-align:center">post·lude</td>
-</tr>
-<tr>
-<td style="text-align:center">ignoble</td>
-<td style="text-align:center">adj. 卑微的</td>
-<td style="text-align:center"><code>ig - not</code><br />不高贵noble的</td>
-<td style="text-align:center">ig·noble</td>
-</tr>
-<tr>
-<td style="text-align:center">disgraceful</td>
-<td style="text-align:center">adj. 丢脸的，不光彩的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ignominious</td>
-<td style="text-align:center">adj. 不光彩的，可耻的</td>
-<td style="text-align:center"><code>nom - name</code><br />没有名誉的</td>
-<td style="text-align:center">ig·nom·inious</td>
-</tr>
-<tr>
-<td style="text-align:center">kindred</td>
-<td style="text-align:center">adj. 同类的；同族的</td>
-<td style="text-align:center">来自kin</td>
-<td style="text-align:center">kindr·ed</td>
-</tr>
-<tr>
-<td style="text-align:center">poltroon</td>
-<td style="text-align:center">n. 懦夫</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rout</td>
-<td style="text-align:center">v. 溃败，打散</td>
-<td style="text-align:center"><code>rupt - to break</code></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">susceptible</td>
-<td style="text-align:center">adj. 易受影响的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">abide</td>
-<td style="text-align:center">v. 居住</td>
-<td style="text-align:center">abide by 遵守</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">boisterous</td>
-<td style="text-align:center">adj. 喧闹的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">despicable</td>
-<td style="text-align:center">adj. 可鄙视的的</td>
-<td style="text-align:center">可以不看的</td>
-<td style="text-align:center">de·spic·able</td>
-</tr>
-<tr>
-<td style="text-align:center">despise</td>
-<td style="text-align:center">v. 鄙视</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">de·spise</td>
-</tr>
-<tr>
-<td style="text-align:center">exotic</td>
-<td style="text-align:center">adj. 外来的；异域的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nonplus</td>
-<td style="text-align:center">v. 使迷惑</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">addle</td>
-<td style="text-align:center">v. 使头脑混乱的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sever</td>
-<td style="text-align:center">v. 分开；断绝</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sultry</td>
-<td style="text-align:center">adj. 闷热的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">swelter</td>
-<td style="text-align:center">n./v. 使闷热</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wane</td>
-<td style="text-align:center">v. 月亏；减弱</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">wax</td>
-<td style="text-align:center">v. 月满；增强</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
+          <h1 id="Minimizing-the-Error"><a href="#Minimizing-the-Error" class="headerlink" title="Minimizing the Error"></a>Minimizing the Error</h1><ol>
+<li>When $A\vec{x}=\vec{b}$ has no solution, we solve $A\hat{\vec{x}}=\vec{b}’$. And $\vec{e}=\vec{b}-A\hat{\vec{x}}$ is the error vector stands for the difference between $\vec{b}$ and the $\vec{b}’$ we use instead. </li>
+<li>$\hat{\vec{x}}$ is called the <code>least squares solution</code>. </li>
+<li>Because $\hat{\vec{x}}$ is the best solution, $\hat{\vec{x}}$ makes $E=||e||^2$ as small as possible. </li>
+<li>By geometry, to minimize $E$, we only need to make $\vec{e}$ perpendicular to $C(A)$. So the best solution to $A\hat{\vec{x}}$ is $\vec{p}$. </li>
+<li>By algebra, $\vec{b}$ splits into two parts. The part in the column space is $\vec{p}$. The perpendicular part is $\vec{e}$. So remove $\vec{e}$ and solve $A\hat{\vec{x}}=\vec{p}$. </li>
+<li>For any vector $\vec{x}$, $||A\vec{x}-\vec{b}||^2=||A\vec{x}-\vec{p}||^2+||\vec{e}||^2$. $A\vec{x}-\vec{p}$ which stands for the defference between $\vec{b}’$ and $\vec{p}$ is in $C(A)$ and $\vec{e}$ is in $N(A^T)$. We set $A\vec{x}-\vec{p}$ $\vec{0}$ by choosing $\vec{x}=\hat{\vec{x}}$ to minimize $||A\vec{x}-\vec{b}||$. </li>
+<li>By calculus, we need to minimize the function $E=\displaystyle{\sum^n_{i=1}{e_i^2}}$. To do that, we need to solve $\frac{\partial E}{\partial x_i}=0$. After that, we can get a new system of equations $A’\vec{x}=\vec{c}$. Here $A’$ happens to be $A^TA$ and $\vec{c}$ happens to be $A^T\vec{b}$. </li>
+<li>The shortage of least squares is that it cannot ignore the wrong data. If a data is wrong, it will be far a way from others and the solution will shift to it. </li>
+</ol>
+<h1 id="Dependent-Columns-in-A"><a href="#Dependent-Columns-in-A" class="headerlink" title="Dependent Columns in A"></a>Dependent Columns in A</h1><ol>
+<li>If A has dependent columns, $A^TA$ isn’t invertible, we cannot use the aforementioned way to get the best solution. </li>
+<li>If we insist the projection way, we can change an equation without solution to an equation with infinitely many solutions. </li>
+<li>The pseudoinverse will choose the shortest solution to $A\hat{\vec{x}}=\vec{p}$. </li>
+</ol>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Fitting-a-Straight-Line"><a href="#Fitting-a-Straight-Line" class="headerlink" title="Fitting a Straight Line"></a>Fitting a Straight Line</h2><ol>
+<li>We have $m$ dots and want to find a line go through all dots. When we cannot, we want a best line. </li>
+<li>If we suppose that line is $C+Dt=b$, we can have the equation $A\left[\begin{matrix}C\\D\end{matrix}\right]=\vec{b}$. $A=\left[\begin{matrix}1&amp;t_1\\1&amp;t_2\\\vdots&amp;\vdots\\1&amp;t_m\end{matrix}\right]$ $\vec{b}=\left[\begin{matrix}b_1\\b_2\\\vdots\\b_m\end{matrix}\right]$</li>
+<li>$A^TA=\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]$<br />$A^T\vec{b}=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$<br />The final equation is $\left[\begin{matrix}m&amp;\sum{t_i}\\\sum{t_i}&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$</li>
+<li>If two columns of $A$ is orthogonal, i.e. $\sum{t_i}=0$, the final equation becomes $\left[\begin{matrix}m&amp;0\\0&amp;\sum{t_i^2}\end{matrix}\right]\left[\begin{matrix}C\\D\end{matrix}\right]=\left[\begin{matrix}\sum{b_i}\\\sum{t_ib_i}\end{matrix}\right]$ which is a lot easier to solve. So we can orthognize columns of $A$ first by subtracting the average time $\hat{t}=\frac{\sum{t_i}}{m}$ from the last column of $A$. </li>
+</ol>
+<h2 id="Fitting-by-a-Parabola"><a href="#Fitting-by-a-Parabola" class="headerlink" title="Fitting by a Parabola"></a>Fitting by a Parabola</h2><ol>
+<li>Suppose $C+Dt+Et^2=b$. </li>
+<li>$A=\left[\begin{matrix}1&amp;t_1&amp;t_1^2\\1&amp;t_2&amp;t_2^2\\\vdots&amp;\vdots&amp;\vdots\\1&amp;t_m&amp;t_m^2\end{matrix}\right]$</li>
+</ol>
 
       
     </div>
@@ -1996,7 +1136,7 @@ table th:first-of-type {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/11/25/day-14/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/01/12-Projections-onto-Subspaces/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -2010,7 +1150,7 @@ table th:first-of-type {
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/25/day-14/" class="post-title-link" itemprop="url">day 14</a>
+            <a href="/2020/02/01/12-Projections-onto-Subspaces/" class="post-title-link" itemprop="url">12. Projections onto Subspaces</a>
         </h1>
 
         <div class="post-meta">
@@ -2020,14 +1160,14 @@ table th:first-of-type {
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-25 11:49:54" itemprop="dateCreated datePublished" datetime="2019-11-25T11:49:54+08:00">2019-11-25</time>
+              <time title="Created: 2020-02-01 09:30:17" itemprop="dateCreated datePublished" datetime="2020-02-01T09:30:17+08:00">2020-02-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 17:36:35" itemprop="dateModified" datetime="2020-08-07T17:36:35+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:16:00" itemprop="dateModified" datetime="2020-08-07T19:16:00+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2035,14 +1175,14 @@ table th:first-of-type {
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/%E6%9B%B2%E6%A0%B9%E4%B8%87%E8%AF%8D%E7%8F%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">曲根万词班</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
                   </a>
                 </span>
             </span>
@@ -2058,747 +1198,27 @@ table th:first-of-type {
     <div class="post-body" itemprop="articleBody">
 
       
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">单词</th>
-<th style="text-align:center">释义</th>
-<th style="text-align:center">备注</th>
-<th style="text-align:center">分解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">feud</td>
-<td style="text-align:center">n. 世仇</td>
-<td style="text-align:center">关于土地field引起的世仇</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">feudal</td>
-<td style="text-align:center">adj. 封建的</td>
-<td style="text-align:center">封建土地</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">feudalism</td>
-<td style="text-align:center">n. 封建制度</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">feudal·ism</td>
-</tr>
-<tr>
-<td style="text-align:center">indolent</td>
-<td style="text-align:center">adj. 粗野的，无礼的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">presumptuous</td>
-<td style="text-align:center">adj. 放肆无理的；专横的</td>
-<td style="text-align:center"><code>sumpt/sume - to take</code><br />提前拿走</td>
-<td style="text-align:center">pre·sumpt·uous</td>
-</tr>
-<tr>
-<td style="text-align:center">predecessor</td>
-<td style="text-align:center">n. 前任</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">successor</td>
-<td style="text-align:center">n. 后辈</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">whet</td>
-<td style="text-align:center">v. 刺激</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">quell</td>
-<td style="text-align:center">v. 平息</td>
-<td style="text-align:center">quiet</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">squelch</td>
-<td style="text-align:center">v. 压制</td>
-<td style="text-align:center">squash</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">acquit</td>
-<td style="text-align:center">v. 宣告无罪</td>
-<td style="text-align:center">退出指控</td>
-<td style="text-align:center">ac·quit</td>
-</tr>
-<tr>
-<td style="text-align:center">convict</td>
-<td style="text-align:center">v. 证明某人有罪</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">culprit</td>
-<td style="text-align:center">n. 犯罪</td>
-<td style="text-align:center"><code>culp - guilt</code></td>
-<td style="text-align:center">culp·rit</td>
-</tr>
-<tr>
-<td style="text-align:center">culpable</td>
-<td style="text-align:center">adj. 有罪的；应受谴责的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">culp·able</td>
-</tr>
-<tr>
-<td style="text-align:center">detract</td>
-<td style="text-align:center">v. 贬损</td>
-<td style="text-align:center"><code>tract - to draw</code><br />向下拉</td>
-<td style="text-align:center">de·tract</td>
-</tr>
-<tr>
-<td style="text-align:center">protract</td>
-<td style="text-align:center">v. 延长</td>
-<td style="text-align:center">向前拉</td>
-<td style="text-align:center">pro·tract</td>
-</tr>
-<tr>
-<td style="text-align:center">intractable</td>
-<td style="text-align:center">adj. 难以驾驭的</td>
-<td style="text-align:center">拉不住的</td>
-<td style="text-align:center">in·tract·able</td>
-</tr>
-<tr>
-<td style="text-align:center">retract</td>
-<td style="text-align:center">v. 收回</td>
-<td style="text-align:center">拉回来</td>
-<td style="text-align:center">re·tract</td>
-</tr>
-<tr>
-<td style="text-align:center">indulgent</td>
-<td style="text-align:center">adj. 放任的；溺爱的</td>
-<td style="text-align:center">不再dull的生活</td>
-<td style="text-align:center">in·dul·gent</td>
-</tr>
-<tr>
-<td style="text-align:center">stern</td>
-<td style="text-align:center">adj. 严格的，苛刻</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rigid</td>
-<td style="text-align:center">adj. 严格的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rigorous</td>
-<td style="text-align:center">adj. 严格的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mendacious</td>
-<td style="text-align:center">adj. 爱说谎的</td>
-<td style="text-align:center">mind很多</td>
-<td style="text-align:center">mend·acious</td>
-</tr>
-<tr>
-<td style="text-align:center">perfidious</td>
-<td style="text-align:center">adj. 背信弃义的，不忠的</td>
-<td style="text-align:center"><code>fid - believe</code><br />离开了信仰</td>
-<td style="text-align:center">per·fid·ious</td>
-</tr>
-<tr>
-<td style="text-align:center">fraudulent</td>
-<td style="text-align:center">adj. 欺骗性的，骗人的</td>
-<td style="text-align:center">fraud</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">treacherous</td>
-<td style="text-align:center">adj. 背信弃义的，不忠的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">brim</td>
-<td style="text-align:center">n. 边缘</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">brink</td>
-<td style="text-align:center">n. 峭壁的边缘</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">fringe</td>
-<td style="text-align:center">n. 边缘；刘海</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">infringe</td>
-<td style="text-align:center">v. 违背</td>
-<td style="text-align:center">走进边缘</td>
-<td style="text-align:center">in·fringe</td>
-</tr>
-<tr>
-<td style="text-align:center">adjacent</td>
-<td style="text-align:center">adj. 接近的；邻近的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">adjoin</td>
-<td style="text-align:center">v. 邻近</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">abut</td>
-<td style="text-align:center">v. 邻近</td>
-<td style="text-align:center">abut on</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">devastate</td>
-<td style="text-align:center">v. 毁灭</td>
-<td style="text-align:center">waste (w → v)<br />都浪费掉</td>
-<td style="text-align:center">de·vast·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">demolish</td>
-<td style="text-align:center">v. 拆除；破坏</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">demolition</td>
-<td style="text-align:center">n. 拆迁</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">inexhaustible</td>
-<td style="text-align:center">adj. 无穷无尽的</td>
-<td style="text-align:center">不会疲惫的</td>
-<td style="text-align:center">in·exhaust·ible</td>
-</tr>
-<tr>
-<td style="text-align:center">maudlin</td>
-<td style="text-align:center">adj. 易落泪的，伤感</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">mushy</td>
-<td style="text-align:center">adj. 感伤的，多愁善感的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scrutinous</td>
-<td style="text-align:center">adj. 仔细查看的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scrutiny</td>
-<td style="text-align:center">n. 细看</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">heedless</td>
-<td style="text-align:center">adj. 不注意的，不留心的</td>
-<td style="text-align:center">来自heed</td>
-<td style="text-align:center">heed·less</td>
-</tr>
-<tr>
-<td style="text-align:center">sundry</td>
-<td style="text-align:center">adj. 种种的，各种各样的</td>
-<td style="text-align:center">把一种东西分开sunder成各种各样的东西</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">assorted</td>
-<td style="text-align:center">adj. 各种各样的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">zealous</td>
-<td style="text-align:center">adj. 热心的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">zeal</td>
-<td style="text-align:center">n. 热心</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">zest</td>
-<td style="text-align:center">n. 热心</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">altruistic</td>
-<td style="text-align:center">adj. 利他的</td>
-<td style="text-align:center"><code>alter - other</code></td>
-<td style="text-align:center">altr·uistic</td>
-</tr>
-<tr>
-<td style="text-align:center">egoism</td>
-<td style="text-align:center">n. 自我主义</td>
-<td style="text-align:center"><code>ego - 自我</code></td>
-<td style="text-align:center">ego·ism</td>
-</tr>
-<tr>
-<td style="text-align:center">altercate</td>
-<td style="text-align:center">v. 口角</td>
-<td style="text-align:center">和别人吵架</td>
-<td style="text-align:center">alter·cate</td>
-</tr>
-<tr>
-<td style="text-align:center">alternate</td>
-<td style="text-align:center">v. 交替</td>
-<td style="text-align:center">和别人换</td>
-<td style="text-align:center">alter·nate</td>
-</tr>
-<tr>
-<td style="text-align:center">clamor</td>
-<td style="text-align:center">v./n. 叫嚣</td>
-<td style="text-align:center">claim</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">disclaim</td>
-<td style="text-align:center">v. 否认</td>
-<td style="text-align:center">宣布不是</td>
-<td style="text-align:center">dis·claim</td>
-</tr>
-<tr>
-<td style="text-align:center">declaim</td>
-<td style="text-align:center">v. 演讲；慷慨陈词</td>
-<td style="text-align:center">对下面的人讲</td>
-<td style="text-align:center">de·claim</td>
-</tr>
-<tr>
-<td style="text-align:center">reclaim</td>
-<td style="text-align:center">v. 开垦；要求收回</td>
-<td style="text-align:center">宣布要拿回来</td>
-<td style="text-align:center">re·claim</td>
-</tr>
-<tr>
-<td style="text-align:center">forebear</td>
-<td style="text-align:center">n. 祖先</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">fore·bear</td>
-</tr>
-<tr>
-<td style="text-align:center">forefather</td>
-<td style="text-align:center">n. 祖先</td>
-<td style="text-align:center">之前的父亲</td>
-<td style="text-align:center">fore·father</td>
-</tr>
-<tr>
-<td style="text-align:center">descendant</td>
-<td style="text-align:center">n. 子孙</td>
-<td style="text-align:center">下面的人</td>
-<td style="text-align:center">descent·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">intact</td>
-<td style="text-align:center">adj. 原封不动的</td>
-<td style="text-align:center"><code>tact - to touch</code><br />没有被碰过</td>
-<td style="text-align:center">in·tact</td>
-</tr>
-<tr>
-<td style="text-align:center">contagion</td>
-<td style="text-align:center">n. 传染</td>
-<td style="text-align:center">碰了一个人就得了一样的病</td>
-<td style="text-align:center">con·tag·ion</td>
-</tr>
-<tr>
-<td style="text-align:center">contiguity</td>
-<td style="text-align:center">n. 邻近；接触</td>
-<td style="text-align:center">抬头不见低头见，一直都要碰到</td>
-<td style="text-align:center">con·tig·uity</td>
-</tr>
-<tr>
-<td style="text-align:center">profuse</td>
-<td style="text-align:center">adj. 丰富的；慷慨的；浪费的</td>
-<td style="text-align:center"><code>fuse - pour</code><br />倒到垃圾桶里，浪费<br />倒到别人手里，慷慨<br />有那么多可以倒，丰富</td>
-<td style="text-align:center">pro·fuse</td>
-</tr>
-<tr>
-<td style="text-align:center">infuse</td>
-<td style="text-align:center">v. 灌输</td>
-<td style="text-align:center">倒进去</td>
-<td style="text-align:center">in·fuse</td>
-</tr>
-<tr>
-<td style="text-align:center">effuse</td>
-<td style="text-align:center">v. 流出</td>
-<td style="text-align:center">倒出来</td>
-<td style="text-align:center">ef·fuse</td>
-</tr>
-<tr>
-<td style="text-align:center">effusive</td>
-<td style="text-align:center">adj. 热情洋溢的</td>
-<td style="text-align:center">情感外露的</td>
-<td style="text-align:center">ef·fus·ive</td>
-</tr>
-<tr>
-<td style="text-align:center">suffuse</td>
-<td style="text-align:center">v. 充满</td>
-<td style="text-align:center">倒满</td>
-<td style="text-align:center">suf·fuse</td>
-</tr>
-<tr>
-<td style="text-align:center">fuddle</td>
-<td style="text-align:center">v. 灌醉</td>
-<td style="text-align:center">反复倒满酒</td>
-<td style="text-align:center">fud·dle</td>
-</tr>
-<tr>
-<td style="text-align:center">befuddle</td>
-<td style="text-align:center">v. 使迷惑，困惑</td>
-<td style="text-align:center">喝多酒的正常状态</td>
-<td style="text-align:center">be·fuddle</td>
-</tr>
-<tr>
-<td style="text-align:center">slack</td>
-<td style="text-align:center">adj. 懈怠的；疏忽的；萧条的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sluggish</td>
-<td style="text-align:center">adj. 懒惰的</td>
-<td style="text-align:center">和鼻涕虫(slug)一样软塌塌地爬在那里</td>
-<td style="text-align:center">slug·g·ish</td>
-</tr>
-<tr>
-<td style="text-align:center">sluggard</td>
-<td style="text-align:center">n. 懒鬼</td>
-<td style="text-align:center">同上</td>
-<td style="text-align:center">slug·g·ard</td>
-</tr>
-<tr>
-<td style="text-align:center">tart</td>
-<td style="text-align:center">adj. 酸的；尖刻的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pungent</td>
-<td style="text-align:center">adj. 尖刻的；刺激性的</td>
-<td style="text-align:center"><code>pung/punc - 刺</code></td>
-<td style="text-align:center">pung·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">expunge</td>
-<td style="text-align:center">v. 删除，抹去</td>
-<td style="text-align:center">刺出去</td>
-<td style="text-align:center">ex·pung·e</td>
-</tr>
-<tr>
-<td style="text-align:center">punctilious</td>
-<td style="text-align:center">adj. 谨慎的</td>
-<td style="text-align:center">小心不要刺到自己</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">compunction</td>
-<td style="text-align:center">n. 后悔</td>
-<td style="text-align:center">刺痛内心的行为</td>
-<td style="text-align:center">com·punc·tion</td>
-</tr>
-<tr>
-<td style="text-align:center">punch</td>
-<td style="text-align:center">v .打孔；重击</td>
-<td style="text-align:center">用拳头刺</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">poignant</td>
-<td style="text-align:center">adj. 尖刻的；辛辣的</td>
-<td style="text-align:center">point</td>
-<td style="text-align:center">poign·ant</td>
-</tr>
-<tr>
-<td style="text-align:center">nonviable</td>
-<td style="text-align:center">adj. 无法生存的</td>
-<td style="text-align:center">来自viable，不可行的</td>
-<td style="text-align:center">non·viaible</td>
-</tr>
-<tr>
-<td style="text-align:center">aslant</td>
-<td style="text-align:center">adj. 斜的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">slant</td>
-<td style="text-align:center">n. 斜面</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">concede</td>
-<td style="text-align:center">v. 承认</td>
-<td style="text-align:center">make concessions on<br /><code>cede - to go</code><br />与承认的人期行</td>
-<td style="text-align:center">con·cede</td>
-</tr>
-<tr>
-<td style="text-align:center">confide</td>
-<td style="text-align:center">v. 相信，信任</td>
-<td style="text-align:center"><code>fid - faith - to believe(confident)</code></td>
-<td style="text-align:center">con·fide</td>
-</tr>
-<tr>
-<td style="text-align:center">perfidy</td>
-<td style="text-align:center">n. 背信弃义，不忠的</td>
-<td style="text-align:center"><code>per - 假，坏</code><br />不值得相信的</td>
-<td style="text-align:center">per·fid·y</td>
-</tr>
-<tr>
-<td style="text-align:center">diffident</td>
-<td style="text-align:center">adj. 缺乏自信的</td>
-<td style="text-align:center">confident的反义词</td>
-<td style="text-align:center">dif·fid·ent</td>
-</tr>
-<tr>
-<td style="text-align:center">infidelity</td>
-<td style="text-align:center">n. 不忠</td>
-<td style="text-align:center">不值得信任</td>
-<td style="text-align:center">in·fid·elity</td>
-</tr>
-<tr>
-<td style="text-align:center">groggy</td>
-<td style="text-align:center">adj. 虚弱的；不稳定的；酒醉的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">grog</td>
-<td style="text-align:center">n. 烈性酒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rash</td>
-<td style="text-align:center">adj. 鲁莽的，冒失的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">sporadic</td>
-<td style="text-align:center">adj, 零星的，偶发的</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">chronic</td>
-<td style="text-align:center">adj. 长期的</td>
-<td style="text-align:center"><code>chron - time</code></td>
-<td style="text-align:center">chron·ic</td>
-</tr>
-<tr>
-<td style="text-align:center">chronological</td>
-<td style="text-align:center">adj. 按时间顺序排列的</td>
-<td style="text-align:center">时间逻辑</td>
-<td style="text-align:center">chrono·logical</td>
-</tr>
-<tr>
-<td style="text-align:center">chronicle</td>
-<td style="text-align:center">n. 编年史<br />v. 记录</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">chron·icle</td>
-</tr>
-<tr>
-<td style="text-align:center">synchronize</td>
-<td style="text-align:center">v. 使同步，同时发生</td>
-<td style="text-align:center"><code>syn - same</code><br />更新时间相同</td>
-<td style="text-align:center">syn·chron·ize</td>
-</tr>
-<tr>
-<td style="text-align:center">toxic</td>
-<td style="text-align:center">adj. 有毒的</td>
-<td style="text-align:center"><code>tox - poison</code></td>
-<td style="text-align:center">tox·ic</td>
-</tr>
-<tr>
-<td style="text-align:center">intoxicate</td>
-<td style="text-align:center">v. 使陶醉</td>
-<td style="text-align:center">像中毒一样</td>
-<td style="text-align:center">in·tox·ic·ate</td>
-</tr>
-<tr>
-<td style="text-align:center">detoxify</td>
-<td style="text-align:center">v. 解毒</td>
-<td style="text-align:center">不中毒</td>
-<td style="text-align:center">de·tox·ify</td>
-</tr>
-<tr>
-<td style="text-align:center">antitoxin</td>
-<td style="text-align:center">n. 抗毒素</td>
-<td style="text-align:center">反毒药</td>
-<td style="text-align:center">anti·tox·in</td>
-</tr>
-<tr>
-<td style="text-align:center">antidote</td>
-<td style="text-align:center">n. 解药</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">avert</td>
-<td style="text-align:center">v. 避免；防止</td>
-<td style="text-align:center"><code>vert/vers - turn</code><br />转开避免</td>
-<td style="text-align:center">a·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">advert</td>
-<td style="text-align:center">v. 注意</td>
-<td style="text-align:center">广告是需要被注意到的</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">inadvertence</td>
-<td style="text-align:center">n. 疏忽</td>
-<td style="text-align:center">没注意到的</td>
-<td style="text-align:center">in·advert·ence</td>
-</tr>
-<tr>
-<td style="text-align:center">pervert</td>
-<td style="text-align:center">n. 变态<br />v. 曲解</td>
-<td style="text-align:center">越转离常人越远per，变态<br />越转离正解越远，曲解</td>
-<td style="text-align:center">per·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">divert</td>
-<td style="text-align:center">v. 转向；娱乐</td>
-<td style="text-align:center">转向别的方向</td>
-<td style="text-align:center">di·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">revert</td>
-<td style="text-align:center">v. 恢复</td>
-<td style="text-align:center">转回来</td>
-<td style="text-align:center">re·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">invert</td>
-<td style="text-align:center">v. 翻转，颠倒</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">in·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">incontrovertible</td>
-<td style="text-align:center">adj. 不容置疑的</td>
-<td style="text-align:center">来自controvert</td>
-<td style="text-align:center">in·controvert·ible</td>
-</tr>
-<tr>
-<td style="text-align:center">subvert</td>
-<td style="text-align:center">v. 颠覆，破坏</td>
-<td style="text-align:center">从下面翻上来</td>
-<td style="text-align:center">sub·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">extrovert</td>
-<td style="text-align:center">n. 外向</td>
-<td style="text-align:center">向外转</td>
-<td style="text-align:center">extro·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">introvert</td>
-<td style="text-align:center">n. 内向</td>
-<td style="text-align:center">向内转</td>
-<td style="text-align:center">intro·vert</td>
-</tr>
-<tr>
-<td style="text-align:center">vertigo</td>
-<td style="text-align:center">n. 眩晕</td>
-<td style="text-align:center">转多了</td>
-<td style="text-align:center">vert·igo</td>
-</tr>
-<tr>
-<td style="text-align:center">vortex</td>
-<td style="text-align:center">n. 旋涡</td>
-<td style="text-align:center">一直在转的水</td>
-<td style="text-align:center">vort·ex</td>
-</tr>
-<tr>
-<td style="text-align:center">averse</td>
-<td style="text-align:center">adj. 厌恶的</td>
-<td style="text-align:center">和转多了一样反胃</td>
-<td style="text-align:center">a·verse</td>
-</tr>
-<tr>
-<td style="text-align:center">adverse</td>
-<td style="text-align:center">adj. 敌对的，相反的</td>
-<td style="text-align:center">厌恶的人</td>
-<td style="text-align:center">ad·verse</td>
-</tr>
-<tr>
-<td style="text-align:center">deduce</td>
-<td style="text-align:center">v. 推论</td>
-<td style="text-align:center"><code>duce - to lead</code></td>
-<td style="text-align:center">de·duce</td>
-</tr>
-<tr>
-<td style="text-align:center">embark</td>
-<td style="text-align:center">v. (使)搭载；上船；着手做</td>
-<td style="text-align:center">embark on</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">disembark</td>
-<td style="text-align:center">v. 登陆，下船</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">dis·embark</td>
-</tr>
-<tr>
-<td style="text-align:center">inhume</td>
-<td style="text-align:center">v. 埋葬</td>
-<td style="text-align:center"><code>hum - ground(humble)</code><br />埋到土里</td>
-<td style="text-align:center">in·hume</td>
-</tr>
-<tr>
-<td style="text-align:center">exhume</td>
-<td style="text-align:center">v. 挖掘</td>
-<td style="text-align:center">从土里挖出来</td>
-<td style="text-align:center">ex·hume</td>
-</tr>
-<tr>
-<td style="text-align:center">posthumous</td>
-<td style="text-align:center">adj. 死后的</td>
-<td style="text-align:center"><code>post - behind</code><br />进土(死)后的事</td>
-<td style="text-align:center">post·hum·ous</td>
-</tr>
-</tbody>
-</table>
-</div>
+          <h1 id="Projection-Onto-a-Line"><a href="#Projection-Onto-a-Line" class="headerlink" title="Projection Onto a Line"></a>Projection Onto a Line</h1><ol>
+<li>Denote the <code>projection</code> of <script type="math/tex">\vec{b}</script> onto a line <script type="math/tex">\vec{a}</script> by <script type="math/tex">\vec{p}</script>. <script type="math/tex">\vec{p}</script> is a part of that line along <script type="math/tex">\vec{b}</script>. </li>
+<li>The line from <script type="math/tex">\vec{b}</script> to <script type="math/tex">\vec{p}</script> is  perpendicular to <script type="math/tex">\vec{a}</script>. Denote that line <code>error vector</code><script type="math/tex">\vec{e}=\vec{b}-\vec{p}</script>. </li>
+<li>As <script type="math/tex">\vec{p}</script> is part of <script type="math/tex">\vec{a}</script>, we have <script type="math/tex">\vec{p}=\hat{x}\vec{a}</script>. Substitute to the dot product <script type="math/tex">\vec{a}\cdot \vec{e}=\vec{0}</script> to get <script type="math/tex">\vec{a}\cdot (\vec{b}-\hat{x}\vec{a})=\vec{0}</script><br />We can solve <script type="math/tex">\hat{x}</script> from that equation. <script type="math/tex">\hat{x}=\frac{\vec{a}\cdot \vec{b}}{\vec{a}\cdot \vec{a}}=\frac{\vec{a}^T\vec{b}}{\vec{a}^T\vec{b}}</script><br />Then we have the projection <script type="math/tex">\vec{p}=\frac{\vec{a}^T\vec{b}}{\vec{a}^T\vec{b}}\vec{a}</script></li>
+<li>If <script type="math/tex">\vec{b}=\vec{a}</script>, then <script type="math/tex">\hat{x}=1</script>. The projection of <script type="math/tex">\vec{a}</script> onto <script type="math/tex">\vec{a}</script> is itself. <br />If <script type="math/tex">\vec{b}</script> is perpendicular to <script type="math/tex">\vec{a}</script>, then <script type="math/tex">\vec{a}^T\vec{b}=0</script>. The projection is <script type="math/tex">\vec{0}</script>. </li>
+<li>After projection, <script type="math/tex">\vec{b}</script> is parted to two parts, the projection <script type="math/tex">\vec{p}</script> and the error vector <script type="math/tex">\vec{e}</script>. </li>
+<li><script type="math/tex">\vec{p}=\frac{\vec{a}^T\vec{b}}{\vec{a}^T\vec{b}}\vec{a}=\vec{a}\frac{\vec{a}^T\vec{b}}{\vec{a}^T\vec{b}}=\frac{\vec{a}\vec{a}^T}{\vec{a}^T\vec{a}}\vec{b}=P\vec{b}</script>. <script type="math/tex">P</script> is called <code>projection matrix</code>. </li>
+<li><script type="math/tex">P</script> is a column times a row which means rank of <script type="math/tex">P</script> is <script type="math/tex">1</script>. That line is the column space of <script type="math/tex">P</script>. </li>
+<li>Projecting a second time dosen’t change anything, i.e. the projection of the projection of <script type="math/tex">\vec{b}</script> onto line <script type="math/tex">\vec{a}</script> is still <script type="math/tex">\vec{p}</script>. So <script type="math/tex">P^n=P</script>. </li>
+<li>Notice that <script type="math/tex">(I-P)\vec{b}=\vec{b}-\vec{p}=\vec{e}</script>. When <script type="math/tex">P</script> projects onto one subspace, <script type="math/tex">I-P</script> projects onto the perpendicular subspace. </li>
+</ol>
+<h1 id="Projection-Onto-a-Subspace"><a href="#Projection-Onto-a-Subspace" class="headerlink" title="Projection Onto a Subspace"></a>Projection Onto a Subspace</h1><ol>
+<li>When <script type="math/tex">A\vec{x}=\vec{b}</script> has no solution, we usually want to get a <script type="math/tex">\hat{\vec{x}}</script> to make <script type="math/tex">\vec{p}=A\vec{x}</script> is closest to <script type="math/tex">\vec{b}</script>. </li>
+<li>We want the error vector as small as possible so we choose the projection of <script type="math/tex">\vec{b}</script> onto the column space of <script type="math/tex">A</script> to be the <script type="math/tex">\vec{p}</script>. </li>
+<li>If <script type="math/tex">A</script> has only one column, this is the problem aforementioned. But normally <script type="math/tex">A</script> has more than one column. </li>
+<li><script type="math/tex">\vec{e}</script> is perpendicular to the column space of <script type="math/tex">A</script>. So if <script type="math/tex">\vec{a_i}</script> is a column vector of <script type="math/tex">A</script>, for every <script type="math/tex">i</script>, <script type="math/tex">\vec{a_i}^T(\vec{b}-A\hat{\vec{x}})=0</script>. <br />The matrix with those rows <script type="math/tex">\vec{a_i}^T</script> is <script type="math/tex">A^T</script>, so <script type="math/tex">A^T(\vec{b}-A\hat{\vec{x}})=\vec{0}</script>. <br />Rewrite that equation, we have <script type="math/tex">A^TA\hat{\vec{x}}=A^T\vec{b}</script>. </li>
+<li>Final solution: <br />&emsp;<script type="math/tex">\hat{\vec{x}}=(A^TA)^{-1}A^T\vec{b}</script><br />&emsp;<script type="math/tex">\vec{p}=A\hat{\vec{x}}=A(A^TA)^{-1}A^T\vec{b}</script><br />&emsp;<script type="math/tex">P=A(A^TA)^{-1}A^T</script></li>
+<li>The error vector is perpendicular to the column space. Therefore it’s in the left nullspace. The left nullspace contains the error vector. </li>
+<li>When calculating the projection matrix, we cannot split <script type="math/tex">(A^TA)^{-1}</script> into <script type="math/tex">A^{-1}(A^T)^{-1}</script>. Because <script type="math/tex">A</script> is definitely not invertible, or <script type="math/tex">A\vec{x}=\vec{b}</script> will be solvable. </li>
+<li>The distance from <script type="math/tex">\vec{b}</script> to the subspace <script type="math/tex">C(A)</script> is <script type="math/tex">||\vec{e}||</script>. W</li>
+</ol>
 
       
     </div>
@@ -2818,7 +1238,7 @@ table th:first-of-type {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2885,20 +1305,20 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Balancing the workloadAlways implement the simplest solution first, then measure performance to determine if you need to do better.  Static assignment The assignment of work to threads is pre-determin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04. Work Distribution and Scheduling">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/05/17/04-Work-Distribution-and-Scheduling/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Balancing the workloadAlways implement the simplest solution first, then measure performance to determine if you need to do better.  Static assignment The assignment of work to threads is pre-determin">
+<meta property="article:published_time" content="2022-05-17T07:35:33.000Z">
+<meta property="article:modified_time" content="2022-05-18T09:07:58.597Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/05/17/04-Work-Distribution-and-Scheduling/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>04. Work Distribution and Scheduling | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/17/04-Work-Distribution-and-Scheduling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          04. Work Distribution and Scheduling
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:35:33" itemprop="dateCreated datePublished" datetime="2022-05-17T15:35:33+08:00">2022-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-18 17:07:58" itemprop="dateModified" datetime="2022-05-18T17:07:58+08:00">2022-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Balancing-the-workload"><a href="#Balancing-the-workload" class="headerlink" title="Balancing the workload"></a>Balancing the workload</h1><p>Always implement the simplest solution first, then measure performance to determine if you need to do better. </p>
+<h2 id="Static-assignment"><a href="#Static-assignment" class="headerlink" title="Static assignment"></a>Static assignment</h2><ol>
+<li>The assignment of work to threads is pre-determined. But not necessarily determined at compile-time, may depend on runtime parameters. </li>
+<li>Benefit: simple, essentially zero runtime overhead</li>
+<li>Applicable situation: When the cost (execution time) of work and the amount of work is predictable. The followings are some most common situations:<br>When it is known up front that all work has the same cost<br>When work is predictable, but not all jobs have same cost<br>When statistics about execution time are known</li>
+<li>Semi-static assignment: When the cost of work is predictable for near-term future, we can periodically profile itself and re-adjust assignment.<br>Assignment is “static” for the interval between re-adjustments</li>
+</ol>
+<h2 id="Dynamic-assignment"><a href="#Dynamic-assignment" class="headerlink" title="Dynamic assignment"></a>Dynamic assignment</h2><ol>
+<li><p>Program determines assignment dynamically at runtime to ensure a well distributed load. Often used when the execution time of tasks, or the total number of tasks, is unpredictable. </p>
+</li>
+<li><p>The ISPC task is implemented dynamically. </p>
+</li>
+</ol>
+<h3 id="With-one-queue"><a href="#With-one-queue" class="headerlink" title="With one queue"></a>With one queue</h3><ol>
+<li><p>The programmers divide the whole problem into sub-problems (or “tasks”, “work”). A queue shared by all threads is a collection of work to do. Whenever a thread finished its task, it will grab another task from the queue. </p>
+</li>
+<li><p>Fine granularity partitioning: each task is small.<br>This is likely to have a good workload balance, but potential for high synchronization cost. </p>
+</li>
+<li><p>Coarse granularity partitioning: each task is larger.<br>This will decrease synchronization cost and the overhead, but may have a worse workload balance. </p>
+</li>
+<li><p>Long tasks should be scheduled first. Thread performing long task performs fewer overall tasks, but approximately the same amount of work as the other threads. This requires some knowledge of workload. </p>
+</li>
+</ol>
+<h3 id="With-a-set-of-queues"><a href="#With-a-set-of-queues" class="headerlink" title="With a set of queues"></a>With a set of queues</h3><ol>
+<li><p>When assign with one queue, all threads have to communicate with each other about the queue. </p>
+</li>
+<li><p>Each thread has their own queue, and they only execute tasks in their queue. So there is no need to communication with other threads. </p>
+</li>
+<li><p>At the beginning, the programmer push tasks into queues arbitarily (a bit like static assignment).<br>The dynamic is that when a queue is empty, that thread can steal from other threads that is  still working.<br>It will steal from a random thread. Every time, it will steal a proportion of the tasks in the target queue, not all of them, and usually more than one task.<br>A thread is terminated when there is no thread for it to steal, namely when a steal is failed, it will try to steal from other threads, util it have tried all of them. </p>
+</li>
+<li><p>Stealing involves communication, but in a lower frequency then one queue method. And in this way, the local queue access is fast. </p>
+</li>
+<li><p>Sometimes it is hard to have fully independent task, but work in task queues need not be independent.<br>A task is not removed from queue and assigned to worker thread until all task dependencies are satisfied. Workers can submit new tasks (with optional explicit dependencies) to task system</p>
+</li>
+</ol>
+<h1 id="Scheduling"><a href="#Scheduling" class="headerlink" title="Scheduling"></a>Scheduling</h1><p>In a divide-and-conquer algorithm, there is both dependencies and independencies. Like in quick-sort, both the divide is dependent on the partition, and those two divide is independent.<br>With Cilk Plus, we can express divide-and-conquer easier. </p>
+<h2 id="cilk-spawn"><a href="#cilk-spawn" class="headerlink" title="cilk_spawn"></a>cilk_spawn</h2><ol>
+<li><p><code>cilk_spawn</code> is labelled before a function call, so that the called function can run with the code after the call concurrently.<br>The call labelled <code>cilk_spawn</code> is the spawned child, and the rest of the code is the continuation.</p>
+</li>
+<li><p>In divide-and-conquer, there is always a time, when the problem size is small enough that overhead of spawn trumps benefits of<br>potential parallelization. And then we will solve those problems sequentially. </p>
+</li>
+<li><p>The main idea is to expose independent work (potential parallelism) to the system using <code>cilk_spawn</code>. </p>
+</li>
+<li><p><code>cilk_spawn</code> is a bit like <code>pthread_create</code>, and <code>cilk_sync</code> is similar to <code>pthread_join</code>. But <code>pthread</code> has some problems when too many threads are spawned.<br>The first is the heavyweight spawn operation. And many more concurrently running threads than cores, which will cause context switching overhead and larger working set than necessary, less cache locality. </p>
+</li>
+<li><p>The Cilk Plus runtime maintains pool of worker threads. All threads created at application launch.  There are exactly as many worker threads as execution contexts in the machine.<br>If we labelled everything <code>cilk_spawn</code>, the main thread has nothing to do. </p>
+</li>
+<li><p>Each thread in the pool will maintain a work queue to store what word needs to be done.<br>When a thread goes idle, it will look in busy thread’s queue for work, and moves work from busy thread’s queue to its own queue.</p>
+</li>
+<li><p>If caller thread runs the continuation first, the queue should record the child for later execution, and child is made available for stealing by other threads.<br>In this method, caller thread will spawn as many child as it could, like BFS. If no stealing, execution order is very different than<br>that of program withcilk_spawnremoved. </p>
+</li>
+<li><p>If caller thread runs the child first, the queue should record continuation for later execution, and continuation is made available for stealing by other threads.<br>In this method, caller thread will only create one item to steal.<br>If no stealing occurs, thread continually pops continuation from work queue, enqueues new continuation (like DFS). The order of execution is the same as for program with spawn removed.<br>If continuation is stolen, stealing thread spawns next child. </p>
+</li>
+<li><p>If the continuation is run first, there will be more items to steal, and thus makes a better advantage of multi-thread.<br>But if the continuation is run first, the work queue storage for system with T threads is no more than T times that of stack storage for single threaded execution, and thus saves more space. </p>
+</li>
+<li><p>Work queue is implemented as a dequeue (double ended queue).<br>Local thread pushes/pops from the “tail” (bottom), while remote threads steal from “head” (top).<br>Reduces contention with local thread: local thread is not accessing same part of dequeue that stealing threads do.<br>Do larger work first: in divide-and-conquer, the top of the queue is usually at the beginning of call tree, and is a larger piece of work.<br>Maximizes locality: in conjunction with run-child-first policy, local thread works on local part of call tree</p>
+</li>
+</ol>
+<h2 id="cilk-sync"><a href="#cilk-sync" class="headerlink" title="cilk_sync"></a>cilk_sync</h2><ol>
+<li><p><code>cilk_sync</code> is used after those <code>cilk_spawn</code> call code. It will return when all calls spawned by current function have completed. </p>
+</li>
+<li><p>There is an implicitcilk_syncat the end of every function that contains a cilk_spawn, so when a Cilk function returns, all work associated with that function is complete. </p>
+</li>
+<li><p>If no work has been stolen by other threads, then there’s nothing to do at the sync point, <code>cilk_sync</code> is a no-op. But this is not a common situation. </p>
+</li>
+<li><p>One way to implement sync is with stalling joint.<br>Thread that initiates the fork must perform the sync. Therefore it waits for all spawned work to be complete.<br>descriptor for block A created<br>When a stealing from the initial thread happens, a descriptor for that stolen work is created to track the number of outstanding spawns for the block, and the number of those spawns that have completed.<br>When all the child spowned for the block is done, this block is considered done, and the descriptor is free. When all the blocks are done, sync is fullfilled. </p>
+</li>
+<li><p>Another way to implement sync is the greedy policy.<br>When thread that initiates the fork goes idle, it can look to steal new work.  Last thread to reach the join point continues execution after sync. This will also create a decriptor for those stolen work.<br>Worker thread that initiated spawn may not be thread that executes logic after <code>cilk_sync</code>. </p>
+</li>
+<li><p>In greedy policy, All threads always attempt to steal if there is nothing to do, and thread only goes idle if no work to steal is present in system. But in stalling policy, the initial thread doesn’t steal, and only waits when its work is done. </p>
+</li>
+<li><p>Overhead of bookkeeping steals and managing sync points only occurs when steals occur. If large pieces of work are stolen, this should occur infrequently. Most of the time, threads are pushing/popping local work from their local dequeue. </p>
+</li>
+<li><p>Cilk uses greedy join scheduling. </p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/12/08-Metaprogramming/" rel="prev" title="08. Metaprogramming">
+      <i class="fa fa-chevron-left"></i> 08. Metaprogramming
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/19/05-Graphic-processing-units-and-CUDA/" rel="next" title="05. Graphic processing units and CUDA">
+      05. Graphic processing units and CUDA <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Balancing-the-workload"><span class="nav-number">1.</span> <span class="nav-text">Balancing the workload</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-assignment"><span class="nav-number">1.1.</span> <span class="nav-text">Static assignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-assignment"><span class="nav-number">1.2.</span> <span class="nav-text">Dynamic assignment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#With-one-queue"><span class="nav-number">1.2.1.</span> <span class="nav-text">With one queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#With-a-set-of-queues"><span class="nav-number">1.2.2.</span> <span class="nav-text">With a set of queues</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scheduling"><span class="nav-number">2.</span> <span class="nav-text">Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cilk-spawn"><span class="nav-number">2.1.</span> <span class="nav-text">cilk_spawn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cilk-sync"><span class="nav-number">2.2.</span> <span class="nav-text">cilk_sync</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

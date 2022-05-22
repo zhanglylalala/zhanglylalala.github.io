@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Speedup Speedup (using P processors) &#x3D; execution time (using 1 processor) &#x2F; execution time (using P processors) When using P processors, we can only get a speedup less than P times.One reason is that">
 <meta property="article:published_time" content="2022-04-13T07:48:23.000Z">
-<meta property="article:modified_time" content="2022-05-03T06:48:40.153Z">
+<meta property="article:modified_time" content="2022-05-17T07:35:57.835Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -137,12 +137,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-03 14:48:40" itemprop="dateModified" datetime="2022-05-03T14:48:40+08:00">2022-05-03</time>
+                <time title="Modified: 2022-05-17 15:35:57" itemprop="dateModified" datetime="2022-05-17T15:35:57+08:00">2022-05-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
 <li>When using P processors, we can only get a speedup less than P times.<br>One reason is that although cores are in the same chip, when they want to communicate with each other, they have to transmit information through wires, which takes some time.<br>Another reason is that the imbalance in work assignment, which caused that one core has too heavy assignment while other cores has nothing to do but wait.<br>Communication costs can dominate a parallel computation, severely limiting speedup. Especially when you assign tasks to too many cores, each core gets little computation. </li>
 </ol>
 <h1 id="Parallelism"><a href="#Parallelism" class="headerlink" title="Parallelism"></a>Parallelism</h1><p>Why parallelism?<br>Before 2004, the performance of single-processor grew exponentially. However, in 2004, Intel hit the Power Density Wall. If you get more than 100 watts in a chip, it goes to hot and will melt. And the battery won’t hold long.</p>
-<h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP:"></a>ILP:</h2><ol>
+<h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a>ILP</h2><ol>
 <li>Instruction-Level Parallelism. Extract several instructions from the same instruction stream, and multiple ALU performs multiple operations parallel (within a core). This has to be done in a semantics of program. </li>
 <li>Superscalar processor: exploit ILP within an instruction stream. Parallelism automatically and dynamically discovered by the hardware during execution (not programmer visible)</li>
 <li>Example: Pentium 4<br>Its inctruction decoder will yank a whole bunch of instructions out of instruction stream, and map them to a new kind of computation called data flow computation that will track which value is generated and feed which instruction there<br>Decoders map them to independent processing units that can each performs a subset of the whole operations.<br>Control logics try to predict what’s going on and deal with it when it predicts incorrectly. The Branch Target Buffer keeps a record of all the control flow instructions to predict where they will go again. If it predicts wrong, it will back out and doesn’t commit to those results generated, flushes them away<br>Meltdown inspector: This logic leaks informations about what other processors are doing. </li>
@@ -406,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Speedup"><span class="nav-number">1.</span> <span class="nav-text">Speedup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallelism"><span class="nav-number">2.</span> <span class="nav-text">Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ILP"><span class="nav-number">2.1.</span> <span class="nav-text">ILP:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Core"><span class="nav-number">2.2.</span> <span class="nav-text">Multi-Core</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simpler-cores"><span class="nav-number">2.2.1.</span> <span class="nav-text">Simpler cores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-processing"><span class="nav-number">2.2.2.</span> <span class="nav-text">SIMD processing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD-on-modern-CPUs"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">SIMD on modern CPUs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD-on-modern-GPUs"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">SIMD on modern GPUs</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Access-Memory"><span class="nav-number">3.</span> <span class="nav-text">Access Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-threading"><span class="nav-number">3.1.</span> <span class="nav-text">Multi-threading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPUs-and-GPUs"><span class="nav-number">3.2.</span> <span class="nav-text">CPUs and GPUs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bandwidth"><span class="nav-number">3.3.</span> <span class="nav-text">Bandwidth</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Speedup"><span class="nav-number">1.</span> <span class="nav-text">Speedup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallelism"><span class="nav-number">2.</span> <span class="nav-text">Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ILP"><span class="nav-number">2.1.</span> <span class="nav-text">ILP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Core"><span class="nav-number">2.2.</span> <span class="nav-text">Multi-Core</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simpler-cores"><span class="nav-number">2.2.1.</span> <span class="nav-text">Simpler cores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-processing"><span class="nav-number">2.2.2.</span> <span class="nav-text">SIMD processing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD-on-modern-CPUs"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">SIMD on modern CPUs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMD-on-modern-GPUs"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">SIMD on modern GPUs</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Access-Memory"><span class="nav-number">3.</span> <span class="nav-text">Access Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-threading"><span class="nav-number">3.1.</span> <span class="nav-text">Multi-threading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPUs-and-GPUs"><span class="nav-number">3.2.</span> <span class="nav-text">CPUs and GPUs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bandwidth"><span class="nav-number">3.3.</span> <span class="nav-text">Bandwidth</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -421,20 +421,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

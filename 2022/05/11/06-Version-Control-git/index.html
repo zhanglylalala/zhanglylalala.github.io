@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Git Model Folders are called trees, and files are called blobs. Trees can have other trees and blobs, while blobs cannot have trees.   Git keeps snapshots of the file system, and arrange them in a for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06.Version Control (git)">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Git Model Folders are called trees, and files are called blobs. Trees can have other trees and blobs, while blobs cannot have trees.   Git keeps snapshots of the file system, and arrange them in a for">
+<meta property="article:published_time" content="2022-05-11T05:35:13.000Z">
+<meta property="article:modified_time" content="2022-05-12T06:14:50.512Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>06.Version Control (git) | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          06.Version Control (git)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-11 13:35:13" itemprop="dateCreated datePublished" datetime="2022-05-11T13:35:13+08:00">2022-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-12 14:14:50" itemprop="dateModified" datetime="2022-05-12T14:14:50+08:00">2022-05-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Git-Model"><a href="#Git-Model" class="headerlink" title="Git Model"></a>Git Model</h1><ol>
+<li><p>Folders are called <code>trees</code>, and files are called <code>blobs</code>. Trees can have other trees and blobs, while blobs cannot have trees. </p>
+</li>
+<li><p>Git keeps snapshots of the file system, and arrange them in a form of tree according to commits. </p>
+</li>
+<li><p>One snapshot has only one parant snapshot, but may have multiple children. Those children contains different commits, and don’t share their new changes.<br>We can merge snapshots together to get all changes in all snapshots. Sometimes this process is automatically, but there are some cases when it trigues the merge conflict. </p>
+</li>
+<li><p>Actually, git stores versions not by snapshots, but by commits. Each commit contains not only the snapshot of the file system snapshot, but also some metadata, like the author, message and parent of this commit. </p>
+</li>
+<li><p>Git calculates the hash name of a commit through Sha-1 algorithm, which is a 40 character hex code.<br>So references is provided to refer a human-readable name to a hash name. While the human-readable name is changeable, the hash name cannot be changed. </p>
+</li>
+</ol>
+<h1 id="Git-Commands"><a href="#Git-Commands" class="headerlink" title="Git Commands"></a>Git Commands</h1><ol>
+<li><p><code>git init</code> will create a <code>.git</code> folder, and make the current folder into a git folder</p>
+</li>
+<li><p><code>git help &lt;git command&gt;</code> can show the document of that command. Don’t need <code>git</code> in git command. </p>
+</li>
+<li><p><code>git status</code> will show the status of changes compared the current file system with its parent. It will only show blobs or trees, not the details.<br><code>git log</code> will show all the commits in history in a flat form, including author, date and message. <code>git log --all --graph --decorate</code> can show the history more beautiful, and the relations more clear. <code>--oneline</code> will show some more simplified information. </p>
+</li>
+<li><p><code>git add &lt;file path&gt;</code> can add a changed file to the next commit.<br><code>git commit</code> will commit every changes that have been added. </p>
+</li>
+<li><p><code>git cat-file -p &lt;hash name&gt;</code> will show what is in the object with that hash name. The object might be a commit, a snapshot, a tree or a blob. </p>
+</li>
+<li><p><code>HEAD</code> is the current commit you are looking, and <code>master</code> is the up-to-date commit.<br><code>git checkout &lt;hash name&gt;</code> will change the current working space  to that commit, and the <code>HEAD</code> will point to that commit. This will change all the files into the snapshot of the commit.<br>If we want to go to master, we can use <code>master</code> instead of <code>&lt;hash name&gt;</code>. </p>
+</li>
+<li><p><code>git diff</code> will show the differet between the current file system and <code>HEAD</code> commit. It will not only show the file-names, by also what is changed in those files.<br>It can takes some arguments, like <code>git &lt;hash name1&gt; &lt;hash name2&gt; &lt;file name&gt;</code>. In this case, it will only compare the state of that file between that two commits. </p>
+</li>
+<li><p>When the <code>HEAD</code> is pointing to the end of a branch, and we make a commit, <code>HEAD</code> that that branch mark will both point to the new commit.<br><code>git branch</code> will list all the braches we have. <code>Master</code> is a special brach that will be created from the beginning.<br><code>git brach &lt;name&gt;</code> will name the commit <code>HEAD</code> is pointing to that name.<br><code>git checkout &lt;branch name&gt;</code> will point the <code>HEAD</code> to that brach mark. <code>-b</code> flag will create and check out that branck. </p>
+</li>
+<li><p><code>git merge &lt;branch name&gt;</code> will merge the commit that branch mark points to into the <code>HEAD</code> commit.<br>If the <code>HEAD</code> commit is a predecessor of that branch, a fast-forward merging is used, which simply move the <code>HEAD</code> to that branch.<br>Or Git will do its best to auto-merge the changes, but sometimes it might get confused, so a merge conflict is raised. We can manually fix those conflicts, and use <code>git add</code> to add the changed files again, use <code>git merge --continue</code> to finish the merge. </p>
+</li>
+</ol>
+<h1 id="Git-Remote"><a href="#Git-Remote" class="headerlink" title="Git Remote"></a>Git Remote</h1><ol>
+<li><p><code>git remote</code> will print all the remotes that git is aware of for the current repository</p>
+</li>
+<li><p><code>git remote add &lt;name&gt; &lt;url&gt;</code>. The name is <code>origin</code> by convention. </p>
+</li>
+<li><p><code>git push &lt;remote name&gt; &lt;local branch&gt;:&lt;remote branch&gt;</code> will set the branch in the remote to the local branch. If that remote branch doesn’t exist, it will be created.<br>We can use <code>git branch --set-upstream-to=&lt;remote name&gt;/&lt;remote branch&gt;</code> so that we will push the current branch to the set remote branch by default. </p>
+</li>
+<li><p><code>git clone &lt;url&gt; &lt;foler name&gt;</code> will clone the repo into the local folder.<br><code>--shallow</code> will only get the latest snapshot, not the whole history. </p>
+</li>
+<li><p><code>git fetch &lt;remote name&gt;</code> will retrieve the changes in the remote. But it will not change anything we have locally, and the local master branch is still pointing to where it was. We can use <code>git merge</code> to move master branch.<br><code>git pull &lt;remote name&gt;</code> will fetch and merge. </p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Tools/" rel="tag"><i class="fa fa-tag"></i> Tools</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/10/05-Commandline-Environment/" rel="prev" title="05. Commandline Environment">
+      <i class="fa fa-chevron-left"></i> 05. Commandline Environment
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/12/08-Metaprogramming/" rel="next" title="08. Metaprogramming">
+      08. Metaprogramming <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Model"><span class="nav-number">1.</span> <span class="nav-text">Git Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Commands"><span class="nav-number">2.</span> <span class="nav-text">Git Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Remote"><span class="nav-number">3.</span> <span class="nav-text">Git Remote</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

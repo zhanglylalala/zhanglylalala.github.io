@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/29/08-Gradient%20Field/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/29/08-Gradient%20Field/" class="post-title-link" itemprop="url">08. Gradient Field</a>
+            <a href="/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/" class="post-title-link" itemprop="url">07. Derived Distributions, Convolution, Covariance and Correlation</a>
         </h1>
 
         <div class="post-meta">
@@ -215,14 +215,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-29 20:34:47" itemprop="dateCreated datePublished" datetime="2020-02-29T20:34:47+08:00">2020-02-29</time>
+              <time title="Created: 2020-03-14 23:03:14" itemprop="dateCreated datePublished" datetime="2020-03-14T23:03:14+08:00">2020-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:23" itemprop="dateModified" datetime="2020-08-07T22:36:23+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:34:36" itemprop="dateModified" datetime="2020-08-07T19:34:36+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,8 +236,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
                   </a>
                 </span>
             </span>
@@ -253,22 +253,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
-<li>Gradient field: <script type="math/tex">\vec{F}=\triangledown f</script> (<script type="math/tex">f(x,y)</script> is called potential). </li>
-<li>Fundamental theorem of calculus for line integrals: <script type="math/tex">\displaystyle\int_C\triangledown f\cdot d\vec{r}=f(P_1)-f(P_0)</script> (<script type="math/tex">C</script> starts from <script type="math/tex">P_0</script> ends at <script type="math/tex">P_1</script>)<br />Proof: <script type="math/tex">\begin{equation}\begin{split}\displaystyle\int_C\triangledown f\cdot d\vec{r}&=\int_C\triangledown f\cdot\frac{d\vec{r}}{dt}dt=\int_C<f_x,f_y>\cdot<\frac{dx}{dt},\frac{dy}{dt}>dt\\&=\int_C(f_x\frac{dx}{dt}+f_y\frac{dy}{dt})dt=\int^{t_2}_{t_1}\frac{df}{dt}dt\ \ \ (chain\ rule)\\&=\int^{t_2}_{t_1}df=f(P_1)-f(P_2) \end{split}\end{equation}</script></li>
-<li>Path independence: The integral doesn’t depend on the path we take. As long as the start and end points are the same, integrals are the same. <br /><script type="math/tex">\displaystyle\int_{C_1}\triangledown fd\vec{r}=\int_{C_2}\triangledown fd\vec{r}</script></li>
-<li><script type="math/tex">\triangledown f</script> Is conservative. If <script type="math/tex">C</script> is any closed curve, the work along <script type="math/tex">C</script> is zero. </li>
-<li>Not every field is a gradient field. </li>
-<li>Conservativeness means no energy can be extracted from the field for free. </li>
-<li><script type="math/tex">Mdx+Ndy</script> is an exact differential which equals to <script type="math/tex">df</script>. </li>
-<li>If <script type="math/tex">\vec{F}=\triangledown f</script>, then <script type="math/tex">M=f_x</script> and <script type="math/tex">N=f_y</script>. Also <script type="math/tex">f_{xy}=f_{yx}</script>. So if <script type="math/tex">\vec{F}</script> is a gradient field, <script type="math/tex">M_y=N_x</script>. <br />If <script type="math/tex">M_y=N_x</script> and <script type="math/tex">\vec{F}</script> is defined in entire plane (or simply concrete region), we can know <script type="math/tex">\vec{F}</script> is a gradient field. </li>
-<li>When <script type="math/tex">\vec{F}</script> is a gradient field, we can find the potential: <br />&emsp;The first method is computing the line integral from the known point to the target. <br />&emsp;The second method is antiderivatives. With <script type="math/tex">f_x</script>, we can know <script type="math/tex">f=F(x)+G(y)</script> (<script type="math/tex">F(x)</script> is the main answer of antiderivative which may contain <script type="math/tex">y</script> while <script type="math/tex">G(y)</script> is the optional term of antiderivative which becomes zero when derivative with respect to <script type="math/tex">x</script>). <br />Now derivative the <script type="math/tex">f</script> with respect to <script type="math/tex">y</script> to get <script type="math/tex">f_y=F_y+G'(y)</script>. After compared to the known <script type="math/tex">f_y</script>, we can get the expression of <script type="math/tex">G'(y)</script>. Then calculate <script type="math/tex">G(y)</script> ans substitute to <script type="math/tex">f</script>. </li>
+          <h1 id="Derived-Distributions"><a href="#Derived-Distributions" class="headerlink" title="Derived Distributions"></a>Derived Distributions</h1><ol>
+<li>Calculate the PDF of $Y=g(X)$ of a continuous random variable $X$: <br />&emsp;First calculate the CDF $F_Y$ of $Y$ using $F_Y(y)=P(g(X)≤y)=\displaystyle\int_{\{x|g(x)≤y\}}f_X(x)dx$<br />&emsp;Differentiate to obtain the PDF of $Y$: $f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)$</li>
+<li>If $Y=aX+b$, where $a$ and $b$ are scalars, with $a≠0$. Then $f_Y(y)=\displaystyle\frac{1}{|a|}f_X(\frac{y-b}{a})$<br />Graphical proof: The width will be $|a|$ times wider and the height will be $|a|$ times shorter. The points are shifted by $b$. If $a$ were negative, the graph will be flipped around the vertical axis. <br />Algebra proof: <br />&emsp;If $a&gt;0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≤\displaystyle\frac{y-b}{a})=F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=\frac{1}{a}f_X(\frac{y-b}{a})$<br />&emsp;If $a<0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≥\displaystyle\frac{y-b}{a})=1-F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=-\frac{1}{a}f_X(\frac{y-b}{a})$</li>
+<li>$Y=g(X)$ is a monotonic function and its inverse is $X=h(Y)$. Assume that $h$ is differentiable. Then the PDF of $Y$ in the region where $f_Y(y)&gt;0$ is given by $f_Y(y)=f_X(h(y))\bigg|\displaystyle\frac{dh}{dy}(y)\bigg|$. <br />Proof: <br />&emsp;If $g$ is monotonically increasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(x≤h(y))=F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\frac{dh}{dy}(y)$<br />&emsp;If $g$ is monotonically decreasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(X≥h(y))=1-F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\bigg[-\frac{dh}{dy}(y)\bigg]$</li>
+<li>This method also works for functions of multiple random variables. <br />&emsp;$F_Z(z)=P(g(X,Y)≤z)=\displaystyle\iint\limits_{\{(x,y)|(x,y)≤z\}}f_{X,Y}(x,y)dxdy$<br />&emsp;$f_Z(z)=\displaystyle\frac{dF_Z}{dz}(z)$</li>
+<li>Two-sided exponential PDF (Laplace PDF): $f_Z(z)=\displaystyle\frac{\lambda}{2}e^{-\lambda|z|}$</li>
+<li>For independent $X$ and $Y$, $Z=X+Y$. <br />&emsp;If $X$ and $Y$ are independent discrete random variables with PMFs $p_X,p_y$: <br />&emsp;&emsp;$\begin{equation}\begin{split}p_Z(z)&amp;=P(X+Y=z)\\&amp;=\displaystyle\sum_{\{(x,y)|x+y=z\}}P(X=x,Y=y)\\&amp;=\sum_xP(X=x,Y=z-x)\\&amp;=\sum_xp_X(x)p_Y(z-x) \end{split}\end{equation}$<br />&emsp;&emsp;The resulting PMF $p_Z$ is called the convolution of the PMFs of $X$ and $Y$. <br />&emsp;If $X$ and $Y$ are independent continuous random variables with PDFs $f_X$ and $f_Y$. <br />&emsp;&emsp;$\begin{equation}\begin{split}P(Z≤z|X=x)&amp;=P(X+Y≤z|X=x)\\&amp;=P(x+Y≤z|X=x)\\&amp;=P(x+Y≤z)\\&amp;=P(Y≤z-x) \end{split}\end{equation}$<br />&emsp;&emsp;Differentiating both sides with respect to $z$. $f_{Z|X}(z|x)=f_Y(z-x)$<br />&emsp;&emsp;So $f_{X,Z}(x,z)=f_X(x)f_{Z|X}(z|x)=f_X(x)f_Y(z-x)$<br />&emsp;&emsp;$f_Z(z)=\displaystyle\int^\infty_{-\infty}f_{X,Z}(x,z)dx=\int^\infty_{-\infty}f_X(x)f_Y(z-x)dx$<br />&emsp;&emsp;This is the convolution of the PDFs of $X$ and $Y$. </li>
+<li>With the help of convolution, we know that the sum of two normal random variables with means $\mu_1,\mu_2$ and variance $\sigma_1^2,\sigma_2^2$ is another normal random variable with mean $\mu_1+\mu_2$ and variance $\sigma_1^2+\sigma^2_2$. </li>
+<li>Graphical calculation of convolution: <br />&emsp;First plot $f_Y(z-t)$ as a function of $t$. <br />&emsp;Place the plots of $f_X(t)$ and $f_Y(z-t)$ on top of each other and form their product. <br />&emsp; The value of $f_Z(z)$ is the integral of the product of these two plots. </li>
 </ol>
-<h1 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h1><ol>
-<li><script type="math/tex; mode=display">curl(\vec{F})=N_x-M_y$$. Test for conservativeness is $$curl\ \vec{F}=0</script></li>
-<li>Curl measures twice angular velocity of rotation component of velocity field and torque exerted on a test object in the field. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{torque}{moment\ of\ inertia}=\frac{d}{dt}(angular\ velocity)</script></li>
-<li>If force <script type="math/tex">\vec{F}</script> derives from a potential, <script type="math/tex">curl\ \vec{F}=0</script> means <script type="math/tex">\vec{F}</script> doesn’t induce any rotation motion. </li>
+<h1 id="Covariance-and-Correlation"><a href="#Covariance-and-Correlation" class="headerlink" title="Covariance and Correlation"></a>Covariance and Correlation</h1><ol>
+<li>The covariance of two random variables $X$ and $Y$, denoted by $cov(X,Y)$ is defined by $cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. </li>
+<li>When $cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated. <br />Roughly speaking, a positive or negative covariance indicates that the value of $X-E[X]$ and $Y-E[Y]$ obtained in a single experiment tend to have the same or the opposite sign. </li>
+<li>$cov(X,Y)=E[XY]-E[X]E[Y]$</li>
+<li>$cov(X,X)=var(X)$</li>
+<li>$cov(X,aY+b)=a\cdot cov(X,Y)$</li>
+<li>$cov(X,Y+Z)=cov(X,Y)+cov(X,Z)$</li>
+<li>If $X$ and $Y$ are independent, $E[XY]=E[X]E[Y]$, so $cov(X,Y)=0$. Thus, if $X$ and $Y$ are independent, they are also uncorrelated. But two uncorrelated random variables are not alway independent. </li>
+<li>If $E[X|Y=y]=E[X]$, <script type="math/tex">E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&X\ and\ Y\ are\ discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&X\ and\ Y\ are\ continuous \end{array}\right.</script><br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
+<li>The correlation coefficient of two random variables $X$ and $Y$ that have nonzero variances: $\rho(X,Y)=\displaystyle\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$</li>
+<li>The correlation coefficient is a normalized version of the covariance. It ranges from $-1$ to $1$. </li>
+<li>If $\rho&gt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the same sign. if $\rho&lt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the opposite sign. </li>
+<li>$\rho=\pm1$ means $X$ and $Y$ are strongly dependent, knowing one can restore another one. <br />$\rho=1$ if and only if there exists a positive constant $c$ such that $Y-E[Y]=c(X-E[X])$. <br />$\rho=-1$ if and only if there exists a negative constant $c$ such that $Y-E[Y]=c(X-E[X])$. </li>
+<li>If $X_1,X_2,…,X_n$ are random variables with finite variance, we have $var\left(\displaystyle\sum^n_{i=1}X_i\right)=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j)$. <br />For $n=2$, $var(X_1+X_2)=var(X_1)+var(X_2)+2cov(X_1,X_2)$. <br />Proof: We denote $\tilde{X_i}=X_i-E[X_i]$. <br />&emsp;$\displaystyle\begin{equation}\begin{split}var\left(\sum^n_{i=1}X_i\right)&amp;=E\left[\left(\sum^n_{i=1}\tilde{X_i} \right)^2 \right]\\&amp;=E\left[\sum^n_{i=1}\sum^n_{j=1}\tilde{X_i}\tilde{X_j} \right]\\&amp;=\sum^n_{i=1}\sum^n_{j=1}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}E[\tilde{X_i}^2]+\sum_{\{(i,j)|i≠j\}}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j) \end{split}\end{equation}$</li>
 </ol>
 
       
@@ -289,7 +297,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/28/07-Change-of-Variables-and-Vector-Fields/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -303,7 +311,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/28/07-Change-of-Variables-and-Vector-Fields/" class="post-title-link" itemprop="url">07. Change of Variables and Vector Fields</a>
+            <a href="/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/" class="post-title-link" itemprop="url">06. Multiple Continuous Random Variables and Conditional PDFs</a>
         </h1>
 
         <div class="post-meta">
@@ -313,14 +321,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-28 23:13:59" itemprop="dateCreated datePublished" datetime="2020-02-28T23:13:59+08:00">2020-02-28</time>
+              <time title="Created: 2020-03-14 19:35:04" itemprop="dateCreated datePublished" datetime="2020-03-14T19:35:04+08:00">2020-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:31" itemprop="dateModified" datetime="2020-08-07T22:35:31+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:35:18" itemprop="dateModified" datetime="2020-08-07T19:35:18+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -334,8 +342,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
                   </a>
                 </span>
             </span>
@@ -351,18 +359,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Change-of-Variables"><a href="#Change-of-Variables" class="headerlink" title="Change of Variables"></a>Change of Variables</h1><ol>
-<li>Let <script type="math/tex">u=u(x,y)</script> and <script type="math/tex">v=v(x,y)</script>. <br />Approximation: <script type="math/tex">\left\{\begin{array}{}\Delta u\approx u_x\Delta x+u_y\Delta y\\\Delta v\approx v_x\Delta x+v_y\Delta y\end{array}\right.</script><br />Linear tranformation: <script type="math/tex">\left[\begin{matrix}\Delta u\\\Delta v\end{matrix}\right]\approx\left[\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right]\left[\begin{matrix}\Delta x\\\Delta y\end{matrix}\right]</script><br />So new area is <script type="math/tex">\Delta A'=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|\Delta x\Delta y</script>. <br /><code>Jacobbian</code>: <script type="math/tex">J=\displaystyle\frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|</script><br />So <script type="math/tex">dA'=du\ dv=|J|dx\ dy=|J|dA</script></li>
-<li>Mark that <script type="math/tex">\displaystyle\frac{\partial(u,v)}{\partial(x,y)}\cdot\frac{\partial(x,y)}{\partial(u,v)}=1</script>. So <script type="math/tex">J_{(u,v)/(x,y)}=\displaystyle\frac{1}{J_{(x,y)/(u,v)}}</script>, namely their determinants are inverse, which implies their matrices are inverse. </li>
-<li>We also need to change the bounds from <script type="math/tex">x,y</script> to <script type="math/tex">u,v</script>. Draw the original region <script type="math/tex">x-y</script>. Then try to change each sides in that region to <script type="math/tex">u-v</script> graph to get the <script type="math/tex">u-v</script> region. </li>
+          <h1 id="Joint-PDFs"><a href="#Joint-PDFs" class="headerlink" title="Joint PDFs"></a>Joint PDFs</h1><ol>
+<li>Two continuous random variables associated with the same experiment are jointly continuous and can be described in terms of a joint PDF $f_{X,Y}$. </li>
+<li>$f_{X,Y}$ is a nonnegative function that satisfies $P((X,Y)\in B)=\displaystyle\iint\limits_{(x,y)\in B}f_{X,Y}(x,y)dxdy$, for every subset $B$ of the two-dimensional plane. </li>
+<li>If $B=\{(x,y)|a≤x≤b,c≤y≤d\}$, $P(a≤X≤b,c≤Y≤d)=\displaystyle\int^d_c\int^b_af_{X,Y}(x,y)dxdy$<br />If $B$ is the entire two-dimensional plane, $P((X,Y)\in B)=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}f_{X,Y}(x,y)dxdy=1$</li>
+<li>Like PDF of single random variable, the joint PDF can be viewed as the probability per unit area in the vicinity of a point. </li>
+<li><script type="math/tex; mode=display">P(X\in A)=P(X\in A\ and\ Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx</script></li>
+<li>The marginal PDF $f_X(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y}(x,y)dy$. </li>
+<li>The uniform model: <br />PDF: <script type="math/tex">f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area\ of\ S}&if\ (x,y)\in S\\0&otherwise \end{array}\right.</script><br /><br />Probability: <script type="math/tex">P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area\ of\ S}\iint\limits_{(x,y)\in A}dxdy=\frac{area\ of\ A}{area\ of\ S}</script></li>
+<li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{-\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
+<li>$f_{X,Y}(x,y)=\displaystyle\frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$</li>
+<li>For expectation: $E[g(X,Y)]=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}g(x,y)f_{X,Y}(x,y)dxdy$</li>
+<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
 </ol>
-<h1 id="Vector-Fields"><a href="#Vector-Fields" class="headerlink" title="Vector Fields"></a>Vector Fields</h1><ol>
-<li>At each point <script type="math/tex">(x,y)</script> in a plane, we have <script type="math/tex">\vec{F}</script> a vector that depends on <script type="math/tex">(x,y)</script>. </li>
-<li><script type="math/tex">\vec{F}=M\vec{i}+N\vec{j}</script> Where <script type="math/tex">M</script> and <script type="math/tex">N</script> are function of <script type="math/tex">x,y</script>.  </li>
-<li>Each <script type="math/tex">\vec{F}</script> is a vector which starts from point <script type="math/tex">(x,y)</script> and points to a certain direction. For example, <script type="math/tex">\vec{F}=x\vec{i}+y\vec{j}</script> starts from <script type="math/tex">(x,y)</script> and points to <script type="math/tex">(2x,2y)</script>. </li>
-<li>Work (line integral): <script type="math/tex">W=\vec{F}\cdot\vec{\Delta r}</script>. Along a trajectory <script type="math/tex">C</script>, work adds up to <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>. <script type="math/tex">W=\displaystyle\lim_{|\vec{\Delta r}|\to 0}\sum\vec{F}\cdot\vec{\Delta r_i}=\lim_{\Delta t\to 0}\sum\vec{F}\cdot(\displaystyle\frac{\vec{\Delta r}}{\Delta t}\Delta t)</script>. <br />So <script type="math/tex">W=\displaystyle\int_{t_1}^{t_2}\vec{F}\cdot\frac{d\vec{r}}{dt}dt=\int^{t_2}_{t_1}\vec{F}\cdot\vec{v}\ dt</script></li>
-<li>Another way to calculate work: <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_C<M,N>\cdot<dx,dy>=\int_cMdx+Ndy</script>. Then express <script type="math/tex">x</script> and <script type="math/tex">y</script> in terms of the same thing. Normally we’ll use parametric equation of <script type="math/tex">C</script>. </li>
-<li>Geometric approach: <script type="math/tex">\vec{\Delta r}</script> is in the direction of <script type="math/tex">\vec{T}</script> with size of <script type="math/tex">ds</script>. So <script type="math/tex">\displaystyle\frac{d\vec{r}}{dt}=\vec{v}=\vec{T}\frac{ds}{dt}</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and <script type="math/tex">\displaystyle\frac{ds}{dt}</script> is its size. <br /><script type="math/tex">W =\displaystyle\int_C\vec{F}\cdot\vec{T}ds</script>. </li>
+<h1 id="Conditioning"><a href="#Conditioning" class="headerlink" title="Conditioning"></a>Conditioning</h1><ol>
+<li>Given an event $A$ with $P(A)&gt;0$, the conditional PDF is $P(X\in B|A)=\displaystyle\int_Bf_{X|A}(x)dx$ for any subset $B$ of the real line. </li>
+<li>If $P(x\in A)&gt;0$, $P(X\in B|X\in A)=\displaystyle\frac{P(X\in B,X\in A)}{P(X\in A)}=\frac{\int_{A\cap B}f_X(x)dx}{P(X\in A)}$. So <script type="math/tex">f_{X|\{X\in A\}}(x)=\left\{\begin{array}{}\displaystyle\frac{f_X(x)}{P(X\in A)}&if\ x\in A\\0&otherwise \end{array}\right.</script></li>
+<li>If two random variables $X$ and $Y$, event $C=\{(X,Y)\in A\}$, <script type="math/tex">f_{X,Y|C}(x,y)=\left\{\begin{array}{}\displaystyle\frac{f_{X,Y}(x,y)}{P(C)}&if\ (x,y)\in A\\0&otherwise \end{array}\right.</script> and $f_{X|C}(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y|C}(x)dy$</li>
+<li>Total probability theorem: If disjoint sets $A_1,A_2,…,A_n$ form a partition of the sample space, $f_X(x)=\displaystyle\sum^n_{i=1}P(A_i)f_{X|A_i}(x)$. </li>
+<li>If $X$ and $Y$ are continuous random variables with joint PDF $f_{X,Y}$. For any $y$ with $f_Y(y)&gt;0$, the conditional PDF of $X$ given that $Y=y$ is $f_{X|Y}(x|y)=\displaystyle\frac{f_{X,Y}(x,y)}{f_Y(y)}$. </li>
+<li>Total probability theorem based on another continuous random variable: $f_X(x)=\displaystyle\int^\infty_{-\infty}f_Y(y)f_{X|Y}(x|y)dy$</li>
+<li>It’s best to view $y$ as a fixed number and consider $f_{X|Y}(x|y)$ as a function of the single variable $x$. Viewed as a function of $x$, $f_{X|Y}(x|y)$ has the same shape as the joint PDF $f_{X,Y}$, because the denominator $f_Y$ does not depend on $x$. </li>
+<li>$f_{X,Y|Z}(x,y|z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_Z(z)}$ and $f_{X|Y,Z}(x|y,z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_{Y,Z}(y,z)}$</li>
+<li>$E[X|A]=\displaystyle\int^\infty_{-\infty}xf_{X|A}(x)dx$ and $E[X|Y=y]=\displaystyle\int^\infty_{-\infty}xf_{X|Y}(x|y)dx$</li>
+<li>$E[g(X)|A]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|A}(x)dx$ and $E[g(X)|Y=y]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|Y}(x|y)dx$</li>
+<li>If disjoint sets $A_1,A_2,…,A_n$ form a partition of sample space, $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$. </li>
+<li>$E[X]=\displaystyle\int^\infty_{-\infty}E[X|Y=y]f_Y(y)dy$</li>
+</ol>
+<h1 id="Continuous-Bayes-Rule"><a href="#Continuous-Bayes-Rule" class="headerlink" title="Continuous Bayes Rule"></a>Continuous Bayes Rule</h1><ol>
+<li>Since $f_Xf_{Y|X}=f_{X,Y}=f_Yf_{X|Y}$, $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{f_Y(y)}$. </li>
+<li>We can also plug in the total probability theorem: $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{\int^\infty_{-\infty}f_X(x)f_{Y|X}(y|x)}$</li>
+<li>A discrete event $A$ and a continuous random variable $Y$<br />$\begin{equation}\begin{split}P(A|Y=y)&amp;\approx P(A|y≤Y≤y+\delta)\\&amp;=\displaystyle\frac{P(A)P(y≤Y≤y+\delta|A)}{P(y≤Y≤y+\delta)}\\&amp;\approx\frac{P(A)f_{Y|A}(y)\delta}{f_Y(y)\delta}\\&amp;=\frac{P(A)f_{Y|A}(y)}{f_Y(y)} \end{split}\end{equation}$<br />Substitute $f_Y(y)$, $P(A|Y=y)=\displaystyle\frac{P(A)f_{Y|A}(y)}{P(A)f_{Y|A}(y)+P(A^c)f_{Y|A^c}(y)}$<br />Let $A=\{N=n\}$ and $p_N$ be the PMF of $N$. $P(A|Y=y)=P(N=n|Y=y)=\displaystyle\frac{p_N(n)f_{Y|N}(y|n)}{f_Y(y)}=\frac{p_N(n)f_{Y|N}(y|n)}{\sum_ip_N(i)f_{Y|N}(y|i)}$</li>
+<li>$A$ is still a discrete event and $Y$ is a continuous random variable<br />$f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{P(A)}$<br />Also plug in the total probability theorem: $f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{\int^\infty_{-\infty}f_Y(t)P(A|Y=t)dt}$</li>
+</ol>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li>Two continuous random variables $X$ and $Y$ are independent if their joint PDF is the product of the marginal PDFs: $f_{X,Y}(x,y)=f_X(x)f_Y(y)$, for all $x,y$. </li>
+<li>Also $f_{X|Y}(x|y)=f_X(x)$, for all $y$ with $f_Y(y)&gt;0$ and all $x$. </li>
+<li>$P(X\in A and Y\in B)=P(X\in A)P(Y\in B)$. </li>
+<li>$F_{X,Y}(x,y)=F_X(x)F_Y(y)$, for all $x, y$. </li>
+<li>$E[g(X)h(Y)]=E[g(X)]E[h(Y)]$</li>
+<li>$var(X+Y)=var(X)+var(y)$. </li>
 </ol>
 
       
@@ -383,7 +419,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/27/06-Double-Integrals/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -397,7 +433,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/27/06-Double-Integrals/" class="post-title-link" itemprop="url">06. Double Integrals</a>
+            <a href="/2020/03/14/05-Continuous-Random-Variables/" class="post-title-link" itemprop="url">05. Continuous Random Variables</a>
         </h1>
 
         <div class="post-meta">
@@ -407,14 +443,624 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-27 16:11:44" itemprop="dateCreated datePublished" datetime="2020-02-27T16:11:44+08:00">2020-02-27</time>
+              <time title="Created: 2020-03-14 15:46:33" itemprop="dateCreated datePublished" datetime="2020-03-14T15:46:33+08:00">2020-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:51" itemprop="dateModified" datetime="2020-08-07T22:35:51+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:35:30" itemprop="dateModified" datetime="2020-08-07T19:35:30+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h1><ol>
+<li>A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)=\displaystyle\int_Bf_X(x)dx$ for every subset $B$  of the real line. </li>
+<li>In particular, the probability that the value of $X$ falls within an interval is $P(a≤X≤b)=\displaystyle\int^b_af_X(x)dx$. </li>
+<li>The probability can be interpreted as the area under the graph of the PDF. </li>
+<li>For any single value $a$, we have $P(X=a)=\displaystyle\int^a_af_X(x)dx=0$. <br />So including or excluding the nedpoints of an interval has no effect on its probability. $P(a≤X≤b)=P(a≤X&lt;b)=P(a&lt;X≤b)=P(a&lt;X&lt;b)$</li>
+<li>$P(a≤X≤b)=P(X≤b)-P(X≤a)$</li>
+<li>$\displaystyle\int^\infty_{-\infty}f_X(x)dx=1$</li>
+<li>$P([x,x+\delta])=\displaystyle\int^{x+\delta}_xf_X(t)dt\approx f_X(x)\cdot\delta$. So we can view $f_X(X)$ as the probability mass per unit length near $x$. Even though a PDF is used to calculate event probabilities, $f_X(x)$ is not the probability of any particular event. </li>
+<li>$f_X(x)$ is not restricted to be less than or equal to one. </li>
+<li>If a random variable $X$ takes values in an interval $[a,b]$ and any two subintervals of the same length have the same probability, we refer to this type of random variable as uniform or uniformly distributed. <br /><script type="math/tex">f_X(x)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a}&if\ a≤x≤b\\0&otherwise \end{array}\right.</script></li>
+<li>The expected value of a continuous random variable $X$ is defined by $E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx$. </li>
+<li>If $X$ is a continuous random variable, $Y=g(X)$ is also a random variable but may be a decrete one. But $E[g(X)]=\displaystyle\int^\infty_{-\infty}g(x)f_X(x)dx$ is true for any kind of $Y$, descrete or continuous. </li>
+<li>The variance is still $var(X)=E[(X-E[X])^2]=\displaystyle\int_{-\infty}^\infty(x-E[X])^2f_X(x)dx$. <br />And $var(X)=E[(X-E[X])^2]$ still stands. </li>
+<li>For uniform random variable: <br />$E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx=\int^b_ax\frac{1}{b-a}dx=\frac{a+b}{2}$<br />$E[X^2]=\displaystyle\int^\infty_{-\infty}x^2f_X(x)dx=\int^b_a\frac{x^2}{b-a}dx=\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{a^2+ab+b^2}{3}-\frac{(a+b)^2}{4}=\frac{(b-a)^2}{12}$</li>
+<li>Exponential random variable: <br />PDF: $f_X(x)=\left\{\begin{array}{}\lambda e^{-\lambda x}&amp;if x≥0\\0&amp;otherwise \end{array}\right.$<br />$P(X≥a)=\displaystyle\int^\infty_a\lambda e^{-\lambda x}dx=e^{-\lambda a}$<br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\int^\infty_0x\lambda e^{-\lambda x}dx\\&amp;=(-xe^{-\lambda x})\Big|^\infty_0+\int^\infty_0e^{-\lambda x}dx\\&amp;=\frac{1}{\lambda} \end{split}\end{equation}$<br />$\begin{equation}\begin{split}E[X^2]&amp;=\displaystyle\int^\infty_0x^2\lambda e^{-\lambda x}dx\\&amp;=(-x^2e^{-\lambda x})\Big|^\infty_0+\int^\infty_02xe^{-\lambda x}dx\\&amp;=0+\frac{2}{\lambda}E[X]\\&amp;=\frac{2}{\lambda^2} \end{split}\end{equation}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1}{\lambda^2}$</li>
+</ol>
+<h1 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h1><ol>
+<li>The cumulative distribution function (CDF) of a random variable $X$ is denoted by $F_X$ and provides probability $P(X≤x)$. <br /><script type="math/tex">F_X(x)=P(X≤x)=\left\{\begin{array}{}\displaystyle\sum_{k≤x}p_X(k)&if\ X\ is\ discrete\\\int^x_{-\infty}f_X(t)dt&if\ X\ is\ continuous \end{array}\right.</script></li>
+<li>CDF accumulates probability up to the value $x$. </li>
+<li>The graph of CDF of a descrete random variable has a staircase form at the values of probability mass. At the points where a jump occurs, the value of $F_X$ is the larger of the two corresponding value, i.e. $F_X$ is continuous from the right. </li>
+<li>$F_X$ is monotonically nondecreasing: if $x≤y$, then $F_X(x)≤F_X(y)$. </li>
+<li>$\displaystyle\lim_{x\to-\infty}F_X=0$ and $\displaystyle\lim_{x\to\infty}F_X=1$</li>
+<li>If $X$ is discrete, then $F_X(x)$ is a piecewise constant function of $x$. If $X$ is continuous, then $F_X(x)$ is a continuous function of $x$. </li>
+<li>If $X$ is descrete, $p_X(k)=P(X≤k)-P(X≤k-1)=F_X(k)-F_X(k-1)$. If $X$ is continuous, $f_X(x)=\displaystyle\frac{dF_X}{dx}(x)$. </li>
+<li>If $X_1,X_2,…,X_n$ are independent, $F_X(x)=F_{X_1}(x)…F_{X_n}(x)$</li>
+<li>For geometric random variable, $F_{geo}(n)=\displaystyle\sum^n_{k=1}p(1-p)^{k-1}=1-(1-p)^2$<br />For exponential random variable, $F_{exp}(x)=\displaystyle\int^x_0\lambda e^{-\lambda t}dt=1-e^{-\lambda x}$ for $x&gt;0$ and $F_X(x)=0$, for $x≤0$. <br />$F_{geo}=F_{exp}$ when $x=n\delta$ ($\delta=-\displaystyle\frac{-ln(1-p)}{\lambda}$), with $n=1,2,…$. </li>
+</ol>
+<h1 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h1><ol>
+<li>A continuous random variable $X$ is said to be normal or Gaussian if it has a PDF of the form $f_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, where $\mu$ and $\sigma$ are two scalar parameters characterizing the PDF with $\sigma&gt;0$. </li>
+<li>The PDF is symmetric around $\mu$. So its mean $E[X]$ has to be $\mu$. </li>
+<li><br />$\begin{equation}\begin{split}var(X)&amp;=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}\int^\infty_{-\infty}(x-\mu)^2e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\int^\infty_{-\infty}y^2e^{-\frac{y^2}{2}}dy                         y=\frac{x-\mu}{\sigma}\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\Bigg[(-ye^{-\frac{y^2}{2}})\bigg|^\infty_{-\infty}+\int^\infty_{-\infty}e^{-\frac{y^2}{2}}dy\Bigg]\\&amp;=\sigma^2 \end{split}\end{equation}$</li>
+<li>The standard normal random variable is a normal random variable with zero mean and unit variance. CDF: $\Phi(y)=P(Y≤y)=\displaystyle\frac{1}{\sqrt{2\pi}}\int^y_{-\infty}e^{-\frac{t^2}{2}}dt$</li>
+<li>In standard normal random variable, for $y&lt;0$, $\Phi(y)=P(Y≤y)=P(Y≥-y)=1-P(Y≤-y)=1-\Phi(-y)$</li>
+<li>For any $X$, we can standardize by $Y=\displaystyle\frac{X-\mu}{\sigma}$. And in reverse, any $X=\sigma Y+\mu$. So $P(X≤x)=P(\displaystyle\frac{X-\mu}{\sigma}≤\frac{x-\mu}{\sigma})=P(Y≤\frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma})$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/" class="post-title-link" itemprop="url">04. Discrete Random Variables; Probability Mass Functions; Expectations</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-12 18:14:27" itemprop="dateCreated datePublished" datetime="2020-03-12T18:14:27+08:00">2020-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:07" itemprop="dateModified" datetime="2020-08-07T19:35:07+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Random-Variables"><a href="#Random-Variables" class="headerlink" title="Random Variables"></a>Random Variables</h1><ol>
+<li>Sometimes we can use a random variable to associate the (numerical) value with each outcome. </li>
+<li>A random variable is a real valued function of the experimental outcome. </li>
+<li>A function of a random variable defines another random variable. </li>
+<li>A random variable can be conditioned on an event or on another random variable. </li>
+<li>A random variable can be independent of an event or from another random variable. </li>
+<li>A random variable is called discrete if its range is either finite or countably infinite. </li>
+<li>If $Y=g(X)$ is a function of a random variable $X$, then $Y$ is also a random variable. </li>
+</ol>
+<h1 id="Probability-Mass-Function"><a href="#Probability-Mass-Function" class="headerlink" title="Probability Mass Function"></a>Probability Mass Function</h1><ol>
+<li>Probability mass function (PMF) of a discrete random variable $X$ can capture the probabilities of the values that it can take. PMF of $X$ is denoted $p_X$. </li>
+<li>If $x$ is any possible value of $X$, the probability mass of $x$ denoted $p_X(x)$ is the probability of the event $\{X=x\}$ consisting of all outcomes that give rise to a value of $X$ equal to $x$: $p_X(x)=P(\{X=x\})$ or $p_X(x)=P(X=x)$. </li>
+<li>Convention: upper case characters denote random variables and lower case characters denote real numbers such as the numerical values of a random variable. </li>
+<li>The events $\{X=x\}$ are disjoint and form a partition of the sample space. So: $\displaystyle\sum_xp_X(x)=1$ and $P(X\in S)=\displaystyle\sum_{x\in S}p_X(x)$. </li>
+<li>$p_X(x)$ equals the sum of the probabilities of all outcomes that give rise to event $\{X=x\}$. </li>
+<li>If $Y=g(X)$, $p_Y(y)=\displaystyle\sum_{\{x|g(x)=y\}}p_X(x)$. </li>
+</ol>
+<h1 id="Special-Random-Variable"><a href="#Special-Random-Variable" class="headerlink" title="Special Random Variable"></a>Special Random Variable</h1><ol>
+<li>The Bernoulli random variable takes the two values $1$ and $0$. And its PMF is <script type="math/tex">p_X(x)=\left\{\begin{array}{}p&if\ x=1\\1-p&if\ x=0 \end{array}\right.</script></li>
+<li>The Binomial random variable: In $n$ times of Bernoulli experiment, $x=1$ has happened $k$ times. Its PMF is $p_X(k)=P(X=k)=\big(^n_k\big)p^k(1-p)^{n-k}$. </li>
+<li>The geometric random variable: In $n$ times of Bernoulli experiment, $x=1$ haven’t occurred until $k$th time. Its PMF is $p_X(k)=(1-p)^{k-1}p$. </li>
+<li>The Poisson random variable has PMF of $p_X(k)=e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}$. This is a binomial random variable with very small $p$ and very large $n$. $e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}\approx\big(^n_k\big)p^k(1-p)^{n-k}$. $\lambda=np$</li>
+</ol>
+<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><ol>
+<li>The expectation of $X$ is a weighted average of the possible values of $X$. $E[X]=\displaystyle\sum_xxp_X(x)$. </li>
+<li>The expectationid well-defined if $\displaystyle\sum_x|x|p_X(x)&lt;\infty$. In this case, it’s known that the infinite sum converges to a finite value that is independent of the order in which the various terms are summed. </li>
+<li>The expectation is the center of gravity of the PMF. The sum of the torques from the weights to its left is equal to the sum of the torques from the weights to its right. $\displaystyle\sum_x(x-c)p_X(x)=0$. </li>
+<li>The $n$th moment as $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
+<li>The variance of $X$ is $var(X)=E[(X-E[X])^2]$. </li>
+<li>The variance provides a measure of dispersion of $X$ around its mean. </li>
+<li>Another measure of dispersion is the standard deviation of $X$, $\sigma_X=\sqrt{var(X)}$. </li>
+<li>The PMF of $(X-E[X])^2$ is not alway the same PMF of $X$. </li>
+<li>Expected value rule for functions of random variables: $E[g(X)]=\displaystyle\sum_xg(x)p_X(x)$. <br />So the variance: $var(X)=E[(X-E[x])^2]=\displaystyle\sum_x(x-E[x])^2p_X(x)$. <br />The $n$th moment: $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
+<li>Variance is zero if and only if all $x=E[X]$. </li>
+<li>In general, $E[g(X)]≠g(E[X])$</li>
+</ol>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ol>
+<li>The expectation of a constant is itself. $E[c]=c$. </li>
+<li>Define $Y=aX+b$, $E[Y]=\displaystyle\sum_x(ax+b)p_X(x)=a\sum_xxp_X(x)+b\sum_xp_X(x)=aE[x]+b$<br />$\begin{equation}\begin{split}var(Y)&amp;=\displaystyle\sum_x(ax+b-E[aX+b])^2p_X(x)\\&amp;=\sum_x(ax+b-aE[x]-b)^2p_X(x)\\&amp;=a^2\sum_x(x-E[x])^2p_X(x)\\&amp;=a^2var(X) \end{split}\end{equation}$</li>
+<li><br />$\begin{equation}\begin{split}var(X)&amp;=\sum_x(x-E[X])^2p_X(x)\\&amp;=\sum_x(x^2-2xE[X]+(E[X])^2)p_X(x)\\&amp;=\sum_xx^2p_X(x)-2E[x]\sum_xxp_X(x)+(E[X])^2\sum_xp_X(x)\\&amp;=E[X^2]-2(E[X])^2+(E[X])^2\\&amp;=E[X^2]-(E[X])^2 \end{split}\end{equation}$</li>
+<li>For discrete uniform over $[a,b]$: <br />$p_X(k)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a+1}&amp;if k=a,a+1,…b\\0&amp;otherwise \end{array}\right.$<br />$E[X]=\displaystyle\frac{a+b}{2}$, $var(X)=\displaystyle\frac{(b-a)(b-a+2)}{12}$</li>
+<li>For Bernoulli random variable: <br />$E[X]=1\cdot p+0\cdot(1-p)=p$<br />$E[X^2]=1^2\cdot p+0^2\cdot(1-p)=p$<br />$var(X)=E[X^2]-(E[X])^2=p-p^2=p(1-p)$</li>
+<li>For Poisson random variable: <br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\sum^\infty_{k=1}ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}e^{-\lambda}\frac{\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}e^{-\lambda}\frac{\lambda^m}{m!}\\&amp;=\lambda \end{split}\end{equation}$</li>
+<li>For Binomial random variable:  $E[X]=\displaystyle\sum_{i=1}^nE[X_i]=\sum^n_{i=1}p=np$</li>
+</ol>
+<h1 id="Other-PMF-Models"><a href="#Other-PMF-Models" class="headerlink" title="Other PMF Models"></a>Other PMF Models</h1><h2 id="Joint-PMF"><a href="#Joint-PMF" class="headerlink" title="Joint PMF"></a>Joint PMF</h2><ol>
+<li>The probability of the values that $X$ and $Y$ can take are captured by the joint PMF of $X$ and $Y$, denoted $p_{X,Y}$. $p_{X,Y}(x,y)=P(X=x,Y=y)$. </li>
+<li>$P((X,Y)\in A)=\displaystyle\sum_{(x,y)\in A}p_{X,Y}(x,y)$</li>
+<li>Sometimes, we refer to $p_X$ and $p_Y$ as the marginal PMFs. And we can calculate the marginla PMFs by using the tabular method, $p_X(x)=\displaystyle\sum_{y}p_{X,Y}(x,y)$</li>
+<li>If $Z=g(X,Y)$, $p_Z(z)=\displaystyle\sum_{\{(x,y)|g(x,y=z)\}}p_{X,Y}(x,y)$</li>
+<li>The expected value rule: $E[g(X,Y)]=\displaystyle\sum_x\sum_yg(x,y)p_{X,Y}(x,y)$</li>
+<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
+</ol>
+<h2 id="Conditional-PMF"><a href="#Conditional-PMF" class="headerlink" title="Conditional PMF"></a>Conditional PMF</h2><ol>
+<li>$p_{X|A}(x)=P(X=x|A)=\displaystyle\frac{P(\{X=x\}\cap A)}{P(A)}=\frac{P(\{X=x\}\cap A)}{\sum_xP(\{X=x\}\cap A)}$</li>
+<li>$E[X|A]=\displaystyle\sum_xxp_{X|A}(x)$<br />$E[X|Y=y]=\displaystyle\sum_xxp_{X|Y}(x|y)$</li>
+<li>$p_{X|Y}(x|y)=P(X=x|Y=y)=\displaystyle\frac{p_{X,Y}(x,y)}{p_Y(y)}$</li>
+<li>$p_{X,Y}(x,y)=p_{X|Y}(x|y)\cdot p_Y(y)=p_{Y|X}(y|x)\cdot p_X(x)$</li>
+<li>Partition of sample space into disjoint events $A_1,A_2,…,A_n$. <br />$p_X(x)=\displaystyle\sum_{i=1}^nP(A_i)p_{X|A_i}(x)$<br />$p_{X|B}(x)=\displaystyle\sum^n_{i=1}P(A_i|B)p_{X|A_i\cap B}(x)$<br /> Total expectation theorem: $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$<br />$E[X|B]=\displaystyle\sum^n_{i=1}P(A_i|B)E[X|A_i\cap B]$</li>
+<li>$E[g(X)|A]=\displaystyle\sum_xg(x)p_{X|A}(x)$</li>
+<li>$E[X]=\displaystyle\sum_yp_Y(y)E[X|Y=y]$</li>
+<li>Geometric random variable: <br />$E[X]=P(X=1)E[X|X=1]+P(X&gt;1)E[X|X&gt;1]$<br />$E[X|X&gt;1]=E[X-1|X-1&gt;0]+1=E[X]+1$<br />So $E[X]=p\cdot 1+(1-p)(E(x)+1)$. <br />$E[X]=\displaystyle\frac{1}{p}$<br />Similarly, we can obtain $E[X^2|X&gt;1]=E[(1+X)^2|X+1&gt;1]=E[(1+X)^2]=1+2E[X]+E[X^2]$<br />So that $E[X^2]=p\cdot 1+(1-p)(1+2E[X]+E[X^2])$ from which we obtain $E[X^2]=\displaystyle\frac{2}{p^2}-\frac{1}{p}$. <br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1-p}{p^2}$</li>
+</ol>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li>The random variable $X$ is independent of the event $A$ if <script type="math/tex">P(X=x\ and\ A)=P(X=x)P(A)=p_X(x)P(A)</script> for all $x$. </li>
+<li><script type="math/tex; mode=display">P(X=x\ and\ A)=p_{X|A}(x)P(A)</script></li>
+<li>$p_{X|A}(x)=p_X(x)$ for all $x$</li>
+<li>Two random variables $X$ and $Y$ are independent if $p_{X,Y}(x,y)=p_X(x)p_Y(y)$, for all $x,y$. </li>
+<li>$X$ and $Y$ are said to be conditionally independent, given a positive probability event $A$, if $P(X=x,Y=y|A)=P(X=x|A)P(Y=y|A)$ or $p_{X,Y|A}(x,y)=p_{X|A}(x)p_{Y|A}(y)$, for all $x$ and $y$. </li>
+<li>If $X $ and $Y$ are independent random variables, then <br />$g(X)$ and $h(Y)$ are also independent. <br />$E[XY]=E[X]E[Y]$ and $E[g(X)h(Y)]=E[g(X)]E[h(Y)]$<br />$var(X+Y)=var(X)+var(Y)$</li>
+<li>Three  random variables $X,Y,Z$ are said to be independent if $p_{X,Y,Z}(x,y,z)=p_X(x)p_Y(y)p_Z(z)$ for all $x,y,z$</li>
+<li>If $X,Y,Z$ are independent, then <br />$f(X),g(Y),h(Z)$ are also independent and $g(X,Y)$ and $h(Z)$ are independent. <br />$var(\displaystyle\sum^n_{i=1}X_i)=\sum^n_{i=1}var(X_i)$</li>
+<li>For Binomial random variable: <br />For each toss, we let $X_i$ be the random variable which is equal to 1 if the $i$th toss comes up a head. Then $X=\displaystyle\sum^n_{i=1}X_i$<br />$var(X)=\displaystyle\sum^n_{i=1}v ar(X_i)=np(1-p)$</li>
+<li>For Poisson random variable: <br />$E[Y]=\lambda$<br />$\begin{equation}\begin{split}E[Y^2]&amp;=\displaystyle\sum^\infty_{k=1}k^2e^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}k\frac{e^{-\lambda}\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}(m+1)\frac{e^{-\lambda}\lambda^m}{m!}\\&amp;=\lambda(E[Y]+1)\\&amp;=\lambda(\lambda+1) \end{split}\end{equation}$<br />$var(Y)=E[Y^2]-(E[Y])^2=\lambda(\lambda+1)-\lambda^2=\lambda$</li>
+<li>For Bernoulli random variable: <br />Let $X=1$ is event occurred. Then $E[X]=p,var(X)=p(1-p)$<br />Sample mean $S_n=\displaystyle\frac{X_1+X_2+…+X_n}{n}$<br />$E[S_n]=\displaystyle\sum^n_{i=1}\frac{1}{n}E[X_i]=p$<br />$var(S_n)=\displaystyle\sum^n_{i=1}\frac{1}{n^2}var(X_i)=\frac{p(1-p)}{n}$<br />Not only for Bernoulli experiments, $var(S_n)=\displaystyle\frac{var(X)}{n}$ as long as $X_i$ are independent, with common mean $E[X]$ and variance $var(X)$. <br />The sample mean $S_n$ can be viewed as a good estimate of the probability of $X=1$. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/03-Independence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/03-Independence/" class="post-title-link" itemprop="url">03. Independence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-12 12:35:13" itemprop="dateCreated datePublished" datetime="2020-03-12T12:35:13+08:00">2020-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:14" itemprop="dateModified" datetime="2020-08-07T19:35:14+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li>$A$ is independent of $B$ if $P(A|B)=P(A)$. The occurrence of $B$ provides no such information and does not alter the probability that $A$ has occurred. </li>
+<li>$P(A|B)=\displaystyle\frac{P(A\cap B)}{P(B)}$. So if $A$ is independent of $B$, $P(A\cap B)=P(A|B)P(B)=P(A)P(B)$. </li>
+<li>We take $P(A\cap B)=P(A)P(B)$ as the definition of independent, because it can be used even when $P(B)=0$. </li>
+<li>For $A$ and $B$, the definition is a symmetric property. If $A$ is independent of $B$, then $B$ is independent of $A$, and we can unambiguously say that $A$ and $B$ are independent events. </li>
+<li>Disjoint sets definitely not independent. </li>
+<li>If $A$ and $B$ are independent, the same holds true for $A$ and $B^c$. </li>
+</ol>
+<h1 id="Conditional-Independence"><a href="#Conditional-Independence" class="headerlink" title="Conditional Independence"></a>Conditional Independence</h1><ol>
+<li>Given an event $C$, the events $A$ and $B$ are called conditionally independent if $P(A\cap B|C)=P(A|C)P(B|C)$. </li>
+<li>$\begin{equation}\begin{split}P(A\cap B|C)&amp;=\displaystyle\frac{P(A\cap B\cap C)}{P(C)}\\&amp;=\frac{P(C)\frac{P(B\cap C)}{P(C)}\frac{P(A\cap B\cap C)}{P(B\cap C)}}{P(C)}\\&amp;=\frac{P(C)P(B|C)P(A|B\cap C)}{P(C)}\\&amp;=P(B|C)P(A|B\cap C)\end{split}\end{equation}$</li>
+<li>Also $P(A\cap B|C)=P(A|C)P(B|C)$. So we see the conditional independence is the same as the condition $P(A|B\cap C)=P(A|C)$</li>
+<li>This relation states that is $C$ is known to have occurred, the additional knowledge that $B$ also occurred does not change the probability of $A$. </li>
+<li>Independence of two events $A$ and $B$ with respect to the unconditional probability law does not imply conditional independence and vice versa. </li>
+</ol>
+<h1 id="Independence-of-a-Collection-of-Events"><a href="#Independence-of-a-Collection-of-Events" class="headerlink" title="Independence of a Collection of Events"></a>Independence of a Collection of Events</h1><ol>
+<li>Events $A_1,…,A_n$ are independent if $\displaystyle P(\bigcap_{i\in S}A_i)=\prod_{i\in S}P(A_i)$, for every subset $S$ of $\{1,2,…,n\}$</li>
+<li>Distinguish from pairwise independence which is defined as any two events are independent. </li>
+<li>We can substitute any set with its complement with the independence true. </li>
+</ol>
+<h1 id="Independent-Trials-and-Binomial-Probabilities"><a href="#Independent-Trials-and-Binomial-Probabilities" class="headerlink" title="Independent Trials and Binomial Probabilities"></a>Independent Trials and Binomial Probabilities</h1><ol>
+<li>If an experiment involves a sequence of independent but identical stages, we say that we have a sequence of independent trials. </li>
+<li>In the special case where there are only two possible results at each stage, we say that we have a sequence of independent Bernoulli trials. </li>
+<li>Two possible results $A$ and $B$, and the probability of $A$ is $p$. In $n$ experiments, the probability that $A$ occurs $k$ times is $p(k)=\big(^n_k\big)p^k(1-p)^{n-k}$. <br />$\big(^n_k\big)=\displaystyle\frac{n!}{k!\cdot(n-k)!}$</li>
+<li>The sum of probabilities of each possible outcomes should be $1$. <br />Binomial formula: $\displaystyle\sum^n_{k=0}\big(^n_k\big)p^k(1-p)^{n-k}=1$<br />When $p=\displaystyle\frac{1}{2}$, $\displaystyle\sum^n_{k=0}\big(^n_k\big)=2^2$</li>
+<li>A similar coefficient is the multinomial coefficient: <br />$\begin{equation}\begin{split}\big(^{     n}_{n_1n_2…n_r}\big)&amp;=\big(^n_{n_1}\big)\big(^{n-n_1}_{  n_2}\big)\big(^{n-n_1-n_2}_{    n_3})…\big(^{n-n_1-…-n_{r-1}}_{          n_r})\\&amp;=\displaystyle\frac{n!}{n_1!(n-n_1)!}\frac{(n-n_1)!}{n_2!(n-n_1-n_2!)}…\frac{(n-n_1-…-n_{r-1})!}{n_r!(n-n_1-…-n_r)!}\\&amp;=\frac{n!}{n_1!n_2!…n_r!}\end{split}\end{equation}$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/10/02-Conditioning-and-Bayes-rule/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/10/02-Conditioning-and-Bayes-rule/" class="post-title-link" itemprop="url">02. Conditioning and Bayes' rule</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-10 09:11:31" itemprop="dateCreated datePublished" datetime="2020-03-10T09:11:31+08:00">2020-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:33:15" itemprop="dateModified" datetime="2020-08-07T19:33:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Conditional-Probability"><a href="#Conditional-Probability" class="headerlink" title="Conditional Probability"></a>Conditional Probability</h1><ol>
+<li>$P(A|B)$ means the conditional probability of $A$ given $B$. </li>
+<li>$P(A|B)=\displaystyle\frac{P(A\cap B)}{P(B)}$, if $P(B)&gt;0$. If $P(B)=0$, the probability $P(A|B)$ is undefined. </li>
+<li>Three probability laws: <br />&emsp;$P(A|B)&gt;0$<br />&emsp;$P(\Omega|B)=1$<br />&emsp;$P(A_1\cup A_2|B)=P(A_1|B)+P(A_2|B)$ if $A_1$ and $A_2$ are two disjoint sets. </li>
+<li>For any two sets $A$ and $C$, $P(A\cup C|B)≤P(A|B)+P(C|B)$</li>
+<li>$P(B|B)=\displaystyle\frac{P(B)}{P(B)}=1$</li>
+<li>We might discard all possible outcomes outside $B$ and treat the conditional probabilities as a probability law defined on the new universe $B$. </li>
+<li>Often $P(A\cap B)$ is not easy to calculate directly. But we can calculate $P(A|B)$ first and then use $P(A\cap B)=P(B)P(A|B)$ to get the answer. </li>
+<li>Calculate various probabilities in conjunction with a tree-based sequential description of an experiment: <br />&emsp;First set up the tree so that an event of interest is associated with a leaf. <br />&emsp;Every node represents the probability of an event which is the conjunction of all passed events from root to it. <br />&emsp;Every path is the conditional probability of the next event given the conjunction of all the afore-passed events. </li>
+<li>Multiplication rule: <br /><script type="math/tex">\begin{equation}\begin{split}P(\bigcap^n_{i=1}A_i)&=\displaystyle P(A_1)\frac{P(A_1\cap A_2)}{P(A_1)}\frac{P(A_1\cap A_2\cap A_3)}{P(A_1\cap A_2)}…\frac{P(\bigcap^n_{i=1}A_i)}{P(\bigcap^{n-1}_{i=1}A_i)} \\&=P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)…P(A_n|\bigcap^{n-1}_{i=1}A_i)\end{split}\end{equation}</script></li>
+</ol>
+<h1 id="Total-Probability-Theorem-and-Bayes’-Rule"><a href="#Total-Probability-Theorem-and-Bayes’-Rule" class="headerlink" title="Total Probability Theorem and Bayes’ Rule"></a>Total Probability Theorem and Bayes’ Rule</h1><ol>
+<li>A set of sets is a partition of the sample space if and only if each possible outcomes is included in exactly one of the sets. </li>
+<li>Total probability theorem: Let $A_1,…,A_2$ be disjoint events that form a partion of the sample space and assume that $P(A_i)&gt;0$, for all $i$. <br />For any event $B$, <br /><script type="math/tex">\begin{equation}\begin{split}P(B)&=P(\Omega\cap B)=P((A_1\cup A_2\cup…\cup A_n)\cap B)\\&=P((A_1\cap B)\cup(A_2\cap B)\cup…\cup(A_n\cap B))\\&=P(A_1\cap B)+P(A_2\cap B)+…+P(A_n\cap B)\\&=P(A_1)P(B|A_1)+P(A_2)P(B|A_2)+…+P(A_n)P(B|A_n) \end{split}\end{equation}</script></li>
+<li>We are partition the sample space into a number of scenarios. Then the probability that $B$ occurs is a weighted average of its conditional probability under each scenarios, where each scenario is weighted according to its unconditional probability. </li>
+<li>Bayes’ rule: The condition of Bayes’ rule is the same as total probability theorem<br />Since $P(A_i\cap B)=P(B)P(A_i|B)=P(A_i)P(B|A_i)$<br /><script type="math/tex">\begin{equation}\begin{split}P(A_i|B)&=\displaystyle\frac{P(A_i)P(B|A_i)}{P(B)}\ \ \ \ \ \ \ \ Plug\ in\ total\ probability\ theorem\\&=\frac{P(A_i)P(B|A_i)}{P(A_1)P(B|A_1)+…+P(A_n)P(B|A_n)} \end{split}\end{equation}</script></li>
+<li>Bayes’ rule is often used for inference. We observe the effect, and we wish to infer the cause.<br />The events $A_i$’s are associated with the causes and the event $B$ represents the effect. <br />The probability $P(B|A_i)$ that the effect will be observed when the cause is represent amounts to a probabilistic model of the cause-effect relation. <br />The probability $P(A_i|B)$ is the probability that the cause $A_i$ is present when the effect has been observed. <br />We refer $P(A_i|B)$ as the posterior probability of event $A_i$ given the information. $P(A_i)$ is called the prior probability. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/04/01-Probability-Models-and-Axioms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/04/01-Probability-Models-and-Axioms/" class="post-title-link" itemprop="url">01. Probability Models and Axioms</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-04 11:48:19" itemprop="dateCreated datePublished" datetime="2020-03-04T11:48:19+08:00">2020-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:34:53" itemprop="dateModified" datetime="2020-08-07T19:34:53+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h1><ol>
+<li>A <code>set</code> is a collection of objects which are the <code>elements of the set</code>. </li>
+<li>If <script type="math/tex">S</script> is a set and <script type="math/tex">x</script> is an element of <script type="math/tex">S</script>, we write <script type="math/tex">x\in S</script>. If <script type="math/tex">x</script> is not an element of <script type="math/tex">S</script>, we write <script type="math/tex">x\notin S</script>. </li>
+<li><code>Empty set</code>: a set has no elements, denoted by <script type="math/tex">\emptyset</script>. </li>
+<li>If <script type="math/tex">S</script> contains a finite number of elements, we write it as a list of the elements in braces: <script type="math/tex">S=\{x_1,x_2,…,x_n\}</script><br />If <script type="math/tex">S</script> contains infinitely many elements which can be enumerated in a list, we write <script type="math/tex">S=\{x_1,x_2,…\}</script>. <script type="math/tex">S</script> is <code>countably infinite</code>. <br />If all <script type="math/tex">x</script>‘s in <script type="math/tex">S</script> have a certain property <script type="math/tex">P</script>, we write <script type="math/tex">S=\{x|x\ satisfies\ P\}</script>. <script type="math/tex">|</script> is to be read as “such that”. In this case, <script type="math/tex">x</script> take a continuous range of values, and cannot be written down in a list. So <script type="math/tex">S</script> is called uncountable. </li>
+<li>If every element of <script type="math/tex">S</script> is also an element of <script type="math/tex">T</script>, <script type="math/tex">S</script> is a <code>subset</code> of <script type="math/tex">T</script>, <script type="math/tex">S\subset T</script>. </li>
+<li>If <script type="math/tex">S\subset T</script> and <script type="math/tex">T\subset S</script>, two sets are <code>equal</code>, <script type="math/tex">S=T</script>. </li>
+<li><code>Universal set</code> contains all objects that could conceivably be of interest in a particular context. It’s usually denoted by <script type="math/tex">\Omega</script>. </li>
+<li>Sets <script type="math/tex">S</script> are subsets of <script type="math/tex">\Omega</script>. </li>
+<li>The <code>complement of a set</code> <script type="math/tex">S</script>, <code>with respect to the universe</code> <script type="math/tex">\Omega</script>, is <script type="math/tex">\{x\in\Omega|x\notin S\}</script>. It’s denoted by <script type="math/tex">S^c</script>. </li>
+<li><script type="math/tex">\Omega^c=\emptyset</script>. </li>
+<li><code>Union</code> of <script type="math/tex">S</script> and <script type="math/tex">T</script>: <script type="math/tex">S\cup T=\{x|x\in S\ or\ x\in T\}</script></li>
+<li><code>Intersection</code> of <script type="math/tex">S</script> and <script type="math/tex">T</script>: <script type="math/tex">S\cap T=\{x|x\in S\ and\ x\in T\}</script></li>
+<li>Two sets are <code>disjoint</code> if <script type="math/tex">S\cap T=\emptyset</script>. Several sets are disjoint if no two of them have common element. </li>
+<li>A collection of sets is a <code>partition</code> of a set <script type="math/tex">S</script> if the sets are disjoint and their union is <script type="math/tex">S</script>. </li>
+<li>If <script type="math/tex">x</script> and <script type="math/tex">y</script> are two objects, we use <script type="math/tex">(x,y)</script> to denote the <code>ordered pair</code> of <script type="math/tex">x</script> and <script type="math/tex">y</script>. </li>
+<li>The set of scalars (real number) is denoted by <script type="math/tex">R</script>. The <script type="math/tex">n</script>-dimensional space is denoted by <script type="math/tex">R^n</script>. </li>
+<li><code>Venn diagrams</code> are used to visualize sets. </li>
+<li>Algebra of sets: <br />&emsp;<script type="math/tex">\begin{equation}\begin{split}S\cup T&=T\cup S\\ S\cap(T\cup T)&=(S\cap T)\cup(S\cap U)\\ (S^c)^c&=S\\ S\cup\Omega&=\Omega\\ (\bigcup\limits_nS_n)^c&=\bigcap\limits_nS^c_n \end{split}\end{equation}</script> &emsp; <script type="math/tex">\begin{equation}\begin{split}S\cup(T\cup U)&=(S\cup T)\cup U\\S\cup(T\cap U)&=(S\cup T)\cap(S\cup U)\\S\cap S^c&=\emptyset\\S\cap\Omega&=S\\ (\bigcap\limits_nS_n)^c&=\bigcup\limits_nS^c_n \end{split}\end{equation}</script></li>
+</ol>
+<h1 id="Probabilistic-Models"><a href="#Probabilistic-Models" class="headerlink" title="Probabilistic Models"></a>Probabilistic Models</h1><h2 id="Sample-Space"><a href="#Sample-Space" class="headerlink" title="Sample Space"></a>Sample Space</h2><ol>
+<li>Every probabilistic model invelves an underlying process, called the <code>experiment</code>, that will produce exactly one out of several possible outcomes. </li>
+<li><code>Sample space</code> <script type="math/tex">\Omega</script> contains all possible outcomes of an experiment. </li>
+<li><code>Event</code> is any collection of possible outcomes, including the entire sample sapce and the empty set. </li>
+<li><code>Probabilistic model</code> must contain the sample space and the probability law. </li>
+<li>In our formulation of a probabilistic model, there is only one experiment. </li>
+<li>Three requirements of sample space: <br />&emsp;Sample space may consist of a finite or an infinite possible of outcomes. <br />&emsp;Different elements of the sample space should be distinct and mutually exclusive. <br />&emsp;The sample space chosen for a probabilistic model must be collectively exhaustive. <br />&emsp;The sample space should have enough detail to distinguish between all outcomes of interest to the modeler. </li>
+<li>$0$ Probability doesn’t means impossible which only stands for extremely unlikely. $1$ Probability doesn’t means certain which only stands for extremely likely. $0$ probability events may happen while $1$ probability events may not occur. </li>
+</ol>
+<h2 id="Probability-Law"><a href="#Probability-Law" class="headerlink" title="Probability Law"></a>Probability Law</h2><ol>
+<li>Probability law specifies the likelihood of any event. </li>
+<li>The probability law assigns to every event $A$ a number $P(A)$, called probability of $A$. </li>
+<li>Probability axioms: <br />&emsp;Nonnegativity: $P(A)≥0$, for every event $A$. <br />&emsp;Additivity: If $A$ and $B$ are two disjoint events, then $P(A\cup B)=P(A)+P(B)$. <br />&emsp;Normalization: The probability of the entire sample space is 1, $P(\Omega)=1$. </li>
+<li>$P(\emptyset)=0$, for $1=P(\Omega)=P(\Omega\cup\emptyset)=P(\Omega)+P(\emptyset)=1+P(\emptyset)$. </li>
+<li>If $A\subset B$, then $P(A)≤P(B)$. </li>
+<li>$P(A\cup B)=P(A)+P(B)-P(A\cap B)≤P(A)+P(B)$</li>
+<li>$P(A\cup B\cup C)=P(A)+P(A^c\cap B)+P(A^c\cap B^c\cap C)$</li>
+</ol>
+<h3 id="Discrete-Models"><a href="#Discrete-Models" class="headerlink" title="Discrete Models"></a>Discrete Models</h3><ol>
+<li>Discrete probability law: If the sample space consists of a finite number of possible outcomes, $P(\{s_1,s_2,…,s_n\})=\displaystyle\sum^n_{i=1}P(s_i)$. Here $s_i$ is a single element. </li>
+<li>Discrete Uniform Probability Law: If the sample space consists of $n$ possible outcomes which are equally likely (i.e. all single-element events have the same probability), the the probability of any event $A$ is given by <script type="math/tex">P(A)=\displaystyle\frac{number\ of\ elements\ of\ A}{n}</script>. </li>
+</ol>
+<h3 id="Continuous-Models"><a href="#Continuous-Models" class="headerlink" title="Continuous Models"></a>Continuous Models</h3><ol>
+<li>The sample space of these models usually has infinite number of elements. </li>
+<li>In continuous models, the probability of each single elements is $0$, but the probability of a event consisting several elements may be positive. </li>
+<li>Normally these models are solved by graphs. <script type="math/tex">P(A)=\displaystyle\frac{integral\ of\ A}{integral\ of\ sample\ space}</script>. If the experiment is linear, the probability is $P(A)=\displaystyle\frac{\int_Adt}{\int_Sdt}$. If the experiment is 2-dimension, the probability is $P(A)=\displaystyle\frac{\iint_Adt}{\iint_Sdt}$. </li>
+</ol>
+<h1 id="Paradoxes-in-Probability"><a href="#Paradoxes-in-Probability" class="headerlink" title="Paradoxes in Probability"></a>Paradoxes in Probability</h1><p><strong><code>In probability, different mathods may give different answers, but all of the answers are correct.</code></strong></p>
+<p>The difference between answers is most affected by the sample space they choose. </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/11-Vector-Fields-in-3D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/01/11-Vector-Fields-in-3D/" class="post-title-link" itemprop="url">11. Vector Fields in 3D</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-01 21:46:57" itemprop="dateCreated datePublished" datetime="2020-03-01T21:46:57+08:00">2020-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:35:55" itemprop="dateModified" datetime="2020-08-07T22:35:55+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -445,24 +1091,150 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Double-Integral"><a href="#Double-Integral" class="headerlink" title="Double Integral"></a>Double Integral</h1><ol>
-<li>Double integral is calculating the volumn below graph of <script type="math/tex">f</script> on a certain region <script type="math/tex">R</script>. It’s denoted by <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>. <script type="math/tex">dA</script> stands for area. </li>
-<li>Like in the one variable integral, we cut <script type="math/tex">R</script> into small pieces of area <script type="math/tex">\Delta A</script>. Mark each pieces with its center <script type="math/tex">(x_i,y_i)</script>. <br />Then answer is <script type="math/tex">\displaystyle\lim_{\Delta A\to 0}\sum f(x_i,y_i)\Delta A</script>. </li>
-<li>To compute <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>, take slices let <script type="math/tex">S(x)</script> is area of slice by plane parallel to <script type="math/tex">yoz</script> plane. Then the volumn is <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}} S(x)dx</script>. For given <script type="math/tex">x</script>, <script type="math/tex">S(x)=\displaystyle\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy</script>. <br />Conclusion, <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{x_{max}}_{x_{min}}\bigg[\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\bigg]dx</script></li>
-<li>The bounds of outer integral are pure constants while the bounds of inner integral may contain <script type="math/tex">x</script>. However in inner integrals <script type="math/tex">x</script> is set constant. </li>
-<li>When exchanging order of integration, remember to change the bounds. Draw <script type="math/tex">y_{max}(x)</script> and <script type="math/tex">y_{min}(x)</script> in the inteval <script type="math/tex">[x_{min},x_{max}]</script> to find the new bounds. Normally <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}}\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\ dx</script> becomes <script type="math/tex">\displaystyle\int^{y_{max}}_{x_{min}}\int^{x_{max}(y)}_{x_{min}(y)}f(x,y)dx\ dy</script> (<script type="math/tex">x_{max}(y)\ is\ y^{-1}_{min}(x)</script> and <script type="math/tex">x_{min}(y)\ is\ y^{-1}_{max}(x)</script>). </li>
+          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
+<li>At every point, <script type="math/tex">\vec{F}=<P,Q,R></script>, <script type="math/tex">P,Q,R</script> are all functions of <script type="math/tex">x,y,z</script>. </li>
+<li>In 3D, flux through a surface, which requires a surface integral. </li>
+<li><script type="math/tex">Flux=\displaystyle\iint_S\vec{F}\cdot\vec{n}\ dS</script>. Sometimes <script type="math/tex">d\vec{S}=\vec{n}dS</script>. </li>
+<li>If <script type="math/tex">S</script> is horizontal, namely <script type="math/tex">z=a</script>, <script type="math/tex">\vec{n}=\pm\vec{k}</script>. <script type="math/tex">dS=dx\ dy</script>. <br />If <script type="math/tex">S</script> is a sphere of radius <script type="math/tex">a</script> centered at origin, <script type="math/tex">n=\pm\displaystyle\frac{<x,y,z>}{a}</script>. <script type="math/tex">dS=a^2sin\ \theta\ d\phi\ d\theta</script><br />If <script type="math/tex">S</script> is a sylinder of radius <script type="math/tex">a</script> symmetric to z-axis, <script type="math/tex">\vec{n}=\displaystyle\pm\frac{<x,y,0>}{a}</script>. <script type="math/tex">dS=adz\ d\theta</script><br />If <script type="math/tex">S</script> is graph <script type="math/tex">z=f(x,y)</script>, <script type="math/tex">\vec{n}dS=\pm<-f_x,-f_y,1>dx\ dy</script>. MARK: <script type="math/tex"><-f_x,-f_y,1></script> is not <script type="math/tex">\vec{n}</script> and <script type="math/tex">dx\ dy</script> is not <script type="math/tex">dS</script>. <br />If <script type="math/tex">S</script> is parametric description, namely <script type="math/tex">S=\left\{\begin{array}{}x=x(u,v)\\y=y(u,v)\\z=z(u,v) \end{array}\right.</script>, <script type="math/tex"><x,y,z>=\vec{r}(u,v)</script>. Then <script type="math/tex">\vec{n}dS=\pm(\displaystyle\frac{\partial\vec{r}}{\partial u}\times\frac{\partial\vec{r}}{\partial v})du\ dv</script><br />If we know a normal vector <script type="math/tex">\vec{N}</script> (not necessarily unit) to surface <script type="math/tex">S</script>, see below. </li>
+<li>To set up bounds on <script type="math/tex">dx\ dy</script>, look at shadow of <script type="math/tex">S</script> in xy-plane. </li>
+<li>Interpretation of <script type="math/tex">\vec{n}dS</script>: <br />&emsp;One is the area. Normally the area is a parallelogram, so <script type="math/tex">\vec{n}dS</script> is the cross product of two adjacent edges. <br />&emsp;Let’s say <script type="math/tex">\alpha</script> is the angle between <script type="math/tex">\Delta S</script> and its projection at xy-plane <script type="math/tex">\Delta A</script>. <script type="math/tex">\Delta A=\Delta S\ cos\ \alpha</script><br />&emsp;Easy to know that <script type="math/tex">\alpha</script> is also the angle between normal vector of <script type="math/tex">\Delta S</script> <script type="math/tex">\vec{N}</script> and unit vector which goes along z-axis <script type="math/tex">\vec{k}</script>. <script type="math/tex">cos\ \alpha=\displaystyle\frac{\vec{N}\cdot\vec{k}}{|\vec{N}|}</script><br />&emsp;<script type="math/tex">\Delta S=\displaystyle\frac{1}{cos\ \alpha}\Delta A=\frac{|\vec{N}|}{\vec{N}\cdot\vec{k}}</script><br />&emsp;<script type="math/tex">\vec{n}\Delta S=\displaystyle\frac{|\vec{N}|\vec{n}}{\vec{N}\cdot\vec{k}}\Delta A=\pm\frac{\vec{N}}{\vec{N}\cdot\vec{k}}\Delta A</script><br />&emsp;So <script type="math/tex">\vec{n}dS=\pm\displaystyle\frac{\vec{N}}{\vec{N}\cdot\vec{k}}dx\ dy</script></li>
 </ol>
-<h1 id="Polar-Coordination"><a href="#Polar-Coordination" class="headerlink" title="Polar Coordination"></a>Polar Coordination</h1><ol>
-<li>In polar coordination, we substitute <script type="math/tex">\left\{\begin{array}{}x=rcos\ \theta\\y=rsin\ \theta\end{array}\right.</script> to get the function <script type="math/tex">f(r,\theta)</script>. </li>
-<li>In perpendicular coordination, we can do all those things because <script type="math/tex">\Delta A=\Delta x\cdot \Delta y</script>. But in polar coordination, cut <script type="math/tex">R</script> into small pieces of fan-shaped area with straight lines from origin and circles. So <script type="math/tex">\Delta A=width\ between\ rings\cdot\ arclength=\Delta r\cdot r\Delta\theta</script>, namely <script type="math/tex">da=rdr\ d\theta</script></li>
-<li>So <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{\theta_{max}}_{\theta_{min}}\int^{r_{max}(\theta)}_{r_{min}(\theta)}f(r,\theta)rdr\ d\theta</script></li>
+<h1 id="Divergence-Theorem"><a href="#Divergence-Theorem" class="headerlink" title="Divergence Theorem"></a>Divergence Theorem</h1><ol>
+<li>Divergence theorem： If <script type="math/tex">S</script> is a closed surface enclosing a region <script type="math/tex">D</script>, oriented with <script type="math/tex">\vec{n}</script> outwards and <script type="math/tex">\vec{F}</script> defined and differentiable everywhere in D, <script type="math/tex">\displaystyle\iint_S\vec{F}dS=\iiint_Ddiv\ \vec{F}dV</script>. <script type="math/tex">div\ (P\vec{i}+Q\vec{j}+R\vec{k})=P_x+Q_y+Z_k</script>.</li>
+<li><script type="math/tex">\triangledown</script> notation: <script type="math/tex">\triangledown=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}></script>. </li>
+<li>Gradient: <script type="math/tex">\triangledown f=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>f=<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}></script></li>
+<li>Divergence: <script type="math/tex">\triangledown\cdot\vec{F}=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>\cdot<P,Q,R>=P_x+Q_y+R_z</script></li>
+<li><script type="math/tex; mode=display">\triangledown^2 f=\triangledown\cdot\triangledown f=\triangledown\cdot<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}>=<\displaystyle\frac{\partial^2 f}{\partial x^2},\frac{\partial^2 f}{\partial y^2},\frac{\partial^2 f}{\partial z^2}>=P_{xx}+Q_{yy}+R_{zz}</script></li>
+<li><script type="math/tex; mode=display">\triangledown\times f=\left|\begin{matrix}\vec{i}&\vec{j}&\vec{k}\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R \end{matrix}\right|=(R_y-Q_z)\vec{i}-(R_x-P_z)\vec{j}+(Q_x-P_y)\vec{k}</script></li>
+<li>Physical interpretation: <script type="math/tex">div\ \vec{F}=</script> source rate <script type="math/tex">=</script> amount of flux generated  per unit volume</li>
+<li>If we sum the divergence in <script type="math/tex">D</script>, we get amount of fluid leaving <script type="math/tex">D</script> per unit time. </li>
+<li>Diffusion equation<br /><script type="math/tex">u=</script> concentration at a given point <script type="math/tex">=u(x,y,z,t)</script>. <br /><script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=k\triangledown^2u=k\triangledown\cdot\triangledown u=k(u_{xx}+u_{yy}+u_{zz})</script>. <br /><script type="math/tex">\vec{F}=</script> velocity field of flowing things. <br />Phycics: Things flows from high concentration towards low concentration. So <script type="math/tex">\vec{F}</script> is directed along <script type="math/tex">-\triangledown u</script>, namely <script type="math/tex">\vec{F}=-k\triangledown u</script>. <br />Math:  Flux out of <script type="math/tex">D</script> through <script type="math/tex">S</script>: <script type="math/tex">\displaystyle\iint\vec{F}\cdot\vec{n}dS=amount\ of\ smoke\ through\ S\ per\ unit\ time=-\frac{d}{dt}(\iiint_DudV)</script>. <br /><script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=\iint_S\vec{F}\cdot\vec{n}dS</script>. So <script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=-\frac{d}{dt}(\iiint_DudV)=\iiint_D-\frac{\partial u}{\partial t}dV</script><br />So <script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=-div\ \vec{F}=kdiv\ (\triangledown u)=k\triangledown^2u</script>. </li>
+</ol>
+<h1 id="Work"><a href="#Work" class="headerlink" title="Work"></a>Work</h1><ol>
+<li><script type="math/tex">\vec{F}=P\vec{i}+Q\vec{j}+R\vec{k}</script>, <script type="math/tex">d\vec{r}=<dx,dy,dz></script>. <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz</script>. </li>
+<li>Fundamental theorem of calculus for line integral is still true in 3D. </li>
+<li>Test for gradient fiels: <script type="math/tex">\left\{\begin{array}{}P_y=f_{xy}=f_{yx}=Q_x\\P_z=f_{xz}=f_{zx}=R_x\\Q_z=f_{yz}=f_{zy}=R_{y} \end{array}\right.</script></li>
+<li>Find potential: <br />&emsp;<script type="math/tex">f(x,y,z)=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>.<br />&emsp;Antiderivatives: Integral <script type="math/tex">P</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)}_{certain}+\underbrace{G(y,z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}</script> with <script type="math/tex">Q</script> to get <script type="math/tex">G_y</script>. Integral <script type="math/tex">G_y</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)+G(y,z)}_{certain}+\underbrace{H(z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial z}</script> with <script type="math/tex">R</script> to get <script type="math/tex">H'</script>. Integral to get <script type="math/tex">H</script>. </li>
+<li><script type="math/tex">curl\ \vec{F}=(R_y-Q_z)\vec{i}+(P_z-R_x)\vec{j}+(Q_x-P_y)\vec{k}=\triangledown\times f</script>. </li>
+<li>If <script type="math/tex">\vec{F}</script> is defined in a symply connected region, <script type="math/tex">\vec{F}</script> is conservative if and only if <script type="math/tex">curl\ \vec{F}=0</script>. </li>
+<li>Curl meansures rotation component in a velocity field. </li>
+</ol>
+<h1 id="Stokes’-Theorem"><a href="#Stokes’-Theorem" class="headerlink" title="Stokes’ Theorem"></a>Stokes’ Theorem</h1><ol>
+<li>Stokes theorem: If <script type="math/tex">C</script> is a closed curve and <script type="math/tex">S</script> is any surface bounded by <script type="math/tex">C</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_S(\triangledown\times\vec{F})\cdot\vec{n}dS</script>. </li>
+<li>Need orientations of <script type="math/tex">C</script> and <script type="math/tex">S</script> to compatible. <br />When walking along <script type="math/tex">C</script>, keep all <script type="math/tex">S</script> in your left-hand side. <br />Or right-hand rule: thumb along <script type="math/tex">C</script> positively, index tangent to <script type="math/tex">S</script> (towards interior of <script type="math/tex">S</script>) and middle finger parallel to <script type="math/tex">\vec{n}</script>. </li>
+<li>Green’s theorem is special case of Stokes in xy-plane. </li>
+<li>A region is simply-connected if every closed loop inside it bounds a surface inside it. </li>
+<li>If <script type="math/tex">\vec{F}</script> is defined in a simply-connected region and <script type="math/tex">curl\ \vec{F}=0</script> then <script type="math/tex">\vec{F}</script> is a gradient and <script type="math/tex">\displaystyle\int_C\vec{F}\cdot d\vec{r}</script> is path-independent. </li>
+<li>Orientability: non-orientable surfaces have only one side, like Mobius surface. Flux cannot be defined in this kind of surface. </li>
+<li><script type="math/tex">div\ (curl\ \vec{F}) =div\ (\triangledown\times\vec{F})=0</script>. (For real vectors <script type="math/tex">\vec{u}\cdot(\vec{u}\times\vec{v})=0</script>)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/10-Triple-Integrals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/01/10-Triple-Integrals/" class="post-title-link" itemprop="url">10. Triple Integrals</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-01 17:47:34" itemprop="dateCreated datePublished" datetime="2020-03-01T17:47:34+08:00">2020-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:36:03" itemprop="dateModified" datetime="2020-08-07T22:36:03+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Rectangular-Coordinates"><a href="#Rectangular-Coordinates" class="headerlink" title="Rectangular Coordinates"></a>Rectangular Coordinates</h1><ol>
+<li><script type="math/tex">\displaystyle\iiint_RfdV</script>. <script type="math/tex">dV</script> is called volume element and <script type="math/tex">dV=dx\ dy\ dz</script>. </li>
+<li>Volume of <script type="math/tex">R</script> is <script type="math/tex">volume(R)=\displaystyle\iiint_R1dV</script>. </li>
+<li>Just like in double integral, we solve this one by one. Every time, we solve one integral. </li>
+<li>The bounds of one integral contains variables of outer integrals. </li>
+<li>After calculate the inner integral, the triple integral becomes a double integral. </li>
+<li><script type="math/tex">\Delta V=\Delta A\cdot\Delta z</script>. So <script type="math/tex">dV=dA\cdot dz</script>. </li>
+</ol>
+<h1 id="Cylindrical-Coordinates"><a href="#Cylindrical-Coordinates" class="headerlink" title="Cylindrical Coordinates"></a>Cylindrical Coordinates</h1><ol>
+<li>Cylindrical coordinates are just polar coordinates with an extra z-axis. </li>
+<li><script type="math/tex">dx\ dy\ dz=dz\ rdr\ d\theta</script>. </li>
+<li>In cylinderical coordinates, <script type="math/tex">r</script> stands for the distance to z-axis not origin. So <script type="math/tex">r=a</script> is a cylinder. </li>
+<li>The convension in writing a point in cylinderical coordinates form is <script type="math/tex">(r,\theta,z)</script>. </li>
+</ol>
+<h1 id="Spherical-Coordinates"><a href="#Spherical-Coordinates" class="headerlink" title="Spherical Coordinates"></a>Spherical Coordinates</h1><ol>
+<li>Each point is represented by <br />&emsp;a distance <script type="math/tex">\rho</script> <br />&emsp;and two angles <script type="math/tex">\theta</script> (counterclockwise from x-axis) and <script type="math/tex">\phi</script>(downwards form z-axis), <br />&emsp;namely <script type="math/tex">(\rho,\theta,\phi)</script>. </li>
+<li><script type="math/tex; mode=display">r=\rho sin\ \phi$$<br />$$\left\{\begin{array}{}z=\rho cos\ \phi\\x=rcos\ \theta=\rho sin\ \phi\ cos\ \theta\\y=rsin\ \theta=\rho sin\ \phi\ sin\ \theta \end{array}\right.</script></li>
+<li><script type="math/tex; mode=display">\Delta V\approx \Delta\rho\cdot\Delta s=\rho^2sin\ \phi\Delta\rho\Delta\phi\Delta\theta$$. So $$dV=\rho^2sin\ \phi\ d\rho\ d\phi\ d\theta</script></li>
 </ol>
 <h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><ol>
-<li>The area of given region <script type="math/tex">R</script> in two dimension is <script type="math/tex">\displaystyle Area(R)=\iint_R1\ dA</script>. </li>
-<li>The density of a flat matter in a unit area is <script type="math/tex">\delta</script>, then the mass is <script type="math/tex">m=\displaystyle\iint_R\delta\ dA</script>. </li>
-<li>Average value of <script type="math/tex">f</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{Area(R)}\iint_RfdA</script><br />Weighted average of <script type="math/tex">f</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{\iint_R\delta dA}\iint_Rf\delta dA</script>. </li>
-<li>Center of mass of a planer object with density <script type="math/tex">\delta</script>: <script type="math/tex">\left\{\begin{array}{}\overline{x}=\displaystyle\frac{1}{mass}\iint_Rx\delta\ dA\\\overline y= \displaystyle\frac{1}{mass}\iint_Ry\delta\ dA\end{array}\right.</script></li>
-<li>Moment of inertia about an axis: <script type="math/tex">I=\displaystyle\iint_Rr^2\delta\ dA</script> (<script type="math/tex">r</script> is the spin radius)</li>
+<li>Mass: <script type="math/tex">\Delta m=\delta\cdot\Delta V</script>. <script type="math/tex">Mass=\displaystyle\iiint_R\delta\ dV</script>. </li>
+<li>Average value of <script type="math/tex">f(x,y,z)</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline{f}=\displaystyle\frac{1}{volume(R)}\iiint_Rf\ dV</script></li>
+<li>Weighted average: <script type="math/tex">\overline{f}=\displaystyle\frac{1}{Mass(R)}\iiint_Rf\delta\ dV</script></li>
+<li>Center of mass: <script type="math/tex">(\overline{x}, \overline{y},\overline{z})</script>, <script type="math/tex">\overline{x}=\displaystyle\frac{1}{Mass}x\delta\ dV</script>, <script type="math/tex">\overline{y}</script> and <script type="math/tex">\overline{z}</script> are similar. </li>
+<li>Moment of inertia: <script type="math/tex">I=\displaystyle\iiint_Rr^2\delta\ dV</script>. <script type="math/tex">r</script> is the distance to axis. There are three axises, so There are three moment of inertia. </li>
+<li>Graviation attraction: <script type="math/tex">|\vec{F}|=\displaystyle\frac{G\cdot\Delta M\cdot m}{\rho^2}</script> and <script type="math/tex">dir\ \vec{F}=\displaystyle\frac{<x,y,z>}{\rho}</script><br />So <script type="math/tex">\vec{F}=\displaystyle\iiint\frac{Gm<x,y,z>}{\rho^3}\delta\ dV</script>. <br />Use spherical coordinates, place solid so z-axis is an axis of symmetry. <br />Then <script type="math/tex">\vec{F}=<0,0,z></script>. <br /><script type="math/tex">\begin{equation}\begin{split}z&=Gm\displaystyle\iiint\frac{z}{\rho^3}\delta\ dV\\&=\iiint\frac{z}{\rho^3}\delta\rho^2sin\ \phi\ d\rho\ d\phi\ d\theta\\&=\iiint\delta cos\ \phi sin\ \phi\ d\rho\ d\phi\ d\theta\end{split}\end{equation}</script>. </li>
 </ol>
 
       
@@ -483,7 +1255,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/26/05-Lagrange-Multipliers/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/09-Flux-and-Green-s-Theorem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -497,7 +1269,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/02/26/05-Lagrange-Multipliers/" class="post-title-link" itemprop="url">05. Lagrange Multipliers</a>
+            <a href="/2020/03/01/09-Flux-and-Green-s-Theorem/" class="post-title-link" itemprop="url">09. Flux and Green's Theorem</a>
         </h1>
 
         <div class="post-meta">
@@ -507,14 +1279,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-02-26 13:22:31" itemprop="dateCreated datePublished" datetime="2020-02-26T13:22:31+08:00">2020-02-26</time>
+              <time title="Created: 2020-03-01 09:18:41" itemprop="dateCreated datePublished" datetime="2020-03-01T09:18:41+08:00">2020-03-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:16" itemprop="dateModified" datetime="2020-08-07T22:36:16+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 22:36:12" itemprop="dateModified" datetime="2020-08-07T22:36:12+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -545,610 +1317,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lagrange-Multipliers"><a href="#Lagrange-Multipliers" class="headerlink" title="Lagrange Multipliers"></a>Lagrange Multipliers</h1><ol>
-<li>The goal is to minize of maximize a function <script type="math/tex">f(x,y,z)</script> where <script type="math/tex">x,y,z</script> are not independent, namely <script type="math/tex">g(x,y,z)=c</script>. </li>
-<li>At the minimum/maximum, the level curve of <script type="math/tex">f</script> is tangent to the hyperbola <script type="math/tex">g</script>. </li>
-<li>Find the tangent point: If the two curves are tangent at that point, the two curves share the same tangent line, namely their normal vectors are parallel. So <script type="math/tex">\triangledown f \parallel \triangledown g</script>, i.e. <script type="math/tex">\triangledown f=\lambda\triangledown g</script>. </li>
-<li><script type="math/tex">\left\{\begin{array}{}f_x=\lambda g_x\\f_y=\lambda g_y\\\dots\\g=c\end{array}\right.</script> is the <code>Lagrange equations</code> to solve all the variables and <script type="math/tex">\lambda</script>. </li>
-<li>The partial derivative equations can form <script type="math/tex">A\vec{x}=\vec{0}</script> (<script type="math/tex">A</script> contains constants and <script type="math/tex">\lambda</script> and <script type="math/tex">\vec{x}</script> is the vector of variables). Normally <script type="math/tex">\vec{x}</script> will not be a solution to <script type="math/tex">g=c</script>, so <script type="math/tex">A\vec{x}=\vec{0}</script> must has at least one nontrivial solution. So the determinant of <script type="math/tex">A</script> is zero, which allows us to solve <script type="math/tex">\lambda</script>. </li>
-<li>At constrained min/max, in any direction along level <script type="math/tex">g=c</script> the rate of change of <script type="math/tex">f</script> must be <script type="math/tex">0</script>. <br />For any <script type="math/tex">\vec{u}</script> tangent of <script type="math/tex">g=c</script>, we must have <script type="math/tex">\displaystyle\frac{df}{ds}\Big|_\vec{u}=0</script>. So any such <script type="math/tex">\vec{u}</script> is perpendicular to <script type="math/tex">\triangledown f</script>. <br /><script type="math/tex">\triangledown f</script> is perpendicular to level set of <script type="math/tex">g</script>. Since <script type="math/tex">\triangledown g</script> is perpendicular to level set of <script type="math/tex">f</script>, <script type="math/tex">\triangledown f\parallel\triangledown g</script>. </li>
-<li>We cannot use second derivatives to distinguish if the point is minimum or maximum. To find out about that ,we can only compare values of <script type="math/tex">f</script> at various solution to Lagrange equations. </li>
+          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
+<li>This is another kind of line integral. </li>
+<li><script type="math/tex">C</script> is the plane curve with unit normal vector <script type="math/tex">\vec{n}</script> at each point and <script type="math/tex">\vec{F}</script> is a vector field. </li>
+<li>If break <script type="math/tex">C</script> into small pieces <script type="math/tex">\Delta s</script>, <script type="math/tex">Flux=\displaystyle\lim_{\Delta s\to 0}(\sum\vec{F}\cdot\vec{n}\ \Delta s)</script>. So <script type="math/tex">Flux=\displaystyle\int_C\vec{F}\cdot\vec{n}\ ds</script></li>
+<li>Interpretation: for <script type="math/tex">\vec{F}</script> a velocity field, flux measures how much fluid passes through <script type="math/tex">C</script> per unit time. </li>
+<li>Before calculation, we need  to set a direction to flux. Goes along that direction is positive while opposite direction is negative. </li>
+<li>Calculation using components: <br />Remember: <script type="math/tex">d\vec{r}=\vec{T}ds=<dx,dy></script>. Since <script type="math/tex">\vec{n}</script> is <script type="math/tex">\vec{T}</script> rotated <script type="math/tex">\displaystyle\frac{\pi}{2}</script> clockwise, <script type="math/tex">\vec{n}ds=<dy,-dx></script>. <br />If <script type="math/tex">\vec{F}=<M,N></script>, then <script type="math/tex">\displaystyle\int_C\vec{F}\cdot\vec{n}ds=\int_C-Ndx+Mdy</script></li>
 </ol>
-<h1 id="Non-independent-Variables"><a href="#Non-independent-Variables" class="headerlink" title="Non-independent Variables"></a>Non-independent Variables</h1><ol>
-<li>If <script type="math/tex">g(x,y,z)=c</script>, how to find <script type="math/tex">\displaystyle\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}</script>? </li>
-<li><script type="math/tex">dg=\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz</script>. Since <script type="math/tex">g=c</script>, <script type="math/tex">dg=0</script>, <script type="math/tex">\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz=0</script>. Plug in the point <script type="math/tex">(x,y,z)</script>, we can have a relationship of <script type="math/tex">a_0dx+a_1dy+a_2dz=0</script> which contains among the change of <script type="math/tex">x, y</script> and <script type="math/tex">z</script>. </li>
-<li>Separate <script type="math/tex">dx, dy</script> or <script type="math/tex">dz</script> and compare to the equation <script type="math/tex">dz=\displaystyle\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy</script>, we can have <script type="math/tex">\displaystyle\frac{\partial g}{\partial x},\frac{\partial g}{\partial y}</script>. Or we can set <script type="math/tex">y</script> constant by setting <script type="math/tex">dy=0</script>. </li>
-<li>So in general, <script type="math/tex">\displaystyle\frac{\partial z}{\partial x}=-\frac{g_x}{g_z}</script> and <script type="math/tex">\displaystyle\frac{\partial z}{\partial y}=-\frac{g_y}{g_z}</script>. </li>
-<li><script type="math/tex">(\displaystyle\frac{\partial g}{\partial x})_y</script> means when calculating the partial derivative, we set <script type="math/tex">y</script> constant. Normally when <script type="math/tex">x=u</script>, <script type="math/tex">\displaystyle(\frac{\partial g}{\partial x})_y≠(\frac{\partial g}{\partial x})_v=(\frac{\partial  g}{\partial u})_v</script>. </li>
-<li>In the function <script type="math/tex">w=f(x,y,z)</script>, <script type="math/tex">dw=f_xdx+f_ydy+f_zdz</script>. <br />One variable is set constant (<script type="math/tex">x</script> for example), and from above we can solve <script type="math/tex">dy</script> in terms of <script type="math/tex">dz</script>. <br />Then substitute <script type="math/tex">dx=0</script> and <script type="math/tex">dy</script> into the differential equation, to get <script type="math/tex">(\displaystyle\frac{dw}{dz})_x</script>. </li>
-<li>Another way: <br />In the chain rule: <script type="math/tex">(\displaystyle\frac{\partial w}{\partial z})_x=f_z(\frac{\partial z}{\partial z})_x+f_x(\frac{\partial x}{\partial z})_x+f_y(\frac{\partial y}{\partial z})_x</script>. <br /><script type="math/tex">(\displaystyle\frac{\partial z}{\partial z})_x=1</script> and <script type="math/tex">(\displaystyle\frac{\partial x}{\partial z})_x=0</script>. We can also find <script type="math/tex">(\displaystyle\frac{\partial y}{\partial z})</script> in the constrain. <br />Substitute all the three into the differential equation to find the solution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/25/04-Differentials-and-Gradient/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/25/04-Differentials-and-Gradient/" class="post-title-link" itemprop="url">04. Differentials and Gradient</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-25 20:38:19" itemprop="dateCreated datePublished" datetime="2020-02-25T20:38:19+08:00">2020-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:06" itemprop="dateModified" datetime="2020-08-07T22:36:06+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Differential"><a href="#Differential" class="headerlink" title="Differential"></a>Differential</h1><ol>
-<li>For <script type="math/tex">f(x, y, z)</script>, <script type="math/tex">df=f_xdx+f_ydy+f_zdz</script>. </li>
-<li><script type="math/tex">df</script> is not <script type="math/tex">\Delta f</script>. </li>
-<li>It encodes how changes in <script type="math/tex">x,y,z</script> affect <script type="math/tex">f</script>. </li>
-<li>It’s a placeholder for smal variations <script type="math/tex">\Delta x,\Delta y, \Delta z</script> to get approximation formula <script type="math/tex">\Delta f\approx f_x\Delta x+f_y\Delta y+f_z\Delta z</script>. </li>
-<li><code>Chain rule</code>: When <script type="math/tex">x=x(t),y=y(t),z=z(t)</script>, it can be divided by something like <script type="math/tex">dt</script> to get a rate of change. <br /><script type="math/tex">\displaystyle\frac{df}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}+f_z\frac{dz}{dt}</script></li>
-<li><script type="math/tex; mode=display">d(uv)=f_udu+f_vdv=vdu+udv$$ and $$\displaystyle\frac{d(uv)}{dt}=v\frac{du}{dt}+u\frac{dv}{dt}</script></li>
-<li><script type="math/tex; mode=display">\displaystyle d(\frac{u}{v})=f_udu+f_vdc=\frac{1}{v}du+\frac{-u}{v^2}dv$$ and $$\displaystyle\frac{d(\frac{u}{v})}{dt}=\frac{1}{v}\frac{du}{dt}+\frac{-u}{v^2}\frac{dv}{dt}</script></li>
-<li><code>Chain rule with more variables</code>: <script type="math/tex">f=f(x,y),x=x(u,v),y=y(u,v)</script><br /><script type="math/tex">\begin{equation}\begin{split}df&=f_xdx+f_ydy\\&=f_x(x_udu+x_vdv)+f_y(y_udu+y_vdv)\\&=(f_xx_u+f_yy_u)du+(f_xx_v+f_yy_u)dv\\&=f_udu+f_vdv\end{split}\end{equation}</script><br />Here we also knows <script type="math/tex">\displaystyle\frac{\partial f}{\partial u}=\frac{\partial f}{\partial x}\frac{\partial x}{\partial u}+\frac{\partial f}{\partial y}\frac{\partial y}{\partial u}</script></li>
-</ol>
-<h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
-<li>The differential of <script type="math/tex">w=w(x,y,z)</script> and <script type="math/tex">x=x(t),y=y(t),z=z(t)</script> is <script type="math/tex">\displaystyle\frac{dw}{dt}=f_x\frac{dx}{dt}+f_y\frac{dy}{dt}+f_z\frac{dz}{dt}</script>. We define <script type="math/tex">\displaystyle\frac{dw}{dt}=\triangledown w\cdot\frac{d\vec{r}}{dt}</script>. </li>
-<li>So <script type="math/tex">\triangledown w=<f_x,f_y,f_z></script> and <script type="math/tex">\displaystyle\frac{d\vec{r}}{dt}=<\frac{dx}{dt},\frac{dy}{dt},\frac{dz}{dt}></script>. </li>
-<li><script type="math/tex">\triangledown w</script> is perpendicular to level surface <script type="math/tex">w=c</script> and points towards higher values of <script type="math/tex">w</script>. <br />Take a curve <script type="math/tex">\vec{r}=\vec{r}(t)</script> that stays on the level <script type="math/tex">w=c</script>, so the velocity along that direction is <script type="math/tex">\vec{v}=\displaystyle\frac{d\vec{r}}{dt}</script> which is tangent to the level. <br />By the chain rule, <script type="math/tex">\displaystyle\frac{dw}{dt}=\triangledown w\cdot \frac{d\vec{r}}{dt}=\triangledown w\cdot\vec{v}=0</script>, since <script type="math/tex">w=c</script> is a constant. So <script type="math/tex">\triangledown w\perp\vec{v}</script> <br />Further more, <script type="math/tex">\triangledown w</script> is perpendicular to any vector tangent to level <script type="math/tex">w=c</script>. <br />This is an important way to find the tangent plane of a level surface, since <script type="math/tex">\triangledown w</script> is the normal vector of that plane. </li>
-<li>The partial derivatives can tells us how <script type="math/tex">w</script> changes when we move along the axises. If we want to know the answer when we move in direction of unit vector <script type="math/tex">\vec{u}</script>, we need the directional derivatives. </li>
-<li>The directional derivative of <script type="math/tex">w</script> at the direction of <script type="math/tex">\vec{u}</script> at point <script type="math/tex">(x,y)</script> is the slope of graph by a vertical plane parallel to <script type="math/tex">\vec{u}</script>. </li>
-<li>This represent the changing rate of <script type="math/tex">w</script> at different direction. </li>
-<li><script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=\triangledown w\frac{d\vec{r}}{ds}=\triangledown w\cdot \vec{u}</script>. This is the component of <script type="math/tex">\triangledown w</script> in direction of <script type="math/tex">\vec{u}</script>. <script type="math/tex">s</script> is the distance we move along <script type="math/tex">\vec{u}</script>. Since the velocity is <script type="math/tex">1</script>, this is <script type="math/tex">t</script>. </li>
-<li><script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=|\triangledown w||\vec{u}|cos\ \theta=|\triangledown w|cos\ \theta</script>. <script type="math/tex">\theta</script> is the angle between <script type="math/tex">\vec{u}</script> and <script type="math/tex">\triangledown w</script><br />When <script type="math/tex">\theta</script> is <script type="math/tex">0</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=|\triangledown w|</script>, this is the fastest increase of <script type="math/tex">w</script>. <br />When <script type="math/tex">\theta = \pi</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=-|\triangledown w|</script>, this is the fastest decrease of <script type="math/tex">w</script>. <br />When <script type="math/tex">\theta=\displaystyle\frac{\pi}{2}</script>, <script type="math/tex">\displaystyle\frac{dw}{ds}\Big|_{\vec{u}}=0</script>, <script type="math/tex">\vec{u}</script> is tangen to the level curve and this is where <script type="math/tex">w</script> doesn’t change. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/03-Max-min-Problems-and-Least-Squares/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/23/03-Max-min-Problems-and-Least-Squares/" class="post-title-link" itemprop="url">03. Max-min Problems and Least Squares</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-23 23:14:10" itemprop="dateCreated datePublished" datetime="2020-02-23T23:14:10+08:00">2020-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:39" itemprop="dateModified" datetime="2020-08-07T22:35:39+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Max-min-Problems"><a href="#Max-min-Problems" class="headerlink" title="Max-min Problems"></a>Max-min Problems</h1><ol>
-<li>At a local min or max <script type="math/tex">f_x=0</script> and <script type="math/tex">f_y=0</script>. <br />According to the approximation equation <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script> we know this is right. </li>
-<li>Max or min also means the tangent plane is horizontal. </li>
-<li><script type="math/tex">(x_0,y_0)</script> is a critical point of <script type="math/tex">f</script> if <script type="math/tex">f_x(x_0,y_0)=0</script> and <script type="math/tex">f_y(x_0,y_0)=0</script>. </li>
-<li>A critical point can be a <code>local min</code>, a <code>local max</code> or a <code>saddle point</code>. </li>
-<li>A global min/max occurs either at a critical point or on boundary / at infinity. </li>
-<li><code>Second derivative test</code>: <br />&emsp;There are three second derivatives <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial x^2}=f_{xx}</script>, <script type="math/tex">f_{xy}=\displaystyle\frac{\partial^2f}{\partial x\partial y}=\frac{\partial^2f}{\partial y\partial x}=f_{yx}</script> and <script type="math/tex">\displaystyle\frac{\partial^2f}{\partial y^2}=f_{yy}</script>. <br />&emsp;At a critical point <script type="math/tex">P(x_0,y_0)</script> of <script type="math/tex">f</script>, let <script type="math/tex">A=f_{xx}(x_0,y_0),B=f_{xy}(x_0,y_0)</script> and <script type="math/tex">C=f_{yy}(x_0,y_0)</script>. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A>0</script>, <script type="math/tex">P</script> is a local minimum. <br />&emsp;If <script type="math/tex">AC-B^2>0</script> and <script type="math/tex">A<0</script>, <script type="math/tex">P</script> s a local maximum. <br />&emsp;If <script type="math/tex">AC-B^2<0</script>, <script type="math/tex">P</script> s a saddle point. <br />&emsp;If <script type="math/tex">AC-B^2=0</script>, cannot conclude. </li>
-</ol>
-<h1 id="Least-Square"><a href="#Least-Square" class="headerlink" title="Least Square"></a>Least Square</h1><ol>
-<li>Given some datas, find best fit line <script type="math/tex">y=ax+b</script>. In this equation, <script type="math/tex">a</script> and <script type="math/tex">b</script> are unknowns instead of <script type="math/tex">x</script> and <script type="math/tex">y</script>. </li>
-<li>Best means minimizing total square deviation. </li>
-<li>Deviation for each data point is <script type="math/tex">y_i-(ax_i+b)</script>. </li>
-<li>So we are trying to minimize <script type="math/tex">D=\displaystyle\sum^n_{i=1}[y_i-(ax_i+b)]^2</script></li>
-<li><script type="math/tex">\begin{equation}\begin{split}&\left\{\begin{array}{}\frac{\partial D}{\partial a}=\sum^n_{i=1}2(y_i-(ax_i+b))(-x_i)=0\\\frac{\partial D}{\partial b}=\sum^n_{i=1}2(y_i-(ax_i+b))(-1)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}\sum^n_{i=1}(x_i^2a+x_ib-x_iy_i)=0\\\sum^n_{i=1}(x_ia+b-y)=0 \end{array}\right.\\\Leftrightarrow&\left\{\begin{array}{}(\sum^n_{i=1}x_i^2)a+(\sum^n_{i=1}x_i)b=\sum^n_{i=1}x_iy_i\\(\sum^n_{i=1}x_i)a+nb=\sum^n_{i=1}y_i \end{array}\right. \end{split}\end{equation}</script><br />This is a <script type="math/tex">2\times2</script> linear equation of <script type="math/tex">a</script> and <script type="math/tex">b</script>. </li>
-<li>If the best explanation of a set of datas is <script type="math/tex">y=ce^{ax}</script>, we can make it <script type="math/tex">ln\ y=ln\ c+ax</script> so that it becomes linear again. </li>
-<li>Similarly we can define the best quadratic <script type="math/tex">y=ax^2+bx+c</script> with the same deviation. </li>
-</ol>
-<p>See the linear algebra version of least square: <a href="http://www.laughingtree.cn/2020/02/01/13-Least-Squares/" target="_blank" rel="noopener">Least square</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/23/02-Contow-Plot-and-Partial-Derivatives/" class="post-title-link" itemprop="url">02. Contow Plot and Partial Derivatives</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-23 17:38:13" itemprop="dateCreated datePublished" datetime="2020-02-23T17:38:13+08:00">2020-02-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:28" itemprop="dateModified" datetime="2020-08-07T22:35:28+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Contow-Plot"><a href="#Contow-Plot" class="headerlink" title="Contow Plot"></a>Contow Plot</h1><ol>
-<li>Normally a function can be represented by equations or graphs. </li>
-<li>However, functions with multivariables are hard to draw on paper. For two-variablefunctions there is another way to draw is <code>Contow plot</code>: <br />&emsp;In Contow plot, we draw on an <script type="math/tex">x-y</script> plane where we link all points with the same <script type="math/tex">f(x,y)</script> value chosen at regular intevals. <br />&emsp;Namely, we slice the graph with horizontal planes <script type="math/tex">z=c</script>. </li>
-<li>Every slice of <script type="math/tex">f(x,y)</script> by <script type="math/tex">z=c</script> is a lever curve of <script type="math/tex">f</script>.  </li>
-<li>Contow plot tells us what <script type="math/tex">f</script> will increase or decrease when we move <script type="math/tex">x</script> or <script type="math/tex">y</script>, but it won’t tell how much or how fast. </li>
-</ol>
-<h1 id="Partial-Derivatives"><a href="#Partial-Derivatives" class="headerlink" title="Partial Derivatives"></a>Partial Derivatives</h1><ol>
-<li>This is where <code>partial derivatives</code> come in. <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=\lim_{\Delta x\to 0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x}</script>. Similarly we can define the partial derivative on other variables. </li>
-<li>The partial derivative of <script type="math/tex">f(x,y)</script> at point <script type="math/tex">(x_0,y_0)</script> on <script type="math/tex">x</script> means the slope of <script type="math/tex">f(x,y)</script> at slice of <script type="math/tex">y=y_0</script> at <script type="math/tex">x=x_0</script>. </li>
-<li>To compute <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=f_x</script>, we just see <script type="math/tex">x</script> as the only variable and see all others constants. </li>
-<li>Linear approximation equation: <script type="math/tex">\Delta z\approx f_x\Delta x+f_y\Delta y</script><br />Quadratic approximation equation: <script type="math/tex">\Delta z\approx f_x(x-x_0)+f_y(y-y_0)+\displaystyle\frac{1}{2}f_{xx}(x-x_0)^2+f_{xy}(x-x_0)(y-y_0)+\frac{1}{2}(y-y_0)^2</script></li>
-<li>The two tangent lines represented by <script type="math/tex">\displaystyle\frac{\partial f}{\partial x}=a</script> and <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}=b</script> set the tangent plane of <script type="math/tex">f</script> at <script type="math/tex">(x_0,y_0)</script> whose equation is <script type="math/tex">z=z_0+a(x-x_0)+b(y-y_0)</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/22/01-Vectors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/22/01-Vectors/" class="post-title-link" itemprop="url">01. Vectors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-22 10:22:24" itemprop="dateCreated datePublished" datetime="2020-02-22T10:22:24+08:00">2020-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-20 18:56:01" itemprop="dateModified" datetime="2022-04-20T18:56:01+08:00">2022-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>Vector has both <code>direction</code> and <code>magnitude (length)</code>. </li>
-<li><strong>a</strong><script type="math/tex">=\vec{a}=a_1\vec{i}+a_2\vec{j}+…=<a_1,a_2,…></script> (<script type="math/tex">\vec{i},\vec{j},…</script> are unit vectors going along the axises). </li>
-<li><script type="math/tex; mode=display">|\vec{a}|$$ is a scalar equal to the length of $$\vec{a}$$. $$|\vec{a}|=\sqrt{a_1^2+a_2^2+…}</script></li>
-<li><script type="math/tex">dir(\vec{a})</script> is the unit vector in the same direction of <script type="math/tex">\vec{a}</script>. We can aquire <script type="math/tex">dir(\vec{a})</script> by dividing <script type="math/tex">\vec{a}</script> with its length. </li>
-<li>If a point <script type="math/tex">P(x,y,z)</script> is in the plane <script type="math/tex">P_1P_2P_3</script>, then <script type="math/tex">det(\vec{P_1P_2},\vec{P_1P_3},\vec{P_1P})=0</script> in other words <script type="math/tex">\vec{P_1P}</script> is perpendicular to <script type="math/tex">\vec{P_1P_2}\times\vec{P_1P_3}</script>. </li>
-<li>The plane perpendicular to <script type="math/tex">\vec{N}=<a,b,c></script> is <script type="math/tex">ax+by+cz=0</script>, namely <script type="math/tex"><x,y,z>\cdot\vec{N}=0</script>.</li>
-<li>The line through point <script type="math/tex">P_0</script> and parallel to <script type="math/tex">\vec{v}</script> is <script type="math/tex">P(t)=P_0+t\vec{v}</script>, namely <script type="math/tex">\left\{\begin{matrix}x=x_0+at\\y=y_0+bt\\z=z_0+ct \end{matrix}\right.</script>, which is a parametric equation. </li>
-<li><script type="math/tex; mode=display">\displaystyle\frac{d}{dt}(\vec{a}\times\vec{b})=\frac{d\vec{a}}{dt}\vec{b}+\vec{a}\frac{d\vec{b}}{dt}</script></li>
-<li>Velocity is a vector while speed is a scalar which equals to the length of velocity. </li>
-<li><script type="math/tex; mode=display">\vec{v}=\displaystyle\Bigg|\frac{d\vec{r}}{dt}\Bigg|≠\frac{d|\vec{r}|}{dt}$$ and $$speed=\displaystyle\frac{ds}{dt}=|\vec{v}|</script></li>
-<li><script type="math/tex">\displaystyle\vec{v}=\frac{d\vec{r}}{dt}=\frac{d\vec{r}}{ds}\frac{ds}{dt}=\vec{T}|\vec{v}|</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and tangent line of arclength. </li>
-<li><script type="math/tex; mode=display">\displaystyle\vec{\Delta r}=\vec{T}\Delta s\Leftrightarrow\frac{\vec{\Delta r}}{\Delta t}=\vec{T}\frac{\Delta s}{\Delta t}\Leftrightarrow\frac{d\vec{r}}{dt}=\vec{T}\frac{ds}{dt}</script></li>
-<li>Kepler’s second law: <br />&emsp;<script type="math/tex">Area\approx\displaystyle\frac{1}{2}|\vec{r}\times\vec{\Delta r}|\approx\frac{1}{2}|\vec{r}\times\vec{v}|\Delta t</script>. Since area is a constant, <script type="math/tex">|\vec{r}\times\vec{v}|</script> is a constant. <br />&emsp;<script type="math/tex">\displaystyle\frac{d}{dt}(\vec{r}\times\vec{v})=\frac{d\vec{r}}{dt}\times\vec{v}+\vec{r}\times\frac{d\vec{v}}{dt}=\vec{v}\times\vec{v}+\vec{r}\times\vec{a}=\vec{r}\times\vec{a}=0</script>. So <script type="math/tex">\vec{r}</script> and <script type="math/tex">\vec{a}</script> is parallel. So the orbit of a planet is in a plane. </li>
-</ol>
-<p>See more about vectors and matrices on <a href="http://www.laughingtree.cn/categories/Mathematics/Linear-Algebra-MIT-18-06/" target="_blank" rel="noopener">Linear Algebra (18.06)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/16-Series/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/20/16-Series/" class="post-title-link" itemprop="url">16. Series</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-20 23:01:26" itemprop="dateCreated datePublished" datetime="2020-02-20T23:01:26+08:00">2020-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:28" itemprop="dateModified" datetime="2020-08-07T19:22:28+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Infinite-Series"><a href="#Infinite-Series" class="headerlink" title="Infinite Series"></a>Infinite Series</h1><ol>
-<li><script type="math/tex">S_N=\displaystyle\sum^N_{n=0}a_n</script>. <script type="math/tex">S=\displaystyle\sum^\infty_{n= 0}a_n=\lim_{N\to\infty}\sum^N_{n=0}a_n</script>. <script type="math/tex">S</script> converges if limit exists. </li>
-<li><script type="math/tex">S_N</script> is larger than the lower Riemann sum of <script type="math/tex">\displaystyle\int^N_1f(x)dx</script> when <script type="math/tex">\Delta x=1</script> and is less than the upper Riemann sum of when <script type="math/tex">\Delta x=1</script>. </li>
-<li><code>Integral comparison</code>: If <script type="math/tex">f(x)</script> is decreasing, <script type="math/tex">f(x)>0</script>, then <script type="math/tex">\Bigg|\displaystyle\sum^\infty_{n=0}f(n)-\int^\infty_1f(x)dx\Bigg|<f(1)</script>. <script type="math/tex">\displaystyle\sum^\infty_{n=0}f(n)</script> and <script type="math/tex">\int^\infty_1f(x)dx</script> either both converge or both diverge. </li>
-<li>If <script type="math/tex">f(n)\sim g(n)</script>, and <script type="math/tex">g(n)>0</script> as <script type="math/tex">n\to\infty</script> for all <script type="math/tex">n</script> then <script type="math/tex">\displaystyle\sum^\infty_{n=0} f(n),\sum^\infty_{n=0} g(n)</script> either both converge or both diverge. </li>
-</ol>
-<h1 id="Power-Series"><a href="#Power-Series" class="headerlink" title="Power Series"></a>Power Series</h1><ol>
-<li>Geometric series: <script type="math/tex">1+x+x^2+x^3+…=\displaystyle\frac{1}{1-x}</script> when <script type="math/tex">|x|<1</script>. <br />&emsp;Proof: Assume <script type="math/tex">1+x+x^2+…=S</script>. Multiply with <script type="math/tex">x</script>, <script type="math/tex">x+x^2+x^2+…=Sx</script>. <br />&emsp;Subtract the second equation from the first one <script type="math/tex">1=S(1-x)</script>. So <script type="math/tex">S=\displaystyle\frac{1}{1-x}</script>. </li>
-<li>General power series: <script type="math/tex">a_0+a_1x+a_2x^2+…=\displaystyle\sum^\infty_{n=0}a_nx^n</script>. </li>
-<li><script type="math/tex">|x|<R</script> (<script type="math/tex">R</script> is the radius of convergence <script type="math/tex">0≤R≤\infty</script>) where seriese converges and <script type="math/tex">|a_nx^n|</script> tends to zero exponentially fast. <script type="math/tex">|x|>R,\  \displaystyle\sum^\infty_{n=0}a_nx^n</script> diverges, and <script type="math/tex">|a_nx^n|</script> doesn’t tend to zero at all. <script type="math/tex">|x|=R</script> is a very delicate borderline. </li>
-<li>Rules for convergent power series are just like polynomials. We can do add, multiplication, division, substitution, differentiation and integrate them. </li>
-<li><code>Taylor&#39;s formula</code>: <script type="math/tex">f(x)=\displaystyle\sum^\infty_{n=0}\frac{f^{(n)}(0)}{n!}x^n</script>, for any <script type="math/tex">f(x)</script>. </li>
-<li><script type="math/tex; mode=display">e^x=\displaystyle\sum^\infty_{n=0}\frac{1}{n!}x^n$$<br />So $$e=e^x\Big|_{x=1}=\displaystyle\sum^\infty_{x=0}\frac{1}{n!}</script></li>
-<li>Another expresion of Taylor’s formula is <script type="math/tex">a_n=\displaystyle\frac{f^{(n)}(0)}{n!}</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/20/15-Indeterminate-Forms-L-Hospital-s-Rule-and-Informal-Integrals/" class="post-title-link" itemprop="url">15. Indeterminate Forms-L'Hôspital's Rule and Improper Integrals</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-20 09:19:17" itemprop="dateCreated datePublished" datetime="2020-02-20T09:19:17+08:00">2020-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:33" itemprop="dateModified" datetime="2020-08-07T19:22:33+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Indeterminate-Forms"><a href="#Indeterminate-Forms" class="headerlink" title="Indeterminate Forms"></a>Indeterminate Forms</h1><ol>
-<li><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}</script>, if <script type="math/tex">f(a)=g(a)=0</script>, then this is an indeterminate form of <script type="math/tex">\displaystyle\frac{0}{0}</script>. </li>
-<li>To solve this limit, if <script type="math/tex">g'(a) ≠ 0</script> just divide the numerator and denominator with <script type="math/tex">x-a</script>. <br /><script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{\frac{f(x)}{x-a}}{\frac{g(x)}{(x-a)}}=\frac{\lim_{x\to a}\frac{f(x)-f(a)}{x-a}}{\lim_{x\to a}\frac{g(x)-g(a)}{x-a}}=\frac{f'(a)}{g'(a)}</script></li>
-<li><code>L&#39;Hôspital&#39;s Rule</code>: <script type="math/tex">\displaystyle\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}</script>. If derivate once cannot solve the problem, derivate again until the denominator is not zero. </li>
-<li><script type="math/tex">\displaystyle\frac{\infty}{\infty}</script> form is also OK for L’Hôspital’s Rule. So does when right hand side is either finite or <script type="math/tex">\pm\infty</script> and <script type="math/tex">a</script> can be anything including <script type="math/tex">\pm\infty</script>. </li>
-<li>For <script type="math/tex">0</script> and <script type="math/tex">\infty</script> product problem, rewrite the equation to the ratio form to become <script type="math/tex">\displaystyle\frac{0}{0}</script> or <script type="math/tex">\displaystyle\frac{\infty}{\infty}</script>. </li>
-<li>Another form is <script type="math/tex">0^0</script>. <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=\lim_{x\to 0^+}e^{xln\ x}</script>. And <script type="math/tex">\displaystyle\lim_{x\to 0^+}xln\ x=0</script>. So <script type="math/tex">\displaystyle\lim_{x\to 0^+}x^x=e^0=1</script>. </li>
-</ol>
-<h1 id="Improper-Integrals"><a href="#Improper-Integrals" class="headerlink" title="Improper Integrals"></a>Improper Integrals</h1><ol>
-<li>Definition: <script type="math/tex">\displaystyle\int^\infty_af(x)dx=\lim_{x\to \infty}\int^x_af(x)dx</script>. </li>
-<li>The integral converges if limit exists and diverges if limit doesn’t exist. </li>
-<li>This is the total area of <script type="math/tex">f(x)</script> from <script type="math/tex">a</script> to <script type="math/tex">\infty</script>. </li>
-<li>If the integral converges, the total area is finite. And if the integral diverges, the total area is infinite. </li>
-<li><script type="math/tex">\displaystyle\int^\infty_1\frac{dx}{x^p}</script> diverges if <script type="math/tex">p≤1</script> and converges if <script type="math/tex">p>1</script> (the value is <script type="math/tex">\displaystyle\frac{1}{p-1}</script>). </li>
-<li>If <script type="math/tex">\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=1</script>, then <script type="math/tex">f(x)</script> is similar to <script type="math/tex">g(x)</script> as <script type="math/tex">x\to\infty</script>, denoted by <script type="math/tex">f(x)\sim g(x)</script>. </li>
-<li>Limit Comparison: If <script type="math/tex">f(x)\sim g(x)</script> as <script type="math/tex">x\to\infty</script>, then <script type="math/tex">\displaystyle\int^\infty_af(x)dx</script> and <script type="math/tex">\displaystyle\int^\infty_ag(x)dx</script> either both converge or both diverge. </li>
-<li>Sometimes when calculation or comparison, the end of the interval can be ignored since it doesn’t effect the answer. </li>
-<li>Second type of improper integrals is defined <script type="math/tex">f(x)</script> is undefined at <script type="math/tex">x=a</script> when calculate the integral of <script type="math/tex">[a,b]</script>. <script type="math/tex">\displaystyle\int^b_af(x)dx=\lim_{x\to a^+}\int^b_xf(x)dx</script>. </li>
+<h1 id="Green’s-Theorem"><a href="#Green’s-Theorem" class="headerlink" title="Green’s Theorem"></a>Green’s Theorem</h1><ol>
+<li>For work: <script type="math/tex">C</script> is a closed curve enclosing a region R, counterclockwise. <script type="math/tex">\vec{F}</script> Vector field is defined and differentiable in <script type="math/tex">R</script>. Then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script>, namely <script type="math/tex">\displaystyle\oint_CMdx+Ndy=\iint_R(N_x-M_y)dA</script>. </li>
+<li><strong><code>WARNING: ONLY FOR CLOSED CURVE</code></strong></li>
+<li>If <script type="math/tex">curl\ \vec{F}=0</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA=0</script></li>
+<li>A complex region can be decomposed into simpler regions. </li>
+<li>For flux: If <script type="math/tex">C</script> encloses a region <script type="math/tex">R</script> counterclockwise and <script type="math/tex">\vec{F}<P,Q></script> defined in <script type="math/tex">R</script>, then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot\vec{n}ds=\iint_Rdiv\ \vec{F}dA</script> <script type="math/tex">(divergent:div\ <P,Q>=P_x+Q_y)</script>. </li>
+<li>Green’s theorem shows us the position of an enclosed curve doesn’t affect the flux. </li>
+<li>Interpretation of <script type="math/tex">div\ \vec{F}</script>: <br />&emsp;Measures how much the flow is expanding. <br />&emsp;Source rate = amount of fluid added to the system per unit time per unit area. </li>
+<li>If one enclosed curve <script type="math/tex">C'</script> is in another enclosed curve <script type="math/tex">C</script>, connect them with one segment. <br />We can go along <script type="math/tex">C</script> and then go to <script type="math/tex">C'</script> through that segment. <br />And go along <script type="math/tex">C'</script> in opposite direction then come back to <script type="math/tex">C</script> through that segment. <br />This forms a new curve which encloses a region <script type="math/tex">R</script> between <script type="math/tex">C</script> and <script type="math/tex">C'</script>. <br /><script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}-\oint_{C'}\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script></li>
+<li>A connected region <script type="math/tex">R</script> in the plane is simply connected if the interior of any closed curve in <script type="math/tex">R</script> is also contained in <script type="math/tex">R</script>. <br />Simply connected has no “hole” in it. </li>
+<li>If <script type="math/tex">curl\ \vec{F}=0</script> and domain where <script type="math/tex">\vec{F}</script> defined is simply connected, then <script type="math/tex">\vec{F}</script> is conservative and a gradient. </li>
 </ol>
 
       
@@ -1169,7 +1356,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1236,20 +1423,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

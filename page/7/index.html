@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">31</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/02-Loss-Functions-and-Optimization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/14/07-Derived-Distributions-Convolution-Covariance-and-Correlation/" class="post-title-link" itemprop="url">07. Derived Distributions, Convolution, Covariance and Correlation</a>
+            <a href="/2020/04/04/02-Loss-Functions-and-Optimization/" class="post-title-link" itemprop="url">02. Loss Functions and Optimization</a>
         </h1>
 
         <div class="post-meta">
@@ -215,14 +215,253 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-14 23:03:14" itemprop="dateCreated datePublished" datetime="2020-03-14T23:03:14+08:00">2020-03-14</time>
+              <time title="Created: 2020-04-04 15:30:24" itemprop="dateCreated datePublished" datetime="2020-04-04T15:30:24+08:00">2020-04-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:36" itemprop="dateModified" datetime="2020-08-07T19:34:36+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:47:31" itemprop="dateModified" datetime="2020-08-07T19:47:31+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>A loss function tells how good our current classifier is. </p>
+<h2 id="Data-Loss"><a href="#Data-Loss" class="headerlink" title="Data Loss"></a>Data Loss</h2><ol>
+<li>Given a dataset of examples $\{(x_i,y_i)\}^N_{i=1}$ where $x_i$ is an image and $y_i$ is an integer label. Loss over the dataset is a sum of loss over examples: $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)$. </li>
+<li>There are infinitely many $W$ to make $L=0$. </li>
+</ol>
+<h3 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h3><ol>
+<li>Multiclass SVM loss (Hinge loss): $L_i=\displaystyle\sum_{j≠y_i}max(0,s_j-s_{y_i}+1)$. $s_i$ is the score of the $i$th class. </li>
+<li>The minimum loss of SVM is $0$ when all prediction is correct. The maximum loss is infinity when the prediction is as wrong as possible. </li>
+<li>If at initialization $W$ is small, so all $s\approx 0$, the loss will be <script type="math/tex">the\ number\ of\ class-1</script>. </li>
+</ol>
+<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><ol>
+<li>We can use the scores to calculate the probabilities of all labels given the condition of the image is $x_i$. </li>
+<li>We exponentiate scores to make every term positive. So the probability of the actual label being $k$ is $P(Y=k|X=x_i)=\displaystyle\frac{e^{s_k}}{\sum_je^{s_j}}$, which is called the softmax function. </li>
+<li>To maximize the log-likelihood, or to minimize the negative log-likelihood of the correct class. <script type="math/tex">L_i=-log\ P(Y=y_i|X=x_i)=-log\ \displaystyle\frac{e^{s_{y_i}}}{\sum_je^{s_j}}</script>. </li>
+<li>The goal is to maximize the probability of the right label. It is easier to maximize the log function than the raw probability. Also, the loss function is describing how bad the model is, so we take the negative of it. </li>
+<li>Three steps for softmax classifier: exponentiate the scores; normalize them; take the negative log of the correct label. </li>
+<li>The minimum possible loss is $0$ when the model is totally right (the probability of the accurate label is $1$). The maximum is infinity when the model is entirely wrong (the probability of the correct label is $0$). However, these two situations will occur. </li>
+<li>A slight change in a datapoint might when changing the loss of SVM if the label is right, but it will change the loss of softmax in any situation. </li>
+</ol>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><ol>
+<li>The only thing we care about is the performance on the test set. So we need to tell our algorithm more than the performance on the training data. </li>
+<li>To avoid overfitting the training data, we should add regularization to the loss, which will punish when the model is complicated. So the loss becomes $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$. $\lambda$ is a hyperparameter called regularization strength. </li>
+<li>$L2$ regularization: $R(W)=\displaystyle\sum_k\sum_lW_{k,l}^2$<br />$L1$ regularization: $R(W)=\displaystyle\sum_k\sum_l|W_{k,l}|$<br />Elastic net $(L1+L2)$: $R(W)=\displaystyle\sum_k\sum_l\beta W_{k,l}^2+|W_{k,l}|$</li>
+<li>The idea of regularization is to penalize the complexity of model rather than trying to fit the training data. </li>
+<li>$L2$ regularization also corresponds MAP inference using a Gaussian prior on $W$. </li>
+<li>The regularization function is a problem-dependent hyperparameter. </li>
+<li>If at initialization $W$ is small so all $s\approx 0$, the loss will be <script type="math/tex">-log\ c</script>. $c$ is the number of classes. </li>
+</ol>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><ol>
+<li>The strategy here is to follow the gradient of $f$. The opposite direction of the gradient is the greatest decrease in the function. </li>
+<li>The numerical way to calculate the gradient to increase one component of $W$ a little bit, then use the formula $\displaystyle\frac{df}{dx}=\frac{f(x+h)-f(x)}{h}$ to get the corresponding component in the gradient. </li>
+<li>The faster way to get the gradient is the analytic way. In practice, always use the analytic gradient, but check implementation with numerical gradient. This is called a gradient check. </li>
+<li>Gradient descent: first calculate the gradient, then subtract the multiplication of learning rate and the gradient from the weight. </li>
+<li>Calculation of the gradient can be slow, so in practice, we usually use the stochastic gradient descent, which only calculates the gradient of part of the training set. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/01-Image-Classification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/04/01-Image-Classification/" class="post-title-link" itemprop="url">01. Image Classification</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-04 12:11:23" itemprop="dateCreated datePublished" datetime="2020-04-04T12:11:23+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:47:49" itemprop="dateModified" datetime="2020-08-07T19:47:49+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>The conventional way to solve image classification problem: <br />Data-driven Approach: <br />&emsp;Collect a dataset of images and labels<br />&emsp;Use Machine Learning to train a classifier<br />&emsp;Evaluate the classifier on new images</li>
+<li>The API has two main functions: <br />&emsp;”Train” function: input images and labels then output a model. <br />&emsp;”Predict” function: input model and images then output predictions. </li>
+</ol>
+<h1 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h1><h2 id="Train-and-Predict"><a href="#Train-and-Predict" class="headerlink" title="Train and Predict"></a>Train and Predict</h2><ol>
+<li>In the training function, we memorize all data and labels. </li>
+<li>In the prediction function, we predict the label of the most similar training image. </li>
+<li>More specific, in prediction, we find the closest image and predict the label of the nearest image. </li>
+<li>With $N$ example, the complexity of training is $O(1)$ and prediction is $O(N)$. This is bad because we want classifiers that are fast at prediction even if the training is slow</li>
+<li>Another problem with this algorithm is the curse of dimensionality. As the data enter the higher dimension, they become sparse. So we need a lot more datas to make space dense, which is possibly out of control. </li>
+</ol>
+<h2 id="Compare-Images"><a href="#Compare-Images" class="headerlink" title="Compare Images"></a>Compare Images</h2><ol>
+<li>In order to select the most similar image, we need to compare each image. So it is necessary to choose a compare function. </li>
+<li>The first choice is the <code>L1 distance</code> or <code>Manhattan distance</code>. $d_1(I_1,I_2)=\displaystyle\sum_p|I_1^p-I_2^p|$. </li>
+<li>Another choice is the <code>L2 distance</code> or <code>Euclidean distance</code>. $d_2(I_1,I_2)=\sqrt{\sum_p(I_1^p-I_2^p)^2}$. </li>
+<li>The difference between the two choices is that $L1$ distance is coordinate-dependent wile $L2$ distance is coordinate-independent. If we rotate the coordinate frame, $L1$ distance will be changed while $L2$ distance remains the same. </li>
+<li>Actually, distance matrices on pixels are not informative. </li>
+</ol>
+<h2 id="K-Nearest-Neighbors"><a href="#K-Nearest-Neighbors" class="headerlink" title="K-Nearest Neighbors"></a>K-Nearest Neighbors</h2><ol>
+<li>The algorithm above determines the result with only one data. Therefore it is easily affected by noise. </li>
+<li>To reduce the affection of noise, we use the more “democratic” way. We take majority vote from $K$-nearest neighbours. </li>
+<li>The algorithm mentioned earlier is a $K=1$ algorithm. </li>
+<li>We often take $K$ some odd number instead of an even number. </li>
+<li>When $K$ is smaller than the number of classes of labels, some image may be unpredictable if the vote of all $K$-nearest neighbours is a tie. So we will make a random guess among the majority winners. </li>
+</ol>
+<h1 id="Hyperparameter"><a href="#Hyperparameter" class="headerlink" title="Hyperparameter"></a>Hyperparameter</h1><ol>
+<li>Hyperparameter is choices about the algorithm that we set rather than learn. As the number of $K$ above, which distance we are using, they are both hyperparameters. </li>
+<li>Hyperparameter is very problem-dependent. We must try them all out and see what works best. </li>
+</ol>
+<h2 id="Setting-Hyperparameters"><a href="#Setting-Hyperparameters" class="headerlink" title="Setting Hyperparameters"></a>Setting Hyperparameters</h2><ol>
+<li>Mark that when setting hyperparameters, we never touch a finger on the test set. The test must be unseen from model and us. </li>
+<li>So we must split data into a training set, a validation set and a test set. Choose hyperparameters on the validation set and evaluate on the test set. </li>
+<li>Furthermore, we can use the cross-validation by splitting data into folds. Try each fold as validation and average the results. This is useful but takes much time. So we mostly use it on small datasets and seldom use it on large datasets. </li>
+<li>In order to avoid bias on each dataset, we usually split data randomly. </li>
+</ol>
+<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><ol>
+<li>The parametric approach takes in the image as a vertical vector $\vec{x}$, and a parameter matrix (weight matrix) $W$ then outputs scores of each class. <br />For $\vec{x}$, we take the numbers in each image out in order and put them into a vertical vector. </li>
+<li>In linear classification, $f(\vec{x},W)=W\vec{x}$. Sometimes, we might want to add a bias vector $\vec{b}$, which makes the function $f(\vec{x}, W)=W\vec{x}+\vec{b}$. </li>
+<li>Each row of $W$ is a template of how each pixel in the image will affect each class. </li>
+<li>The linear classification model splits the space into pieces with linear decision boundaries. Each class takes one piece. </li>
+<li>We predict the label as the label of the highest class score. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/22/15-Classical-Statistical-Inference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/22/15-Classical-Statistical-Inference/" class="post-title-link" itemprop="url">15. Classical Statistical Inference</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-22 10:11:49" itemprop="dateCreated datePublished" datetime="2020-03-22T10:11:49+08:00">2020-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:35:01" itemprop="dateModified" datetime="2020-08-07T19:35:01+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,30 +492,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Derived-Distributions"><a href="#Derived-Distributions" class="headerlink" title="Derived Distributions"></a>Derived Distributions</h1><ol>
-<li>Calculate the PDF of $Y=g(X)$ of a continuous random variable $X$: <br />&emsp;First calculate the CDF $F_Y$ of $Y$ using $F_Y(y)=P(g(X)≤y)=\displaystyle\int_{\{x|g(x)≤y\}}f_X(x)dx$<br />&emsp;Differentiate to obtain the PDF of $Y$: $f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)$</li>
-<li>If $Y=aX+b$, where $a$ and $b$ are scalars, with $a≠0$. Then $f_Y(y)=\displaystyle\frac{1}{|a|}f_X(\frac{y-b}{a})$<br />Graphical proof: The width will be $|a|$ times wider and the height will be $|a|$ times shorter. The points are shifted by $b$. If $a$ were negative, the graph will be flipped around the vertical axis. <br />Algebra proof: <br />&emsp;If $a&gt;0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≤\displaystyle\frac{y-b}{a})=F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=\frac{1}{a}f_X(\frac{y-b}{a})$<br />&emsp;If $a<0$<br />&emsp;&emsp;$F_Y(y)=P(Y≤y)=P(aX+b≤y)=P(X≥\displaystyle\frac{y-b}{a})=1-F_X(\frac{y-b}{a})$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=-\frac{1}{a}f_X(\frac{y-b}{a})$</li>
-<li>$Y=g(X)$ is a monotonic function and its inverse is $X=h(Y)$. Assume that $h$ is differentiable. Then the PDF of $Y$ in the region where $f_Y(y)&gt;0$ is given by $f_Y(y)=f_X(h(y))\bigg|\displaystyle\frac{dh}{dy}(y)\bigg|$. <br />Proof: <br />&emsp;If $g$ is monotonically increasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(x≤h(y))=F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\frac{dh}{dy}(y)$<br />&emsp;If $g$ is monotonically decreasing<br />&emsp;&emsp;$F_Y(y)=P(g(X)≤y)=P(X≥h(y))=1-F_X(h(y))$<br />&emsp;&emsp;$f_Y(y)=\displaystyle\frac{dF_Y}{dy}(y)=f_X(h(y))\bigg[-\frac{dh}{dy}(y)\bigg]$</li>
-<li>This method also works for functions of multiple random variables. <br />&emsp;$F_Z(z)=P(g(X,Y)≤z)=\displaystyle\iint\limits_{\{(x,y)|(x,y)≤z\}}f_{X,Y}(x,y)dxdy$<br />&emsp;$f_Z(z)=\displaystyle\frac{dF_Z}{dz}(z)$</li>
-<li>Two-sided exponential PDF (Laplace PDF): $f_Z(z)=\displaystyle\frac{\lambda}{2}e^{-\lambda|z|}$</li>
-<li>For independent $X$ and $Y$, $Z=X+Y$. <br />&emsp;If $X$ and $Y$ are independent discrete random variables with PMFs $p_X,p_y$: <br />&emsp;&emsp;$\begin{equation}\begin{split}p_Z(z)&amp;=P(X+Y=z)\\&amp;=\displaystyle\sum_{\{(x,y)|x+y=z\}}P(X=x,Y=y)\\&amp;=\sum_xP(X=x,Y=z-x)\\&amp;=\sum_xp_X(x)p_Y(z-x) \end{split}\end{equation}$<br />&emsp;&emsp;The resulting PMF $p_Z$ is called the convolution of the PMFs of $X$ and $Y$. <br />&emsp;If $X$ and $Y$ are independent continuous random variables with PDFs $f_X$ and $f_Y$. <br />&emsp;&emsp;$\begin{equation}\begin{split}P(Z≤z|X=x)&amp;=P(X+Y≤z|X=x)\\&amp;=P(x+Y≤z|X=x)\\&amp;=P(x+Y≤z)\\&amp;=P(Y≤z-x) \end{split}\end{equation}$<br />&emsp;&emsp;Differentiating both sides with respect to $z$. $f_{Z|X}(z|x)=f_Y(z-x)$<br />&emsp;&emsp;So $f_{X,Z}(x,z)=f_X(x)f_{Z|X}(z|x)=f_X(x)f_Y(z-x)$<br />&emsp;&emsp;$f_Z(z)=\displaystyle\int^\infty_{-\infty}f_{X,Z}(x,z)dx=\int^\infty_{-\infty}f_X(x)f_Y(z-x)dx$<br />&emsp;&emsp;This is the convolution of the PDFs of $X$ and $Y$. </li>
-<li>With the help of convolution, we know that the sum of two normal random variables with means $\mu_1,\mu_2$ and variance $\sigma_1^2,\sigma_2^2$ is another normal random variable with mean $\mu_1+\mu_2$ and variance $\sigma_1^2+\sigma^2_2$. </li>
-<li>Graphical calculation of convolution: <br />&emsp;First plot $f_Y(z-t)$ as a function of $t$. <br />&emsp;Place the plots of $f_X(t)$ and $f_Y(z-t)$ on top of each other and form their product. <br />&emsp; The value of $f_Z(z)$ is the integral of the product of these two plots. </li>
+          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
+<li>In classical statistics, we see the unknowns as constants instead of random variables in Bayesian statistics. </li>
+<li>The distribution of $X$ depends on $\theta$. This is not a conditional distribution $p_{X|\Theta}$ or $f_{X|\Theta}$ in the Bayesian statistics but only a common distribution $p_X(x;\theta)$ or $f_X(x;\theta)$. </li>
+<li>For vectors $X$ and $\theta$: $p_{X_1,…X_2}(x_1,…,x_n;\theta_1,…,\theta_m)$. </li>
+<li>Problem types: <br />&emsp;Hypothesis testing: choose the correct model from several discrete model. Each model contains only one model. <br />&emsp;Composite hypotheses: some models might consist of more than one models. <br />&emsp;Estimation: design an estimator $\hat\Theta$ to keep estimation error $\hat\Theta-\theta$ small. </li>
 </ol>
-<h1 id="Covariance-and-Correlation"><a href="#Covariance-and-Correlation" class="headerlink" title="Covariance and Correlation"></a>Covariance and Correlation</h1><ol>
-<li>The covariance of two random variables $X$ and $Y$, denoted by $cov(X,Y)$ is defined by $cov(X,Y)=E[(X-E[X])(Y-E[Y])]$. </li>
-<li>When $cov(X,Y)=0$, we say that $X$ and $Y$ are uncorrelated. <br />Roughly speaking, a positive or negative covariance indicates that the value of $X-E[X]$ and $Y-E[Y]$ obtained in a single experiment tend to have the same or the opposite sign. </li>
-<li>$cov(X,Y)=E[XY]-E[X]E[Y]$</li>
-<li>$cov(X,X)=var(X)$</li>
-<li>$cov(X,aY+b)=a\cdot cov(X,Y)$</li>
-<li>$cov(X,Y+Z)=cov(X,Y)+cov(X,Z)$</li>
-<li>If $X$ and $Y$ are independent, $E[XY]=E[X]E[Y]$, so $cov(X,Y)=0$. Thus, if $X$ and $Y$ are independent, they are also uncorrelated. But two uncorrelated random variables are not alway independent. </li>
-<li>If $E[X|Y=y]=E[X]$, <script type="math/tex">E[XY]=\displaystyle\left\{\begin{array}{}\sum_yyp_Y(y)E[X|Y=y]=E[X]\sum_yyp_Y(y)=E[X]E[Y]&X\ and\ Y\ are\ discrete\\\\\int^\infty_{-\infty}yf_y(y)E[X|Y=y]dy=E[X]\int^\infty_{-\infty}yf_Y(y)dy=E[X]E[Y]&X\ and\ Y\ are\ continuous \end{array}\right.</script><br />So $cov(X,Y)=0$. In this case $X$ and $Y$ are uncorrelated but not always independent. </li>
-<li>The correlation coefficient of two random variables $X$ and $Y$ that have nonzero variances: $\rho(X,Y)=\displaystyle\frac{cov(X,Y)}{\sqrt{var(X)var(Y)}}$</li>
-<li>The correlation coefficient is a normalized version of the covariance. It ranges from $-1$ to $1$. </li>
-<li>If $\rho&gt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the same sign. if $\rho&lt;0$, then the value of $X-E[X]$ and $Y-E[Y]$ tend to have the opposite sign. </li>
-<li>$\rho=\pm1$ means $X$ and $Y$ are strongly dependent, knowing one can restore another one. <br />$\rho=1$ if and only if there exists a positive constant $c$ such that $Y-E[Y]=c(X-E[X])$. <br />$\rho=-1$ if and only if there exists a negative constant $c$ such that $Y-E[Y]=c(X-E[X])$. </li>
-<li>If $X_1,X_2,…,X_n$ are random variables with finite variance, we have $var\left(\displaystyle\sum^n_{i=1}X_i\right)=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j)$. <br />For $n=2$, $var(X_1+X_2)=var(X_1)+var(X_2)+2cov(X_1,X_2)$. <br />Proof: We denote $\tilde{X_i}=X_i-E[X_i]$. <br />&emsp;$\displaystyle\begin{equation}\begin{split}var\left(\sum^n_{i=1}X_i\right)&amp;=E\left[\left(\sum^n_{i=1}\tilde{X_i} \right)^2 \right]\\&amp;=E\left[\sum^n_{i=1}\sum^n_{j=1}\tilde{X_i}\tilde{X_j} \right]\\&amp;=\sum^n_{i=1}\sum^n_{j=1}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}E[\tilde{X_i}^2]+\sum_{\{(i,j)|i≠j\}}E[\tilde{X_i}\tilde{X_j}]\\&amp;=\sum^n_{i=1}var(X_i)+\sum_{\{(i,j)|i≠j\}}cov(X_i,X_j) \end{split}\end{equation}$</li>
+<h1 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h1><ol>
+<li>Pick $\theta$ that makes data most likely. <script type="math/tex">\hat\theta_{ML}=arg\ max_\theta\ p_X(x;\theta)</script>. </li>
+<li>In Bayesian MAP estimation, we actually only need to maximize <script type="math/tex">\hat\theta_{MAP}=arg\ max_\theta\ p_{X|\Theta}(x|\theta)p_\Theta(\theta)</script>. If $p_\Theta(\theta)$ is a constant, these two is going to maximize the same thing. </li>
+<li>The estimate $\theta$ is the realized value of estimator $\hat\Theta$. </li>
+<li>In many applications, the observations $X_i$ are assumed to be independent, in which case, the likelihood function is of the form $p_X(x_1,…,x_n;\theta)=\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)$. <br />In this case, it is often use the logarithm form, which is called log-likelihood function, to find the maximum. <br /><script type="math/tex">log\ p_X(x_1,…,x_n;\theta)=log\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)=\sum^n_{i=1}log\ p_{X_i}(x_i;\theta)</script></li>
+</ol>
+<h2 id="Desired-Properties-of-Estimators"><a href="#Desired-Properties-of-Estimators" class="headerlink" title="Desired Properties of Estimators"></a>Desired Properties of Estimators</h2><ol>
+<li>Unbiased: $E_\theta[\hat\Theta]=\displaystyle\int f_{\hat\Theta}(\hat\theta;\theta)\hat\theta d\hat\theta =\theta$. $\theta$ is the true value. </li>
+<li>Consistent: $\hat\Theta_n\to\theta$. </li>
+<li>Small mean squared error: $E_\theta[(\hat\Theta-\theta)^2]=var_\theta(\hat\Theta-\theta)+(E_\theta[\hat\Theta-\theta])^2=var_\theta(\hat\Theta)+(bias_\theta)^2$</li>
+</ol>
+<h1 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h1><ol>
+<li>An estimate $\hat\Theta_n$ may not be informative enough. </li>
+<li>An $(1-\alpha)$ confidence interval is a random interval $[\Theta_n^-,\Theta_n^+]$, such that $P(\Theta^-_n≤\theta≤\Theta^+_n)≥1-\alpha,\forall\alpha$. </li>
+<li>We usually use the normal table to calculate the confidence interval of sample mean. <br />&emsp;According to the central limit theorem, $P\left(\displaystyle\frac{|\hat\Theta_n-\theta|}{\displaystyle\frac{\sigma}{\sqrt{n}}}≤z \right)\approx\Phi(z)$. <br />&emsp;So $P\left(\hat\Theta_n-\displaystyle\frac{z\sigma}{\sqrt{n}}≤\theta≤\hat\Theta_n+\frac{z\sigma}{\sqrt{n}} \right)\approx1-\alpha$<br />&emsp;$\Phi(z)=1-\displaystyle\frac{\alpha}{2}$. </li>
+<li>If we don’t know about $\sigma$. <br />&emsp;Option $1$: use the upper bound on $\sigma$. <br />&emsp;Option $2$: use ad hoc estimate of $\sigma$. <br />&emsp;Option $3$: use the generic estimate of variance<br />&emsp;&emsp;$\sigma^2=E[(X_i-\theta)^2]$, so $\hat\sigma^2=\displaystyle\frac{1}{n}\sum^n_{i=1}(X_i-\theta)^2$. But $\theta$ is still unknown, so we use the estimator instead. <br />&emsp;&emsp;$\hat{S}_n^2=\displaystyle\frac{1}{n-1}\sum^n_{i=1}(X_i-\hat\Theta_n)^2$. And $E[\hat{S}^2_n]=\hat\sigma^2\to\sigma^2$. </li>
+</ol>
+<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><ol>
+<li>Model: $y\approx\theta_0+\theta_1x$ to minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>Interpretation: $Y_i=\theta_0+\theta_1x_i+W_i$, $W_i\sim N(0,\sigma^2)$. </li>
+<li>Likelihood function $f_{X,Y|\theta}(x,y;\theta)=c\cdot exp\{\displaystyle-\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2\}$. So we need to maximize it. </li>
+<li>Take the logs, maximize <script type="math/tex">-log\ c\cdot\displaystyle\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2</script>. The same as minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
+<li>The solution is $\hat\theta_1=\displaystyle\frac{\displaystyle\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum^n_{i=1}(x_i-\bar{x})^2}$ and $\hat\theta_0=\bar{y}-\hat\theta_1\bar{x}$. </li>
+<li>This form can be interpreted as estimates of $\hat\theta_1=\displaystyle\frac{cov(X,Y)}{var(X)}$ and $\hat\theta_0=E[Y]-\hat\theta_1E[X]$. </li>
+<li>Multiple linear regression: <br />&emsp;Model: $y\approx\theta_0+\theta_1x_1+\theta_2x_2+…$. <br />&emsp;Formulation: <script type="math/tex">min_{\theta_0,\theta_1,…}\ \displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_1-\theta_2x_2-…)^2</script>. </li>
+<li>General method: set the derivative to zero. </li>
+<li>We can also choose different variables $y\approx\theta_0+\theta_1h(x)$. Since $\theta_0$ and $\theta_1$ are the unknowns, this is still a linear function. </li>
+<li>Some concerns: <br />&emsp;noise might affect the result<br />&emsp;multiple variables have different correlation<br />&emsp;the regression function only shows the prediction based on other variables, but says nothing about the causal relations. </li>
+</ol>
+<h1 id="Binary-Hypothesis-Testing"><a href="#Binary-Hypothesis-Testing" class="headerlink" title="Binary Hypothesis Testing"></a>Binary Hypothesis Testing</h1><ol>
+<li>Null hypothesis $H_0$: $X\sim p_X(x;H_0)$ or $X\sim f_X(x;H_0)$<br />Alternative hypothesis $H_1$: $X\sim p_X(x;H_1)$ or $X\sim f_X(x;H_1)$. </li>
+<li>Partition the space of possible data vectors Rejection region R: reject $H_0$ if and only if $x\in R$. </li>
+<li>Types of errors: <br />&emsp;False rejection: $H_0$ is true but rejected: $\alpha(R)=P(X\in R;H_0)$. <br />&emsp;False acceptance: $H_0$ is false but accepted: $\beta(R)=P(X\notin R;H_1)$. <br />&emsp;$\alpha$ and $\beta$ have a trade off relation. When $\alpha$ increases, $\beta$ decreases and vice versa. </li>
+<li>Likelihood ratio test of Bayesian test: choose $H_1$ if <br />$P(H_1|X=x)&gt;P(H_0|X=x)$ or $\displaystyle\frac{P(X=x|H_1)P(H_1)}{P(X=x)}&gt;\frac{P(X=x|H_0)P(H_0)}{P(X=x)}$ or $\displaystyle\frac{P(X=x|H_1)}{P(X=x|H_0)}&gt;\frac{P(H_0)}{P(H_1)}$. </li>
+<li>Likelihood ratio test of Nonbayesian test: choose $H_1$ if <br />$L(x)=\displaystyle\frac{P(X=x;H_1)}{P(X=x;H_0)}&gt;\epsilon$ when $X$ is discrete and if $\displaystyle\frac{f_X(x;H_1)}{f_X(x;H_0)}&gt;\epsilon$ when $X$ is continuous. <br />Normally, we can concise the inequality to $\displaystyle\sum_if(X_i)&gt;\epsilon’$, which is called the statistic. <br />Then fix the false rejection probability $\alpha$, and choose $\epsilon$ so that <script type="math/tex">P(reject\ H_0;H0)=\alpha</script>, or $P\left(\displaystyle\sum_if(X_i)&gt;\epsilon’;H_0\right)=\alpha$. <br />Usually, we can solve the later equation with CLT when statistic is large. </li>
 </ol>
 
       
@@ -297,7 +553,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/21/14-Bayesian-Statistical-Inference/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -311,7 +567,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/14/06-Multiple-Continuous-Random-Variables-%20and-Conditional-PDFs/" class="post-title-link" itemprop="url">06. Multiple Continuous Random Variables and Conditional PDFs</a>
+            <a href="/2020/03/21/14-Bayesian-Statistical-Inference/" class="post-title-link" itemprop="url">14. Bayesian Statistical Inference</a>
         </h1>
 
         <div class="post-meta">
@@ -321,14 +577,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-14 19:35:04" itemprop="dateCreated datePublished" datetime="2020-03-14T19:35:04+08:00">2020-03-14</time>
+              <time title="Created: 2020-03-21 16:38:18" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:18" itemprop="dateModified" datetime="2020-08-07T19:35:18+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:34:48" itemprop="dateModified" datetime="2020-08-07T19:34:48+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -359,46 +615,64 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Joint-PDFs"><a href="#Joint-PDFs" class="headerlink" title="Joint PDFs"></a>Joint PDFs</h1><ol>
-<li>Two continuous random variables associated with the same experiment are jointly continuous and can be described in terms of a joint PDF $f_{X,Y}$. </li>
-<li>$f_{X,Y}$ is a nonnegative function that satisfies $P((X,Y)\in B)=\displaystyle\iint\limits_{(x,y)\in B}f_{X,Y}(x,y)dxdy$, for every subset $B$ of the two-dimensional plane. </li>
-<li>If $B=\{(x,y)|a≤x≤b,c≤y≤d\}$, $P(a≤X≤b,c≤Y≤d)=\displaystyle\int^d_c\int^b_af_{X,Y}(x,y)dxdy$<br />If $B$ is the entire two-dimensional plane, $P((X,Y)\in B)=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}f_{X,Y}(x,y)dxdy=1$</li>
-<li>Like PDF of single random variable, the joint PDF can be viewed as the probability per unit area in the vicinity of a point. </li>
-<li><script type="math/tex; mode=display">P(X\in A)=P(X\in A\ and\ Y\in (-\infty,\infty))=\displaystyle\int_A\int^\infty_{-\infty}f_{X,Y}(x,y)dydx</script></li>
-<li>The marginal PDF $f_X(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y}(x,y)dy$. </li>
-<li>The uniform model: <br />PDF: <script type="math/tex">f_{X,Y}(x,y)=\left\{\begin{array}{}\displaystyle\frac{1}{area\ of\ S}&if\ (x,y)\in S\\0&otherwise \end{array}\right.</script><br /><br />Probability: <script type="math/tex">P((X,Y)\in A)=\displaystyle\iint\limits_{(x,y)\in A}f_{X,Y}(x,y)dxdy=\frac{1}{area\ of\ S}\iint\limits_{(x,y)\in A}dxdy=\frac{area\ of\ A}{area\ of\ S}</script></li>
-<li>We define the joint CDF of $X$ and $Y$ by $F_{X,Y}(x,y)=P(X≤x,Y≤y)=\displaystyle\int^x_{-\infty}\int^y_{-\infty}f_{X,Y}(s,t)dtds$. </li>
-<li>$f_{X,Y}(x,y)=\displaystyle\frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$</li>
-<li>For expectation: $E[g(X,Y)]=\displaystyle\int^\infty_{-\infty}\int^\infty_{-\infty}g(x,y)f_{X,Y}(x,y)dxdy$</li>
-<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
+          <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
+<li>In probability, every unambiguous question has a unique correct answer. </li>
+<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unless one makes several assumptions and imposes additional constraints on the inference problem. </li>
+<li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
+<li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
+<li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
+<li>In parameter estimation, we want to generate estimates that are close to the true values of the parameters in some probabilistic sense. </li>
+<li>In hypothesis testing, the unknown parameter takes one of a finite number of values, corresponding to competing hypotheses; we want to choose one of the hypotheses, aiming to achieve a small probability of error. </li>
 </ol>
-<h1 id="Conditioning"><a href="#Conditioning" class="headerlink" title="Conditioning"></a>Conditioning</h1><ol>
-<li>Given an event $A$ with $P(A)&gt;0$, the conditional PDF is $P(X\in B|A)=\displaystyle\int_Bf_{X|A}(x)dx$ for any subset $B$ of the real line. </li>
-<li>If $P(x\in A)&gt;0$, $P(X\in B|X\in A)=\displaystyle\frac{P(X\in B,X\in A)}{P(X\in A)}=\frac{\int_{A\cap B}f_X(x)dx}{P(X\in A)}$. So <script type="math/tex">f_{X|\{X\in A\}}(x)=\left\{\begin{array}{}\displaystyle\frac{f_X(x)}{P(X\in A)}&if\ x\in A\\0&otherwise \end{array}\right.</script></li>
-<li>If two random variables $X$ and $Y$, event $C=\{(X,Y)\in A\}$, <script type="math/tex">f_{X,Y|C}(x,y)=\left\{\begin{array}{}\displaystyle\frac{f_{X,Y}(x,y)}{P(C)}&if\ (x,y)\in A\\0&otherwise \end{array}\right.</script> and $f_{X|C}(x)=\displaystyle\int^\infty_{-\infty}f_{X,Y|C}(x)dy$</li>
-<li>Total probability theorem: If disjoint sets $A_1,A_2,…,A_n$ form a partition of the sample space, $f_X(x)=\displaystyle\sum^n_{i=1}P(A_i)f_{X|A_i}(x)$. </li>
-<li>If $X$ and $Y$ are continuous random variables with joint PDF $f_{X,Y}$. For any $y$ with $f_Y(y)&gt;0$, the conditional PDF of $X$ given that $Y=y$ is $f_{X|Y}(x|y)=\displaystyle\frac{f_{X,Y}(x,y)}{f_Y(y)}$. </li>
-<li>Total probability theorem based on another continuous random variable: $f_X(x)=\displaystyle\int^\infty_{-\infty}f_Y(y)f_{X|Y}(x|y)dy$</li>
-<li>It’s best to view $y$ as a fixed number and consider $f_{X|Y}(x|y)$ as a function of the single variable $x$. Viewed as a function of $x$, $f_{X|Y}(x|y)$ has the same shape as the joint PDF $f_{X,Y}$, because the denominator $f_Y$ does not depend on $x$. </li>
-<li>$f_{X,Y|Z}(x,y|z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_Z(z)}$ and $f_{X|Y,Z}(x|y,z)=\displaystyle\frac{f_{X,Y,Z}(x,y,z)}{f_{Y,Z}(y,z)}$</li>
-<li>$E[X|A]=\displaystyle\int^\infty_{-\infty}xf_{X|A}(x)dx$ and $E[X|Y=y]=\displaystyle\int^\infty_{-\infty}xf_{X|Y}(x|y)dx$</li>
-<li>$E[g(X)|A]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|A}(x)dx$ and $E[g(X)|Y=y]=\displaystyle\int^\infty_{-\infty}g(x)f_{X|Y}(x|y)dx$</li>
-<li>If disjoint sets $A_1,A_2,…,A_n$ form a partition of sample space, $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$. </li>
-<li>$E[X]=\displaystyle\int^\infty_{-\infty}E[X|Y=y]f_Y(y)dy$</li>
+<h1 id="Bayesian-Inference-and-the-Posterior-Distribution"><a href="#Bayesian-Inference-and-the-Posterior-Distribution" class="headerlink" title="Bayesian Inference and the Posterior Distribution"></a>Bayesian Inference and the Posterior Distribution</h1><ol>
+<li>In Bayesian inference, the unknown quantity of interest, which we denote by $\Theta$, is modeled as a random variable or as a finite collection of random variables. </li>
+<li>We aim to extract information about $\Theta$, based on observing a collection $X=(X_1,…,X_n)$ of related random variables, called observations, measurements, or an observation vector. </li>
+<li>In Bayesian Inference, we start with a prior distribution $p_\Theta$ or $f_\Theta$ for the unknown random variable $\Theta$. We have a model $p_{X|\Theta}$ or $f_{X|\Theta}$ of the observation vector $X$. After observing the value $x$ of $X$, we form the posterior distribution $p_{\Theta|X}$ or $f_{\Theta|X}$, using the appropriate version of Bayes’s rule. </li>
+<li>Once a particular value $x$ of $X$ has been ovserved, a complete answer to the Bayesian inference problem is provided by the posterior distribution of $\Theta$. </li>
+<li>The case of multiple unknown parameters is entirely similar. </li>
+<li>After getting the posterior distribution, we are certainly to make some decision with it to minimize the probability of error. </li>
 </ol>
-<h1 id="Continuous-Bayes-Rule"><a href="#Continuous-Bayes-Rule" class="headerlink" title="Continuous Bayes Rule"></a>Continuous Bayes Rule</h1><ol>
-<li>Since $f_Xf_{Y|X}=f_{X,Y}=f_Yf_{X|Y}$, $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{f_Y(y)}$. </li>
-<li>We can also plug in the total probability theorem: $f_{X|Y}(x|y)=\displaystyle\frac{f_X(x)f_{Y|X}(y|x)}{\int^\infty_{-\infty}f_X(x)f_{Y|X}(y|x)}$</li>
-<li>A discrete event $A$ and a continuous random variable $Y$<br />$\begin{equation}\begin{split}P(A|Y=y)&amp;\approx P(A|y≤Y≤y+\delta)\\&amp;=\displaystyle\frac{P(A)P(y≤Y≤y+\delta|A)}{P(y≤Y≤y+\delta)}\\&amp;\approx\frac{P(A)f_{Y|A}(y)\delta}{f_Y(y)\delta}\\&amp;=\frac{P(A)f_{Y|A}(y)}{f_Y(y)} \end{split}\end{equation}$<br />Substitute $f_Y(y)$, $P(A|Y=y)=\displaystyle\frac{P(A)f_{Y|A}(y)}{P(A)f_{Y|A}(y)+P(A^c)f_{Y|A^c}(y)}$<br />Let $A=\{N=n\}$ and $p_N$ be the PMF of $N$. $P(A|Y=y)=P(N=n|Y=y)=\displaystyle\frac{p_N(n)f_{Y|N}(y|n)}{f_Y(y)}=\frac{p_N(n)f_{Y|N}(y|n)}{\sum_ip_N(i)f_{Y|N}(y|i)}$</li>
-<li>$A$ is still a discrete event and $Y$ is a continuous random variable<br />$f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{P(A)}$<br />Also plug in the total probability theorem: $f_{Y|A}(y)=\displaystyle\frac{f_Y(y)P(A|Y=y)}{\int^\infty_{-\infty}f_Y(t)P(A|Y=t)dt}$</li>
+<h1 id="Hypothesis-and-Estimate"><a href="#Hypothesis-and-Estimate" class="headerlink" title="Hypothesis and Estimate"></a>Hypothesis and Estimate</h1><ol>
+<li>An estimator is a random variable of the form $\hat\Theta=g(X)$, for some function $g$. Different choices of $g$ correspond to different estimators. </li>
+<li>An estimate is the value $\hat\theta$ of an estimator, as determined by the realized value $x$ of observation $X$. </li>
+<li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
 </ol>
-<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>Two continuous random variables $X$ and $Y$ are independent if their joint PDF is the product of the marginal PDFs: $f_{X,Y}(x,y)=f_X(x)f_Y(y)$, for all $x,y$. </li>
-<li>Also $f_{X|Y}(x|y)=f_X(x)$, for all $y$ with $f_Y(y)&gt;0$ and all $x$. </li>
-<li>$P(X\in A and Y\in B)=P(X\in A)P(Y\in B)$. </li>
-<li>$F_{X,Y}(x,y)=F_X(x)F_Y(y)$, for all $x, y$. </li>
-<li>$E[g(X)h(Y)]=E[g(X)]E[h(Y)]$</li>
-<li>$var(X+Y)=var(X)+var(y)$. </li>
+<h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
+<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ is\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ is\ continuous \end{array}\right.</script></li>
+<li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
+<li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
+<li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>
+</ol>
+<h2 id="LMS"><a href="#LMS" class="headerlink" title="LMS"></a>LMS</h2><ol>
+<li>This rule tries to minimize $E[(\Theta-c)^2]$, where $c$ is the estimate. <br />Expand this to get $E[\Theta^2]-2cE[\Theta]+c^2$. The minimum is achieved at $c=E[\Theta]$. </li>
+<li>So the optimal estimate is $E[\Theta]$. And the error is $E[(\Theta-E[\Theta])^2]=var(\Theta)$. </li>
+<li>The conditional case is the same. Minimize $E[(\Theta-c)^2|X=x]$ is minimized by $c=[\Theta|X=x]$. </li>
+<li>$E[\Theta|X]$ minimizes $E[(\Theta-g(X))^2]$ over all estimators $g(\cdot)$. </li>
+<li>If we have multiple observations, $\hat\theta=E[\Theta|X_1,…,X_n]$, $E[(\Theta-E[\Theta|X_1,…,X_n])^2]≤E[(\Theta-g(X_1,…,X_n))^2]$ for all estimators $g(X_1,…,X_n)$. </li>
+<li>If we have multiple parameters, we need to minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$. The result is $\hat\Theta_i=E[\Theta_i|X_1,…,X_n]$. </li>
+</ol>
+<h3 id="Estimation-Error"><a href="#Estimation-Error" class="headerlink" title="Estimation Error"></a>Estimation Error</h3><ol>
+<li>Let $\hat\Theta=E[\Theta|X]$ be the LMS estimator and $\tilde\Theta=\hat\Theta-\Theta$ be the associated estimation error. </li>
+<li>The estimation error $\tilde\Theta$ is unbiased, i.e. it has zero unconditional and conditional mean $E[\tilde\Theta]=0$ and $E[\tilde\Theta|X=x]=0$ for all $x$. </li>
+<li>The estimation error $\tilde\Theta$ is uncorrelated with the estimate $\hat\Theta$: $cov(\hat\Theta, \tilde\Theta)=0$. </li>
+<li>The variance of $\Theta$ can be decomposed as $var(\Theta)=var(\hat\Theta)+var(\tilde\Theta)$. </li>
+</ol>
+<h3 id="Linear-LMS"><a href="#Linear-LMS" class="headerlink" title="Linear LMS"></a>Linear LMS</h3><ol>
+<li>The calculation for multiple observations and multiple parameters might be hard. So we might choose another way to estimate. </li>
+<li>A linear estimator of a random variable $\Theta$, based on observations $X_1,…,X_n$ has form $\hat\Theta=a_1X_1+…+a_nX_n+b$. </li>
+<li>Given a particular choice of the scalars $a_1,…,a_n,b$, the corresponding mean squared error is $E[(\Theta-a_1X_1-…-a_nX_n-b)^2]$. </li>
+</ol>
+<h4 id="Single-Observation"><a href="#Single-Observation" class="headerlink" title="Single Observation"></a>Single Observation</h4><ol>
+<li>Suppose that $a$ has already been chosen. This is the same as choosing a constant $b$ to estimate the random variable $\Theta-aX$. The best choice is $b=E[\Theta-aX]=E[\Theta]-aE[X]$. </li>
+<li>Now we only need to minimize $E[(\Theta-aX-E[\Theta]+aE[X])^2]$. </li>
+<li>Rewrite this expression as $var(\Theta-aX)=\sigma_\Theta^2+a^2\sigma_X^2+2cov(\Theta,-aX)=\sigma_\Theta^2+a^2\sigma_X-2a\cdot cov(\Theta,X)$. </li>
+<li>To minimize $var(\Theta-aX)$, we set its derivative to zero and solve for $a$. This yields $a=\displaystyle\frac{cov(\Theta,X)}{\sigma^2_X}=\frac{\rho\sigma_\Theta\sigma_X}{\sigma^2_X}=\rho\frac{\sigma_\Theta}{\sigma_X}$, where $\rho=\displaystyle\frac{cov(\Theta,X)}{\sigma_\Theta\sigma_X}$. </li>
+<li>The mean squared estimation error of the resulting linear estimator $\hat\Theta$ is given by $var(\Theta-\hat\Theta)=(1-\rho^2)\sigma^2_\Theta$. </li>
+</ol>
+<h4 id="Multiple-Observations-and-Multiple-Parameters"><a href="#Multiple-Observations-and-Multiple-Parameters" class="headerlink" title="Multiple Observations and Multiple Parameters"></a>Multiple Observations and Multiple Parameters</h4><ol>
+<li>To minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$, only need to minmize each $E[(\Theta_1-\hat\Theta_i)^2]$. So we are essentially dealing with $m$ decoupled linear estimation problems, one for each unknown parameter. </li>
+<li>For every observation, we have $X_i=\Theta+W_i$, where the $W_i$ are random variables with mean $0$ and variance $\sigma_i^2$, which represent observation errors. </li>
+<li>The linear LMS estimator of $\Theta$ based on the observations $X_1,…,X_n$ turns out to be $\hat\Theta_i=\displaystyle\frac{\displaystyle\frac{\mu_i}{\sigma_{0i}^2}+\displaystyle\sum^n_{i=1}\frac{X_i}{\sigma^2_i}}{\displaystyle\sum^n_{i=0}\frac{1}{\sigma^2_i}}$. $\mu_i$ is the mean of $\Theta_i$ while $\sigma_{0i}^2$ is the variance of $\Theta_i$. </li>
 </ol>
 
       
@@ -419,7 +693,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/14/05-Continuous-Random-Variables/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/20/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -433,7 +707,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/14/05-Continuous-Random-Variables/" class="post-title-link" itemprop="url">05. Continuous Random Variables</a>
+            <a href="/2020/03/20/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/" class="post-title-link" itemprop="url">13. Central Limit Theorem and Strong Law of Large Numbers</a>
         </h1>
 
         <div class="post-meta">
@@ -443,14 +717,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-14 15:46:33" itemprop="dateCreated datePublished" datetime="2020-03-14T15:46:33+08:00">2020-03-14</time>
+              <time title="Created: 2020-03-20 17:52:34" itemprop="dateCreated datePublished" datetime="2020-03-20T17:52:34+08:00">2020-03-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:30" itemprop="dateModified" datetime="2020-08-07T19:35:30+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:35:25" itemprop="dateModified" datetime="2020-08-07T19:35:25+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -481,40 +755,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Continuous-Random-Variables"><a href="#Continuous-Random-Variables" class="headerlink" title="Continuous Random Variables"></a>Continuous Random Variables</h1><ol>
-<li>A random variable $X$ is called continuous if there is a nonnegative function $f_X$, called the probability density function (PDF) of $X$, such that $P(X\in B)=\displaystyle\int_Bf_X(x)dx$ for every subset $B$  of the real line. </li>
-<li>In particular, the probability that the value of $X$ falls within an interval is $P(a≤X≤b)=\displaystyle\int^b_af_X(x)dx$. </li>
-<li>The probability can be interpreted as the area under the graph of the PDF. </li>
-<li>For any single value $a$, we have $P(X=a)=\displaystyle\int^a_af_X(x)dx=0$. <br />So including or excluding the nedpoints of an interval has no effect on its probability. $P(a≤X≤b)=P(a≤X&lt;b)=P(a&lt;X≤b)=P(a&lt;X&lt;b)$</li>
-<li>$P(a≤X≤b)=P(X≤b)-P(X≤a)$</li>
-<li>$\displaystyle\int^\infty_{-\infty}f_X(x)dx=1$</li>
-<li>$P([x,x+\delta])=\displaystyle\int^{x+\delta}_xf_X(t)dt\approx f_X(x)\cdot\delta$. So we can view $f_X(X)$ as the probability mass per unit length near $x$. Even though a PDF is used to calculate event probabilities, $f_X(x)$ is not the probability of any particular event. </li>
-<li>$f_X(x)$ is not restricted to be less than or equal to one. </li>
-<li>If a random variable $X$ takes values in an interval $[a,b]$ and any two subintervals of the same length have the same probability, we refer to this type of random variable as uniform or uniformly distributed. <br /><script type="math/tex">f_X(x)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a}&if\ a≤x≤b\\0&otherwise \end{array}\right.</script></li>
-<li>The expected value of a continuous random variable $X$ is defined by $E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx$. </li>
-<li>If $X$ is a continuous random variable, $Y=g(X)$ is also a random variable but may be a decrete one. But $E[g(X)]=\displaystyle\int^\infty_{-\infty}g(x)f_X(x)dx$ is true for any kind of $Y$, descrete or continuous. </li>
-<li>The variance is still $var(X)=E[(X-E[X])^2]=\displaystyle\int_{-\infty}^\infty(x-E[X])^2f_X(x)dx$. <br />And $var(X)=E[(X-E[X])^2]$ still stands. </li>
-<li>For uniform random variable: <br />$E[X]=\displaystyle\int^\infty_{-\infty}xf_X(x)dx=\int^b_ax\frac{1}{b-a}dx=\frac{a+b}{2}$<br />$E[X^2]=\displaystyle\int^\infty_{-\infty}x^2f_X(x)dx=\int^b_a\frac{x^2}{b-a}dx=\frac{b^3-a^3}{3(b-a)}=\frac{a^2+ab+b^2}{3}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{a^2+ab+b^2}{3}-\frac{(a+b)^2}{4}=\frac{(b-a)^2}{12}$</li>
-<li>Exponential random variable: <br />PDF: $f_X(x)=\left\{\begin{array}{}\lambda e^{-\lambda x}&amp;if x≥0\\0&amp;otherwise \end{array}\right.$<br />$P(X≥a)=\displaystyle\int^\infty_a\lambda e^{-\lambda x}dx=e^{-\lambda a}$<br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\int^\infty_0x\lambda e^{-\lambda x}dx\\&amp;=(-xe^{-\lambda x})\Big|^\infty_0+\int^\infty_0e^{-\lambda x}dx\\&amp;=\frac{1}{\lambda} \end{split}\end{equation}$<br />$\begin{equation}\begin{split}E[X^2]&amp;=\displaystyle\int^\infty_0x^2\lambda e^{-\lambda x}dx\\&amp;=(-x^2e^{-\lambda x})\Big|^\infty_0+\int^\infty_02xe^{-\lambda x}dx\\&amp;=0+\frac{2}{\lambda}E[X]\\&amp;=\frac{2}{\lambda^2} \end{split}\end{equation}$<br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1}{\lambda^2}$</li>
+          <h1 id="The-Central-Limit-Theorem"><a href="#The-Central-Limit-Theorem" class="headerlink" title="The Central Limit Theorem"></a>The Central Limit Theorem</h1><ol>
+<li>While $M_n=\displaystyle\frac{X_1+…+X_n}{n}$ converges to the true mean $\mu$, $S_n=nM_n$ increases to infinity. </li>
+<li>Consider the deviation $S_n-n\mu$ of $S_n$ from its mean $n\mu$, and scaling it by a factor proportional to $\displaystyle\frac{1}{\sqrt{n}}$ to keep the variance at a constant level. <br />We define $Z_n=\displaystyle\frac{S_n-n\mu}{\sigma\sqrt{n}}$. <br />So $E[Z_n]=\displaystyle\frac{E[X_1+…+E_n]-n\mu}{\sigma\sqrt{n}}=0$ and $var(Z_n)=\displaystyle\frac{var(X_1+…+X_n)}{\sigma^2n}=\frac{var(X_1)+…+var(X_n)}{\sigma^2n}=\frac{n\sigma^2}{n\sigma^2}=1$. </li>
+<li>The central limit theorem: The CDF of $Z_n$ converges to the standard normal CDF in the sense that $\displaystyle\lim_{n\to\infty}P(Z_n≤z)=\Phi(z)$, for all $z$. </li>
+<li>This law indicates that the sum of a large number of independent random variables is approximately normal. </li>
+<li>This law eliminates the need for detailed probabilistic models, and for tedious manipulations of PMFs and PDFs. </li>
+<li>Since normality is preserved uner linear transformations, this is equal to treating $S_n$ as a normal random variable with mean $n\mu$ and variance $\sigma^2$. </li>
+<li>Let $z=\displaystyle\frac{c-n\mu}{\sigma\sqrt{n}}$. $P(S_n≤c)\approx\Phi(z)$. </li>
 </ol>
-<h1 id="Cumulative-Distribution-Functions"><a href="#Cumulative-Distribution-Functions" class="headerlink" title="Cumulative Distribution Functions"></a>Cumulative Distribution Functions</h1><ol>
-<li>The cumulative distribution function (CDF) of a random variable $X$ is denoted by $F_X$ and provides probability $P(X≤x)$. <br /><script type="math/tex">F_X(x)=P(X≤x)=\left\{\begin{array}{}\displaystyle\sum_{k≤x}p_X(k)&if\ X\ is\ discrete\\\int^x_{-\infty}f_X(t)dt&if\ X\ is\ continuous \end{array}\right.</script></li>
-<li>CDF accumulates probability up to the value $x$. </li>
-<li>The graph of CDF of a descrete random variable has a staircase form at the values of probability mass. At the points where a jump occurs, the value of $F_X$ is the larger of the two corresponding value, i.e. $F_X$ is continuous from the right. </li>
-<li>$F_X$ is monotonically nondecreasing: if $x≤y$, then $F_X(x)≤F_X(y)$. </li>
-<li>$\displaystyle\lim_{x\to-\infty}F_X=0$ and $\displaystyle\lim_{x\to\infty}F_X=1$</li>
-<li>If $X$ is discrete, then $F_X(x)$ is a piecewise constant function of $x$. If $X$ is continuous, then $F_X(x)$ is a continuous function of $x$. </li>
-<li>If $X$ is descrete, $p_X(k)=P(X≤k)-P(X≤k-1)=F_X(k)-F_X(k-1)$. If $X$ is continuous, $f_X(x)=\displaystyle\frac{dF_X}{dx}(x)$. </li>
-<li>If $X_1,X_2,…,X_n$ are independent, $F_X(x)=F_{X_1}(x)…F_{X_n}(x)$</li>
-<li>For geometric random variable, $F_{geo}(n)=\displaystyle\sum^n_{k=1}p(1-p)^{k-1}=1-(1-p)^2$<br />For exponential random variable, $F_{exp}(x)=\displaystyle\int^x_0\lambda e^{-\lambda t}dt=1-e^{-\lambda x}$ for $x&gt;0$ and $F_X(x)=0$, for $x≤0$. <br />$F_{geo}=F_{exp}$ when $x=n\delta$ ($\delta=-\displaystyle\frac{-ln(1-p)}{\lambda}$), with $n=1,2,…$. </li>
+<h1 id="De-Moivre-Laplace-Approximation-to-the-Binomial"><a href="#De-Moivre-Laplace-Approximation-to-the-Binomial" class="headerlink" title="De Moivre-Laplace Approximation to the Binomial"></a>De Moivre-Laplace Approximation to the Binomial</h1><ol>
+<li>A binomial random variable $S_n$ with parameters $n$ and $p$ can be viewed as the sum of $n$ independent Bernoulli random variables $X_1,…,X_n$, with common parameter $p$. </li>
+<li>$k≤S_n≤l\Longleftrightarrow\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}$. <br />$\displaystyle P(k≤S_n≤l)=P\left(\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}\right)\approx\Phi\left(\frac{l-np}{\sqrt{np(1-p)}}\right)-\Phi\left(\frac{k-np}{\sqrt{np(1-p)}}\right)$</li>
+<li>An approximation of this form is equivalent to treat $S_n$ as a normal random variable with mean $np$ and variance $np(1-p)$. </li>
+<li>A little bug in this approximation is that the approximation of $P(S_n=k)=P(k≤S_n≤k)$ is always zero. So we can fix by calculating with $k-\displaystyle\frac12$ and $l+\displaystyle\frac12$. This is the DeMoivre-Laplace approximation to the Binomial: <br />$\displaystyle P(k≤S_n≤l)\approx\Phi\left(\frac{l+\frac12-np}{\sqrt{np(1-p)}} \right)-\Phi\left(\frac{k-\frac12-np}{\sqrt{np(1-p)}} \right)$</li>
 </ol>
-<h1 id="Normal-Random-Variables"><a href="#Normal-Random-Variables" class="headerlink" title="Normal Random Variables"></a>Normal Random Variables</h1><ol>
-<li>A continuous random variable $X$ is said to be normal or Gaussian if it has a PDF of the form $f_X(x)=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, where $\mu$ and $\sigma$ are two scalar parameters characterizing the PDF with $\sigma&gt;0$. </li>
-<li>The PDF is symmetric around $\mu$. So its mean $E[X]$ has to be $\mu$. </li>
-<li><br />$\begin{equation}\begin{split}var(X)&amp;=\displaystyle\frac{1}{\sqrt{2\pi}\sigma}\int^\infty_{-\infty}(x-\mu)^2e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\int^\infty_{-\infty}y^2e^{-\frac{y^2}{2}}dy                         y=\frac{x-\mu}{\sigma}\\&amp;=\frac{\sigma^2}{\sqrt{2\pi}}\Bigg[(-ye^{-\frac{y^2}{2}})\bigg|^\infty_{-\infty}+\int^\infty_{-\infty}e^{-\frac{y^2}{2}}dy\Bigg]\\&amp;=\sigma^2 \end{split}\end{equation}$</li>
-<li>The standard normal random variable is a normal random variable with zero mean and unit variance. CDF: $\Phi(y)=P(Y≤y)=\displaystyle\frac{1}{\sqrt{2\pi}}\int^y_{-\infty}e^{-\frac{t^2}{2}}dt$</li>
-<li>In standard normal random variable, for $y&lt;0$, $\Phi(y)=P(Y≤y)=P(Y≥-y)=1-P(Y≤-y)=1-\Phi(-y)$</li>
-<li>For any $X$, we can standardize by $Y=\displaystyle\frac{X-\mu}{\sigma}$. And in reverse, any $X=\sigma Y+\mu$. So $P(X≤x)=P(\displaystyle\frac{X-\mu}{\sigma}≤\frac{x-\mu}{\sigma})=P(Y≤\frac{x-\mu}{\sigma})=\Phi(\frac{x-\mu}{\sigma})$</li>
+<h1 id="The-Strong-Law-of-Large-Numbers"><a href="#The-Strong-Law-of-Large-Numbers" class="headerlink" title="The Strong Law of Large Numbers"></a>The Strong Law of Large Numbers</h1><ol>
+<li>Let $X_1,X_2,…$ be a sequence of independent identically distributed random variables with mean $\mu$. Then the sequence of sample means converges to $\mu$, with probability $1$, in the sense that $P\left(\displaystyle\lim_{n\to\infty}\frac{X_1+…X_2}{n}=\mu\right)=1$. </li>
+<li>Consider the experiment is infinitely long , so the sample space is a set of infinite sequences of real number. Let set $A$ consist of those sequences whose long-term average is $\mu$. The strong law of large numbers states that all of the probability is concentrated on this particular subset of the sample space. </li>
+<li>The collection of outcomes that do not belong to $A$ has probability zero. </li>
+<li>The weak law provides no conclusive information on the number of deviations between $M_n$ and $\mu$ as $n$ tends to infinity. The strong law implies that  for any given $\epsilon&gt;0$, the probability that the difference $|M_n-\mu|$ will exceed $\epsilon$ an infintie number of times is equal to zero. </li>
+<li>Convergence with probability: $Y_1,Y_2,…$ are a sequence of random variables (not necessarily independent). $c$ is a real number. $Y_n$ converges to $c$ with probability $1$ if $P\left(\displaystyle\lim_{n\to\infty}Y_n=c\right)=1$. </li>
+<li>Convergence WITH probabiltiy is different from convergence IN probability. </li>
 </ol>
 
       
@@ -535,7 +797,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/20/12-Weak-Law-of-Large-Numbers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -549,7 +811,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/12/04-Discrete-Random-Variables-Probability-Mass-Functions-Expectations/" class="post-title-link" itemprop="url">04. Discrete Random Variables; Probability Mass Functions; Expectations</a>
+            <a href="/2020/03/20/12-Weak-Law-of-Large-Numbers/" class="post-title-link" itemprop="url">12. Weak Law of Large Numbers</a>
         </h1>
 
         <div class="post-meta">
@@ -559,14 +821,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-12 18:14:27" itemprop="dateCreated datePublished" datetime="2020-03-12T18:14:27+08:00">2020-03-12</time>
+              <time title="Created: 2020-03-20 11:12:37" itemprop="dateCreated datePublished" datetime="2020-03-20T11:12:37+08:00">2020-03-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:07" itemprop="dateModified" datetime="2020-08-07T19:35:07+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:34:26" itemprop="dateModified" datetime="2020-08-07T19:34:26+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -597,81 +859,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Random-Variables"><a href="#Random-Variables" class="headerlink" title="Random Variables"></a>Random Variables</h1><ol>
-<li>Sometimes we can use a random variable to associate the (numerical) value with each outcome. </li>
-<li>A random variable is a real valued function of the experimental outcome. </li>
-<li>A function of a random variable defines another random variable. </li>
-<li>A random variable can be conditioned on an event or on another random variable. </li>
-<li>A random variable can be independent of an event or from another random variable. </li>
-<li>A random variable is called discrete if its range is either finite or countably infinite. </li>
-<li>If $Y=g(X)$ is a function of a random variable $X$, then $Y$ is also a random variable. </li>
+          <h1 id="Inequalities"><a href="#Inequalities" class="headerlink" title="Inequalities"></a>Inequalities</h1><ol>
+<li>Markov inequality: If a random variable $X$ can only take nonnegative values, then $P(X≥a)≤\displaystyle\frac{E[X]}{a}$, for all $a&gt;0$. <br />Proof: <br />&emsp;First fix a positive number $a$ and let <script type="math/tex">Y_a=\left\{\begin{array}{}0&if\ X<a\\a&if\ X≥a \end{array}\right.</script>. <br />&emsp;So $Y_a≤X$ and therefore $E[Y_a]≤E[X]$. <br />&emsp;$E[Y_a]=aP(Y_a=a)=aP(X≥a)$. So $aP(X≥a)≤E[X]$. <br />&emsp;Hence, $P(X≥a)≤\displaystyle\frac{E[X]}{a}$. </li>
+<li>If a nonnegative random variable has a small mean, then the probability that it takes a large value must also be small. </li>
+<li>The bounds provided by the Markov inequality can be quite loose. </li>
+<li>Chebyshev inequality: If $X$ is a random variable with mean $\mu$ and variance $\sigma^2$, $P(|X-\mu|≥c)≤\displaystyle\frac{\sigma^2}{c^2}$. <br />Proof: <br />&emsp;$P(|X-\mu|≥c)=P((X-\mu)^2≥c^2)≤\displaystyle\frac{E[(X-\mu)^2]}{c^2}=\frac{\sigma^2}{c^2}$. </li>
+<li>Let $c=k\sigma$, $P(|X-\mu|≥k\sigma)≤\displaystyle\frac{\sigma^2}{k^2\sigma^2}=\frac{1}{k^2}$. </li>
+<li>The bounds that the Chebyshev inequality provides are more accurate than Markkov inequality. But we still cannot expect the bounds to be close approximations of the exact probabilities. </li>
 </ol>
-<h1 id="Probability-Mass-Function"><a href="#Probability-Mass-Function" class="headerlink" title="Probability Mass Function"></a>Probability Mass Function</h1><ol>
-<li>Probability mass function (PMF) of a discrete random variable $X$ can capture the probabilities of the values that it can take. PMF of $X$ is denoted $p_X$. </li>
-<li>If $x$ is any possible value of $X$, the probability mass of $x$ denoted $p_X(x)$ is the probability of the event $\{X=x\}$ consisting of all outcomes that give rise to a value of $X$ equal to $x$: $p_X(x)=P(\{X=x\})$ or $p_X(x)=P(X=x)$. </li>
-<li>Convention: upper case characters denote random variables and lower case characters denote real numbers such as the numerical values of a random variable. </li>
-<li>The events $\{X=x\}$ are disjoint and form a partition of the sample space. So: $\displaystyle\sum_xp_X(x)=1$ and $P(X\in S)=\displaystyle\sum_{x\in S}p_X(x)$. </li>
-<li>$p_X(x)$ equals the sum of the probabilities of all outcomes that give rise to event $\{X=x\}$. </li>
-<li>If $Y=g(X)$, $p_Y(y)=\displaystyle\sum_{\{x|g(x)=y\}}p_X(x)$. </li>
+<h1 id="The-Weak-Law-of-Large-Numbers"><a href="#The-Weak-Law-of-Large-Numbers" class="headerlink" title="The Weak Law of Large Numbers"></a>The Weak Law of Large Numbers</h1><ol>
+<li>A sequence $X_1,X_2,…$ of independent identically distributed random vairables with mean $\mu$ and variance $\sigma^2$ and define the sample mean by $M_n=\displaystyle\frac{X_1+…+X_n}{n}$. <br />We have $E[M_n]=\displaystyle\frac{E[X_1]+…+E[X_n]}{n}=\frac{n\mu}{n}=\mu$, and $var(M_n)=\displaystyle\frac{var(X_1+…X_n)}{n^2}=\frac{var(X_1)+…+var(X_n)}{n^2}=\frac{n\sigma^2}{n}=\frac{\sigma^2}{n}$. </li>
+<li>Apply the Chebyshev inequality and obtain $P(|M_n-\mu|≥\epsilon)≤\displaystyle\frac{\sigma^2}{n\epsilon^2}$, for any $\epsilon&gt;0$. </li>
+<li>The weak law of large numbers: For every $\epsilon&gt;0$, we have $P(|M_n-\mu|≥\epsilon)=P\left(\left|\displaystyle\frac{X_1+…+X_n}{n}-\mu\right|≥\epsilon\right)\to0$, as $n\to\infty$. </li>
+<li>For large $n$, the bulk of the distribution of $M_n$ is concentrated near $\mu$. If we consider a positive length interval $[\mu-\epsilon,\mu+\epsilon]$ around $\mu$, then there is high probability that $M_n$ will fall in that interval; as $n\to\infty$, this probability converges to $1$. If $\epsilon$ is very small, we may have to wait longer (i.e.need a larger value of $n$). </li>
 </ol>
-<h1 id="Special-Random-Variable"><a href="#Special-Random-Variable" class="headerlink" title="Special Random Variable"></a>Special Random Variable</h1><ol>
-<li>The Bernoulli random variable takes the two values $1$ and $0$. And its PMF is <script type="math/tex">p_X(x)=\left\{\begin{array}{}p&if\ x=1\\1-p&if\ x=0 \end{array}\right.</script></li>
-<li>The Binomial random variable: In $n$ times of Bernoulli experiment, $x=1$ has happened $k$ times. Its PMF is $p_X(k)=P(X=k)=\big(^n_k\big)p^k(1-p)^{n-k}$. </li>
-<li>The geometric random variable: In $n$ times of Bernoulli experiment, $x=1$ haven’t occurred until $k$th time. Its PMF is $p_X(k)=(1-p)^{k-1}p$. </li>
-<li>The Poisson random variable has PMF of $p_X(k)=e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}$. This is a binomial random variable with very small $p$ and very large $n$. $e^{-\lambda}\displaystyle\frac{\lambda^k}{k!}\approx\big(^n_k\big)p^k(1-p)^{n-k}$. $\lambda=np$</li>
-</ol>
-<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><ol>
-<li>The expectation of $X$ is a weighted average of the possible values of $X$. $E[X]=\displaystyle\sum_xxp_X(x)$. </li>
-<li>The expectationid well-defined if $\displaystyle\sum_x|x|p_X(x)&lt;\infty$. In this case, it’s known that the infinite sum converges to a finite value that is independent of the order in which the various terms are summed. </li>
-<li>The expectation is the center of gravity of the PMF. The sum of the torques from the weights to its left is equal to the sum of the torques from the weights to its right. $\displaystyle\sum_x(x-c)p_X(x)=0$. </li>
-<li>The $n$th moment as $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
-<li>The variance of $X$ is $var(X)=E[(X-E[X])^2]$. </li>
-<li>The variance provides a measure of dispersion of $X$ around its mean. </li>
-<li>Another measure of dispersion is the standard deviation of $X$, $\sigma_X=\sqrt{var(X)}$. </li>
-<li>The PMF of $(X-E[X])^2$ is not alway the same PMF of $X$. </li>
-<li>Expected value rule for functions of random variables: $E[g(X)]=\displaystyle\sum_xg(x)p_X(x)$. <br />So the variance: $var(X)=E[(X-E[x])^2]=\displaystyle\sum_x(x-E[x])^2p_X(x)$. <br />The $n$th moment: $E[X^n]=\displaystyle\sum_xx^np_X(x)$. </li>
-<li>Variance is zero if and only if all $x=E[X]$. </li>
-<li>In general, $E[g(X)]≠g(E[X])$</li>
-</ol>
-<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ol>
-<li>The expectation of a constant is itself. $E[c]=c$. </li>
-<li>Define $Y=aX+b$, $E[Y]=\displaystyle\sum_x(ax+b)p_X(x)=a\sum_xxp_X(x)+b\sum_xp_X(x)=aE[x]+b$<br />$\begin{equation}\begin{split}var(Y)&amp;=\displaystyle\sum_x(ax+b-E[aX+b])^2p_X(x)\\&amp;=\sum_x(ax+b-aE[x]-b)^2p_X(x)\\&amp;=a^2\sum_x(x-E[x])^2p_X(x)\\&amp;=a^2var(X) \end{split}\end{equation}$</li>
-<li><br />$\begin{equation}\begin{split}var(X)&amp;=\sum_x(x-E[X])^2p_X(x)\\&amp;=\sum_x(x^2-2xE[X]+(E[X])^2)p_X(x)\\&amp;=\sum_xx^2p_X(x)-2E[x]\sum_xxp_X(x)+(E[X])^2\sum_xp_X(x)\\&amp;=E[X^2]-2(E[X])^2+(E[X])^2\\&amp;=E[X^2]-(E[X])^2 \end{split}\end{equation}$</li>
-<li>For discrete uniform over $[a,b]$: <br />$p_X(k)=\left\{\begin{array}{}\displaystyle\frac{1}{b-a+1}&amp;if k=a,a+1,…b\\0&amp;otherwise \end{array}\right.$<br />$E[X]=\displaystyle\frac{a+b}{2}$, $var(X)=\displaystyle\frac{(b-a)(b-a+2)}{12}$</li>
-<li>For Bernoulli random variable: <br />$E[X]=1\cdot p+0\cdot(1-p)=p$<br />$E[X^2]=1^2\cdot p+0^2\cdot(1-p)=p$<br />$var(X)=E[X^2]-(E[X])^2=p-p^2=p(1-p)$</li>
-<li>For Poisson random variable: <br />$\begin{equation}\begin{split}E[X]&amp;=\displaystyle\sum_{k=0}^\infty ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\sum^\infty_{k=1}ke^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}e^{-\lambda}\frac{\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}e^{-\lambda}\frac{\lambda^m}{m!}\\&amp;=\lambda \end{split}\end{equation}$</li>
-<li>For Binomial random variable:  $E[X]=\displaystyle\sum_{i=1}^nE[X_i]=\sum^n_{i=1}p=np$</li>
-</ol>
-<h1 id="Other-PMF-Models"><a href="#Other-PMF-Models" class="headerlink" title="Other PMF Models"></a>Other PMF Models</h1><h2 id="Joint-PMF"><a href="#Joint-PMF" class="headerlink" title="Joint PMF"></a>Joint PMF</h2><ol>
-<li>The probability of the values that $X$ and $Y$ can take are captured by the joint PMF of $X$ and $Y$, denoted $p_{X,Y}$. $p_{X,Y}(x,y)=P(X=x,Y=y)$. </li>
-<li>$P((X,Y)\in A)=\displaystyle\sum_{(x,y)\in A}p_{X,Y}(x,y)$</li>
-<li>Sometimes, we refer to $p_X$ and $p_Y$ as the marginal PMFs. And we can calculate the marginla PMFs by using the tabular method, $p_X(x)=\displaystyle\sum_{y}p_{X,Y}(x,y)$</li>
-<li>If $Z=g(X,Y)$, $p_Z(z)=\displaystyle\sum_{\{(x,y)|g(x,y=z)\}}p_{X,Y}(x,y)$</li>
-<li>The expected value rule: $E[g(X,Y)]=\displaystyle\sum_x\sum_yg(x,y)p_{X,Y}(x,y)$</li>
-<li>$E[aX+bY+c]=aE[X]+bE[Y]+c$</li>
-</ol>
-<h2 id="Conditional-PMF"><a href="#Conditional-PMF" class="headerlink" title="Conditional PMF"></a>Conditional PMF</h2><ol>
-<li>$p_{X|A}(x)=P(X=x|A)=\displaystyle\frac{P(\{X=x\}\cap A)}{P(A)}=\frac{P(\{X=x\}\cap A)}{\sum_xP(\{X=x\}\cap A)}$</li>
-<li>$E[X|A]=\displaystyle\sum_xxp_{X|A}(x)$<br />$E[X|Y=y]=\displaystyle\sum_xxp_{X|Y}(x|y)$</li>
-<li>$p_{X|Y}(x|y)=P(X=x|Y=y)=\displaystyle\frac{p_{X,Y}(x,y)}{p_Y(y)}$</li>
-<li>$p_{X,Y}(x,y)=p_{X|Y}(x|y)\cdot p_Y(y)=p_{Y|X}(y|x)\cdot p_X(x)$</li>
-<li>Partition of sample space into disjoint events $A_1,A_2,…,A_n$. <br />$p_X(x)=\displaystyle\sum_{i=1}^nP(A_i)p_{X|A_i}(x)$<br />$p_{X|B}(x)=\displaystyle\sum^n_{i=1}P(A_i|B)p_{X|A_i\cap B}(x)$<br /> Total expectation theorem: $E[X]=\displaystyle\sum^n_{i=1}P(A_i)E[X|A_i]$<br />$E[X|B]=\displaystyle\sum^n_{i=1}P(A_i|B)E[X|A_i\cap B]$</li>
-<li>$E[g(X)|A]=\displaystyle\sum_xg(x)p_{X|A}(x)$</li>
-<li>$E[X]=\displaystyle\sum_yp_Y(y)E[X|Y=y]$</li>
-<li>Geometric random variable: <br />$E[X]=P(X=1)E[X|X=1]+P(X&gt;1)E[X|X&gt;1]$<br />$E[X|X&gt;1]=E[X-1|X-1&gt;0]+1=E[X]+1$<br />So $E[X]=p\cdot 1+(1-p)(E(x)+1)$. <br />$E[X]=\displaystyle\frac{1}{p}$<br />Similarly, we can obtain $E[X^2|X&gt;1]=E[(1+X)^2|X+1&gt;1]=E[(1+X)^2]=1+2E[X]+E[X^2]$<br />So that $E[X^2]=p\cdot 1+(1-p)(1+2E[X]+E[X^2])$ from which we obtain $E[X^2]=\displaystyle\frac{2}{p^2}-\frac{1}{p}$. <br />$var(X)=E[X^2]-(E[X])^2=\displaystyle\frac{1-p}{p^2}$</li>
-</ol>
-<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>The random variable $X$ is independent of the event $A$ if <script type="math/tex">P(X=x\ and\ A)=P(X=x)P(A)=p_X(x)P(A)</script> for all $x$. </li>
-<li><script type="math/tex; mode=display">P(X=x\ and\ A)=p_{X|A}(x)P(A)</script></li>
-<li>$p_{X|A}(x)=p_X(x)$ for all $x$</li>
-<li>Two random variables $X$ and $Y$ are independent if $p_{X,Y}(x,y)=p_X(x)p_Y(y)$, for all $x,y$. </li>
-<li>$X$ and $Y$ are said to be conditionally independent, given a positive probability event $A$, if $P(X=x,Y=y|A)=P(X=x|A)P(Y=y|A)$ or $p_{X,Y|A}(x,y)=p_{X|A}(x)p_{Y|A}(y)$, for all $x$ and $y$. </li>
-<li>If $X $ and $Y$ are independent random variables, then <br />$g(X)$ and $h(Y)$ are also independent. <br />$E[XY]=E[X]E[Y]$ and $E[g(X)h(Y)]=E[g(X)]E[h(Y)]$<br />$var(X+Y)=var(X)+var(Y)$</li>
-<li>Three  random variables $X,Y,Z$ are said to be independent if $p_{X,Y,Z}(x,y,z)=p_X(x)p_Y(y)p_Z(z)$ for all $x,y,z$</li>
-<li>If $X,Y,Z$ are independent, then <br />$f(X),g(Y),h(Z)$ are also independent and $g(X,Y)$ and $h(Z)$ are independent. <br />$var(\displaystyle\sum^n_{i=1}X_i)=\sum^n_{i=1}var(X_i)$</li>
-<li>For Binomial random variable: <br />For each toss, we let $X_i$ be the random variable which is equal to 1 if the $i$th toss comes up a head. Then $X=\displaystyle\sum^n_{i=1}X_i$<br />$var(X)=\displaystyle\sum^n_{i=1}v ar(X_i)=np(1-p)$</li>
-<li>For Poisson random variable: <br />$E[Y]=\lambda$<br />$\begin{equation}\begin{split}E[Y^2]&amp;=\displaystyle\sum^\infty_{k=1}k^2e^{-\lambda}\frac{\lambda^k}{k!}\\&amp;=\lambda\sum^\infty_{k=1}k\frac{e^{-\lambda}\lambda^{k-1}}{(k-1)!}\\&amp;=\lambda\sum^\infty_{m=0}(m+1)\frac{e^{-\lambda}\lambda^m}{m!}\\&amp;=\lambda(E[Y]+1)\\&amp;=\lambda(\lambda+1) \end{split}\end{equation}$<br />$var(Y)=E[Y^2]-(E[Y])^2=\lambda(\lambda+1)-\lambda^2=\lambda$</li>
-<li>For Bernoulli random variable: <br />Let $X=1$ is event occurred. Then $E[X]=p,var(X)=p(1-p)$<br />Sample mean $S_n=\displaystyle\frac{X_1+X_2+…+X_n}{n}$<br />$E[S_n]=\displaystyle\sum^n_{i=1}\frac{1}{n}E[X_i]=p$<br />$var(S_n)=\displaystyle\sum^n_{i=1}\frac{1}{n^2}var(X_i)=\frac{p(1-p)}{n}$<br />Not only for Bernoulli experiments, $var(S_n)=\displaystyle\frac{var(X)}{n}$ as long as $X_i$ are independent, with common mean $E[X]$ and variance $var(X)$. <br />The sample mean $S_n$ can be viewed as a good estimate of the probability of $X=1$. </li>
+<h1 id="Convergence-in-Probability"><a href="#Convergence-in-Probability" class="headerlink" title="Convergence in Probability"></a>Convergence in Probability</h1><ol>
+<li>Convergence in Probability: Let $Y_1,Y_2,…$ be a sequence of random variables (not necessarily independent), and let $a$ be a real number. We say that the sequence $Y_n$ converges to $a$ in probability, if for every $\epsilon&gt;0$, we have $\displaystyle\lim_{n\to\infty}P(|Y_n-a|≥\epsilon)=0$. </li>
+<li>The weak law of large numbers simply states that the sample mean converges in probability to the true mean $\mu$. </li>
+<li>The Chebyshev inequality implies that if all $Y_n$ have the same mean $\mu$, and $var(Y_n)$ converges to $0$, then $Y_n$ converges to $\mu$ in probability. </li>
+<li>If the random variables $Y_1,Y_2,…$ have a PMF or a PDF and converge in probability to $a$, then according to the above definition, “almost all” of the PMF or PDF of $Y_n$ is concentrated within $\epsilon$ of $a$ for large values of $n$. </li>
+<li>The definition can be rephrased as: For every $\epsilon&gt;0$, and for every $\delta&gt;0$, there exists some $n_0$ such that $P(|Y_n-a|≥\epsilon)≤\delta$, for all $n≥n_0$. </li>
+<li>If we refer to $\epsilon$ as the accuracy level, and $\delta$ as the confidence level, for any given level of accuracy and confidenc, $Y_n$ will be equal to $a$, within these levels of accuracy and confidence, provided that $n$ is large enough. </li>
 </ol>
 
       
@@ -692,7 +900,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/12/03-Independence/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/17/11-Markov-Chains/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -706,7 +914,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/12/03-Independence/" class="post-title-link" itemprop="url">03. Independence</a>
+            <a href="/2020/03/17/11-Markov-Chains/" class="post-title-link" itemprop="url">11. Markov Chains</a>
         </h1>
 
         <div class="post-meta">
@@ -716,14 +924,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-12 12:35:13" itemprop="dateCreated datePublished" datetime="2020-03-12T12:35:13+08:00">2020-03-12</time>
+              <time title="Created: 2020-03-17 15:43:13" itemprop="dateCreated datePublished" datetime="2020-03-17T15:43:13+08:00">2020-03-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:14" itemprop="dateModified" datetime="2020-08-07T19:35:14+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:35:52" itemprop="dateModified" datetime="2020-08-07T19:35:52+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -754,32 +962,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
-<li>$A$ is independent of $B$ if $P(A|B)=P(A)$. The occurrence of $B$ provides no such information and does not alter the probability that $A$ has occurred. </li>
-<li>$P(A|B)=\displaystyle\frac{P(A\cap B)}{P(B)}$. So if $A$ is independent of $B$, $P(A\cap B)=P(A|B)P(B)=P(A)P(B)$. </li>
-<li>We take $P(A\cap B)=P(A)P(B)$ as the definition of independent, because it can be used even when $P(B)=0$. </li>
-<li>For $A$ and $B$, the definition is a symmetric property. If $A$ is independent of $B$, then $B$ is independent of $A$, and we can unambiguously say that $A$ and $B$ are independent events. </li>
-<li>Disjoint sets definitely not independent. </li>
-<li>If $A$ and $B$ are independent, the same holds true for $A$ and $B^c$. </li>
+          <h1 id="Discrete-Time-Markov-Chains"><a href="#Discrete-Time-Markov-Chains" class="headerlink" title="Discrete-Time Markov Chains"></a>Discrete-Time Markov Chains</h1><ol>
+<li>The effect of the past on the future is summarized by state, which changes over time according to given probabilities. </li>
+<li>In discrete-time Markoc chains, state changes at certain discrete time instants, indexed by an integer variable $n$. </li>
+<li>At each time step $n$, the state of the chain is denoted by $X_n$ and belongs to a finite set $S$ of possible states, called the state space. <br />We assume that $S=\{1,…,m\}$, for some positive integer $m$. </li>
+<li>The Markov chain is described in terms of its transition probabilities $p_{ij}$: whenever the state happens to be $i$, there is a probability $p_{ij}$ that the next state is equal to $j$. Mathematically, $p_{ij}=P(X_{n+1}=j|X_n=i), (i,j\in S)$. </li>
+<li>The transition probabilities apply whenever state $i$ is visited, no matter what happened in the past and no matter how state $i$ was reached. <br />The Markov property requires $P(X_{n+1}=j|X_n=i,X_{n-1}=i_n-1,…,X_0=i_0)=P(X_{n+1}=j|X_n=i)=p_{ij}$, for all time $n$, all states $i,j\in S$ and all sequences $i_0,…,i_{n-1}$ of earlier states. <br />Thus, the probability law of the next state $X_{n-1}$ depends on the past only through the value of the present state $X_n$. </li>
+<li>For all states, $\displaystyle\sum^m_{j=1}p_{ij}=1, \forall i$. </li>
+<li>The probability $p_{ii}$ is allowed to be positive, in which case it’s possible for the next state to be the same as the current one. Even though the state doesn’t change, we still view this as a state stransition of a special type (a “self-transition”). </li>
+<li>All of the elements of a Markov chain model can be encoded in a transition probability matrix. </li>
+<li>It’s also helpful to lay out the model in the socalled transition probability graph, whose nodes are the states and whose arcs are the possible transitions. </li>
+<li>It’s possible to use a Markov chain model even if there is a dependence on the states at several past days. The general idea is to introduce some additional states which encode relevant information from preceding periods. </li>
+<li>$P(X_0=i_0,X_1=i_1,…,X_n=i_n)=P(X_0=0)p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$<br />$P(X_1=i_1,…,X_n=i_n|X_0=i_0)=p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$</li>
+<li>Graphically, a state sequence can be identified with a sequence of arcs in the transition probability graph, and the probability of such a path (given the initial state) is given by the product of the probabilities associated with the arcs traversed by the path. </li>
 </ol>
-<h1 id="Conditional-Independence"><a href="#Conditional-Independence" class="headerlink" title="Conditional Independence"></a>Conditional Independence</h1><ol>
-<li>Given an event $C$, the events $A$ and $B$ are called conditionally independent if $P(A\cap B|C)=P(A|C)P(B|C)$. </li>
-<li>$\begin{equation}\begin{split}P(A\cap B|C)&amp;=\displaystyle\frac{P(A\cap B\cap C)}{P(C)}\\&amp;=\frac{P(C)\frac{P(B\cap C)}{P(C)}\frac{P(A\cap B\cap C)}{P(B\cap C)}}{P(C)}\\&amp;=\frac{P(C)P(B|C)P(A|B\cap C)}{P(C)}\\&amp;=P(B|C)P(A|B\cap C)\end{split}\end{equation}$</li>
-<li>Also $P(A\cap B|C)=P(A|C)P(B|C)$. So we see the conditional independence is the same as the condition $P(A|B\cap C)=P(A|C)$</li>
-<li>This relation states that is $C$ is known to have occurred, the additional knowledge that $B$ also occurred does not change the probability of $A$. </li>
-<li>Independence of two events $A$ and $B$ with respect to the unconditional probability law does not imply conditional independence and vice versa. </li>
+<h1 id="n-step-Transition-Probabilities"><a href="#n-step-Transition-Probabilities" class="headerlink" title="n-step Transition Probabilities"></a>n-step Transition Probabilities</h1><ol>
+<li>$n$-step transition probabilities are probabilities that describe the likelihood of the state at some  future time, conditioned on the current state. </li>
+<li>This is defined by $r_{ij}(n)=P(X_n=j|X_0=i)$. This is the probability that the state after $n$ time periods will be $j$, given that the current state is $i$. </li>
+<li>Chapman_Kolmogorov equation: $r_{ij}(n)=\displaystyle\sum^m_{k=1}r_{ik}(n-1)p_{kj}$, for $n&gt;1$ and all $i,j$. Start with $r_{ij}(1)=p_{ij}$. <br />Namely the sum of the product of the probability of $n-1$ steps later at state $k$ and the probability of from $k$ to $j$. <br />The trick is that once we condition on $X_{n-1}=k$, the conditioning on $X_0=i$ does not affect the probability $p_{kj}$ of reaching $j$ at the next step. </li>
+<li>We can view $r_{ij}(n)$  as the element at the $i$th row and $j$th column of $n$-step transition probability matrix. </li>
+<li>The matrix of $n$-step transition probabilities $r_{ij}(n)$ is obtained by multiplying the $i$th row of matrix of $(n-1)$-step transition probability $r_{ik}(n-1)$, with the $j$th column of one-step transition probability matrix $p_{kj}$. <br />Thus, the $n$-step transition probability matrix is the $n$th power of the transition probability matrix. </li>
 </ol>
-<h1 id="Independence-of-a-Collection-of-Events"><a href="#Independence-of-a-Collection-of-Events" class="headerlink" title="Independence of a Collection of Events"></a>Independence of a Collection of Events</h1><ol>
-<li>Events $A_1,…,A_n$ are independent if $\displaystyle P(\bigcap_{i\in S}A_i)=\prod_{i\in S}P(A_i)$, for every subset $S$ of $\{1,2,…,n\}$</li>
-<li>Distinguish from pairwise independence which is defined as any two events are independent. </li>
-<li>We can substitute any set with its complement with the independence true. </li>
+<h1 id="Recurrent-and-Transient"><a href="#Recurrent-and-Transient" class="headerlink" title="Recurrent and Transient"></a>Recurrent and Transient</h1><ol>
+<li>A state $j$ is accessible from a state $i$ if for some $n$, the $n$-step transition probability $r_{ij}(n)$ is positive. </li>
+<li>Let $A(i)$ be the set of states that are accessible from $i$. </li>
+<li>We say that $i$ is recurrent if for every $j$ that is accessible from $i$, $i$ is also accessible from $j$. Namely for all $j$ that belong to $A(i)$ , we have that $i$ belongs to $A(j)$. </li>
+<li>From any future state, there is always som probability of returning to $i$ and , given enough time, this is certain to happen. </li>
+<li>If a recurrent state is visited once, it’s certain to be revisited an infinite number of times. </li>
+<li>If a state is not recurrent, then it is called transient. Thus, a state $i$ is transient if there is a stete $j\in A(i)$ such that $i$ is not accessible from $j$. <br />After each visit to state $i$, there is positive probability that the state enters such a $j$. Given enough time, this will happen, and state $i$ cannot be visited after that. Thus, a transient state will only be visited a finite number of times. </li>
+<li>Transient or recurrent is determined by the arcs of the transition probability graph (wheter $p_{ij}&gt;0$) and not by the numerical values of the $p_{ij}$. </li>
+<li>If $i$ is a recurrent state, the set of states $A(i)$ that are accessible from $i$ form a recurrent class, meaning that states in $A(i)$ are all accessible from each other, and no state outside $A(i)$ is accessible from them. <br />For a recurrent state $i$, we have $A(i)=A(j)$ for all $j$ that belong to $A(i)$. </li>
+<li>At least one recurrent state must be accessible from any given transient state. <br />A recurrent state is accessible from all states in its class, but is not accessible from recurrent states in other classes. <br />A transient state is not accessible from any recurrent state. </li>
+<li>There must exist at least one recurrent state and hence at least one class. </li>
+<li>A Markov chain can be decomposed into one or more recurrent classes, plus possibly some transient states. </li>
+<li>Once the state enters (or starts in) a class of recurrent states, it stays within that class; since all states in the class are accessible from each other, all states in the class will be visited an infinite number of times. </li>
+<li>If the initial state is transient, then the state trajectory contains an initial portion consisting of transient states and a final portion consisting of recurrent states from the same class. </li>
 </ol>
-<h1 id="Independent-Trials-and-Binomial-Probabilities"><a href="#Independent-Trials-and-Binomial-Probabilities" class="headerlink" title="Independent Trials and Binomial Probabilities"></a>Independent Trials and Binomial Probabilities</h1><ol>
-<li>If an experiment involves a sequence of independent but identical stages, we say that we have a sequence of independent trials. </li>
-<li>In the special case where there are only two possible results at each stage, we say that we have a sequence of independent Bernoulli trials. </li>
-<li>Two possible results $A$ and $B$, and the probability of $A$ is $p$. In $n$ experiments, the probability that $A$ occurs $k$ times is $p(k)=\big(^n_k\big)p^k(1-p)^{n-k}$. <br />$\big(^n_k\big)=\displaystyle\frac{n!}{k!\cdot(n-k)!}$</li>
-<li>The sum of probabilities of each possible outcomes should be $1$. <br />Binomial formula: $\displaystyle\sum^n_{k=0}\big(^n_k\big)p^k(1-p)^{n-k}=1$<br />When $p=\displaystyle\frac{1}{2}$, $\displaystyle\sum^n_{k=0}\big(^n_k\big)=2^2$</li>
-<li>A similar coefficient is the multinomial coefficient: <br />$\begin{equation}\begin{split}\big(^{     n}_{n_1n_2…n_r}\big)&amp;=\big(^n_{n_1}\big)\big(^{n-n_1}_{  n_2}\big)\big(^{n-n_1-n_2}_{    n_3})…\big(^{n-n_1-…-n_{r-1}}_{          n_r})\\&amp;=\displaystyle\frac{n!}{n_1!(n-n_1)!}\frac{(n-n_1)!}{n_2!(n-n_1-n_2!)}…\frac{(n-n_1-…-n_{r-1})!}{n_r!(n-n_1-…-n_r)!}\\&amp;=\frac{n!}{n_1!n_2!…n_r!}\end{split}\end{equation}$</li>
+<h1 id="Periodicity"><a href="#Periodicity" class="headerlink" title="Periodicity"></a>Periodicity</h1><ol>
+<li>A recurrent class is said to be periodic if its states can be grouped in $d&gt;1$ disjoint subsets $S_1,…,S_d$ so that all transitions from one subset lead to the next subset. <br />If $i\in S$ and $p_{ij}&gt;0$, then <script type="math/tex">\left\{\begin{array}{}j\in S_{k+1} & if\ k=1,…,d-1\\j\in S_1&if\ k=d \end{array}\right.</script>. </li>
+<li>A recurrent class that is not periodic is said to be aperiodic. </li>
+<li>In a periodic recurrent class, we move through that sequence of subsets in order, and after $d$ steps, we end up in the same subset. </li>
+<li>Given a periodic recurrent class, a positive time $n$, and a state $i$ in the class, there must exist one or more states $j$ for which $r_{ij}(n)=0$. <br />Starting from $i$, only one of the sets is possible at time $n$. </li>
+<li>A way to verify aperiodicity of a given recurrent class $R$, is to check whether there is a special time $n≥1$ and a special state $i\in R$ from which all states in $R$ can be reached in $n$ steps, i.e. $r_{ij}(n)&gt;0$ for all $j\in R$. </li>
+<li>If a recurrent class $R$ is aperiodic, then there exists a time $n$ such that $r_{ij}(n)&gt;0$ for every $i$ and $j$ in $R$. </li>
+</ol>
+<h1 id="Steady-State-Behavior"><a href="#Steady-State-Behavior" class="headerlink" title="Steady-State Behavior"></a>Steady-State Behavior</h1><ol>
+<li>If there are two or more classes of recurrent states, it is clear that the limiting values of the $r_{ij}(n)$ must depend on the initial state (the possibility of visiting $j$ far into the future depends on whether $j$ is in the same class as the initial state $i$). </li>
+<li>Even for chains with a single recurrent class, the $r_{ij}(n)$ may fail to converge. </li>
+<li>The recurrent class is periodic, and for such a class, it can be seen that the $r_{ij}(n)$ generically oscillate. </li>
+<li>For every state $j$, the probability $r_{ij}(n)$ of being at state $j$ approaches a limiting value that is independent of the initial state $i$. This limiting value, denoted by $\pi_j$, has the interpretation $\pi_j\approx P(X_n=j)$, when $n$ is large, and is called the steady-state probability of $j$. </li>
+<li>For a Markov chain with a single recurrent class, which is aperiodic, <br />&emsp;for each $j$, we have $\displaystyle\lim_{i\to\infty}r_{ij}(n)=\pi_j$, for all $i$; <br />&emsp;The $\pi_j$ are unique solution to the system of equation <script type="math/tex">\displaystyle\left\{\begin{array}{}the\ balance\ equations:& \pi_j=\sum^n_{k=1}\pi_kp_{kj}&j=1,…,m\\the\ normalization\ equation:&1=\sum^m_{k=1}\pi_k \end{array}\right.</script><br />&emsp;We have <script type="math/tex">\left\{\begin{array}{}\pi_j=0 &for\ all\ transient\ states\ j\\\pi_j>0&for\ all\ recurrent\ states\ j\end{array}\right.</script>. </li>
+<li>The steady-state probabilities $\pi_j$ sum to $1$ and form a probability distribution on the state space, called the stationary distribution of the chain. <br />If the initial state is chosen according to this distribution, i.e. if $P(X_0=j)=\pi_j, j=1,…,m$, then, using the total probability theorem, we have $P(X_1=j)=\displaystyle\sum^m_{k=1}P(X_0=k)p_{kj}=\sum^m_{k=1}\pi_kp_{kj}=\pi_j$. <br />Similarly $P(X_n=j)=\pi_j$, for all $n$ and $j$. </li>
+</ol>
+<h1 id="Long-Term-Frequency-Interpretations"><a href="#Long-Term-Frequency-Interpretations" class="headerlink" title="Long-Term Frequency Interpretations"></a>Long-Term Frequency Interpretations</h1><ol>
+<li>Two way to view the long-term expected value: <br />&emsp;One way is to view it as the expected value of the number on a randomly chosen day far into the future. <br />&emsp;Another way is to calculate the total expected value of the number in $n$ days, where $n$ is very large, and divide it by $n$. </li>
+<li>For a Markov chain with a single class which is aperiodic, the steady-state probabilities $\pi_j$ satisfy $\pi_j=\displaystyle\lim_{n\to\infty}\frac{v_{ij}(n)}{n}$, where $v_{ij}(n)$ is the expected value of the number of visits to state $j$ within the first $n$ transitions, starting from state $i$. </li>
+<li>$\pi_j$ is the long-term expected fraction of time that the state is equal to $j$. Each time that state $j$ is visited, there is probability $p_{jk}$ that the next transition takes up to state $k$. We conclude that $\pi_kp_{jk}$ can be viewed as the long-term expected fraction of transitions that move the state from $j$ to $k$. </li>
+<li>Whenever we carry out a probabilistic experiment and generate a trajectory of the Markov chain over an infinite time horizon, the observed long-term frequency with which state $j$ is visited will be exactly equal to $\pi_j$, and the observed long-term frequency of transitions from $j$ to $k$ will be exactly equal to $\pi_jp_{jk}$. </li>
+<li>For $n$ transitions of a Markov chain with a single class which is aperiodic, let $q_{jk}(n)$ be the expected number of such transitions that take the state from $j$ to $k$. Then regardless of the initial state, we have $\displaystyle\lim_{n\to\infty}\frac{q_{jk}(n)}{n}=\pi_jp_{jk}$. </li>
+<li>Now we can see that the balance equation expresses the fact that the expected frequency $\pi_j$ of visits to $j$ is equal to the sum of the expected frequencies $\pi_kp_{kj}$ of the transition that lead to $j$. </li>
+</ol>
+<h1 id="Birth-Death-Process"><a href="#Birth-Death-Process" class="headerlink" title="Birth-Death Process"></a>Birth-Death Process</h1><ol>
+<li>A birth-death process is a Markov chain in which the states are linearly arranged and transitions can only occur to a neighboring state, or else leave the state unchanged. <br />$b_i=P(X_{n+1}=i+1|X_n=i)$, (“birth” probability at state $i$), <br />$d_i=P(X_{n+1}=i-1|X_n=1)$, (“death” probability at state $i$). </li>
+<li>In any trajectory of the Markov chain, a transition from $i$ to $i+1$ has to be followed by a transition from $i+1$ to $i$, before another transition from $i$ to $i+1$ can occur. </li>
+<li>The expected frequency of transitions from $i$ to $i+1$, which is $\pi_ib_i$, must be equal to the expected frequency of transitions from $i+1$ to $i$, which is $\pi_{i+1}d_{i+1}$. This leads to the local balance equations $\pi_ib_i=\pi_{i+1}d_{i+1}$, $i=0,1,…,m-1$. </li>
+<li>Using the local balance equations, we obtain $\pi_i=\pi_0\displaystyle\frac{b_0b_2…b_{i-1}}{d_1d_2…d_i}$, $i=1,…,m$. </li>
+<li>If $b_i=p,d_i=q$ for all $i$, <script type="math/tex">\rho=\displaystyle\frac{p}{q}=load\ factor≠1</script>, there are $m$ states. <br />$\pi_{i+1}=\pi_i\displaystyle\frac{p}q=\pi_i\rho$. So $\pi_i=\pi_0\rho^i$, $i=0,1,…,m$. <br />$1=\displaystyle\sum^m_{i=0}\pi_i=\pi_0(1+\rho+…+\rho^m)$. So $\pi_0=\displaystyle\frac{1-\rho}{1-\rho^{m+1}}$<br />If $p<q$, $\rho<1$ and $m\to\infty$. Then $\pi_0=1-p$ $\pi_i=(1-\rho)\rho^i$, $E[X_n]=\displaystyle\frac{\rho}{1-\rho}$. <br />If $p&gt;q$, $\rho&gt;1$ and $m\to\infty$. Then $\pi_i\to0$, for all $i$. </li>
 </ol>
 
       
@@ -800,7 +1048,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/10/02-Conditioning-and-Bayes-rule/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/10-Poisson-Porcess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -814,7 +1062,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/10/02-Conditioning-and-Bayes-rule/" class="post-title-link" itemprop="url">02. Conditioning and Bayes' rule</a>
+            <a href="/2020/03/16/10-Poisson-Porcess/" class="post-title-link" itemprop="url">10. Poisson Porcess</a>
         </h1>
 
         <div class="post-meta">
@@ -824,14 +1072,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-10 09:11:31" itemprop="dateCreated datePublished" datetime="2020-03-10T09:11:31+08:00">2020-03-10</time>
+              <time title="Created: 2020-03-16 23:41:53" itemprop="dateCreated datePublished" datetime="2020-03-16T23:41:53+08:00">2020-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:33:15" itemprop="dateModified" datetime="2020-08-07T19:33:15+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:58:54" itemprop="dateModified" datetime="2020-08-07T19:58:54+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -862,23 +1110,58 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Conditional-Probability"><a href="#Conditional-Probability" class="headerlink" title="Conditional Probability"></a>Conditional Probability</h1><ol>
-<li>$P(A|B)$ means the conditional probability of $A$ given $B$. </li>
-<li>$P(A|B)=\displaystyle\frac{P(A\cap B)}{P(B)}$, if $P(B)&gt;0$. If $P(B)=0$, the probability $P(A|B)$ is undefined. </li>
-<li>Three probability laws: <br />&emsp;$P(A|B)&gt;0$<br />&emsp;$P(\Omega|B)=1$<br />&emsp;$P(A_1\cup A_2|B)=P(A_1|B)+P(A_2|B)$ if $A_1$ and $A_2$ are two disjoint sets. </li>
-<li>For any two sets $A$ and $C$, $P(A\cup C|B)≤P(A|B)+P(C|B)$</li>
-<li>$P(B|B)=\displaystyle\frac{P(B)}{P(B)}=1$</li>
-<li>We might discard all possible outcomes outside $B$ and treat the conditional probabilities as a probability law defined on the new universe $B$. </li>
-<li>Often $P(A\cap B)$ is not easy to calculate directly. But we can calculate $P(A|B)$ first and then use $P(A\cap B)=P(B)P(A|B)$ to get the answer. </li>
-<li>Calculate various probabilities in conjunction with a tree-based sequential description of an experiment: <br />&emsp;First set up the tree so that an event of interest is associated with a leaf. <br />&emsp;Every node represents the probability of an event which is the conjunction of all passed events from root to it. <br />&emsp;Every path is the conditional probability of the next event given the conjunction of all the afore-passed events. </li>
-<li>Multiplication rule: <br /><script type="math/tex">\begin{equation}\begin{split}P(\bigcap^n_{i=1}A_i)&=\displaystyle P(A_1)\frac{P(A_1\cap A_2)}{P(A_1)}\frac{P(A_1\cap A_2\cap A_3)}{P(A_1\cap A_2)}…\frac{P(\bigcap^n_{i=1}A_i)}{P(\bigcap^{n-1}_{i=1}A_i)} \\&=P(A_1)P(A_2|A_1)P(A_3|A_1\cap A_2)…P(A_n|\bigcap^{n-1}_{i=1}A_i)\end{split}\end{equation}</script></li>
+          <h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><ol>
+<li>The Poisson process is a continuous-time analog of the Bernoulli process. </li>
+<li><script type="math/tex">\lambda</script> is the rate of one Poisson process. Namely the rate of arrivals per unit time. </li>
+<li>We define <script type="math/tex">P(k,\tau)=P(there\ are\ exactly\ k\ arrivals\ during\ an\ interval\ of\ length\ \tau)</script></li>
+<li>This probability is the same for all intervals of the same length <script type="math/tex">\tau</script>. Namely, arrivals are equally likely at all times. </li>
+<li>The number of arrivals during a particular interval is independent of the history of arrivals outside this interval. </li>
+<li><script type="math/tex">P(0,\tau)=1-\lambda\tau+o(\tau)</script><br /><script type="math/tex">P(1,\tau)=\lambda\tau+o_1(\tau)</script><br /><script type="math/tex">P(k,\tau)=o_k(\tau)\ \ (k>1)</script>. <br /><script type="math/tex">\displaystyle\lim_{\tau\to0}\frac{o(\tau)}{\tau}=0</script>, <script type="math/tex">\displaystyle\lim_{\tau\to0}\frac{o_k(\tau)}{\tau}</script>. </li>
+<li>The <script type="math/tex">o(\tau)</script> and <script type="math/tex">o_k(\tau)</script> are meant to be negligible in comparison to <script type="math/tex">\tau</script>, when the interaval length <script type="math/tex">\tau</script> is very small. </li>
 </ol>
-<h1 id="Total-Probability-Theorem-and-Bayes’-Rule"><a href="#Total-Probability-Theorem-and-Bayes’-Rule" class="headerlink" title="Total Probability Theorem and Bayes’ Rule"></a>Total Probability Theorem and Bayes’ Rule</h1><ol>
-<li>A set of sets is a partition of the sample space if and only if each possible outcomes is included in exactly one of the sets. </li>
-<li>Total probability theorem: Let $A_1,…,A_2$ be disjoint events that form a partion of the sample space and assume that $P(A_i)&gt;0$, for all $i$. <br />For any event $B$, <br /><script type="math/tex">\begin{equation}\begin{split}P(B)&=P(\Omega\cap B)=P((A_1\cup A_2\cup…\cup A_n)\cap B)\\&=P((A_1\cap B)\cup(A_2\cap B)\cup…\cup(A_n\cap B))\\&=P(A_1\cap B)+P(A_2\cap B)+…+P(A_n\cap B)\\&=P(A_1)P(B|A_1)+P(A_2)P(B|A_2)+…+P(A_n)P(B|A_n) \end{split}\end{equation}</script></li>
-<li>We are partition the sample space into a number of scenarios. Then the probability that $B$ occurs is a weighted average of its conditional probability under each scenarios, where each scenario is weighted according to its unconditional probability. </li>
-<li>Bayes’ rule: The condition of Bayes’ rule is the same as total probability theorem<br />Since $P(A_i\cap B)=P(B)P(A_i|B)=P(A_i)P(B|A_i)$<br /><script type="math/tex">\begin{equation}\begin{split}P(A_i|B)&=\displaystyle\frac{P(A_i)P(B|A_i)}{P(B)}\ \ \ \ \ \ \ \ Plug\ in\ total\ probability\ theorem\\&=\frac{P(A_i)P(B|A_i)}{P(A_1)P(B|A_1)+…+P(A_n)P(B|A_n)} \end{split}\end{equation}</script></li>
-<li>Bayes’ rule is often used for inference. We observe the effect, and we wish to infer the cause.<br />The events $A_i$’s are associated with the causes and the event $B$ represents the effect. <br />The probability $P(B|A_i)$ that the effect will be observed when the cause is represent amounts to a probabilistic model of the cause-effect relation. <br />The probability $P(A_i|B)$ is the probability that the cause $A_i$ is present when the effect has been observed. <br />We refer $P(A_i|B)$ as the posterior probability of event $A_i$ given the information. $P(A_i)$ is called the prior probability. </li>
+<h1 id="Number-of-Arrivals-in-an-Interval"><a href="#Number-of-Arrivals-in-an-Interval" class="headerlink" title="Number of Arrivals in an Interval"></a>Number of Arrivals in an Interval</h1><ol>
+<li>First fix the time interval of length <script type="math/tex">\tau</script> and partition it into <script type="math/tex">\displaystyle\frac{\tau}{\delta}</script> periods of length <script type="math/tex">\delta</script>, where <script type="math/tex">\delta</script> is a very small number. </li>
+<li>Because <script type="math/tex">P(k,\tau)=o_k(\tau)</script> when <script type="math/tex">k≥2</script>, the probability of more than two arrivals during any period can be neglected. </li>
+<li>Each period has one arrival with probability approximately equal to <script type="math/tex">\lambda\delta</script> and is independent of each other. </li>
+<li>Therefore, the process can be approximated by a Bernoulli process with parameter <script type="math/tex">\lambda\delta</script>. </li>
+<li>Hence, the PMF is <script type="math/tex">P(k,\tau)=e^{-\lambda\tau}\displaystyle\frac{(\lambda\tau)^k}{k!}</script>, the expected number of arrivals is <script type="math/tex">E[N\tau]=np=\lambda\tau</script> and the variance is <script type="math/tex">var(N_\tau)=\lambda\tau</script>. <script type="math/tex">N_\tau</script> denotes the number of arrivals during a time interval of length <script type="math/tex">\tau</script>. </li>
+<li>The probability law for the time <script type="math/tex">T</script> of the first arrival, assuming that the process starts at time zero: <br /><script type="math/tex">F_T(t)=P(T≤t)=1-P(T>t)=1-P(0,t)=1-e^{-\lambda t}</script>. </li>
+<li>The PDF formula: <script type="math/tex">f_T(t)=\lambda e^{-\lambda t}</script> <script type="math/tex">(t≥0)</script>. </li>
+<li>The probability of <script type="math/tex">k</script> arrivals during a set of times of total length <script type="math/tex">\tau</script> is always given by <script type="math/tex">P(k,\tau)</script>, even if that set is not an interval. </li>
+</ol>
+<h1 id="Independence-and-Memorylessness"><a href="#Independence-and-Memorylessness" class="headerlink" title="Independence and Memorylessness"></a>Independence and Memorylessness</h1><ol>
+<li>For any given time <script type="math/tex">t>0</script>, the history of the process after time <script type="math/tex">t</script> is also a Poisson process, and is independent from the history of the process until <script type="math/tex">t</script>. </li>
+<li>Let <script type="math/tex">t</script> be a given time and let <script type="math/tex">\overline{T}</script> be the time of the first arrival after time <script type="math/tex">t</script>. Then <script type="math/tex">\overline{T}-t</script> has an exponential distribution with parameter <script type="math/tex">\lambda</script>, and is independent of the history of the process until time <script type="math/tex">t</script>. </li>
+</ol>
+<h1 id="The-kth-Arrival-Time"><a href="#The-kth-Arrival-Time" class="headerlink" title="The kth Arrival Time"></a>The kth Arrival Time</h1><ol>
+<li>The definition is the same as in the Bernoulli process. </li>
+<li>$E[Y_k]=E[T_1]+…+E[T_k]=\displaystyle\frac{k}{\lambda}$</li>
+<li>$var(Y_k)=var(T_1)+…+var(T_k)=\displaystyle\frac{k}{\lambda^2}$</li>
+<li>The PDF of <script type="math/tex">Y_k</script> (Erlang PDF of order <script type="math/tex">k</script>) is <script type="math/tex">f_{Y_k}(y)=\displaystyle\frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k-1)!}\ \ (y≥0)</script>. </li>
+<li>For a small <script type="math/tex">\delta</script>, the product <script type="math/tex">\delta\cdot f_{Y_k}(y)</script> approximates the probability that the <script type="math/tex">k</script>th arrival occurs between times <script type="math/tex">y</script> and <script type="math/tex">y+\delta</script>. </li>
+<li>When <script type="math/tex">\delta</script> is very small, the probability of more thant one arrival during the interval <script type="math/tex">[y,y+\delta]</script> is negligible. Thus the <script type="math/tex">k</script>th arrival occurs between <script type="math/tex">y</script> and <script type="math/tex">y+\delta</script> if and only if: <br />&emsp;There is an arrival during the interval <script type="math/tex">[y,y+\delta]</script><br />&emsp;There are exactly <script type="math/tex">k-1</script> arrivals before time <script type="math/tex">y</script>. <br /><script type="math/tex">\delta f_{Y_k}(y)\approx \lambda\delta \cdot P(k-1,y)=\lambda\delta\displaystyle\frac{\lambda^{k-1}y^{k-1}e^{-\lambda y}}{(k-1)!}</script><br />So <script type="math/tex">f_{Y_k}(y)=\displaystyle\frac{\lambda^ky^{k-1}e^{-\lambda y}}{(k-1)!}</script></li>
+<li>CDF: <script type="math/tex">F_{Y_k}(y)=P(Y_k≤y)=\displaystyle\sum^\infty_{n=k}P(n,y)=1-\sum^{k-1}_{n=0}P(n,y)=1-\sum^{k-1}_{n=0}\frac{(\lambda y)^ne^{-\lambda y}}{n!}</script></li>
+</ol>
+<h1 id="Splitting-and-Merging"><a href="#Splitting-and-Merging" class="headerlink" title="Splitting and Merging"></a>Splitting and Merging</h1><ol>
+<li>As in the Bernoulli process, start with one Poisson process with rate <script type="math/tex">\lambda</script> and split its arrivals at rate <script type="math/tex">q</script> into two independent new processes with new rates <script type="math/tex">\lambda q</script> and <script type="math/tex">\lambda(1-q)</script>. </li>
+<li>Alternatively, start with two Poisson processes with rates <script type="math/tex">\lambda_1</script> and <script type="math/tex">\lambda_2</script> and merge them into one process with rate <script type="math/tex">\lambda_1+\lambda_2</script>. <br/><script type="math/tex">P(0\ arrivals\ in\ the\ merged\ process)\approx(1-\lambda_1\delta)(1-\lambda_2\delta)\approx1-(\lambda_1+\lambda_2)\delta</script><br /><script type="math/tex">P(1\ arrivals\ in\ the\ merged\ process)\approx\lambda_1\delta(1-\lambda_2\delta)+(1-\lambda_1\delta)\lambda_2\delta\approx(\lambda_1+\lambda_2)\delta</script></li>
+<li>Any particular arrival of the merged process has probability <script type="math/tex">\displaystyle\frac{\lambda_1}{\lambda_1+\lambda_2}</script> of originating from the first process, and probability <script type="math/tex">\displaystyle\frac{\lambda_2}{\lambda_1+\lambda_2}</script> of originating from the second process. <br /><script type="math/tex">P(1\ arrival\ of\ first\ process|1\ arrival)=\displaystyle\frac{P(1\ arrival\ of\ first\ process)}{P(1\ arrival)}\approx\frac{\lambda_1\delta}{(\lambda_1+\lambda_2)\delta}=\frac{\lambda_1}{\lambda_1+\lambda+2}</script></li>
+</ol>
+<h1 id="Sums-of-Random-Variables"><a href="#Sums-of-Random-Variables" class="headerlink" title="Sums of Random Variables"></a>Sums of Random Variables</h1><ol>
+<li>Let <script type="math/tex">N,X_1,X_2,…</script> be independent random variables. <script type="math/tex">N</script> takes nonnegative integer values. Let <script type="math/tex">Y=X_1+…+X_N</script>. <script type="math/tex">Y=0</script> when <script type="math/tex">N=0</script>. </li>
+<li>If <script type="math/tex">X_i</script> is Bernoulli with parameter <script type="math/tex">p</script>, and <script type="math/tex">N</script> is binomial with parameters <script type="math/tex">m</script> and <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is binomial with parameters <script type="math/tex">m</script> and <script type="math/tex">pq</script>. </li>
+<li>If <script type="math/tex">X_i</script> is Bernoulli with parameter <script type="math/tex">p</script> and <script type="math/tex">N</script> is Poisson with parameter <script type="math/tex">\lambda</script>, then <script type="math/tex">Y</script> is Poisson with parameter <script type="math/tex">\lambda p</script>. </li>
+<li>If <script type="math/tex">X_i</script> is geometric with parameter <script type="math/tex">p</script>, and <script type="math/tex">N</script> is geometric with parameter <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is geometirc with parametric <script type="math/tex">pq</script>. </li>
+<li>If <script type="math/tex">X_i</script> is exponential with parameter <script type="math/tex">\lambda</script>, and <script type="math/tex">N</script> is geometric with parameter <script type="math/tex">q</script>, then <script type="math/tex">Y</script> is exponential with parameter <script type="math/tex">\lambda q</script>. </li>
+<li>If <script type="math/tex">N_t</script> denotes the number of arrivals of a Poisson process with parameter <script type="math/tex">\lambda</script> within an interval of length <script type="math/tex">t</script>, and <script type="math/tex">T</script> is an interval with length that is exponentially distributed with parameter <script type="math/tex">\upsilon</script> and is independent of the Poisson process, then <script type="math/tex">N_T+1</script> is geometrically distributed with parameter <script type="math/tex">\displaystyle\frac{\upsilon}{\lambda+\upsilon}</script>. </li>
+<li>The sum of a large number of independent arrival processes (not necessarily Poisson) can be approximated by a Poisson process with arrival rate equal to the sum of the individual arrival rates. <br />The component processes must have a small rate relative to the total, so that none of them imposes its probabilistic character on the total arrival process. </li>
+</ol>
+<h1 id="Random-Incidence-Paradox"><a href="#Random-Incidence-Paradox" class="headerlink" title="Random Incidence Paradox"></a>Random Incidence Paradox</h1><ol>
+<li><script type="math/tex">t^*</script> is a fixed time instance with at least one prior arrival. <script type="math/tex">L</script> is the inter arrival interval that contains <script type="math/tex">t^*</script>. </li>
+<li>Let <script type="math/tex">L</script> be <script type="math/tex">[U,V]</script>. Split <script type="math/tex">L</script> into two parts <script type="math/tex">L=(t^*-U)+(V-t^*)</script>. </li>
+<li><script type="math/tex">t^*-U</script> is determined by the past history of the process before <script type="math/tex">t^*</script> while <script type="math/tex">V-t^*</script> is determined by the future of the process after time <script type="math/tex">t^*</script>. </li>
+<li>These two are independent and both are exponential with parameter <script type="math/tex">\lambda</script>. So <script type="math/tex">L</script> is the sum of two independent exponential random variables with parameter <script type="math/tex">\lambda</script>, i.e. Erlang of order two, with mean <script type="math/tex">\displaystyle\frac{2}{\lambda}</script>. </li>
+<li>This is not right, the mean should be <script type="math/tex">\displaystyle\frac{1}{\lambda}</script>. The problem is that when we insert that time instance <script type="math/tex">t^*</script> into time line, it is more likely to fall into larger intervals rather than  smaller intervals. So the expectation of the interval is larger. </li>
 </ol>
 
       
@@ -899,7 +1182,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/04/01-Probability-Models-and-Axioms/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/09-Bernoulli-Process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -913,7 +1196,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/04/01-Probability-Models-and-Axioms/" class="post-title-link" itemprop="url">01. Probability Models and Axioms</a>
+            <a href="/2020/03/16/09-Bernoulli-Process/" class="post-title-link" itemprop="url">09. Bernoulli Process</a>
         </h1>
 
         <div class="post-meta">
@@ -923,14 +1206,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-04 11:48:19" itemprop="dateCreated datePublished" datetime="2020-03-04T11:48:19+08:00">2020-03-04</time>
+              <time title="Created: 2020-03-16 20:51:19" itemprop="dateCreated datePublished" datetime="2020-03-16T20:51:19+08:00">2020-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:53" itemprop="dateModified" datetime="2020-08-07T19:34:53+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:34:39" itemprop="dateModified" datetime="2020-08-07T19:34:39+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -961,172 +1244,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h1><ol>
-<li>A <code>set</code> is a collection of objects which are the <code>elements of the set</code>. </li>
-<li>If <script type="math/tex">S</script> is a set and <script type="math/tex">x</script> is an element of <script type="math/tex">S</script>, we write <script type="math/tex">x\in S</script>. If <script type="math/tex">x</script> is not an element of <script type="math/tex">S</script>, we write <script type="math/tex">x\notin S</script>. </li>
-<li><code>Empty set</code>: a set has no elements, denoted by <script type="math/tex">\emptyset</script>. </li>
-<li>If <script type="math/tex">S</script> contains a finite number of elements, we write it as a list of the elements in braces: <script type="math/tex">S=\{x_1,x_2,…,x_n\}</script><br />If <script type="math/tex">S</script> contains infinitely many elements which can be enumerated in a list, we write <script type="math/tex">S=\{x_1,x_2,…\}</script>. <script type="math/tex">S</script> is <code>countably infinite</code>. <br />If all <script type="math/tex">x</script>‘s in <script type="math/tex">S</script> have a certain property <script type="math/tex">P</script>, we write <script type="math/tex">S=\{x|x\ satisfies\ P\}</script>. <script type="math/tex">|</script> is to be read as “such that”. In this case, <script type="math/tex">x</script> take a continuous range of values, and cannot be written down in a list. So <script type="math/tex">S</script> is called uncountable. </li>
-<li>If every element of <script type="math/tex">S</script> is also an element of <script type="math/tex">T</script>, <script type="math/tex">S</script> is a <code>subset</code> of <script type="math/tex">T</script>, <script type="math/tex">S\subset T</script>. </li>
-<li>If <script type="math/tex">S\subset T</script> and <script type="math/tex">T\subset S</script>, two sets are <code>equal</code>, <script type="math/tex">S=T</script>. </li>
-<li><code>Universal set</code> contains all objects that could conceivably be of interest in a particular context. It’s usually denoted by <script type="math/tex">\Omega</script>. </li>
-<li>Sets <script type="math/tex">S</script> are subsets of <script type="math/tex">\Omega</script>. </li>
-<li>The <code>complement of a set</code> <script type="math/tex">S</script>, <code>with respect to the universe</code> <script type="math/tex">\Omega</script>, is <script type="math/tex">\{x\in\Omega|x\notin S\}</script>. It’s denoted by <script type="math/tex">S^c</script>. </li>
-<li><script type="math/tex">\Omega^c=\emptyset</script>. </li>
-<li><code>Union</code> of <script type="math/tex">S</script> and <script type="math/tex">T</script>: <script type="math/tex">S\cup T=\{x|x\in S\ or\ x\in T\}</script></li>
-<li><code>Intersection</code> of <script type="math/tex">S</script> and <script type="math/tex">T</script>: <script type="math/tex">S\cap T=\{x|x\in S\ and\ x\in T\}</script></li>
-<li>Two sets are <code>disjoint</code> if <script type="math/tex">S\cap T=\emptyset</script>. Several sets are disjoint if no two of them have common element. </li>
-<li>A collection of sets is a <code>partition</code> of a set <script type="math/tex">S</script> if the sets are disjoint and their union is <script type="math/tex">S</script>. </li>
-<li>If <script type="math/tex">x</script> and <script type="math/tex">y</script> are two objects, we use <script type="math/tex">(x,y)</script> to denote the <code>ordered pair</code> of <script type="math/tex">x</script> and <script type="math/tex">y</script>. </li>
-<li>The set of scalars (real number) is denoted by <script type="math/tex">R</script>. The <script type="math/tex">n</script>-dimensional space is denoted by <script type="math/tex">R^n</script>. </li>
-<li><code>Venn diagrams</code> are used to visualize sets. </li>
-<li>Algebra of sets: <br />&emsp;<script type="math/tex">\begin{equation}\begin{split}S\cup T&=T\cup S\\ S\cap(T\cup T)&=(S\cap T)\cup(S\cap U)\\ (S^c)^c&=S\\ S\cup\Omega&=\Omega\\ (\bigcup\limits_nS_n)^c&=\bigcap\limits_nS^c_n \end{split}\end{equation}</script> &emsp; <script type="math/tex">\begin{equation}\begin{split}S\cup(T\cup U)&=(S\cup T)\cup U\\S\cup(T\cap U)&=(S\cup T)\cap(S\cup U)\\S\cap S^c&=\emptyset\\S\cap\Omega&=S\\ (\bigcap\limits_nS_n)^c&=\bigcup\limits_nS^c_n \end{split}\end{equation}</script></li>
+          <ol>
+<li>The Bernoulli process can be visualized as a sequence of independent coin tosses where the probability of heads in each toss is a fixed number $p$ in the range $(0,1)$. </li>
+<li>In convention, each trial produces a $1$ (a success) with probability $p$, and a $0$ (a failure) with probability $1-p$, independent of what happens in other trials. </li>
 </ol>
-<h1 id="Probabilistic-Models"><a href="#Probabilistic-Models" class="headerlink" title="Probabilistic Models"></a>Probabilistic Models</h1><h2 id="Sample-Space"><a href="#Sample-Space" class="headerlink" title="Sample Space"></a>Sample Space</h2><ol>
-<li>Every probabilistic model invelves an underlying process, called the <code>experiment</code>, that will produce exactly one out of several possible outcomes. </li>
-<li><code>Sample space</code> <script type="math/tex">\Omega</script> contains all possible outcomes of an experiment. </li>
-<li><code>Event</code> is any collection of possible outcomes, including the entire sample sapce and the empty set. </li>
-<li><code>Probabilistic model</code> must contain the sample space and the probability law. </li>
-<li>In our formulation of a probabilistic model, there is only one experiment. </li>
-<li>Three requirements of sample space: <br />&emsp;Sample space may consist of a finite or an infinite possible of outcomes. <br />&emsp;Different elements of the sample space should be distinct and mutually exclusive. <br />&emsp;The sample space chosen for a probabilistic model must be collectively exhaustive. <br />&emsp;The sample space should have enough detail to distinguish between all outcomes of interest to the modeler. </li>
-<li>$0$ Probability doesn’t means impossible which only stands for extremely unlikely. $1$ Probability doesn’t means certain which only stands for extremely likely. $0$ probability events may happen while $1$ probability events may not occur. </li>
+<h1 id="Independence-and-Memorylessness"><a href="#Independence-and-Memorylessness" class="headerlink" title="Independence and Memorylessness"></a>Independence and Memorylessness</h1><ol>
+<li>Fresh-start property: The future trials are independent from the past ones. Starting from any given point in time, the future is also modeled by a Bernoulli process, which is independent from the past. </li>
+<li>Memorylessness property: The time $T$ until the first success is a geometric random variable. After $n$ failures, since a fresh-start Bernoulli process is constituting, the remaining trials until first success $T-n$ is still a geometric random variable. $P(T-n=t|T&gt;n)=P(T=t)$</li>
 </ol>
-<h2 id="Probability-Law"><a href="#Probability-Law" class="headerlink" title="Probability Law"></a>Probability Law</h2><ol>
-<li>Probability law specifies the likelihood of any event. </li>
-<li>The probability law assigns to every event $A$ a number $P(A)$, called probability of $A$. </li>
-<li>Probability axioms: <br />&emsp;Nonnegativity: $P(A)≥0$, for every event $A$. <br />&emsp;Additivity: If $A$ and $B$ are two disjoint events, then $P(A\cup B)=P(A)+P(B)$. <br />&emsp;Normalization: The probability of the entire sample space is 1, $P(\Omega)=1$. </li>
-<li>$P(\emptyset)=0$, for $1=P(\Omega)=P(\Omega\cup\emptyset)=P(\Omega)+P(\emptyset)=1+P(\emptyset)$. </li>
-<li>If $A\subset B$, then $P(A)≤P(B)$. </li>
-<li>$P(A\cup B)=P(A)+P(B)-P(A\cap B)≤P(A)+P(B)$</li>
-<li>$P(A\cup B\cup C)=P(A)+P(A^c\cap B)+P(A^c\cap B^c\cap C)$</li>
+<h1 id="Interarrival-Times"><a href="#Interarrival-Times" class="headerlink" title="Interarrival Times"></a>Interarrival Times</h1><ol>
+<li>$Y_k$ represents the time of $k$th success. $T_k$ stands for the $k$th interarrival time. </li>
+<li>$T_1=Y_1$, $T_i=Y_i-Y_{i-1}(i&gt;1)$</li>
+<li>$Y_k=\displaystyle\sum^k_{i=1}T_i$</li>
+<li>$T_1$ is a geometric random variable with parameter $p$. After $T_1$, the future is a new Bernoulli process similar to the old one. </li>
+<li>All $T_i$ are independent and all have the same geometric distribution. </li>
+<li>In the problem of finding the first failure string, the string begins with the first failure and ends with the first success since then is not geometric. Because we look at it from the frist failure when we know it’s a failure. So we need to look from the experiment after the first failure, since we only know whether it’s going to success or not. So the geometric begins after the first failure occurred, ends when the frist success occurred. And the expectation of that is $E[T_1]+1$. </li>
 </ol>
-<h3 id="Discrete-Models"><a href="#Discrete-Models" class="headerlink" title="Discrete Models"></a>Discrete Models</h3><ol>
-<li>Discrete probability law: If the sample space consists of a finite number of possible outcomes, $P(\{s_1,s_2,…,s_n\})=\displaystyle\sum^n_{i=1}P(s_i)$. Here $s_i$ is a single element. </li>
-<li>Discrete Uniform Probability Law: If the sample space consists of $n$ possible outcomes which are equally likely (i.e. all single-element events have the same probability), the the probability of any event $A$ is given by <script type="math/tex">P(A)=\displaystyle\frac{number\ of\ elements\ of\ A}{n}</script>. </li>
+<h1 id="The-kth-Arrivial-Time"><a href="#The-kth-Arrivial-Time" class="headerlink" title="The  kth Arrivial Time"></a>The  kth Arrivial Time</h1><ol>
+<li>$Y_k=T_1+…+T_k$, $T_1,…,T_k$ are independent and have geometric PMF. So $E[Y_k]=E[T_1+…+T_k]=E[T_1]+…E[T_k]=\displaystyle\frac{k}{p}$</li>
+<li>$var(Y_k)=var(T_1+…+T_k)=var(T_1)+…+var(T_k)=\displaystyle\frac{k(1-p)}{p^2}$</li>
+<li>The PMF of $Y_k$ (Pascal PMF of order $k$): $p_{Y_k}(t)={t-1\choose k-1}p^k(1-p)^{t-k}  t≥k$</li>
 </ol>
-<h3 id="Continuous-Models"><a href="#Continuous-Models" class="headerlink" title="Continuous Models"></a>Continuous Models</h3><ol>
-<li>The sample space of these models usually has infinite number of elements. </li>
-<li>In continuous models, the probability of each single elements is $0$, but the probability of a event consisting several elements may be positive. </li>
-<li>Normally these models are solved by graphs. <script type="math/tex">P(A)=\displaystyle\frac{integral\ of\ A}{integral\ of\ sample\ space}</script>. If the experiment is linear, the probability is $P(A)=\displaystyle\frac{\int_Adt}{\int_Sdt}$. If the experiment is 2-dimension, the probability is $P(A)=\displaystyle\frac{\iint_Adt}{\iint_Sdt}$. </li>
+<h1 id="Split-and-Merge"><a href="#Split-and-Merge" class="headerlink" title="Split and Merge"></a>Split and Merge</h1><h2 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h2><ol>
+<li>Imaging tossing two coins, the first coin has a bias to the head of probability $p$ and the second coin has a bias to the head of probability $q$. </li>
+<li>If the outcome of the first coin is head, then we toss the second coin. </li>
+<li>We can split the result of first coin into two independent process. Both of the later process focus only on the second coin. </li>
+<li>One process marks the head side on the second coin as success and tail on the first coin or tail on the second coin as failure. <br />The other process marks the tail on the second coin as success and tail on the first coin or head on the second coin as failure. </li>
+<li>The first process has a proabability of success of $pq$ while the second process has a probability of success of $p(1-q)$. </li>
 </ol>
-<h1 id="Paradoxes-in-Probability"><a href="#Paradoxes-in-Probability" class="headerlink" title="Paradoxes in Probability"></a>Paradoxes in Probability</h1><p><strong><code>In probability, different mathods may give different answers, but all of the answers are correct.</code></strong></p>
-<p>The difference between answers is most affected by the sample space they choose. </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/11-Vector-Fields-in-3D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/01/11-Vector-Fields-in-3D/" class="post-title-link" itemprop="url">11. Vector Fields in 3D</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-01 21:46:57" itemprop="dateCreated datePublished" datetime="2020-03-01T21:46:57+08:00">2020-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:35:55" itemprop="dateModified" datetime="2020-08-07T22:35:55+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
-<li>At every point, <script type="math/tex">\vec{F}=<P,Q,R></script>, <script type="math/tex">P,Q,R</script> are all functions of <script type="math/tex">x,y,z</script>. </li>
-<li>In 3D, flux through a surface, which requires a surface integral. </li>
-<li><script type="math/tex">Flux=\displaystyle\iint_S\vec{F}\cdot\vec{n}\ dS</script>. Sometimes <script type="math/tex">d\vec{S}=\vec{n}dS</script>. </li>
-<li>If <script type="math/tex">S</script> is horizontal, namely <script type="math/tex">z=a</script>, <script type="math/tex">\vec{n}=\pm\vec{k}</script>. <script type="math/tex">dS=dx\ dy</script>. <br />If <script type="math/tex">S</script> is a sphere of radius <script type="math/tex">a</script> centered at origin, <script type="math/tex">n=\pm\displaystyle\frac{<x,y,z>}{a}</script>. <script type="math/tex">dS=a^2sin\ \theta\ d\phi\ d\theta</script><br />If <script type="math/tex">S</script> is a sylinder of radius <script type="math/tex">a</script> symmetric to z-axis, <script type="math/tex">\vec{n}=\displaystyle\pm\frac{<x,y,0>}{a}</script>. <script type="math/tex">dS=adz\ d\theta</script><br />If <script type="math/tex">S</script> is graph <script type="math/tex">z=f(x,y)</script>, <script type="math/tex">\vec{n}dS=\pm<-f_x,-f_y,1>dx\ dy</script>. MARK: <script type="math/tex"><-f_x,-f_y,1></script> is not <script type="math/tex">\vec{n}</script> and <script type="math/tex">dx\ dy</script> is not <script type="math/tex">dS</script>. <br />If <script type="math/tex">S</script> is parametric description, namely <script type="math/tex">S=\left\{\begin{array}{}x=x(u,v)\\y=y(u,v)\\z=z(u,v) \end{array}\right.</script>, <script type="math/tex"><x,y,z>=\vec{r}(u,v)</script>. Then <script type="math/tex">\vec{n}dS=\pm(\displaystyle\frac{\partial\vec{r}}{\partial u}\times\frac{\partial\vec{r}}{\partial v})du\ dv</script><br />If we know a normal vector <script type="math/tex">\vec{N}</script> (not necessarily unit) to surface <script type="math/tex">S</script>, see below. </li>
-<li>To set up bounds on <script type="math/tex">dx\ dy</script>, look at shadow of <script type="math/tex">S</script> in xy-plane. </li>
-<li>Interpretation of <script type="math/tex">\vec{n}dS</script>: <br />&emsp;One is the area. Normally the area is a parallelogram, so <script type="math/tex">\vec{n}dS</script> is the cross product of two adjacent edges. <br />&emsp;Let’s say <script type="math/tex">\alpha</script> is the angle between <script type="math/tex">\Delta S</script> and its projection at xy-plane <script type="math/tex">\Delta A</script>. <script type="math/tex">\Delta A=\Delta S\ cos\ \alpha</script><br />&emsp;Easy to know that <script type="math/tex">\alpha</script> is also the angle between normal vector of <script type="math/tex">\Delta S</script> <script type="math/tex">\vec{N}</script> and unit vector which goes along z-axis <script type="math/tex">\vec{k}</script>. <script type="math/tex">cos\ \alpha=\displaystyle\frac{\vec{N}\cdot\vec{k}}{|\vec{N}|}</script><br />&emsp;<script type="math/tex">\Delta S=\displaystyle\frac{1}{cos\ \alpha}\Delta A=\frac{|\vec{N}|}{\vec{N}\cdot\vec{k}}</script><br />&emsp;<script type="math/tex">\vec{n}\Delta S=\displaystyle\frac{|\vec{N}|\vec{n}}{\vec{N}\cdot\vec{k}}\Delta A=\pm\frac{\vec{N}}{\vec{N}\cdot\vec{k}}\Delta A</script><br />&emsp;So <script type="math/tex">\vec{n}dS=\pm\displaystyle\frac{\vec{N}}{\vec{N}\cdot\vec{k}}dx\ dy</script></li>
-</ol>
-<h1 id="Divergence-Theorem"><a href="#Divergence-Theorem" class="headerlink" title="Divergence Theorem"></a>Divergence Theorem</h1><ol>
-<li>Divergence theorem： If <script type="math/tex">S</script> is a closed surface enclosing a region <script type="math/tex">D</script>, oriented with <script type="math/tex">\vec{n}</script> outwards and <script type="math/tex">\vec{F}</script> defined and differentiable everywhere in D, <script type="math/tex">\displaystyle\iint_S\vec{F}dS=\iiint_Ddiv\ \vec{F}dV</script>. <script type="math/tex">div\ (P\vec{i}+Q\vec{j}+R\vec{k})=P_x+Q_y+Z_k</script>.</li>
-<li><script type="math/tex">\triangledown</script> notation: <script type="math/tex">\triangledown=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}></script>. </li>
-<li>Gradient: <script type="math/tex">\triangledown f=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>f=<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}></script></li>
-<li>Divergence: <script type="math/tex">\triangledown\cdot\vec{F}=<\displaystyle\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}>\cdot<P,Q,R>=P_x+Q_y+R_z</script></li>
-<li><script type="math/tex; mode=display">\triangledown^2 f=\triangledown\cdot\triangledown f=\triangledown\cdot<\displaystyle\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}>=<\displaystyle\frac{\partial^2 f}{\partial x^2},\frac{\partial^2 f}{\partial y^2},\frac{\partial^2 f}{\partial z^2}>=P_{xx}+Q_{yy}+R_{zz}</script></li>
-<li><script type="math/tex; mode=display">\triangledown\times f=\left|\begin{matrix}\vec{i}&\vec{j}&\vec{k}\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\P&Q&R \end{matrix}\right|=(R_y-Q_z)\vec{i}-(R_x-P_z)\vec{j}+(Q_x-P_y)\vec{k}</script></li>
-<li>Physical interpretation: <script type="math/tex">div\ \vec{F}=</script> source rate <script type="math/tex">=</script> amount of flux generated  per unit volume</li>
-<li>If we sum the divergence in <script type="math/tex">D</script>, we get amount of fluid leaving <script type="math/tex">D</script> per unit time. </li>
-<li>Diffusion equation<br /><script type="math/tex">u=</script> concentration at a given point <script type="math/tex">=u(x,y,z,t)</script>. <br /><script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=k\triangledown^2u=k\triangledown\cdot\triangledown u=k(u_{xx}+u_{yy}+u_{zz})</script>. <br /><script type="math/tex">\vec{F}=</script> velocity field of flowing things. <br />Phycics: Things flows from high concentration towards low concentration. So <script type="math/tex">\vec{F}</script> is directed along <script type="math/tex">-\triangledown u</script>, namely <script type="math/tex">\vec{F}=-k\triangledown u</script>. <br />Math:  Flux out of <script type="math/tex">D</script> through <script type="math/tex">S</script>: <script type="math/tex">\displaystyle\iint\vec{F}\cdot\vec{n}dS=amount\ of\ smoke\ through\ S\ per\ unit\ time=-\frac{d}{dt}(\iiint_DudV)</script>. <br /><script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=\iint_S\vec{F}\cdot\vec{n}dS</script>. So <script type="math/tex">\displaystyle\iiint_Ddiv\ \vec{F}dV=-\frac{d}{dt}(\iiint_DudV)=\iiint_D-\frac{\partial u}{\partial t}dV</script><br />So <script type="math/tex">\displaystyle\frac{\partial u}{\partial t}=-div\ \vec{F}=kdiv\ (\triangledown u)=k\triangledown^2u</script>. </li>
-</ol>
-<h1 id="Work"><a href="#Work" class="headerlink" title="Work"></a>Work</h1><ol>
-<li><script type="math/tex">\vec{F}=P\vec{i}+Q\vec{j}+R\vec{k}</script>, <script type="math/tex">d\vec{r}=<dx,dy,dz></script>. <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz</script>. </li>
-<li>Fundamental theorem of calculus for line integral is still true in 3D. </li>
-<li>Test for gradient fiels: <script type="math/tex">\left\{\begin{array}{}P_y=f_{xy}=f_{yx}=Q_x\\P_z=f_{xz}=f_{zx}=R_x\\Q_z=f_{yz}=f_{zy}=R_{y} \end{array}\right.</script></li>
-<li>Find potential: <br />&emsp;<script type="math/tex">f(x,y,z)=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>.<br />&emsp;Antiderivatives: Integral <script type="math/tex">P</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)}_{certain}+\underbrace{G(y,z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial y}</script> with <script type="math/tex">Q</script> to get <script type="math/tex">G_y</script>. Integral <script type="math/tex">G_y</script> to get <script type="math/tex">f=\underbrace{F(x,y,z)+G(y,z)}_{certain}+\underbrace{H(z)}_{unknown}</script>. Compare <script type="math/tex">\displaystyle\frac{\partial f}{\partial z}</script> with <script type="math/tex">R</script> to get <script type="math/tex">H'</script>. Integral to get <script type="math/tex">H</script>. </li>
-<li><script type="math/tex">curl\ \vec{F}=(R_y-Q_z)\vec{i}+(P_z-R_x)\vec{j}+(Q_x-P_y)\vec{k}=\triangledown\times f</script>. </li>
-<li>If <script type="math/tex">\vec{F}</script> is defined in a symply connected region, <script type="math/tex">\vec{F}</script> is conservative if and only if <script type="math/tex">curl\ \vec{F}=0</script>. </li>
-<li>Curl meansures rotation component in a velocity field. </li>
-</ol>
-<h1 id="Stokes’-Theorem"><a href="#Stokes’-Theorem" class="headerlink" title="Stokes’ Theorem"></a>Stokes’ Theorem</h1><ol>
-<li>Stokes theorem: If <script type="math/tex">C</script> is a closed curve and <script type="math/tex">S</script> is any surface bounded by <script type="math/tex">C</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_S(\triangledown\times\vec{F})\cdot\vec{n}dS</script>. </li>
-<li>Need orientations of <script type="math/tex">C</script> and <script type="math/tex">S</script> to compatible. <br />When walking along <script type="math/tex">C</script>, keep all <script type="math/tex">S</script> in your left-hand side. <br />Or right-hand rule: thumb along <script type="math/tex">C</script> positively, index tangent to <script type="math/tex">S</script> (towards interior of <script type="math/tex">S</script>) and middle finger parallel to <script type="math/tex">\vec{n}</script>. </li>
-<li>Green’s theorem is special case of Stokes in xy-plane. </li>
-<li>A region is simply-connected if every closed loop inside it bounds a surface inside it. </li>
-<li>If <script type="math/tex">\vec{F}</script> is defined in a simply-connected region and <script type="math/tex">curl\ \vec{F}=0</script> then <script type="math/tex">\vec{F}</script> is a gradient and <script type="math/tex">\displaystyle\int_C\vec{F}\cdot d\vec{r}</script> is path-independent. </li>
-<li>Orientability: non-orientable surfaces have only one side, like Mobius surface. Flux cannot be defined in this kind of surface. </li>
-<li><script type="math/tex">div\ (curl\ \vec{F}) =div\ (\triangledown\times\vec{F})=0</script>. (For real vectors <script type="math/tex">\vec{u}\cdot(\vec{u}\times\vec{v})=0</script>)</li>
+<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><ol>
+<li>Other than split one process into two process, we can also merge two process into one process. </li>
+<li>Tossing the same two coins as above at the same time, the result is success if one of the coins is head. </li>
+<li>This final process has a probability of <script type="math/tex">1-P(none\ is\ head)=1-(1-p)(1-q)=p+q-pq</script></li>
 </ol>
 
       
@@ -1147,7 +1296,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/10-Triple-Integrals/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -1161,7 +1310,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/03/01/10-Triple-Integrals/" class="post-title-link" itemprop="url">10. Triple Integrals</a>
+            <a href="/2020/03/16/08-Iterated-Expectation-and-Sum-of-a-Random-Number-of-Random-Variables/" class="post-title-link" itemprop="url">08. Iterated Expectation and Sum of a Random Number of Random Variables</a>
         </h1>
 
         <div class="post-meta">
@@ -1171,14 +1320,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-03-01 17:47:34" itemprop="dateCreated datePublished" datetime="2020-03-01T17:47:34+08:00">2020-03-01</time>
+              <time title="Created: 2020-03-16 08:51:43" itemprop="dateCreated datePublished" datetime="2020-03-16T08:51:43+08:00">2020-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:03" itemprop="dateModified" datetime="2020-08-07T22:36:03+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:53:39" itemprop="dateModified" datetime="2020-08-07T19:53:39+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1192,8 +1341,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
+                    <span itemprop="name">概率论 (MIT 6.041)</span>
                   </a>
                 </span>
             </span>
@@ -1209,133 +1358,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Rectangular-Coordinates"><a href="#Rectangular-Coordinates" class="headerlink" title="Rectangular Coordinates"></a>Rectangular Coordinates</h1><ol>
-<li><script type="math/tex">\displaystyle\iiint_RfdV</script>. <script type="math/tex">dV</script> is called volume element and <script type="math/tex">dV=dx\ dy\ dz</script>. </li>
-<li>Volume of <script type="math/tex">R</script> is <script type="math/tex">volume(R)=\displaystyle\iiint_R1dV</script>. </li>
-<li>Just like in double integral, we solve this one by one. Every time, we solve one integral. </li>
-<li>The bounds of one integral contains variables of outer integrals. </li>
-<li>After calculate the inner integral, the triple integral becomes a double integral. </li>
-<li><script type="math/tex">\Delta V=\Delta A\cdot\Delta z</script>. So <script type="math/tex">dV=dA\cdot dz</script>. </li>
+          <h1 id="Iterated-Expectation"><a href="#Iterated-Expectation" class="headerlink" title="Iterated Expectation"></a>Iterated Expectation</h1><ol>
+<li>$E[X|Y]$ is a random variable that takes the value $E[X|Y=y]$ when $Y$ takes the value $y$. <br />Since $E[X|Y=y]$ is a function of $y$, $E[X|Y]$ is a function of $Y$. </li>
+<li>The distribution of $E[X|Y]$ is determined by the distribution of $Y$ by changing $y$ in $E[X|Y=y]$ into $Y$. </li>
+<li>Iterated Expectation: Because $E[X|Y]$ is a random variable, naturally it has its own expectation <br /><script type="math/tex">E[E[X|Y]]=\left\{\begin{array}{}\displaystyle\sum_yE[X|Y=y]p_Y(y)&Y\ is\ discrete\\\int^\infty_{-\infty}E[E[X|Y=y]]f_Y(y)dy&Y\ is\ continuous \end{array}\right.=E[X]</script></li>
+<li>For any function $g$, given the value of $Y$, $g(Y)$ is a constant. So $E[Xg(Y)|Y]=g(Y)E[X|Y]$. </li>
+<li>We denote $\hat{X}=E[X|Y]$ as an estimator of $X$ given $Y$. </li>
+<li>The estimation error $\tilde{X}=\hat{X}-X$ satisfying $E[\tilde{X}|Y]=E[\hat{X}-X|Y]=E[\hat{X}|Y]-E[X|Y]=\hat{X}-\hat{X}=0$</li>
+<li>The random variable $E[\tilde{X}|Y]$ is identically zero: $E[\tilde{X}|Y=y]=0$ for all values of $y$. <br />The law of iterated expectation also tells us $E[\tilde{X}]=E[E[\tilde{X}|Y]]=0$. <br />It indicates that the estimation error doesn’t have a systematic upward or downward bias. </li>
+<li>$E[\hat{X}\tilde{X}]=E[E[\hat{X}\tilde{X}|Y]]$. Since $\hat{X}$ is complete determined by $Y$, $E[E[\hat{X}\tilde{X}|Y]]=E[\hat{X}E[\tilde{X}|Y]]=E[\hat{X}0]=0$<br />It follows that $cov(\hat{X},\tilde{X})=E[\hat{X}\tilde{X}]-E[\hat{X}]E[\tilde{X}]=0-E[X]\cdot0=0$<br />So $\hat{X}$ and $\tilde{X}$ are uncorrelated. <br />So $var(X)=var(\tilde{X})+var(\hat{X})$. </li>
+<li>The conditional variance: $var(X|Y)=E[(X-E{X|Y})^2|Y]=E[\tilde{X}^2|Y]$</li>
+<li>This is the function of $Y$ whose value is the conditional variance of $X$ when $Y$ takes the value $y$. </li>
+<li>Using $E[\tilde{X}]=0$, $var(\tilde{X})=E[\tilde{X}^2]=E[E[\tilde{X}^2|Y]]=E[var(X|Y)]$. <br />Since $var(X)=var(\tilde{X})+var{\hat{X}}$, we have the law of total variance: $var(X)=E[var(X|Y)]+var(E[X|Y])$</li>
 </ol>
-<h1 id="Cylindrical-Coordinates"><a href="#Cylindrical-Coordinates" class="headerlink" title="Cylindrical Coordinates"></a>Cylindrical Coordinates</h1><ol>
-<li>Cylindrical coordinates are just polar coordinates with an extra z-axis. </li>
-<li><script type="math/tex">dx\ dy\ dz=dz\ rdr\ d\theta</script>. </li>
-<li>In cylinderical coordinates, <script type="math/tex">r</script> stands for the distance to z-axis not origin. So <script type="math/tex">r=a</script> is a cylinder. </li>
-<li>The convension in writing a point in cylinderical coordinates form is <script type="math/tex">(r,\theta,z)</script>. </li>
+<h1 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h1><ol>
+<li>The transform associated with a random variable $X$ is a function $M_X(s)$ of a scalar parameter $s$, defined by $M_X(s)=E[e^{sX}]$. </li>
+<li>If $X$ is a discrete random variable, the transform can be written as $M(s)=\displaystyle\sum_xe^{sx}p_X(x)$. <br />If $X$ is a continuous random variable, $M(s)=\displaystyle\int^\infty_{-\infty}e^{sx}f_X(x)dx$. </li>
+<li>If $Y=aX+b$, $M_Y(s)=E[e^{s(aX+b)}]=E[e^{saX}e^{sb}]=e^{sb}E[e^{saX}]=e^{sb}M_X(sa)$. </li>
+<li>$\displaystyle\frac{d}{ds}M(s)=\int^\infty_{-\infty}xe^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d}{ds}M(s)\right|_{s=0}=\int^{\infty}_{-\infty}xf_X(x)dx=E[X]$<br />$\displaystyle\frac{d^n}{ds^n}M(s)=\int^{\infty}_{-\infty}x^ne^{sx}f_X(x)dx$ and $\displaystyle\left.\frac{d^n}{ds^n}M(s)\right|_{s=0}=\int^\infty_{-\infty}x^nf_X(x)dx=E[X^n]$</li>
+<li>$M_X(0)=E[e^{0X}]=E[1]=1$</li>
+<li>If $X$ takes only nonnegative integer values, then $\displaystyle\lim_{s\to-\infty}M_X(s)=P(X=0)$</li>
+<li>If $Z=X+Y$ $M_Z(s)=E[e^{sZ}]=E[e^{s(X+Y)}]=E[e^{sX+sY}]=E[e^{sX}e^{sY}]$. If $X$ and $Y$ are independent, $M_Z(s)=E[e^{sX}]E[e^{sY}]=M_X(s)M_Y(s)$. </li>
+<li>In discrete random variables: <br />&emsp;For $Bernoulli(p)$, $M_X(s)=1-p+pe^s$<br />&emsp;For $Binomial(n,p)$, $M_X(s)=(1-p+pe^s)^n$<br />&emsp;For $Geometric(p)$, $M_X(s)=\displaystyle\frac{pe^s}{1-(1-p)e^s}$<br />&emsp;For $Poisson(\lambda)$, $M_X(s)=e^{\lambda(e^s-1)}$<br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sa}(e^{s(b-a+1)}-1)}{(b-a+1)(e^s-1)}$</li>
+<li>In continuous random variables: <br />&emsp;For $Uniform(a,b)$, $M_X(s)=\displaystyle\frac{e^{sb}-e^{sa}}{s(b-a)}$<br />&emsp;For $Exponential(\lambda)$, $M_X(s)=\displaystyle\frac{\lambda}{\lambda-s}(s&lt;\lambda)$<br />&emsp;For $Normal(\mu,\sigma^2)$, $M_X(s)=e^{\frac{\sigma^2s^2}{2}+\mu s}$</li>
+<li>$M_{X_1,…,X_n}(s_1,…,s_n)=E[e^{s_1X_1+…+s_nX_n}]$</li>
 </ol>
-<h1 id="Spherical-Coordinates"><a href="#Spherical-Coordinates" class="headerlink" title="Spherical Coordinates"></a>Spherical Coordinates</h1><ol>
-<li>Each point is represented by <br />&emsp;a distance <script type="math/tex">\rho</script> <br />&emsp;and two angles <script type="math/tex">\theta</script> (counterclockwise from x-axis) and <script type="math/tex">\phi</script>(downwards form z-axis), <br />&emsp;namely <script type="math/tex">(\rho,\theta,\phi)</script>. </li>
-<li><script type="math/tex; mode=display">r=\rho sin\ \phi$$<br />$$\left\{\begin{array}{}z=\rho cos\ \phi\\x=rcos\ \theta=\rho sin\ \phi\ cos\ \theta\\y=rsin\ \theta=\rho sin\ \phi\ sin\ \theta \end{array}\right.</script></li>
-<li><script type="math/tex; mode=display">\Delta V\approx \Delta\rho\cdot\Delta s=\rho^2sin\ \phi\Delta\rho\Delta\phi\Delta\theta$$. So $$dV=\rho^2sin\ \phi\ d\rho\ d\phi\ d\theta</script></li>
-</ol>
-<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><ol>
-<li>Mass: <script type="math/tex">\Delta m=\delta\cdot\Delta V</script>. <script type="math/tex">Mass=\displaystyle\iiint_R\delta\ dV</script>. </li>
-<li>Average value of <script type="math/tex">f(x,y,z)</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline{f}=\displaystyle\frac{1}{volume(R)}\iiint_Rf\ dV</script></li>
-<li>Weighted average: <script type="math/tex">\overline{f}=\displaystyle\frac{1}{Mass(R)}\iiint_Rf\delta\ dV</script></li>
-<li>Center of mass: <script type="math/tex">(\overline{x}, \overline{y},\overline{z})</script>, <script type="math/tex">\overline{x}=\displaystyle\frac{1}{Mass}x\delta\ dV</script>, <script type="math/tex">\overline{y}</script> and <script type="math/tex">\overline{z}</script> are similar. </li>
-<li>Moment of inertia: <script type="math/tex">I=\displaystyle\iiint_Rr^2\delta\ dV</script>. <script type="math/tex">r</script> is the distance to axis. There are three axises, so There are three moment of inertia. </li>
-<li>Graviation attraction: <script type="math/tex">|\vec{F}|=\displaystyle\frac{G\cdot\Delta M\cdot m}{\rho^2}</script> and <script type="math/tex">dir\ \vec{F}=\displaystyle\frac{<x,y,z>}{\rho}</script><br />So <script type="math/tex">\vec{F}=\displaystyle\iiint\frac{Gm<x,y,z>}{\rho^3}\delta\ dV</script>. <br />Use spherical coordinates, place solid so z-axis is an axis of symmetry. <br />Then <script type="math/tex">\vec{F}=<0,0,z></script>. <br /><script type="math/tex">\begin{equation}\begin{split}z&=Gm\displaystyle\iiint\frac{z}{\rho^3}\delta\ dV\\&=\iiint\frac{z}{\rho^3}\delta\rho^2sin\ \phi\ d\rho\ d\phi\ d\theta\\&=\iiint\delta cos\ \phi sin\ \phi\ d\rho\ d\phi\ d\theta\end{split}\end{equation}</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/01/09-Flux-and-Green-s-Theorem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/01/09-Flux-and-Green-s-Theorem/" class="post-title-link" itemprop="url">09. Flux and Green's Theorem</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-01 09:18:41" itemprop="dateCreated datePublished" datetime="2020-03-01T09:18:41+08:00">2020-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 22:36:12" itemprop="dateModified" datetime="2020-08-07T22:36:12+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
-                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><ol>
-<li>This is another kind of line integral. </li>
-<li><script type="math/tex">C</script> is the plane curve with unit normal vector <script type="math/tex">\vec{n}</script> at each point and <script type="math/tex">\vec{F}</script> is a vector field. </li>
-<li>If break <script type="math/tex">C</script> into small pieces <script type="math/tex">\Delta s</script>, <script type="math/tex">Flux=\displaystyle\lim_{\Delta s\to 0}(\sum\vec{F}\cdot\vec{n}\ \Delta s)</script>. So <script type="math/tex">Flux=\displaystyle\int_C\vec{F}\cdot\vec{n}\ ds</script></li>
-<li>Interpretation: for <script type="math/tex">\vec{F}</script> a velocity field, flux measures how much fluid passes through <script type="math/tex">C</script> per unit time. </li>
-<li>Before calculation, we need  to set a direction to flux. Goes along that direction is positive while opposite direction is negative. </li>
-<li>Calculation using components: <br />Remember: <script type="math/tex">d\vec{r}=\vec{T}ds=<dx,dy></script>. Since <script type="math/tex">\vec{n}</script> is <script type="math/tex">\vec{T}</script> rotated <script type="math/tex">\displaystyle\frac{\pi}{2}</script> clockwise, <script type="math/tex">\vec{n}ds=<dy,-dx></script>. <br />If <script type="math/tex">\vec{F}=<M,N></script>, then <script type="math/tex">\displaystyle\int_C\vec{F}\cdot\vec{n}ds=\int_C-Ndx+Mdy</script></li>
-</ol>
-<h1 id="Green’s-Theorem"><a href="#Green’s-Theorem" class="headerlink" title="Green’s Theorem"></a>Green’s Theorem</h1><ol>
-<li>For work: <script type="math/tex">C</script> is a closed curve enclosing a region R, counterclockwise. <script type="math/tex">\vec{F}</script> Vector field is defined and differentiable in <script type="math/tex">R</script>. Then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script>, namely <script type="math/tex">\displaystyle\oint_CMdx+Ndy=\iint_R(N_x-M_y)dA</script>. </li>
-<li><strong><code>WARNING: ONLY FOR CLOSED CURVE</code></strong></li>
-<li>If <script type="math/tex">curl\ \vec{F}=0</script>, <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA=0</script></li>
-<li>A complex region can be decomposed into simpler regions. </li>
-<li>For flux: If <script type="math/tex">C</script> encloses a region <script type="math/tex">R</script> counterclockwise and <script type="math/tex">\vec{F}<P,Q></script> defined in <script type="math/tex">R</script>, then <script type="math/tex">\displaystyle\oint_C\vec{F}\cdot\vec{n}ds=\iint_Rdiv\ \vec{F}dA</script> <script type="math/tex">(divergent:div\ <P,Q>=P_x+Q_y)</script>. </li>
-<li>Green’s theorem shows us the position of an enclosed curve doesn’t affect the flux. </li>
-<li>Interpretation of <script type="math/tex">div\ \vec{F}</script>: <br />&emsp;Measures how much the flow is expanding. <br />&emsp;Source rate = amount of fluid added to the system per unit time per unit area. </li>
-<li>If one enclosed curve <script type="math/tex">C'</script> is in another enclosed curve <script type="math/tex">C</script>, connect them with one segment. <br />We can go along <script type="math/tex">C</script> and then go to <script type="math/tex">C'</script> through that segment. <br />And go along <script type="math/tex">C'</script> in opposite direction then come back to <script type="math/tex">C</script> through that segment. <br />This forms a new curve which encloses a region <script type="math/tex">R</script> between <script type="math/tex">C</script> and <script type="math/tex">C'</script>. <br /><script type="math/tex">\displaystyle\oint_C\vec{F}\cdot d\vec{r}-\oint_{C'}\vec{F}\cdot d\vec{r}=\iint_Rcurl\ \vec{F}dA</script></li>
-<li>A connected region <script type="math/tex">R</script> in the plane is simply connected if the interior of any closed curve in <script type="math/tex">R</script> is also contained in <script type="math/tex">R</script>. <br />Simply connected has no “hole” in it. </li>
-<li>If <script type="math/tex">curl\ \vec{F}=0</script> and domain where <script type="math/tex">\vec{F}</script> defined is simply connected, then <script type="math/tex">\vec{F}</script> is conservative and a gradient. </li>
+<h1 id="Sum-of-a-Random-Number-of-Independent-Random-Variables"><a href="#Sum-of-a-Random-Number-of-Independent-Random-Variables" class="headerlink" title="Sum of a Random Number of Independent Random Variables"></a>Sum of a Random Number of Independent Random Variables</h1><ol>
+<li>We consider the sum $Y=X_1+X_2+…+X_N$. <br />$N$ is a random variable that takes nonnegative integer values. <br />$X_1,X_2,…$ are identically independent distributed random variables. </li>
+<li>If $N=0$, $Y=0$. </li>
+<li>Fix a nonnegative integer $n$. <br />$E[Y|N=n]=E[X_1+X_2+…X_n]=nE[X]$. <br />So $E[Y|N]=NE[X]$. By the law of iterated expectation, $E[Y]=E[E[Y|N]]=E[NE[X]]=E[N]E[X]$</li>
+<li>$\begin{equation}\begin{split}var(Y)&amp;=E[var(Y|N)]+var(E[Y|N])\\&amp;=E[Nvar(X)]+var(NE[X])\\&amp;=E[N]var(X)+(E[X])^2var(N)\end{split}\end{equation}$</li>
+<li>$E[e^{sY}|N=n]=E[e^{sX_1}…e^{sX_n}]=E[e^{sX_1}]…E[e^{sX_n}]=(M_X(s))^n$. <br />$M_Y(s)=E[e^{sY}]=E[E[e^{sY}|N]]=E[(M_X(s))^N]=\displaystyle\sum^\infty_{n=0}(M_X(s))^np_N(n)=\sum^\infty_{n=0}e^{nlog M_X(s)}p_N(n)$<br />Compare with $M_N(s)=\displaystyle\sum^\infty_{n=0}e^{sn}p_N(n)$, $M_Y(s)=M_N(log M_X(s))$. </li>
 </ol>
 
       
@@ -1356,7 +1409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1423,20 +1476,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
