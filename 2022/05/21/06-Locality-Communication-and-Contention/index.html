@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="CommunicationReduce communication time Total communication time &#x3D; overhead + occupancy + network delay.   Overhead is the time spent on the communication by a processor, occupancy is the time for data">
 <meta property="article:published_time" content="2022-05-21T05:42:23.000Z">
-<meta property="article:modified_time" content="2022-05-22T07:19:44.654Z">
+<meta property="article:modified_time" content="2022-06-11T13:43:56.643Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="并行计算与分布式">
 <meta name="twitter:card" content="summary">
@@ -137,12 +137,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -226,7 +226,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-22 15:19:44" itemprop="dateModified" datetime="2022-05-22T15:19:44+08:00">2022-05-22</time>
+                <time title="Modified: 2022-06-11 21:43:56" itemprop="dateModified" datetime="2022-06-11T21:43:56+08:00">2022-06-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,6 +317,42 @@
 <li><p>The best way is to stagger access to contended resources. For example, instead of calculate the final result directly, we can calculate several temporal results which has no contention, and get the final result from them. </p>
 </li>
 </ol>
+<h1 id="Understanding-the-performance"><a href="#Understanding-the-performance" class="headerlink" title="Understanding the performance"></a>Understanding the performance</h1><ol>
+<li><p>Always, always, always try the simplest parallel solution first, then measure performance to see where you stand. </p>
+</li>
+<li><p>We should compare parallel program speedup to the best sequential program, instead of parallel algorithm running on one core.<br>The reason is that to allow for parallelism, we might change the algorithm, and make it slower when executed sequentially. </p>
+</li>
+<li><p>Determine if your performance is limited by computation, memory bandwidth (or memory latency), or synchronization?<br>Try and establish “high watermarks”. What’s the best you can do in practice? How close is your implementation to a best-case scenario?</p>
+</li>
+<li><p>Roofline model: Use microbenchmarks to compute peak performance of a machine as a function of arithmetic intensity of application. Then compare application’s performance to known peak values</p>
+</li>
+</ol>
+<h2 id="Establish-high-watermarks"><a href="#Establish-high-watermarks" class="headerlink" title="Establish high watermarks"></a>Establish high watermarks</h2><ol>
+<li><p>Add “math” (non-memory instructions).<br>Does execution time increase linearly with operation count as math is added?<br>If so, this is evidence that code is instruction-rate limited</p>
+</li>
+<li><p>Remove almost all math, but load same data.<br>How much does execution-time decrease?<br>If not much, suspect memory bottleneck</p>
+</li>
+<li><p>Change all array accesses to A[0].<br>How much faster does your code get?<br>This establishes an upper bound on benefit of improving locality of data access</p>
+</li>
+<li><p>Remove all atomic operations or locks.<br>How much faster does your code get? (provided it still does approximately the same amount of work)<br>This establishes an upper bound on benefit of reducing sync overhead. </p>
+</li>
+</ol>
+<h2 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h2><ol>
+<li><p>Arithmetic intensity is determined by both problem size and the processors number. Small problem size or large processor number both yields low arithmetic intensity. </p>
+</li>
+<li><p>If the problem size is too small, it might already execute fast enough on a single core. Scaling the performance of small problem ay not be all that important. </p>
+</li>
+<li><p>If the problem size is too large for a single machine, working set may not fit in memory, and causing thrashing to disk. With enough processors, the key working set fits in per-processor cache.<br>This may get a super-linear speedup and make speedup on a bigger parallel machine with more memory look amazing. </p>
+</li>
+<li><p>Desire to scale problem size as machine sizes grow (buy a bigger machine to compute more, rather than just compute the same problem faster)</p>
+</li>
+<li><p>Problem-constrained scaling focuses on using a parallel computer to solve the same problem faster<br>$Speedup=\frac{time 1 processor}{time P processors}$</p>
+</li>
+<li><p>Time-constrained scaling focuses on completing more work in a fixed amount of time<br>$Speedup = \frac{work done by P processors}{work done by 1 processor}$<br>“Work done” may not be linear function of problem inputs. One approach of defining “work done” is by execution time of same computation on a single processor (but consider effects of thrashing if problem too big)</p>
+</li>
+<li><p>Memory-constrained scaling (wak scaling) focuses on running the largest problem possible without overflowing main memory. Neither work or execution times are held constant.<br>$Speedup = \frac{work (P processors)}{time (P processors)}/\frac{work (1 processor)}{time (1 processor)}=\frac{work per unit time on P processors}{work per unit time on 1 processor}$</p>
+</li>
+</ol>
 
     </div>
 
@@ -339,7 +375,10 @@
     <a href="/2022/05/19/05-Graphic-processing-units-and-CUDA/" rel="prev" title="05. Graphic processing units and CUDA">
       <i class="fa fa-chevron-left"></i> 05. Graphic processing units and CUDA
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/11/07-Workload-driven-Perfromance-Evaluation/" rel="next" title="07. Workload-driven Perfromance Evaluation">
+      07. Workload-driven Perfromance Evaluation <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -399,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Communication"><span class="nav-number">1.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-communication-time"><span class="nav-number">1.1.</span> <span class="nav-text">Reduce communication time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-communication-cost"><span class="nav-number">1.2.</span> <span class="nav-text">Reduce communication cost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improve-arithmetic-intensity"><span class="nav-number">1.3.</span> <span class="nav-text">Improve arithmetic intensity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-artifactual-communication"><span class="nav-number">1.4.</span> <span class="nav-text">Reduce artifactual communication</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contention"><span class="nav-number">2.</span> <span class="nav-text">Contention</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Communication"><span class="nav-number">1.</span> <span class="nav-text">Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-communication-time"><span class="nav-number">1.1.</span> <span class="nav-text">Reduce communication time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-communication-cost"><span class="nav-number">1.2.</span> <span class="nav-text">Reduce communication cost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improve-arithmetic-intensity"><span class="nav-number">1.3.</span> <span class="nav-text">Improve arithmetic intensity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-artifactual-communication"><span class="nav-number">1.4.</span> <span class="nav-text">Reduce artifactual communication</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contention"><span class="nav-number">2.</span> <span class="nav-text">Contention</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understanding-the-performance"><span class="nav-number">3.</span> <span class="nav-text">Understanding the performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Establish-high-watermarks"><span class="nav-number">3.1.</span> <span class="nav-text">Establish high watermarks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaling"><span class="nav-number">3.2.</span> <span class="nav-text">Scaling</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -414,20 +453,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

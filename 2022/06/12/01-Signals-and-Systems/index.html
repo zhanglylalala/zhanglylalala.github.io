@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Sinusoidal signalsContinuous-time $x(t)&#x3D;A cos(\omega_0t+\phi)$. Here $A$ stands for amplitude, $\omega_0$ stands for frequency, and $\phi$ stands for phase.   A sinusoidal signal has period $T_0&#x3D;\frac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. Signals and Systems">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/06/12/01-Signals-and-Systems/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Sinusoidal signalsContinuous-time $x(t)&#x3D;A cos(\omega_0t+\phi)$. Here $A$ stands for amplitude, $\omega_0$ stands for frequency, and $\phi$ stands for phase.   A sinusoidal signal has period $T_0&#x3D;\frac">
+<meta property="article:published_time" content="2022-06-12T08:53:56.000Z">
+<meta property="article:modified_time" content="2022-06-16T15:41:42.700Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="信号">
+<meta property="article:tag" content="电子">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/06/12/01-Signals-and-Systems/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>01. Signals and Systems | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/12/01-Signals-and-Systems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          01. Signals and Systems
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-12 16:53:56" itemprop="dateCreated datePublished" datetime="2022-06-12T16:53:56+08:00">2022-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-16 23:41:42" itemprop="dateModified" datetime="2022-06-16T23:41:42+08:00">2022-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Sinusoidal-signals"><a href="#Sinusoidal-signals" class="headerlink" title="Sinusoidal signals"></a>Sinusoidal signals</h1><h2 id="Continuous-time"><a href="#Continuous-time" class="headerlink" title="Continuous-time"></a>Continuous-time</h2><ol>
+<li><p>$x(t)=A cos(\omega_0t+\phi)$. Here $A$ stands for amplitude, $\omega_0$ stands for frequency, and $\phi$ stands for phase. </p>
+</li>
+<li><p>A sinusoidal signal has period $T_0=\frac{2\pi}{\omega_0}$. </p>
+</li>
+<li><p>Time shift corresponds to a phase change, while phase change, likewise, corresponds to time shift.<br>For a time shift $\Delta t$, we can always have a phase change $\Delta\phi$, so that $x(t+\Delta t) = Acos(\omega_0(t+\Delta t)+\phi)=Acos(\omega_0t+\omega_0\Delta t+\phi)\Rightarrow\Delta\phi=\omega_0\Delta t$, and $\Delta t=\frac{\Delta\phi}{\omega_0}$</p>
+</li>
+<li><p>When $\phi=0$, $x(t)$ is a cosine signal, which is even. Namely, $x(t)=x(-t)$,<br>When $\phi=-\frac{\pi}{2}$, $x(t)=Acos(\omega_0t-\frac{\pi}{2})=Asin(\omega_0t)=Acos(\omega(t-\frac{T_0}{4})$ is a sinusoid signal, which is odd. Namely $x(t)=-x(-t)$. </p>
+</li>
+</ol>
+<h2 id="Discrete-time"><a href="#Discrete-time" class="headerlink" title="Discrete-time"></a>Discrete-time</h2><ol>
+<li><p>$x[n]=A cos(\Omega_0n+\phi)$. Here $A$ stands for amplitude, $\Omega_0$ stands for frequency, and $\phi$ stands for phase. $n$ only takes the integer values. </p>
+</li>
+<li><p>A time shift corresponds to a phase change. $x[t+\Delta t]=Acos(\Omega_0(t+\Delta t))=Acos(\Omega_0t+\Omega_0\Delta t)$. Hence $\Delta\phi=\Omega_0\Delta t$<br>However, not any phase change can be interpreted as a simple time shift in the sequence. A constraint in discrete-time is that $t+\Delta t$ must be an integer, but $\Delta t=\frac{\Delta\phi}{\Omega_0}$ cannot guarantee that. </p>
+</li>
+<li><p>If we want $x[n]$ to be periodic, $x[n]=x[n+N]\Rightarrow Acos(\Omega_0n+\phi)=Acos(\Omega_0n+\Omega_0N+\phi)\Rightarrow \Omega_0N=2\pi m$ with $m$ being an integer.<br>So when there exists an $m$ to make $\frac{2\pi m}{\Omega_0}$ an integer, $x[n]$ is periodic, and  the period $N_0=\frac{2\pi m}{\Omega_0}$.  Namely $\frac{2\pi}{\Omega_0}$ must be rational. </p>
+</li>
+<li><p>$Acos((\Omega_0+\Delta\Omega)n+\phi)=Acos((\Omega_0n+\Delta\Omega n+\phi))$. So for $\Delta\Omega=2\pi k$, $x[n]=x’[n]$. Thus, in discrete-time case, this class of signals is identical signals for values of $\Omega_0$ separated by $2\pi$.<br>In continuous-time signal, all signals with different $\Omega_0$ have distinct values. </p>
+</li>
+</ol>
+<h1 id="Exponentials"><a href="#Exponentials" class="headerlink" title="Exponentials"></a>Exponentials</h1><h2 id="Real-exponentials"><a href="#Real-exponentials" class="headerlink" title="Real exponentials"></a>Real exponentials</h2><ol>
+<li><p>In the continuous-time case, $x(t)=Ce^{at}$ with $C$ and $a$ both being real numbers. When $a&gt;0$, $x(t)$ is geomatically growing. When $a&lt;0$, $x(t)$ is decaying.<br>A time shift corresponds to a scale change, vise versa. $x(t+\Delta t)=Ce^{a(t+\Delta t)}=Ce^{a\Delta t}e^{at}$</p>
+</li>
+<li><p>In the discrete-time case, $x[n]=Ce^{\beta n}=C\alpha^n$, with $C,\alpha$ being real number. </p>
+</li>
+<li><p>When $\alpha&gt;1$, $x[n]$ is growing. When $0&lt;\alpha&lt;1$, $x[n]$ is decaying.<br>When $\alpha&lt;0$, $\beta$ is an imaginary number, and the sequence is going to alternate between positive and negative. </p>
+</li>
+</ol>
+<h2 id="Complex-exponentials"><a href="#Complex-exponentials" class="headerlink" title="Complex exponentials"></a>Complex exponentials</h2><ol>
+<li><p>In continuous-time case, $C$ and $a$ are complex numbers. We write $C$ in polar form $C=|C|e^{j\theta}$ and $a$ in rectangular form $a=r+j\omega_0$.<br>$x(t)=|C|e^{j\theta}e^{(r+j\omega_0)t}=|C|e^{rt}e^{j(\omega_0t+\theta)}=|C|e^{rt}cos(\omega_0t+\theta)+j|C|e^{rt}sin(\omega_0t+\theta)$</p>
+</li>
+<li><p>In discrete-time case, we write $C$ and $\alpha$ both in polar form $C=|C|e^{j\theta},\alpha=|\alpha|e^{j\Omega_0}$.<br>$x[n]=|C|e^{j\theta}(|\alpha|e^{j\Omega_0})^n=|C||\alpha|^ne^{j(\Omega_0n+\theta)}=|C||\alpha|^ncos(\Omega_0n+\theta)+j|C||\alpha|^nsin(\Omega_0n+\theta)$</p>
+</li>
+<li><p>When $r=0$, $x(t)$ is always periodic. When $\alpha=1$, whether $x[n]$ is periodic depends on $\Omega_0$. </p>
+</li>
+</ol>
+<h1 id="Unit-step-and-unit-impuls-signals"><a href="#Unit-step-and-unit-impuls-signals" class="headerlink" title="Unit step and unit impuls signals"></a>Unit step and unit impuls signals</h1><h2 id="Discrete-time-1"><a href="#Discrete-time-1" class="headerlink" title="Discrete-time"></a>Discrete-time</h2><ol>
+<li><p>For unit step sequence, $u[n]=\left\{ \begin{matrix}0 &amp; n&lt;0\\1 &amp; n≥0  \end{matrix} \right.$</p>
+</li>
+<li><p>For unit impulse sequence, $\delta[n]=\left\{\begin{matrix}0 &amp; n≠0\\1 &amp; n=0 \end{matrix}\right.$</p>
+</li>
+<li><p>We can express the unit impulse with unit step. $\delta[n]=u[n]-u[n-l] $. Namely, the unit impulse equals to the unit step minus unit step delayed, which is the first difference. </p>
+</li>
+<li><p>We can also express the unit step with unit impulse. $u[n]=\displaystyle\sum^n_{m=-\infty} $ or $u[n]=\displaystyle\sum^\infty_{k=0}\delta[n-k] $</p>
+</li>
+</ol>
+<h2 id="Continuous-time-1"><a href="#Continuous-time-1" class="headerlink" title="Continuous-time"></a>Continuous-time</h2><ol>
+<li><p>For unit step function, $u(t)=\left\{\begin{matrix}0 &amp; t &lt; 0\\1 &amp; t &gt; 0 \end{matrix} \right. $.<br>The unit step function is discontinuous at $t=0$. So in effect, we need to think the unit step function as the limit of a continuous function, $u_\Delta(t) $ linearly increase from $0$ to $1$ at time $t$ from $0$ to $\Delta$. Thus $u(t)=u_\Delta(t) $ as $\Delta\to0$. </p>
+</li>
+<li><p>Unit impulse function is the derivative of unit step function, $\delta(t)=\frac{du(t)}{dt} $.<br>But $u(t)$ is discontinuous, so we would consider $\delta_\Delta(t)$ as the derivative of $u_\Delta(t)$, $\delta_\Delta(t)=\frac{du_\Delta(t)}{dt} $. So $\delta(t)=\delta_\Delta(t) $ as $\Delta\to0$.<br>$\delta_\Delta(t)=\left\{\begin{matrix}\frac{1}\Delta&amp;0&lt;t&lt;\Delta\\0&amp;otherwise \end{matrix} \right.$. As $\Delta\to0$, the width of the rectangle decreases while the height increases, and the area remains $1$.<br>We can draw $\delta(t)$ by an arrow point to the positive size of y-axis with length of $1$. </p>
+</li>
+<li><p>The relationship from unit impulse to unit step is derivative. And, natually, the relationship from unit step to unit impulse is integral, $u(t)=\displaystyle\int^t_{-\infty}\delta(t)dt$</p>
+</li>
+</ol>
+<h1 id="Systems"><a href="#Systems" class="headerlink" title="Systems"></a>Systems</h1><ol>
+<li><p>Systems take one signal as its input, and output another signal.<br>For continuous-time system denoted by $x(t)\to y(t)$, both signals are continuous.<br>For discrete-time system denoted by $x[n]\to y[n]$, both signals are discrete. </p>
+</li>
+<li><p>A cascade of systems (a series interconnection systems): taking the output of one system as the input of another system. </p>
+</li>
+<li><p>Parallel interconnection system: inputs are feed into two systems simultaneously. And the output of those two systems are added together to give the overall system output. </p>
+</li>
+<li><p>Feedback interconnection system: the output of system 1 is the output of the overall system. The output also is fed into system 2. And the sum of output of system 2 and the overall input of the system is the input of system 1. </p>
+</li>
+<li><p>Memoryless: the output at a certain time only depends on the input of the same time.<br>The unit delay system $y[n]=x[n-1] $ is not a memoryless system. </p>
+</li>
+<li><p>Invertibility: given the output, you can figure out the unique input that cause the output.<br>Identity system is the cascade of a system and its inverse. The inverse of system $A$ is denoted by $A^{-1}$<br>The inverse of an integrator is a differentiator. But a differentiator is not invertible, for the input of a given output is not unique. </p>
+</li>
+<li><p>Causality: output at any time depends only on input prior or equal to that time. Or system cannot anticipate future inputs.<br>For $x_1(t)\to y_1(t) $ and $x_2(t)\to y_2(t) $, if $x_1(t)$ and $x_2(t)$ are the same util some time, then $y_1(t)$ and $y_2(t)$ are alse the same util the same time. </p>
+</li>
+<li><p>Stability: for every bounded input, the output is bounded.<br>An unstable system can be stablized through feadback. Feadback can also destablize a system. </p>
+</li>
+<li><p>Time-invariable: If $x(t)\to y(t) $, then $x(t-t_0)\to y(t-t_0) $.<br>The system doesn’t care what happened at the origin. If the input is shifted by a certain time, the output is also shifted by the same time. </p>
+</li>
+<li><p>Linearity: For two systems $x_1(t)\to y_1(t) $ and $x_2(t)\to y_2(t) $, then $ax_1(t)+bx_2(t)\to ay_1(t)+by_2(t) $. </p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E5%8F%B7/" rel="tag"><i class="fa fa-tag"></i> 信号</a>
+              <a href="/tags/%E7%94%B5%E5%AD%90/" rel="tag"><i class="fa fa-tag"></i> 电子</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/11/07-Workload-driven-Perfromance-Evaluation/" rel="prev" title="07. Workload-driven Perfromance Evaluation">
+      <i class="fa fa-chevron-left"></i> 07. Workload-driven Perfromance Evaluation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/17/02-Convolution/" rel="next" title="02. Convolution">
+      02. Convolution <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sinusoidal-signals"><span class="nav-number">1.</span> <span class="nav-text">Sinusoidal signals</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Continuous-time"><span class="nav-number">1.1.</span> <span class="nav-text">Continuous-time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Discrete-time"><span class="nav-number">1.2.</span> <span class="nav-text">Discrete-time</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exponentials"><span class="nav-number">2.</span> <span class="nav-text">Exponentials</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-exponentials"><span class="nav-number">2.1.</span> <span class="nav-text">Real exponentials</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Complex-exponentials"><span class="nav-number">2.2.</span> <span class="nav-text">Complex exponentials</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-step-and-unit-impuls-signals"><span class="nav-number">3.</span> <span class="nav-text">Unit step and unit impuls signals</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Discrete-time-1"><span class="nav-number">3.1.</span> <span class="nav-text">Discrete-time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Continuous-time-1"><span class="nav-number">3.2.</span> <span class="nav-text">Continuous-time</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Systems"><span class="nav-number">4.</span> <span class="nav-text">Systems</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

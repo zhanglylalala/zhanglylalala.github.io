@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,330 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E5%9B%BE%E8%AE%BA%E6%9D%82%E8%B0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/%E5%9B%BE%E8%AE%BA%E6%9D%82%E8%B0%88/" class="post-title-link" itemprop="url">图论杂谈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-08-07 22:45:05 / Modified: 22:48:11" itemprop="dateCreated datePublished" datetime="2020-08-07T22:45:05+08:00">2020-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="缩点"><a href="#缩点" class="headerlink" title="缩点"></a>缩点</h1><p>一种就是比如2-sat问题中的缩点，用tarjan，用于关系模糊未知的图中<br>还可以是用并查集，把同一祖先节点的缩成一个点，用于关系明确，直接说明两个点可以缩为一个点的情况，如：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1811" target="_blank" rel="noopener">HDOJ 1811</a></p>
+<h1 id="判断环"><a href="#判断环" class="headerlink" title="判断环"></a>判断环</h1><p>有一种办法就是利用<strong>拓扑排序</strong>，但这种办法只能静态判断，不能动态，下面还有一种办法：<br>在图中，新建一条边，判断这条边会不会导致形成一个环？<br>只需要开一个二维数组，记录两个点之间有没有连边(直接 / 间接)，新建了一条a -&gt; b的边，就判断一下是不是已经有一条b -&gt; a的边，有就会构成环。<br>边的更新：首先把graph[a][b] = 1，然后开始分点更新。先更新到a的边，遍历一遍，graph[i][a]不为0就说明有路径i -&gt; a -&gt; b，就可以更新graph[i][b] = 1。再更新b出发的边，遍历一遍如果有graph[b][i]不为0，就说明有a -&gt; b -&gt; i，就更新graph[a][i] = 1，但是还不能结束，还要遍历一遍到a的点，如果还有graph[j][a]不为0，就说明有j -&gt; a -&gt; b -&gt; i，就更新graph[j][i] = 1</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	graph[a][b] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (graph[i][a])</span><br><span class="line">		&#123;</span><br><span class="line">			graph[i][b] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (graph[b][i])</span><br><span class="line">		&#123;</span><br><span class="line">			graph[a][i] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (graph[j][b])</span><br><span class="line">				&#123;</span><br><span class="line">					graph[j][i] = <span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E4%BA%8C%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/%E4%BA%8C%E5%88%86/" class="post-title-link" itemprop="url">二分</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-07 22:42:19" itemprop="dateCreated datePublished" datetime="2020-08-07T22:42:19+08:00">2020-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-21 16:16:03" itemprop="dateModified" datetime="2020-08-21T16:16:03+08:00">2020-08-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本二分查找"><a href="#基本二分查找" class="headerlink" title="基本二分查找"></a>基本二分查找</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN];</span><br><span class="line"><span class="comment">// arr按非降排序</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_search_int</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi, <span class="keyword">int</span> target)</span> <span class="comment">// 查找区间为 [lo, hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (arr[mid] &lt; target)</span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> lo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">binary_search_real</span><span class="params">(<span class="keyword">double</span> lo, <span class="keyword">double</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (lo + EPS &lt; hi) <span class="comment">// EPS通常比要求的精度小两个数量级</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">double</span> mid = (lo + hi) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (cmp(mid))</span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> lo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二分答案"><a href="#二分答案" class="headerlink" title="二分答案"></a>二分答案</h1><p>有些题直接求答案不好求，但是一个结果是不是答案很容易判断，这时就可以写一个检查函数，检查一个结果是不是答案<br>例如：<a href="https://ac.nowcoder.com/acm/contest/918/I" target="_blank" rel="noopener">USACO</a><br>在知道了一个界限之后我们就很容易写出检查函数——一辆一辆塞，塞满或者达到界限为止</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arrive[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n, <span class="keyword">int</span> c, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">1</span>, sum = <span class="number">1</span>, fir = arrive[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (arrive[i] - fir &lt;= x &amp;&amp; sum + <span class="number">1</span> &lt;= c)</span><br><span class="line">        &#123;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            sum = <span class="number">1</span>;</span><br><span class="line">            fir = arrive[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt &lt;= m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;c);</span><br><span class="line">    repLess(i, <span class="number">0</span>, n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arrive[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arrive, arrive + n);</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = arrive[n - <span class="number">1</span>] - arrive[<span class="number">0</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (check(mid, n, c, m))</span><br><span class="line">        &#123;</span><br><span class="line">            r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            l = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (check(l, n, c, m))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, l);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三分查找求单峰函数极值"><a href="#三分查找求单峰函数极值" class="headerlink" title="三分查找求单峰函数极值"></a>三分查找求单峰函数极值</h1><ol>
+<li><p>要求单峰函数在极值的两侧都是严格单调，极大值左侧严格递增，右侧严格递减；极小值左侧严格递减，右侧严格递增。且只有一个极值</p>
+</li>
+<li><p>先考虑极大值情况，把区间用两个点$lmid$、$rmid$ 划分成三段区间</p>
+<p>&emsp;如果$f(lmid)&lt;f(rmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的左侧，但极大值都在$lmid$的右侧，此时可以赋值$l=lmid$</p>
+<p>&emsp;如果$f(rmid)&lt;f(lmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$rmid$的左侧，此时可以赋值$r=rmid$</p>
+</li>
+<li><p>再考虑极小值情况</p>
+<p>&emsp;如果$f(lmid)&lt;f(rmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$rmid$的左侧，此时可以赋值$r=rmid$</p>
+<p>&emsp;如果$f(rmid)&lt;f(lmid)$，则要么$lmid$在极大值左侧，$rmid$在极大值右侧，要么都在极大值的右侧，但极大值都在$lmid$的右侧，此时可以赋值$l=lmid$</p>
+</li>
+</ol>
+<h1 id="最近点对问题"><a href="#最近点对问题" class="headerlink" title="最近点对问题"></a>最近点对问题</h1><p>问题：给平面内一系列的点，找出其中距离最近的两个点<br />二分：先把所有点按$x$轴排序，分成左右两段，所有组合只有三种情况——两个点都在左半段；两个点都在右半段；一个点在左半段，一个点在右半段<br />二分解决左半段和右半段的问题，再枚举跨越两段的情况，找到最小值<br />枚举跨越两段的情况时，只需要枚举距离中点不超过只在左段或只在右段的最小距离<br />复杂度为<script type="math/tex">O(nlog\ n\ log\ n)</script></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (lo == hi - <span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> INF;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">double</span> ans = <span class="built_in">min</span>(solve(lo, mid), solve(mid, hi));</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = mid - <span class="number">1</span>; i &gt;= lo; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (dist(i, mid) &gt;= ans)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = mid; j &lt; hi; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (dist(mid, j) &gt;= ans)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      ans = <span class="built_in">min</span>(ans, dist(i, j));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>扩展：把点分为两类，要找出一类点到另一类点的最短距离 <a href="https://ac.nowcoder.com/acm/contest/1004/D" target="_blank" rel="noopener">POJ 3714</a></p>
+<p>在枚举的时候特判一下两个点的类别不同即可</p>
+<h1 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h1><ol>
+<li><code>lower_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于或等于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li><code>upper_bound(begin, end, num)​</code>：在数组区间$[begin, end)$中查找第一个<strong><em><code>大于</code></em></strong>$num$的数，如果不存在，则返回$end$</li>
+<li>这两个函数都是返回一个指针，减掉$begin$，就可以得到其与$begin$的相对位置，是一个整型</li>
+<li>如果要找的是小于或等于查找值的最大位置的话<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置就是等于查找值的位置<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;任何情况下得到的位置都是大于查找值，且其上一个位置等于查找值 (查找值存在)，或小于查找值 (查找值不存在)，所以都要减$1$<br />综上，我们采用​<code>upper_bound(begin, end, num) - begin - 1</code>的策略</li>
+<li>如果要找的是小于查找值的最大位置的话<br />&emsp;使用<code>upper_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置的上一个位置是查找值，再上一个位置才小于查找值，则需要减$2$<br />&emsp;&emsp;如果查找值不存在，得到的是大于查找值的位置，且其上一个位置就是小于查找值的位置 (查找值不存在)，所以要减$1$<br />&emsp;使用<code>lower_bound</code><br />&emsp;&emsp;如果查找值存在，得到的位置是查找值，上一个位置小于查找值，要减$1$<br />&emsp;&emsp;如果查找值不存在，得到的位置大于查找值，但由于查找值不存在，其上一个位置小于查找值，要减$1$<br />综上，我们采用<code>lower_bound(begin, end, num) - begin - 1</code>的策略</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/08/07/%E6%8E%92%E5%BA%8F-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/%E6%8E%92%E5%BA%8F-1/" class="post-title-link" itemprop="url">排序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-07 22:41:49" itemprop="dateCreated datePublished" datetime="2020-08-07T22:41:49+08:00">2020-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-24 18:30:53" itemprop="dateModified" datetime="2020-08-24T18:30:53+08:00">2020-08-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">基本算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h1><ol>
+<li>把所有数据排序去重之后，从第一个开始逐一往后标记，把每一个数据和一个整数一一对应</li>
+<li>排序之后再离散化可以保留原始数据的大小关系，不必查询原数据，就可以直接从Hash后的值得到其大小关系</li>
+</ol>
+<p>例如<a href="https://ac.nowcoder.com/acm/contest/1004/F?&amp;headNav=acm" target="_blank" rel="noopener">POJ 3179</a></p>
+<ol>
+<li><p>首先很明显，这题要用<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">二维前缀和</a>来求解一个区域内的和</p>
+</li>
+<li><p>答案直接求不容易，但是判定一个值是不是答案很容易，所以可以<a href="http://www.laughingtree.cn/2020/08/07/二分/" target="_blank" rel="noopener">二分答案</a>求解</p>
+</li>
+<li><p>这题对空间限制比较严格，而且只有少部分的地方有非$0$值，所以可以把所有非$0$值的横纵坐标离散化，$500$个点离散后最大只有$1000$，来压缩空间</p>
+</li>
+<li><p>离散化后，在确认答案时，要在哈希表中找到原来的坐标对应的哈希后的坐标以及遍历的上界<br />找哈希后的坐标要求的是不大于目标坐标的点，只要找出所有在当前区域内的和即可<br />遍历上界的要求是不超过哈希表中最大元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1E3</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> sum[MAXN][MAXN], ori[MAXN], disc[MAXN];</span><br><span class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pos[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> len, <span class="keyword">int</span> mid, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> bound = upper_bound(disc + <span class="number">1</span>, disc + len, disc[len - <span class="number">1</span>] - mid + <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= bound; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= bound; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">int</span> ti = upper_bound(disc + <span class="number">1</span>, disc + len, disc[i] + mid - <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">int</span> tj = upper_bound(disc + <span class="number">1</span>, disc + len, disc[j] + mid - <span class="number">1</span>) - disc - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (sum[i - <span class="number">1</span>][j - <span class="number">1</span>] - sum[ti][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][tj] + sum[ti][tj] &gt;= c)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">discrete</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  sort(ori, ori + n);</span><br><span class="line">  <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">  disc[<span class="number">0</span>] = -INF;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">0</span> || ori[i] != ori[i - <span class="number">1</span>])</span><br><span class="line">    &#123;</span><br><span class="line">      disc[cnt++] = ori[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  disc[cnt++] = INF;</span><br><span class="line">  <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> c, n;</span><br><span class="line">  <span class="keyword">int</span> x, y;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;c, &amp;n);</span><br><span class="line">  <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">    pos[i] = make_pair(x, y);</span><br><span class="line">    ori[<span class="number">2</span> * i] = x;</span><br><span class="line">    ori[<span class="number">2</span> * i + <span class="number">1</span>] = y;</span><br><span class="line">  &#125;</span><br><span class="line">  len = discrete(<span class="number">2</span> * n);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> nx = lower_bound(disc + <span class="number">1</span>, disc + len, pos[i].first) - disc;</span><br><span class="line">    <span class="keyword">int</span> ny = lower_bound(disc + <span class="number">1</span>, disc + len, pos[i].second) - disc;</span><br><span class="line">    sum[nx][ny]++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      sum[i][j] += sum[i - <span class="number">1</span>][j] + sum[i][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> lo = <span class="number">0</span>, hi = disc[len - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (lo &lt; hi)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (check(len, mid, c))</span><br><span class="line">    &#123;</span><br><span class="line">      hi = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      lo = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, lo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="中位数"><a href="#中位数" class="headerlink" title="中位数"></a>中位数</h1><ol>
+<li>在有序序列中，若下标是从$1$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n+1}{2}$，总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}{2}+1$与$\displaystyle\frac{n}{2}$的数之间的数；若下标是从$0$开始的，则当总共有奇数个数时，中位数的下标为$\displaystyle\frac{n-1}{2}$，当总共有偶数个数时，中位数是下标为$\displaystyle\frac{n}2-1$与$\displaystyle\frac{n}{2}$</li>
+<li>在一个数组中考虑$\displaystyle\sum |a[i]-x|$的最小值。假设在数轴中$a$数组有$P$个数比$x$小，有$Q$个数比$x$大<br />若$P<Q$，则每把$x+1$，要求的值都会减小$Q-P$<br />若$P&gt;Q$，则每把$x-1$，要求的值都会减小$P-Q$<br />所以使得$\displaystyle\sum|a[i]-x|$最小的$x$就是$a$数组的中位数，若$a$数组有偶数个元素，则$x$为两个中位数之间的任意数，若有奇数个元素，则$x$为中位数本身</li>
+</ol>
+<h2 id="环形均分纸牌问题"><a href="#环形均分纸牌问题" class="headerlink" title="环形均分纸牌问题"></a>环形均分纸牌问题</h2><ol>
+<li>环形均分纸牌问题只是在<a href="http://www.laughingtree.cn/2020/08/07/前缀和与差分/" target="_blank" rel="noopener">均分纸牌问题</a>上取消一个限制，最后一个人可以把纸牌给第$1$个人</li>
+<li>从均分纸牌问题的推导中，我们可以知道必然有一个人不用给任何人纸牌，这个人就可以被看作是均分纸牌问题中的最后一个人，即环形链从这个人断开。在环形均分纸牌问题中，我们只需要枚举每一个人作为最后一个人的情况，取其结果的最小值就是答案</li>
+<li>先给每个人从$1$号标到$M$号，记$A[1\sim M]=C[i\sim M]-\displaystyle\frac{T}M$，$A$数组的前缀和$sum[1\sim M]$，则当第$k$个人为最后一个人，链从这里断开时，前缀和<br />$sum_k[k+1]=sum[k+1]-sum[k]$<br />$sum_k[k+2]=sum[k+2]-sum[k]$<br />$…$<br />$sum_k[M]=sum[M]-sum[k]$<br />$sum_k[1]=sum[1]+sum_k[M]=sum[1]+sum[M]-sum[k]$<br />$sum_k[M]=sum[k]+sum[M]-sum[k]=sum[M]$</li>
+<li>故答案为$\displaystyle\sum^M_{i=1}\bigg|sum[i]-sum[k]\bigg|$的最小值，即为$sum$数组的中位数</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = (n + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ave = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ave += sum[i];</span><br><span class="line">    &#125;</span><br><span class="line">    ave /= n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[i] -= ave;</span><br><span class="line">        sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(sum + <span class="number">1</span>, sum + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += <span class="built_in">abs</span>(sum[i] - sum[pos]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态维护中位数"><a href="#动态维护中位数" class="headerlink" title="动态维护中位数"></a>动态维护中位数</h2><ol>
+<li><p>在线的做法是对顶堆算法</p>
+</li>
+<li><p>把序列中从小到大的$1\sim\displaystyle\frac{M}2+1$都存储在大根堆中，$\displaystyle\frac{M}2+2\sim M$存储在小根堆中<br />小根堆中共有$\displaystyle\frac{M}2+1$个数，大根堆中一共有$\displaystyle\frac{M}2-1$个元素</p>
+</li>
+<li><p>每读入一个数，如果比大根堆的堆顶元素小，则推入大根堆，否则推入小根堆。如果有一个堆的大小不符合要求的，就把太大的那个堆的堆顶元素弹出，推入另一个堆中</p>
+</li>
+<li><p>中位数就是小根堆的堆顶元素</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; large;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; small;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">median</span><span class="params">(<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> inp;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;inp);</span><br><span class="line">    <span class="comment">// 推入堆中</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() == <span class="number">0</span> || inp &lt; large.top())</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      small.push(inp);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 维护堆</span></span><br><span class="line">    <span class="keyword">if</span> (large.<span class="built_in">size</span>() &gt; i / <span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      small.push(large.top());</span><br><span class="line">      large.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (small.<span class="built_in">size</span>() &gt; i / <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      large.push(small.top());</span><br><span class="line">      small.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 当有奇数个输入时，输出中位数</span></span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, large.top());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="逆序对"><a href="#逆序对" class="headerlink" title="逆序对"></a>逆序对</h1><ol>
+<li><p>在冒泡排序中，每一次交换就是修复一对逆序对，所以冒泡排序中的交换次数就是逆序对数</p>
+</li>
+<li><p>但是冒泡排序的复杂度是$O(n^2)$，相对较高，可以利用归并排序优化</p>
+</li>
+<li><p>在归并排序的归并过程中$loPtr$指向当前正在排序数组段的前半段中正在比较的数，$hiPtr$指向后半段正在比较的数。若$hiPtr$指向的数小于$loPtr$指向的数，则$hiPtr$指向的数与从$loPtr$到$mid$之间的所有数都构成逆序对</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[MAXN], tmp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lo == hi - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> ans = mergeSort(lo, mid) + mergeSort(mid, hi);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = lo; i &lt; mid; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tmpPtr = lo, hiPtr = mid, arrPtr = lo;</span><br><span class="line">    <span class="keyword">while</span> (arrPtr &lt; hi)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (tmpPtr == mid || (hiPtr != hi &amp;&amp; tmp[tmpPtr] &gt; arr[hiPtr]))</span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = arr[hiPtr++];</span><br><span class="line">            ans += mid - tmpPtr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            arr[arrPtr++] = tmp[tmpPtr++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="数码问题"><a href="#数码问题" class="headerlink" title="数码问题"></a>数码问题</h2><ol>
+<li>在$n\times m$的矩阵中，有$n\times m-1$个数和一个空格，空格可以和其上下左右相邻的格子交换，给出两个局面，问能否从其中一个局面变换到另一个局面</li>
+<li>将矩阵内的非空格内容展开成一维数组，空格的左右交换相当于没有操作，不会改变一维数组，但空格向上交换相当于一维数组中被交换的那格向后移动了$m-1$位；向下交换相当于前移了$m-1$位</li>
+<li>若$m$为奇数，则$m-1$为偶数，移动的过程消除了$x$个逆序对，但增加了$y$个逆序对 (为方便相等的也记为新的逆序对)，且$x+y=m-1$。逆序对的数量变化为$y-x$。$x+y$是偶数，则$y-x$也是偶数。$x$与$y$要么都是奇数，要么都是偶数<br />所以若两个局面可以相互转换，则他们的一维展开逆序对的奇偶性一样</li>
+<li>若$m$为偶数，则$m-1$为奇数。则$y-x$也为奇数，则每变动一行奇偶性变动一次，即逆序对数量之差的奇偶性与行数之差的奇偶性相同</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1301,422 +1625,6 @@ table th:first-of-type {
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:51:12" itemprop="dateModified" datetime="2020-08-07T19:51:12+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
-<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
-<li>语法正确的程序不一定语义正确</li>
-<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
-</ol>
-<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
-<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
-<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
-<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
-<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
-<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承属性：由该节点的兄弟节点及父节点的属性值计算出来</li>
-<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
-<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
-<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
-<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合属性，一般由词法分析器提供</li>
-<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
-<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
-<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
-<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
-<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
-</ol>
-<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
-<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
-<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
-<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
-<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
-</ol>
-<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
-<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
-<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
-<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有关</li>
-<li>每一个$S-$属性定义都是$L-$属性定义</li>
-<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
-<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
-<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
-<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">05. 自底向上语法分析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-13 22:03:25" itemprop="dateCreated datePublished" datetime="2020-05-13T22:03:25+08:00">2020-05-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:49:16" itemprop="dateModified" datetime="2020-08-07T19:49:16+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>方法：从输入串开始，逐步进行归约，直到归约到文法的开始符号</li>
-<li>边扫描输入串，边把输入符号移入分析者，边检查位于栈顶的一串符号是否与某个产生式的右部相同。如果相同，就把串归约为相应左部非终结符，否则继续移入输入符号。重复直到栈内符号为开始符号</li>
-<li>构造分析树时从叶节点 (句子)开始，(以单位为单位)向根节点前进</li>
-<li>问题：如何合适地选择归约串。一个串是多个不同左部产生式的右部；可以看成多种不同的串分别都是不同产生式的右部</li>
-<li>本质是每次都把句柄归约</li>
-<li>初始时栈内只有$\<script type="math/tex">，结束时栈内是$S\</script>，输入缓冲为空</li>
-</ol>
-<h1 id="可归约串的识别——LR分析"><a href="#可归约串的识别——LR分析" class="headerlink" title="可归约串的识别——LR分析"></a>可归约串的识别——LR分析</h1><ol>
-<li>$LR$分析程序，是通用的分析程序，自左向右 ($L$)扫描，识别句柄，自下而上归约，构造一个最右推导的逆过程 ($R$)。为了作出分析决定前(构造分析表时)而向前看的输入符号的个数，通常是$0$或$1$</li>
-<li>$LR$分析器是无回溯的“移进-归约”方法，根据栈中的符号串和向右顺序查看输入串中的$k(k≥0)$个符号唯一确定分析器的操作</li>
-<li>结构：符号栈、状态栈、$action$表、$goto$表。$action$表和$goto$表构成分析表</li>
-<li>状态栈的栈顶元素用$s_m$表示，当前输入符号用$a_i$表示</li>
-<li>$action$表根据当前状态和输入符号唯一确定是移进、归约、接受、报错</li>
-<li>$goto$表根据压入的非终结符号和当前状态确定下一个状态</li>
-<li>把栈中符号序列和剩余输入串看书一个二元格局，初始格局为$(s_0,a_1a_2…a_n\$)$<br />假设当前格局为$(s_0X_1s_1X_2s_2…X_ms_m,a_ia_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=shift\ s</script>，二元式变为$(s_0X_1s_1X_2s_2…X_ms_ma_is,a_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=reduce\ A\to\beta</script>，$|\beta|=r$，二元式变为$(s_0X_1s_1X_2s_2…X_{m-r}s_{m-r}As,a_ia_{i+1}…a_n\$)$<br />&emsp;&emsp;$s=goto[s_{m-r},A]$，$\beta=X_{m-r+1}X_{m-r+2}…X_m$</li>
-</ol>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ol>
-<li>活前缀：归约前栈内的所有符号。即，句柄的前缀。<br />严格定义：若$S’\Rightarrow^*_{rm}\alpha Aw\Rightarrow_{rm}\alpha\beta w$是文法$G$的拓广文法$G’$的一个规范推导，符号$\gamma$是$\alpha\beta$的前缀，则称$\gamma$是$G$的一个活前缀。<br />在$w$的任何一个符号被压入栈前，$\alpha\beta$就必然形成可归约串，并立即运用产生式$A\to\beta$归约，就不可能和$\beta$的任何一个符号同时出现在栈中，就不是活前缀</li>
-<li>每个句柄的识别过程划分为若干个状态，用$\cdot$做区分，称为$LR(0)$项目。<br />例如对产生式$A\to XYZ$，$LR(0)$项目有$A\to\cdot XYZ,A\to X\cdot YZ,A\to XY\cdot Z,A\to XYZ\cdot$，分别表示$XYZ$均未入栈；$X$入栈，$YZ$未入栈；$XY$入栈，$Z$未入栈；$XYZ$均入栈<br />$A\to\epsilon$的项目为$A\to\cdot$</li>
-<li>拓广文法：添加一个唯一的推导出开始符号的符号。$S’$是$G’$的开始符号，$S$是$G$的开始符号，$G’$之比$G$多一条$S’\to S$</li>
-<li>包含了完整句柄的活前缀称为可归前缀</li>
-<li>分析过程可以看做是活前缀的识别过程</li>
-</ol>
-<h1 id="LR-0-分析"><a href="#LR-0-分析" class="headerlink" title="LR(0)分析"></a>LR(0)分析</h1><ol>
-<li>根据$LR(0)$项目分析操作类型</li>
-<li>项目分类：<br />&emsp;$A\to\alpha\cdot a\beta$，$a\in V_T$，移进项目<br />&emsp;$A\to\alpha\cdot B\beta$，$B\in V_N$，待归约项目<br />&emsp;$A\to\alpha\cdot$，归约项目<br />&emsp;$S’\to\cdot S$，开始项目<br />&emsp;$S’\to S\cdot$，接受项目<br />&emsp;项目$A\to XY\cdot Z$是$A\to X\cdot YZ$的后继项目</li>
-</ol>
-<h2 id="构造识别所有活前缀的NFA"><a href="#构造识别所有活前缀的NFA" class="headerlink" title="构造识别所有活前缀的NFA"></a>构造识别所有活前缀的NFA</h2><ol>
-<li>开始符号$S’\to\cdot S$是NFA的唯一初态</li>
-<li>项目$j$是项目$i$的后继项目，就从$i$画一条$X_j$弧到$j$</li>
-<li>若项目$i$后是一个非终结符号，$X\to \alpha\cdot A\beta$，从$i$画$\epsilon$弧到所有$A\to\cdot\gamma$，因为他们是等价状态</li>
-</ol>
-<h2 id="识别活前缀的有效项目的DFA"><a href="#识别活前缀的有效项目的DFA" class="headerlink" title="识别活前缀的有效项目的DFA"></a>识别活前缀的有效项目的DFA</h2><ol>
-<li>如果存在一个规范推导$S\Rightarrow^*_{rm}\alpha Aw\Rightarrow\alpha\beta_1\beta_2w$，则项目$A\to \beta_1\cdot\beta_2$对识别活前缀$\gamma=\alpha\beta_1$是有效的</li>
-<li>若项目$A\to\alpha\cdot B\beta$对识别活前缀$\gamma=\delta\alpha$是有效的，且$B\to\cdot\eta$对识别活前缀$\gamma=\delta\alpha$也有效</li>
-<li>某个活前缀$\gamma$的所有有效项目组成的集合称为$\gamma$的有效项目集</li>
-<li>所有有效项目集组成的集合称为$LR(0)$项目的集规范族，即DFA的状态集</li>
-<li>有效项目集就是之前对每一个项目的$\epsilon$闭包。若项目$A\to\alpha\cdot B\beta$在$closure(I)$中，且$B\to\gamma$是$G$的一个产生式，如果$B\to\cdot\gamma$不在$closure(I)$中，则将$B\to\cdot\gamma$加入$closure(I)$</li>
-<li>待归约项目称为基本项目，是每一个有效项目集的核心</li>
-<li>转移函数$go(I,X)$，输入中把当前状态改为当前有效项目集，输出改为下一有效状态集，$go(I,X)=closure(J)$，$J=\{A\to\alpha X\cdot\beta|A\to\alpha\cdot X\beta\in I\}$</li>
-<li>带有归约项目的有效项目集都是生成的DFA的接受状态</li>
-</ol>
-<h2 id="分析表的构造"><a href="#分析表的构造" class="headerlink" title="分析表的构造"></a>分析表的构造</h2><ol>
-<li>$LR(0)$文法：DFA中每个状态不存在：既含移进项目又含归约项目 (移进-归约冲突)、含有多个归约项目 (归约-归约冲突)</li>
-<li>若项目$A\to\alpha\cdot X\beta\in I_k$，且$go(I_k,X)=I_j$，则<br />&emsp;若$X=a$为终结符号，则置<script type="math/tex">action[k,a]=shift\ j</script>，简写为$sj$，表示把$a$和$j$移入栈中<br />&emsp;若$X$是非终结符号，则置$goto[k,X]=j$</li>
-<li>若$S’\to S\in I_k$，则置$action[k, \$]=acc$</li>
-<li>若$A\to\alpha\cdot\in I_k$，则对所有终结符号$a$，置<script type="math/tex">action[k,a]=reduce\ A\to\alpha</script>，简写为$rj$，$j$为产生式编号</li>
-<li>其他空白格都表示出错</li>
-</ol>
-<h1 id="SLR-1-文法"><a href="#SLR-1-文法" class="headerlink" title="SLR(1)文法"></a>SLR(1)文法</h1><ol>
-<li>如果有冲突，我们可以提前看下一个输入非终结符号，把移进和归约、归约和归约分离开来制作$action$表</li>
-<li>$LR(0)$文法中归约的优先级过高，在$LR(1)$文法中，我们通过限定归约的前提条件来解决冲突</li>
-<li>$n$个归约$A_i\to\gamma_i\cdot$，若$FOLLOW(A_1)\cap FOLLOW(A_0)\cap…\cap FOLLOW(A_n)=\emptyset$，则当$I$面临输入符号$a$时<br />&emsp;若$a\notin FOLLOW(A_1)\cup FOLLOW(A_0)\cup…\cup FOLLOW(A_n)$，移进<br />&emsp;若$a\in FOLLOW(A_1)$，用$A_1\to\gamma_1$归约<br />&emsp;若$a\in FOLLOW(A_2)$，用$A_2\to\gamma_2$归约<br />&emsp;$…$<br />&emsp;否则，报错</li>
-<li>$action$表的生成中唯一的不同就是在填入归约操作时要提前展望下一输入</li>
-</ol>
-<h1 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h1><ol>
-<li>问题：移进符号在某个归约符号的$FOLLOW$集中</li>
-<li>原因：$SLR(1)$只考虑了$FOLLOW$集，没有考虑规范文法的上下文</li>
-<li>考察每一条产生式，如果在某个项目集$I$中包含项目$A\to\alpha\cdot B\beta$，则$B\to\cdot\gamma$也属于$I$。由$FOLLOW$集与$FIRST$集的定义可知$FIRST(\beta)\subseteq FOLLOW(B)$。用$FIRST(\beta)$替代$SLR(1)$中的$FOLLOW(B)$</li>
-<li>在分析的时候，项目增加一元，表示用此产生式归约时，后面可以跟的元素，称之为搜索符，原本的表达式状态称为心，即$[心(产生式)，搜索符]$的二元式形式，$搜索符\in FIRST(\beta)$</li>
-<li>开始项目变为$[S’\to S,\$]$</li>
-<li>闭包函数：若$[A\to\alpha\cdot B\beta,a]\in I$，$B\to\gamma$是一条产生式，$b\in FIRST(\beta a)$，则将$[B\to\cdot\gamma,b]$加入$CLOSURE(I)$中</li>
-<li>转换函数：$I$中任何形如$[A\to\alpha\cdot X\beta,a]$，$[A\to\alpha X\cdot\beta,a]$都在$J$中，$GO(I,X)=CLOSURE(J)$</li>
-</ol>
-<h1 id="LALR-1-分析"><a href="#LALR-1-分析" class="headerlink" title="LALR(1)分析"></a>LALR(1)分析</h1><ol>
-<li>$LR(1)$分析由于原本一个状态根据不同的搜索符拆分成了不同的多个状态，状态的数量大量增加</li>
-<li>我们可以把心相同，但是搜索符不同的项目合并成一个项目，来减少项目的数量</li>
-<li>$LALR(1)$分析的结果不会出现移进-归约冲突，但是仍然可能出现归约-归约冲突</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">04. 自顶向下语法分析</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-12 11:57:11" itemprop="dateCreated datePublished" datetime="2020-05-12T11:57:11+08:00">2020-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:50:08" itemprop="dateModified" datetime="2020-08-07T19:50:08+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>自顶向下分析法构造语法分析树是从根节点开始构造</li>
-<li>其本质是寻找文法的推导过程，一般采用最左推导</li>
-</ol>
-<h1 id="不确定的自顶向下分析-递归下降法"><a href="#不确定的自顶向下分析-递归下降法" class="headerlink" title="不确定的自顶向下分析 (递归下降法)"></a>不确定的自顶向下分析 (递归下降法)</h1><ol>
-<li>利用回溯法遍历可能情况，当没有终结符号时就回溯</li>
-<li>为每个非终结符号设计一个函数，在函数中遍历所有该非终结符号的产生式，利用DFS实现</li>
-<li>优点：对文法限制小，易于实现</li>
-<li>缺点：回溯效率低，文法左递归导致死循环，出错时难以缺点出错位置</li>
-</ol>
-<h1 id="消除左递归"><a href="#消除左递归" class="headerlink" title="消除左递归"></a>消除左递归</h1><ol>
-<li>三种类型的左递归<br />&emsp;直接 (立即)左递归：$N\to Na$<br />&emsp;间接左递归：$N\to A\alpha,A\Rightarrow^+Ny$<br />&emsp;潜在左递归：$N\to\alpha N,\alpha\Rightarrow^+\epsilon$</li>
-<li>直接左递归的消除：对于左递归$A\to A\alpha_1|A\alpha_2|…|\beta_1|\beta_2|…$<br />分析得串是从右向左生成的，以$\beta_1|\beta_2|…$开头，后面跟$(\alpha_1|\alpha_2|…)^*$<br />我们可以把左递归改为右递归，让串从左向右生成<br />$A\to\beta_1 A’|\beta_2A’|…,A’\to \alpha_1A’|\alpha_2A’|…$</li>
-<li>间接和潜在左递归的消除：找到左递归，变为直接左递归，再消除<br />代入法：将右部$\alpha$中非终结符号$N$替换为$N$的候选式<br />过程：<br />&emsp;对文法的所有非终结符号进行排序<br />&emsp;排在前面的非终结符号如果出现在后面非终结符号的右部，就把前面的非终结符号替换掉<br />&emsp;迭代替换操作<br />&emsp;每消除一个非终结符号的间接或潜在左递归，就马上消除新生成的直接左递归<br />限制：不包含环路$A\Rightarrow^+A$和$A\to\epsilon$</li>
-</ol>
-<h1 id="克服回溯问题"><a href="#克服回溯问题" class="headerlink" title="克服回溯问题"></a>克服回溯问题</h1><ol>
-<li>两种情况：<br />&emsp;相同左部的规则，右部左端第一个符号相同，无法根据当前输入符号选择产生式，只能试探<br />&emsp;相同左部的规则，某一右部能推出$\epsilon$串，不知道要不要生成其他的串</li>
-<li>对第一种情况，只需要提取左公共因子。$A\to\delta\beta_1|\delta\beta_2|…|\gamma_1|\gamma_2|…$变为$A\to\delta A’|\gamma_1|\gamma_2|…,A’\to\beta_1|\beta_2|…$</li>
-</ol>
-<h1 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h1><h2 id="FIRST集"><a href="#FIRST集" class="headerlink" title="FIRST集"></a>FIRST集</h2><ol>
-<li>$FIRST$集 (首符集)：$FIRST(\alpha)$是由任意文法符号串$\alpha$推导出的所有的文法符号串的第一个终结符号组成的集合。<script type="math/tex">FIRST(\alpha)=\{a|\alpha\Rightarrow^*a…,a\in V_T\}</script>，如果$\alpha\Rightarrow^*\epsilon$，则$\epsilon\in FIRST(\alpha)$</li>
-<li>$FIRST$集中的元素是终结符号或$\epsilon$</li>
-<li>如果$X$是一个终结符号，$FIRST(X)=\{X\}$</li>
-<li>如果$X\to\epsilon$是一个产生式，则被$\epsilon$加到$FIRST(X)$</li>
-<li>如果$X\to Y_1Y_2…Y_k$是一个产生式，<br />则把$FIRST{(Y_1)}\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果<script type="math/tex">Y_1…Y_{i-1}\Rightarrow^*\epsilon</script>，则把$FIRST(Y_i)\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_k\Rightarrow^*\epsilon$，则把$\epsilon$加入$FIRST(X)$</li>
-<li>假设$A\to\alpha$，$a\in FIRST(\alpha)$，那么当输入符号是$a$时，将待推导非终结符号替换为$\alpha$</li>
-</ol>
-<h2 id="FOLLOW集"><a href="#FOLLOW集" class="headerlink" title="FOLLOW集"></a>FOLLOW集</h2><ol>
-<li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
-<li>$FOLLOW$集中的元素是终结符号或$\$$</li>
-<li>如果$X\to AB$<br />&emsp;则$FIRST(B)\subseteq FOLLOW(A)$且$FOLLOW(X)\subseteq FOLLOW(B)$。$B$的第一个符号就是紧跟在$A$后面。凡事可以跟在$X$后面的，利用这条规则推导后都可以跟在$B$houmi<br />&emsp;如果$B\Rightarrow^*\epsilon$，则$FOLLOW(X)\subseteq FOLLOW(A)$</li>
-<li>$\$$在开始符号的$FOLLOW$集中</li>
-<li>如果$A\to\alpha B\beta$是产生式，则$FIRST(\beta)\backslash\{\epsilon\}$在$FOLLOW(B)$中</li>
-<li>如果$A\to\alpha B$或$A\to\alpha B\beta$且$\beta\Rightarrow^*\epsilon$，$FOLLOW(A)\subseteq FOLOOW(B)$</li>
-<li>算法实现<br />先把$\$$加入开始符号的$FOLLOW$集中<br />循环直到没有$FOLLOW$集改变<br />&emsp;对每一条产生式$X\to X_1X_2…X_m$，对其中的每一个非终结符号$X_j$<br />&emsp;$FOLLOW(X_j)=FOLLOW(X_j)\cup(FIRST(X_{j+1}…X_m)\backslash\{\epsilon\})$<br />&emsp;如果$\epsilon\in FIRST(X_{j+1}…X_m)$，$FOLLOW(X_j)=FOLLOW(X_j)\cup FOLLOW(X)$</li>
-<li>为了避免第二种回溯，$FIRST(B)\cap FOLLOW(B)=\emptyset$，$B$为中间非终结符号</li>
-<li>如果$A\to\alpha$，当$\alpha\Rightarrow^*\epsilon$，则当输入符号在$FOLLOW(A)$中是，用$\alpha$替代$A$</li>
-</ol>
-<h2 id="SELECT集"><a href="#SELECT集" class="headerlink" title="SELECT集"></a>SELECT集</h2><ol>
-<li>当输入符号在左部的某一产生式的$SELECT$中，则选择该条产生式</li>
-<li>对产生式$A\to\alpha,A\in V_N,\alpha\in V^*$<br />&emsp;如果$\alpha$不能推导出$\epsilon$，则$SELECT(A\to\alpha)=FIRST(\alpha)$<br />&emsp;如果$\alpha$可以推导出$\epsilon$，则$SELECT(A\to\alpha)=(FIRST(\alpha)\backslash\{\epsilon\})\cup FOLLOW(A)$</li>
-</ol>
-<h2 id="LL-1-文法-1"><a href="#LL-1-文法-1" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h2><ol>
-<li>解决了左递归和提取了左因子之后，基本避免 了回溯问题 (除了第二种回溯)，这时就可以设计确定的自顶向下分析法</li>
-<li>能使用确定的自顶向下分析法的文法称为$LL(1)$文法</li>
-<li>上下文无关文法$G$是$LL(1)$文法，当且仅当对于$G$的每一个非终结符$A$的任何两个不同产生式$A\to\alpha|\beta$，$SELECT(A\to\alpha)\cap SELECT(A\to\beta)=\emptyset$，且$\alpha$和$\beta$不能同时推导出$\epsilon$</li>
-<li>第一个$L$表示自左而右扫描输入，第二个$L$表示最左推导，$1$表示每部分析只要向前查看一个符号</li>
-<li>$LL(1)$文法不是二义的，无左递归，无左公共因子产生式</li>
-<li>无左递归，无左公共因子的文法不一定是$LL(1)$文法，还有可能有第二种回溯</li>
-<li>$LL(1)$文法可以直接用递归下降法求解</li>
-</ol>
-<h1 id="预测分析器"><a href="#预测分析器" class="headerlink" title="预测分析器"></a>预测分析器</h1><ol>
-<li>预测分析器：对于$LL(1)$文法的句子，用确定的分析方法进行分析的分析程序</li>
-<li>预测分析器是通用的架构，而不像递归是不通用的架构</li>
-<li>工作过程：在推导替代非终结符号集的时候，利用当前非终结符号和下一个输入符号，在预测分析表中查找对应产生式，并替代</li>
-<li>预测分析表就是$SELECT$集，把$SELECT$集中的右部填入左部对应行，集合内各个元素对应列的单元内</li>
-<li>预测分析表的生成过程就是$SELECT$集的遍历过程</li>
-<li>$LL(1)$文法是在分析表在那个不存在多重入口的文法</li>
-<li>一个栈存储待处理符号，栈顶元素$X$和当前输入符号$a$表示程序状态$(X,a)$，称为一个格局<br />若$X\in V_T$，判断$X$和$a$是否相同，若相同则弹出$X$，输入指针往后移，否则为出错<br />若$X\in V_N$，查得分析表$M$的元素$M[X,a]$。若查得$M[X,a]=X\to Y_1Y_2…Y_k$，则$X$弹出，依次将$Y_k,Y_{k-1},…,Y_1$压入栈中。若$M[X,a]=error$，错误分析<br />若<script type="math/tex">X=\$ </script>，如果<script type="math/tex">a=\$ </script>，分析停止，成功分析，否则失败</li>
-</ol>
-<h2 id="预测分析的错误恢复"><a href="#预测分析的错误恢复" class="headerlink" title="预测分析的错误恢复"></a>预测分析的错误恢复</h2><ol>
-<li>错误种类<br />&emsp;栈顶的终结符与当前输入符不匹配<br />&emsp;非终结符$A$在栈顶，面临输入符$a$，分析表$M[A,a]$为空<br />&emsp;$X=\$ $但$a≠\$ $</li>
-<li>应急恢复策略：跳过输入串中的一些符号，直到遇到同步符号把栈顶元素弹出为止</li>
-<li>同步符号：$FOLLOW(A)$中的所有符号作为$A$的同步符号</li>
-<li>若栈顶为终结符号，但与输入符号不符，弹出栈顶终结符号</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1788,20 +1696,20 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

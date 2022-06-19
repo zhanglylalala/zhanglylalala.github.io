@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -191,6 +191,430 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/17/02-Convolution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/17/02-Convolution/" class="post-title-link" itemprop="url">02. Convolution</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-17 13:25:48 / Modified: 18:56:56" itemprop="dateCreated datePublished" datetime="2022-06-17T13:25:48+08:00">2022-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><ol>
+<li><p>We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience. </p>
+</li>
+<li><p>Normally the analytical convenience means that the output can be easily generated. </p>
+</li>
+<li><p>Decompose a signal into a linear combination of delayed impulses. And that leads to a representation for linear time-invairant systems, which is referred to as convolution.<br>Another kind is a decomposition of inputs into complex exponentials. That leads to a representation of signals and systems through Fourier analysis. </p>
+</li>
+<li><p>For a sequence $x[n]$, we can decompose $x[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]\delta[n-k] $. Namely, we can represent $x[n]$ as linear combination of a delayed impulse signal $\delta[n-k]$ with coefficients been $x[k]$.<br>In a linear system, if we denote $\delta[n-k] $ as $h_k[n]$, then we can have $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h_k[n] $.<br>In addition, if the system is time-invariant, $h_k[n]=\delta(n-k)=\delta(n-k-0)=h_0[n-k] $. Define $h_0[n]=h[n]$ to get $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h[n-k] $ in the form of convolution sum. </p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/12/01-Signals-and-Systems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/12/01-Signals-and-Systems/" class="post-title-link" itemprop="url">01. Signals and Systems</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-12 16:53:56" itemprop="dateCreated datePublished" datetime="2022-06-12T16:53:56+08:00">2022-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-16 23:41:42" itemprop="dateModified" datetime="2022-06-16T23:41:42+08:00">2022-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Sinusoidal-signals"><a href="#Sinusoidal-signals" class="headerlink" title="Sinusoidal signals"></a>Sinusoidal signals</h1><h2 id="Continuous-time"><a href="#Continuous-time" class="headerlink" title="Continuous-time"></a>Continuous-time</h2><ol>
+<li><p>$x(t)=A cos(\omega_0t+\phi)$. Here $A$ stands for amplitude, $\omega_0$ stands for frequency, and $\phi$ stands for phase. </p>
+</li>
+<li><p>A sinusoidal signal has period $T_0=\frac{2\pi}{\omega_0}$. </p>
+</li>
+<li><p>Time shift corresponds to a phase change, while phase change, likewise, corresponds to time shift.<br>For a time shift $\Delta t$, we can always have a phase change $\Delta\phi$, so that $x(t+\Delta t) = Acos(\omega_0(t+\Delta t)+\phi)=Acos(\omega_0t+\omega_0\Delta t+\phi)\Rightarrow\Delta\phi=\omega_0\Delta t$, and $\Delta t=\frac{\Delta\phi}{\omega_0}$</p>
+</li>
+<li><p>When $\phi=0$, $x(t)$ is a cosine signal, which is even. Namely, $x(t)=x(-t)$,<br>When $\phi=-\frac{\pi}{2}$, $x(t)=Acos(\omega_0t-\frac{\pi}{2})=Asin(\omega_0t)=Acos(\omega(t-\frac{T_0}{4})$ is a sinusoid signal, which is odd. Namely $x(t)=-x(-t)$. </p>
+</li>
+</ol>
+<h2 id="Discrete-time"><a href="#Discrete-time" class="headerlink" title="Discrete-time"></a>Discrete-time</h2><ol>
+<li><p>$x[n]=A cos(\Omega_0n+\phi)$. Here $A$ stands for amplitude, $\Omega_0$ stands for frequency, and $\phi$ stands for phase. $n$ only takes the integer values. </p>
+</li>
+<li><p>A time shift corresponds to a phase change. $x[t+\Delta t]=Acos(\Omega_0(t+\Delta t))=Acos(\Omega_0t+\Omega_0\Delta t)$. Hence $\Delta\phi=\Omega_0\Delta t$<br>However, not any phase change can be interpreted as a simple time shift in the sequence. A constraint in discrete-time is that $t+\Delta t$ must be an integer, but $\Delta t=\frac{\Delta\phi}{\Omega_0}$ cannot guarantee that. </p>
+</li>
+<li><p>If we want $x[n]$ to be periodic, $x[n]=x[n+N]\Rightarrow Acos(\Omega_0n+\phi)=Acos(\Omega_0n+\Omega_0N+\phi)\Rightarrow \Omega_0N=2\pi m$ with $m$ being an integer.<br>So when there exists an $m$ to make $\frac{2\pi m}{\Omega_0}$ an integer, $x[n]$ is periodic, and  the period $N_0=\frac{2\pi m}{\Omega_0}$.  Namely $\frac{2\pi}{\Omega_0}$ must be rational. </p>
+</li>
+<li><p>$Acos((\Omega_0+\Delta\Omega)n+\phi)=Acos((\Omega_0n+\Delta\Omega n+\phi))$. So for $\Delta\Omega=2\pi k$, $x[n]=x’[n]$. Thus, in discrete-time case, this class of signals is identical signals for values of $\Omega_0$ separated by $2\pi$.<br>In continuous-time signal, all signals with different $\Omega_0$ have distinct values. </p>
+</li>
+</ol>
+<h1 id="Exponentials"><a href="#Exponentials" class="headerlink" title="Exponentials"></a>Exponentials</h1><h2 id="Real-exponentials"><a href="#Real-exponentials" class="headerlink" title="Real exponentials"></a>Real exponentials</h2><ol>
+<li><p>In the continuous-time case, $x(t)=Ce^{at}$ with $C$ and $a$ both being real numbers. When $a&gt;0$, $x(t)$ is geomatically growing. When $a&lt;0$, $x(t)$ is decaying.<br>A time shift corresponds to a scale change, vise versa. $x(t+\Delta t)=Ce^{a(t+\Delta t)}=Ce^{a\Delta t}e^{at}$</p>
+</li>
+<li><p>In the discrete-time case, $x[n]=Ce^{\beta n}=C\alpha^n$, with $C,\alpha$ being real number. </p>
+</li>
+<li><p>When $\alpha&gt;1$, $x[n]$ is growing. When $0&lt;\alpha&lt;1$, $x[n]$ is decaying.<br>When $\alpha&lt;0$, $\beta$ is an imaginary number, and the sequence is going to alternate between positive and negative. </p>
+</li>
+</ol>
+<h2 id="Complex-exponentials"><a href="#Complex-exponentials" class="headerlink" title="Complex exponentials"></a>Complex exponentials</h2><ol>
+<li><p>In continuous-time case, $C$ and $a$ are complex numbers. We write $C$ in polar form $C=|C|e^{j\theta}$ and $a$ in rectangular form $a=r+j\omega_0$.<br>$x(t)=|C|e^{j\theta}e^{(r+j\omega_0)t}=|C|e^{rt}e^{j(\omega_0t+\theta)}=|C|e^{rt}cos(\omega_0t+\theta)+j|C|e^{rt}sin(\omega_0t+\theta)$</p>
+</li>
+<li><p>In discrete-time case, we write $C$ and $\alpha$ both in polar form $C=|C|e^{j\theta},\alpha=|\alpha|e^{j\Omega_0}$.<br>$x[n]=|C|e^{j\theta}(|\alpha|e^{j\Omega_0})^n=|C||\alpha|^ne^{j(\Omega_0n+\theta)}=|C||\alpha|^ncos(\Omega_0n+\theta)+j|C||\alpha|^nsin(\Omega_0n+\theta)$</p>
+</li>
+<li><p>When $r=0$, $x(t)$ is always periodic. When $\alpha=1$, whether $x[n]$ is periodic depends on $\Omega_0$. </p>
+</li>
+</ol>
+<h1 id="Unit-step-and-unit-impuls-signals"><a href="#Unit-step-and-unit-impuls-signals" class="headerlink" title="Unit step and unit impuls signals"></a>Unit step and unit impuls signals</h1><h2 id="Discrete-time-1"><a href="#Discrete-time-1" class="headerlink" title="Discrete-time"></a>Discrete-time</h2><ol>
+<li><p>For unit step sequence, $u[n]=\left\{ \begin{matrix}0 &amp; n&lt;0\\1 &amp; n≥0  \end{matrix} \right.$</p>
+</li>
+<li><p>For unit impulse sequence, $\delta[n]=\left\{\begin{matrix}0 &amp; n≠0\\1 &amp; n=0 \end{matrix}\right.$</p>
+</li>
+<li><p>We can express the unit impulse with unit step. $\delta[n]=u[n]-u[n-l] $. Namely, the unit impulse equals to the unit step minus unit step delayed, which is the first difference. </p>
+</li>
+<li><p>We can also express the unit step with unit impulse. $u[n]=\displaystyle\sum^n_{m=-\infty} $ or $u[n]=\displaystyle\sum^\infty_{k=0}\delta[n-k] $</p>
+</li>
+</ol>
+<h2 id="Continuous-time-1"><a href="#Continuous-time-1" class="headerlink" title="Continuous-time"></a>Continuous-time</h2><ol>
+<li><p>For unit step function, $u(t)=\left\{\begin{matrix}0 &amp; t &lt; 0\\1 &amp; t &gt; 0 \end{matrix} \right. $.<br>The unit step function is discontinuous at $t=0$. So in effect, we need to think the unit step function as the limit of a continuous function, $u_\Delta(t) $ linearly increase from $0$ to $1$ at time $t$ from $0$ to $\Delta$. Thus $u(t)=u_\Delta(t) $ as $\Delta\to0$. </p>
+</li>
+<li><p>Unit impulse function is the derivative of unit step function, $\delta(t)=\frac{du(t)}{dt} $.<br>But $u(t)$ is discontinuous, so we would consider $\delta_\Delta(t)$ as the derivative of $u_\Delta(t)$, $\delta_\Delta(t)=\frac{du_\Delta(t)}{dt} $. So $\delta(t)=\delta_\Delta(t) $ as $\Delta\to0$.<br>$\delta_\Delta(t)=\left\{\begin{matrix}\frac{1}\Delta&amp;0&lt;t&lt;\Delta\\0&amp;otherwise \end{matrix} \right.$. As $\Delta\to0$, the width of the rectangle decreases while the height increases, and the area remains $1$.<br>We can draw $\delta(t)$ by an arrow point to the positive size of y-axis with length of $1$. </p>
+</li>
+<li><p>The relationship from unit impulse to unit step is derivative. And, natually, the relationship from unit step to unit impulse is integral, $u(t)=\displaystyle\int^t_{-\infty}\delta(t)dt$</p>
+</li>
+</ol>
+<h1 id="Systems"><a href="#Systems" class="headerlink" title="Systems"></a>Systems</h1><ol>
+<li><p>Systems take one signal as its input, and output another signal.<br>For continuous-time system denoted by $x(t)\to y(t)$, both signals are continuous.<br>For discrete-time system denoted by $x[n]\to y[n]$, both signals are discrete. </p>
+</li>
+<li><p>A cascade of systems (a series interconnection systems): taking the output of one system as the input of another system. </p>
+</li>
+<li><p>Parallel interconnection system: inputs are feed into two systems simultaneously. And the output of those two systems are added together to give the overall system output. </p>
+</li>
+<li><p>Feedback interconnection system: the output of system 1 is the output of the overall system. The output also is fed into system 2. And the sum of output of system 2 and the overall input of the system is the input of system 1. </p>
+</li>
+<li><p>Memoryless: the output at a certain time only depends on the input of the same time.<br>The unit delay system $y[n]=x[n-1] $ is not a memoryless system. </p>
+</li>
+<li><p>Invertibility: given the output, you can figure out the unique input that cause the output.<br>Identity system is the cascade of a system and its inverse. The inverse of system $A$ is denoted by $A^{-1}$<br>The inverse of an integrator is a differentiator. But a differentiator is not invertible, for the input of a given output is not unique. </p>
+</li>
+<li><p>Causality: output at any time depends only on input prior or equal to that time. Or system cannot anticipate future inputs.<br>For $x_1(t)\to y_1(t) $ and $x_2(t)\to y_2(t) $, if $x_1(t)$ and $x_2(t)$ are the same util some time, then $y_1(t)$ and $y_2(t)$ are alse the same util the same time. </p>
+</li>
+<li><p>Stability: for every bounded input, the output is bounded.<br>An unstable system can be stablized through feadback. Feadback can also destablize a system. </p>
+</li>
+<li><p>Time-invariable: If $x(t)\to y(t) $, then $x(t-t_0)\to y(t-t_0) $.<br>The system doesn’t care what happened at the origin. If the input is shifted by a certain time, the output is also shifted by the same time. </p>
+</li>
+<li><p>Linearity: For two systems $x_1(t)\to y_1(t) $ and $x_2(t)\to y_2(t) $, then $ax_1(t)+bx_2(t)\to ay_1(t)+by_2(t) $. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/11/07-Workload-driven-Perfromance-Evaluation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/11/07-Workload-driven-Perfromance-Evaluation/" class="post-title-link" itemprop="url">07. Workload-driven Perfromance Evaluation</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-11 21:39:38" itemprop="dateCreated datePublished" datetime="2022-06-11T21:39:38+08:00">2022-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-12 16:26:27" itemprop="dateModified" datetime="2022-06-12T16:26:27+08:00">2022-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>We should compare parallel program speedup to the best sequential program, instead of parallel algorithm running on one core.<br>The reason is that to allow for parallelism, we might change the algorithm, and make it slower when executed sequentially.</p>
+<h1 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h1><h2 id="Why-consider-scaling"><a href="#Why-consider-scaling" class="headerlink" title="Why consider scaling?"></a>Why consider scaling?</h2><ol>
+<li><p>Arithmetic intensity is determined by both problem size and the processors number. Small problem size or large processor number both yields low arithmetic intensity.</p>
+</li>
+<li><p>If the problem size is too small, it might already execute fast enough on a single core. Scaling the performance of small problem may not be all that important.<br>Parallelism overheads dominate parallelism benefits, and may even result in slow downs. </p>
+</li>
+<li><p>If the problem size is too large for a single machine, working set may not fit in memory, and causing thrashing to disk. With enough processors, the key working set fits in per-processor cache.<br>This may get a super-linear speedup and make speedup on a bigger parallel machine with more memory look amazing. </p>
+</li>
+<li><p>Another situation that we might get a super-linear speedup is when we try to search for a solution. With parallelism, we are trying more different variance of search, and more likely to find the solution earlier. </p>
+</li>
+<li><p>So we shouldn’t only consider a fixed problem size. Instead, it is desirable to scale problem size as machine sizes grow. </p>
+</li>
+<li><p>In architecture, scaling up considers how does performance scale with increasing core count, and will design scale to the high end?<br>Scaling down considers how does performance scale with decreasing core count, and will desing scale to the low end? </p>
+</li>
+</ol>
+<h2 id="Different-scalings"><a href="#Different-scalings" class="headerlink" title="Different scalings"></a>Different scalings</h2><ol>
+<li><p>Strong scaling: scaling processors with a fixed problem size. Consider the ratio between the runtime of problem $X$ on $P$ processors and the runtime $X$ on $1$ processor. </p>
+</li>
+<li><p>The goal ratio is $P$. This kind of scaling tells us does having more processors get job done faster?</p>
+</li>
+<li><p>Weak scaling: scaling problem size and processors proportionally. Consider the ratio of the runtime of problem $P\times X$ on $P$ processors and the runtime of problem $X$ on $1$ processor. </p>
+</li>
+<li><p>The goal ratio is $1$. This kind of scaling tells us does having more procesors let me do bigger jobs? </p>
+</li>
+<li><p>Problem size is often determined by more than one parameter. So in weak scaling, we need to consider how should the parameter be changed. </p>
+</li>
+</ol>
+<h2 id="Scaling-constrains"><a href="#Scaling-constrains" class="headerlink" title="Scaling constrains"></a>Scaling constrains</h2><ol>
+<li><p>When scaling a probelm, we should first ask that in my situation, under what constraints should the problem be scaled? </p>
+</li>
+<li><p>Problem-constrained scaling focuses on using a parallel computer to solve the same problem faster<br>Speedup $=\frac{time 1 processor}{time P processors}$</p>
+</li>
+<li><p>Time-constrained scaling focuses on completing more work in a fixed amount of time<br>Speedup $ = \frac{work done by P processors}{work done by 1 processor}$</p>
+</li>
+<li><p>“Work done” may not be linear function of problem inputs. One approach of defining “work done” is by execution time of same computation on a single processor (but consider effects of thrashing if problem too big)</p>
+</li>
+<li><p>Ideally, a measure of work is simple to understand and scales linearly with sequential run time (So ideal speedup remains linear in $P$)</p>
+</li>
+<li><p>Memory-constrained scaling (weak scaling) focuses on running the largest problem possible without overflowing main memory. Neither work or execution times are held constant.<br>Speedup $= \frac{work (P processors)}{time (P processors)}/\frac{work (1 processor)}{time (1 processor)}=\frac{work per unit time on P processors}{work per unit time on 1 processor}<br>$There are two assumptions: memory resources scale with processor count, and spilling to disk is infeasible behavior. </p>
+</li>
+</ol>
+<h2 id="Challenges-of-scaling-down-or-up"><a href="#Challenges-of-scaling-down-or-up" class="headerlink" title="Challenges of scaling down or up"></a>Challenges of scaling down or up</h2><ol>
+<li><p>Preserve ratio of time spent in different program phases. </p>
+</li>
+<li><p>Preserve important behavioral characteristics. </p>
+</li>
+<li><p>Preserve contention and communication patterns. Tough to preserve contention since contention is a function of timing and ratios. </p>
+</li>
+<li><p>Preserve scaling relationships between problem parameters. </p>
+</li>
+</ol>
+<h1 id="Simulation"><a href="#Simulation" class="headerlink" title="Simulation"></a>Simulation</h1><ol>
+<li><p>Architects evaluate architectural decisions quantitatively using<br>hardware performance simulators. </p>
+</li>
+<li><p>Architect runs simulations with new feature, runs simulations without new feature, compare simulated performance. Or simulate against a wide collection of benchmarks. </p>
+</li>
+<li><p>You can design detailed simulator to test new architectural feature. It would be very expensive to simulate a parallel machine in full detail.<br>Often cannot simulate full machine configurations or realistic problem sizes (must scale down workloads significantly). Architects need to be confident scaled down simulated results predict reality</p>
+</li>
+<li><p>In trace-driven simulator, we instrument real code running on real machine to record a trace of all memory accesses. Then play back trace on simulator.<br>It may lead to overfit the trace you have instead of having a better generalization. </p>
+</li>
+<li><p>In execution-driven simulator, we execute simulated program in software. Simulated processors generate memory references, which are processed by the simulated memory hierarchy.<br>Performance of simulator is typically inversely proportional to level of simulated detail. </p>
+</li>
+<li><p>When dealing with large parameter space of machines (number of processors, cache sizes, cache line sizes, memory bandwidths, etc. ), we can use the architectural simulation state space. </p>
+</li>
+</ol>
+<h1 id="Understanding-the-performance"><a href="#Understanding-the-performance" class="headerlink" title="Understanding the performance"></a>Understanding the performance</h1><ol>
+<li><p>Always, always, always try the simplest parallel solution first, then measure performance to see where you stand.</p>
+</li>
+<li><p>Determine if your performance is limited by computation, memory bandwidth (or memory latency), or synchronization?<br>Try and establish “high watermarks”. What’s the best you can do in practice? How close is your implementation to a best-case scenario?</p>
+</li>
+<li><p>Roofline model: Use microbenchmarks to compute peak performance of a machine as a function of arithmetic intensity of application. Then compare application’s performance to known peak values. </p>
+</li>
+<li><p>The x-axis means operational intensity (like Flops/Byte), and the y-axis means attenable GFlops/s.<br>In the diagonal region, the y grows with x, which means the memory bendwidth is limited. In the horizontal region, the y stays the same as x grows, which means the compute is limited. </p>
+</li>
+<li><p>When compute is limited, we can make use of ILP or SIMD, or balance floating-point.<br>When memory bandwidth is limited, we can limit accesses to unit stride accesses only, develope memory affinity, or use software prefetching. </p>
+</li>
+</ol>
+<h2 id="Establish-high-watermarks"><a href="#Establish-high-watermarks" class="headerlink" title="Establish high watermarks"></a>Establish high watermarks</h2><ol>
+<li><p>Add “math” (non-memory instructions).<br>Does execution time increase linearly with operation count as math is added? If so, this is evidence that code is instruction-rate limited</p>
+</li>
+<li><p>Remove almost all math, but load same data.<br>How much does execution-time decrease? If not much, suspect memory bottleneck</p>
+</li>
+<li><p>The first two way need to avoid compiler optimization. </p>
+</li>
+<li><p>Change all array accesses to A[0].<br>How much faster does your code get?<br>This establishes an upper bound on benefit of improving locality of data access</p>
+</li>
+<li><p>Remove all atomic operations or locks.<br>How much faster does your code get? (provided it still does approximately the same amount of work)<br>This establishes an upper bound on benefit of reducing sync overhead.</p>
+</li>
+</ol>
+<h2 id="Profilers-performance-monitoring-tools"><a href="#Profilers-performance-monitoring-tools" class="headerlink" title="Profilers/performance monitoring tools"></a>Profilers/performance monitoring tools</h2><ol>
+<li><p>All modern processors have low-level event “performance counters”, which are registers that count important details such as: instructions completed, clock ticks, L2/L3 cache hits/misses, bytes read from memory controller, etc. </p>
+</li>
+<li><p>Intel’s Performance Counter Monitor Tool provides a C++ API for accessing these registers. </p>
+</li>
+<li><p>It can use <code>getIPC(begin, end)</code>, <code>getL3CacheHitRatio(begin, end)</code>, <code>getBytesReadFromMC(begin, end)</code>, etc. to get values of those information. </p>
+</li>
+<li><p>The <code>begin</code> and <code>end</code> is a <code>SystemCountState</code> instance acquired by <code>getSystemCounterState()</code> at the beginning and end of the code to analyze. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PCM *m = PCM::getInstance();</span><br><span class="line">SystemCounterState begin = getSystemCounterState();</span><br><span class="line"></span><br><span class="line"><span class="comment">// code to analyze goes here</span></span><br><span class="line"></span><br><span class="line">SystemCounterState end = getSystemCounterState();</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(“Instructions per clock: %f\n”, getIPC(begin, end));</span><br><span class="line"><span class="built_in">printf</span>(“L3 cache hit ratio: %f\n”, getL3CacheHitRatio(begin, end));</span><br><span class="line"><span class="built_in">printf</span>(“Bytes read: %d\n”, getBytesReadFromMC(begin, end));</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/21/06-Locality-Communication-and-Contention/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +646,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-22 15:19:44" itemprop="dateModified" datetime="2022-05-22T15:19:44+08:00">2022-05-22</time>
+                <time title="Modified: 2022-06-11 21:43:56" itemprop="dateModified" datetime="2022-06-11T21:43:56+08:00">2022-06-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,6 +737,42 @@
 <li><p>The best way is to stagger access to contended resources. For example, instead of calculate the final result directly, we can calculate several temporal results which has no contention, and get the final result from them. </p>
 </li>
 </ol>
+<h1 id="Understanding-the-performance"><a href="#Understanding-the-performance" class="headerlink" title="Understanding the performance"></a>Understanding the performance</h1><ol>
+<li><p>Always, always, always try the simplest parallel solution first, then measure performance to see where you stand. </p>
+</li>
+<li><p>We should compare parallel program speedup to the best sequential program, instead of parallel algorithm running on one core.<br>The reason is that to allow for parallelism, we might change the algorithm, and make it slower when executed sequentially. </p>
+</li>
+<li><p>Determine if your performance is limited by computation, memory bandwidth (or memory latency), or synchronization?<br>Try and establish “high watermarks”. What’s the best you can do in practice? How close is your implementation to a best-case scenario?</p>
+</li>
+<li><p>Roofline model: Use microbenchmarks to compute peak performance of a machine as a function of arithmetic intensity of application. Then compare application’s performance to known peak values</p>
+</li>
+</ol>
+<h2 id="Establish-high-watermarks"><a href="#Establish-high-watermarks" class="headerlink" title="Establish high watermarks"></a>Establish high watermarks</h2><ol>
+<li><p>Add “math” (non-memory instructions).<br>Does execution time increase linearly with operation count as math is added?<br>If so, this is evidence that code is instruction-rate limited</p>
+</li>
+<li><p>Remove almost all math, but load same data.<br>How much does execution-time decrease?<br>If not much, suspect memory bottleneck</p>
+</li>
+<li><p>Change all array accesses to A[0].<br>How much faster does your code get?<br>This establishes an upper bound on benefit of improving locality of data access</p>
+</li>
+<li><p>Remove all atomic operations or locks.<br>How much faster does your code get? (provided it still does approximately the same amount of work)<br>This establishes an upper bound on benefit of reducing sync overhead. </p>
+</li>
+</ol>
+<h2 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h2><ol>
+<li><p>Arithmetic intensity is determined by both problem size and the processors number. Small problem size or large processor number both yields low arithmetic intensity. </p>
+</li>
+<li><p>If the problem size is too small, it might already execute fast enough on a single core. Scaling the performance of small problem ay not be all that important. </p>
+</li>
+<li><p>If the problem size is too large for a single machine, working set may not fit in memory, and causing thrashing to disk. With enough processors, the key working set fits in per-processor cache.<br>This may get a super-linear speedup and make speedup on a bigger parallel machine with more memory look amazing. </p>
+</li>
+<li><p>Desire to scale problem size as machine sizes grow (buy a bigger machine to compute more, rather than just compute the same problem faster)</p>
+</li>
+<li><p>Problem-constrained scaling focuses on using a parallel computer to solve the same problem faster<br>$Speedup=\frac{time 1 processor}{time P processors}$</p>
+</li>
+<li><p>Time-constrained scaling focuses on completing more work in a fixed amount of time<br>$Speedup = \frac{work done by P processors}{work done by 1 processor}$<br>“Work done” may not be linear function of problem inputs. One approach of defining “work done” is by execution time of same computation on a single processor (but consider effects of thrashing if problem too big)</p>
+</li>
+<li><p>Memory-constrained scaling (wak scaling) focuses on running the largest problem possible without overflowing main memory. Neither work or execution times are held constant.<br>$Speedup = \frac{work (P processors)}{time (P processors)}/\frac{work (1 processor)}{time (1 processor)}=\frac{work per unit time on P processors}{work per unit time on 1 processor}$</p>
+</li>
+</ol>
 
       
     </div>
@@ -363,7 +823,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-22 16:10:41" itemprop="dateModified" datetime="2022-05-22T16:10:41+08:00">2022-05-22</time>
+                <time title="Modified: 2022-05-22 17:22:04" itemprop="dateModified" datetime="2022-05-22T17:22:04+08:00">2022-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -415,7 +875,7 @@
 </li>
 </ol>
 <h2 id="Kernel-function"><a href="#Kernel-function" class="headerlink" title="Kernel function"></a>Kernel function</h2><ol>
-<li><p>“Host” code: serial execution runs as part of normal C/C++ application on CPU<br>“CUDA device” code: a kernel function runs on GPU, which is denoted by <code>__global__</code> before the definition of the kernel function.<br>“Device” code: SPMD execution on GPU, which is denoted by <code>__device__</code>. </p>
+<li><p>“Host” code: serial execution runs as part of normal C/C++ application on CPU<br>“CUDA device” code: a kernel function runs on GPU, which is denoted by <code>__global__</code> before the definition of the kernel function.<br>Device function: SPMD execution on GPU, which is denoted by <code>__device__</code>. These functions are called by kernels, and don’t generate new threads.<br>Kernels and device functions only reference device memory. Host code can only reference host memory, but can have pointers to device memory. </p>
 </li>
 <li><p>In kernel function, we need to get the indices of the element a thread calculating. For a 2D matrix, we usually take <code>x</code> as column direction, and <code>y</code> as row direction.<br>So to access <code>A[i][j]</code>, <code>i = blockIdx.y * blockDim * y + threadIdx.y</code> and <code>j = blockIdx.x * blockDim.x + threadIdx.x</code>.</p>
 </li>
@@ -451,7 +911,9 @@
 </li>
 <li><p>Each clock, an SM will choose several warp contexts to fill all warps to use thread-level pallelism, and a warp will choose several instructions to fill all Fetch/Decoder units to use instruction-level pallelism. </p>
 </li>
-<li><p>When running a CUDA program, GPU work schedulor will map one block to multiple warps in the same SM core.<br>Inside a single thread block is SPMD shared address space programming. </p>
+<li><p>When running a CUDA program, GPU work schedulor will map one block to multiple warps in the same SM core. CUDA threads numbered within block in row-major order.<br>Inside a single thread block is SPMD shared address space programming. </p>
+</li>
+<li><p>When single warp accesses consecutive memory locations, do block read or write. When single warp accesses separated memory locations, requires gather (read) or scatter(write)</p>
 </li>
 <li><p>One SM core may have multiple blocks, so a SMM core is capable of concurrently executing multiple CUDA thread blocks.<br>When all threads in block complete, block resources (shared memory allocations, warp execution contexts) become available for next block. </p>
 </li>
@@ -1026,395 +1488,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/09/03-Vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/09/03-Vim/" class="post-title-link" itemprop="url">03. Vim</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-05-09 10:55:04 / Modified: 15:20:00" itemprop="dateCreated datePublished" datetime="2022-05-09T10:55:04+08:00">2022-05-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Normal-mode"><a href="#Normal-mode" class="headerlink" title="Normal mode"></a>Normal mode</h1><p>Access when first start up vim or <code>esc</code> in other modes. This is for navigating around a file, reading things, going from file to file. </p>
-<h2 id="Moving"><a href="#Moving" class="headerlink" title="Moving"></a>Moving</h2><ol>
-<li><p>We can move our cursor with hjkl. <code>j</code> will move down, <code>k</code> will move up, <code>h</code> will move left, and <code>l</code> will move right</p>
-</li>
-<li><p><code>w</code> will move the cursor forward by one word, <code>b</code> will move the cursor backward by one word. <code>e</code> will move to the end of word. </p>
-</li>
-<li><p><code>0</code> will move to the beginning of the line, and <code>$</code> will move to the end of the line. <code>^</code> will move to the first non-empty character on the line. </p>
-</li>
-<li><p><code>Ctrl + u</code> and <code>Ctrl + d</code> will move up or down the entire page.<br><code>G (Cap)</code> will move to the end of the file. <code>gg</code> will move to the beginning of the file. </p>
-</li>
-<li><p><code>L (Cap)</code>, <code>M(Cap)</code>, and <code>H (Cap)</code> will move to the lowest, middle, and highest line shown on the screen. </p>
-</li>
-<li><p><code>f / t + character</code> will jump before or to the first <code>character</code> in that line behind the cursor, and <code>F / T (Cap) + character</code> will jump after or to the last character in that line before the cursor. </p>
-</li>
-<li><p>When the cursor is in a parenthesis, <code>%</code> can quikly move between the matching parentheses. </p>
-</li>
-<li><p>We can start searching with <code>/</code>. Then we can type in the text we want to search and press enter. The cursor will jump to the first matched pattern after the cursor.<br>If the first match is not what we want, we can use <code>n</code> to find the next one. </p>
-</li>
-</ol>
-<h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><ol>
-<li><p><code>o</code> and <code>O</code> will open a new line below or above the cursor and enter the insert move. </p>
-</li>
-<li><p><code>d</code> combined with movement commands will delete contents.<br><code>c</code> (change) combined with movement commands will also delete contens and enter the insert mode.<br><code>dd</code> and <code>cc</code> will act on the given line. </p>
-</li>
-<li><p><code>x</code> will delete the character in the cursor. </p>
-</li>
-<li><p><code>r + character</code> will replace the charater in the cursor to the given character. </p>
-</li>
-<li><p><code>u</code> and <code>Ctrl + R</code> will undo and redo the editing. If the last editing is entering the insert mode and editing something, vim will undo all the editing in the insert mode. But if you just used some commands in normal mode, vim will undo only the last command. </p>
-</li>
-<li><p><code>y</code> combined with movement command will copy contents (y for yank). <code>p</code> will paste contents. <code>yy</code> will copy the whole line. </p>
-</li>
-<li><p><code>~</code> will flip the case on the cursor. </p>
-</li>
-<li><p><code>.</code> will repeat the last editing command again. The commands here is the same as <code>u</code>. </p>
-</li>
-</ol>
-<h2 id="Counting"><a href="#Counting" class="headerlink" title="Counting"></a>Counting</h2><ol>
-<li><p>Counting can be use to do all those commands repeatedly. </p>
-</li>
-<li><p>Just type the times we want to repeat before the command. Even a number larger than 10 is supported. </p>
-</li>
-<li><p>For editing commands that requires extra movement commands, like <code>d</code>, the number could be either before the editing command, or between the editing command and movement command. </p>
-</li>
-</ol>
-<h2 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h2><ol>
-<li><p>There are two kind of modifiers <code>i</code> and <code>a</code>. They require symbols that have a match, like parentheses or quotes. </p>
-</li>
-<li><p><code>i</code> means the things inside the matched symbols, and those symbols are not included.<br><code>a</code> is justl ike <code>i</code>, but symbols included. </p>
-</li>
-<li><p>They can combine with editing commands. Move the cursor into the symbols and type <code>editing command + i/a + symbol</code></p>
-</li>
-</ol>
-<h1 id="Other-Modes"><a href="#Other-Modes" class="headerlink" title="Other Modes"></a>Other Modes</h1><ol>
-<li><p>Insert: access via <code>i</code> in normal mode. editing file</p>
-</li>
-<li><p>Replace: access via <code>R (Cap)</code></p>
-</li>
-</ol>
-<h2 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h2><ol>
-<li>To select the contents we want to copy more convenient, we can first move the cursor to the first or the last character we want, and use <code>v</code> to enter the visual mode. In visual mode, we can move cursor to select the contents between the current position and the position when we just entered. </li>
-<li><code>V (cap)</code> will enter the visual-line mode, which will select the lines. </li>
-<li><code>Ctrl + V</code> will enter the visual-block mode, which will select the rectangualer blocks of text with the original and current cursor being the upper-left and lower-right corner. </li>
-<li>After the selection, we can use the commands in normal mode, which will act on the whole thing and turn back to normal mode. Frequently used commands like <code>y</code> and <code>~</code></li>
-<li>Countings and modifiers are still supported. </li>
-</ol>
-<h2 id="Command-Line-Mode"><a href="#Command-Line-Mode" class="headerlink" title="Command Line Mode"></a>Command Line Mode</h2><ol>
-<li><p>Command line: access via <code>:</code>. Line shell command, but type in vim command, which all starts with <code>:</code>. </p>
-</li>
-<li><p><code>:q</code> will quit vim, <code>:w</code> will save file</p>
-</li>
-<li><p><code>:help</code> will show the document of commands. And quit the document with <code>:q</code></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">help</span> :<span class="keyword">w</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Buffer and window is not always one-to-one correspondence. Each buffer can be opened in zero or more windows.<br>We can create multiple windows with command <code>:sp</code>, or create different tabs with <code>:tabnew</code>.<br><code>:q</code> will only close the current window, and <code>:qa</code> will close all the windows. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/08/02-Shell-Tools-and-Scripting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/08/02-Shell-Tools-and-Scripting/" class="post-title-link" itemprop="url">02. Shell Tools and Scripting</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-08 14:36:05" itemprop="dateCreated datePublished" datetime="2022-05-08T14:36:05+08:00">2022-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-09 10:54:42" itemprop="dateModified" datetime="2022-05-09T10:54:42+08:00">2022-05-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>Variables: In shell, we can assign variables and access them by adding a <code>$</code> before its name. When assigning a variable, there is no extra space.<br>We can assign the output of a command with <code>$()</code>. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo=bar</span><br><span class="line">foo=$(pwd)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can express a string with either double quotes or single quotes. The difference is that double quotes will replace the variables inside with their value, and single quotes will not do so. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo "Value is $foo" # result: Value is bar</span><br><span class="line">echo 'Value is $foo' # result: Value is $foo</span><br><span class="line"></span><br><span class="line">echo "We are in $(pwd)" # result: We are in /...</span><br><span class="line">echo 'We are in $(pwd)' # result: We are in $(pwd)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can define a shell function in a <code>.sh</code> file. After we ran the source command, we can use it as other shell commands. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source mcd.sh</span><br><span class="line">mcd xxx</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>In shell commands, we can use <code>||</code> and <code>&amp;&amp;</code> to connect commands. Just like in C, only the left command of <code>||</code> gets an error, will the right command be executed. And only the left command of <code>&amp;&amp;</code> is correct, will the right command be executed.<br>Two commands can always be separated by a semi-colon. </p>
-</li>
-<li><p>```shell<br>true || echo “This will not be printed”<br>false &amp;&amp; echo “This will not be printed”</p>
-<p>false || echo “This will be printed”<br>true &amp;&amp; echo “This will be printed”</p>
-<p>true ; echo “This will be printed”<br>false ; echo “This will be printed”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. &#96;&#96;&lt;()&#96;&#96; can set the output of the command in parentheses as the input stream. </span><br><span class="line">   </span><br><span class="line">   &#96;&#96;&#96;shell</span><br><span class="line">   cat &lt;(ls) &lt;(ls ..)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>$0</code> is the name of the function, <code>$1</code> is the first parameter, and so on. <code>$?</code> and <code>$_</code> is the error code and the last argument of the previous command. <code>$#</code> is the number of given arguments. <code>$$</code> is the process ID. <code>$@</code> will expand to all arguments, and then we can use for-loop to traverse it </p>
-</li>
-<li><p>We can use <code>{}</code> to simply the arguments we write. They will be expand to multiple arguments being the string outside concatenated with strings inside.<br>We can also expand to a range like <code>{a..d}</code> (a and j included)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">project&#123;,1,2&#125;/src/test&#123;a..b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> project/src/testa project/src/testb project1/src/testa projec1/src/testb project2/src/testa project2/src/testb</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can use <code>*</code> to match any string (even include the empty string). And we can use <code>?</code> to match one singel character. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls *.sh</span><br><span class="line">ls project?</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>shellcheck</code> can check the scripts we write. </p>
-</li>
-<li><p><code>find</code> command: It can find files recursively. It has may arguments which make it powerful.<br>After <code>find</code>, it can specify the path to begin the search. By default, the path will be the current space.<br>It will search according to the argement of <code>-name</code> (case sensitive) or <code>-iname</code> (case insensitive)<br><code>-type</code> can specify the type of file we want. <code>f</code> means regular files, <code>d</code> is directory, etc.<br><code>-exec</code> can tell the shell what do we want to do with those found files in the form of <code>command {} \</code>. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . -name "*.c"</span><br><span class="line">find \home -type d -name "project?"</span><br><span class="line">find \usr\Developer -type d -name "tmp*" -exec rm -rf &#123;&#125; \</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>locate</code> command need to create a database of all files in the system. Then every time, it will search the database to find all paths that match the pattern.<br>When try to find a directory, it will not only list the path of the directory, it also will lists all the files in that directory. </p>
-</li>
-<li><p><code>grep</code> command will print all  lines in the input file that match the pattern. The first argument is the pattern string, and the second is the path of the file. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep torch *.py</span><br></pre></td></tr></table></figure>
-</li>
-<li></li>
-<li><p><code>history</code> command can show all the commands we used before. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/06/01-The-Shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/06/01-The-Shell/" class="post-title-link" itemprop="url">01. The Shell</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-06 14:53:14" itemprop="dateCreated datePublished" datetime="2022-05-06T14:53:14+08:00">2022-05-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-08 14:36:36" itemprop="dateModified" datetime="2022-05-08T14:36:36+08:00">2022-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>Command <code>echo</code> will print the parameter. </p>
-</li>
-<li><p>When a parameter is formed by multiple words, you can wrap them with double quotes or use a ‘\’ before space. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "Hello World"</span><br><span class="line">echo Hello\ World</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The variable <code>$PATH</code> contains all the paths on the machine that the shell will search for programs. Each time we run a shell command, it will search all the pahts to find a program with the same name as the command. </p>
-</li>
-<li><p>To find the path of a command or a program, we can use <code>which</code>. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which echo</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Different directories of a path is separated by forward slashes ‘/‘ in Linux or MacOS and back slashes ‘\’ in Windows.<br>All paths in Linux or MacOS starts from the same root, so they all begins with a ‘/‘. In Windows, they might start from different disks like C: or D:. </p>
-</li>
-<li><p><code>pwd</code> returns the present working directory. We can chage it with <code>cd</code>.<br>There are some special directories. ‘/‘ is the root director. ‘~’ is the home directory. ‘-‘ is the last directory you were in. </p>
-</li>
-<li><p>We can see all the files in the current directory with <code>ls</code>. It can also takes a parameter that is a path, and then we can see the files in that path.<br>With <code>ls -l</code>, it will show more details about files.<br>The first character of the first column is always ‘d’ or ‘-‘. If it is a ‘d’, then that file is a directory.<br>The rest 9 characters of the first column is the permissions of each users. The first 3 are for the owner of the file showed in the second column. The second 3 are for the group of users that own the file showed in the third column. The Third 3 are for everyone else.<br>‘r’ stands for read. For a directory, that means that if you are allowed to see which files are inside<br>‘w’ stands for write. For a directory, that means that if you are allowed to rename, create or remove files in that directory.<br>‘x’ stands for execution. For a directory, that means the if you are allowed to enter that directory. To enter a directory, you need all the executions of the its all parents and itself. </p>
-</li>
-<li><p><code>mv</code>: The first parameter is the old path, while the second is the new path. They are both full paths. When the paths only differ in the last file, it acts as renaming the old file.<br><code>cp</code>: Almost the same as <code>mv</code>, except it only copies the first file without deleting it.<br><code>rm</code>: It has only one parameter, and deletes that file. </p>
-</li>
-<li><p><code>rmdir</code>: Delete an empty directory. <code>rm</code> also cannot delete a non-empty directory, but we can use <code>rm -rf</code> to delete recursively.<br><code>mkdir</code>: It will create a directory. If it has multiple parameters separated by space, it will create one directory for each parameter. </p>
-</li>
-<li><p><code>cat</code>: It will print the contents of a file.<br><code>tail</code>: It will print the last n lines of the file. We can use <code>-n</code> to specify the number of lines. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -n1 hello.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>man</code>: It will show the manuscript of a command given as a parameter. </p>
-</li>
-<li><p><code>Ctrl + L</code> will clean the terminal. </p>
-</li>
-<li><p>We can assign the input stream to a specified file with left angle braket <code>&lt; file</code>, and assign the output stream with <code>&gt; file</code>. </p>
-<p>When using <code>&gt; file</code>, it will delete the original contents. But when using <code>&gt;&gt; file</code>, it will just append new contents to the file.<br>When we assign the input stream of <code>cat</code> to a file, it will still print the contents of that file. If the input file is the same as the output file and we are using <code>&gt;&gt;</code>, it will cause a dead-loop. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo hello &gt; hello.txt</span><br><span class="line">cat &lt; hi.txt &gt;&gt; hello.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The character <code>|</code> creates a pipe that uses the output of the left command as the input of the right command. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l / | tail -n1</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1486,20 +1559,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

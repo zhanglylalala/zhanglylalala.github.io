@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,395 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/09/03-Vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/09/03-Vim/" class="post-title-link" itemprop="url">03. Vim</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-09 10:55:04 / Modified: 15:20:00" itemprop="dateCreated datePublished" datetime="2022-05-09T10:55:04+08:00">2022-05-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Normal-mode"><a href="#Normal-mode" class="headerlink" title="Normal mode"></a>Normal mode</h1><p>Access when first start up vim or <code>esc</code> in other modes. This is for navigating around a file, reading things, going from file to file. </p>
+<h2 id="Moving"><a href="#Moving" class="headerlink" title="Moving"></a>Moving</h2><ol>
+<li><p>We can move our cursor with hjkl. <code>j</code> will move down, <code>k</code> will move up, <code>h</code> will move left, and <code>l</code> will move right</p>
+</li>
+<li><p><code>w</code> will move the cursor forward by one word, <code>b</code> will move the cursor backward by one word. <code>e</code> will move to the end of word. </p>
+</li>
+<li><p><code>0</code> will move to the beginning of the line, and <code>$</code> will move to the end of the line. <code>^</code> will move to the first non-empty character on the line. </p>
+</li>
+<li><p><code>Ctrl + u</code> and <code>Ctrl + d</code> will move up or down the entire page.<br><code>G (Cap)</code> will move to the end of the file. <code>gg</code> will move to the beginning of the file. </p>
+</li>
+<li><p><code>L (Cap)</code>, <code>M(Cap)</code>, and <code>H (Cap)</code> will move to the lowest, middle, and highest line shown on the screen. </p>
+</li>
+<li><p><code>f / t + character</code> will jump before or to the first <code>character</code> in that line behind the cursor, and <code>F / T (Cap) + character</code> will jump after or to the last character in that line before the cursor. </p>
+</li>
+<li><p>When the cursor is in a parenthesis, <code>%</code> can quikly move between the matching parentheses. </p>
+</li>
+<li><p>We can start searching with <code>/</code>. Then we can type in the text we want to search and press enter. The cursor will jump to the first matched pattern after the cursor.<br>If the first match is not what we want, we can use <code>n</code> to find the next one. </p>
+</li>
+</ol>
+<h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><ol>
+<li><p><code>o</code> and <code>O</code> will open a new line below or above the cursor and enter the insert move. </p>
+</li>
+<li><p><code>d</code> combined with movement commands will delete contents.<br><code>c</code> (change) combined with movement commands will also delete contens and enter the insert mode.<br><code>dd</code> and <code>cc</code> will act on the given line. </p>
+</li>
+<li><p><code>x</code> will delete the character in the cursor. </p>
+</li>
+<li><p><code>r + character</code> will replace the charater in the cursor to the given character. </p>
+</li>
+<li><p><code>u</code> and <code>Ctrl + R</code> will undo and redo the editing. If the last editing is entering the insert mode and editing something, vim will undo all the editing in the insert mode. But if you just used some commands in normal mode, vim will undo only the last command. </p>
+</li>
+<li><p><code>y</code> combined with movement command will copy contents (y for yank). <code>p</code> will paste contents. <code>yy</code> will copy the whole line. </p>
+</li>
+<li><p><code>~</code> will flip the case on the cursor. </p>
+</li>
+<li><p><code>.</code> will repeat the last editing command again. The commands here is the same as <code>u</code>. </p>
+</li>
+</ol>
+<h2 id="Counting"><a href="#Counting" class="headerlink" title="Counting"></a>Counting</h2><ol>
+<li><p>Counting can be use to do all those commands repeatedly. </p>
+</li>
+<li><p>Just type the times we want to repeat before the command. Even a number larger than 10 is supported. </p>
+</li>
+<li><p>For editing commands that requires extra movement commands, like <code>d</code>, the number could be either before the editing command, or between the editing command and movement command. </p>
+</li>
+</ol>
+<h2 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h2><ol>
+<li><p>There are two kind of modifiers <code>i</code> and <code>a</code>. They require symbols that have a match, like parentheses or quotes. </p>
+</li>
+<li><p><code>i</code> means the things inside the matched symbols, and those symbols are not included.<br><code>a</code> is justl ike <code>i</code>, but symbols included. </p>
+</li>
+<li><p>They can combine with editing commands. Move the cursor into the symbols and type <code>editing command + i/a + symbol</code></p>
+</li>
+</ol>
+<h1 id="Other-Modes"><a href="#Other-Modes" class="headerlink" title="Other Modes"></a>Other Modes</h1><ol>
+<li><p>Insert: access via <code>i</code> in normal mode. editing file</p>
+</li>
+<li><p>Replace: access via <code>R (Cap)</code></p>
+</li>
+</ol>
+<h2 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h2><ol>
+<li>To select the contents we want to copy more convenient, we can first move the cursor to the first or the last character we want, and use <code>v</code> to enter the visual mode. In visual mode, we can move cursor to select the contents between the current position and the position when we just entered. </li>
+<li><code>V (cap)</code> will enter the visual-line mode, which will select the lines. </li>
+<li><code>Ctrl + V</code> will enter the visual-block mode, which will select the rectangualer blocks of text with the original and current cursor being the upper-left and lower-right corner. </li>
+<li>After the selection, we can use the commands in normal mode, which will act on the whole thing and turn back to normal mode. Frequently used commands like <code>y</code> and <code>~</code></li>
+<li>Countings and modifiers are still supported. </li>
+</ol>
+<h2 id="Command-Line-Mode"><a href="#Command-Line-Mode" class="headerlink" title="Command Line Mode"></a>Command Line Mode</h2><ol>
+<li><p>Command line: access via <code>:</code>. Line shell command, but type in vim command, which all starts with <code>:</code>. </p>
+</li>
+<li><p><code>:q</code> will quit vim, <code>:w</code> will save file</p>
+</li>
+<li><p><code>:help</code> will show the document of commands. And quit the document with <code>:q</code></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">help</span> :<span class="keyword">w</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Buffer and window is not always one-to-one correspondence. Each buffer can be opened in zero or more windows.<br>We can create multiple windows with command <code>:sp</code>, or create different tabs with <code>:tabnew</code>.<br><code>:q</code> will only close the current window, and <code>:qa</code> will close all the windows. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/08/02-Shell-Tools-and-Scripting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/08/02-Shell-Tools-and-Scripting/" class="post-title-link" itemprop="url">02. Shell Tools and Scripting</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-08 14:36:05" itemprop="dateCreated datePublished" datetime="2022-05-08T14:36:05+08:00">2022-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-09 10:54:42" itemprop="dateModified" datetime="2022-05-09T10:54:42+08:00">2022-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>Variables: In shell, we can assign variables and access them by adding a <code>$</code> before its name. When assigning a variable, there is no extra space.<br>We can assign the output of a command with <code>$()</code>. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo=bar</span><br><span class="line">foo=$(pwd)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can express a string with either double quotes or single quotes. The difference is that double quotes will replace the variables inside with their value, and single quotes will not do so. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo "Value is $foo" # result: Value is bar</span><br><span class="line">echo 'Value is $foo' # result: Value is $foo</span><br><span class="line"></span><br><span class="line">echo "We are in $(pwd)" # result: We are in /...</span><br><span class="line">echo 'We are in $(pwd)' # result: We are in $(pwd)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can define a shell function in a <code>.sh</code> file. After we ran the source command, we can use it as other shell commands. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source mcd.sh</span><br><span class="line">mcd xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In shell commands, we can use <code>||</code> and <code>&amp;&amp;</code> to connect commands. Just like in C, only the left command of <code>||</code> gets an error, will the right command be executed. And only the left command of <code>&amp;&amp;</code> is correct, will the right command be executed.<br>Two commands can always be separated by a semi-colon. </p>
+</li>
+<li><p>```shell<br>true || echo “This will not be printed”<br>false &amp;&amp; echo “This will not be printed”</p>
+<p>false || echo “This will be printed”<br>true &amp;&amp; echo “This will be printed”</p>
+<p>true ; echo “This will be printed”<br>false ; echo “This will be printed”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. &#96;&#96;&lt;()&#96;&#96; can set the output of the command in parentheses as the input stream. </span><br><span class="line">   </span><br><span class="line">   &#96;&#96;&#96;shell</span><br><span class="line">   cat &lt;(ls) &lt;(ls ..)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>$0</code> is the name of the function, <code>$1</code> is the first parameter, and so on. <code>$?</code> and <code>$_</code> is the error code and the last argument of the previous command. <code>$#</code> is the number of given arguments. <code>$$</code> is the process ID. <code>$@</code> will expand to all arguments, and then we can use for-loop to traverse it </p>
+</li>
+<li><p>We can use <code>{}</code> to simply the arguments we write. They will be expand to multiple arguments being the string outside concatenated with strings inside.<br>We can also expand to a range like <code>{a..d}</code> (a and j included)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">project&#123;,1,2&#125;/src/test&#123;a..b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> project/src/testa project/src/testb project1/src/testa projec1/src/testb project2/src/testa project2/src/testb</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can use <code>*</code> to match any string (even include the empty string). And we can use <code>?</code> to match one singel character. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls *.sh</span><br><span class="line">ls project?</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>shellcheck</code> can check the scripts we write. </p>
+</li>
+<li><p><code>find</code> command: It can find files recursively. It has may arguments which make it powerful.<br>After <code>find</code>, it can specify the path to begin the search. By default, the path will be the current space.<br>It will search according to the argement of <code>-name</code> (case sensitive) or <code>-iname</code> (case insensitive)<br><code>-type</code> can specify the type of file we want. <code>f</code> means regular files, <code>d</code> is directory, etc.<br><code>-exec</code> can tell the shell what do we want to do with those found files in the form of <code>command {} \</code>. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . -name "*.c"</span><br><span class="line">find \home -type d -name "project?"</span><br><span class="line">find \usr\Developer -type d -name "tmp*" -exec rm -rf &#123;&#125; \</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>locate</code> command need to create a database of all files in the system. Then every time, it will search the database to find all paths that match the pattern.<br>When try to find a directory, it will not only list the path of the directory, it also will lists all the files in that directory. </p>
+</li>
+<li><p><code>grep</code> command will print all  lines in the input file that match the pattern. The first argument is the pattern string, and the second is the path of the file. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep torch *.py</span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
+<li><p><code>history</code> command can show all the commands we used before. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/06/01-The-Shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/06/01-The-Shell/" class="post-title-link" itemprop="url">01. The Shell</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-06 14:53:14" itemprop="dateCreated datePublished" datetime="2022-05-06T14:53:14+08:00">2022-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-08 14:36:36" itemprop="dateModified" datetime="2022-05-08T14:36:36+08:00">2022-05-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>Command <code>echo</code> will print the parameter. </p>
+</li>
+<li><p>When a parameter is formed by multiple words, you can wrap them with double quotes or use a ‘\’ before space. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "Hello World"</span><br><span class="line">echo Hello\ World</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The variable <code>$PATH</code> contains all the paths on the machine that the shell will search for programs. Each time we run a shell command, it will search all the pahts to find a program with the same name as the command. </p>
+</li>
+<li><p>To find the path of a command or a program, we can use <code>which</code>. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which echo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Different directories of a path is separated by forward slashes ‘/‘ in Linux or MacOS and back slashes ‘\’ in Windows.<br>All paths in Linux or MacOS starts from the same root, so they all begins with a ‘/‘. In Windows, they might start from different disks like C: or D:. </p>
+</li>
+<li><p><code>pwd</code> returns the present working directory. We can chage it with <code>cd</code>.<br>There are some special directories. ‘/‘ is the root director. ‘~’ is the home directory. ‘-‘ is the last directory you were in. </p>
+</li>
+<li><p>We can see all the files in the current directory with <code>ls</code>. It can also takes a parameter that is a path, and then we can see the files in that path.<br>With <code>ls -l</code>, it will show more details about files.<br>The first character of the first column is always ‘d’ or ‘-‘. If it is a ‘d’, then that file is a directory.<br>The rest 9 characters of the first column is the permissions of each users. The first 3 are for the owner of the file showed in the second column. The second 3 are for the group of users that own the file showed in the third column. The Third 3 are for everyone else.<br>‘r’ stands for read. For a directory, that means that if you are allowed to see which files are inside<br>‘w’ stands for write. For a directory, that means that if you are allowed to rename, create or remove files in that directory.<br>‘x’ stands for execution. For a directory, that means the if you are allowed to enter that directory. To enter a directory, you need all the executions of the its all parents and itself. </p>
+</li>
+<li><p><code>mv</code>: The first parameter is the old path, while the second is the new path. They are both full paths. When the paths only differ in the last file, it acts as renaming the old file.<br><code>cp</code>: Almost the same as <code>mv</code>, except it only copies the first file without deleting it.<br><code>rm</code>: It has only one parameter, and deletes that file. </p>
+</li>
+<li><p><code>rmdir</code>: Delete an empty directory. <code>rm</code> also cannot delete a non-empty directory, but we can use <code>rm -rf</code> to delete recursively.<br><code>mkdir</code>: It will create a directory. If it has multiple parameters separated by space, it will create one directory for each parameter. </p>
+</li>
+<li><p><code>cat</code>: It will print the contents of a file.<br><code>tail</code>: It will print the last n lines of the file. We can use <code>-n</code> to specify the number of lines. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -n1 hello.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>man</code>: It will show the manuscript of a command given as a parameter. </p>
+</li>
+<li><p><code>Ctrl + L</code> will clean the terminal. </p>
+</li>
+<li><p>We can assign the input stream to a specified file with left angle braket <code>&lt; file</code>, and assign the output stream with <code>&gt; file</code>. </p>
+<p>When using <code>&gt; file</code>, it will delete the original contents. But when using <code>&gt;&gt; file</code>, it will just append new contents to the file.<br>When we assign the input stream of <code>cat</code> to a file, it will still print the contents of that file. If the input file is the same as the output file and we are using <code>&gt;&gt;</code>, it will cause a dead-loop. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo hello &gt; hello.txt</span><br><span class="line">cat &lt; hi.txt &gt;&gt; hello.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The character <code>|</code> creates a pipe that uses the output of the left command as the input of the right command. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l / | tail -n1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1134,263 +1523,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/02/17/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8D%E5%90%8C%E8%A6%81%E6%B1%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/17/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8D%E5%90%8C%E8%A6%81%E6%B1%82/" class="post-title-link" itemprop="url">背包问题的不同要求</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-17 22:20:12" itemprop="dateCreated datePublished" datetime="2022-02-17T22:20:12+08:00">2022-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-18 15:24:07" itemprop="dateModified" datetime="2022-02-18T15:24:07+08:00">2022-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url" rel="index">
-                    <span itemprop="name">动态规划</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="求方案种数"><a href="#求方案种数" class="headerlink" title="求方案种数"></a>求方案种数</h1><h2 id="组合数？排列数？"><a href="#组合数？排列数？" class="headerlink" title="组合数？排列数？"></a>组合数？排列数？</h2><p>组合数即不同的选择顺序算为同一种方案，排列数即算为不同种方案。背包问题中背包容量和选择物品的不同遍历顺序在求方案数问题上会有不同的效果，先考虑二维dp数组，使用到的数据都是左上方的元素</p>
-<p>如果外层循环表示选择的物品编号，内层循环表示背包容量，则$dp[i][j]+=dp[i-1][j-cost[i]]$</p>
-<p>如果外层循环表示背包容量，内层循环表示选择的物品编号，则$dp[i][j]+=dp[i-cost[j]][j-1]$</p>
-<h2 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h2><p>另外开一个一维数组记录方案种数，同样利用滚动数组，有$num[j] += num[j - cost[i]]$表示考虑前i件时，背包容量为j的方案种数。初始化时只需要设$num[0]= 1$表示什么都不选也有一种方法</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">	dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= cost[i]; j--)</span><br><span class="line">    &#123;</span><br><span class="line">      dp[j] += dp[j - cost[i]];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h2><p>类似01背包，利用$num[j]$记录背包容量为$j$时的方案种数，但是</p>
-<h1 id="判断是否可以"><a href="#判断是否可以" class="headerlink" title="判断是否可以"></a>判断是否可以</h1><h2 id="转化为判断选择了物品i的话剩下的是否可以"><a href="#转化为判断选择了物品i的话剩下的是否可以" class="headerlink" title="转化为判断选择了物品i的话剩下的是否可以"></a>转化为判断选择了物品i的话剩下的是否可以</h2><p><a href="https://leetcode-cn.com/problems/word-break/" target="_blank" rel="noopener">LeetCode-139: Word Break</a></p>
-<p>递推思维：判断子串$s[0..&lt;i]$是否可以用word_dict表示，只要$\exist j &lt; i$，使得$s[0..&lt;j]$可以用word_dict表示，而$s[j..&lt;i]$在word_dict中</p>
-<p>dp数组：$dp[i]$表示$s[0..&lt;i ]$是否可以用word_dict表示</p>
-<p>初始化：$dp[0]$表示$s[0..&lt;0]$是否可以被表示，这是空串，一定可以，所以$dp[0]=true$</p>
-<p>递推式：$dp[i]=true$当且仅当$\exist j&lt;i$，使得$dp[j]=true$，且$s[j..&lt;i]$在word_dict中</p>
-<p>求解顺序：从$i=1$开始，遍历到$i=s.length()$</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">305</span>];</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; wordDict.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            mp[wordDict[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s.length(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (mp.find(s.substr(j, i - j)) != mp.end() &amp;&amp; dp[j])</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[i] = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[s.length()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="转为判断是否可以得到价值为多少的组合"><a href="#转为判断是否可以得到价值为多少的组合" class="headerlink" title="转为判断是否可以得到价值为多少的组合"></a>转为判断是否可以得到价值为多少的组合</h2><p><a href="http://localhost:4000/2022/02/17/可转化为背包问题/#LeetCode-416-Partition-Equal-Subset-Sum" target="_blank" rel="noopener">LeetCode-416 Partition Equal Subset Sum</a></p>
-<p>转为判断是否存在体积为sum / 2，价值为sum / 2的组合，所以只要判断最后是否有$dp[sum / 2] == sum /2$即可</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/02/17/%E5%8F%AF%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/17/%E5%8F%AF%E8%BD%AC%E5%8C%96%E4%B8%BA%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">可转化为背包问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-17 21:40:21" itemprop="dateCreated datePublished" datetime="2022-02-17T21:40:21+08:00">2022-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-18 14:55:26" itemprop="dateModified" datetime="2022-02-18T14:55:26+08:00">2022-02-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url" rel="index">
-                    <span itemprop="name">动态规划</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="背包的本质"><a href="#背包的本质" class="headerlink" title="背包的本质"></a>背包的本质</h1><p>背包问题的本质就是给定一系列物品，对于物品的选与不选的问题。而且物品的选择不会影响到下一个物品的选择范围 (就算是分组背包和依赖背包也可以经过变化，变为不影响选择的问题，主要是要与数塔问题进行区分)<br>例题：<a href="https://www.luogu.org/problemnew/show/P1282" target="_blank" rel="noopener">洛谷 P1282</a><br>这题每一套多米诺骨牌就是一个物品，选与不选的问题就是翻与不翻的问题，这就可以转化为一个$01$背包。但是要注意的是这题翻与不翻可能会出现负价值，所以这题不能用滚动数组 ($01$背包能用滚动数组是因为只与两维都不大于当前的值有关，但这题负价值的存在就导致了第二维还与大于当前的值有关)</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">12005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM = <span class="number">1005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXA = <span class="number">6005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ori[MAXM][<span class="number">2</span>], dp[MAXM][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	scInt(n);</span><br><span class="line">	repLE(i, <span class="number">1</span>, n)</span><br><span class="line">	&#123;</span><br><span class="line">		scTwoInt(ori[i][<span class="number">0</span>], ori[i][<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	fill(dp[<span class="number">0</span>], dp[<span class="number">0</span>] + MAXN, INF);</span><br><span class="line">	dp[<span class="number">0</span>][MAXA] = <span class="number">0</span>;</span><br><span class="line">	repLE(i, <span class="number">1</span>, n)</span><br><span class="line">	&#123;</span><br><span class="line">		repLE(j, <span class="number">-5000</span>, <span class="number">5000</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> dis = ori[i][<span class="number">0</span>] - ori[i][<span class="number">1</span>];</span><br><span class="line">			dp[i][j + MAXA] = min(dp[i - <span class="number">1</span>][j - dis + MAXA], dp[i - <span class="number">1</span>][j + dis + MAXA] + <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> ans = INF;</span><br><span class="line">	repLE(i, <span class="number">0</span>, <span class="number">5000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ans = min(dp[n][i + MAXA], dp[n][-i + MAXA]);</span><br><span class="line">		<span class="keyword">if</span>(ans &lt;= <span class="number">1e3</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="转化为背包问题"><a href="#转化为背包问题" class="headerlink" title="转化为背包问题"></a>转化为背包问题</h1><p>什么问题可以转化为背包问题？</p>
-<p>物品的选与不选的问题，而且物品的选择不会影响到下一个物品的选择范围</p>
-<p>如何转化？</p>
-<p>要考虑什么是花费cost，什么是价值weight，什么是背包容量；选与不选两个状态在题中对应的是哪两个对立的状态；是否可以重复选 (是01背包，还是完全背包)</p>
-<h2 id="LeetCode-416-Partition-Equal-Subset-Sum"><a href="#LeetCode-416-Partition-Equal-Subset-Sum" class="headerlink" title="LeetCode-416 Partition Equal Subset Sum"></a><a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">LeetCode-416 Partition Equal Subset Sum</a></h2><p>由于nums的总和是一定的，所以划分之后的两个子集的都是总和的一半，是固定的。就可以转化为从集合中选出多个数的和等于总和的一半</p>
-<p>由于每个数只可以出现在一个子集中，所以不可以重复选，是01背包问题</p>
-<p>把nums[i]作为cost，同时也把nums[i]作为weight，则背包容量为sum / 2，问题转化为是否可以选择出恰好装满背包，且总价值恰好为sum / 2的组合</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">20005</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (sum % <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sum /= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = sum; j - nums[i] &gt;= <span class="number">0</span>; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[sum] == sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/12/18/%E5%9F%BA%E9%87%91%E5%AE%9A%E6%8A%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/18/%E5%9F%BA%E9%87%91%E5%AE%9A%E6%8A%95/" class="post-title-link" itemprop="url">基金定投</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-12-18 23:23:05 / Modified: 23:25:19" itemprop="dateCreated datePublished" datetime="2020-12-18T23:23:05+08:00">2020-12-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">看过的书</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="/img/基金定投.png" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1462,20 +1594,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

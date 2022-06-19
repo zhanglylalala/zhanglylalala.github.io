@@ -132,12 +132,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">27</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">32</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -187,6 +187,366 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/29/03-Multiplication-and-Inverse-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/29/03-Multiplication-and-Inverse-Matrices/" class="post-title-link" itemprop="url">03. Multiplication and Inverse Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-29 14:37:48" itemprop="dateCreated datePublished" datetime="2019-10-29T14:37:48+08:00">2019-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:18:23" itemprop="dateModified" datetime="2020-08-07T19:18:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication"></a>Multiplication</h1><ol>
+<li>$A_{m\times n}B_{n\times p}=C_{m\times p}$</li>
+<li>Dot Product: <script type="math/tex">(AB)_{ij} = (row \ i \ of \ A) \cdot (column \ j \ of \ B) = \displaystyle \sum^{n}_{k=1}A_{ik}B_{kj}</script></li>
+<li>Matrix multiplies columns: $AB=\left[\begin{matrix}Ab_1&amp;Ab_2&amp;…&amp;Ab_n\end{matrix}\right]$<br />It can also be seen as matrix $A$ times every column of $B$. So columns of $C$ are combinations of columns of $A$. </li>
+<li>Rows multiply matrix: <script type="math/tex">AB=\left[\begin{matrix}a_1B\\a_2B\\…\\a_nB\end{matrix}\right]</script><br />And naturally, it can be seen as rows of $A$ times matrix $B$. So rows of $C$ are combinations of rows of $B$.  </li>
+<li>Sum of matrices: <script type="math/tex">AB = \displaystyle \sum^{n}_{k = 1}(column \ k \ of \ A) \cdot (row \ k \ of \ B)</script> <br />It can also be columns times rows. The sum of each column of $A$ times corresponding rows of $B$. </li>
+<li>Multiplication can also be done by blocks. </li>
+<li>In matrices multiplication, <br />&emsp;Associative law is valid: <script type="math/tex">A(BC)=(AB)C</script><br />&emsp;Distributive law is correct: <script type="math/tex">A(B+C)=AB+AC\ \ (A+B)C=AC+BC</script>   <br />&emsp;Commutative law is false: <script type="math/tex">AB≠BA</script></li>
+<li>The complexity of matrix multiplication is <script type="math/tex">O(nmp)</script>. The result is an <script type="math/tex">n\times p</script> matrix and to get each entry, we need <script type="math/tex">m</script> multiplications and add them together. </li>
+<li>Matrices have exponents too. <script type="math/tex">A^p=AAA…A\ (p\ factors)</script></li>
+<li>$(A^p)(A^q)=A^{p+q}$<br /><script type="math/tex">(A^p)^q=A^{pq}</script><br /><script type="math/tex">A^0=I</script><br /><script type="math/tex">A^{-p}=(A^{-1})^p\ \ \ (p > 0)</script></li>
+<li>Matrices can be cut into blocks (smaller matrices). When addition or multiplication (both with scalar or another matrix) happen, the blocks act as numbers. </li>
+<li>Block elimination: <script type="math/tex">\left[\begin{matrix}I & 0 \\ -CA^{-1} & I\end{matrix}\right] \left[\begin{matrix}A&B\\C&D\end{matrix}\right]=\left[\begin{matrix}A&B\\0&D-CA^{-1}B\end{matrix}\right]</script><br /><script type="math/tex">D-CA^{-1}B</script> is called <code>Schur complement</code>. </li>
+<li>For square matrices, we can do better by breaking <script type="math/tex">n</script> by <script type="math/tex">n</script> matrices into $2$ by $2$ blocks. Instead of <script type="math/tex">O(n^3)</script>, this complexity is <script type="math/tex">O(n^{2.376})</script></li>
+</ol>
+<h1 id="Inverses"><a href="#Inverses" class="headerlink" title="Inverses"></a>Inverses</h1><h2 id="Does-It-Have-Inverse"><a href="#Does-It-Have-Inverse" class="headerlink" title="Does It Have Inverse"></a>Does It Have Inverse</h2><ol>
+<li>Define the <code>inverse</code> of $A$ is <script type="math/tex">AA^{-1}=A^{-1}A = I</script>. Here <script type="math/tex">A^{-1}</script>is the inverse of $A$. </li>
+<li>Only square matrices have inverses. </li>
+<li>Those with inverses are called invertible while the ones without inverses are called singular. </li>
+<li>A matrix is invertible <strong>if and only if</strong><br />&emsp;elimination produces $n$ pivots<br />&emsp;the only solution to <script type="math/tex">A\vec{x}=\vec{b}</script> is <script type="math/tex">\vec{x}=A^{-1}\vec{b}</script><br />&emsp;<script type="math/tex">A\vec{x}=\vec{0}</script> can only have the zero solution <script type="math/tex">\vec{x}=\vec{0}</script><br />&emsp;the determinant of <script type="math/tex">A</script> is not zero, because we need to divide it</li>
+<li>A $2$ by $2$ matrix is invertible if and only if <script type="math/tex">ad-bc</script> is not zero. <br /><script type="math/tex">\left[\begin{matrix}a&b\\c&d\end{matrix}\right]^{-1}=\displaystyle\frac{1}{ad-bc}\left[\begin{matrix}d&-b\\-c&a\end{matrix}\right]</script></li>
+<li>A diagonal matrix has an inverse if and only if  no diagonal entries are zero. <br /><script type="math/tex">\left[\begin{matrix}d_1\\&d_2\\&&\ddots\\&&&d_n\end{matrix}\right]^{-1}=\left[\begin{matrix}\frac{1}{d_1}\\&\frac{1}{d_2}\\&&\ddots\\&&&\frac{1}{d_n}\end{matrix}\right]</script><br />Furthermore, a triangular matrix is invertible if and only if no diagonal entries are zero. </li>
+<li><script type="math/tex">AB</script> is invertible if and only if <script type="math/tex">A</script> and <script type="math/tex">B</script> are separately invertible and have the same size. </li>
+<li>Diagonally dominant matrices are invertible. Each $a_{ii}$ on the diagonal is larger than the total sum along the rest of row $i$. On every row, $|a_{ii}|&gt;\displaystyle\sum_{j≠i}|a_{ij}|$. </li>
+</ol>
+<h2 id="What-Is-The-Inverse"><a href="#What-Is-The-Inverse" class="headerlink" title="What Is The Inverse"></a>What Is The Inverse</h2><ol>
+<li>To get the inverse, we need to solve the system of <script type="math/tex">AE = I</script>. <script type="math/tex">E</script> is completely unknown. So we can use the Gauss elimination to solve all entries of $E$ at the same time, which makes us solve <script type="math/tex">\left[\begin{matrix}A&I\end{matrix}\right]</script> as a “super” augmented matrix. </li>
+<li>In the end, we can eliminate to get <script type="math/tex">\left[\begin{matrix}I&E\end{matrix}\right]</script>. As is known to all that only <script type="math/tex">A^{-1} \left[\begin{matrix}A&I\end{matrix}\right] = \left[\begin{matrix}I&A^{-1}\end{matrix}\right]</script>, so we can know that $E$ is the inverse. </li>
+<li>This is the <code>Gauss-Jordan</code> way. </li>
+<li>$(AB)^{-1}=B^{-1}A^{-1}$. <br />$(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AIA^{-1}=AA^{-1}=I$</li>
+<li>For square matrices, an inverse on one side is automatically the inverse on the other side. </li>
+<li>Because inverse undoes whatever the original matrix does, for elimination matrices, the entry of <script type="math/tex">(i,\ j)</script> in the inverse matrix is <script type="math/tex">l</script> while in the original matrix <script type="math/tex">-l</script></li>
+<li>If the original matrix is symmetric, so is its inverse. </li>
+<li>The inverse of a band matrix is generally a dense matrix. </li>
+<li>If <script type="math/tex">A</script> is invertible and upper triangular, so is <script type="math/tex">A^{-1}</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/23/02-Elimination-with-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/23/02-Elimination-with-Matrices/" class="post-title-link" itemprop="url">02. Elimination with Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-23 20:38:36" itemprop="dateCreated datePublished" datetime="2019-10-23T20:38:36+08:00">2019-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:32" itemprop="dateModified" datetime="2020-08-07T19:15:32+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Elimination"><a href="#Elimination" class="headerlink" title="Elimination"></a>Elimination</h1><ol>
+<li>To solve a system, we can eliminate it to make it an upper-triangular form. The goal of elimination is to produce an upper triangular system. </li>
+<li>Before every elimination, choose a pivot. <code>Zero will never be accepted as a pivot</code>.  Pivots are the coefficients in the diagonal of the system. </li>
+<li>We can <code>multiply</code> a specific multiplier to the main equation and <code>subtract</code> it from another equation to eliminate. </li>
+<li>Pivot is the first nonzero in the row that does the elimination. <br />The multiplier is the entry to eliminate divided by pivot. </li>
+<li>When solving the system, right-hand side vector and the coefficients act the same. So it is convenient to add it to the coefficient matrix. The matrix with the right-hand side vector is called <code>the augmented matrix</code>, written as <script type="math/tex">[E\ \vec{b}]</script>. </li>
+<li>After elimination, we <code>back substitute</code> from bottom to top to solve each unknowns. </li>
+<li>Elimination can fail when we do not get $n$ pivots. This could lead to either no solution or infinitely many solutions. However, if there is  a nonzero below the zero in the pivot, we can exchange them to correct the system. </li>
+</ol>
+<h1 id="Matrix-Elimination"><a href="#Matrix-Elimination" class="headerlink" title="Matrix Elimination"></a>Matrix Elimination</h1><h2 id="Operation-by-Rows-or-Columns"><a href="#Operation-by-Rows-or-Columns" class="headerlink" title="Operation by Rows or Columns"></a>Operation by Rows or Columns</h2><ol>
+<li>Every matrix is a series of row vectors or column vectors. When multiplying two matrices, we can multiply them separately. We can multiply the first matrix to every column vector in the second matrix or multiply the second matrix to every row vector in the first matrix</li>
+<li>This gives us a hint of row operations and column operations. The first matrix can change the second matrix on rows while the second matrix changes the first matrix on columns. </li>
+<li>In the multiplication of $LR = A$, the $i$th row of $A$ is $L$ times the $i$th row of $R$ while the $i$th column of $A$ is the $i$th column of $L$ times $R$. </li>
+<li>More specifically, the $i$th row of $A$ is the linear combination of all row vectors in $R$ whose coefficients are the $i$th row of $L$. The $i$th column of $A$ is the linear combination of all column vectors in $L$ whose coefficients are the $i$th column of $R$. </li>
+</ol>
+<h2 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h2><ol>
+<li>With the basic of matrices multiplication, we can eliminate the system with that. </li>
+<li>Based on the identity matrix, we make the elimination matrix <script type="math/tex">E</script>. <script type="math/tex">E_{ij}</script> is to produce a zero in the <script type="math/tex">(i,\ j)</script> position of the matrix. Furthermore, <script type="math/tex">the\ (i,\ j)\ entry\ of\ E_{ij}=-l</script> (<script type="math/tex">l</script> is the multiplier to do the elimination). </li>
+<li>We usually do the row operations when eliminating. So <script type="math/tex">E</script> is usually the left matrix. </li>
+<li>When multiple eliminations are necessary, we write those elimination matrices from right to left opposite to the sequence of elimination. </li>
+<li>Though we can move parentheses, we cannot change the relative position of the matrices. </li>
+<li>The elimination matrices will not change the solution, because the final equation will be <script type="math/tex">EA\vec{x}=E\vec{b}</script>. For augmented matrix the final result is <script type="math/tex">[EA\ E\vec{b}]</script></li>
+<li>When we need a row exchange, a permutation matrix is multiplied. The permutation matrix <script type="math/tex">P_{ij}</script> is the identity matrix with rows <script type="math/tex">i</script> and <script type="math/tex">j</script> reversed to exchange rows <script type="math/tex">i</script> and <script type="math/tex">j</script> of the original matrix.  </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/10/19/01-The-geometry-of-linear-equations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/19/01-The-geometry-of-linear-equations/" class="post-title-link" itemprop="url">01. The Geometry of Linear Equations</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-19 20:13:11" itemprop="dateCreated datePublished" datetime="2019-10-19T20:13:11+08:00">2019-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-06 14:53:31" itemprop="dateModified" datetime="2022-05-06T14:53:31+08:00">2022-05-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linear-Combination"><a href="#Linear-Combination" class="headerlink" title="Linear Combination"></a>Linear Combination</h1><ol>
+<li><code>Vector addition</code> : $\vec{c}=\vec{a}+\vec{b}     (c_i= a_i+b_i)$</li>
+<li><code>Scalar multiplication</code>: $\vec{b}=c\vec{a}    (b_i=ca_i)$</li>
+<li><code>Linear combination</code>: the sum of $c\vec{a}$ and $d\vec{b}$, i.e. $c\vec{a}+d\vec{b}$</li>
+<li>Expressions of vectors: $\vec{x}=\left[\begin{matrix}a \ b \ …\end{matrix}\right]=(a, b, …)≠[a, b, …]$</li>
+<li>For one vector $\vec{u}$, the only linear combination is the scalar multiplication $c\vec{u}$. </li>
+<li>If all vectors are $\vec{0}$, every combination would be zero. </li>
+<li>If $\vec{0}$ does not exist, all the combinations of $n$ independent vectors form an  $n$-dimensional space with $\vec{0}$ in it. </li>
+<li>The picture of a vector is an arrow pointing from the origin point to the point with the coordination of the vector. Moreover, addition is merely following all the vectors and pointing from the origin to the final point. Multiplication is the arrow $c$ times longer. If $c&lt;0$, the arrow goes the other way. </li>
+</ol>
+<h1 id="Lengths-and-Dot-Products"><a href="#Lengths-and-Dot-Products" class="headerlink" title="Lengths and Dot Products"></a>Lengths and Dot Products</h1><ol>
+<li><code>Dot product (Inner product)</code>: $\vec{v}\cdot \vec{w}=\sum{v_iw_i}$</li>
+<li>If the dot product equals to 0, two vectors are perpendicular. The $\vec{0}$ is perpendicular to every vector. </li>
+<li><code>Length of a vector</code>: $||\vec{v}||=\displaystyle\sqrt{\vec{v}\cdot \vec{v}}=\sqrt{\sum{v_i^2}}$</li>
+<li>The length of a vector is the length of the arrow that represents the vector in the picture. </li>
+<li>A unit vector $\vec{u}$ is a vector whose length is $1$. </li>
+<li>We can create a unit vector by dividing a vector with its length, i.e. $\vec{u}=\displaystyle\frac{\vec{v}}{||\vec{v}||}$. </li>
+<li>The standard unit vectors along the $x$ and $y$ axes are written $\vec{i}$ and $\vec{j}$. </li>
+<li>$\vec{v}\cdot \vec{w} &gt; 0 \Longleftrightarrow \theta  &lt;\frac{\Pi}{2}$ <br />$\vec{v}\cdot \vec{w} &lt; 0 \Longleftrightarrow \theta &gt; \frac{\Pi}{2}$</li>
+<li>For unit vectors, the dot product of two vectors is <script type="math/tex">cos\ \theta</script>. If not both vectors are unit vectors, divide them with their length to make them unit vectors. <script type="math/tex">cos\ \theta=\frac{\vec{u}\cdot \vec{v}}{||\vec{u}||\ ||\vec{v}||}</script></li>
+<li><code>Schwarz Inequality</code>: <script type="math/tex">\displaystyle cos\ \theta=\frac{\vec{u}\cdot \vec{v}}{||\vec{u}||\ ||\vec{v}||}\ \Leftrightarrow\ \vec{u}\cdot \vec{v}=||\vec{u}||\ ||\vec{v}||\ cos\ \theta \Leftrightarrow \vec{u}\cdot \vec{v}≥||\vec{u}||\ ||\vec{v}||</script></li>
+<li><code>Triangle Inequality</code>: $||\vec{v}+\vec{u}||≤||\vec{v}||+||\vec{u}||$. Because $\vec{v}+\vec{u}$ is the third side of the triangle of $\vec{u}$ and $\vec{v}$</li>
+<li>For $2$-dimensional vectors $\vec{v}=(a, b)$ and $\vec{u}=(b, a)$, the Schwarz Inequality becomes $2ab ≤ a^2 + b^2$. If we let $x=a^2$ and $y=b^2$, $\displaystyle\sqrt{xy}≤\frac{x+y}{2}$, which is <code>Geometric mean ≤ Arithmetic mean</code></li>
+</ol>
+<h1 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h1><h2 id="Matrix-Times-Vector"><a href="#Matrix-Times-Vector" class="headerlink" title="Matrix Times Vector"></a>Matrix Times Vector</h2><ol>
+<li>For $A\vec{x}$, one way is to calculate by columns, and the other is by rows. </li>
+<li>For columns, the result is the linear combination of each column. </li>
+<li>For rows, the result is the dot product of each row and the vector. </li>
+</ol>
+<h2 id="Solve-Equations"><a href="#Solve-Equations" class="headerlink" title="Solve Equations"></a>Solve Equations</h2><ol>
+<li>First, we need to make sure those equations are linear, which means that the unknowns are only multiplied by numbers. </li>
+<li>For $A\vec{x}=\vec{b}$, we can solve this equation to $\vec{x}=A^{-1}\vec{b}$. Here $A^{-1}$ is the inverse of $A$. $A$ is called the <code>coefficient matrix</code>. </li>
+<li>$A\vec{x}=\vec{b}$ has only one solution as long as $\vec{b}$ is in the column space of $A$. Alternatively, this system has either no solution or infinite solutions. </li>
+<li><code>Independence</code>: If no combination of vectors is $\vec{0}$ except all the scalar is 0, this system of vectors is independent. <br /><code>Dependence</code>: If at least one combination of vectors is $\vec{0}$, this system of vectors is dependent. </li>
+<li>If $A$ has independent columns, $A\vec{x}=\vec{0}$ has one solution. $A$ is an invertible matrix. <br />If $A$ has dependent columns, $A\vec{x}=\vec{0}$ has many solutions. $A$ is a singular matrix. </li>
+</ol>
+<h2 id="Two-ways-to-see-equations"><a href="#Two-ways-to-see-equations" class="headerlink" title="Two ways to see equations"></a>Two ways to see equations</h2><ol>
+<li>For $n$ equations in $m$ unknowns, We can write them in equation form or the matrix form. </li>
+<li>The matrix form has three matrices, the coefficient matrix A, the unknown matrix $\vec{x}$, and the right-hand side matrix $\vec{b}$. These make the system  $A\vec{x} = \vec{b}$. </li>
+<li>The equation form is the usual form, like “$2x - y = 0$”, which is the row form of the matrix. </li>
+<li>According to two ways to calculate the multiplication of matrix and vector, we have two ways to see a system of equations. </li>
+</ol>
+<h3 id="Row-Picture"><a href="#Row-Picture" class="headerlink" title="Row Picture"></a>Row Picture</h3><ol>
+<li>In the row picture, we look at the coefficient matrix by rows. </li>
+<li>Each row dot products with the unknown matrix and produces an equation which stands for a space. </li>
+<li>Furthermore, the answer to the system is the intersection of all spaces. </li>
+<li>The row picture of two equations in two unknowns shows two lines meeting at a single point (the solution). </li>
+</ol>
+<h3 id="Column-Picture"><a href="#Column-Picture" class="headerlink" title="Column Picture"></a>Column Picture</h3><ol>
+<li>In the column picture, we look at the combination of the column vectors. </li>
+<li>Each column, including the right-hand side vector, stands for a vector. </li>
+<li>Moreover, the unknowns are the coefficients of the vectors in the linear combination to produce the right-hand-side vector. </li>
+<li>The column picture combines the column vectors on the left side to produce the vector $\vec{b}$ on the right side. </li>
+<li>The pictures of the higher dimension are hard to draw, even to imagine. Nevertheless, base on the column picture, we can solve other questions. </li>
+<li>The question of solving equations is turned into finding linear combinations. </li>
+<li>Furthermore, the existence of answers becomes a vector space problem, which becomes the rank problem. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -847,294 +1207,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/12/08-Animation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/12/08-Animation/" class="post-title-link" itemprop="url">08. Animation</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-12 10:47:49" itemprop="dateCreated datePublished" datetime="2019-08-12T10:47:49+08:00">2019-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:26:48" itemprop="dateModified" datetime="2020-08-07T19:26:48+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="UIView-Property-Animation"><a href="#UIView-Property-Animation" class="headerlink" title="UIView Property Animation"></a>UIView Property Animation</h1><h2 id="UIView-Animation-Properties"><a href="#UIView-Animation-Properties" class="headerlink" title="UIView Animation Properties"></a>UIView Animation Properties</h2><ol>
-<li>frame/center</li>
-<li>bounds (transient size, does not conflict with animating center)transform (translation, </li>
-<li>rotation and scale)</li>
-<li>alpha (opacity)</li>
-<li>backgroundColor
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/12/08-Animation/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/10/07-Multiple-MVCs-and-Timer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/10/07-Multiple-MVCs-and-Timer/" class="post-title-link" itemprop="url">07. Multiple MVCs and Timer</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-10 12:32:36" itemprop="dateCreated datePublished" datetime="2019-08-10T12:32:36+08:00">2019-08-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:27:12" itemprop="dateModified" datetime="2020-08-07T19:27:12+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Multiple-MVCs"><a href="#Multiple-MVCs" class="headerlink" title="Multiple MVCs"></a>Multiple MVCs</h1><ol>
-<li>When MVCs work together, one MVC is a View as the other MVC, and a MVC sees other MVCs as its View</li>
-<li>We usually use the Controllers iOS provides whose View is other MVCs</li>
-<li>There are three main kind of MVC models provided by iOS</li>
-</ol>
-<h2 id="UITabBarController"><a href="#UITabBarController" class="headerlink" title="UITabBarController"></a>UITabBarController</h2><ol>
-<li>Just a set of taps in the app at the top or in the bottom. </li>
-<li>When user tap one of the taps, the MVC controls the current view changes to the MVC of that tap, and together changes the view
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/10/07-Multiple-MVCs-and-Timer/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2019/08/08/06.Multi-touch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/08/06.Multi-touch/" class="post-title-link" itemprop="url">06. Multi-touch</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-08-08 10:46:57" itemprop="dateCreated datePublished" datetime="2019-08-08T10:46:57+08:00">2019-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:26:36" itemprop="dateModified" datetime="2020-08-07T19:26:36+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/Swift%E5%BC%80%E5%8F%91-Stanford-CS193p/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift开发 (Stanford CS193p)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="React-to-touches"><a href="#React-to-touches" class="headerlink" title="React to touches"></a>React to touches</h1><ol>
-<li>We can react to touches with raw touch events. (touches, moves, up, etc.)</li>
-<li>But, we can also react to certain, predefined “gestures”. Gestures are recognized by instances of <code>UIGestureRecognizer</code>. </li>
-<li>There are two sides to using a gesture recognizer.<br>First, add a gesture recognizer to a UIView<br>Second, provide a method to “handle” that gesture</li>
-<li>Usually the first is done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence. </li>
-<li>The second is provided either by the UIView or a Controller. </li>
-</ol>
-<h1 id="Create-one"><a href="#Create-one" class="headerlink" title="Create one"></a>Create one</h1><h2 id="Adding-a-gesture-recognizer-to-a-UIView"><a href="#Adding-a-gesture-recognizer-to-a-UIView" class="headerlink" title="Adding a gesture recognizer to a UIView"></a>Adding a gesture recognizer to a UIView</h2><ol>
-<li>In this way, we ask the UIView to “recognize” that gesture. Usually it’s done by a Controller. Though occasionally a UIView will do this itself if the gesture is integral to its existence</li>
-<li>First, we need to create a outlet of the view and add a property observer “didset” to it.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/08/06.Multi-touch/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1206,20 +1278,20 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">207</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1311,6 +1383,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
