@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Sinusoidal signalsContinuous-time $x(t)&#x3D;A cos(\omega_0t+\phi)$. Here $A$ stands for amplitude, $\omega_0$ stands for frequency, and $\phi$ stands for phase.   A sinusoidal signal has period $T_0&#x3D;\frac">
 <meta property="article:published_time" content="2022-06-12T08:53:56.000Z">
-<meta property="article:modified_time" content="2022-06-16T15:41:42.700Z">
+<meta property="article:modified_time" content="2022-06-20T14:54:46.934Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="信号">
 <meta property="article:tag" content="电子">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-16 23:41:42" itemprop="dateModified" datetime="2022-06-16T23:41:42+08:00">2022-06-16</time>
+                <time title="Modified: 2022-06-20 22:54:46" itemprop="dateModified" datetime="2022-06-20T22:54:46+08:00">2022-06-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -299,15 +299,15 @@
 </li>
 <li><p>For unit impulse sequence, $\delta[n]=\left\{\begin{matrix}0 &amp; n≠0\\1 &amp; n=0 \end{matrix}\right.$</p>
 </li>
-<li><p>We can express the unit impulse with unit step. $\delta[n]=u[n]-u[n-l] $. Namely, the unit impulse equals to the unit step minus unit step delayed, which is the first difference. </p>
+<li><p>We can express the unit impulse with unit step. $\delta[n]=u[n]-u[n-1] $. Namely, the unit impulse equals to the unit step minus unit step delayed, which is the first difference. </p>
 </li>
-<li><p>We can also express the unit step with unit impulse. $u[n]=\displaystyle\sum^n_{m=-\infty} $ or $u[n]=\displaystyle\sum^\infty_{k=0}\delta[n-k] $</p>
+<li><p>We can also express the unit step with unit impulse. $u[n]=\displaystyle\sum^n_{m=-\infty}\delta[m] $ or $u[n]=\displaystyle\sum^\infty_{k=0}\delta[n-k] $</p>
 </li>
 </ol>
 <h2 id="Continuous-time-1"><a href="#Continuous-time-1" class="headerlink" title="Continuous-time"></a>Continuous-time</h2><ol>
 <li><p>For unit step function, $u(t)=\left\{\begin{matrix}0 &amp; t &lt; 0\\1 &amp; t &gt; 0 \end{matrix} \right. $.<br>The unit step function is discontinuous at $t=0$. So in effect, we need to think the unit step function as the limit of a continuous function, $u_\Delta(t) $ linearly increase from $0$ to $1$ at time $t$ from $0$ to $\Delta$. Thus $u(t)=u_\Delta(t) $ as $\Delta\to0$. </p>
 </li>
-<li><p>Unit impulse function is the derivative of unit step function, $\delta(t)=\frac{du(t)}{dt} $.<br>But $u(t)$ is discontinuous, so we would consider $\delta_\Delta(t)$ as the derivative of $u_\Delta(t)$, $\delta_\Delta(t)=\frac{du_\Delta(t)}{dt} $. So $\delta(t)=\delta_\Delta(t) $ as $\Delta\to0$.<br>$\delta_\Delta(t)=\left\{\begin{matrix}\frac{1}\Delta&amp;0&lt;t&lt;\Delta\\0&amp;otherwise \end{matrix} \right.$. As $\Delta\to0$, the width of the rectangle decreases while the height increases, and the area remains $1$.<br>We can draw $\delta(t)$ by an arrow point to the positive size of y-axis with length of $1$. </p>
+<li><p>Unit impulse function is the derivative of unit step function, $\delta(t)=\frac{du(t)}{dt} $.<br>But $u(t)$ is discontinuous, so we would consider $\delta_\Delta(t)$ as the derivative of $u_\Delta(t)$, $\delta_\Delta(t)=\frac{du_\Delta(t)}{dt} $. So $\delta(t)=\delta_\Delta(t) $ as $\Delta\to0$.<br>$\delta_\Delta(t)=\left\{\begin{matrix}\frac{1}\Delta&amp;0&lt;t&lt;\Delta\\0&amp;otherwise \end{matrix} \right.$. As $\Delta\to0$, the width of the rectangle decreases while the height increases, and the area remains $1$.<br>We can draw $\delta(t)$ by an arrow point to the positive size of y-axis with length of $1$.<br>Since $\displaystyle\lim_{\Delta\to0}u_\Delta(t)=u(t)$, $\displaystyle\lim_{\Delta\to0}\delta_\Delta(t)=\delta(t)$</p>
 </li>
 <li><p>The relationship from unit impulse to unit step is derivative. And, natually, the relationship from unit step to unit impulse is integral, $u(t)=\displaystyle\int^t_{-\infty}\delta(t)dt$</p>
 </li>
@@ -435,7 +435,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

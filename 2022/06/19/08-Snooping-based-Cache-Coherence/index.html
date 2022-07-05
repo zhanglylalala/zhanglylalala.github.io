@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="The cache coherence problem This problem happens in a shared memory multi-processor system. Reading a value at address X should return the last value written to address X by any processor.   This is a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. Snooping-based Cache Coherence">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/06/19/08-Snooping-based-Cache-Coherence/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="The cache coherence problem This problem happens in a shared memory multi-processor system. Reading a value at address X should return the last value written to address X by any processor.   This is a">
+<meta property="og:image" content="http://http/img/08-Snooping-based-Cache-Coherence-1.jpeg">
+<meta property="og:image" content="http://http/img/08-Snooping-based-Cache-Coherence-2.png">
+<meta property="og:image" content="http://http/img/08-Snooping-based-Cache-Coherence-3.jpeg">
+<meta property="article:published_time" content="2022-06-19T11:30:41.000Z">
+<meta property="article:modified_time" content="2022-06-20T08:46:00.312Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://http/img/08-Snooping-based-Cache-Coherence-1.jpeg">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/06/19/08-Snooping-based-Cache-Coherence/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>08. Snooping-based Cache Coherence | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/19/08-Snooping-based-Cache-Coherence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          08. Snooping-based Cache Coherence
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-19 19:30:41" itemprop="dateCreated datePublished" datetime="2022-06-19T19:30:41+08:00">2022-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-20 16:46:00" itemprop="dateModified" datetime="2022-06-20T16:46:00+08:00">2022-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="The-cache-coherence-problem"><a href="#The-cache-coherence-problem" class="headerlink" title="The cache coherence problem"></a>The cache coherence problem</h1><ol>
+<li><p>This problem happens in a shared memory multi-processor system. Reading a value at address X should return the last value written to address X by any processor. </p>
+</li>
+<li><p>This is a problem created by replicating the data stored at address X in local caches (a hardware implementation detail), and cannot be fixed by adding locks. </p>
+</li>
+<li><p>Memory coherence problem exists because there is both global storage (main memory) and per-processor local storage (processor caches) implementing the abstraction of a single shared address space.</p>
+</li>
+<li><p>In a cache hierarchy,<br>L1 and L2 caches are private per core while L3 cahce is shared by cores in the same chip.<br>L3 cache is split into sectors or banks. Each bank is physically associated with a core, but managed hardware-wise as a single coherent unit.<br>L2 cache and L3 cache communicate through a ring interconnect where most inter-processor actions happens. </p>
+</li>
+</ol>
+<h2 id="Uniprocessor-case"><a href="#Uniprocessor-case" class="headerlink" title="Uniprocessor case"></a>Uniprocessor case</h2><ol>
+<li><p>On a uniprocessor, providing coherence is fairly simple, since writes typically come from one client: the processor. Load operation must examine all pending stores in store buffer and select the last sequence. </p>
+</li>
+<li><p>There is one exception on a uniprocessor, which is device I/O via direct memory access (DMA). </p>
+</li>
+<li><p>One solution to DMA is that CPU writes to shared buffers using uncached stores.<br>Another way is supported by OS which will mark virtual memory pages containing shared buffers as not-cachable, and explicitly flush pages from cache when I/O completes. </p>
+</li>
+<li><p>In practice, DMA transfers are infrequent compared to CPU loads and stores (so these heavyweight software solutions are acceptable)</p>
+</li>
+</ol>
+<h2 id="Coherence-definition"><a href="#Coherence-definition" class="headerlink" title="Coherence definition"></a>Coherence definition</h2><ol>
+<li><p>Obeys program order as expected of a uniprocessor system: A read by processor P to address X that follows a write by P to address X, should return the value of the write by P (assuming no other processor wrote to X in between)</p>
+</li>
+<li><p>Write propagation: A read by processor P1 to address X that follows a write by processor P2 to X returns the written value, if the read and write are “sufficiently separated” in time (assuming no other write to X occurs in between)</p>
+</li>
+<li><p>Write serialization: Writes to the same address are serialized: two writes to address X by any two processors are observed in the same order by all processors.</p>
+</li>
+<li><p>Write propagation means that notification of a write must eventually get to the other processors. Note that precisely when information about the write is propagated is not specified in the definition of coherence.</p>
+</li>
+</ol>
+<h1 id="Implementing-choherence"><a href="#Implementing-choherence" class="headerlink" title="Implementing choherence"></a>Implementing choherence</h1><ol>
+<li><p>Software-based solution: OS uses page-fault mechanism to propagate writes. It can be used to implement memory coherence over clusters of workstations</p>
+</li>
+<li><p>Hardware-based solutions: “snooping”-based coherence implementations and directory-based coherence implementations</p>
+</li>
+<li><p>Most modern multi-core CPUs implement cache coherence<br>Discrete GPUs do not implement cache coherence. Overhead of coherence deemed not worth it for graphics and scientific computing applications (NVIDIA GPUs provide single shared L2 + atomic memory operations)<br>But the latest Intel Integrated GPUs do implement cache coherence</p>
+</li>
+</ol>
+<h2 id="Shared-caches"><a href="#Shared-caches" class="headerlink" title="Shared caches"></a>Shared caches</h2><ol>
+<li><p>One single cache shared by all processors eliminates problem of replicating state in multiple caches and makes coherence easy. </p>
+</li>
+<li><p>This has obvious scalability problems since the point of a cache is to be local and fast. It also causes interference and contention due to many clients. </p>
+</li>
+<li><p>Facilitates fine-grained sharing (overlapping working sets). Loads/stores by one processor might pre-fetch lines for another processor</p>
+</li>
+</ol>
+<h2 id="Snooping-cache-coherence-schemes"><a href="#Snooping-cache-coherence-schemes" class="headerlink" title="Snooping cache-coherence schemes"></a>Snooping cache-coherence schemes</h2><ol>
+<li><p>Main idea: all coherence-related activity is broadcast to all processors</p>
+</li>
+<li><p>Cache controllers monitor (“they snoop”) memory operations, and react accordingly to maintain memory coherence</p>
+</li>
+<li><p>Cache controller must respond to actions from both ends:<br>It must respond the Load/Store requests from its local processor<br>It also must respond coherence-related activity broadcast over the chip’s interconnect. </p>
+</li>
+<li><p>The interconnect is between memory and caches possessed by each processor. There is not only memory-cache information, but also cache-cache information, which will limit the scality of the system. </p>
+</li>
+</ol>
+<h3 id="Write-through-caches"><a href="#Write-through-caches" class="headerlink" title="Write-through caches"></a>Write-through caches</h3><ol>
+<li><p>For the invalidation-based protocol, when one processor write into an address, cache controller broadcasts<br>invalidation message for other caches to mark that line to invalidation.<br>the next read from other processors will trigger cache miss</p>
+</li>
+<li><p>For the update-based protocol: other caches will update their local copies as the information is sent. </p>
+</li>
+<li><p>States: Valid (V) or Invalid (I)<br>A local processor read (PrRd) always ends at valid. If the operation starts from an invalid state, a message will be sent (BusRd). If it starts from a valid state, no message will be sent.<br>A local processor write (PrWr) always ends at the same state as before the operation (assumes write no-allocate policy), and always sends a message (BusWr).<br>When a write message from other processor is received (BusWr), It always ends at invalid state.  </p>
+<p><img src="/img/08-Snooping-based-Cache-Coherence-1.jpeg" width="40%"></p>
+</li>
+<li><p>Requirements of the interconnect:<br>All write transactions visible to all cache controllers.<br>All write transactions visible to all cache controllers in the same order. </p>
+</li>
+<li><p>Simplifying assumptions here:<br>Interconnect and memory transactions are atomic<br>Processor waits until previous memory operations is complete before issuing next memory operation<br>Invalidation applied immediately as part of receiving invalidation broadcast</p>
+</li>
+</ol>
+<h1 id="Write-back-caches-Invalidation-based"><a href="#Write-back-caches-Invalidation-based" class="headerlink" title="Write-back caches (Invalidation-based)"></a>Write-back caches (Invalidation-based)</h1><ol>
+<li><p>Dirty state of cache line now indicates exclusive ownership</p>
+</li>
+<li><p>Exclusive: cache is only cache with a valid copy of line (it can safely be written to)<br>Owner: cache is responsible for supplying the line to other processors when they attempt to load it from memory (otherwise a load from another processor will get stale data from memory)</p>
+</li>
+<li><p>A line in the “exclusive” state can be modified without notifying<br>the other caches<br>Processor can only write to lines in the exclusive state. So they need a way to tell other caches that they want exclusive access to the line. They will do this by sending all the other caches messages<br>When cache controller snoops a request for exclusive access to line it contains, it must invalidate the line in its own cache</p>
+</li>
+</ol>
+<h2 id="MSI-write-back-invalidation-protocol"><a href="#MSI-write-back-invalidation-protocol" class="headerlink" title="MSI write-back invalidation protocol"></a>MSI write-back invalidation protocol</h2><ol>
+<li><p>Three cache line states:<br>Invalid (I): same as meaning of invalid in uniprocessor cache<br>Shared (S): line valid in one or more caches<br>Modified (M): line valid in exactly one cache (a.k.a. “dirty” or “exclusive” state)</p>
+</li>
+<li><p>The local processors have the same operations as write-through case.<br>The coherence-related bus transactions from remote caches have three kinds:<br>BusRd: obtain copy of line with no intent to modify<br>BusRdX: obtain copy of line with intent to modify<br>flush: write dirty line out to memory</p>
+<p><img src="/img/08-Snooping-based-Cache-Coherence-2.png" width="50%"></p>
+</li>
+<li><p>When try to write an invalid line without reading it, the content of the current modified state line will be sent to the new writer. </p>
+</li>
+<li><p>Write propagation is achieved via combination of invalidation on BusRdX, and flush from M-state on subsequent BusRd/BusRdX from another processors</p>
+</li>
+<li><p>Write serialization<br>Writes that appear on interconnect are ordered by the order they appear on interconnect (BusRdX)<br>Reads that appear on interconnect are ordered by order they appear on interconnect (BusRd)<br>Writes that don’t appear on the interconnect (PrWr to line already in M state):</p>
+<ul>
+<li>Sequence of writes to line comes between two interconnect transactions for the line</li>
+<li>All writes in sequence performed by same processor, P (that processor certainly observes them in correct sequential order)</li>
+<li>All other processors observe notification of these writes only after a interconnect transaction for the line. </li>
+<li>So all processors see writes in the same order. </li>
+</ul>
+</li>
+</ol>
+<h2 id="MESI-invalidation-protocol"><a href="#MESI-invalidation-protocol" class="headerlink" title="MESI invalidation protocol"></a>MESI invalidation protocol</h2><ol>
+<li><p>MSI requires two interconnect transactions for the common case of reading an address, then writing to it</p>
+<ul>
+<li>Transaction 1: BusRd to move from I to S state</li>
+<li>Transaction 2: BusRdX to move from S to M state</li>
+</ul>
+</li>
+<li><p>Solution: add additional state E (“exclusive clean”) to mark the line that has not been modified, but only this cache has a copy of the line<br>This state decouples exclusivity from line ownership (line not dirty, so copy in memory is valid copy of data)<br>Upgrade from E to M does not require an interconnect transaction </p>
+</li>
+<li><p><img src="/img/08-Snooping-based-Cache-Coherence-3.jpeg" width="50%"></p>
+</li>
+</ol>
+<h2 id="5-stage-invalidation-based-protocol"><a href="#5-stage-invalidation-based-protocol" class="headerlink" title="5-stage invalidation-based protocol"></a>5-stage invalidation-based protocol</h2><ol>
+<li>Who should supply data on a cache miss when line is in the E or S state of another cache?<br>Can get cache line data from memory or can get data from another cache? If source is another cache, which one should provide it?</li>
+<li>Cache-to-cache transfers add complexity, but commonly used to reduce both latency of data access and reduce memory bandwidth required by application</li>
+<li>MESIF: Like MESI, but one cache holds shared line in F state rather than S (F=”forward”). Cache with line in F state services miss<br>Simplifies decision of which cache should service miss (basic MESI: all caches respond)<br>Used by Intel processors</li>
+<li>MOESI: Transition from M to O (O=”owned, but not exclusive”) and do not flush to memory (In MESI protocol, transition from M to S requires flush to memory).<br>Other processors maintain shared line in S state, one processor maintains line in O state. Data in memory is stale, so cache with line in O state must service cache misses.<br>Used in AMD Opteron</li>
+</ol>
+<h1 id="Invalidation-based-vs-Update-based"><a href="#Invalidation-based-vs-Update-based" class="headerlink" title="Invalidation-based vs. Update-based"></a>Invalidation-based vs. Update-based</h1><ol>
+<li><p>Invalidation-based protocol: To write to a line, cache must obtain exclusive access to it. All other caches must invalidate their copies</p>
+</li>
+<li><p>Update-based protocol: Can write to shared copy by broadcasting update to all other copies</p>
+</li>
+<li><p>Intuitively, update would seem preferable if other processors<br>sharing data continue to access it after a write occurs</p>
+<p>But updates are overhead if data just sits in caches (and is never read by another processor again) or application performs many writes before the next read</p>
+</li>
+<li><p>Update can reduce cache miss rate since all shared copies remain valid.<br>Update can suffer from high traffic due to multiple writes before the next read by another processor</p>
+</li>
+</ol>
+<h1 id="Snoop-for-a-cache-hierarchy"><a href="#Snoop-for-a-cache-hierarchy" class="headerlink" title="Snoop for a cache hierarchy"></a>Snoop for a cache hierarchy</h1><ol>
+<li><p>Challenge: changes made to data at L1 cache may not be visible to L2 cache controller than snoops the interconnect. </p>
+</li>
+<li><p>All lines in closer to processor cache are also in farther from processor cache. Thus, all transactions relevant to L1 are also relevant to L2, so it is sufficient for only the L2 to snoop the interconnect. </p>
+</li>
+<li><p>If line is in owned state (M in MSI/MESI) in L1, it must also be in owned state in L2. Allows L2 to determine if a bus transaction is requesting a modified cache line in L1 without requiring information from L1</p>
+</li>
+<li><p>When line X is invalidated in L2 cache due to BusRdX from another cache. Must also invalidate line X in L1<br>Solution: Each L2 line contains an additional state bit indicating if line also exists in L1. This bit tells the L2 invalidations of the cache line due to coherence traffic need to be propagated to L1. </p>
+</li>
+<li><p>When L1 write is hit, the corresponding line in L2 cache is in modified state in the coherence protocol, but L2 data is stale.<br>When coherence protocol requires X to be flushed from L2, L2 cache must request the data from L1.<br>Add another bit for “modified-but-stale” (flushing a “modified-but-stale” L2 line requires getting the real data from L1 first.)</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/17/02-Convolution/" rel="prev" title="02. Convolution">
+      <i class="fa fa-chevron-left"></i> 02. Convolution
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/21/03-Systems-Represented-by-Differential-Equations/" rel="next" title="03. Systems Represented by Differential Equations">
+      03. Systems Represented by Differential Equations <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-cache-coherence-problem"><span class="nav-number">1.</span> <span class="nav-text">The cache coherence problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Uniprocessor-case"><span class="nav-number">1.1.</span> <span class="nav-text">Uniprocessor case</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coherence-definition"><span class="nav-number">1.2.</span> <span class="nav-text">Coherence definition</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementing-choherence"><span class="nav-number">2.</span> <span class="nav-text">Implementing choherence</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shared-caches"><span class="nav-number">2.1.</span> <span class="nav-text">Shared caches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Snooping-cache-coherence-schemes"><span class="nav-number">2.2.</span> <span class="nav-text">Snooping cache-coherence schemes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Write-through-caches"><span class="nav-number">2.2.1.</span> <span class="nav-text">Write-through caches</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Write-back-caches-Invalidation-based"><span class="nav-number">3.</span> <span class="nav-text">Write-back caches (Invalidation-based)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MSI-write-back-invalidation-protocol"><span class="nav-number">3.1.</span> <span class="nav-text">MSI write-back invalidation protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MESI-invalidation-protocol"><span class="nav-number">3.2.</span> <span class="nav-text">MESI invalidation protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-stage-invalidation-based-protocol"><span class="nav-number">3.3.</span> <span class="nav-text">5-stage invalidation-based protocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Invalidation-based-vs-Update-based"><span class="nav-number">4.</span> <span class="nav-text">Invalidation-based vs. Update-based</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Snoop-for-a-cache-hierarchy"><span class="nav-number">5.</span> <span class="nav-text">Snoop for a cache hierarchy</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

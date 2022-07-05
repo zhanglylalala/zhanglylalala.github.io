@@ -48,14 +48,14 @@
   };
 </script>
 
-  <meta name="description" content="We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience.   Normally the analytical convenience means that the output can be easily genera">
+  <meta name="description" content="We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience.Normally the analytical convenience means that the output can be easily generated.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02. Convolution">
 <meta property="og:url" content="http://http//www.laughingtree.cn/2022/06/17/02-Convolution/index.html">
 <meta property="og:site_name" content="LaughingTree">
-<meta property="og:description" content="We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience.   Normally the analytical convenience means that the output can be easily genera">
+<meta property="og:description" content="We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience.Normally the analytical convenience means that the output can be easily generated.">
 <meta property="article:published_time" content="2022-06-17T05:25:48.000Z">
-<meta property="article:modified_time" content="2022-06-17T10:56:56.952Z">
+<meta property="article:modified_time" content="2022-06-19T10:02:45.211Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="信号">
 <meta property="article:tag" content="电子">
@@ -219,10 +219,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-06-17 13:25:48 / Modified: 18:56:56" itemprop="dateCreated datePublished" datetime="2022-06-17T13:25:48+08:00">2022-06-17</time>
+              <time title="Created: 2022-06-17 13:25:48" itemprop="dateCreated datePublished" datetime="2022-06-17T13:25:48+08:00">2022-06-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-19 18:02:45" itemprop="dateModified" datetime="2022-06-19T18:02:45+08:00">2022-06-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -252,16 +258,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><ol>
-<li><p>We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience. </p>
-</li>
-<li><p>Normally the analytical convenience means that the output can be easily generated. </p>
+        <ol>
+<li><p>We try to decompose input signal into a linear combination of basic signals that will provide analytical convenience.<br>Normally the analytical convenience means that the output can be easily generated. </p>
 </li>
 <li><p>Decompose a signal into a linear combination of delayed impulses. And that leads to a representation for linear time-invairant systems, which is referred to as convolution.<br>Another kind is a decomposition of inputs into complex exponentials. That leads to a representation of signals and systems through Fourier analysis. </p>
 </li>
-<li><p>For a sequence $x[n]$, we can decompose $x[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]\delta[n-k] $. Namely, we can represent $x[n]$ as linear combination of a delayed impulse signal $\delta[n-k]$ with coefficients been $x[k]$.<br>In a linear system, if we denote $\delta[n-k] $ as $h_k[n]$, then we can have $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h_k[n] $.<br>In addition, if the system is time-invariant, $h_k[n]=\delta(n-k)=\delta(n-k-0)=h_0[n-k] $. Define $h_0[n]=h[n]$ to get $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h[n-k] $ in the form of convolution sum. </p>
+<li><p>For a sequence $x[n]$, we can decompose $x[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]\delta[n-k] $. Namely, we can represent $x[n]$ as linear combination of delayed impulse signals $\delta[n-k]$ with coefficients been $x[k]$.<br>In a linear system, we denote $h_k[n] $ as the output when the input is $\delta[n-k]$,  we can have the output when the input is $x[n]$ as $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h_k[n] $.<br>In addition, if the system is time-invariant, $h_k[n]=\delta(n-k)=\delta(n-k-0)=h_0[n-k] $. Define $h_0[n]=h[n]$ to get $y[n]=\displaystyle\sum^{+\infty}_{k=-\infty}x[k]h[n-k] $ in the form of convolution sum denoted by $y[n]=x[n]\ast h[n] $. </p>
 </li>
-<li></li>
+<li><p>In continuous case, we want to represent $x(t)$ with successive rectangles and see each rectangle as an impulse. As the width of each rectangle goes narrower and narrower, the representation becomes more accurate.<br>For a rectangle in $(t_0,t_0+\Delta)$, the height of the rectangle depends on $x(t_0)$. We can represent the the impulse as $x(t_0)\delta_\Delta(t-t_0)\Delta$ where $\delta_\Delta(t)$ is defined as before.<br>Now, $x(t)$ is the sum of all impulses, $x(t)\cong\displaystyle\sum^{+\infty}_{k=-\infty}x(k\Delta)\delta_\Delta(t-k\Delta)\Delta $.  $x(t)=\displaystyle\lim_{\Delta\to0}\sum^{+\infty}_{k=-\infty}x(k\Delta)\delta_\Delta(t-k\Delta)\Delta=\int^{+\infty}_{-\infty}x(\tau)\delta(t-\tau)d\tau $. </p>
+</li>
+<li><p>In $x(t)=\displaystyle\lim_{\Delta\to0}\sum^{+\infty}_{k=-\infty}x(k\Delta)\delta_\Delta(t-k\Delta)\Delta $, we can see it as the linear combination of $\delta_\Delta(t-k\Delta)$ with coefficient been $x(k\Delta)\Delta $.<br>In a linear system, if the output of $\delta_\Delta(t-k\Delta)$ is $h_{k\Delta}(t)$, we can know that the output $x(t)$ is $y(t)=\displaystyle\lim_{\Delta\to0}\sum^{+\infty}_{k=-\infty}x(k\Delta)h_{k\Delta}(t)\Delta=\int^{+\infty}_{-\infty}x(\tau)h_\tau(t)d\tau $.<br>In addition, if the system is time-invariant, $h_\tau(t)=h_0(t-\tau)$, and $y(t)=\displaystyle\int^{+\infty}_{-\infty}x(\tau)h(t-\tau)d\tau $ in the form of convolution integral denoted by $y(t)=x(t)\ast h(t)$. </p>
+</li>
 </ol>
 
     </div>
@@ -286,7 +293,10 @@
     <a href="/2022/06/12/01-Signals-and-Systems/" rel="prev" title="01. Signals and Systems">
       <i class="fa fa-chevron-left"></i> 01. Signals and Systems
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/19/08-Snooping-based-Cache-Coherence/" rel="next" title="08. Snooping-based Cache Coherence">
+      08. Snooping-based Cache Coherence <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -346,7 +356,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"> </span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -361,7 +370,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

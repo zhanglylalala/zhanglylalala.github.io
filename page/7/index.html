@@ -191,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/05/05-Training-Neural-Networks/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,7 +205,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/05/05-Training-Neural-Networks/" class="post-title-link" itemprop="url">05. Training Neural Networks</a>
+            <a href="/2020/05/20/07-%E8%AF%AD%E4%B9%89%E5%88%86%E6%9E%90%E5%92%8C%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">07. 语义分析和中间代码生成</a>
         </h1>
 
         <div class="post-meta">
@@ -215,14 +215,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-05 18:19:58" itemprop="dateCreated datePublished" datetime="2020-04-05T18:19:58+08:00">2020-04-05</time>
+              <time title="Created: 2020-05-20 21:54:23" itemprop="dateCreated datePublished" datetime="2020-05-20T21:54:23+08:00">2020-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:34" itemprop="dateModified" datetime="2020-08-07T19:47:34+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:49:32" itemprop="dateModified" datetime="2020-08-07T19:49:32+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,8 +236,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
                   </a>
                 </span>
             </span>
@@ -253,183 +253,99 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h1><h2 id="Sigmoid-Function"><a href="#Sigmoid-Function" class="headerlink" title="Sigmoid Function"></a>Sigmoid Function</h2><ol>
-<li>Form: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$</li>
-<li>It squashes numbers to range $[0,1]$. </li>
-<li>It has excellent interpretation as a saturating “firing rate” of a neuron. </li>
-<li>However, when $x$ is very negative or very positive, the gradient of the sigmoid gate is zero, which kills the gradient flow. </li>
-<li>The Sigmoid outputs are not zero-centred. When the input of a neuron is always positive, the gradients on $W$ are always all positive or negative. This might cause an insufficiency update of $W$. (Same reason we want zero-mean data)</li>
-<li>Moreover, the exponential calculation is a bit compute expensively. </li>
+          <h1 id="中间代码"><a href="#中间代码" class="headerlink" title="中间代码"></a>中间代码</h1><ol>
+<li>中间代码可以是一个真正的语言，也可以是各个阶段共享的多个内部数据结构</li>
+<li>中间代码生成的任务：把语法分析和语义分析完成后得到的源程序中间表示翻译为中间代码</li>
+<li>独立于机器的中间代码便于编译系统的建立和移植，便于进行独立于机器的代码优化</li>
 </ol>
-<h2 id="tanh-x"><a href="#tanh-x" class="headerlink" title="tanh(x)"></a>tanh(x)</h2><ol>
-<li>It squashes numbers to range $[-1,1]$. </li>
-<li>It is zero-centred. </li>
-<li>Nevertheless, it still kills the gradient when saturated. </li>
+<h2 id="图表示法"><a href="#图表示法" class="headerlink" title="图表示法"></a>图表示法</h2><h3 id="抽象语法树"><a href="#抽象语法树" class="headerlink" title="抽象语法树"></a>抽象语法树</h3><ol>
+<li>抽象语法：语言结构本质性的东西，不考虑具体符号表示</li>
+<li>抽象语法树：反映抽象语法，是分析书的抽象形式或压缩形式</li>
+<li>抽象语法树中每一个叶节点都表示运算对象，内部节点表示运算符</li>
+<li>分析树反映的是具体语法结构</li>
+<li>语法规则中符号可能起标点符号作用，也可能起解释作用</li>
+<li>辅助函数：<br />&emsp;<script type="math/tex">mknode(op,\ left,\ right)</script>建立一个运算符节点<br />&emsp;<script type="math/tex">mkleaf(id,\ entry)</script>建立一个标识符节点，即变量下存储的运算对象，变量名为$id$，变量的值为$value$<br />&emsp;<script type="math/tex">mkleaf(num,\ val)</script>建立一个数节点，标号为$num$，数的值为$val$</li>
+<li>利用语法制导定义，每一个产生式的语义规则都是其对应节点的产生辅助函数。如果产生式是$E\to id$，就用<script type="math/tex">mkleaf(id,\ entry)</script>；若是$E\to num$，就用<script type="math/tex">mkleaf(num,\ val)</script>；其它的就用<script type="math/tex">mknode(op,\ left,\ right)</script>来产生对应的运算符</li>
+<li>利用图像直观地展示从分析树生成语法树的过程就可以用箭头从一个语法树的节点指向生成的那个节点，并将节点中的域指针指向对应的语法树节点。最后再把分析树和从分析树指向语法树的箭头去掉，就得到一个语法树</li>
 </ol>
-<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><ol>
-<li>Form: $f(x)=max(0,x)$. </li>
-<li>It does not saturate in the positive regime and computationally efficient. </li>
-<li>In practice, It converges about $6$ times faster than sigmoid/tanh. </li>
-<li>Furthermore, it is more biologically plausible than sigmoid. </li>
-<li>However, it is not zero-centred output, and it also kills the gradient in the negative region. </li>
-<li>At some particular situation called dead ReLU, ReLU will never activate and never update. This happens when the initialization is bad or when the learning rate is too high. So people may initial ReLU neurons will slightly positive biases to increase the likelihood of being active ReLU. </li>
+<h3 id="有向非循环图"><a href="#有向非循环图" class="headerlink" title="有向非循环图"></a>有向非循环图</h3><ol>
+<li>在抽象语法树中，有大量节点表示的是同一个值，这造成了大量的空间浪费</li>
+<li>我们可以把抽象语法树中的公共节点提取出来，只建立一个节点，并把原本指向不同的同值节点的域指针都指向那一个公共节点</li>
+<li>显然这样产生的图就不再是一棵树，一个公共节点可能有多个父节点</li>
+<li>我们相当于只是把原本语法树的节点合并成一个，并没有改变其走向，所以这个图不会有循环</li>
+<li>现在在构造节点前要先检查现有节点，若存在相同节点，就直接返回，确定了不存在相同节点才会创建新的节点</li>
 </ol>
-<h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky_ReLU"></a>Leaky_ReLU</h2><ol>
-<li>Form: $f(x)=max(0.01x,x)$. </li>
-<li>It does not saturate and is computationally efficient. It converges as fast as ReLU. </li>
-<li>More importantly, it will not die. </li>
-<li>Another form is the parametric rectifier (PReLU) $f(x)=max(\alpha x, x)$, where $\alpha$ can be learned in backpropagation. </li>
+<h2 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h2><ol>
+<li>$\Theta$是$k$目运算符，则$\Theta$作用于$e_1e_2…e_k$的结果用$e_1e_2…e_k\Theta$表示</li>
+<li>对语法树进行一次后根遍历得到的序列就是后缀式</li>
+<li>还是利用语法制导定义，设置每一个产生式的语义规则为给左部赋予一个$code$属性，表示改产生式的后缀式。用$||$表示空格，将符号串连接起来</li>
+<li>后缀式的优点是易于计算机处理表达式</li>
+<li>常见的是栈算法，详见 <a href="http://www.laughingtree.cn/2019/07/23/栈和队列/" target="_blank" rel="noopener">栈和队列</a></li>
 </ol>
-<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><ol>
-<li>Exponential Linear Units: <script type="math/tex">f(x)=\left\{\begin{array}{}x&if\ x>0\\\alpha(e^x-1)&if\ x≤0 \end{array}\right.</script>. </li>
-<li>It has all benefits of ReLU except its computation requires exponential. </li>
-<li>It is closer to zero mean outputs. </li>
-<li>It has a negative saturation regime compared with Leaky_ReLU. </li>
-<li>It adds some robustness to noise with flex parameter $\alpha$. </li>
+<h2 id="三地址代码"><a href="#三地址代码" class="headerlink" title="三地址代码"></a>三地址代码</h2><ol>
+<li>一般形式：<script type="math/tex">x\ :=\ y\ op\ z</script></li>
+<li>一般包含三个地址：两个操作分量和一个结果的抽象地址</li>
+<li>通常用变量名代替抽象地址</li>
+<li>三地址代码是语法树或DAG的线性表示，用临时变量代替语法树中的节点</li>
+<li>三地址代码的类型<br />&emsp;赋值语句：<script type="math/tex">x\ :=\ y\ op\ z</script>    <script type="math/tex">x\ :=\ op\ y</script><br />&emsp;无条件转移语句：<script type="math/tex">goto\ L</script><br />&emsp;条件转移语句：<script type="math/tex">if\ x\ relop\ y\ goto\ L</script>，关系运算符号<script type="math/tex">relop(<,\ =, 等等)</script><br />&emsp;复制语句：<script type="math/tex">x\ :=\ y</script><br />&emsp;过程调用语句：先用$n$次<script type="math/tex">param\ x</script>依次调用各个参数，再用<script type="math/tex">call\ p,\ n</script>表示调用的函数和参数个数<br />&emsp;过程返回语句：<script type="math/tex">return\ y</script><br />&emsp;索引赋值语句：$x := y[i]$，<script type="math/tex">x[i]\ :=\ y</script><br />&emsp;地址和指针赋值语句：<script type="math/tex">x\ :=\ \&y</script>，<script type="math/tex">x\ :=\ *y</script>，<script type="math/tex">*x\ :=\ y</script></li>
+<li>语法制导翻译的属性<br />&emsp;$E.place$表示存放$E$值的名字<br />&emsp;$E.code$表示对$E$求值的三地址语句序列。先计算涉及到的计算对象，再用计算当前对象。如<br />&emsp;<script type="math/tex">E.code=E_1.code||E_2.code||gen(E.place':='E_1.place'+'E_2.place)</script><br />&emsp;$newtemp$是个函数，产生一个新的临时变量</li>
+<li>实际实现中，三地址语句序列往往是被放到一个输出文件中，而不是将三地址语句序列置入$code$属性之中</li>
+<li>具体实现<br />&emsp;四元式：<script type="math/tex">op,\ arg1,\ arg2,\ result</script><br />&emsp;三元式：<script type="math/tex">op,\ arg1,\ arg2</script>。结果就存放在当前三元式的地方，要调用是直接调用当前三元式的编号<br />&emsp;间接三元式：间接码表+三元式表。三元式放在一个单独的表中，间接码表中每一行都指向不同的三元式<br />&emsp;涉及到单目运算的不使用$arg2$<br />&emsp;$param$只用$arg1$<br />&emsp;转移指令将目标标号放入$result$</li>
+<li>实现方式的比较<br />&emsp;四元式调整顺序方便，引入的临时变量多，所需存储空间大<br />&emsp;三元式所需存储空间小，但调整顺序不变，调整后还需改变其余行对当前行的引用指针<br />&emsp;间接三元式调整顺序和四元式差不多方便，所需的存储空间也和四元式差不多多</li>
 </ol>
-<h2 id="Maxout-Neuron"><a href="#Maxout-Neuron" class="headerlink" title="Maxout Neuron"></a>Maxout Neuron</h2><ol>
-<li>Form: $f(x)=max(w_1^Tx+b_1,w_2^Tx+b_2)$. </li>
-<li>It can generalize the ReLU and the Leaky_ReLU. </li>
-<li>It has a linear regime and does not die and does not saturate. </li>
-<li>Nevertheless, it doubles the number of parameters per neuron. </li>
+<h1 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h1><ol>
+<li>类型检查是语义分析的重要组成部分</li>
+<li>编译器先根据类型说明，确定每一个变量和常量的类型，计算其使用存储空间大小，从而建立其到存储空间的映射。进而，编译器要确定每个语言结构的类型，判定重载算符 (函数)在程序中代表哪个、类型转换、类型检查</li>
+<li>类型表达式：<br />&emsp;类型名和基本类型是类型表达式<br />&emsp;类型构造符作用于类型表达式的结果仍然是类型表达式<br />&emsp;&emsp;数组构造符$ARRAY(I,T)$，$I$是下标集合，$T$是数组类型<br />&emsp;&emsp;笛卡尔乘积$\times$，<script type="math/tex">A\times B=\{(x,y)|x\in A\ and\ y\in B\}</script><br />&emsp;&emsp;记录类型构造符$RECORD$，其结果类似$C$中的结构体<br />&emsp;&emsp;指针类型构造符$POINTER$，其结果是一个指针类型<br />&emsp;&emsp;函数类型构造符$\to$，$D_1\times D_2\times…\times D_n\to R$<br />&emsp;类型表达式中可以出现类型变量，类型变量的值科院是任何类型表达式</li>
+<li>分类<br />&emsp;静态类型检查：由编译器完成的检查<br />&emsp;动态类型检查：目标程序运行时完成的检查。若目标代码把每个对象的类型和值一起保存，那么任何检查都可以动态完成</li>
+<li>强类型语言：保证编译器所接受的程序不会有运行时的类型错误的语言</li>
+<li>类型检查的内容：表达式、语句、函数</li>
+<li>变量标识符类型的确定<br />&emsp;语义分析程序先处理类型说明，建立类型表达式，然后处理变量说明，建立变量和类型表达式的绑定<br />&emsp;把变量标识符的类型信息记录在其符号表的表项中，$addtype(id.entry,T.type)$完成这个任务，引入综合属性$T.type$记录类型表达式</li>
+<li>表达式的类型检查：检查运算对象之间是否满足相容条件。综合属性$E.type$表示$E$的类型表达式。常用$IF…THEN…ELSE$或$lookup(id.entry)$</li>
+<li>语句的类型检查：主要包括赋值语句类型的相容性、控制表达式的结果类型检查。语句中没有类型错误就是$void$，否则为$type_error$。语句中有表达式，所以还要对表达式类型检查</li>
+<li>函数引用的类型检查：检查参数是否和函数类型一致，是则返回函数返回值的类型</li>
+<li>必须类型转换：赋值号右边的类型转换为左边的类型；整数转换成实数</li>
+<li>类型表达式在源程序的中间表示里插入这些转换操作</li>
+<li>自动类型转换 (隐式转换)：从一种数据类型转换成另一种数据类型，可以由编译器自动完成<br />强制类型转换 (显式转换)：必须由程序员显式地写在源程序中，在类型检查器中类似函数调用</li>
 </ol>
-<h2 id="In-practice"><a href="#In-practice" class="headerlink" title="In practice"></a>In practice</h2><ol>
-<li>Use ReLU. Be careful with the learning rates. </li>
-<li>Sometimes try out Leaky ReLU / Maxout / ELU. </li>
-<li>Maybe even try out tanh but do not expect much. </li>
-<li>Do not use sigmoid. </li>
+<h1 id="常用语句的翻译"><a href="#常用语句的翻译" class="headerlink" title="常用语句的翻译"></a>常用语句的翻译</h1><h2 id="说明语句的翻译"><a href="#说明语句的翻译" class="headerlink" title="说明语句的翻译"></a>说明语句的翻译</h2><ol>
+<li>说明语句：对程序中规定范围内使用的各类变量、常数、过程进行说明</li>
+<li>编译要做的工作：在符号表中建立相应的表项，填写有关的信息。如类型、嵌套深度、相对地址</li>
+<li>$T.width$记录名字的域宽，$T.type$记录名字的类型，$enter(id.name,T.type,offset)$为名字$name$建立一个符号表表项</li>
+<li>用一个全局变量$offset$来记录下一个可用单元相对于初始单元的相对地址。每新建一个变量，就给$offset$叠加该变量的域宽</li>
 </ol>
-<h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><ol>
-<li>In data preprocessing, we usually want to zero-mean them by subtracting the mean from them and normalize them by dividing them with the standard deviation. </li>
-<li>In practice, we may also see the PCA and Whitening of the data. </li>
-<li>We do not normalize the data much when dealing with images. Moreover, we do not do PCA and Whitening for images. </li>
-<li>Sometimes we also subtract per-channel mean to create zero-mean data. </li>
-<li>The mean subtracted is the mean of all training data. </li>
-<li>We do not do these things to each batch later once more. </li>
+<h3 id="保留作用域信息"><a href="#保留作用域信息" class="headerlink" title="保留作用域信息"></a>保留作用域信息</h3><ol>
+<li>同一个标识符有可能在不同的范围内表示不同的信息，要正确区分在各个范围内引用的标识符而不产生混乱</li>
+<li>首先要解决的问题是局部数据和非局部数据的访问</li>
+<li>方法是为每个过程建立一张符号表，每张表都有一个指针指向其直接外围过程的符号表，如果内部数据中无法找到，就顺着指针去直接外围过程符号表找</li>
+<li>子过程名$id$作为直接外围过程的局部名字记录在直接外围过程符号表中，其中还有一个指针指向子过程$id$</li>
+<li>每次生成一个过程 (包括主程序)，先执行定位操作，记录所需空间，若不是主程序，还要返回到外围过程，再执行重定位操作，创建主出现的符号表、初始化</li>
+<li>翻译过程用到一个栈存放指向外围过程的指针。还有一个栈存放变量的相对地址，当过程结束时，里面记录的就是该过程占用的所有字节数</li>
+<li>辅助操作<br />&emsp;$mktable(previous)$创建一张新符号表<br />&emsp;$enter(table,name,type,offset)$插入表项<br />&emsp;$addwidth(table,width)$记录总域宽<br />&emsp;$enterproc(table,name,newtable)$进入过程</li>
+<li>记录声明：定位操作中建立一个空表记录各个域中的信息，最后的重定位操作中将各域的总域宽作为该记录型的域宽，返回记录声明所在过程的符号表</li>
 </ol>
-<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><ol>
-<li>When the initialization with all elements being zeros is used, the gradient of earlier layers in backpropagation will become all zeros. </li>
-<li>The first idea is to start with small random numbers. This works for small networks. However, with deeper networks, all activations become zero. </li>
-<li>Furthermore, if we initiate $W$ with too large numbers, the gradient will be all zero and the update will stop. </li>
-<li>Xavier initialization: This works all well, but when using the ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in)</span><br></pre></td></tr></table></figure></li>
-<li>He et al. fixed the break of ReLU. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in / <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="赋值语句的翻译"><a href="#赋值语句的翻译" class="headerlink" title="赋值语句的翻译"></a>赋值语句的翻译</h2><ol>
+<li>利用过程$lookup(id.name)$检查是否在符号表中存在相应次名字的表项</li>
+<li>$lookup$函数先通过$top(tblptr)$指针在当前符号表中查找，若找到直接返回；若没找到，就到当前表的外围表找，直到找到返回，或所有外围表项都没找到，返回$nil$</li>
+<li>查找只要对终结符中的标识符查找，不必对非终结符或终结符中的常量查找</li>
+<li>语义动作应包括类型分析，文法符阿訇应有类型属性，在类型分析的基础上，进行相容和赋值相容检查，生成类型转换的三地址代码</li>
+<li>一维数组$A$的基址为$base$，域宽为$w$，下标下界为$low$，上界为$high$。$A[i]$的位置为$i\times w+base-low\times w$<br />二维数组行列下界分别为$low_1,low_2$，长度$n_1,n_2$，$A[i][j]$位置为$(i\times n_2 + j)\times w + base-(low_1\times n_2+low_2)\times w$<br />$A[i_1,i_2,…,i_k]$的地址为$((…((i_1\times n_2+i_2)\times n_3+i_3)…)\times n_k+i_k)\times w+base-((…((low_1\times n_2+low_2)\times n_3+low_3)…)\times n_k+low_k)\times w$</li>
+<li>我们用$Elist$来表示数组的一个下标，多个下标用逗号分割。定义其属性$Elist.array$为数组名在符号表的位置，$Elist.ndim$为目前已经识别出的下标表达式的个数，$Elist.place$保存递推公式中临时变量位置</li>
+<li>如果一个变量的$.offset$属性是$null$，则为简单变量，如果是一个变项，则是一个数字元素，且其值为$Elist.array$</li>
+<li>访问记录中的域：先找到符号表里的记录变量的位置，再找到记录表的位置</li>
 </ol>
-<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><ol>
-<li>This operation tries to make the input of each layer unit gaussian activations. </li>
-<li>First, compute the empirical mean and variance independently for each dimension.<br />Second, normalize $\hat{x}^{(k)}=\displaystyle\frac{x^{(k)}-E[x^{(k)}]}{\sqrt{var(x^{(k)})}}$. </li>
-<li>This layer is usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. </li>
-<li>We also can allow the network to squash the range if it wants to. $y^{(k)}=\gamma^{(k)}\hat{x}^{(k)}+\beta^{(k)}$. Note that the network can learn $\gamma^{(k)}=\sqrt{var(x^{(k)})}$ and $\beta^{k}=E[x^{(k)}]$ to recover the identity mapping, but not definitely. </li>
-<li>It improves gradient flow through the network, allows higher learning rates, reduces the strong dependence on initialization, acts as a form of regularization, and slightly reduces the need for dropout, maybe. </li>
-<li>At test time, we use the mean and standard deviation calculated at training. So we skip the step of calculation at test time. </li>
+<h2 id="布尔表达式和控制流语句"><a href="#布尔表达式和控制流语句" class="headerlink" title="布尔表达式和控制流语句"></a>布尔表达式和控制流语句</h2><ol>
+<li>布尔表达式与一般的算术表达式类似，运算符是与或非等，运算量是布尔常量或关系表达式，运算结果是布尔常量</li>
+<li>布尔表达式的值的表示方法：数值法、控制流表示法。布尔表达式的翻译方法也是这两种</li>
+<li>数值翻译法就只有一个属性$E.place$存放$E$的布尔数值，控制流翻译法就有$E.true$表示$E$值为真时应执行的第一条语句的标号，$E.false$表示$E$值为假时应执行的第一条语句的标号。他们都有$E.code$表示三地址代码</li>
+<li>对语句$S$有：$S.next$表示紧跟在语句$S$之后的三地址语句的标号，$S.begin$表示语句$S$的第一条三地址语句的标号，$S.code$表示语句$S$的三地址代码</li>
 </ol>
-<h1 id="Babysitting-the-Learning-Process"><a href="#Babysitting-the-Learning-Process" class="headerlink" title="Babysitting the Learning Process"></a>Babysitting the Learning Process</h1><ol>
-<li>The first step is to preprocess the data, as mentioned above. </li>
-<li>The second step is to choose the architecture with which we want to start. </li>
-<li>The third step is to double-check the loss is reasonable. Do the forward process without regularization once and see if the loss is reasonable. Do it again with regularization and see if the loss is larger. </li>
-<li>Then make sure that it can overfit a tiny portion of the training data. Namely, the loss goes to $0$, and the accuracy goes to $1$. </li>
-<li>After that, use the full training set, and start with small regularization and find learning rate that makes the loss go down. If the loss is not going down, the learning rate is too low. If the loss is $NaN$, the learning rate is too high. <br />Do not focus on accuracy. Because when the accuracy is low, the distribution of loss is very dense. The raise of accuracy due to luck. </li>
-</ol>
-<h1 id="Hyperparameter-Optimization"><a href="#Hyperparameter-Optimization" class="headerlink" title="Hyperparameter Optimization"></a>Hyperparameter Optimization</h1><ol>
-<li>In cross-validation strategy, we first take a coarse search with a few epochs, to narrow down the range of parameters. </li>
-<li>Then we can do a finer search with longer running time at the rough range we get to find the specific best hyperparameter. </li>
-<li>We had better keep the best hyperparameters in the middle of the searching range. </li>
-<li>It is best to optimize in log space. </li>
-<li>Another two strategies are the random search and the grid search. If the loss is more sensitive to one of the hyperparameters, the random search can cover the situation better. </li>
-<li>If the loss curve: <br />&emsp;exploded: very high learning rate<br />&emsp;decrease slowly: very low learning rate<br />&emsp;decrease rapidly first, then barely changed: very high learning rate<br />&emsp;barely changed first, but begin to decay after a while: bad initialization<br />&emsp;has big gap between training and test: overfitting, try to increase the regularization strength<br />&emsp;has no gap between: increase model capability. </li>
-</ol>
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="Problems-with-gradient-descend"><a href="#Problems-with-gradient-descend" class="headerlink" title="Problems with gradient descend"></a>Problems with gradient descend</h2><ol>
-<li>Some loss function changes quickly in one direction and slowly in another. Namely, loss function has a high condition number: the ratio of the largest to the smallest singular value of the Hessian matrix is massive. </li>
-<li>If the loss function has a local minimum or a saddle point, the gradient near it will be zero, and the gradient descend will get stuck. </li>
-<li>The data may contain noise, which will cause the gradient to descend inaccurately. </li>
-</ol>
-<h2 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h2><ol>
-<li>A straightforward strategy is to use the <code>SGD + momentum</code>. </li>
-<li>The SGD has the formula: $x_{t+1}=x_t-\alpha\triangledown f(x_t)$. We can preserve a velocity as a running mean of gradients. <br />Velocity: $v_{t+1}=\rho v_t+\triangledown f(x_t)$<br />Descend: $x_{t+1}=x_t-\alpha v_{t+1}$. </li>
-<li>Rho gives “friction”; typically <script type="math/tex">\rho=0.9\ or\ 0.99</script>. </li>
-<li>So we update the parameters at the direction of speed instead of the gradient of the gradient. </li>
-<li>Another kind of momentum is the Nesterov momentum. It updates the speed with the gradient at the endpoint of current speed. <br />Velocity: $v_{t+1}=\rho v_t-\alpha\triangledown f(x_t+\rho v_t)$. <br />Parameters: $x_{t+1}=x_t+v_{t+1}$. </li>
-<li>In Nesterov momentum, we can substitute $\tilde{x}_t=x_t+\rho v_t$. So that $v_{t+1}=\rho v_t-\alpha\triangledown f(\tilde{x})$ and $\tilde{x}_{t+1}=\tilde{x}_t+v_{t+1}+\rho(v_{t+1}-v_t)$. </li>
-<li>Add a momentum solved all the problems we have above. <br />&emsp;At local minima or saddle points, the velocity will maintain the update instead of stuck there. <br />&emsp;If the loss function is poor conditioning, the zig-zag gradients will cancel out by the velocity fast since the velocity is the mean of gradients. <br />&emsp;Moreover, the velocity is less sensitive to the noise. </li>
-</ol>
-<h2 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h2><ol>
-<li><p>AdaGrad scales the update step size by the square root of the accumulative of the square the gradient. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">grad_square += dx * dx</span><br><span class="line">x -= learning_rate * dx / (np.sqrt(grad_square) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The $1e-7$ is only to make sure we will not divide by zero. </p>
-</li>
-<li>However, as the training time goes by, the grad_square grows larger and larger, so the step size of the update becomes smaller. </li>
-<li>A better form of AdaGrad is RMSProp. This method allows the grad_square to decay to prevent it from getting too large. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_square = decay_rate * grad_square + (<span class="number">1</span> - decay_rate) * dx * dx</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><ol>
-<li>What the momentum does is to replace the gradient with the velocity when updating the parameters. What the AdaGrad does is to scale the update step size. </li>
-<li><p>In Adam, we do them both. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">first_moment = beta1 * first_moment + (<span class="number">1</span> - beta1) * dx</span><br><span class="line">second_moment = beta2 * second_moment + (<span class="number">1</span> - beta2) * dx * dx</span><br><span class="line">x -= learning_rate * first_moment / (np.sqrt(second_moment) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Usually, we set betas some number close to $1$. This will cause the second_moment too small at first, which will lead to a giant step at the beginning. </p>
-</li>
-<li>To solve the problem, we scale the moments before the update by a size decaying as time goes by. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">first_unbias = first_moment / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">second_unbias = second_moment / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line"><span class="comment"># t means this is the t-th epoch of iterate</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h2><ol>
-<li>No matter which optimization strategy is used, the learning rate is always a hyperparameter. </li>
-<li>In practice, we do not have to stick to one constant learning rate to the end. We can change the learning rate as training goes deeper. </li>
-<li>One strategy is to decay the learning rate every few epochs. </li>
-<li>Alternatively, we can decay it exponentially. $\alpha = \alpha_0e^{-kt}$</li>
-<li>What’ more, we can decay it as $\alpha=\displaystyle\frac{\alpha_0}{1+kt}$. </li>
-<li>The change of learning rate can cause an underivable point on the graph of the loss function. </li>
-</ol>
-<h2 id="Second-Order-Optimization"><a href="#Second-Order-Optimization" class="headerlink" title="Second-Order Optimization"></a>Second-Order Optimization</h2><ol>
-<li>What we discussed before is all first-order optimization, which uses the gradient form linear approximation ($\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)$) to step to minimize the approximation. </li>
-<li>In second-order optimization, we use the gradient and the Hessian matrix to form a quadratic approximation <br />$\Delta f(x_0,x_1,…)\approx \displaystyle\sum_{x_i}f_{x_i}(x-x_i)+\sum_{x_i}\sum_{x_j}\frac{1}{2}f_{x_ix_j}(x-x_i)(x-x_j)$</li>
-<li>The $(i,j)$ element of the Hessian matrix is $f_{x_ix_j}$. </li>
-<li>In the vector form, $J(\vec{\theta})=J(\vec{\theta_0})+(\vec{\theta}-\vec{\theta_0})^T\triangledown_{\vec{\theta}}J(\vec{\theta_0})+\displaystyle\frac{1}{2}(\theta-\theta_0)^TH(\theta-\theta_0)$</li>
-<li>Solve for the critical point, and we obtain the Newton parameter update: $\vec{\theta}^*=\vec{\theta_0}-H^{-1}\triangledown_{\vec{\theta}}J(\vec{\theta_0})$. </li>
-<li>This method avoids the hyperparameters. It does not contain the learning rate. </li>
-<li>Nevertheless, the Hessian matrix has $N^2$ elements. To invert it requires $O(N^3)$. </li>
-<li>Quasi-Newton methods (BGFS most popular): instead of inverting the Hessian ($O(n^3)$), approximate inverse Hessian with rank $1$ updates over time ($O(n^2)$ each). </li>
-<li>L-BFGS (Limited memory BFGS): Does not form/store the full inverse Hessian. It cannot handle stochastic problems well.</li>
-</ol>
-<h2 id="In-Practice"><a href="#In-Practice" class="headerlink" title="In Practice"></a>In Practice</h2><ol>
-<li>Adam optimization is often the best choice. </li>
-<li>If full batch updates can be afforded then maybe try out L-BFGS (and do not forget to disable all sources of noise). </li>
-</ol>
-<h1 id="Decrease-the-Gap"><a href="#Decrease-the-Gap" class="headerlink" title="Decrease the Gap"></a>Decrease the Gap</h1><p>Usually, there will exist a gap between the loss functions of the training set and the test set. </p>
-<h2 id="Model-Ensembles"><a href="#Model-Ensembles" class="headerlink" title="Model Ensembles"></a>Model Ensembles</h2><ol>
-<li>The first strategy to decrease the gap is to train multiple independent models and average their results at test time. </li>
-<li>This will have a slight improvement at test. </li>
-<li>Instead of training independent models, use multiple snapshots of a single model during training. Cyclic learning rate schedules can make this work even better. </li>
-<li>Instead of using the actual parameter vector, keep a moving average of the parameter vector and use that at test time (Polyak averaging)</li>
-</ol>
-<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><ol>
-<li>This strategy can improve single-model performance. </li>
-<li>Using dropout, we randomly set some neurons to zero in each forward pass. Probability of dropping is a hyperparameter $p$, which is typical $0.5$. </li>
-<li>By the mean of setting to zero, we set the input of activation to zero. </li>
-<li>It forces the network to have a redundant representation and prevents co-adaptation of features. Dropout often happens at fully-connected layers, but sometimes convolution layers. </li>
-<li>Dropout is training a large ensemble of models that share parameters. </li>
-<li>Each dropout decision is called a dropout mask, and each binary mask is one model. </li>
-<li>Nevertheless, dropout makes our output random with $y=f(x,z)$, where $z$ is the random dropout mask. </li>
-<li>In order to average out the randomness at test-time, we want $y=E_z[f(x,z)]=\displaystyle\int p(z)f(x,z)dz$. </li>
-<li>However, the integral is hard to calculate, so we want an approximation of it by consider it discrete. Funnily, the approximation is to scale each activation with the probability $p$. </li>
-<li>With dropout, we might need  a bit longer time to train, but after training, the model will have a better generalization. </li>
-</ol>
-<h2 id="Data-Augmentation"><a href="#Data-Augmentation" class="headerlink" title="Data Augmentation"></a>Data Augmentation</h2><ol>
-<li>This strategy creates new images from the old ones with some operations. </li>
-<li>The common operations for data augmentation: <br />&emsp;Horizontal flips<br />&emsp;Random crops and scales<br />&emsp;Color jitter</li>
-</ol>
-<h2 id="Common-Pattern"><a href="#Common-Pattern" class="headerlink" title="Common Pattern"></a>Common Pattern</h2><ol>
-<li>The common strategy is to add random noise at training and marginalize over the noise at test. </li>
-<li>Batch normalization fits this common pattern, too. In training, it normalizes using stats from random minibatches, while in the test, it uses fixed stats to normalize. </li>
-<li>Another strategy which is similar to the dropout is drop-connect. Instead of dropout neurons before activation, it drops connections between layers by setting part of the weight matrix to zero. </li>
-<li>Two more unusual strategies are the fractional max pooling and the stochastic depth. </li>
-</ol>
-<h1 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h1><ol>
-<li>This is a backup plan when the dataset is not large. </li>
-<li>First, train the network at another dataset on the internet. Then finetune the linear classifier with our dataset. </li>
-<li>If our dataset is tiny, then we can use linear classifier on top layer and train with some very similar dataset. If our dataset is quite large, then we can finetune a few layers. </li>
-<li>With more similar datasets, the layer needed to finetune is less. </li>
-<li>Transfer learning with CNNs is pervasive. This is the norm, not an exception. e</li>
+<h3 id="回填技术"><a href="#回填技术" class="headerlink" title="回填技术"></a>回填技术</h3><ol>
+<li>两遍扫描的翻译技术 ($L$属性定义，深度优先翻译)：先产生分析树，再为分析树加注释 (翻译)</li>
+<li>一边扫描技术 ($S$属性定义，自底向上翻译)的问题时生成某些转移指令时，目标地址可能还不知道，即布尔表达式的真出口和假出口可能还不知道</li>
+<li>解决：先产生无转移标号的转移语句，再转向标号确定后，再把语句标号填上，即回填</li>
+<li>定义综合属性$E.truelist$记录转移到$E$的真出口的指令的链表指针，$E.falselist$记录转移到$E$的假出口的指令的链表指针。一个真出口链表里可能有不止一个指针，但他们指向的语句的跳转出口都是一样的</li>
+<li>在计算时，我们先把所有带回填且需回填同一个值的指针串成一条链，当满足回填要求的时候就把其中的每一个都填上</li>
 </ol>
 
       
@@ -450,7 +366,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/05/04-Convolutional-Neural-Networks/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -464,7 +380,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/05/04-Convolutional-Neural-Networks/" class="post-title-link" itemprop="url">04. Convolutional Neural Networks</a>
+            <a href="/2020/05/18/06-%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91%E6%8A%80%E6%9C%AF/" class="post-title-link" itemprop="url">06. 语法制导翻译技术</a>
         </h1>
 
         <div class="post-meta">
@@ -474,14 +390,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-05 09:29:06" itemprop="dateCreated datePublished" datetime="2020-04-05T09:29:06+08:00">2020-04-05</time>
+              <time title="Created: 2020-05-18 22:42:36" itemprop="dateCreated datePublished" datetime="2020-05-18T22:42:36+08:00">2020-05-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:58" itemprop="dateModified" datetime="2020-08-07T19:47:58+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:51:12" itemprop="dateModified" datetime="2020-08-07T19:51:12+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -495,8 +411,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
                   </a>
                 </span>
             </span>
@@ -512,21 +428,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Convolution-Layer"><a href="#Convolution-Layer" class="headerlink" title="Convolution Layer"></a>Convolution Layer</h1><ol>
-<li>Fully-connected layer extracts pixels of an image into a one-dimensional vector. However, the convolution layer tends to preserve the spatial structure of that image. </li>
-<li>In the convolution layer, we convolve a smaller filter with the image; namely, we slide it over the image spatially, computing dot products. </li>
-<li>The size of the matrix of an image is usually $N\times N\times z$. The filter we choose can have random $F$, but the $z$ must be maintained. So the filter can be anything in the form of $F\times F\times z$. </li>
-<li>Every filter is a weighted matrix. We use it to cover up some location of the image, then calculate the sum of the products of the corresponding numbers. <br />This process is the same as we stretch the filter and the covered area into two one-dimensional vectors and calculate the dot product of these two vectors. </li>
-<li>After each dot product, we get a number $w^Tx+b$ instead of a vector. So each filter can produce an $F’\times F’\times1$ activation map. Furthermore, we can use multiple filters to create multiple activation maps. With $k$ filters, the activation matrix will be $F’\times F’\times k$. </li>
-<li>The earlier convolution layers will learn lower-level features while the later ones will learn higher-level features. </li>
-<li>One thing that will affect the size of the activation map is the stride we choose when the filter is slid around the image. If the stride is $S$, the size will be $\displaystyle(\frac{N-F}{S}+1)\times(\frac{N-F}{S}+1)\times n$. <br />Stride can be any integer as long as $N-F$ is dividable by it. </li>
-<li>Another common phenomenon is padding. When we say “zero pad with $P$”, we mean that add $a$ laps zero bounds around the original matrix. <br />So the actual size of a matrix which pad with $P$ we need to slide is $(N+2P)\times (N+2P)\times z$. <br />The padding is used to maintain the input size. So in convolution layer, we often pad the image with $\displaystyle\frac{F-1}{2}$ laps of zero pixel border. Nevertheless, the pad is not necessary; sometimes we do not use padding; sometimes we pad less, sometimes we pad more. </li>
+          <h1 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h1><ol>
+<li>语义表示了程序本身的涵义、施加于语言结构上的限制或者要执行的动作</li>
+<li>语法正确的程序不一定语义正确</li>
+<li>基本功能：确定类型，类型检查，识别含义，控制流检查，标识符唯一性检查</li>
 </ol>
-<h1 id="Other-layers"><a href="#Other-layers" class="headerlink" title="Other layers"></a>Other layers</h1><ol>
-<li>Pooling layer makes the representations smaller and more manageable. It operates over each activation map independently and downsamples them. </li>
-<li>The pooling layer also has a filter, but instead of doing a dot product, it may take the maximum of the numbers (Max Pooling Layer). </li>
-<li>In convention, we do not want any overlap in pooling layer, unlike in the convolution layer. </li>
-<li>Typically, the last layer of a convolution neural network will be a fully-connected layer, which connects the class labels to the input. </li>
+<h1 id="语法制导定义"><a href="#语法制导定义" class="headerlink" title="语法制导定义"></a>语法制导定义</h1><ol>
+<li>给每一个文法符号添加一个属性的集合，表示符号所代表的语义信息</li>
+<li>属性的计算：定义语义规则，并将之作用在由文法符号组成的产生式上</li>
+<li>利用产生式推导或归约时，执行语义规则来进行属性的计算</li>
+<li>语法制导定义是对上下文无关文法的推广。每个文法符号和一个属性集合相关联；每一个产生式和一个语法规则集合相关联</li>
+<li>属性分类：<br />&emsp;综合属性：通过分析树中其子节点的属性值计算出来的<br />&emsp;继承属性：由该节点的兄弟节点及父节点的属性值计算出来</li>
+<li>属性可以是任何对象：符号串、数字、类型、内存单元或其他对象</li>
+<li>综合属性用于自下而上传递信息；继承属性用于自上而下传递信息</li>
+<li>对于一条规则$b:=f(c_1,c_2,…,c_n)$，我们可以说$b$依赖于$c_1,c_2,…,c_n$</li>
+<li>非终结符号既可以由综合属性，也可有继承属性<br />开始符号没有继承属性<br />终结符号只有综合属性，一般由词法分析器提供</li>
+<li>虚属性：语义动作 (过程或语义子程序)，只是为了形式上的统一，起辅助作用，不计算属性</li>
+<li>注释分析树：每个文法符号加上它们的属性的分析树</li>
+<li>属性文法：语法制导定义对上下文无关文法扩充后的文法</li>
+<li>语法制导翻译：基于语法分析中用到的文法产生式 (语法制导)对应的语义规则进行翻译 (翻译)的方法</li>
+<li>依赖图：有向边$a\to b$表示属性$b$依赖于$a$。依赖图的拓扑排序获得语义规则的计算顺序</li>
+</ol>
+<h1 id="S-属性定义"><a href="#S-属性定义" class="headerlink" title="S-属性定义"></a>S-属性定义</h1><ol>
+<li>$S-$属性定义：仅仅使用综合属性的语法制导定义，使用自底向上的分析方法</li>
+<li>依赖图中有向边的走向和自底向上分析时建立分析树的顺序是一致的。因此，可以考虑在进行语法分析 (自底向上)的同时进行翻译 (执行语义规则)</li>
+<li>实现<br />&emsp;扩充 LR分析器，为栈中的每一个文法符号增加一个属性域，存放分析过程中该文法符号的综合属性值<br />&emsp;当用产生式进行归约时，产生式左边文法符号入栈，其属性值由栈中正在归约的产生式右边符号的属性值计算</li>
+<li>在这种分析模式中，语法分析是主动的，语义分析是从动的，语法分析制导着语义分析</li>
+</ol>
+<h1 id="L-属性定义"><a href="#L-属性定义" class="headerlink" title="L-属性定义"></a>L-属性定义</h1><ol>
+<li>继承属性麻烦的地方在于不清楚需要先计算其兄弟节点、父节点的哪些。所以在$L-$属性中，我们就属性的计算顺序做限制，让其受到分析树节点建立顺序的限制</li>
+<li>$L-$属性定义可用于按深度优先顺序计算属性值</li>
+<li>$L-$属性定义：所有属性不是继承属性就是综合属性，且其继承属性的语义规则只与其长兄节点或父节点有关</li>
+<li>每一个$S-$属性定义都是$L-$属性定义</li>
+<li>翻译模式 (翻译方案)与语法制导定义的区别：语法制导定义只是简单描述产生式中的规则和属性，但是翻译模式给出显式的计算顺序</li>
+<li>翻译模式中，属性与文法符号相对应，语义规则或语义动作用$\{\}$括起来，可插入产生式右部的任何位置</li>
+<li>翻译模式是语法分析和语义动作交错的表示法，表达在按深度优先比那里分析树的过程中何时执行语义动作。可以看做是分析过程中翻译的注释</li>
+<li>构造翻译模式<br />&emsp;只需要综合属性，每一条语义规则放到产生式右边的末尾<br />&emsp;既有综合属性，又有继承属性<br />&emsp;&emsp;产生式右部文法符号的继承属性必须在这个符号以前的动作中计算出来<br />&emsp;&emsp;一个动作不能引用该动作右边符号的综合属性<br />&emsp;&emsp;产生式左部非终结符号的综合属性只有在其引用的所有属性都计算出来以后才能计算。计算该属性的动作通常放在产生式右部的末尾</li>
 </ol>
 
       
@@ -547,7 +484,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/03-Backpropagation-and-Neural-Networks/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -561,7 +498,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/04/03-Backpropagation-and-Neural-Networks/" class="post-title-link" itemprop="url">03. Backpropagation and Neural Networks</a>
+            <a href="/2020/05/13/05-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">05. 自底向上语法分析</a>
         </h1>
 
         <div class="post-meta">
@@ -571,14 +508,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-04 19:16:49" itemprop="dateCreated datePublished" datetime="2020-04-04T19:16:49+08:00">2020-04-04</time>
+              <time title="Created: 2020-05-13 22:03:25" itemprop="dateCreated datePublished" datetime="2020-05-13T22:03:25+08:00">2020-05-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:45" itemprop="dateModified" datetime="2020-08-07T19:47:45+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:49:16" itemprop="dateModified" datetime="2020-08-07T19:49:16+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -592,8 +529,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
                   </a>
                 </span>
             </span>
@@ -609,26 +546,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h1><ol>
-<li>Backpropagation is used for calculating the gradient. </li>
-<li>In each gradient, we need to calculate the derivative of $f$ with respect to each component. </li>
-<li>Any function $f$ can be decomposed into a computational graph, which contains several nodes. Each node represents one single simple calculation with some inputs and one output. </li>
-<li>We can easily calculate the local gradient for each node function $q$, $\displaystyle\frac{\partial q}{\partial x_i}$. </li>
-<li>With the chain rule, we can multiply each local gradient to get $\displaystyle\frac{\partial f}{\partial x_i}$. </li>
-<li>In programming, we usually start from the end of the computational graph, namely $f=f$. Its local gradient is $\displaystyle\frac{\partial f}{\partial f}=1$. <br />Then we calculate backwardly the last but one node. <br />Each node except the last one multiplies the previously calculated gradient to get the global gradient. <br />The global gradients of the leaf nodes are the gradient we want. <br /><img src="/img/03.BackpropagationandNeuralNetworks01.png" width="40%">$\displaystyle\frac{\partial f}{\partial q},\frac{\partial q}{\partial W},\frac{\partial q}{\partial X},\frac{\partial f}{\partial b}$ are all local gradients, while $\displaystyle1.0,\frac{\partial f}{\partial q}\times1.0,\frac{\partial q}{\partial W}\frac{\partial f}{\partial q},\frac{\partial q}{\partial X}\frac{\partial f}{\partial q},\frac{\partial f}{\partial b}\times1.0$ are all global gradients. </li>
-<li>We can also group some nodes to form a complicated node as long as we can write down the local gradient. </li>
-<li>Add gate distributes the global gradient of the output as the global gradient of each input. <br />Max gate gives the output local gradient to the larger input as its global gradient and gives $0$ to another input. <br />Multiplication gate switches the values of inputs as their local gradient. </li>
-<li>If inputs are vectors, the local gradients are the Jacobian matrices; namely, we need to calculate each element of the output with respect to each element of the input. Given the property of partial derivative, the Jacobian matrices are diagonal. </li>
-<li>Always check: The gradient with respect to a variable should have the same shape as the variable. </li>
-<li>In implement, we can make each gate a class with a forward function and a backward function. The forward function takes in the inputs and returns the forward calculation output. The backward function takes in the previous gradient and returns the gradients with respect to each component. </li>
+          <ol>
+<li>方法：从输入串开始，逐步进行归约，直到归约到文法的开始符号</li>
+<li>边扫描输入串，边把输入符号移入分析者，边检查位于栈顶的一串符号是否与某个产生式的右部相同。如果相同，就把串归约为相应左部非终结符，否则继续移入输入符号。重复直到栈内符号为开始符号</li>
+<li>构造分析树时从叶节点 (句子)开始，(以单位为单位)向根节点前进</li>
+<li>问题：如何合适地选择归约串。一个串是多个不同左部产生式的右部；可以看成多种不同的串分别都是不同产生式的右部</li>
+<li>本质是每次都把句柄归约</li>
+<li>初始时栈内只有$\<script type="math/tex">，结束时栈内是$S\</script>，输入缓冲为空</li>
 </ol>
-<h1 id="Neural-Network"><a href="#Neural-Network" class="headerlink" title="Neural Network"></a>Neural Network</h1><ol>
-<li>Instead of using a single linear score function, we use multiple linear functions in neural networks with nonlinear functions in between. </li>
-<li>The nonlinear functions are called the activation function. </li>
-<li>There are many kinds of activation functions: <br />&emsp;Sigmoid: $\sigma(x)=\displaystyle\frac{1}{1+e^{-x}}$<br />&emsp;tanh: $tanh(x)$<br />&emsp;ReLu: $max(0,x)$<br />&emsp;Leaky ReLu: $max(0.1x,x)$<br />&emsp;Maxout: $max(w_1^Tx+b_1,w^T_2x+b_2)$<br />&emsp;ELU: $\left\{\begin{array}{}x&amp;x≥0\\\alpha(e^x-1)&amp;x&lt;0 \end{array}\right.$</li>
-<li>The layers which take in the output of the previous layer and do one linear calculation and one nonlinear calculation is called fully-connected layers. </li>
-<li>The first layer is the input layer, which takes in the input and calculate. So it is a fully-connected layer. <br />The last layer is the output layer, which does no calculation, simply outputs the result. So it is not a fully-connected layer. <br />All layers except these two layers are hidden layers. </li>
-<li>What we called “$2$-layer Neural Network” is “$2$-fully-connected-layer Neural Network” or “$1$-hidden-layer Neural Network”. </li>
+<h1 id="可归约串的识别——LR分析"><a href="#可归约串的识别——LR分析" class="headerlink" title="可归约串的识别——LR分析"></a>可归约串的识别——LR分析</h1><ol>
+<li>$LR$分析程序，是通用的分析程序，自左向右 ($L$)扫描，识别句柄，自下而上归约，构造一个最右推导的逆过程 ($R$)。为了作出分析决定前(构造分析表时)而向前看的输入符号的个数，通常是$0$或$1$</li>
+<li>$LR$分析器是无回溯的“移进-归约”方法，根据栈中的符号串和向右顺序查看输入串中的$k(k≥0)$个符号唯一确定分析器的操作</li>
+<li>结构：符号栈、状态栈、$action$表、$goto$表。$action$表和$goto$表构成分析表</li>
+<li>状态栈的栈顶元素用$s_m$表示，当前输入符号用$a_i$表示</li>
+<li>$action$表根据当前状态和输入符号唯一确定是移进、归约、接受、报错</li>
+<li>$goto$表根据压入的非终结符号和当前状态确定下一个状态</li>
+<li>把栈中符号序列和剩余输入串看书一个二元格局，初始格局为$(s_0,a_1a_2…a_n\$)$<br />假设当前格局为$(s_0X_1s_1X_2s_2…X_ms_m,a_ia_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=shift\ s</script>，二元式变为$(s_0X_1s_1X_2s_2…X_ms_ma_is,a_{i+1}…a_n\$)$<br />&emsp;若<script type="math/tex">action[s_m,a_i]=reduce\ A\to\beta</script>，$|\beta|=r$，二元式变为$(s_0X_1s_1X_2s_2…X_{m-r}s_{m-r}As,a_ia_{i+1}…a_n\$)$<br />&emsp;&emsp;$s=goto[s_{m-r},A]$，$\beta=X_{m-r+1}X_{m-r+2}…X_m$</li>
+</ol>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ol>
+<li>活前缀：归约前栈内的所有符号。即，句柄的前缀。<br />严格定义：若$S’\Rightarrow^*_{rm}\alpha Aw\Rightarrow_{rm}\alpha\beta w$是文法$G$的拓广文法$G’$的一个规范推导，符号$\gamma$是$\alpha\beta$的前缀，则称$\gamma$是$G$的一个活前缀。<br />在$w$的任何一个符号被压入栈前，$\alpha\beta$就必然形成可归约串，并立即运用产生式$A\to\beta$归约，就不可能和$\beta$的任何一个符号同时出现在栈中，就不是活前缀</li>
+<li>每个句柄的识别过程划分为若干个状态，用$\cdot$做区分，称为$LR(0)$项目。<br />例如对产生式$A\to XYZ$，$LR(0)$项目有$A\to\cdot XYZ,A\to X\cdot YZ,A\to XY\cdot Z,A\to XYZ\cdot$，分别表示$XYZ$均未入栈；$X$入栈，$YZ$未入栈；$XY$入栈，$Z$未入栈；$XYZ$均入栈<br />$A\to\epsilon$的项目为$A\to\cdot$</li>
+<li>拓广文法：添加一个唯一的推导出开始符号的符号。$S’$是$G’$的开始符号，$S$是$G$的开始符号，$G’$之比$G$多一条$S’\to S$</li>
+<li>包含了完整句柄的活前缀称为可归前缀</li>
+<li>分析过程可以看做是活前缀的识别过程</li>
+</ol>
+<h1 id="LR-0-分析"><a href="#LR-0-分析" class="headerlink" title="LR(0)分析"></a>LR(0)分析</h1><ol>
+<li>根据$LR(0)$项目分析操作类型</li>
+<li>项目分类：<br />&emsp;$A\to\alpha\cdot a\beta$，$a\in V_T$，移进项目<br />&emsp;$A\to\alpha\cdot B\beta$，$B\in V_N$，待归约项目<br />&emsp;$A\to\alpha\cdot$，归约项目<br />&emsp;$S’\to\cdot S$，开始项目<br />&emsp;$S’\to S\cdot$，接受项目<br />&emsp;项目$A\to XY\cdot Z$是$A\to X\cdot YZ$的后继项目</li>
+</ol>
+<h2 id="构造识别所有活前缀的NFA"><a href="#构造识别所有活前缀的NFA" class="headerlink" title="构造识别所有活前缀的NFA"></a>构造识别所有活前缀的NFA</h2><ol>
+<li>开始符号$S’\to\cdot S$是NFA的唯一初态</li>
+<li>项目$j$是项目$i$的后继项目，就从$i$画一条$X_j$弧到$j$</li>
+<li>若项目$i$后是一个非终结符号，$X\to \alpha\cdot A\beta$，从$i$画$\epsilon$弧到所有$A\to\cdot\gamma$，因为他们是等价状态</li>
+</ol>
+<h2 id="识别活前缀的有效项目的DFA"><a href="#识别活前缀的有效项目的DFA" class="headerlink" title="识别活前缀的有效项目的DFA"></a>识别活前缀的有效项目的DFA</h2><ol>
+<li>如果存在一个规范推导$S\Rightarrow^*_{rm}\alpha Aw\Rightarrow\alpha\beta_1\beta_2w$，则项目$A\to \beta_1\cdot\beta_2$对识别活前缀$\gamma=\alpha\beta_1$是有效的</li>
+<li>若项目$A\to\alpha\cdot B\beta$对识别活前缀$\gamma=\delta\alpha$是有效的，且$B\to\cdot\eta$对识别活前缀$\gamma=\delta\alpha$也有效</li>
+<li>某个活前缀$\gamma$的所有有效项目组成的集合称为$\gamma$的有效项目集</li>
+<li>所有有效项目集组成的集合称为$LR(0)$项目的集规范族，即DFA的状态集</li>
+<li>有效项目集就是之前对每一个项目的$\epsilon$闭包。若项目$A\to\alpha\cdot B\beta$在$closure(I)$中，且$B\to\gamma$是$G$的一个产生式，如果$B\to\cdot\gamma$不在$closure(I)$中，则将$B\to\cdot\gamma$加入$closure(I)$</li>
+<li>待归约项目称为基本项目，是每一个有效项目集的核心</li>
+<li>转移函数$go(I,X)$，输入中把当前状态改为当前有效项目集，输出改为下一有效状态集，$go(I,X)=closure(J)$，$J=\{A\to\alpha X\cdot\beta|A\to\alpha\cdot X\beta\in I\}$</li>
+<li>带有归约项目的有效项目集都是生成的DFA的接受状态</li>
+</ol>
+<h2 id="分析表的构造"><a href="#分析表的构造" class="headerlink" title="分析表的构造"></a>分析表的构造</h2><ol>
+<li>$LR(0)$文法：DFA中每个状态不存在：既含移进项目又含归约项目 (移进-归约冲突)、含有多个归约项目 (归约-归约冲突)</li>
+<li>若项目$A\to\alpha\cdot X\beta\in I_k$，且$go(I_k,X)=I_j$，则<br />&emsp;若$X=a$为终结符号，则置<script type="math/tex">action[k,a]=shift\ j</script>，简写为$sj$，表示把$a$和$j$移入栈中<br />&emsp;若$X$是非终结符号，则置$goto[k,X]=j$</li>
+<li>若$S’\to S\in I_k$，则置$action[k, \$]=acc$</li>
+<li>若$A\to\alpha\cdot\in I_k$，则对所有终结符号$a$，置<script type="math/tex">action[k,a]=reduce\ A\to\alpha</script>，简写为$rj$，$j$为产生式编号</li>
+<li>其他空白格都表示出错</li>
+</ol>
+<h1 id="SLR-1-文法"><a href="#SLR-1-文法" class="headerlink" title="SLR(1)文法"></a>SLR(1)文法</h1><ol>
+<li>如果有冲突，我们可以提前看下一个输入非终结符号，把移进和归约、归约和归约分离开来制作$action$表</li>
+<li>$LR(0)$文法中归约的优先级过高，在$LR(1)$文法中，我们通过限定归约的前提条件来解决冲突</li>
+<li>$n$个归约$A_i\to\gamma_i\cdot$，若$FOLLOW(A_1)\cap FOLLOW(A_0)\cap…\cap FOLLOW(A_n)=\emptyset$，则当$I$面临输入符号$a$时<br />&emsp;若$a\notin FOLLOW(A_1)\cup FOLLOW(A_0)\cup…\cup FOLLOW(A_n)$，移进<br />&emsp;若$a\in FOLLOW(A_1)$，用$A_1\to\gamma_1$归约<br />&emsp;若$a\in FOLLOW(A_2)$，用$A_2\to\gamma_2$归约<br />&emsp;$…$<br />&emsp;否则，报错</li>
+<li>$action$表的生成中唯一的不同就是在填入归约操作时要提前展望下一输入</li>
+</ol>
+<h1 id="LR-1-分析"><a href="#LR-1-分析" class="headerlink" title="LR(1)分析"></a>LR(1)分析</h1><ol>
+<li>问题：移进符号在某个归约符号的$FOLLOW$集中</li>
+<li>原因：$SLR(1)$只考虑了$FOLLOW$集，没有考虑规范文法的上下文</li>
+<li>考察每一条产生式，如果在某个项目集$I$中包含项目$A\to\alpha\cdot B\beta$，则$B\to\cdot\gamma$也属于$I$。由$FOLLOW$集与$FIRST$集的定义可知$FIRST(\beta)\subseteq FOLLOW(B)$。用$FIRST(\beta)$替代$SLR(1)$中的$FOLLOW(B)$</li>
+<li>在分析的时候，项目增加一元，表示用此产生式归约时，后面可以跟的元素，称之为搜索符，原本的表达式状态称为心，即$[心(产生式)，搜索符]$的二元式形式，$搜索符\in FIRST(\beta)$</li>
+<li>开始项目变为$[S’\to S,\$]$</li>
+<li>闭包函数：若$[A\to\alpha\cdot B\beta,a]\in I$，$B\to\gamma$是一条产生式，$b\in FIRST(\beta a)$，则将$[B\to\cdot\gamma,b]$加入$CLOSURE(I)$中</li>
+<li>转换函数：$I$中任何形如$[A\to\alpha\cdot X\beta,a]$，$[A\to\alpha X\cdot\beta,a]$都在$J$中，$GO(I,X)=CLOSURE(J)$</li>
+</ol>
+<h1 id="LALR-1-分析"><a href="#LALR-1-分析" class="headerlink" title="LALR(1)分析"></a>LALR(1)分析</h1><ol>
+<li>$LR(1)$分析由于原本一个状态根据不同的搜索符拆分成了不同的多个状态，状态的数量大量增加</li>
+<li>我们可以把心相同，但是搜索符不同的项目合并成一个项目，来减少项目的数量</li>
+<li>$LALR(1)$分析的结果不会出现移进-归约冲突，但是仍然可能出现归约-归约冲突</li>
 </ol>
 
       
@@ -649,7 +635,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/02-Loss-Functions-and-Optimization/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -663,7 +649,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/04/02-Loss-Functions-and-Optimization/" class="post-title-link" itemprop="url">02. Loss Functions and Optimization</a>
+            <a href="/2020/05/12/04-%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">04. 自顶向下语法分析</a>
         </h1>
 
         <div class="post-meta">
@@ -673,14 +659,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-04 15:30:24" itemprop="dateCreated datePublished" datetime="2020-04-04T15:30:24+08:00">2020-04-04</time>
+              <time title="Created: 2020-05-12 11:57:11" itemprop="dateCreated datePublished" datetime="2020-05-12T11:57:11+08:00">2020-05-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:31" itemprop="dateModified" datetime="2020-08-07T19:47:31+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:50:08" itemprop="dateModified" datetime="2020-08-07T19:50:08+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -694,8 +680,8 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
                   </a>
                 </span>
             </span>
@@ -711,40 +697,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>A loss function tells how good our current classifier is. </p>
-<h2 id="Data-Loss"><a href="#Data-Loss" class="headerlink" title="Data Loss"></a>Data Loss</h2><ol>
-<li>Given a dataset of examples $\{(x_i,y_i)\}^N_{i=1}$ where $x_i$ is an image and $y_i$ is an integer label. Loss over the dataset is a sum of loss over examples: $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)$. </li>
-<li>There are infinitely many $W$ to make $L=0$. </li>
+          <ol>
+<li>自顶向下分析法构造语法分析树是从根节点开始构造</li>
+<li>其本质是寻找文法的推导过程，一般采用最左推导</li>
 </ol>
-<h3 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h3><ol>
-<li>Multiclass SVM loss (Hinge loss): $L_i=\displaystyle\sum_{j≠y_i}max(0,s_j-s_{y_i}+1)$. $s_i$ is the score of the $i$th class. </li>
-<li>The minimum loss of SVM is $0$ when all prediction is correct. The maximum loss is infinity when the prediction is as wrong as possible. </li>
-<li>If at initialization $W$ is small, so all $s\approx 0$, the loss will be <script type="math/tex">the\ number\ of\ class-1</script>. </li>
+<h1 id="不确定的自顶向下分析-递归下降法"><a href="#不确定的自顶向下分析-递归下降法" class="headerlink" title="不确定的自顶向下分析 (递归下降法)"></a>不确定的自顶向下分析 (递归下降法)</h1><ol>
+<li>利用回溯法遍历可能情况，当没有终结符号时就回溯</li>
+<li>为每个非终结符号设计一个函数，在函数中遍历所有该非终结符号的产生式，利用DFS实现</li>
+<li>优点：对文法限制小，易于实现</li>
+<li>缺点：回溯效率低，文法左递归导致死循环，出错时难以缺点出错位置</li>
 </ol>
-<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><ol>
-<li>We can use the scores to calculate the probabilities of all labels given the condition of the image is $x_i$. </li>
-<li>We exponentiate scores to make every term positive. So the probability of the actual label being $k$ is $P(Y=k|X=x_i)=\displaystyle\frac{e^{s_k}}{\sum_je^{s_j}}$, which is called the softmax function. </li>
-<li>To maximize the log-likelihood, or to minimize the negative log-likelihood of the correct class. <script type="math/tex">L_i=-log\ P(Y=y_i|X=x_i)=-log\ \displaystyle\frac{e^{s_{y_i}}}{\sum_je^{s_j}}</script>. </li>
-<li>The goal is to maximize the probability of the right label. It is easier to maximize the log function than the raw probability. Also, the loss function is describing how bad the model is, so we take the negative of it. </li>
-<li>Three steps for softmax classifier: exponentiate the scores; normalize them; take the negative log of the correct label. </li>
-<li>The minimum possible loss is $0$ when the model is totally right (the probability of the accurate label is $1$). The maximum is infinity when the model is entirely wrong (the probability of the correct label is $0$). However, these two situations will occur. </li>
-<li>A slight change in a datapoint might when changing the loss of SVM if the label is right, but it will change the loss of softmax in any situation. </li>
+<h1 id="消除左递归"><a href="#消除左递归" class="headerlink" title="消除左递归"></a>消除左递归</h1><ol>
+<li>三种类型的左递归<br />&emsp;直接 (立即)左递归：$N\to Na$<br />&emsp;间接左递归：$N\to A\alpha,A\Rightarrow^+Ny$<br />&emsp;潜在左递归：$N\to\alpha N,\alpha\Rightarrow^+\epsilon$</li>
+<li>直接左递归的消除：对于左递归$A\to A\alpha_1|A\alpha_2|…|\beta_1|\beta_2|…$<br />分析得串是从右向左生成的，以$\beta_1|\beta_2|…$开头，后面跟$(\alpha_1|\alpha_2|…)^*$<br />我们可以把左递归改为右递归，让串从左向右生成<br />$A\to\beta_1 A’|\beta_2A’|…,A’\to \alpha_1A’|\alpha_2A’|…$</li>
+<li>间接和潜在左递归的消除：找到左递归，变为直接左递归，再消除<br />代入法：将右部$\alpha$中非终结符号$N$替换为$N$的候选式<br />过程：<br />&emsp;对文法的所有非终结符号进行排序<br />&emsp;排在前面的非终结符号如果出现在后面非终结符号的右部，就把前面的非终结符号替换掉<br />&emsp;迭代替换操作<br />&emsp;每消除一个非终结符号的间接或潜在左递归，就马上消除新生成的直接左递归<br />限制：不包含环路$A\Rightarrow^+A$和$A\to\epsilon$</li>
 </ol>
-<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><ol>
-<li>The only thing we care about is the performance on the test set. So we need to tell our algorithm more than the performance on the training data. </li>
-<li>To avoid overfitting the training data, we should add regularization to the loss, which will punish when the model is complicated. So the loss becomes $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$. $\lambda$ is a hyperparameter called regularization strength. </li>
-<li>$L2$ regularization: $R(W)=\displaystyle\sum_k\sum_lW_{k,l}^2$<br />$L1$ regularization: $R(W)=\displaystyle\sum_k\sum_l|W_{k,l}|$<br />Elastic net $(L1+L2)$: $R(W)=\displaystyle\sum_k\sum_l\beta W_{k,l}^2+|W_{k,l}|$</li>
-<li>The idea of regularization is to penalize the complexity of model rather than trying to fit the training data. </li>
-<li>$L2$ regularization also corresponds MAP inference using a Gaussian prior on $W$. </li>
-<li>The regularization function is a problem-dependent hyperparameter. </li>
-<li>If at initialization $W$ is small so all $s\approx 0$, the loss will be <script type="math/tex">-log\ c</script>. $c$ is the number of classes. </li>
+<h1 id="克服回溯问题"><a href="#克服回溯问题" class="headerlink" title="克服回溯问题"></a>克服回溯问题</h1><ol>
+<li>两种情况：<br />&emsp;相同左部的规则，右部左端第一个符号相同，无法根据当前输入符号选择产生式，只能试探<br />&emsp;相同左部的规则，某一右部能推出$\epsilon$串，不知道要不要生成其他的串</li>
+<li>对第一种情况，只需要提取左公共因子。$A\to\delta\beta_1|\delta\beta_2|…|\gamma_1|\gamma_2|…$变为$A\to\delta A’|\gamma_1|\gamma_2|…,A’\to\beta_1|\beta_2|…$</li>
 </ol>
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><ol>
-<li>The strategy here is to follow the gradient of $f$. The opposite direction of the gradient is the greatest decrease in the function. </li>
-<li>The numerical way to calculate the gradient to increase one component of $W$ a little bit, then use the formula $\displaystyle\frac{df}{dx}=\frac{f(x+h)-f(x)}{h}$ to get the corresponding component in the gradient. </li>
-<li>The faster way to get the gradient is the analytic way. In practice, always use the analytic gradient, but check implementation with numerical gradient. This is called a gradient check. </li>
-<li>Gradient descent: first calculate the gradient, then subtract the multiplication of learning rate and the gradient from the weight. </li>
-<li>Calculation of the gradient can be slow, so in practice, we usually use the stochastic gradient descent, which only calculates the gradient of part of the training set. </li>
+<h1 id="LL-1-文法"><a href="#LL-1-文法" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h1><h2 id="FIRST集"><a href="#FIRST集" class="headerlink" title="FIRST集"></a>FIRST集</h2><ol>
+<li>$FIRST$集 (首符集)：$FIRST(\alpha)$是由任意文法符号串$\alpha$推导出的所有的文法符号串的第一个终结符号组成的集合。<script type="math/tex">FIRST(\alpha)=\{a|\alpha\Rightarrow^*a…,a\in V_T\}</script>，如果$\alpha\Rightarrow^*\epsilon$，则$\epsilon\in FIRST(\alpha)$</li>
+<li>$FIRST$集中的元素是终结符号或$\epsilon$</li>
+<li>如果$X$是一个终结符号，$FIRST(X)=\{X\}$</li>
+<li>如果$X\to\epsilon$是一个产生式，则被$\epsilon$加到$FIRST(X)$</li>
+<li>如果$X\to Y_1Y_2…Y_k$是一个产生式，<br />则把$FIRST{(Y_1)}\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果<script type="math/tex">Y_1…Y_{i-1}\Rightarrow^*\epsilon</script>，则把$FIRST(Y_i)\backslash\{\epsilon\}$加入$FIRST(X)$<br />如果$Y_1…Y_k\Rightarrow^*\epsilon$，则把$\epsilon$加入$FIRST(X)$</li>
+<li>假设$A\to\alpha$，$a\in FIRST(\alpha)$，那么当输入符号是$a$时，将待推导非终结符号替换为$\alpha$</li>
+</ol>
+<h2 id="FOLLOW集"><a href="#FOLLOW集" class="headerlink" title="FOLLOW集"></a>FOLLOW集</h2><ol>
+<li>$FOLLOW$集 (后跟集)：$FOLLOW(A)$是由所有句型中紧跟在非终结符号$A$后面的终结符$a$组成的集合。$FOLLOW(A)=\{a|S\Rightarrow^*\alpha Aa\beta,a\in V_T\}$</li>
+<li>$FOLLOW$集中的元素是终结符号或$\$$</li>
+<li>如果$X\to AB$<br />&emsp;则$FIRST(B)\subseteq FOLLOW(A)$且$FOLLOW(X)\subseteq FOLLOW(B)$。$B$的第一个符号就是紧跟在$A$后面。凡事可以跟在$X$后面的，利用这条规则推导后都可以跟在$B$houmi<br />&emsp;如果$B\Rightarrow^*\epsilon$，则$FOLLOW(X)\subseteq FOLLOW(A)$</li>
+<li>$\$$在开始符号的$FOLLOW$集中</li>
+<li>如果$A\to\alpha B\beta$是产生式，则$FIRST(\beta)\backslash\{\epsilon\}$在$FOLLOW(B)$中</li>
+<li>如果$A\to\alpha B$或$A\to\alpha B\beta$且$\beta\Rightarrow^*\epsilon$，$FOLLOW(A)\subseteq FOLOOW(B)$</li>
+<li>算法实现<br />先把$\$$加入开始符号的$FOLLOW$集中<br />循环直到没有$FOLLOW$集改变<br />&emsp;对每一条产生式$X\to X_1X_2…X_m$，对其中的每一个非终结符号$X_j$<br />&emsp;$FOLLOW(X_j)=FOLLOW(X_j)\cup(FIRST(X_{j+1}…X_m)\backslash\{\epsilon\})$<br />&emsp;如果$\epsilon\in FIRST(X_{j+1}…X_m)$，$FOLLOW(X_j)=FOLLOW(X_j)\cup FOLLOW(X)$</li>
+<li>为了避免第二种回溯，$FIRST(B)\cap FOLLOW(B)=\emptyset$，$B$为中间非终结符号</li>
+<li>如果$A\to\alpha$，当$\alpha\Rightarrow^*\epsilon$，则当输入符号在$FOLLOW(A)$中是，用$\alpha$替代$A$</li>
+</ol>
+<h2 id="SELECT集"><a href="#SELECT集" class="headerlink" title="SELECT集"></a>SELECT集</h2><ol>
+<li>当输入符号在左部的某一产生式的$SELECT$中，则选择该条产生式</li>
+<li>对产生式$A\to\alpha,A\in V_N,\alpha\in V^*$<br />&emsp;如果$\alpha$不能推导出$\epsilon$，则$SELECT(A\to\alpha)=FIRST(\alpha)$<br />&emsp;如果$\alpha$可以推导出$\epsilon$，则$SELECT(A\to\alpha)=(FIRST(\alpha)\backslash\{\epsilon\})\cup FOLLOW(A)$</li>
+</ol>
+<h2 id="LL-1-文法-1"><a href="#LL-1-文法-1" class="headerlink" title="LL(1)文法"></a>LL(1)文法</h2><ol>
+<li>解决了左递归和提取了左因子之后，基本避免 了回溯问题 (除了第二种回溯)，这时就可以设计确定的自顶向下分析法</li>
+<li>能使用确定的自顶向下分析法的文法称为$LL(1)$文法</li>
+<li>上下文无关文法$G$是$LL(1)$文法，当且仅当对于$G$的每一个非终结符$A$的任何两个不同产生式$A\to\alpha|\beta$，$SELECT(A\to\alpha)\cap SELECT(A\to\beta)=\emptyset$，且$\alpha$和$\beta$不能同时推导出$\epsilon$</li>
+<li>第一个$L$表示自左而右扫描输入，第二个$L$表示最左推导，$1$表示每部分析只要向前查看一个符号</li>
+<li>$LL(1)$文法不是二义的，无左递归，无左公共因子产生式</li>
+<li>无左递归，无左公共因子的文法不一定是$LL(1)$文法，还有可能有第二种回溯</li>
+<li>$LL(1)$文法可以直接用递归下降法求解</li>
+</ol>
+<h1 id="预测分析器"><a href="#预测分析器" class="headerlink" title="预测分析器"></a>预测分析器</h1><ol>
+<li>预测分析器：对于$LL(1)$文法的句子，用确定的分析方法进行分析的分析程序</li>
+<li>预测分析器是通用的架构，而不像递归是不通用的架构</li>
+<li>工作过程：在推导替代非终结符号集的时候，利用当前非终结符号和下一个输入符号，在预测分析表中查找对应产生式，并替代</li>
+<li>预测分析表就是$SELECT$集，把$SELECT$集中的右部填入左部对应行，集合内各个元素对应列的单元内</li>
+<li>预测分析表的生成过程就是$SELECT$集的遍历过程</li>
+<li>$LL(1)$文法是在分析表在那个不存在多重入口的文法</li>
+<li>一个栈存储待处理符号，栈顶元素$X$和当前输入符号$a$表示程序状态$(X,a)$，称为一个格局<br />若$X\in V_T$，判断$X$和$a$是否相同，若相同则弹出$X$，输入指针往后移，否则为出错<br />若$X\in V_N$，查得分析表$M$的元素$M[X,a]$。若查得$M[X,a]=X\to Y_1Y_2…Y_k$，则$X$弹出，依次将$Y_k,Y_{k-1},…,Y_1$压入栈中。若$M[X,a]=error$，错误分析<br />若<script type="math/tex">X=\$ </script>，如果<script type="math/tex">a=\$ </script>，分析停止，成功分析，否则失败</li>
+</ol>
+<h2 id="预测分析的错误恢复"><a href="#预测分析的错误恢复" class="headerlink" title="预测分析的错误恢复"></a>预测分析的错误恢复</h2><ol>
+<li>错误种类<br />&emsp;栈顶的终结符与当前输入符不匹配<br />&emsp;非终结符$A$在栈顶，面临输入符$a$，分析表$M[A,a]$为空<br />&emsp;$X=\$ $但$a≠\$ $</li>
+<li>应急恢复策略：跳过输入串中的一些符号，直到遇到同步符号把栈顶元素弹出为止</li>
+<li>同步符号：$FOLLOW(A)$中的所有符号作为$A$的同步符号</li>
+<li>若栈顶为终结符号，但与输入符号不符，弹出栈顶终结符号</li>
 </ol>
 
       
@@ -765,7 +782,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/01-Image-Classification/">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -779,7 +796,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/04/01-Image-Classification/" class="post-title-link" itemprop="url">01. Image Classification</a>
+            <a href="/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">03. 词法分析</a>
         </h1>
 
         <div class="post-meta">
@@ -789,14 +806,566 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-04 12:11:23" itemprop="dateCreated datePublished" datetime="2020-04-04T12:11:23+08:00">2020-04-04</time>
+              <time title="Created: 2020-05-10 14:59:42" itemprop="dateCreated datePublished" datetime="2020-05-10T14:59:42+08:00">2020-05-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:49" itemprop="dateModified" datetime="2020-08-07T19:47:49+08:00">2020-08-07</time>
+                <time title="Modified: 2020-08-07 19:49:40" itemprop="dateModified" datetime="2020-08-07T19:49:40+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="词法分析程序设计"><a href="#词法分析程序设计" class="headerlink" title="词法分析程序设计"></a>词法分析程序设计</h1><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ol>
+<li>读入源程序字符序列</li>
+<li>对源程序预处理</li>
+<li>识别源程序中的单词，创建符号表并在相应的符号表中登录信息</li>
+<li>把单词和行号关联，以便编译器将错误信息与源程序位置联系起来</li>
+<li>输出单词序列</li>
+<li>组织：<br />&emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件<br />&emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式</li>
+</ol>
+<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><ol>
+<li>单词：具有独立含义的最小语法单位</li>
+<li>分类：标识符 (变量名)、关键字、常数、运算符、分界符、字符串</li>
+<li>词法分析程序根据词类划分源码，输出二元式$&lt;类别,单词属性值&gt;$ (称为单词符号)。一类一码可以把类别省略，但本质还是二元组</li>
+<li>模式：一个单词的可能形式，定义类别为某一个类的单词的形式</li>
+<li>词素：源程序的一个字符序列，是单词符号的实例。单词属性值不一定是词素。比如源码中的变量名就是一个词素，但是在二元组中，单词属性值可能是$1$</li>
+</ol>
+<h2 id="正规表达式"><a href="#正规表达式" class="headerlink" title="正规表达式"></a>正规表达式</h2><ol>
+<li>正规表达式是表示字符串格式的模式，可以用来描述单词的结构</li>
+<li>正规集：正规式$(r)$所匹配的所有字符串的集合，实际上是一个正规语言，记为$L(r)$</li>
+<li>正则表达式定义：<br />&emsp;$\epsilon$是正规式，其匹配语言是$L(\epsilon)=\{\epsilon\}$<br />&emsp;如果$a\in\Sigma$，则$a$是一个正规式，其匹配语言是$L(a)=\{a\}$<br />&emsp;如果$r$和$s$都是正规式，则有：<br />&emsp;&emsp;$(r)|(s)$也是正规式，表示语言$L(r)\displaystyle\cup L(s)$<br />&emsp;&emsp;$(r)(s)$也是正规式，表示语言$L(r)\cdot L(s)$<br />&emsp;&emsp;$(r)^*$也是正规式，表示语言$(L(r))^*$<br />&emsp;&emsp;$(r)$也是正规式，表示语言$L(r)$</li>
+<li>运算符号优先级：$*=+&gt;\cdot&gt;|$</li>
+<li>或运算具有交换律和结合律，连接运算具有结合律和对或运算的分配律</li>
+<li>$\epsilon$是连接运算的单位元</li>
+</ol>
+<h1 id="有限状态自动机"><a href="#有限状态自动机" class="headerlink" title="有限状态自动机"></a>有限状态自动机</h1><ol>
+<li>状态：区分事物的标识</li>
+<li>有限状态自动机是离散状态系统</li>
+<li>定义：具有离散输入与离散输出的一种数学模型，用于识别输入的符号串是否属于某个语言的合法句子</li>
+<li>输入为符号串，输出为是或者否</li>
+<li>分类<br />&emsp;确定性有限自动机 (DFA)：输入符号定，下一动作定<br />&emsp;非确定性有限自动机 (NFA)：输入符号定，下一动作不定</li>
+<li>组成：字母表 (输入符号)、状态 (开始状态、接受或终结状态)、转移函数</li>
+<li>开始状态用一个箭头空指向该状态，也可以再加一个“start”</li>
+<li>接受状态，也称为终结状态，表示该串是可识别串，用两个圆圈表示</li>
+<li>转移函数有两个参数，当前状态和输入符号。输出下一状态</li>
+<li>从开始状态到终结状态之间的输入符号按顺序组成的串就是可识别的串</li>
+</ol>
+<h2 id="确定性有限自动机"><a href="#确定性有限自动机" class="headerlink" title="确定性有限自动机"></a>确定性有限自动机</h2><ol>
+<li>DFS表示为一个五元组$M=(Q,\Sigma,q_0,F,\delta)$<br />&emsp;$Q$表示有限状态集<br />&emsp;$\Sigma$表示字符表<br />&emsp;$q_0$表示初始状态，只能有一个$q_0\in Q$<br />&emsp;$F$表示接受或终止状态集，可以有多个元素$F\subseteq Q$<br />&emsp;$\delta$表示转移函数，$Q\times\Sigma\to Q$</li>
+<li>表示方法：状态转换图和状态转换表</li>
+<li>状态转换表中开始状态加$\to$，终结状态加$*$</li>
+</ol>
+<h2 id="非确定性有限自动机"><a href="#非确定性有限自动机" class="headerlink" title="非确定性有限自动机"></a>非确定性有限自动机</h2><ol>
+<li>NFA也是由五元组表示，但是转移函数的值域不同。</li>
+<li>NFA的转移函数也是一个当前状态+一个输入符号的定义域，但是值域不是一个状态，而是状态的集合。所以对$\delta$有$Q\times(\Sigma\cup\{\epsilon\})\to 2^Q$</li>
+<li>在非确定性有限自动机中，输入符号可以是$\epsilon$，表示两个状态识别的串是同一个串</li>
+<li>NFA的不确定性体现在两个方面<br />&emsp;第一种情况是识别一个符号的时候有两条路径可走<br />&emsp;第二种是$\epsilon$边的存在，使得同一个子串可以由两个不同的状态</li>
+<li>DFA是NFA的一个特例，但两种自动机识别语言的能力是一样的，即如果一个语言可以被DFA识别，则一定存在一个NFA可以识别该语言，反之亦然</li>
+<li>正规表达式直接转化成DFA比较难，一般是先转化为NFA，再把NFA转化为DFA</li>
+</ol>
+<h2 id="NFA到DFA的转换"><a href="#NFA到DFA的转换" class="headerlink" title="NFA到DFA的转换"></a>NFA到DFA的转换</h2><ol>
+<li>将NFA中一个状态输入同一个符号的所有下一状态作为DFA中的一个集合，以消除第一种不确定性</li>
+<li>$\epsilon$闭包：$t$是一个状态，则$\epsilon-closure(t)$是从状态$t$只经过$\epsilon$转换可以到达的状态集；$T$是一个状态集，$\epsilon-closure(T)$是从$T$中任一状态只经过$\epsilon$边就可以达到的状态集<br />$t$本身以及$T$中的所有状态都属于他们的$\epsilon$闭包<br />利用$\epsilon$闭包可以消除第二种不确定性</li>
+<li>定义$move(t,a)$表示从状态$t$经过$a$边能到达的状态集；$move(T,a)$表示从状态集$T$中的状态经非空的$a$转换可达到的状态集</li>
+<li>子集构造法<br />&emsp;DFA的开始状态是$\epsilon-closure(s_0)$，这就是第一个稳定的状态<br />&emsp;其余状态由$\epsilon-closure(move(T,a))$生成<br />&emsp;DFA的终态是包含原来终态的状态</li>
+<li>子集构造算法流程<br />&emsp;先获得开始状态$\epsilon-closure(s_0)$<br />&emsp;对每一个状态，先找到它在每一个输入下的稳定次态，即，枚举$\epsilon-colosure(move(T,a))$，对每一个可能的$a$<br />&emsp;每次找到一个新的状态，就加入DFA的状态集中，并在未来也对这个新状态进行枚举</li>
+</ol>
+<h2 id="从正规式到NFA的转换"><a href="#从正规式到NFA的转换" class="headerlink" title="从正规式到NFA的转换"></a>从正规式到NFA的转换</h2><ol>
+<li>直接从正规式的定义出发来定义正规式对应的NFA</li>
+<li>对$r=\epsilon$<br /><img src="/img/03.词法分析01.png" width="30%"></li>
+<li>对$r=a$<br /><img src="/img/03.词法分析02.png" width="30%"></li>
+<li>对$r=s|t$<br /><img src="/img/03.词法分析03.png" width="30%"></li>
+<li>对$r=st$，$s$和$t$有一个公用节点，表示$s$的接受状态和$t$的开始状态<br /><img src="/img/03.词法分析04.png" width="30%"></li>
+<li>对$r=(s)^*$<br /><img src="/img/03.词法分析05.png" width="30%"></li>
+<li>$r=(s)$的NFA和$r=s$的一样</li>
+<li>得到的NFA的性质<br />&emsp;$N(r)$的状态数最多是$r$中符号和算符总数的两倍<br />&emsp;$N(r)$只有一个开始状态和一个接受状态，接受状态没有向外的转换<br />&emsp;$N(r)$的每个状态有一个不是$\epsilon$边的指向其他状态的边，或者最多只有两条$\epsilon$边</li>
+</ol>
+<h2 id="DFA的化简"><a href="#DFA的化简" class="headerlink" title="DFA的化简"></a>DFA的化简</h2><ol>
+<li>任何DFA或NFA都存在唯一一个最简DFA与之等价，且任何DFA或NFA都可以转换为该最简DFA</li>
+<li>等价状态<br />&emsp;一致性：两个状态必须同为接受状态或非接受状态<br />&emsp;蔓延性：对所有输入符号，两个状态转移到等价状态</li>
+<li>寻找等价状态：隐含表法 (求同法)<br />&emsp;横少尾，纵少头的阶梯表<br />&emsp;可以直接确定等价的打钩，直接确定不等价的画叉<br />&emsp;取决于次态的写上次态，第一轮比完后再一一比较次态，直至全部判断完毕<br />&emsp;如果遇到相互依赖，循环不定的情况，默认他们都等价</li>
+<li>寻找等价状态：求异法<br />&emsp;先将状态划分为接受状态和非接受状态，再逐步划分精细化，最后得到不可在细分的划分<br />&emsp;考察每一个划分，要求其中的每一个元素在所有输入的情况下的次态组成的集合是该划分的子集<br />&emsp;如果有元素存在某一个输入对应的次态不是原划分的元素，就把该元素从原划分中剥离出去，直到没有元素应该被剥离</li>
+<li>在找到了等价状态之后，重新命名各个等效状态集，并把转移函数的输入中的状态改为原输入状态所属的等效状态，把输出状态改为原输出状态所属的等效状态</li>
+</ol>
+<h2 id="有限自动机到正规文法"><a href="#有限自动机到正规文法" class="headerlink" title="有限自动机到正规文法"></a>有限自动机到正规文法</h2><ol>
+<li>任意一个FA识别的语言都能用正规文法来生成</li>
+<li>每一个状态代表一个非终结符号</li>
+<li>如果状态$i$是一个接受状态，则设规则$A_i\to\epsilon$</li>
+<li>如果状态$i$是一个开始状态，则$A_i$是开始符号</li>
+<li>其他情况，如下图，则设规则$A_i\to aA_j$<br /><img src="/img/03.词法分析06.png" width="30%"></li>
+</ol>
+<h1 id="词法分析器的自动构造"><a href="#词法分析器的自动构造" class="headerlink" title="词法分析器的自动构造"></a>词法分析器的自动构造</h1><ol>
+<li>先用正规式表示出单词的结构，再由正规式生成NFA，最后再化简得到最简DFA</li>
+<li>给每个正规式构造相应的NFA，将所有的NFA用或运算并联起来</li>
+<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺序</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/07/02-%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95%E4%B8%8E%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/07/02-%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95%E4%B8%8E%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80/" class="post-title-link" itemprop="url">02. 形式文法与形式语言</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-07 22:17:22" itemprop="dateCreated datePublished" datetime="2020-05-07T22:17:22+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:59" itemprop="dateModified" datetime="2020-08-07T19:49:59+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="符号串和语言"><a href="#符号串和语言" class="headerlink" title="符号串和语言"></a>符号串和语言</h1><h2 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h2><ol>
+<li>符号：可以相互区分的记号或元素</li>
+<li>字母表$\Sigma$：符号的有限集合</li>
+<li>符号串：字母表上的符号的有穷序列</li>
+<li>空符号串$\epsilon$是不包含任何符号的符号串，是任何$\Sigma$上的符号串，相当于符号串这个群的单位元</li>
+<li>连接：符号串$\alpha$、$\beta$的连接，是把$\beta$的符号写在$\alpha$的符号之后得到的符号串$\alpha\beta$。$\epsilon\alpha=\alpha\epsilon=\alpha$。不满足交换律，是偏序关系</li>
+<li>幂：符号串$\alpha$自身连接$n$次得到的符号串，$\alpha^n$。$\alpha^0=\epsilon$，$\alpha^1=\alpha$</li>
+<li>符号串的长度表示符号串中包含符号的个数。$|\epsilon|=0$</li>
+<li>子串：符号串中的连续子序列</li>
+<li>前缀：符号串中从第一位开始的子序列<br />后缀：符号串中以最后一位结尾的子序列<br />真前/后缀：与原串不同的前/后缀</li>
+<li>符号串集合<br />并集：<script type="math/tex">A+B=\{w|w\in A\ or\ w\in B\}</script><br />连接：<script type="math/tex">A\cdot B=\{xy|x\in A\ and\ y\in B\}</script><br />幂次：$A^0=\{\epsilon\}$，$A^n=A^{n-1}A$<br />$Kleene$闭包 (星闭包)：$\Sigma^* $表示由字母表中的符号组成的符号串集合。<br />正闭包：$\Sigma^+=\Sigma^*-\{\epsilon\}$，即长度大于$1$的符号串的集合</li>
+</ol>
+<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><ol>
+<li>定义：某个字母表上的符号串的集合</li>
+<li>任何一个语言都是$\Sigma^*$的一个子集</li>
+<li>描述方法<br />&emsp;有穷：直接列出<br />&emsp;无穷：给出生成方式 (文法)或识别方式 (自动机)</li>
+</ol>
+<h1 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h1><p>主要用到的是上下文无关文法和正规文法 (正则文法)</p>
+<h2 id="文法-1"><a href="#文法-1" class="headerlink" title="文法"></a>文法</h2><ol>
+<li>文法$G$是一个四元组$G=(V_T,V_N,S,P)$<br />&emsp;$V_T$是终结符号集，即最终出现在句子中，在字母表中的单词符号<br />&emsp;$V_N$是非终结符号集，即推导过程中出现，但不在字母表中，不会在最后的句子中出现的符号<br />&emsp;$S$是开始符号，$S\in V_N$，表示最大的语法单位<br />&emsp;$P$是产生式规则集合。$P=\{\alpha\to\beta|\alpha至少包含一个非终结符号\}$</li>
+<li>从文法生成串：从开始符号$S$开始，利用规则$P$重写所有非终结符号，直到每一个符号都是终结符号为止</li>
+<li>$P\to\alpha_1,P\to\alpha_2,…,P\to\alpha_n$缩写为$P\to\alpha_1|\alpha_2|…|\alpha_n$</li>
+<li>只有四个元素都完全一样的两个文法才是相同的文法，否则即使产生的语言一样也不相同</li>
+<li>直接推导：用一条规则把左部的一个非终结符号直接替换为一个终结符号或另一个非终结符号<br />推导：$0$步或多步直接推导，$\alpha\Rightarrow…\Rightarrow\beta$等价于$\alpha\Rightarrow^*\beta$<br />用$\Rightarrow^+$表示至少$1$步的推导</li>
+<li>最左推导：每一步的推导都施加在句型的最左边的非终结符号上，记为$\Rightarrow_{lm}$，生成的句型称为左句型<br />最右推导：施加在最右边的非终结符号上，记为$\Rightarrow_{rm}$，生成的句型称为右句型。也称为规范推导</li>
+<li>归约：用产生式的左部替代右部的过程，是识别串的方式，是推导的逆过程。如果$A\to\gamma$是产生式规则，记为$\alpha\gamma\beta\Leftarrow\alpha A\beta$<br />最左归约：每一步归约都施加在句型最左边的可归约串上，规范归约，是最右推导的逆过程 (因此最右推导是规范推导)<br />最右归约：施加在最右边的可归约串上，是最左推导的逆过程</li>
+<li>文法$G[S]:…$中，$G$是文法的名字，$S$是开始符号，后面跟的是产生式规则集，产生式规则集中左部都是非终结符号，其他的都是终结符号</li>
+<li>乔姆斯基文法的四种类型 ($G=(V_T,V_N,S,P),\alpha\to\beta\in P$)<br />&emsp;0型，短语结构文法 (PSG)：$|\alpha|≠0$，识别系统是图灵机<br />&emsp;1型，上下文有关文法 (CSG)：$|\alpha|≤|\beta|$，识别系统是线性有界自动机<br />&emsp;2型，上下文无关文法 (CFG)：$|\alpha|=1,\alpha\in V_N$，识别系统是下推自动机<br />&emsp;3型，正规文法 (RG)：右部最多一个非终结符号且在所有可选项中非终结符号都在终结符号的同一侧，在左边的是左线性文法，在右边的是右线性文法。识别系统是有限自动机</li>
+</ol>
+<h2 id="语言-1"><a href="#语言-1" class="headerlink" title="语言"></a>语言</h2><ol>
+<li>句型：若存在$S\Rightarrow^*\alpha$，则$\alpha$是一个句型。必须从开始符号出发推导<br />句子：$\alpha$是一个句型，且$\alpha$只包含终结符号</li>
+<li>文法产生的语言$L(G)=\{\alpha|\alpha是G的句子\}$。即语言是文法$G$推导出的所有句子组成的集合。$L(G)=\{\alpha|S\Rightarrow^*\alpha且\alpha\in V_T^*\}$</li>
+<li>文法产生的语言只有一个，但是一个语言可以由多种文法产生。如果两个文法生成同一个语言，则这两个文法等价</li>
+<li>产生式集合、终结符号、非终结符号有限，但是在有递归的情况下可以导出无穷多个句子</li>
+</ol>
+<h2 id="分析树"><a href="#分析树" class="headerlink" title="分析树"></a>分析树</h2><ol>
+<li>一个节点一个符号，用于展示推导过程</li>
+<li>根结点是开始符号</li>
+<li>叶子节点按中序遍历中的相对顺序从左到右构成这一棵推导树的结果句型</li>
+<li>内部结点都是非终结符号。但是非终结符号也可能出现在叶子节点，这棵推导树的结果是句型不是句子</li>
+<li>每一个结点及其所有子节点对应一条产生式规则，其中的父节点是左部，子节点从左到右排列构成右部</li>
+<li>分析树忽略了推导过程中非终结符号的替换顺序，所以一棵树可以对应多个推导。但一棵树只能对应一个最左推导 (上到下，左到右)，以及一个最右推导 (上到下，右到左)</li>
+<li>二义：一个文法的句子有不止一棵的分析树<br />又最左(右)推导与分析树一一对应，故句子二义说明有不止一个最左(右)推导</li>
+<li>如果一个文法包含二义性句子，则这个文法是二义性的<br />产生某上下文无关语言的每一个文法都是二义的，则语言是先天二义的</li>
+<li>文法的无二义性是不可判定的，因为不可能穷举文法的所有句子。只能判断有二义性</li>
+<li>如果产生式集中一个非终结符号既存在左递归，又存在右递归，那该文法就是二义的</li>
+<li>程序设计语言中二义文法的解决方法：<br />&emsp;改写为等价无二义文法<br />&emsp;设定优先顺序，限制可选分析树</li>
+</ol>
+<h2 id="句型分析"><a href="#句型分析" class="headerlink" title="句型分析"></a>句型分析</h2><ol>
+<li>短语：$\alpha\beta\delta$是文法$G[S]$的一个句型，若存在推导$S\Rightarrow^*\alpha A\delta$且$A\Rightarrow^+\beta$，则称$\beta$是句型$\alpha\beta\delta$相对于非终结符号$A$的短语。<br />即，句型中一个可以独立由某个非终结符号生成的子串就是句型相对于非终结符号的短语<br />短语也是分析树中以非终结符号为子树根节点的最右叶子节点序列</li>
+<li>直接短语：一步推导就能得到的短语，在分析树中，子树只有两层，短语是非终结符号的子节点</li>
+<li>句柄：最左边的直接短语</li>
+<li>素短语：至少包含一个终结符，不含更小带终结符的短语的短语</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/06/GTD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/06/GTD/" class="post-title-link" itemprop="url">GTD</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-06 23:37:37" itemprop="dateCreated datePublished" datetime="2020-05-06T23:37:37+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:45:24" itemprop="dateModified" datetime="2020-08-07T19:45:24+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">看过的书</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/img/GTD.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/06/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/06/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">如何高效学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-06 23:34:56" itemprop="dateCreated datePublished" datetime="2020-05-06T23:34:56+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:44:15" itemprop="dateModified" datetime="2020-08-07T19:44:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">看过的书</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/img/如何高效学习.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/26/01-%E7%BC%96%E8%AF%91%E6%A6%82%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/26/01-%E7%BC%96%E8%AF%91%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">01. 编译概述</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-26 21:56:45" itemprop="dateCreated datePublished" datetime="2020-04-26T21:56:45+08:00">2020-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:52" itemprop="dateModified" datetime="2020-08-07T19:49:52+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="语言处理系统"><a href="#语言处理系统" class="headerlink" title="语言处理系统"></a>语言处理系统</h1><ol>
+<li>编译程序就是为机器翻译程序语言 (描述计算的符号)的软件系统。一个编译程序就是一种翻译系统，把源语言翻译成目标语言的等价程序</li>
+<li><strong>源程序</strong>先经过<code>预处理</code>变为<strong>修改后的源程序</strong><br /><strong>修改后的源程序</strong>经过<code>编译器</code>变为<strong>汇编代码</strong><br /><strong>汇编代码</strong>经过<code>汇编器</code>变为<strong>可重定位的机器代码</strong><br /><strong>可重定位的机器代码</strong>最后经过<code>连接器</code>变为<strong>目标机器代码</strong></li>
+<li>源程序经过编译器编译，若没有错误，就得到目标程序；若有错误就得到错误信息。输入进入目标程序再得到输出</li>
+<li>编译程序将源程序全部翻译成机器语言程序后，再执行机器语言程序。一次编译可以多次执行<br />解释程序将源程序的一条语句翻译成机器语言程序，并立即执行，再接着翻译。解释程序可交互，易于调试，可移植性好，编译一次执行一次，但是效率低</li>
+<li>Java先经Java编译器编译得到一个字节码，再在JVM上解释</li>
+</ol>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><ol>
+<li>编译步骤<br />&emsp;词法分析：输入源程序，输出单词符号序列 (二元组序列)<br />&emsp;语法分析：输入单词符号序列，输出语法分析树<br />&emsp;语义分析：输入语法分析树，输出带语义的树<br />&emsp;中间代码生成：输入带语义的树，输出中间代码<br />&emsp;代码优化：输入原始中间代码，输出优化后的中间代码<br />&emsp;目标代码生成：输入优化后的中间代码，输出目标程序代码</li>
+<li>词法分析把字符序列切分为有意义的单词。词法分析器的主要功能就是识别单词<br />识别关键字、标识符、数字等，并对每一个单词给出其类型，生成单词符号，表示为$&lt;单词词类, 单词值&gt;$。如果一个词类里只有一个单词，则可以省略单词词类<br />空格只是作为分隔符，忽略。过滤注释部分代码<br />每一个单词词类都有一个符号表，单词值指向符号表中的某一项</li>
+<li>语法分析分析表达式、语句等。语法分析器的任务就是分析单词符号序列是如何构成语法单位的<br />语法树体现了单词符号序列的语法结，节点是单词符号或语法单元。<br />语法树的节点通常是操作符，而其子节点则是操作数</li>
+<li>语义分析分析表达式或语句的操作内容。收集语义信息，类型检查和类型转换。验证语法结构合法的程序是否存在语义错误</li>
+<li>中间代码称为三地址代码，每一条指令只执行一个操作。中间代码是一种面向抽象机器的代码结构，易于产生且易于翻译成目标语言</li>
+<li>前端主要是分析工作，包括：词法分析、语法分析、语义分析、中间代码产生，以及部分代码优化工作，相关的错误处理和符号表的建立。前端依赖于源程序，并在很大程度上独立于目标机器</li>
+<li>后端主要是综合工作，包括：代码优化、代码生成和相关错误处理。依赖于目标机器，因为涉及到指令选择</li>
+<li>前端可以移植在不同的系统中，后端可以在不同语言中重用。若有$m$种语言，要在$n$个不同的平台中运行，需要的编译器就从原始的$O(nm)$个编译器变为$O(n+m)$个模块</li>
+<li>把所有东西读一次并处理就是一遍，一次编译可能不止一遍。生成一次中间代码或目标代码必定是一遍</li>
+<li>构造编译程序的工具：编译程序-编译程序、编译程序产生器、翻译程序书写系统<br />扫描器生成器：产生词法分析器<br />语法分析生成器<br />语法制导翻译引擎</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/09/07-CNN-Architectures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/09/07-CNN-Architectures/" class="post-title-link" itemprop="url">07. CNN Architectures</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-09 19:47:07" itemprop="dateCreated datePublished" datetime="2020-04-09T19:47:07+08:00">2020-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:47:19" itemprop="dateModified" datetime="2020-08-07T19:47:19+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -828,664 +1397,55 @@
 
       
           <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
-<li>The conventional way to solve image classification problem: <br />Data-driven Approach: <br />&emsp;Collect a dataset of images and labels<br />&emsp;Use Machine Learning to train a classifier<br />&emsp;Evaluate the classifier on new images</li>
-<li>The API has two main functions: <br />&emsp;”Train” function: input images and labels then output a model. <br />&emsp;”Predict” function: input model and images then output predictions. </li>
+<li>When we say how many layers a network has, we mean how many layers in that network has weight. Namely, the sum of fully-connected layers and convolution layers. </li>
+<li>The rule of naming a layer: <br />&emsp;If it is a fully-connected layer, its name will begin with “FC”. Behind “FC” is a number that stands for the number of neurons in this layer. Namely, the dimension of the output vector. <br />&emsp;If it is a convolution layer, its name begins with the size of the filter. In the middle is “conv”. At the end is the number of filters. <br />&emsp;Pooling layers write “Pool”. </li>
 </ol>
-<h1 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h1><h2 id="Train-and-Predict"><a href="#Train-and-Predict" class="headerlink" title="Train and Predict"></a>Train and Predict</h2><ol>
-<li>In the training function, we memorize all data and labels. </li>
-<li>In the prediction function, we predict the label of the most similar training image. </li>
-<li>More specific, in prediction, we find the closest image and predict the label of the nearest image. </li>
-<li>With $N$ example, the complexity of training is $O(1)$ and prediction is $O(N)$. This is bad because we want classifiers that are fast at prediction even if the training is slow</li>
-<li>Another problem with this algorithm is the curse of dimensionality. As the data enter the higher dimension, they become sparse. So we need a lot more datas to make space dense, which is possibly out of control. </li>
+<h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><ol>
+<li>Published at 2012, AlexNet has many features: <br />&emsp;It is the first network using ReLU. <br />&emsp;It uses norm layers (not common now). <br />&emsp;It has heavy data augmentation. <br />&emsp;It uses the dropout with the probability of $0.5$. <br />&emsp;Its batch size is $128$, SGD momentum is $0.9$. <br />&emsp;The learning rate is $1e-2$, reduced by $10$ manually when validation accuracy plateaus. <br />&emsp;$L2$ weight decay is $5e-4$. <br />&emsp;$7$ models ensemble to create about $3%$ better accuracy. </li>
+<li>Architecture: <br /><img src="/img/07.CNNArchitectures01.png" width="10%"></li>
+<li>AlexNet was trained on <script type="math/tex">GTX\ 580</script> GPU with only $3$ GB of memory. However, the output of its first convolution layer is $55\times55\times96$. So the network has to spread across $2$ GPUs, half the neurons (feature maps) on each GPU. </li>
+<li>$CONV1$, $CONV2$, $CONV4$, $CONV5$ in AlexNet only have connections with feature maps on the same GPU. $CONV3$, $FC6$, $FC7$, $FC8$ have connections with all feature maps in the preceding layer; They communicate across GPUs. </li>
+<li>ZFNect is AlexNet, except that $CONV1$ changed to $7\times7$ with stride $2$, and $CONV3, 4, 5$ uses $512, 1024, 512$ filters. </li>
 </ol>
-<h2 id="Compare-Images"><a href="#Compare-Images" class="headerlink" title="Compare Images"></a>Compare Images</h2><ol>
-<li>In order to select the most similar image, we need to compare each image. So it is necessary to choose a compare function. </li>
-<li>The first choice is the <code>L1 distance</code> or <code>Manhattan distance</code>. $d_1(I_1,I_2)=\displaystyle\sum_p|I_1^p-I_2^p|$. </li>
-<li>Another choice is the <code>L2 distance</code> or <code>Euclidean distance</code>. $d_2(I_1,I_2)=\sqrt{\sum_p(I_1^p-I_2^p)^2}$. </li>
-<li>The difference between the two choices is that $L1$ distance is coordinate-dependent wile $L2$ distance is coordinate-independent. If we rotate the coordinate frame, $L1$ distance will be changed while $L2$ distance remains the same. </li>
-<li>Actually, distance matrices on pixels are not informative. </li>
+<h1 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h1><ol>
+<li>The main feature of VGG is small filters and deeper networks. </li>
+<li>VGG has many architectures with $16\sim19$ layers. The structure of VGG can be divided into blocks. So in VGG, we can name the convolution layers like $conv-x-y$, where $x$ is the number of blocks and $y$ is its position in that block. </li>
+<li>All three fully-connected layers of VGG are in the last as AlexNet. </li>
+<li>VGG only uses small filters of $3\times3,CONV$ stride $1$, pad $1$, and <script type="math/tex">2\times2,MAX\ POOL</script> stride $2$. Stack of three $3\times3 conv$ (stride $1$) layers has the same effective receptive field as one $7\times7 conv$ layer. However, a stack of three $3\times3$ convolution layer is deeper, more nonlinearities and fewer parameters than one $7\times7$ layer and <br />The size of the receptive field is the size of pixels that affect one pixel of the last layer. In this case, $3\times3$ pixels affect one pixel of the first convolution layer. Since the stride is $1$, we pad the receptive field of last layer with $1$, which makes the receptive field of the second convolution layer $5\times5$. Finally, the receptive field of the last layer is $7\times7$. </li>
+<li>Most memory is spent on early convolution layers while most parameters are in late fully-connected layers. </li>
 </ol>
-<h2 id="K-Nearest-Neighbors"><a href="#K-Nearest-Neighbors" class="headerlink" title="K-Nearest Neighbors"></a>K-Nearest Neighbors</h2><ol>
-<li>The algorithm above determines the result with only one data. Therefore it is easily affected by noise. </li>
-<li>To reduce the affection of noise, we use the more “democratic” way. We take majority vote from $K$-nearest neighbours. </li>
-<li>The algorithm mentioned earlier is a $K=1$ algorithm. </li>
-<li>We often take $K$ some odd number instead of an even number. </li>
-<li>When $K$ is smaller than the number of classes of labels, some image may be unpredictable if the vote of all $K$-nearest neighbours is a tie. So we will make a random guess among the majority winners. </li>
+<h1 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h1><ol>
+<li>GoogLeNet replaced fully-connected layer with average pooling layer. Nevertheless, in order to finetune hyperparameters, it still added one fully-connected layer at the end. </li>
+<li>GoogLeNet first used the inception module. The naive version of inception module is as followed. <br /><img src="/img/07.CNNArchitectures02.png" width="30%"><br />It applied parallel filter operations on the input from the previous layer. With padding to make the output of four layers in the same size, the output of this inception module merely stacks them up. <br />However, its computational complexity is too high, not to mention that the pooling layer preserves feature depth, which means total depth after concatenation can only grow at every layer. </li>
+<li>Hence, we use the bottleneck to reduce feature depth as followed. <br /><img src="/img/07.CNNArchitectures03.png" width="30%"><br />It uses less $1\times1$ filters then the depth of the input to reduce the complexity of calculation. </li>
+<li>GoogLeNet stacks inception modules with dimension reduce on top of each other. <br /><img src="/img/07.CNNArchitectures04.png" width='30%'><br />At the beginning is the stem network and at the end is the classifier output. <br />Nevertheless, it added some auxiliary classification outputs to inject additional gradient at lower layers. </li>
 </ol>
-<h1 id="Hyperparameter"><a href="#Hyperparameter" class="headerlink" title="Hyperparameter"></a>Hyperparameter</h1><ol>
-<li>Hyperparameter is choices about the algorithm that we set rather than learn. As the number of $K$ above, which distance we are using, they are both hyperparameters. </li>
-<li>Hyperparameter is very problem-dependent. We must try them all out and see what works best. </li>
+<h1 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h1><ol>
+<li>ResNet is so deep that it has $152$ layers. </li>
+<li>The problem is that when continue stacking deeper layers on a “plain” convolutional neural network, the performance will become even worse. </li>
+<li>The team assumed that the problem is an <em>optimization</em> problem; deeper models are harder to optimize. </li>
+<li>Their solution is to use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping. Namely, learn a function $H(x)$ to be the output to the next layer. <br /><img src="/img/07.CNNArchitectures05.png" width="10%"></li>
+<li>They also assumed that learning a $H(x) = F(x)+x$ is much easier than learning a completely unknown $H(x)$. <br /><img src="/img/07.CNNArchitectures06.png" width="20%"></li>
+<li>ResNet stacks residual blocks together, and every residual block has two $3\times3$ convolutional layers. <br />It also periodically double the number of filters and downsample spatially using stride $2$. <br />The ResNet begins with an additional convolutional layer and ends with a fully-connected layer. <br /></li>
+<li>For deeper networks, they also use the bottleneck layer to improve efficiency as GoogLeNet. </li>
+<li>To train a ResNet in practice: <br />&emsp;Add a BN layer after each convolutional layer. <br />&emsp;Use $Xavier/2$ initialization. <br />&emsp;Some hyperparameters: <br />&emsp;&emsp;Momentum: $0.9$<br />&emsp;&emsp;Learning rate: $0.1$, divided by $10$ when validation error plateaus. <br />&emsp;&emsp;Mini-batch size: 256<br />&emsp;&emsp;Weight decay: $1e-5$<br />&emsp;No dropout used. </li>
 </ol>
-<h2 id="Setting-Hyperparameters"><a href="#Setting-Hyperparameters" class="headerlink" title="Setting Hyperparameters"></a>Setting Hyperparameters</h2><ol>
-<li>Mark that when setting hyperparameters, we never touch a finger on the test set. The test must be unseen from model and us. </li>
-<li>So we must split data into a training set, a validation set and a test set. Choose hyperparameters on the validation set and evaluate on the test set. </li>
-<li>Furthermore, we can use the cross-validation by splitting data into folds. Try each fold as validation and average the results. This is useful but takes much time. So we mostly use it on small datasets and seldom use it on large datasets. </li>
-<li>In order to avoid bias on each dataset, we usually split data randomly. </li>
+<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ol>
+<li>AlexNet: small compute, still memory heavy, lower accuracy</li>
+<li>VGG: highest memory, most operations</li>
+<li>GoogLeNet: most efficient</li>
+<li>ResNet: Moderate efficiency depending on model, highest accuracy</li>
+<li>ResNet, with inception, has the highest accuracy. </li>
 </ol>
-<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><ol>
-<li>The parametric approach takes in the image as a vertical vector $\vec{x}$, and a parameter matrix (weight matrix) $W$ then outputs scores of each class. <br />For $\vec{x}$, we take the numbers in each image out in order and put them into a vertical vector. </li>
-<li>In linear classification, $f(\vec{x},W)=W\vec{x}$. Sometimes, we might want to add a bias vector $\vec{b}$, which makes the function $f(\vec{x}, W)=W\vec{x}+\vec{b}$. </li>
-<li>Each row of $W$ is a template of how each pixel in the image will affect each class. </li>
-<li>The linear classification model splits the space into pieces with linear decision boundaries. Each class takes one piece. </li>
-<li>We predict the label as the label of the highest class score. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/22/15-Classical-Statistical-Inference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/22/15-Classical-Statistical-Inference/" class="post-title-link" itemprop="url">15. Classical Statistical Inference</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-22 10:11:49" itemprop="dateCreated datePublished" datetime="2020-03-22T10:11:49+08:00">2020-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:01" itemprop="dateModified" datetime="2020-08-07T19:35:01+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
-<li>In classical statistics, we see the unknowns as constants instead of random variables in Bayesian statistics. </li>
-<li>The distribution of $X$ depends on $\theta$. This is not a conditional distribution $p_{X|\Theta}$ or $f_{X|\Theta}$ in the Bayesian statistics but only a common distribution $p_X(x;\theta)$ or $f_X(x;\theta)$. </li>
-<li>For vectors $X$ and $\theta$: $p_{X_1,…X_2}(x_1,…,x_n;\theta_1,…,\theta_m)$. </li>
-<li>Problem types: <br />&emsp;Hypothesis testing: choose the correct model from several discrete model. Each model contains only one model. <br />&emsp;Composite hypotheses: some models might consist of more than one models. <br />&emsp;Estimation: design an estimator $\hat\Theta$ to keep estimation error $\hat\Theta-\theta$ small. </li>
-</ol>
-<h1 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h1><ol>
-<li>Pick $\theta$ that makes data most likely. <script type="math/tex">\hat\theta_{ML}=arg\ max_\theta\ p_X(x;\theta)</script>. </li>
-<li>In Bayesian MAP estimation, we actually only need to maximize <script type="math/tex">\hat\theta_{MAP}=arg\ max_\theta\ p_{X|\Theta}(x|\theta)p_\Theta(\theta)</script>. If $p_\Theta(\theta)$ is a constant, these two is going to maximize the same thing. </li>
-<li>The estimate $\theta$ is the realized value of estimator $\hat\Theta$. </li>
-<li>In many applications, the observations $X_i$ are assumed to be independent, in which case, the likelihood function is of the form $p_X(x_1,…,x_n;\theta)=\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)$. <br />In this case, it is often use the logarithm form, which is called log-likelihood function, to find the maximum. <br /><script type="math/tex">log\ p_X(x_1,…,x_n;\theta)=log\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)=\sum^n_{i=1}log\ p_{X_i}(x_i;\theta)</script></li>
-</ol>
-<h2 id="Desired-Properties-of-Estimators"><a href="#Desired-Properties-of-Estimators" class="headerlink" title="Desired Properties of Estimators"></a>Desired Properties of Estimators</h2><ol>
-<li>Unbiased: $E_\theta[\hat\Theta]=\displaystyle\int f_{\hat\Theta}(\hat\theta;\theta)\hat\theta d\hat\theta =\theta$. $\theta$ is the true value. </li>
-<li>Consistent: $\hat\Theta_n\to\theta$. </li>
-<li>Small mean squared error: $E_\theta[(\hat\Theta-\theta)^2]=var_\theta(\hat\Theta-\theta)+(E_\theta[\hat\Theta-\theta])^2=var_\theta(\hat\Theta)+(bias_\theta)^2$</li>
-</ol>
-<h1 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h1><ol>
-<li>An estimate $\hat\Theta_n$ may not be informative enough. </li>
-<li>An $(1-\alpha)$ confidence interval is a random interval $[\Theta_n^-,\Theta_n^+]$, such that $P(\Theta^-_n≤\theta≤\Theta^+_n)≥1-\alpha,\forall\alpha$. </li>
-<li>We usually use the normal table to calculate the confidence interval of sample mean. <br />&emsp;According to the central limit theorem, $P\left(\displaystyle\frac{|\hat\Theta_n-\theta|}{\displaystyle\frac{\sigma}{\sqrt{n}}}≤z \right)\approx\Phi(z)$. <br />&emsp;So $P\left(\hat\Theta_n-\displaystyle\frac{z\sigma}{\sqrt{n}}≤\theta≤\hat\Theta_n+\frac{z\sigma}{\sqrt{n}} \right)\approx1-\alpha$<br />&emsp;$\Phi(z)=1-\displaystyle\frac{\alpha}{2}$. </li>
-<li>If we don’t know about $\sigma$. <br />&emsp;Option $1$: use the upper bound on $\sigma$. <br />&emsp;Option $2$: use ad hoc estimate of $\sigma$. <br />&emsp;Option $3$: use the generic estimate of variance<br />&emsp;&emsp;$\sigma^2=E[(X_i-\theta)^2]$, so $\hat\sigma^2=\displaystyle\frac{1}{n}\sum^n_{i=1}(X_i-\theta)^2$. But $\theta$ is still unknown, so we use the estimator instead. <br />&emsp;&emsp;$\hat{S}_n^2=\displaystyle\frac{1}{n-1}\sum^n_{i=1}(X_i-\hat\Theta_n)^2$. And $E[\hat{S}^2_n]=\hat\sigma^2\to\sigma^2$. </li>
-</ol>
-<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><ol>
-<li>Model: $y\approx\theta_0+\theta_1x$ to minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
-<li>Interpretation: $Y_i=\theta_0+\theta_1x_i+W_i$, $W_i\sim N(0,\sigma^2)$. </li>
-<li>Likelihood function $f_{X,Y|\theta}(x,y;\theta)=c\cdot exp\{\displaystyle-\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2\}$. So we need to maximize it. </li>
-<li>Take the logs, maximize <script type="math/tex">-log\ c\cdot\displaystyle\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2</script>. The same as minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
-<li>The solution is $\hat\theta_1=\displaystyle\frac{\displaystyle\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum^n_{i=1}(x_i-\bar{x})^2}$ and $\hat\theta_0=\bar{y}-\hat\theta_1\bar{x}$. </li>
-<li>This form can be interpreted as estimates of $\hat\theta_1=\displaystyle\frac{cov(X,Y)}{var(X)}$ and $\hat\theta_0=E[Y]-\hat\theta_1E[X]$. </li>
-<li>Multiple linear regression: <br />&emsp;Model: $y\approx\theta_0+\theta_1x_1+\theta_2x_2+…$. <br />&emsp;Formulation: <script type="math/tex">min_{\theta_0,\theta_1,…}\ \displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_1-\theta_2x_2-…)^2</script>. </li>
-<li>General method: set the derivative to zero. </li>
-<li>We can also choose different variables $y\approx\theta_0+\theta_1h(x)$. Since $\theta_0$ and $\theta_1$ are the unknowns, this is still a linear function. </li>
-<li>Some concerns: <br />&emsp;noise might affect the result<br />&emsp;multiple variables have different correlation<br />&emsp;the regression function only shows the prediction based on other variables, but says nothing about the causal relations. </li>
-</ol>
-<h1 id="Binary-Hypothesis-Testing"><a href="#Binary-Hypothesis-Testing" class="headerlink" title="Binary Hypothesis Testing"></a>Binary Hypothesis Testing</h1><ol>
-<li>Null hypothesis $H_0$: $X\sim p_X(x;H_0)$ or $X\sim f_X(x;H_0)$<br />Alternative hypothesis $H_1$: $X\sim p_X(x;H_1)$ or $X\sim f_X(x;H_1)$. </li>
-<li>Partition the space of possible data vectors Rejection region R: reject $H_0$ if and only if $x\in R$. </li>
-<li>Types of errors: <br />&emsp;False rejection: $H_0$ is true but rejected: $\alpha(R)=P(X\in R;H_0)$. <br />&emsp;False acceptance: $H_0$ is false but accepted: $\beta(R)=P(X\notin R;H_1)$. <br />&emsp;$\alpha$ and $\beta$ have a trade off relation. When $\alpha$ increases, $\beta$ decreases and vice versa. </li>
-<li>Likelihood ratio test of Bayesian test: choose $H_1$ if <br />$P(H_1|X=x)&gt;P(H_0|X=x)$ or $\displaystyle\frac{P(X=x|H_1)P(H_1)}{P(X=x)}&gt;\frac{P(X=x|H_0)P(H_0)}{P(X=x)}$ or $\displaystyle\frac{P(X=x|H_1)}{P(X=x|H_0)}&gt;\frac{P(H_0)}{P(H_1)}$. </li>
-<li>Likelihood ratio test of Nonbayesian test: choose $H_1$ if <br />$L(x)=\displaystyle\frac{P(X=x;H_1)}{P(X=x;H_0)}&gt;\epsilon$ when $X$ is discrete and if $\displaystyle\frac{f_X(x;H_1)}{f_X(x;H_0)}&gt;\epsilon$ when $X$ is continuous. <br />Normally, we can concise the inequality to $\displaystyle\sum_if(X_i)&gt;\epsilon’$, which is called the statistic. <br />Then fix the false rejection probability $\alpha$, and choose $\epsilon$ so that <script type="math/tex">P(reject\ H_0;H0)=\alpha</script>, or $P\left(\displaystyle\sum_if(X_i)&gt;\epsilon’;H_0\right)=\alpha$. <br />Usually, we can solve the later equation with CLT when statistic is large. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/21/14-Bayesian-Statistical-Inference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/21/14-Bayesian-Statistical-Inference/" class="post-title-link" itemprop="url">14. Bayesian Statistical Inference</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-21 16:38:18" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:48" itemprop="dateModified" datetime="2020-08-07T19:34:48+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
-<li>In probability, every unambiguous question has a unique correct answer. </li>
-<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unless one makes several assumptions and imposes additional constraints on the inference problem. </li>
-<li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
-<li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
-<li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
-<li>In parameter estimation, we want to generate estimates that are close to the true values of the parameters in some probabilistic sense. </li>
-<li>In hypothesis testing, the unknown parameter takes one of a finite number of values, corresponding to competing hypotheses; we want to choose one of the hypotheses, aiming to achieve a small probability of error. </li>
-</ol>
-<h1 id="Bayesian-Inference-and-the-Posterior-Distribution"><a href="#Bayesian-Inference-and-the-Posterior-Distribution" class="headerlink" title="Bayesian Inference and the Posterior Distribution"></a>Bayesian Inference and the Posterior Distribution</h1><ol>
-<li>In Bayesian inference, the unknown quantity of interest, which we denote by $\Theta$, is modeled as a random variable or as a finite collection of random variables. </li>
-<li>We aim to extract information about $\Theta$, based on observing a collection $X=(X_1,…,X_n)$ of related random variables, called observations, measurements, or an observation vector. </li>
-<li>In Bayesian Inference, we start with a prior distribution $p_\Theta$ or $f_\Theta$ for the unknown random variable $\Theta$. We have a model $p_{X|\Theta}$ or $f_{X|\Theta}$ of the observation vector $X$. After observing the value $x$ of $X$, we form the posterior distribution $p_{\Theta|X}$ or $f_{\Theta|X}$, using the appropriate version of Bayes’s rule. </li>
-<li>Once a particular value $x$ of $X$ has been ovserved, a complete answer to the Bayesian inference problem is provided by the posterior distribution of $\Theta$. </li>
-<li>The case of multiple unknown parameters is entirely similar. </li>
-<li>After getting the posterior distribution, we are certainly to make some decision with it to minimize the probability of error. </li>
-</ol>
-<h1 id="Hypothesis-and-Estimate"><a href="#Hypothesis-and-Estimate" class="headerlink" title="Hypothesis and Estimate"></a>Hypothesis and Estimate</h1><ol>
-<li>An estimator is a random variable of the form $\hat\Theta=g(X)$, for some function $g$. Different choices of $g$ correspond to different estimators. </li>
-<li>An estimate is the value $\hat\theta$ of an estimator, as determined by the realized value $x$ of observation $X$. </li>
-<li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
-</ol>
-<h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
-<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ is\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ is\ continuous \end{array}\right.</script></li>
-<li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
-<li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
-<li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>
-</ol>
-<h2 id="LMS"><a href="#LMS" class="headerlink" title="LMS"></a>LMS</h2><ol>
-<li>This rule tries to minimize $E[(\Theta-c)^2]$, where $c$ is the estimate. <br />Expand this to get $E[\Theta^2]-2cE[\Theta]+c^2$. The minimum is achieved at $c=E[\Theta]$. </li>
-<li>So the optimal estimate is $E[\Theta]$. And the error is $E[(\Theta-E[\Theta])^2]=var(\Theta)$. </li>
-<li>The conditional case is the same. Minimize $E[(\Theta-c)^2|X=x]$ is minimized by $c=[\Theta|X=x]$. </li>
-<li>$E[\Theta|X]$ minimizes $E[(\Theta-g(X))^2]$ over all estimators $g(\cdot)$. </li>
-<li>If we have multiple observations, $\hat\theta=E[\Theta|X_1,…,X_n]$, $E[(\Theta-E[\Theta|X_1,…,X_n])^2]≤E[(\Theta-g(X_1,…,X_n))^2]$ for all estimators $g(X_1,…,X_n)$. </li>
-<li>If we have multiple parameters, we need to minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$. The result is $\hat\Theta_i=E[\Theta_i|X_1,…,X_n]$. </li>
-</ol>
-<h3 id="Estimation-Error"><a href="#Estimation-Error" class="headerlink" title="Estimation Error"></a>Estimation Error</h3><ol>
-<li>Let $\hat\Theta=E[\Theta|X]$ be the LMS estimator and $\tilde\Theta=\hat\Theta-\Theta$ be the associated estimation error. </li>
-<li>The estimation error $\tilde\Theta$ is unbiased, i.e. it has zero unconditional and conditional mean $E[\tilde\Theta]=0$ and $E[\tilde\Theta|X=x]=0$ for all $x$. </li>
-<li>The estimation error $\tilde\Theta$ is uncorrelated with the estimate $\hat\Theta$: $cov(\hat\Theta, \tilde\Theta)=0$. </li>
-<li>The variance of $\Theta$ can be decomposed as $var(\Theta)=var(\hat\Theta)+var(\tilde\Theta)$. </li>
-</ol>
-<h3 id="Linear-LMS"><a href="#Linear-LMS" class="headerlink" title="Linear LMS"></a>Linear LMS</h3><ol>
-<li>The calculation for multiple observations and multiple parameters might be hard. So we might choose another way to estimate. </li>
-<li>A linear estimator of a random variable $\Theta$, based on observations $X_1,…,X_n$ has form $\hat\Theta=a_1X_1+…+a_nX_n+b$. </li>
-<li>Given a particular choice of the scalars $a_1,…,a_n,b$, the corresponding mean squared error is $E[(\Theta-a_1X_1-…-a_nX_n-b)^2]$. </li>
-</ol>
-<h4 id="Single-Observation"><a href="#Single-Observation" class="headerlink" title="Single Observation"></a>Single Observation</h4><ol>
-<li>Suppose that $a$ has already been chosen. This is the same as choosing a constant $b$ to estimate the random variable $\Theta-aX$. The best choice is $b=E[\Theta-aX]=E[\Theta]-aE[X]$. </li>
-<li>Now we only need to minimize $E[(\Theta-aX-E[\Theta]+aE[X])^2]$. </li>
-<li>Rewrite this expression as $var(\Theta-aX)=\sigma_\Theta^2+a^2\sigma_X^2+2cov(\Theta,-aX)=\sigma_\Theta^2+a^2\sigma_X-2a\cdot cov(\Theta,X)$. </li>
-<li>To minimize $var(\Theta-aX)$, we set its derivative to zero and solve for $a$. This yields $a=\displaystyle\frac{cov(\Theta,X)}{\sigma^2_X}=\frac{\rho\sigma_\Theta\sigma_X}{\sigma^2_X}=\rho\frac{\sigma_\Theta}{\sigma_X}$, where $\rho=\displaystyle\frac{cov(\Theta,X)}{\sigma_\Theta\sigma_X}$. </li>
-<li>The mean squared estimation error of the resulting linear estimator $\hat\Theta$ is given by $var(\Theta-\hat\Theta)=(1-\rho^2)\sigma^2_\Theta$. </li>
-</ol>
-<h4 id="Multiple-Observations-and-Multiple-Parameters"><a href="#Multiple-Observations-and-Multiple-Parameters" class="headerlink" title="Multiple Observations and Multiple Parameters"></a>Multiple Observations and Multiple Parameters</h4><ol>
-<li>To minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$, only need to minmize each $E[(\Theta_1-\hat\Theta_i)^2]$. So we are essentially dealing with $m$ decoupled linear estimation problems, one for each unknown parameter. </li>
-<li>For every observation, we have $X_i=\Theta+W_i$, where the $W_i$ are random variables with mean $0$ and variance $\sigma_i^2$, which represent observation errors. </li>
-<li>The linear LMS estimator of $\Theta$ based on the observations $X_1,…,X_n$ turns out to be $\hat\Theta_i=\displaystyle\frac{\displaystyle\frac{\mu_i}{\sigma_{0i}^2}+\displaystyle\sum^n_{i=1}\frac{X_i}{\sigma^2_i}}{\displaystyle\sum^n_{i=0}\frac{1}{\sigma^2_i}}$. $\mu_i$ is the mean of $\Theta_i$ while $\sigma_{0i}^2$ is the variance of $\Theta_i$. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/20/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/13-Central-Limit-Theorem-and-Strong-Law-of-Large-Numbers/" class="post-title-link" itemprop="url">13. Central Limit Theorem and Strong Law of Large Numbers</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-20 17:52:34" itemprop="dateCreated datePublished" datetime="2020-03-20T17:52:34+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:25" itemprop="dateModified" datetime="2020-08-07T19:35:25+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="The-Central-Limit-Theorem"><a href="#The-Central-Limit-Theorem" class="headerlink" title="The Central Limit Theorem"></a>The Central Limit Theorem</h1><ol>
-<li>While $M_n=\displaystyle\frac{X_1+…+X_n}{n}$ converges to the true mean $\mu$, $S_n=nM_n$ increases to infinity. </li>
-<li>Consider the deviation $S_n-n\mu$ of $S_n$ from its mean $n\mu$, and scaling it by a factor proportional to $\displaystyle\frac{1}{\sqrt{n}}$ to keep the variance at a constant level. <br />We define $Z_n=\displaystyle\frac{S_n-n\mu}{\sigma\sqrt{n}}$. <br />So $E[Z_n]=\displaystyle\frac{E[X_1+…+E_n]-n\mu}{\sigma\sqrt{n}}=0$ and $var(Z_n)=\displaystyle\frac{var(X_1+…+X_n)}{\sigma^2n}=\frac{var(X_1)+…+var(X_n)}{\sigma^2n}=\frac{n\sigma^2}{n\sigma^2}=1$. </li>
-<li>The central limit theorem: The CDF of $Z_n$ converges to the standard normal CDF in the sense that $\displaystyle\lim_{n\to\infty}P(Z_n≤z)=\Phi(z)$, for all $z$. </li>
-<li>This law indicates that the sum of a large number of independent random variables is approximately normal. </li>
-<li>This law eliminates the need for detailed probabilistic models, and for tedious manipulations of PMFs and PDFs. </li>
-<li>Since normality is preserved uner linear transformations, this is equal to treating $S_n$ as a normal random variable with mean $n\mu$ and variance $\sigma^2$. </li>
-<li>Let $z=\displaystyle\frac{c-n\mu}{\sigma\sqrt{n}}$. $P(S_n≤c)\approx\Phi(z)$. </li>
-</ol>
-<h1 id="De-Moivre-Laplace-Approximation-to-the-Binomial"><a href="#De-Moivre-Laplace-Approximation-to-the-Binomial" class="headerlink" title="De Moivre-Laplace Approximation to the Binomial"></a>De Moivre-Laplace Approximation to the Binomial</h1><ol>
-<li>A binomial random variable $S_n$ with parameters $n$ and $p$ can be viewed as the sum of $n$ independent Bernoulli random variables $X_1,…,X_n$, with common parameter $p$. </li>
-<li>$k≤S_n≤l\Longleftrightarrow\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}$. <br />$\displaystyle P(k≤S_n≤l)=P\left(\displaystyle\frac{k-np}{\sqrt{np(1-p)}}≤\frac{S_n-np}{\sqrt{np(1-p)}}≤\frac{l-np}{\sqrt{np(1-p)}}\right)\approx\Phi\left(\frac{l-np}{\sqrt{np(1-p)}}\right)-\Phi\left(\frac{k-np}{\sqrt{np(1-p)}}\right)$</li>
-<li>An approximation of this form is equivalent to treat $S_n$ as a normal random variable with mean $np$ and variance $np(1-p)$. </li>
-<li>A little bug in this approximation is that the approximation of $P(S_n=k)=P(k≤S_n≤k)$ is always zero. So we can fix by calculating with $k-\displaystyle\frac12$ and $l+\displaystyle\frac12$. This is the DeMoivre-Laplace approximation to the Binomial: <br />$\displaystyle P(k≤S_n≤l)\approx\Phi\left(\frac{l+\frac12-np}{\sqrt{np(1-p)}} \right)-\Phi\left(\frac{k-\frac12-np}{\sqrt{np(1-p)}} \right)$</li>
-</ol>
-<h1 id="The-Strong-Law-of-Large-Numbers"><a href="#The-Strong-Law-of-Large-Numbers" class="headerlink" title="The Strong Law of Large Numbers"></a>The Strong Law of Large Numbers</h1><ol>
-<li>Let $X_1,X_2,…$ be a sequence of independent identically distributed random variables with mean $\mu$. Then the sequence of sample means converges to $\mu$, with probability $1$, in the sense that $P\left(\displaystyle\lim_{n\to\infty}\frac{X_1+…X_2}{n}=\mu\right)=1$. </li>
-<li>Consider the experiment is infinitely long , so the sample space is a set of infinite sequences of real number. Let set $A$ consist of those sequences whose long-term average is $\mu$. The strong law of large numbers states that all of the probability is concentrated on this particular subset of the sample space. </li>
-<li>The collection of outcomes that do not belong to $A$ has probability zero. </li>
-<li>The weak law provides no conclusive information on the number of deviations between $M_n$ and $\mu$ as $n$ tends to infinity. The strong law implies that  for any given $\epsilon&gt;0$, the probability that the difference $|M_n-\mu|$ will exceed $\epsilon$ an infintie number of times is equal to zero. </li>
-<li>Convergence with probability: $Y_1,Y_2,…$ are a sequence of random variables (not necessarily independent). $c$ is a real number. $Y_n$ converges to $c$ with probability $1$ if $P\left(\displaystyle\lim_{n\to\infty}Y_n=c\right)=1$. </li>
-<li>Convergence WITH probabiltiy is different from convergence IN probability. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/20/12-Weak-Law-of-Large-Numbers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/12-Weak-Law-of-Large-Numbers/" class="post-title-link" itemprop="url">12. Weak Law of Large Numbers</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-20 11:12:37" itemprop="dateCreated datePublished" datetime="2020-03-20T11:12:37+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:26" itemprop="dateModified" datetime="2020-08-07T19:34:26+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Inequalities"><a href="#Inequalities" class="headerlink" title="Inequalities"></a>Inequalities</h1><ol>
-<li>Markov inequality: If a random variable $X$ can only take nonnegative values, then $P(X≥a)≤\displaystyle\frac{E[X]}{a}$, for all $a&gt;0$. <br />Proof: <br />&emsp;First fix a positive number $a$ and let <script type="math/tex">Y_a=\left\{\begin{array}{}0&if\ X<a\\a&if\ X≥a \end{array}\right.</script>. <br />&emsp;So $Y_a≤X$ and therefore $E[Y_a]≤E[X]$. <br />&emsp;$E[Y_a]=aP(Y_a=a)=aP(X≥a)$. So $aP(X≥a)≤E[X]$. <br />&emsp;Hence, $P(X≥a)≤\displaystyle\frac{E[X]}{a}$. </li>
-<li>If a nonnegative random variable has a small mean, then the probability that it takes a large value must also be small. </li>
-<li>The bounds provided by the Markov inequality can be quite loose. </li>
-<li>Chebyshev inequality: If $X$ is a random variable with mean $\mu$ and variance $\sigma^2$, $P(|X-\mu|≥c)≤\displaystyle\frac{\sigma^2}{c^2}$. <br />Proof: <br />&emsp;$P(|X-\mu|≥c)=P((X-\mu)^2≥c^2)≤\displaystyle\frac{E[(X-\mu)^2]}{c^2}=\frac{\sigma^2}{c^2}$. </li>
-<li>Let $c=k\sigma$, $P(|X-\mu|≥k\sigma)≤\displaystyle\frac{\sigma^2}{k^2\sigma^2}=\frac{1}{k^2}$. </li>
-<li>The bounds that the Chebyshev inequality provides are more accurate than Markkov inequality. But we still cannot expect the bounds to be close approximations of the exact probabilities. </li>
-</ol>
-<h1 id="The-Weak-Law-of-Large-Numbers"><a href="#The-Weak-Law-of-Large-Numbers" class="headerlink" title="The Weak Law of Large Numbers"></a>The Weak Law of Large Numbers</h1><ol>
-<li>A sequence $X_1,X_2,…$ of independent identically distributed random vairables with mean $\mu$ and variance $\sigma^2$ and define the sample mean by $M_n=\displaystyle\frac{X_1+…+X_n}{n}$. <br />We have $E[M_n]=\displaystyle\frac{E[X_1]+…+E[X_n]}{n}=\frac{n\mu}{n}=\mu$, and $var(M_n)=\displaystyle\frac{var(X_1+…X_n)}{n^2}=\frac{var(X_1)+…+var(X_n)}{n^2}=\frac{n\sigma^2}{n}=\frac{\sigma^2}{n}$. </li>
-<li>Apply the Chebyshev inequality and obtain $P(|M_n-\mu|≥\epsilon)≤\displaystyle\frac{\sigma^2}{n\epsilon^2}$, for any $\epsilon&gt;0$. </li>
-<li>The weak law of large numbers: For every $\epsilon&gt;0$, we have $P(|M_n-\mu|≥\epsilon)=P\left(\left|\displaystyle\frac{X_1+…+X_n}{n}-\mu\right|≥\epsilon\right)\to0$, as $n\to\infty$. </li>
-<li>For large $n$, the bulk of the distribution of $M_n$ is concentrated near $\mu$. If we consider a positive length interval $[\mu-\epsilon,\mu+\epsilon]$ around $\mu$, then there is high probability that $M_n$ will fall in that interval; as $n\to\infty$, this probability converges to $1$. If $\epsilon$ is very small, we may have to wait longer (i.e.need a larger value of $n$). </li>
-</ol>
-<h1 id="Convergence-in-Probability"><a href="#Convergence-in-Probability" class="headerlink" title="Convergence in Probability"></a>Convergence in Probability</h1><ol>
-<li>Convergence in Probability: Let $Y_1,Y_2,…$ be a sequence of random variables (not necessarily independent), and let $a$ be a real number. We say that the sequence $Y_n$ converges to $a$ in probability, if for every $\epsilon&gt;0$, we have $\displaystyle\lim_{n\to\infty}P(|Y_n-a|≥\epsilon)=0$. </li>
-<li>The weak law of large numbers simply states that the sample mean converges in probability to the true mean $\mu$. </li>
-<li>The Chebyshev inequality implies that if all $Y_n$ have the same mean $\mu$, and $var(Y_n)$ converges to $0$, then $Y_n$ converges to $\mu$ in probability. </li>
-<li>If the random variables $Y_1,Y_2,…$ have a PMF or a PDF and converge in probability to $a$, then according to the above definition, “almost all” of the PMF or PDF of $Y_n$ is concentrated within $\epsilon$ of $a$ for large values of $n$. </li>
-<li>The definition can be rephrased as: For every $\epsilon&gt;0$, and for every $\delta&gt;0$, there exists some $n_0$ such that $P(|Y_n-a|≥\epsilon)≤\delta$, for all $n≥n_0$. </li>
-<li>If we refer to $\epsilon$ as the accuracy level, and $\delta$ as the confidence level, for any given level of accuracy and confidenc, $Y_n$ will be equal to $a$, within these levels of accuracy and confidence, provided that $n$ is large enough. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/17/11-Markov-Chains/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/17/11-Markov-Chains/" class="post-title-link" itemprop="url">11. Markov Chains</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-17 15:43:13" itemprop="dateCreated datePublished" datetime="2020-03-17T15:43:13+08:00">2020-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:52" itemprop="dateModified" datetime="2020-08-07T19:35:52+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Discrete-Time-Markov-Chains"><a href="#Discrete-Time-Markov-Chains" class="headerlink" title="Discrete-Time Markov Chains"></a>Discrete-Time Markov Chains</h1><ol>
-<li>The effect of the past on the future is summarized by state, which changes over time according to given probabilities. </li>
-<li>In discrete-time Markoc chains, state changes at certain discrete time instants, indexed by an integer variable $n$. </li>
-<li>At each time step $n$, the state of the chain is denoted by $X_n$ and belongs to a finite set $S$ of possible states, called the state space. <br />We assume that $S=\{1,…,m\}$, for some positive integer $m$. </li>
-<li>The Markov chain is described in terms of its transition probabilities $p_{ij}$: whenever the state happens to be $i$, there is a probability $p_{ij}$ that the next state is equal to $j$. Mathematically, $p_{ij}=P(X_{n+1}=j|X_n=i), (i,j\in S)$. </li>
-<li>The transition probabilities apply whenever state $i$ is visited, no matter what happened in the past and no matter how state $i$ was reached. <br />The Markov property requires $P(X_{n+1}=j|X_n=i,X_{n-1}=i_n-1,…,X_0=i_0)=P(X_{n+1}=j|X_n=i)=p_{ij}$, for all time $n$, all states $i,j\in S$ and all sequences $i_0,…,i_{n-1}$ of earlier states. <br />Thus, the probability law of the next state $X_{n-1}$ depends on the past only through the value of the present state $X_n$. </li>
-<li>For all states, $\displaystyle\sum^m_{j=1}p_{ij}=1, \forall i$. </li>
-<li>The probability $p_{ii}$ is allowed to be positive, in which case it’s possible for the next state to be the same as the current one. Even though the state doesn’t change, we still view this as a state stransition of a special type (a “self-transition”). </li>
-<li>All of the elements of a Markov chain model can be encoded in a transition probability matrix. </li>
-<li>It’s also helpful to lay out the model in the socalled transition probability graph, whose nodes are the states and whose arcs are the possible transitions. </li>
-<li>It’s possible to use a Markov chain model even if there is a dependence on the states at several past days. The general idea is to introduce some additional states which encode relevant information from preceding periods. </li>
-<li>$P(X_0=i_0,X_1=i_1,…,X_n=i_n)=P(X_0=0)p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$<br />$P(X_1=i_1,…,X_n=i_n|X_0=i_0)=p_{i_0i_1}p_{i_1i_2}…p_{i_{n-1}i_n}$</li>
-<li>Graphically, a state sequence can be identified with a sequence of arcs in the transition probability graph, and the probability of such a path (given the initial state) is given by the product of the probabilities associated with the arcs traversed by the path. </li>
-</ol>
-<h1 id="n-step-Transition-Probabilities"><a href="#n-step-Transition-Probabilities" class="headerlink" title="n-step Transition Probabilities"></a>n-step Transition Probabilities</h1><ol>
-<li>$n$-step transition probabilities are probabilities that describe the likelihood of the state at some  future time, conditioned on the current state. </li>
-<li>This is defined by $r_{ij}(n)=P(X_n=j|X_0=i)$. This is the probability that the state after $n$ time periods will be $j$, given that the current state is $i$. </li>
-<li>Chapman_Kolmogorov equation: $r_{ij}(n)=\displaystyle\sum^m_{k=1}r_{ik}(n-1)p_{kj}$, for $n&gt;1$ and all $i,j$. Start with $r_{ij}(1)=p_{ij}$. <br />Namely the sum of the product of the probability of $n-1$ steps later at state $k$ and the probability of from $k$ to $j$. <br />The trick is that once we condition on $X_{n-1}=k$, the conditioning on $X_0=i$ does not affect the probability $p_{kj}$ of reaching $j$ at the next step. </li>
-<li>We can view $r_{ij}(n)$  as the element at the $i$th row and $j$th column of $n$-step transition probability matrix. </li>
-<li>The matrix of $n$-step transition probabilities $r_{ij}(n)$ is obtained by multiplying the $i$th row of matrix of $(n-1)$-step transition probability $r_{ik}(n-1)$, with the $j$th column of one-step transition probability matrix $p_{kj}$. <br />Thus, the $n$-step transition probability matrix is the $n$th power of the transition probability matrix. </li>
-</ol>
-<h1 id="Recurrent-and-Transient"><a href="#Recurrent-and-Transient" class="headerlink" title="Recurrent and Transient"></a>Recurrent and Transient</h1><ol>
-<li>A state $j$ is accessible from a state $i$ if for some $n$, the $n$-step transition probability $r_{ij}(n)$ is positive. </li>
-<li>Let $A(i)$ be the set of states that are accessible from $i$. </li>
-<li>We say that $i$ is recurrent if for every $j$ that is accessible from $i$, $i$ is also accessible from $j$. Namely for all $j$ that belong to $A(i)$ , we have that $i$ belongs to $A(j)$. </li>
-<li>From any future state, there is always som probability of returning to $i$ and , given enough time, this is certain to happen. </li>
-<li>If a recurrent state is visited once, it’s certain to be revisited an infinite number of times. </li>
-<li>If a state is not recurrent, then it is called transient. Thus, a state $i$ is transient if there is a stete $j\in A(i)$ such that $i$ is not accessible from $j$. <br />After each visit to state $i$, there is positive probability that the state enters such a $j$. Given enough time, this will happen, and state $i$ cannot be visited after that. Thus, a transient state will only be visited a finite number of times. </li>
-<li>Transient or recurrent is determined by the arcs of the transition probability graph (wheter $p_{ij}&gt;0$) and not by the numerical values of the $p_{ij}$. </li>
-<li>If $i$ is a recurrent state, the set of states $A(i)$ that are accessible from $i$ form a recurrent class, meaning that states in $A(i)$ are all accessible from each other, and no state outside $A(i)$ is accessible from them. <br />For a recurrent state $i$, we have $A(i)=A(j)$ for all $j$ that belong to $A(i)$. </li>
-<li>At least one recurrent state must be accessible from any given transient state. <br />A recurrent state is accessible from all states in its class, but is not accessible from recurrent states in other classes. <br />A transient state is not accessible from any recurrent state. </li>
-<li>There must exist at least one recurrent state and hence at least one class. </li>
-<li>A Markov chain can be decomposed into one or more recurrent classes, plus possibly some transient states. </li>
-<li>Once the state enters (or starts in) a class of recurrent states, it stays within that class; since all states in the class are accessible from each other, all states in the class will be visited an infinite number of times. </li>
-<li>If the initial state is transient, then the state trajectory contains an initial portion consisting of transient states and a final portion consisting of recurrent states from the same class. </li>
-</ol>
-<h1 id="Periodicity"><a href="#Periodicity" class="headerlink" title="Periodicity"></a>Periodicity</h1><ol>
-<li>A recurrent class is said to be periodic if its states can be grouped in $d&gt;1$ disjoint subsets $S_1,…,S_d$ so that all transitions from one subset lead to the next subset. <br />If $i\in S$ and $p_{ij}&gt;0$, then <script type="math/tex">\left\{\begin{array}{}j\in S_{k+1} & if\ k=1,…,d-1\\j\in S_1&if\ k=d \end{array}\right.</script>. </li>
-<li>A recurrent class that is not periodic is said to be aperiodic. </li>
-<li>In a periodic recurrent class, we move through that sequence of subsets in order, and after $d$ steps, we end up in the same subset. </li>
-<li>Given a periodic recurrent class, a positive time $n$, and a state $i$ in the class, there must exist one or more states $j$ for which $r_{ij}(n)=0$. <br />Starting from $i$, only one of the sets is possible at time $n$. </li>
-<li>A way to verify aperiodicity of a given recurrent class $R$, is to check whether there is a special time $n≥1$ and a special state $i\in R$ from which all states in $R$ can be reached in $n$ steps, i.e. $r_{ij}(n)&gt;0$ for all $j\in R$. </li>
-<li>If a recurrent class $R$ is aperiodic, then there exists a time $n$ such that $r_{ij}(n)&gt;0$ for every $i$ and $j$ in $R$. </li>
-</ol>
-<h1 id="Steady-State-Behavior"><a href="#Steady-State-Behavior" class="headerlink" title="Steady-State Behavior"></a>Steady-State Behavior</h1><ol>
-<li>If there are two or more classes of recurrent states, it is clear that the limiting values of the $r_{ij}(n)$ must depend on the initial state (the possibility of visiting $j$ far into the future depends on whether $j$ is in the same class as the initial state $i$). </li>
-<li>Even for chains with a single recurrent class, the $r_{ij}(n)$ may fail to converge. </li>
-<li>The recurrent class is periodic, and for such a class, it can be seen that the $r_{ij}(n)$ generically oscillate. </li>
-<li>For every state $j$, the probability $r_{ij}(n)$ of being at state $j$ approaches a limiting value that is independent of the initial state $i$. This limiting value, denoted by $\pi_j$, has the interpretation $\pi_j\approx P(X_n=j)$, when $n$ is large, and is called the steady-state probability of $j$. </li>
-<li>For a Markov chain with a single recurrent class, which is aperiodic, <br />&emsp;for each $j$, we have $\displaystyle\lim_{i\to\infty}r_{ij}(n)=\pi_j$, for all $i$; <br />&emsp;The $\pi_j$ are unique solution to the system of equation <script type="math/tex">\displaystyle\left\{\begin{array}{}the\ balance\ equations:& \pi_j=\sum^n_{k=1}\pi_kp_{kj}&j=1,…,m\\the\ normalization\ equation:&1=\sum^m_{k=1}\pi_k \end{array}\right.</script><br />&emsp;We have <script type="math/tex">\left\{\begin{array}{}\pi_j=0 &for\ all\ transient\ states\ j\\\pi_j>0&for\ all\ recurrent\ states\ j\end{array}\right.</script>. </li>
-<li>The steady-state probabilities $\pi_j$ sum to $1$ and form a probability distribution on the state space, called the stationary distribution of the chain. <br />If the initial state is chosen according to this distribution, i.e. if $P(X_0=j)=\pi_j, j=1,…,m$, then, using the total probability theorem, we have $P(X_1=j)=\displaystyle\sum^m_{k=1}P(X_0=k)p_{kj}=\sum^m_{k=1}\pi_kp_{kj}=\pi_j$. <br />Similarly $P(X_n=j)=\pi_j$, for all $n$ and $j$. </li>
-</ol>
-<h1 id="Long-Term-Frequency-Interpretations"><a href="#Long-Term-Frequency-Interpretations" class="headerlink" title="Long-Term Frequency Interpretations"></a>Long-Term Frequency Interpretations</h1><ol>
-<li>Two way to view the long-term expected value: <br />&emsp;One way is to view it as the expected value of the number on a randomly chosen day far into the future. <br />&emsp;Another way is to calculate the total expected value of the number in $n$ days, where $n$ is very large, and divide it by $n$. </li>
-<li>For a Markov chain with a single class which is aperiodic, the steady-state probabilities $\pi_j$ satisfy $\pi_j=\displaystyle\lim_{n\to\infty}\frac{v_{ij}(n)}{n}$, where $v_{ij}(n)$ is the expected value of the number of visits to state $j$ within the first $n$ transitions, starting from state $i$. </li>
-<li>$\pi_j$ is the long-term expected fraction of time that the state is equal to $j$. Each time that state $j$ is visited, there is probability $p_{jk}$ that the next transition takes up to state $k$. We conclude that $\pi_kp_{jk}$ can be viewed as the long-term expected fraction of transitions that move the state from $j$ to $k$. </li>
-<li>Whenever we carry out a probabilistic experiment and generate a trajectory of the Markov chain over an infinite time horizon, the observed long-term frequency with which state $j$ is visited will be exactly equal to $\pi_j$, and the observed long-term frequency of transitions from $j$ to $k$ will be exactly equal to $\pi_jp_{jk}$. </li>
-<li>For $n$ transitions of a Markov chain with a single class which is aperiodic, let $q_{jk}(n)$ be the expected number of such transitions that take the state from $j$ to $k$. Then regardless of the initial state, we have $\displaystyle\lim_{n\to\infty}\frac{q_{jk}(n)}{n}=\pi_jp_{jk}$. </li>
-<li>Now we can see that the balance equation expresses the fact that the expected frequency $\pi_j$ of visits to $j$ is equal to the sum of the expected frequencies $\pi_kp_{kj}$ of the transition that lead to $j$. </li>
-</ol>
-<h1 id="Birth-Death-Process"><a href="#Birth-Death-Process" class="headerlink" title="Birth-Death Process"></a>Birth-Death Process</h1><ol>
-<li>A birth-death process is a Markov chain in which the states are linearly arranged and transitions can only occur to a neighboring state, or else leave the state unchanged. <br />$b_i=P(X_{n+1}=i+1|X_n=i)$, (“birth” probability at state $i$), <br />$d_i=P(X_{n+1}=i-1|X_n=1)$, (“death” probability at state $i$). </li>
-<li>In any trajectory of the Markov chain, a transition from $i$ to $i+1$ has to be followed by a transition from $i+1$ to $i$, before another transition from $i$ to $i+1$ can occur. </li>
-<li>The expected frequency of transitions from $i$ to $i+1$, which is $\pi_ib_i$, must be equal to the expected frequency of transitions from $i+1$ to $i$, which is $\pi_{i+1}d_{i+1}$. This leads to the local balance equations $\pi_ib_i=\pi_{i+1}d_{i+1}$, $i=0,1,…,m-1$. </li>
-<li>Using the local balance equations, we obtain $\pi_i=\pi_0\displaystyle\frac{b_0b_2…b_{i-1}}{d_1d_2…d_i}$, $i=1,…,m$. </li>
-<li>If $b_i=p,d_i=q$ for all $i$, <script type="math/tex">\rho=\displaystyle\frac{p}{q}=load\ factor≠1</script>, there are $m$ states. <br />$\pi_{i+1}=\pi_i\displaystyle\frac{p}q=\pi_i\rho$. So $\pi_i=\pi_0\rho^i$, $i=0,1,…,m$. <br />$1=\displaystyle\sum^m_{i=0}\pi_i=\pi_0(1+\rho+…+\rho^m)$. So $\pi_0=\displaystyle\frac{1-\rho}{1-\rho^{m+1}}$<br />If $p<q$, $\rho<1$ and $m\to\infty$. Then $\pi_0=1-p$ $\pi_i=(1-\rho)\rho^i$, $E[X_n]=\displaystyle\frac{\rho}{1-\rho}$. <br />If $p&gt;q$, $\rho&gt;1$ and $m\to\infty$. Then $\pi_i\to0$, for all $i$. </li>
+<h1 id="Other-Architectures"><a href="#Other-Architectures" class="headerlink" title="Other Architectures"></a>Other Architectures</h1><ol>
+<li>NiN (Network in Network): <br />&emsp;Multiple convolutional layers with “micro-network” within each convolutional layer to compute more abstract features for local patches. <br />&emsp;The micro-network uses multilayer perceptron, like fully-connected layer. <br />&emsp;This is the precursor to GoogLeNet and ResNet bottleneck layers. </li>
+<li>Identity Mappings in Deep Residual Networks: Creates a more direct path for propagating information throughout the network (moves activation to residual mapping pathway)</li>
+<li>Wide residual network: <br />&emsp;Residuals are the critical factor, not depth. <br />&emsp;Use wider residual blocks ($F\times k$ filters instead of $F$ filters in each layer)<br />&emsp;$50$-layer wide ResNet outperforms $152$-layer original ResNet. <br />&emsp;Increasing width instead of depth is more computationally efficient. The computation can be easily parallelized. </li>
+<li>ResNeXt: increase the width of theresidual block through multiple parallel pathways. <br /><img src="/img/07.CNNArchitectures07.png" width="30%"></li>
+<li>Stochastic depth: <br />&emsp;Motivation: reduce vanishing gradients and training time through short networks during training. <br />&emsp;Randomly drop a subset of layers during each training pass. <br />&emsp;Bypass with identity function. <br />&emsp;Use the full network at test time. </li>
+<li>FractalNet: <br />&emsp;The key is transitioning efficiently from shallow to deep and residual representation is not necessary. <br />&emsp;It has both shallow and deep paths to output. <br />&emsp;It is trained with dropout, and test with full network. <br />&emsp;<img src="/img/07.CNNArchitectures08.png" width="50%"></li>
+<li>Densely Connected Convolutional Networks: <br />&emsp;In dense block, each layer is connected to every other layer in a feedforward fashion. <br />&emsp;<img src="/img/07.CNNArchitectures09.png" width="30%"><br />&emsp;It alleviates vanishing gradients, strengths feature propagation, encourages feature reuse. <br />&emsp;<img src="/img/07.CNNArchitectures10.png" width="15%"></li>
+<li>SqueezeNet: <br />&emsp;It has AlexNet-level accuracy with $50$ times fewer parameters and less than $0.5$ Mb model size. <br />&emsp;Fire modules consisting of a ‘squeeze’ layer with $1\times1$ filters feeding an ‘expand’ layer with $1\times1$ and $3\times3$ filters. </li>
 </ol>
 
       
@@ -1506,7 +1466,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1573,7 +1533,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">210</span>
+          <span class="site-state-item-count">221</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

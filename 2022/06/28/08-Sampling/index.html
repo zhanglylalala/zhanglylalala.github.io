@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Continuous-time sampling With $p(t)$ being impulse train, $x(t)p(t)$ is samples of $x(t)$.Sampling theorem: given equally spaced samples of $x(t)$ and $x(t)$ is band limited ($X(\omega)&#x3D;0$ for $|\omeg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08. Sampling">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/06/28/08-Sampling/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Continuous-time sampling With $p(t)$ being impulse train, $x(t)p(t)$ is samples of $x(t)$.Sampling theorem: given equally spaced samples of $x(t)$ and $x(t)$ is band limited ($X(\omega)&#x3D;0$ for $|\omeg">
+<meta property="article:published_time" content="2022-06-28T03:01:03.000Z">
+<meta property="article:modified_time" content="2022-06-28T08:44:19.227Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="信号">
+<meta property="article:tag" content="电子">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/06/28/08-Sampling/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>08. Sampling | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/28/08-Sampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          08. Sampling
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-28 11:01:03 / Modified: 16:44:19" itemprop="dateCreated datePublished" datetime="2022-06-28T11:01:03+08:00">2022-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Continuous-time-sampling"><a href="#Continuous-time-sampling" class="headerlink" title="Continuous-time sampling"></a>Continuous-time sampling</h1><ol>
+<li><p>With $p(t)$ being impulse train, $x(t)p(t)$ is samples of $x(t)$.<br>Sampling theorem: given equally spaced samples of $x(t)$ and $x(t)$ is band limited ($X(\omega)=0$ for $|\omega|&gt;\omega_M$), if the sampling frequency $\omega_s=\frac{2\pi}{T}&gt;2\omega_M$, then $x(t)$ is uniquely recoverable with lowpass filter.<br>We can process continuous-time signal in the discrete-time way. </p>
+</li>
+<li><p>The condition $\omega_s&gt;2\omega_M$ is to avoid overlap in frequency domain. If $\omega_s&lt;2\omega_M$, aliasing will cause errors in reconstructing signals. Aliasing will reconstruct a low frequency signal instead of the real high frequency signal. </p>
+</li>
+<li><p>The signal after sampling is $x_p(t)=x(t)p(t)=x(t)\sum^{+\infty}_{n=-\infty}\delta(t-nT)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $.<br> $P(\omega)=\frac{2\pi}{T}\sum^{+\infty}_{k=-\infty}\delta(\omega-k\frac{2\pi}{T}) $, and $X_p(\omega)=\frac{1}{2\pi}[X(\omega)\ast P(\omega)]=\frac{1}{T}\sum^{+\infty}_{k=-\infty}X(\omega-k\frac{2\pi}{T}) $. </p>
+</li>
+</ol>
+<h2 id="Reconstruct-signal"><a href="#Reconstruct-signal" class="headerlink" title="Reconstruct signal"></a>Reconstruct signal</h2><ol>
+<li>The sampling signal is $x_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $, which can be seen as the linear combination of $\delta(t-nT)$ with coefficients being $x(nT)$.<br>If $h(t)$ is the filter impulse response, then the reconstructed signal should be $x_r(t)=x_p(t)\ast h(t)=\sum^{+\infty}_{n=-\infty}x(nT)h(t-nT) $. For an ideal lowpass filter with cutoff frequency $\omega_c$, $h(t)=T\frac{\omega_c}{\pi}sinc(\frac{\omega_ct}{\pi})=T\frac{\omega_c}{\pi}\frac{sin(\omega_ct)}{\omega_ct} $<br>Hence the reconstructed signal is linear combination of $h(t-nT)$ with coefficients being $x(nT)$</li>
+<li>Zero-order hold: held the sample value until the next sampling to form a staircase curve. Its impulse response is $h(t)=\left\{\begin{matrix}1&amp;0&lt;t&lt;T\\0&amp;otherwise \end{matrix} \right.$</li>
+<li>First-order hold: fit an interpolated curve between two sample values, which is a straight line. Its impulse response is a triangular signal with height of $1$ and bottom in $[-T,T]$. </li>
+</ol>
+<h2 id="Conversion-between-continuous-time-and-discrete-time"><a href="#Conversion-between-continuous-time-and-discrete-time" class="headerlink" title="Conversion between continuous-time and discrete-time"></a>Conversion between continuous-time and discrete-time</h2><ol>
+<li><p>After sampling, we acquire a sampled signal of impulse train. But that is still not a discrete-time signal, and a conversion of impulse train to discrete-time sequence is needed. </p>
+</li>
+<li><p>The sampled signal is $x_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $, and its Fourier transform is $X_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)e^{-j\omega nT} $.<br>If we want the discrete-time signal to be $x[n]=x(nT)$, then its Fourier transform is $X(\Omega)=\sum^{+\infty}_{n=-\infty}x[n]e^{-j\Omega n} $. </p>
+</li>
+<li><p>Compare the two Fourier transform equation, we know that if $\Omega=\omega T$, then $X_p(t)=X(\Omega)$. Thus, we have $X(\Omega)=X(\omega)|_{\omega=\Omega/ T}=X(\Omega/T)$. </p>
+</li>
+<li><p>In the time domain, this step is only relabelling the impulses to discrete-time sequence, namely dividing the time-axis by $T$.<br>In the frequency domain, sampling will replicate the original frequency and this step will multiply the frequency-axis by $T$. </p>
+</li>
+<li><p>If we want to convert from discrete-time to continuous-time, we only need to undo all the operations aforementioned.<br>In the frequency domain, first divide the frequency-axis by $T$, then use a lowpass filter to remove replicated frequency. </p>
+</li>
+<li><p>Even the discrete-time filter cutoff is fixed, changing the sampling frequency will still change the cutoff frequency of the equivalent continuous-time filter. </p>
+</li>
+</ol>
+<h1 id="Discrete-time-sampling"><a href="#Discrete-time-sampling" class="headerlink" title="Discrete-time sampling"></a>Discrete-time sampling</h1><ol>
+<li>The sampling impulse sequence is $p[n]=\sum^{+\infty}_{k=-\infty}\delta(n-kN)$ and its Fourier transform is $P(\Omega)=\frac{2\pi}{N}\sum^{+\infty}_{k=-\infty}\delta(\Omega-k\frac{2\pi}{N})$.<br>The sampled signal is $x_p[n]=x[n]p[n]$, and its Fourier transform is $X_p(\Omega)=\frac1{2\pi}\int_{2\pi}P(\theta)X(\Omega-\theta)d\theta=\frac1N\sum^{N-1}_{k=0}X(\Omega-k\frac{2\pi}{N})$</li>
+<li>The sampling theorem also applies to discrete-time sampling. In the aformentioned equations, the sampling frequency is $\Omega_s=\frac{2\pi}{N}$. </li>
+<li>The discrete-time sample will set some values to zero. And storing those zeros is inefficient since we can easily insert them back given sampling frequency.<br>A decimated sequence removes those zeros and only keeps the values associated with the original sequence. Decimating is to pick out every $n^{th}$ sample and end up with a collaped sequence. </li>
+<li>Define the decimated sequence $x_d[n]=x[nN]=x_p[nN]$. Substitute $n=mN$ into the Fourier transform $X_p(\Omega)=\sum^{+\infty}_{n=-\infty}x_p[n]e^{-j\Omega n}=\sum^{+\infty}_{m=-\infty}x_p[mN]e^{-j\Omega mN}$. Given the Fourier transform of $x_d[n]$ is $X_d(\Omega)=\sum^{+\infty}_{m=-\infty}x_d[m]e^{-j\Omega m}$, compare the two equations to get that $X_d(\Omega)=X_p(\Omega/N)$.<br>So, in frequency domain, decimating will scale the frequency-axis by $N$, namely multiply the frequency-axis by $N$. </li>
+<li>Downsampling is to decrease the sampling rate (sampling frequency). In time domain, t simply removes some values from the sampled sequence. In frequency domain, it<br>Upsampling is to recovering a signal after it has been decimated. To do so, must convert the decimated sequency to sampled sequence, and then use a lowpass filter to acquire the signal before decimating. </li>
+<li>If we want to decrease the sampling rate by an integer $k$, namely $T_2=2T_1$ we need to downsample and decimate by $1:k$. If we want to increate the sampling rate by an integer $k$, namely $T_2=\frac12T_1$, we need to upsample and interpolate by $k:1$.<br>If we want to change the sampling rate by $T_2=\frac{P}QT_1$, we need to upsample and interpolate by $Q:1$, then downsample and decimate by $1:P$. </li>
+</ol>
+<h1 id="Frequency-domain-sampling"><a href="#Frequency-domain-sampling" class="headerlink" title="Frequency domain sampling"></a>Frequency domain sampling</h1><ol>
+<li>Similar to time domain sampling, frequency domain sampling also multiplies the frequency function $X(\omega)$ by a sample function $P(\omega)=\sum^{+\infty}_{k=-\infty}\delta(\omega-k\omega_0)$. The sampled frequency function is $\tilde{X}(\omega)=X(\omega)P(\omega)=\sum^{+\infty}_{k=-\infty}X(k\omega_0)\delta(\omega-k\omega_0)$. </li>
+<li>In frequency domain, $\tilde{X}(\omega)$ is a train of impulse response.<br>In time domain, it replicates $x(t)$ with period of $\frac{2\pi}{\omega_0}$ and scale by $\frac{1}{\omega_0}$. </li>
+<li>To recover the original signal, we just multiply $\tilde{x}(t)$ with a time window to retain only one period. </li>
+<li>The aformentioned operations also apply to discrete-time signals. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E5%8F%B7/" rel="tag"><i class="fa fa-tag"></i> 信号</a>
+              <a href="/tags/%E7%94%B5%E5%AD%90/" rel="tag"><i class="fa fa-tag"></i> 电子</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/25/07-Modulation/" rel="prev" title="07. Modulation">
+      <i class="fa fa-chevron-left"></i> 07. Modulation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/06/28/09-The-Laplace-Transform/" rel="next" title="09. The Laplace Transform">
+      09. The Laplace Transform <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-time-sampling"><span class="nav-number">1.</span> <span class="nav-text">Continuous-time sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reconstruct-signal"><span class="nav-number">1.1.</span> <span class="nav-text">Reconstruct signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conversion-between-continuous-time-and-discrete-time"><span class="nav-number">1.2.</span> <span class="nav-text">Conversion between continuous-time and discrete-time</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discrete-time-sampling"><span class="nav-number">2.</span> <span class="nav-text">Discrete-time sampling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frequency-domain-sampling"><span class="nav-number">3.</span> <span class="nav-text">Frequency domain sampling</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
