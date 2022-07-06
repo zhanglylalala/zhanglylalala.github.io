@@ -191,6 +191,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/06/09-Directory-Based-Cache-Cohurence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/06/09-Directory-Based-Cache-Cohurence/" class="post-title-link" itemprop="url">09. Directory-Based Cache Cohurence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-07-06 17:10:17 / Modified: 20:09:21" itemprop="dateCreated datePublished" datetime="2022-07-06T17:10:17+08:00">2022-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Problems-to-solve"><a href="#Problems-to-solve" class="headerlink" title="Problems to solve"></a>Problems to solve</h1><ol>
+<li>The snooping cache coherence protocols relied on broadcasting coherence information to all processors over the chip interconnect. Every time a cache miss occurred, the triggering cache communicated with all other caches, so the interconnect has a heavy traffic. </li>
+<li>The efficiency of NUMA system does little good if the coherence protocol can’t also be scaled. Processor accesses nearby memory, but to ensure coherence still must broadcast to all other processors. </li>
+<li>One possible solution is hierarchical snooping which arranges nodes in a tree and uses snooping coherence at each level. The interconnects involved in a communication is as low as possible and kept as local as possible. </li>
+<li>The structure of hierarchical snooping is relatively simple to build.<br>It uses a tree to reduce the conjunction at the center part, but if the workload is not nicely partitioned, then the root of the network can become a bottleneck.<br>It also has larger latencies than direct communication and does not apply to more general network topologies (meshes, cubes)</li>
+</ol>
+<h1 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h1><ol>
+<li>Snooping schemes broadcast coherence messages to determine the state of a line in the other caches. An alternative idea is to avoid broadcast by storing information about the status of the line in one place, namely a “directory”. </li>
+<li>A line is a region of memory that would be cached as a single block. One directory entry corresponds to one line of memory.<br>In a directory entry, there are a dirty bit that indicates line is dirty in one of the processors’ caches and P presence bits that indicate whether processor P has line in its cache. </li>
+<li>The directory is used in NUMA system, each processor has a “local” memory and a directory.<br>Home node of a line is the node with memory holding the corresponding data for the line.<br>Requesting node is the node containing processor requesting line</li>
+</ol>
+<h2 id="Read-and-write"><a href="#Read-and-write" class="headerlink" title="Read and write"></a>Read and write</h2><ol>
+<li>When a read miss happens:<br>The requesting node will send a read miss message to the home node of the requested line. Then home directory checks entry for line.<br>If dirty bit for cache line is OFF, the home node will respond with contents from memory, set presence bit of the requesting node to true to indicate line is cached by the requesting processor.<br>If dirty bit for cache line is ON, the home node will respond with message providing identity of line owner. Requesting node requests data from owner and owner changes state in cache to SHARED (read only), responds to requesting node. Owner also responds to home node, home clears dirty, updates presence bits (line is cached by both the requesting node and owner), updates memory. </li>
+<li>When a write miss happens:<br>The requesting node will send a write miss message to the home node of the requested line.<br>The home node will response the sharer ids and data to the requesting node.<br>The requesting node will send invalidation signal to all sharers. After receiving invalidation acks from all sharers, the requesting node can perform write.<br>The home node will update presence bits (line is cached by only the requesting node) and dirty bit. </li>
+<li>On reads, directory tells requesting node exactly where to get the line from, either from home node (if the line is clean) or from the owning node (if the line is dirty). Either way, retrieving data involves only point-to-point communication. </li>
+<li>On writes, the advantage of directories depends on the number of sharers. In the limit, if all caches are sharing data, all caches must be communicated with, just like broadcast in a snooping protocol. </li>
+<li>In general only a few processors share the line, namely only a few processors must be told of writes.  And the expected number of sharers typically increases slowly with P. </li>
+</ol>
+<h2 id="Reduce-storage-overhead"><a href="#Reduce-storage-overhead" class="headerlink" title="Reduce storage overhead"></a>Reduce storage overhead</h2><ol>
+<li>Full bit vector directory storage is proportional to $P\times M$ where $P$ is the number of nodes and $M$ is the number of lines in memory. The storage overhead of directory is too much, and we do not want it to be DRAM since we need it to run fast.</li>
+<li>One way to reduce storage overhead is to optimize on full-bit vector.<br> Increase cache line size to reduce $M$ term.<br> Group multiple processors into a single directory node to reduce $P$ term. We could use snooping protocol to maintain coherence among processors in a node, directory across nodes. </li>
+<li>Another way is to limit sharer pointer. Since data is expected to only be in a few caches at once, storage for a limited number of pointers per directory entry should be sufficient. Only need a list of the nodes holding a valid copy of the line. </li>
+<li>When an overflow in limited pointer schemes occurs, we can revert to broadcast if broadcast mechanism exists. If no broadcast mechanism present on machine, newest sharer replaces an existing one (must invalidate line in the old sharer’s cache)</li>
+<li>One more way is through sparse directory.<br> The majority of memory is not resident in cache. And to carry out coherence protocol the system only needs sharing information for lines that are currently in some cache. So most directory entries are empty most of the time.<br> We can add a tag for each directory line to indicate the memory held in some cache. The overhead is now $P\times C$ where $C$ is the number of lines in each cache. </li>
+</ol>
+<h2 id="Reduce-number-of-message-sent"><a href="#Reduce-number-of-message-sent" class="headerlink" title="Reduce number of message sent"></a>Reduce number of message sent</h2><ol>
+<li>In a read miss to dirty line, there are five network transactions in total. But only four of the transactions are on the critical path. </li>
+<li>In intervention forward, home node requests data from owner node (intervention read). After the owner has responded, home node updates directory, and responds to requesting node with data.<br>Four network transactions in total (less traffic). But all four of the transactions are on the critical path. </li>
+<li>In request forwarding, home node requests the owner to sent data to the requesting node. Then the owner will send data to requesting node and home node at the same time.<br>Four network transactions in total, with only three of the transactions are on the critical path. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/03/12-Feedback/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,120 +1247,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/21/03-Systems-Represented-by-Differential-Equations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/21/03-Systems-Represented-by-Differential-Equations/" class="post-title-link" itemprop="url">03. Systems Represented by Differential Equations</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-06-21 11:50:42 / Modified: 19:49:21" itemprop="dateCreated datePublished" datetime="2022-06-21T11:50:42+08:00">2022-06-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
-                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Operational-definition​"><a href="#Operational-definition​" class="headerlink" title="Operational definition​"></a>Operational definition​</h1><ol>
-<li><p>For an identity system, its impulse response is $h(t)=\delta(t)$ or $h[n]=\delta[n] $. If we cascade two identity system, the overall system is still an identity system, and its impulse response is $\delta(t)\ast\delta(t)=\delta(t) $ or $\delta[n]\ast\delta[n]=\delta[n] $. </p>
-</li>
-<li><p>Operational definition: Focus not on what the impulse is , but to what the impulse does under the operation of convolution. </p>
-</li>
-<li><p>For a differentiator, its impulse response is $u_1(t)=\displaystyle\frac{d}{dt}\delta(t)$. What is $u_1(t)$ is difficult to find out, but we know that $x(t)\ast u_1(t)=\displaystyle\frac{d}{dt}x(t)$.<br>If we cascade two differentiator together, the impulse response is denoted $u_2(t)=u_1(t)\ast u_1(t) $. What $u_2(t) $ does is that $x(t)\ast u_2(t)=\displaystyle\frac{d^2}{dt^2}x(t) $.<br>If we cascade $k$ differentiator together, the impulse response is $u_k(t)=u_1(t)\ast u_1(t)\cdots $, and $x(t)\ast u_k(t)=\displaystyle\frac{d^k}{dt^k}x(t)$. </p>
-</li>
-<li><p>For an integrator, its impulse response is $u_{-1}(t)=u(t) $.<br>if we cascade two integrator, its impulse response is $u_{-2}(t)=$ unit ramp.<br>$x(t)\ast u_{-m}(t)=$ $m^{th}$ running  integral. </p>
-</li>
-<li><p>For $u_k(t)$, where $k$ can be either positive or negative:<br>$u_0(t)=\delta(t) $, $u_{-1}(t)=u(t)$.<br>$u_k(t)\ast u_l(t)=u_{k+l}(t) $.  </p>
-</li>
-</ol>
-<h1 id="Differential-equation"><a href="#Differential-equation" class="headerlink" title="Differential equation"></a>Differential equation</h1><ol>
-<li>$N^{th}$ order Linear constant-coefficient differential equation: $\displaystyle\sum^N_{k=0}a_k\frac{d^ky(t)}{dt^k}=\sum^N_{k=0}b_k\frac{d^kx(t)}{dt^k}$.<br>The “linear” here only means linear combination. There is no guarentee that the system is linear. </li>
-<li>$\displaystyle\sum^N_{k=0}a_k\frac{d^ky_h(t)}{dt^k}=0$ is the homogeneous equation, and its solution $y_h(t)$ is the homogeneous solution.<br>For any $y_s(t)$ being the solution of the differential equation, $y_s(t)+y_h(t)$ is also a solution. </li>
-<li>Guess $y_h(t)=Ae^{st}$. Substitute it to the homogeneous equation to get $\displaystyle\sum^N_{k=0}a_kAs^ke^{st}=0\Rightarrow\sum^N_{k=0}a_ks^k=0$. This equation has $N$ complex roots, and thus $y_h(t)=\displaystyle\sum^N_{k=0}A_ke^{s_kt}$ with $A_i$ being unspecified coeffecients. </li>
-<li>The solution of the differential equation is $y(t)=y_h(t)+y_p(t)$ where $y_p(t)$ is a particular solution of the equation.<br>With $N$ auxiliary conditions about $y(t), \frac{dy(t)}{dt}, \cdots,\frac{d^Ny(t)}{dt^N}$ at $t=t_0$, we can solve all $A_i$ in $y(t)$. </li>
-<li>A system being linear $\Leftrightarrow$ all auxiliary conditions must be 0.<br>An LTI system being causal $\Leftrightarrow$ initial rest. </li>
-</ol>
-<h1 id="Difference-equation"><a href="#Difference-equation" class="headerlink" title="Difference equation"></a>Difference equation</h1><ol>
-<li><p>$N^{th}$ order Linear constant-coefficient difference equation: $\displaystyle\sum^N_{k=0}a_ky[n-k]=\sum^N_{k=0}b_kx[n-k]$. </p>
-</li>
-<li><p>The homogeneous equation is $\displaystyle\sum^N_{k=0}a_ky[n-k]=0$, and its solution is $y_h[n]$.<br>For any $y_s[n]$ being the solution of the difference equation, $y_s[n]+y_h[n]$ is also a solution. </p>
-</li>
-<li><p>Guess $y_h[n]=Az^n$. Substitute it to the homogeneous equation to get $\displaystyle\sum^N_{k=0}a_kAz^nz^{-k}=0\Rightarrow\sum^N_{k=0}a_kz^{-k}=0$. This equation has $N$ complex roots, and thus $y_h[n]=\displaystyle\sum^N_{k=0}A_kz_k^n$ with $A_i$ being undetermined coeffecients. </p>
-</li>
-<li><p>The solution is $y[n]=y_h[n]+y_p[n]$.<br>With $N$ auxiliary conditions about $y[n], y[n-1], \cdots,y[n-N+1]$ at $n=n_0$, we can solve all $A_i$ in the solution of differential equation. </p>
-</li>
-<li><p>A system being linear $\Leftrightarrow$ all auxiliary conditions must be 0.<br>An LTI system being causal $\Leftrightarrow$ initial rest. </p>
-</li>
-<li><p>From the difference equation, we can have $y[n]=\frac{1}{a_0}\displaystyle(\sum^N_{k=0}b_kx[n-k]-\sum^N_{k=1}a_ky[n-k])$.<br>Thus when the system is causal and LTI, we can calculate $y[n]$ from the first nonzero input $n=n_0$ since we know that all $y[n]$ with $n&lt;n_0$ is zero. </p>
-</li>
-</ol>
-<h1 id="Diagram"><a href="#Diagram" class="headerlink" title="Diagram"></a>Diagram</h1><ol>
-<li><p>The diagram of the causal LTI difference equation system is as followed:<br><img src="/img/03-Systems-Represented-by-Differential-Equations-1.png" width="40%"><br>We can see the two sets of delay operation as two cascaded system and swap their position.<br><img src="/img/03-Systems-Represented-by-Differential-Equations-2.png" width="40%"><br>Now, the input of those two sets of delay operation is the same, so we can merge them into only one set.<br><img src="/img/03-Systems-Represented-by-Differential-Equations-3.png" width="40%"></p>
-</li>
-<li><p>Similar to difference equation, we can have the diagram of the causal LTI differetial equation system as followed (move all terms except $\frac{d^Ny(t)}{dt^N}$ to the left, and integrate $N$ times):<br><img src="/img/03-Systems-Represented-by-Differential-Equations-4.png" width="40%"><br>Swap and merge the integrators to have the followed diagram:<br><img src="/img/03-Systems-Represented-by-Differential-Equations-5.png" width="40%"></p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1327,7 +1318,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

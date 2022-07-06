@@ -191,6 +191,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/26-Linear-Transformations-and-Their-Matrices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/26-Linear-Transformations-and-Their-Matrices/" class="post-title-link" itemprop="url">26. Linear Transformations and Their Matrices</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-06 21:12:44" itemprop="dateCreated datePublished" datetime="2020-02-06T21:12:44+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:15:48" itemprop="dateModified" datetime="2020-08-07T19:15:48+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
+                    <span itemprop="name">线性代数 (MIT 18.06)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linear-Transformation"><a href="#Linear-Transformation" class="headerlink" title="Linear Transformation"></a>Linear Transformation</h1><ol>
+<li>When a matrix <script type="math/tex">A</script> multiplies a vector <script type="math/tex">\vec{v}</script>, it transforms <script type="math/tex">\vec{v}</script> into another vector <script type="math/tex">A\vec{v}</script>. </li>
+<li>In goes <script type="math/tex">\vec{v}</script>, out comes <script type="math/tex">T(\vec{v})=A\vec{v}</script>. </li>
+<li><code>Linear transformation</code>: <script type="math/tex">T(c\vec{v}+d\vec{w})=cT(\vec{v})+dT(\vec{w})</script>. </li>
+<li><script type="math/tex">T(\vec{0}+\vec{0})=T(\vec{0})+T(\vec{0})\Rightarrow T(\vec{0})=\vec{0}</script>. </li>
+<li><code>Identity transformation</code>: <script type="math/tex">T(\vec{v})=\vec{v}</script>. </li>
+<li>The <code>linear-plus-shift transformation (affine)</code>: <script type="math/tex">T(\vec{v})=A\vec{v}+\vec{u_0}</script>. This is not linear transformation. </li>
+<li>Every point on the input line goes onto the output line and equally spaced points go to equally spaced points. </li>
+</ol>
+<h1 id="Basis"><a href="#Basis" class="headerlink" title="Basis"></a>Basis</h1><ol>
+<li><script type="math/tex">n</script>-dimension linearity: <script type="math/tex">\vec{u}=\sum c_i\vec{v_i}</script>, <script type="math/tex">T(\vec{u})=\sum c_iT(\vec{v_i})</script>. </li>
+<li>Suppose we know <script type="math/tex">T(\vec{v})</script> for all vectors <script type="math/tex">\vec{v_1},…,\vec{v_n}</script> in a basis. Then we can know <script type="math/tex">T(\vec{u})</script> for every vector <script type="math/tex">\vec{u}</script> in the spacef for all vectors are a combination of basis. </li>
+<li>Derivative can be expressed by <script type="math/tex">T(u)=\displaystyle\frac{du}{dx}</script>. For a quadratics fuction <script type="math/tex">y=a+bx+cx^2</script>, <script type="math/tex">T(\vec{u})</script> also satisfies the linearity, and <script type="math/tex">1,x,x^2</script> can be its basis. This can be written as <script type="math/tex">T(\vec{u})=A\vec{u}=\left[\begin{matrix}0&1&0\\0&0&2\end{matrix}\right]\left[\begin{matrix}a\\b\\c\end{matrix}\right]=\left[\begin{matrix}b\\2c\end{matrix}\right]</script>. </li>
+<li>Integration <script type="math/tex">T^+</script> is also linear. For <script type="math/tex">T^+(u)=\displaystyle^x_0(D+Ex)dx=Dx+\displaystyle\frac{1}{2}Ex^2</script>. The input basis is <script type="math/tex">1,x</script>. The output basis is <script type="math/tex">1,x,x^2</script>. <script type="math/tex">T^+(\vec{u})=A^+\vec{u}=\left[\begin{matrix}0&0\\1&0\\0&\frac{1}{2}\end{matrix}\right]\left[\begin{matrix}D\\E\end{matrix}\right]=\left[\begin{matrix}0\\D\\\frac{1}{2}E\end{matrix}\right]</script>. </li>
+<li><code>The Fundamental Theorem of Calculus</code>: integration is the pseudo inverse of differentiation. <br /><script type="math/tex">A^+A=\left[\begin{matrix}0&0&0\\0&1&0\\0&0&1\end{matrix}\right]</script>. <script type="math/tex">AA^+=\left[\begin{matrix}1&0\\0&1\end{matrix}\right]</script>. </li>
+<li><code>Range of T</code>: all outputs of <script type="math/tex">T(\vec{v})</script>. Corresponds to column space. </li>
+<li><code>Kernel of T</code>: all inputs for which <script type="math/tex">T(\vec{v})=\vec{0}</script>. Corresponds to nullspace. </li>
+</ol>
+<h1 id="Change-of-Basis"><a href="#Change-of-Basis" class="headerlink" title="Change of Basis"></a>Change of Basis</h1><ol>
+<li><script type="math/tex">T(\vec{v})=\vec{v}</script> don’t change basis of the vector. </li>
+<li>When the input basis is in the columns of a matrix <script type="math/tex">V</script>, and the output basis is in the columns of <script type="math/tex">W</script>, the change of basis matrixfor <script type="math/tex">T=I</script> is <script type="math/tex">B=W^{-1}V</script>. <br /><script type="math/tex">\vec{u}=Vc=Wd</script>, so <script type="math/tex">d=W^{-1}Vd</script>. </li>
+<li>Construct input from output or construct matrix from input basis and output basis: <script type="math/tex">T(v_j)=\displaystyle\sum^m_{i=1}{a_{ij}w_i}</script>. </li>
+<li>Choose bases that diagonalize the matrix. </li>
+<li>If transformation is from <script type="math/tex">R^n</script> to <script type="math/tex">R^n</script>, <script type="math/tex">A</script> must be square. We can choose the eigenvectors to be the basis. This will make <script type="math/tex">A</script> the diagonal matrix with eigenvalues. </li>
+<li>The new basis of input space is <script type="math/tex">B_{in}=B</script>, and the new basis of output space is <script type="math/tex">B_{out}=B^{-1}</script>. The new transmation matrix <script type="math/tex">A_{new}=B^{-1}AB</script>. </li>
+<li>For different spaces <script type="math/tex">V</script> and <script type="math/tex">W</script>, we take the singular vectors. </li>
+<li>In image compression, we first get a signal <script type="math/tex">P</script>, but <script type="math/tex">P</script> is too large to storage. Then we choose a good basis <script type="math/tex">W</script>. Change columns of <script type="math/tex">P</script> into that basis. For every column, we calculate the new coefficients <script type="math/tex">\vec{c}=W^{-1}P</script>. Then if there are some coefficient that doesn’t matter, we can throw them away to get a new <script type="math/tex">\hat{\vec{c}}</script> with many zeros. Then reconstruct the image from <script type="math/tex">\hat{\vec{c}}</script>. </li>
+<li>A good basis is: <br />&emsp;Fast to calculate. <br />&emsp;Few is enough. </li>
+<li>Two more basis: <code>Fourier basis</code>, <code>Wavelet basis</code>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/06/25-Singular-Value-Decomposition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1167,107 +1278,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/02/16-Determinant-Formulas-and-Cofactors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/02/16-Determinant-Formulas-and-Cofactors/" class="post-title-link" itemprop="url">16. Determinant Formulas and Cofactors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-02 17:24:27" itemprop="dateCreated datePublished" datetime="2020-02-02T17:24:27+08:00">2020-02-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:15:19" itemprop="dateModified" datetime="2020-08-07T19:15:19+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0-MIT-18-06/" itemprop="url" rel="index">
-                    <span itemprop="name">线性代数 (MIT 18.06)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Pivot-Formula"><a href="#Pivot-Formula" class="headerlink" title="Pivot Formula"></a>Pivot Formula</h1><ol>
-<li>We can eliminate to factorize <script type="math/tex">PA=LU</script>. So <script type="math/tex">|P||A|=|L||U|= \displaystyle\prod^{n}_{i=1}1\displaystyle \prod^{n}_{i=1}{d_i}</script>, which gives us <script type="math/tex">|A|=\pm(d_1d_2…d_n)</script>. Here <script type="math/tex">d_i</script> is the pivots in the diagonal of <script type="math/tex">U</script>. </li>
-<li>Without row exchanges, if we take the upper left <script type="math/tex">k</script> by <script type="math/tex">k</script> square in <script type="math/tex">A</script> as <script type="math/tex">A_k</script>, the kth pivot is <script type="math/tex">d_k=\frac{|A_k|}{|A_{k-1}|}</script>. </li>
-</ol>
-<h1 id="The-Big-Formula"><a href="#The-Big-Formula" class="headerlink" title="The Big Formula"></a>The Big Formula</h1><ol>
-<li>One row a time, we use the linearity to split determinant into <script type="math/tex">n</script> determinant with only one nonzero entry in the current row. <br />After <script type="math/tex">n</script> rows, we get <script type="math/tex">n^n</script> determinant and most of them are zero. <br />For example, <script type="math/tex">\left|\begin{array}{aa}a&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\c&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&d\end{array}\right|=\left|\begin{array}{aa}a&0\\0&d\end{array}\right|+\left|\begin{array}{aa}a&0\\c&0\end{array}\right|+\left|\begin{array}{aa}0&b\\0&d\end{array}\right|+\left|\begin{array}{aa}0&b\\c&0\end{array}\right|</script><br />The new determinants are nonzero if and only if all none zero entries are not one the same row and the same column. </li>
-<li>All the “survived” determinants are a form of permutation and we can calculate with permutation by factoring all entries out. </li>
-<li>Each product had one entry from each row and also one entry from each column. </li>
-<li>The formula has <script type="math/tex">n!</script> terms to add up. Half the terms have minus signs while the other half have plus signs determined by the permutation matrix. </li>
-<li>The <script type="math/tex">n!</script> possibilities are <script type="math/tex">n</script> columns <script type="math/tex">(1,2,…,n)</script> go into each possible order <script type="math/tex">(\alpha,\beta,…,\omega)</script>. And the result is the sum over all <script type="math/tex">n!</script> column permutations <script type="math/tex">P=(\alpha,\beta,…,\omega)</script>. <script type="math/tex">|A|=\sum|P|a_{1\alpha}a_{2\beta}…a_{n\omega}</script>. </li>
-<li>When <script type="math/tex">U</script> is upper triangular, only one of the <script type="math/tex">n!</script> products can be nonzero. </li>
-</ol>
-<h1 id="Cofactors"><a href="#Cofactors" class="headerlink" title="Cofactors"></a>Cofactors</h1><ol>
-<li>We note a submatrix <script type="math/tex">M_{ij}</script> of size <script type="math/tex">n-1</script> which comes from the original matrix without row <script type="math/tex">i</script> and column <script type="math/tex">j</script>. </li>
-<li>The <code>cofactors</code> <script type="math/tex">C_{ij}=(-1)^{i+j}|M_{ij}|</script>. </li>
-<li>The determinant is the sum of all entries in one row times its cofactor. By its cofactor, we mean that the cofactor of <script type="math/tex">a_{ij}</script> is <script type="math/tex">C_{ij}</script>. </li>
-<li><script type="math/tex">|A|=\displaystyle\sum^{n}_{j=1}{a_{ij}C_{ij}}</script>. </li>
-<li>This is a recursive way to calculate determinants. The determinant to calculate goes from order <script type="math/tex">n</script> to order <script type="math/tex">n-1</script> and finally comes to order <script type="math/tex">1</script> which don’t need calculation. </li>
-<li>Cofactors are useful when matrices have many zeros. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1339,7 +1349,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">221</span>
+          <span class="site-state-item-count">222</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

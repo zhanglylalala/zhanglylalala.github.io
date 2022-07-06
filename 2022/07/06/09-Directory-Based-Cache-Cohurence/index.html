@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Problems to solve The snooping cache coherence protocols relied on broadcasting coherence information to all processors over the chip interconnect. Every time a cache miss occurred, the triggering cac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="09. Directory-Based Cache Cohurence">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/07/06/09-Directory-Based-Cache-Cohurence/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Problems to solve The snooping cache coherence protocols relied on broadcasting coherence information to all processors over the chip interconnect. Every time a cache miss occurred, the triggering cac">
+<meta property="article:published_time" content="2022-07-06T09:10:17.000Z">
+<meta property="article:modified_time" content="2022-07-06T12:09:21.005Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/07/06/09-Directory-Based-Cache-Cohurence/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>09. Directory-Based Cache Cohurence | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/06/09-Directory-Based-Cache-Cohurence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          09. Directory-Based Cache Cohurence
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-07-06 17:10:17 / Modified: 20:09:21" itemprop="dateCreated datePublished" datetime="2022-07-06T17:10:17+08:00">2022-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Problems-to-solve"><a href="#Problems-to-solve" class="headerlink" title="Problems to solve"></a>Problems to solve</h1><ol>
+<li>The snooping cache coherence protocols relied on broadcasting coherence information to all processors over the chip interconnect. Every time a cache miss occurred, the triggering cache communicated with all other caches, so the interconnect has a heavy traffic. </li>
+<li>The efficiency of NUMA system does little good if the coherence protocol can’t also be scaled. Processor accesses nearby memory, but to ensure coherence still must broadcast to all other processors. </li>
+<li>One possible solution is hierarchical snooping which arranges nodes in a tree and uses snooping coherence at each level. The interconnects involved in a communication is as low as possible and kept as local as possible. </li>
+<li>The structure of hierarchical snooping is relatively simple to build.<br>It uses a tree to reduce the conjunction at the center part, but if the workload is not nicely partitioned, then the root of the network can become a bottleneck.<br>It also has larger latencies than direct communication and does not apply to more general network topologies (meshes, cubes)</li>
+</ol>
+<h1 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h1><ol>
+<li>Snooping schemes broadcast coherence messages to determine the state of a line in the other caches. An alternative idea is to avoid broadcast by storing information about the status of the line in one place, namely a “directory”. </li>
+<li>A line is a region of memory that would be cached as a single block. One directory entry corresponds to one line of memory.<br>In a directory entry, there are a dirty bit that indicates line is dirty in one of the processors’ caches and P presence bits that indicate whether processor P has line in its cache. </li>
+<li>The directory is used in NUMA system, each processor has a “local” memory and a directory.<br>Home node of a line is the node with memory holding the corresponding data for the line.<br>Requesting node is the node containing processor requesting line</li>
+</ol>
+<h2 id="Read-and-write"><a href="#Read-and-write" class="headerlink" title="Read and write"></a>Read and write</h2><ol>
+<li>When a read miss happens:<br>The requesting node will send a read miss message to the home node of the requested line. Then home directory checks entry for line.<br>If dirty bit for cache line is OFF, the home node will respond with contents from memory, set presence bit of the requesting node to true to indicate line is cached by the requesting processor.<br>If dirty bit for cache line is ON, the home node will respond with message providing identity of line owner. Requesting node requests data from owner and owner changes state in cache to SHARED (read only), responds to requesting node. Owner also responds to home node, home clears dirty, updates presence bits (line is cached by both the requesting node and owner), updates memory. </li>
+<li>When a write miss happens:<br>The requesting node will send a write miss message to the home node of the requested line.<br>The home node will response the sharer ids and data to the requesting node.<br>The requesting node will send invalidation signal to all sharers. After receiving invalidation acks from all sharers, the requesting node can perform write.<br>The home node will update presence bits (line is cached by only the requesting node) and dirty bit. </li>
+<li>On reads, directory tells requesting node exactly where to get the line from, either from home node (if the line is clean) or from the owning node (if the line is dirty). Either way, retrieving data involves only point-to-point communication. </li>
+<li>On writes, the advantage of directories depends on the number of sharers. In the limit, if all caches are sharing data, all caches must be communicated with, just like broadcast in a snooping protocol. </li>
+<li>In general only a few processors share the line, namely only a few processors must be told of writes.  And the expected number of sharers typically increases slowly with P. </li>
+</ol>
+<h2 id="Reduce-storage-overhead"><a href="#Reduce-storage-overhead" class="headerlink" title="Reduce storage overhead"></a>Reduce storage overhead</h2><ol>
+<li>Full bit vector directory storage is proportional to $P\times M$ where $P$ is the number of nodes and $M$ is the number of lines in memory. The storage overhead of directory is too much, and we do not want it to be DRAM since we need it to run fast.</li>
+<li>One way to reduce storage overhead is to optimize on full-bit vector.<br> Increase cache line size to reduce $M$ term.<br> Group multiple processors into a single directory node to reduce $P$ term. We could use snooping protocol to maintain coherence among processors in a node, directory across nodes. </li>
+<li>Another way is to limit sharer pointer. Since data is expected to only be in a few caches at once, storage for a limited number of pointers per directory entry should be sufficient. Only need a list of the nodes holding a valid copy of the line. </li>
+<li>When an overflow in limited pointer schemes occurs, we can revert to broadcast if broadcast mechanism exists. If no broadcast mechanism present on machine, newest sharer replaces an existing one (must invalidate line in the old sharer’s cache)</li>
+<li>One more way is through sparse directory.<br> The majority of memory is not resident in cache. And to carry out coherence protocol the system only needs sharing information for lines that are currently in some cache. So most directory entries are empty most of the time.<br> We can add a tag for each directory line to indicate the memory held in some cache. The overhead is now $P\times C$ where $C$ is the number of lines in each cache. </li>
+</ol>
+<h2 id="Reduce-number-of-message-sent"><a href="#Reduce-number-of-message-sent" class="headerlink" title="Reduce number of message sent"></a>Reduce number of message sent</h2><ol>
+<li>In a read miss to dirty line, there are five network transactions in total. But only four of the transactions are on the critical path. </li>
+<li>In intervention forward, home node requests data from owner node (intervention read). After the owner has responded, home node updates directory, and responds to requesting node with data.<br>Four network transactions in total (less traffic). But all four of the transactions are on the critical path. </li>
+<li>In request forwarding, home node requests the owner to sent data to the requesting node. Then the owner will send data to requesting node and home node at the same time.<br>Four network transactions in total, with only three of the transactions are on the critical path. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/03/12-Feedback/" rel="prev" title="12. Feedback">
+      <i class="fa fa-chevron-left"></i> 12. Feedback
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problems-to-solve"><span class="nav-number">1.</span> <span class="nav-text">Problems to solve</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Directory"><span class="nav-number">2.</span> <span class="nav-text">Directory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-and-write"><span class="nav-number">2.1.</span> <span class="nav-text">Read and write</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-storage-overhead"><span class="nav-number">2.2.</span> <span class="nav-text">Reduce storage overhead</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-number-of-message-sent"><span class="nav-number">2.3.</span> <span class="nav-text">Reduce number of message sent</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
