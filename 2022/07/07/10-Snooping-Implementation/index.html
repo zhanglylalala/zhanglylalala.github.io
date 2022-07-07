@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Building with an atomic busTransaction There is a bus controller to do arbitration. If a processor wants to communicate on the bus, it has to make a request. If there are simultaneous requests from mu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. Snooping Implementation">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/07/07/10-Snooping-Implementation/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Building with an atomic busTransaction There is a bus controller to do arbitration. If a processor wants to communicate on the bus, it has to make a request. If there are simultaneous requests from mu">
+<meta property="article:published_time" content="2022-07-07T02:24:14.000Z">
+<meta property="article:modified_time" content="2022-07-07T15:53:49.684Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/07/07/10-Snooping-Implementation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>10. Snooping Implementation | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/07/10-Snooping-Implementation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10. Snooping Implementation
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-07-07 10:24:14 / Modified: 23:53:49" itemprop="dateCreated datePublished" datetime="2022-07-07T10:24:14+08:00">2022-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Building-with-an-atomic-bus"><a href="#Building-with-an-atomic-bus" class="headerlink" title="Building with an atomic bus"></a>Building with an atomic bus</h1><h2 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h2><ol>
+<li>There is a bus controller to do arbitration. If a processor wants to communicate on the bus, it has to make a request. If there are simultaneous requests from multiple processors, the arbiter will only grant one of them. </li>
+<li>A transaction on an atomic bus generally need four steps.<br>Client is granted bus access (result of arbitration). The client places command on bus (may also place data on bus).<br>Response to command by another bus client placed on bus. Next client obtains bus access (arbitration)</li>
+<li>In a multi-processor with atomic bus scenario, no other bus transactions is allowed between issuing address and receiving data when one processor want to read. Also, when flush is occurred, address and data are sent simultaneously, received by memory before any other transaction is allowed. </li>
+<li>Both requests from processor and bus require to look the tag on cache.<br>If bus receives priority, during bus transaction, processor is locked out from its own cache.<br>If processor receives priority, during processor cache accesses, cache cannot respond with its snoop result. So it delays other processors even if no sharing of any form is present. </li>
+<li>We can alleviate contention to allow simultaneous access by processor-side and snoop controllers through cache duplicate tags or multi-ported tag memory. In either case cost of the additional performance is additional hardware resources.<br>Tags must stay in sync for correctness, so tag update by one controller will still need to block the other controller, but modifying tags is infrequent compared to checking them. </li>
+</ol>
+<h2 id="Read-miss"><a href="#Read-miss" class="headerlink" title="Read miss"></a>Read miss</h2><ol>
+<li>When a cache read miss occurred, memory needs to know what to do. If the line is dirty, memory should not respond. And the loading cache needs to know what to do. If the line is shared, cache should load into S state, not E. </li>
+<li>If one cache controller find that the line is shared in its cache, the controller will send a message through the “shared” wire on bus. If that line is dirty, the controller will send a message through the “dirty” wire on bus.<br>Everytime a processor has responded a snoop, the value in “snoop-pending” wire will be lower and $0$ value indicates that all processors have responded. </li>
+<li>Memory controller could immediately start accessing DRAM, but not respond (squelch response). If a snoop result from another cache indicates it has copy of most recent data, then cache should provide data, not memory. Memory could assume one of the caches will service request until snoop results are valid. If snoop indicates no cache has data, then memory must respond</li>
+</ol>
+<h2 id="Write-back"><a href="#Write-back" class="headerlink" title="Write back"></a>Write back</h2><ol>
+<li>Write backs involve two bus transactions, incoming line (line requested by processor) and outgoing line (evicted dirty line in cache that must be flushed).<br>Ideally would like the processor to continue as soon as possible, namely it shouldn’t have to wait for the flush to complete. </li>
+<li>The solution is write-back buffer.<br>Stick line to be flushed in a write-back buffer. Immediately load requested line to allow processor to continue. Flush contents of write-back buffer at a later time. </li>
+<li>If a request of another processor for the address of the data in the write-back buffer appears on the bus, snoop controller must check the write-back buffer addresses in addition to cache tags.<br>If there is a write-back buffer match, the controller will respond with data from write- back buffer rather than cache and cancel outstanding bus access request. </li>
+<li>A write commits when a read-exclusive transaction appears on bus and is acknowledged by all other caches. All future reads will reflect the value of this write, even if data from P has not yet been written to P’s dirty cache line, or to memory.<br>Order of transactions on the bus defines the global order of writes in the parallel program. </li>
+<li>“Commit” is not “complete”. A write completes when the updated value is in the cache line</li>
+</ol>
+<h2 id="Race-conditions"><a href="#Race-conditions" class="headerlink" title="Race conditions"></a>Race conditions</h2><ol>
+<li>Coherence protocol state transition diagrams assumed that transitions between states were atomic. However, in practice state transitions are not atomic. </li>
+<li>We’ve assumed the bus transaction itself is atomic, but all the operations the system performs as a result of a memory operation are not. </li>
+<li>Processor, cache, and bus all are resources operating in parallel. They often contend for shared resources: processor and bus contend for cache while caches contend for bus access. </li>
+<li>Cache must be able to handle requests while waiting to acquire bus AND be able to modify its own outstanding requests. </li>
+<li>To avoid deadlock, processor must be able to service incoming transactions while waiting to issue requests. </li>
+<li>To avoid livelock, a write that obtains exclusive ownership must be allowed to complete before exclusive ownership is relinquished. </li>
+<li>Multiple processors competing for bus access must be careful to avoid (or minimize likelihood of) starvation. </li>
+<li>Performance optimization often entails splitting operations into several, smaller transactions. Splitting costs in more hardware needed to exploit additional parallelism, and care needed to ensure abstractions still hold. </li>
+</ol>
+<h1 id="Building-with-non-atomic-bus"><a href="#Building-with-non-atomic-bus" class="headerlink" title="Building with non-atomic bus"></a>Building with non-atomic bus</h1><ol>
+<li>Problem with atomic bus: bus is idle while response is pending, which decreases effective bus bandwidth. The interconnect is a limited, shared resource in a multi-processor system. So it is important to use it as efficiently as possible. </li>
+<li>Bus transactions are split into two transactions, the request and the response. Other transactions can intervene between a transaction’s request and response. </li>
+<li>Basic design:<br>Up to eight outstanding requests at a time (system wide)<br>Responses need not occur in the same order as requests. But request order establishes the total order for the system<br>Flow control via negative acknowledgements (NACKs). When a buffer is full, client can NACK a transaction, causing a retry</li>
+<li>We can think of a split-transaction bus as two separate buses, a request bus and a response bus.<br>The request bus has lines for command and address. The response bus has lines for data and response tag. Response tag has 3 bits to represent 8 requests. </li>
+</ol>
+<h2 id="Read-miss-1"><a href="#Read-miss-1" class="headerlink" title="Read miss"></a>Read miss</h2><h3 id="Phase-1"><a href="#Phase-1" class="headerlink" title="Phase 1"></a>Phase 1</h3><ol>
+<li>Request arbitration: cache controllers present request for address to bus (many caches may be doing so in the same cycle)</li>
+<li>Request resolution: address bus arbiter grants access to one of the requestors. Request table entry allocated for request. Special arbitration lines indicate tag assigned to request. </li>
+<li>Bus “winner” places command/address on the bus. </li>
+<li>Caches perform snoop: look up tags, update cache state, etc. Memory operation commits here. (no bus traffic)</li>
+<li>Caches acknowledge this snoop result is ready, or signal they could not complete snoop in time here. </li>
+</ol>
+<h3 id="Phase-2"><a href="#Phase-2" class="headerlink" title="Phase 2"></a>Phase 2</h3><ol>
+<li>Data response arbitration: responder presents intent to respond to request with tag T. (many caches or memory may be doing so in the same cycle)</li>
+<li>Data bus arbiter grants one responder bus access. </li>
+<li>Original requestor signals readiness to receive response (or lack thereof: requestor may be busy at this time)</li>
+<li>Then in phase 3, Responder places response data on data bus. Caches present snoop result for request with the data. Request table entry is freed. Those 3 actions can happen parallel. </li>
+</ol>
+<h2 id="Pipelined-transactions"><a href="#Pipelined-transactions" class="headerlink" title="Pipelined transactions"></a>Pipelined transactions</h2><ol>
+<li>Request bus and response bus can run parallel. So the response of the last transaction and the request of the next transaction can happen simultaneously. Pipelining may cause out-of-order completion. </li>
+<li>Write backs and BusUpg transactions do not have a response component. Write backs acquire access to both request address bus and data bus as part of “request” phase BusUpg does not need any acknowledgement or data. </li>
+<li>Avoid conflicting requests by disallowing them. Each cache has a copy of the request table. Caches do not make requests that conflict with requests in the request table. </li>
+<li>Caches/memory have buffers for receiving data off the bus. If the buffer fills, client NACKs relevant requests or responses. </li>
+<li>In parallel system, we use queues to accommodate variable (unpredictable) rates of production and consumption. As long as workers, on average, produce and consume at the same rate, all workers can run at full rate. Otherwise, some will stall waiting for others to accept or produce new input. </li>
+<li>We have queues to track requests and responses between L1 and L2 caches and between L2 cache and bus. One queue is for requests and responses from closer (to processor) to farther (L1 to L2 or L2 to bus), and the other is from farther to closer (L2 to L1 or bus to L2). </li>
+<li>This may rise deadlock due to full queue. Outgoing read request (initiated by processor) and incoming read request (due to another cache) both requests generate responses that require space in the other queue (circular dependency)</li>
+<li>Sizing all buffers to accommodate the maximum number of outstanding requests on bus is one solution to avoiding deadlock. But a costly one. </li>
+<li>Avoiding buffer deadlock with separate request/response queues. Namely, we distinguish whether it is a request or a response.<br>Responses can be completed without generating further transactions. Requests increase queue length But responses reduce queue length. While stalled attempting to send a request, cache must be able to service responses. Responses will make progress, eventually freeing up resources for requests. </li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/06/09-Directory-Based-Cache-Cohurence/" rel="prev" title="09. Directory-Based Cache Cohurence">
+      <i class="fa fa-chevron-left"></i> 09. Directory-Based Cache Cohurence
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Building-with-an-atomic-bus"><span class="nav-number">1.</span> <span class="nav-text">Building with an atomic bus</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transaction"><span class="nav-number">1.1.</span> <span class="nav-text">Transaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-miss"><span class="nav-number">1.2.</span> <span class="nav-text">Read miss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-back"><span class="nav-number">1.3.</span> <span class="nav-text">Write back</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Race-conditions"><span class="nav-number">1.4.</span> <span class="nav-text">Race conditions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Building-with-non-atomic-bus"><span class="nav-number">2.</span> <span class="nav-text">Building with non-atomic bus</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-miss-1"><span class="nav-number">2.1.</span> <span class="nav-text">Read miss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Phase-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Phase 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Phase-2"><span class="nav-number">2.1.2.</span> <span class="nav-text">Phase 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipelined-transactions"><span class="nav-number">2.2.</span> <span class="nav-text">Pipelined transactions</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

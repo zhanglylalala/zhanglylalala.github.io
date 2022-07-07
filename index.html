@@ -191,6 +191,140 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/07/10-Snooping-Implementation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/07/07/10-Snooping-Implementation/" class="post-title-link" itemprop="url">10. Snooping Implementation</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-07-07 10:24:14 / Modified: 23:53:49" itemprop="dateCreated datePublished" datetime="2022-07-07T10:24:14+08:00">2022-07-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Building-with-an-atomic-bus"><a href="#Building-with-an-atomic-bus" class="headerlink" title="Building with an atomic bus"></a>Building with an atomic bus</h1><h2 id="Transaction"><a href="#Transaction" class="headerlink" title="Transaction"></a>Transaction</h2><ol>
+<li>There is a bus controller to do arbitration. If a processor wants to communicate on the bus, it has to make a request. If there are simultaneous requests from multiple processors, the arbiter will only grant one of them. </li>
+<li>A transaction on an atomic bus generally need four steps.<br>Client is granted bus access (result of arbitration). The client places command on bus (may also place data on bus).<br>Response to command by another bus client placed on bus. Next client obtains bus access (arbitration)</li>
+<li>In a multi-processor with atomic bus scenario, no other bus transactions is allowed between issuing address and receiving data when one processor want to read. Also, when flush is occurred, address and data are sent simultaneously, received by memory before any other transaction is allowed. </li>
+<li>Both requests from processor and bus require to look the tag on cache.<br>If bus receives priority, during bus transaction, processor is locked out from its own cache.<br>If processor receives priority, during processor cache accesses, cache cannot respond with its snoop result. So it delays other processors even if no sharing of any form is present. </li>
+<li>We can alleviate contention to allow simultaneous access by processor-side and snoop controllers through cache duplicate tags or multi-ported tag memory. In either case cost of the additional performance is additional hardware resources.<br>Tags must stay in sync for correctness, so tag update by one controller will still need to block the other controller, but modifying tags is infrequent compared to checking them. </li>
+</ol>
+<h2 id="Read-miss"><a href="#Read-miss" class="headerlink" title="Read miss"></a>Read miss</h2><ol>
+<li>When a cache read miss occurred, memory needs to know what to do. If the line is dirty, memory should not respond. And the loading cache needs to know what to do. If the line is shared, cache should load into S state, not E. </li>
+<li>If one cache controller find that the line is shared in its cache, the controller will send a message through the “shared” wire on bus. If that line is dirty, the controller will send a message through the “dirty” wire on bus.<br>Everytime a processor has responded a snoop, the value in “snoop-pending” wire will be lower and $0$ value indicates that all processors have responded. </li>
+<li>Memory controller could immediately start accessing DRAM, but not respond (squelch response). If a snoop result from another cache indicates it has copy of most recent data, then cache should provide data, not memory. Memory could assume one of the caches will service request until snoop results are valid. If snoop indicates no cache has data, then memory must respond</li>
+</ol>
+<h2 id="Write-back"><a href="#Write-back" class="headerlink" title="Write back"></a>Write back</h2><ol>
+<li>Write backs involve two bus transactions, incoming line (line requested by processor) and outgoing line (evicted dirty line in cache that must be flushed).<br>Ideally would like the processor to continue as soon as possible, namely it shouldn’t have to wait for the flush to complete. </li>
+<li>The solution is write-back buffer.<br>Stick line to be flushed in a write-back buffer. Immediately load requested line to allow processor to continue. Flush contents of write-back buffer at a later time. </li>
+<li>If a request of another processor for the address of the data in the write-back buffer appears on the bus, snoop controller must check the write-back buffer addresses in addition to cache tags.<br>If there is a write-back buffer match, the controller will respond with data from write- back buffer rather than cache and cancel outstanding bus access request. </li>
+<li>A write commits when a read-exclusive transaction appears on bus and is acknowledged by all other caches. All future reads will reflect the value of this write, even if data from P has not yet been written to P’s dirty cache line, or to memory.<br>Order of transactions on the bus defines the global order of writes in the parallel program. </li>
+<li>“Commit” is not “complete”. A write completes when the updated value is in the cache line</li>
+</ol>
+<h2 id="Race-conditions"><a href="#Race-conditions" class="headerlink" title="Race conditions"></a>Race conditions</h2><ol>
+<li>Coherence protocol state transition diagrams assumed that transitions between states were atomic. However, in practice state transitions are not atomic. </li>
+<li>We’ve assumed the bus transaction itself is atomic, but all the operations the system performs as a result of a memory operation are not. </li>
+<li>Processor, cache, and bus all are resources operating in parallel. They often contend for shared resources: processor and bus contend for cache while caches contend for bus access. </li>
+<li>Cache must be able to handle requests while waiting to acquire bus AND be able to modify its own outstanding requests. </li>
+<li>To avoid deadlock, processor must be able to service incoming transactions while waiting to issue requests. </li>
+<li>To avoid livelock, a write that obtains exclusive ownership must be allowed to complete before exclusive ownership is relinquished. </li>
+<li>Multiple processors competing for bus access must be careful to avoid (or minimize likelihood of) starvation. </li>
+<li>Performance optimization often entails splitting operations into several, smaller transactions. Splitting costs in more hardware needed to exploit additional parallelism, and care needed to ensure abstractions still hold. </li>
+</ol>
+<h1 id="Building-with-non-atomic-bus"><a href="#Building-with-non-atomic-bus" class="headerlink" title="Building with non-atomic bus"></a>Building with non-atomic bus</h1><ol>
+<li>Problem with atomic bus: bus is idle while response is pending, which decreases effective bus bandwidth. The interconnect is a limited, shared resource in a multi-processor system. So it is important to use it as efficiently as possible. </li>
+<li>Bus transactions are split into two transactions, the request and the response. Other transactions can intervene between a transaction’s request and response. </li>
+<li>Basic design:<br>Up to eight outstanding requests at a time (system wide)<br>Responses need not occur in the same order as requests. But request order establishes the total order for the system<br>Flow control via negative acknowledgements (NACKs). When a buffer is full, client can NACK a transaction, causing a retry</li>
+<li>We can think of a split-transaction bus as two separate buses, a request bus and a response bus.<br>The request bus has lines for command and address. The response bus has lines for data and response tag. Response tag has 3 bits to represent 8 requests. </li>
+</ol>
+<h2 id="Read-miss-1"><a href="#Read-miss-1" class="headerlink" title="Read miss"></a>Read miss</h2><h3 id="Phase-1"><a href="#Phase-1" class="headerlink" title="Phase 1"></a>Phase 1</h3><ol>
+<li>Request arbitration: cache controllers present request for address to bus (many caches may be doing so in the same cycle)</li>
+<li>Request resolution: address bus arbiter grants access to one of the requestors. Request table entry allocated for request. Special arbitration lines indicate tag assigned to request. </li>
+<li>Bus “winner” places command/address on the bus. </li>
+<li>Caches perform snoop: look up tags, update cache state, etc. Memory operation commits here. (no bus traffic)</li>
+<li>Caches acknowledge this snoop result is ready, or signal they could not complete snoop in time here. </li>
+</ol>
+<h3 id="Phase-2"><a href="#Phase-2" class="headerlink" title="Phase 2"></a>Phase 2</h3><ol>
+<li>Data response arbitration: responder presents intent to respond to request with tag T. (many caches or memory may be doing so in the same cycle)</li>
+<li>Data bus arbiter grants one responder bus access. </li>
+<li>Original requestor signals readiness to receive response (or lack thereof: requestor may be busy at this time)</li>
+<li>Then in phase 3, Responder places response data on data bus. Caches present snoop result for request with the data. Request table entry is freed. Those 3 actions can happen parallel. </li>
+</ol>
+<h2 id="Pipelined-transactions"><a href="#Pipelined-transactions" class="headerlink" title="Pipelined transactions"></a>Pipelined transactions</h2><ol>
+<li>Request bus and response bus can run parallel. So the response of the last transaction and the request of the next transaction can happen simultaneously. Pipelining may cause out-of-order completion. </li>
+<li>Write backs and BusUpg transactions do not have a response component. Write backs acquire access to both request address bus and data bus as part of “request” phase BusUpg does not need any acknowledgement or data. </li>
+<li>Avoid conflicting requests by disallowing them. Each cache has a copy of the request table. Caches do not make requests that conflict with requests in the request table. </li>
+<li>Caches/memory have buffers for receiving data off the bus. If the buffer fills, client NACKs relevant requests or responses. </li>
+<li>In parallel system, we use queues to accommodate variable (unpredictable) rates of production and consumption. As long as workers, on average, produce and consume at the same rate, all workers can run at full rate. Otherwise, some will stall waiting for others to accept or produce new input. </li>
+<li>We have queues to track requests and responses between L1 and L2 caches and between L2 cache and bus. One queue is for requests and responses from closer (to processor) to farther (L1 to L2 or L2 to bus), and the other is from farther to closer (L2 to L1 or bus to L2). </li>
+<li>This may rise deadlock due to full queue. Outgoing read request (initiated by processor) and incoming read request (due to another cache) both requests generate responses that require space in the other queue (circular dependency)</li>
+<li>Sizing all buffers to accommodate the maximum number of outstanding requests on bus is one solution to avoiding deadlock. But a costly one. </li>
+<li>Avoiding buffer deadlock with separate request/response queues. Namely, we distinguish whether it is a request or a response.<br>Responses can be completed without generating further transactions. Requests increase queue length But responses reduce queue length. While stalled attempting to send a request, cache must be able to service responses. Responses will make progress, eventually freeing up resources for requests. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/06/09-Directory-Based-Cache-Cohurence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1113,140 +1247,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/22/04-Continuous-Time-Fourier-Analysis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/06/22/04-Continuous-Time-Fourier-Analysis/" class="post-title-link" itemprop="url">04. Continuous-Time Fourier Analysis</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-06-22 13:40:58" itemprop="dateCreated datePublished" datetime="2022-06-22T13:40:58+08:00">2022-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-25 15:04:19" itemprop="dateModified" datetime="2022-06-25T15:04:19+08:00">2022-06-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
-                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Fourier-analysis"><a href="#Fourier-analysis" class="headerlink" title="Fourier analysis"></a>Fourier analysis</h1><ol>
-<li>In Fourier analysis, we decompose signals into basic signals of complex exponentials.<br>In continuous-time case, $s_k=j\omega_k$, which is pure imaginary, And $\phi_k(t)=e^{s_kt}=e^{j\omega_kt}$.<br>In discrete-time case, $|z_k|=1$, and $\phi_k[n]=e^{j\Omega_kt}$</li>
-<li>If we represent the response of $\phi_k(t)$ as the convolution integral, $\int^{+\infty}_{-\infty}h(t)e^{j\omega_k(t-\tau)}d\tau=e^{j\omega_kt}\int^{+\infty}_{-\infty}h(t)e^{-j\omega_k\tau}d\tau=H(\omega_k)e^{j\omega_kt} $ .<br>Namely the system is $e^{j\omega_kt}\to H(\omega_k)e^{j\omega_kt}$. This means the reponse is the same signal scaled by $H(\omega_k)=\int^{+\infty}_{-\infty}h(t)e^{-j\omega_k\tau}d\tau$. $e^{j\omega_kt}$ is called the eigenfunction while $H(\omega_k)$ is the eigenvalue. </li>
-<li>When $x(t)$ is periodic, we can decompose it into Fourier series. When $x(t)$ is aperiodic, we can still perform Fourier transform to represent it through Fourier seirier. </li>
-</ol>
-<h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
-<li><p>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </p>
-</li>
-<li><p>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </p>
-</li>
-<li><p>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</p>
-</li>
-<li><p>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</p>
-</li>
-<li><p>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </p>
-</li>
-<li><p>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </p>
-</li>
-<li><p>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </p>
-</li>
-</ol>
-<h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
-<li><p>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</p>
-</li>
-<li><p>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</p>
-</li>
-<li><p>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </p>
-</li>
-<li><p>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</p>
-</li>
-<li><p>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </p>
-</li>
-</ol>
-<h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
-<li><p>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </p>
-</li>
-<li><p>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</p>
-</li>
-<li><p>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</p>
-</li>
-<li><p>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</p>
-</li>
-<li><p>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </p>
-</li>
-<li><p>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</p>
-</li>
-<li><p>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </p>
-</li>
-<li><p>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </p>
-</li>
-<li><p>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1318,7 +1318,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

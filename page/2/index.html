@@ -191,6 +191,140 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/22/04-Continuous-Time-Fourier-Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/22/04-Continuous-Time-Fourier-Analysis/" class="post-title-link" itemprop="url">04. Continuous-Time Fourier Analysis</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-22 13:40:58" itemprop="dateCreated datePublished" datetime="2022-06-22T13:40:58+08:00">2022-06-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-25 15:04:19" itemprop="dateModified" datetime="2022-06-25T15:04:19+08:00">2022-06-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Fourier-analysis"><a href="#Fourier-analysis" class="headerlink" title="Fourier analysis"></a>Fourier analysis</h1><ol>
+<li>In Fourier analysis, we decompose signals into basic signals of complex exponentials.<br>In continuous-time case, $s_k=j\omega_k$, which is pure imaginary, And $\phi_k(t)=e^{s_kt}=e^{j\omega_kt}$.<br>In discrete-time case, $|z_k|=1$, and $\phi_k[n]=e^{j\Omega_kt}$</li>
+<li>If we represent the response of $\phi_k(t)$ as the convolution integral, $\int^{+\infty}_{-\infty}h(t)e^{j\omega_k(t-\tau)}d\tau=e^{j\omega_kt}\int^{+\infty}_{-\infty}h(t)e^{-j\omega_k\tau}d\tau=H(\omega_k)e^{j\omega_kt} $ .<br>Namely the system is $e^{j\omega_kt}\to H(\omega_k)e^{j\omega_kt}$. This means the reponse is the same signal scaled by $H(\omega_k)=\int^{+\infty}_{-\infty}h(t)e^{-j\omega_k\tau}d\tau$. $e^{j\omega_kt}$ is called the eigenfunction while $H(\omega_k)$ is the eigenvalue. </li>
+<li>When $x(t)$ is periodic, we can decompose it into Fourier series. When $x(t)$ is aperiodic, we can still perform Fourier transform to represent it through Fourier seirier. </li>
+</ol>
+<h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
+<li><p>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </p>
+</li>
+<li><p>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </p>
+</li>
+<li><p>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</p>
+</li>
+<li><p>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</p>
+</li>
+<li><p>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </p>
+</li>
+<li><p>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </p>
+</li>
+<li><p>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </p>
+</li>
+</ol>
+<h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
+<li><p>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</p>
+</li>
+<li><p>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</p>
+</li>
+<li><p>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </p>
+</li>
+<li><p>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</p>
+</li>
+<li><p>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </p>
+</li>
+</ol>
+<h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
+<li><p>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </p>
+</li>
+<li><p>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</p>
+</li>
+<li><p>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</p>
+</li>
+<li><p>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</p>
+</li>
+<li><p>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </p>
+</li>
+<li><p>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</p>
+</li>
+<li><p>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </p>
+</li>
+<li><p>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </p>
+</li>
+<li><p>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/21/03-Systems-Represented-by-Differential-Equations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -336,7 +470,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-07-06 17:09:36" itemprop="dateModified" datetime="2022-07-06T17:09:36+08:00">2022-07-06</time>
+                <time title="Modified: 2022-07-07 17:15:46" itemprop="dateModified" datetime="2022-07-07T17:15:46+08:00">2022-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -368,94 +502,57 @@
 
       
           <h1 id="The-cache-coherence-problem"><a href="#The-cache-coherence-problem" class="headerlink" title="The cache coherence problem"></a>The cache coherence problem</h1><ol>
-<li><p>This problem happens in a shared memory multi-processor system. Reading a value at address X should return the last value written to address X by any processor. </p>
-</li>
-<li><p>This is a problem created by replicating the data stored at address X in local caches (a hardware implementation detail), and cannot be fixed by adding locks. </p>
-</li>
-<li><p>Memory coherence problem exists because there is both global storage (main memory) and per-processor local storage (processor caches) implementing the abstraction of a single shared address space.</p>
-</li>
-<li><p>In a cache hierarchy,<br>L1 and L2 caches are private per core while L3 cahce is shared by cores in the same chip.<br>L3 cache is split into sectors or banks. Each bank is physically associated with a core, but managed hardware-wise as a single coherent unit.<br>L2 cache and L3 cache communicate through a ring interconnect where most inter-processor actions happens. </p>
-</li>
+<li>This problem happens in a shared memory multi-processor system. Reading a value at address X should return the last value written to address X by any processor. </li>
+<li>This is a problem created by replicating the data stored at address X in local caches (a hardware implementation detail), and cannot be fixed by adding locks. </li>
+<li>Memory coherence problem exists because there is both global storage (main memory) and per-processor local storage (processor caches) implementing the abstraction of a single shared address space.</li>
+<li>In a cache hierarchy,<br>L1 and L2 caches are private per core while L3 cahce is shared by cores in the same chip.<br>L3 cache is split into sectors or banks. Each bank is physically associated with a core, but managed hardware-wise as a single coherent unit.<br>L2 cache and L3 cache communicate through a ring interconnect where most inter-processor actions happens. </li>
 </ol>
 <h2 id="Uniprocessor-case"><a href="#Uniprocessor-case" class="headerlink" title="Uniprocessor case"></a>Uniprocessor case</h2><ol>
-<li><p>On a uniprocessor, providing coherence is fairly simple, since writes typically come from one client: the processor. Load operation must examine all pending stores in store buffer and select the last sequence. </p>
-</li>
-<li><p>There is one exception on a uniprocessor, which is device I/O via direct memory access (DMA). </p>
-</li>
-<li><p>One solution to DMA is that CPU writes to shared buffers using uncached stores.<br>Another way is supported by OS which will mark virtual memory pages containing shared buffers as not-cachable, and explicitly flush pages from cache when I/O completes. </p>
-</li>
-<li><p>In practice, DMA transfers are infrequent compared to CPU loads and stores (so these heavyweight software solutions are acceptable)</p>
-</li>
+<li>On a uniprocessor, providing coherence is fairly simple, since writes typically come from one client: the processor. Load operation must examine all pending stores in store buffer and select the last sequence. </li>
+<li>There is one exception on a uniprocessor, which is device I/O via direct memory access (DMA). </li>
+<li>One solution to DMA is that CPU writes to shared buffers using uncached stores.<br>Another way is supported by OS which will mark virtual memory pages containing shared buffers as not-cachable, and explicitly flush pages from cache when I/O completes. </li>
+<li>In practice, DMA transfers are infrequent compared to CPU loads and stores (so these heavyweight software solutions are acceptable)</li>
 </ol>
 <h2 id="Coherence-definition"><a href="#Coherence-definition" class="headerlink" title="Coherence definition"></a>Coherence definition</h2><ol>
-<li><p>Obeys program order as expected of a uniprocessor system: A read by processor P to address X that follows a write by P to address X, should return the value of the write by P (assuming no other processor wrote to X in between)</p>
-</li>
-<li><p>Write propagation: A read by processor P1 to address X that follows a write by processor P2 to X returns the written value, if the read and write are “sufficiently separated” in time (assuming no other write to X occurs in between)</p>
-</li>
-<li><p>Write serialization: Writes to the same address are serialized: two writes to address X by any two processors are observed in the same order by all processors.</p>
-</li>
-<li><p>Write propagation means that notification of a write must eventually get to the other processors. Note that precisely when information about the write is propagated is not specified in the definition of coherence.</p>
-</li>
+<li>Obeys program order as expected of a uniprocessor system: A read by processor P to address X that follows a write by P to address X, should return the value of the write by P (assuming no other processor wrote to X in between)</li>
+<li>Write propagation: A read by processor P1 to address X that follows a write by processor P2 to X returns the written value, if the read and write are “sufficiently separated” in time (assuming no other write to X occurs in between)</li>
+<li>Write serialization: Writes to the same address are serialized: two writes to address X by any two processors are observed in the same order by all processors.</li>
+<li>Write propagation means that notification of a write must eventually get to the other processors. Note that precisely when information about the write is propagated is not specified in the definition of coherence.</li>
 </ol>
 <h1 id="Implementing-choherence"><a href="#Implementing-choherence" class="headerlink" title="Implementing choherence"></a>Implementing choherence</h1><ol>
-<li><p>Software-based solution: OS uses page-fault mechanism to propagate writes. It can be used to implement memory coherence over clusters of workstations</p>
-</li>
-<li><p>Hardware-based solutions: “snooping”-based coherence implementations and directory-based coherence implementations</p>
-</li>
-<li><p>Most modern multi-core CPUs implement cache coherence<br>Discrete GPUs do not implement cache coherence. Overhead of coherence deemed not worth it for graphics and scientific computing applications (NVIDIA GPUs provide single shared L2 + atomic memory operations)<br>But the latest Intel Integrated GPUs do implement cache coherence</p>
-</li>
+<li>Software-based solution: OS uses page-fault mechanism to propagate writes. It can be used to implement memory coherence over clusters of workstations</li>
+<li>Hardware-based solutions: “snooping”-based coherence implementations and directory-based coherence implementations</li>
+<li>Most modern multi-core CPUs implement cache coherence<br>Discrete GPUs do not implement cache coherence. Overhead of coherence deemed not worth it for graphics and scientific computing applications (NVIDIA GPUs provide single shared L2 + atomic memory operations)<br>But the latest Intel Integrated GPUs do implement cache coherence</li>
 </ol>
 <h2 id="Shared-caches"><a href="#Shared-caches" class="headerlink" title="Shared caches"></a>Shared caches</h2><ol>
-<li><p>One single cache shared by all processors eliminates problem of replicating state in multiple caches and makes coherence easy. </p>
-</li>
-<li><p>This has obvious scalability problems since the point of a cache is to be local and fast. It also causes interference and contention due to many clients. </p>
-</li>
-<li><p>Facilitates fine-grained sharing (overlapping working sets). Loads/stores by one processor might pre-fetch lines for another processor</p>
-</li>
+<li>One single cache shared by all processors eliminates problem of replicating state in multiple caches and makes coherence easy. </li>
+<li>This has obvious scalability problems since the point of a cache is to be local and fast. It also causes interference and contention due to many clients. </li>
+<li>Facilitates fine-grained sharing (overlapping working sets). Loads/stores by one processor might pre-fetch lines for another processor</li>
 </ol>
 <h2 id="Snooping-cache-coherence-schemes"><a href="#Snooping-cache-coherence-schemes" class="headerlink" title="Snooping cache-coherence schemes"></a>Snooping cache-coherence schemes</h2><ol>
-<li><p>Main idea: all coherence-related activity is broadcast to all processors</p>
-</li>
-<li><p>Cache controllers monitor (“they snoop”) memory operations, and react accordingly to maintain memory coherence</p>
-</li>
-<li><p>Cache controller must respond to actions from both ends:<br>It must respond the Load/Store requests from its local processor<br>It also must respond coherence-related activity broadcast over the chip’s interconnect. </p>
-</li>
-<li><p>The interconnect is between memory and caches possessed by each processor. There is not only memory-cache information, but also cache-cache information, which will limit the scality of the system. </p>
-</li>
+<li>Main idea: all coherence-related activity is broadcast to all processors</li>
+<li>Cache controllers monitor (“they snoop”) memory operations, and react accordingly to maintain memory coherence</li>
+<li>Cache controller must respond to actions from both ends:<br>It must respond the Load/Store requests from its local processor<br>It also must respond coherence-related activity broadcast over the chip’s interconnect. </li>
+<li>The interconnect is between memory and caches possessed by each processor. There is not only memory-cache information, but also cache-cache information, which will limit the scality of the system. </li>
 </ol>
 <h3 id="Write-through-caches"><a href="#Write-through-caches" class="headerlink" title="Write-through caches"></a>Write-through caches</h3><ol>
-<li><p>For the invalidation-based protocol, when one processor write into an address, cache controller broadcasts<br>invalidation message for other caches to mark that line to invalidation.<br>the next read from other processors will trigger cache miss</p>
-</li>
-<li><p>For the update-based protocol: other caches will update their local copies as the information is sent. </p>
-</li>
-<li><p>States: Valid (V) or Invalid (I)<br>A local processor read (PrRd) always ends at valid. If the operation starts from an invalid state, a message will be sent (BusRd). If it starts from a valid state, no message will be sent.<br>A local processor write (PrWr) always ends at the same state as before the operation (assumes write no-allocate policy), and always sends a message (BusWr).<br>When a write message from other processor is received (BusWr), It always ends at invalid state.  </p>
-<p><img src="/img/08-Snooping-based-Cache-Coherence-1.jpeg" width="40%"></p>
-</li>
-<li><p>Requirements of the interconnect:<br>All write transactions visible to all cache controllers.<br>All write transactions visible to all cache controllers in the same order. </p>
-</li>
-<li><p>Simplifying assumptions here:<br>Interconnect and memory transactions are atomic<br>Processor waits until previous memory operations is complete before issuing next memory operation<br>Invalidation applied immediately as part of receiving invalidation broadcast</p>
-</li>
+<li>For the invalidation-based protocol, when one processor write into an address, cache controller broadcasts<br>invalidation message for other caches to mark that line to invalidation.<br>the next read from other processors will trigger cache miss</li>
+<li>For the update-based protocol: other caches will update their local copies as the information is sent. </li>
+<li>States: Valid (V) or Invalid (I)<br>A local processor read (PrRd) always ends at valid. If the operation starts from an invalid state, a message will be sent (BusRd). If it starts from a valid state, no message will be sent.<br>A local processor write (PrWr) always ends at the same state as before the operation (assumes write no-allocate policy), and always sends a message (BusWr).<br>When a write message from other processor is received (BusWr), It always ends at invalid state.<br><img src="/img/08-Snooping-based-Cache-Coherence-1.jpeg" width="40%"></li>
+<li>Requirements of the interconnect:<br>All write transactions visible to all cache controllers.<br>All write transactions visible to all cache controllers in the same order. </li>
+<li>Simplifying assumptions here:<br>Interconnect and memory transactions are atomic<br>Processor waits until previous memory operations is complete before issuing next memory operation<br>Invalidation applied immediately as part of receiving invalidation broadcast</li>
 </ol>
 <h1 id="Write-back-caches-Invalidation-based"><a href="#Write-back-caches-Invalidation-based" class="headerlink" title="Write-back caches (Invalidation-based)"></a>Write-back caches (Invalidation-based)</h1><ol>
-<li><p>Dirty state of cache line now indicates exclusive ownership</p>
-</li>
-<li><p>Exclusive: cache is only cache with a valid copy of line (it can safely be written to)<br>Owner: cache is responsible for supplying the line to other processors when they attempt to load it from memory (otherwise a load from another processor will get stale data from memory)</p>
-</li>
-<li><p>A line in the “exclusive” state can be modified without notifying<br>the other caches<br>Processor can only write to lines in the exclusive state. So they need a way to tell other caches that they want exclusive access to the line. They will do this by sending all the other caches messages<br>When cache controller snoops a request for exclusive access to line it contains, it must invalidate the line in its own cache</p>
-</li>
+<li>Dirty state of cache line now indicates exclusive ownership</li>
+<li>Exclusive: cache is only cache with a valid copy of line (it can safely be written to)<br>Owner: cache is responsible for supplying the line to other processors when they attempt to load it from memory (otherwise a load from another processor will get stale data from memory)</li>
+<li>A line in the “exclusive” state can be modified without notifying<br>the other caches<br>Processor can only write to lines in the exclusive state. So they need a way to tell other caches that they want exclusive access to the line. They will do this by sending all the other caches messages<br>When cache controller snoops a request for exclusive access to line it contains, it must invalidate the line in its own cache</li>
 </ol>
 <h2 id="MSI-write-back-invalidation-protocol"><a href="#MSI-write-back-invalidation-protocol" class="headerlink" title="MSI write-back invalidation protocol"></a>MSI write-back invalidation protocol</h2><ol>
-<li><p>Three cache line states:<br>Invalid (I): same as meaning of invalid in uniprocessor cache<br>Shared (S): line valid in one or more caches<br>Modified (M): line valid in exactly one cache (a.k.a. “dirty” or “exclusive” state)</p>
-</li>
-<li><p>The local processors have the same operations as write-through case.<br>The coherence-related bus transactions from remote caches have three kinds:<br>BusRd: obtain copy of line with no intent to modify<br>BusRdX: obtain copy of line with intent to modify<br>flush: write dirty line out to memory</p>
-<p><img src="/img/08-Snooping-based-Cache-Coherence-2.png" width="50%"></p>
-</li>
-<li><p>When try to write an invalid line without reading it, the content of the current modified state line will be sent to the new writer. </p>
-</li>
-<li><p>Write propagation is achieved via combination of invalidation on BusRdX, and flush from M-state on subsequent BusRd/BusRdX from another processors</p>
-</li>
-<li><p>Write serialization<br>Writes that appear on interconnect are ordered by the order they appear on interconnect (BusRdX)<br>Reads that appear on interconnect are ordered by order they appear on interconnect (BusRd)<br>Writes that don’t appear on the interconnect (PrWr to line already in M state):</p>
-<ul>
+<li>Three cache line states:<br>Invalid (I): same as meaning of invalid in uniprocessor cache<br>Shared (S): line valid in one or more caches<br>Modified (M): line valid in exactly one cache (a.k.a. “dirty” or “exclusive” state)</li>
+<li>The local processors have the same operations as write-through case.<br>The coherence-related bus transactions from remote caches have three kinds:<br>BusRd: obtain copy of line with no intent to modify<br>BusRdX: obtain copy of line with intent to modify<br>flush: write dirty line out to memory<br><img src="/img/08-Snooping-based-Cache-Coherence-2.png" width="50%"></li>
+<li>When try to write an invalid line without reading it, the content of the current modified state line will be sent to the new writer. </li>
+<li>Write propagation is achieved via combination of invalidation on BusRdX, and flush from M-state on subsequent BusRd/BusRdX from another processors</li>
+<li>Write serialization<br>Writes that appear on interconnect are ordered by the order they appear on interconnect (BusRdX)<br>Reads that appear on interconnect are ordered by order they appear on interconnect (BusRd)<br>Writes that don’t appear on the interconnect (PrWr to line already in M state):<ul>
 <li>Sequence of writes to line comes between two interconnect transactions for the line</li>
 <li>All writes in sequence performed by same processor, P (that processor certainly observes them in correct sequential order)</li>
 <li>All other processors observe notification of these writes only after a interconnect transaction for the line. </li>
@@ -464,16 +561,13 @@
 </li>
 </ol>
 <h2 id="MESI-invalidation-protocol"><a href="#MESI-invalidation-protocol" class="headerlink" title="MESI invalidation protocol"></a>MESI invalidation protocol</h2><ol>
-<li><p>MSI requires two interconnect transactions for the common case of reading an address, then writing to it</p>
-<ul>
+<li>MSI requires two interconnect transactions for the common case of reading an address, then writing to it<ul>
 <li>Transaction 1: BusRd to move from I to S state</li>
 <li>Transaction 2: BusRdX to move from S to M state</li>
 </ul>
 </li>
-<li><p>Solution: add additional state E (“exclusive clean”) to mark the line that has not been modified, but only this cache has a copy of the line<br>This state decouples exclusivity from line ownership (line not dirty, so copy in memory is valid copy of data)<br>Upgrade from E to M does not require an interconnect transaction </p>
-</li>
-<li><p><img src="/img/08-Snooping-based-Cache-Coherence-3.jpeg" width="50%"></p>
-</li>
+<li>Solution: add additional state E (“exclusive clean”) to mark the line that has not been modified, but only this cache has a copy of the line<br>This state decouples exclusivity from line ownership (line not dirty, so copy in memory is valid copy of data)<br>Upgrade from E to M does not require an interconnect transaction </li>
+<li><img src="/img/08-Snooping-based-Cache-Coherence-3.jpeg" width="50%"></li>
 </ol>
 <h2 id="5-stage-invalidation-based-protocol"><a href="#5-stage-invalidation-based-protocol" class="headerlink" title="5-stage invalidation-based protocol"></a>5-stage invalidation-based protocol</h2><ol>
 <li>Who should supply data on a cache miss when line is in the E or S state of another cache?<br>Can get cache line data from memory or can get data from another cache? If source is another cache, which one should provide it?</li>
@@ -482,27 +576,17 @@
 <li>MOESI: Transition from M to O (O=”owned, but not exclusive”) and do not flush to memory (In MESI protocol, transition from M to S requires flush to memory).<br>Other processors maintain shared line in S state, one processor maintains line in O state. Data in memory is stale, so cache with line in O state must service cache misses.<br>Used in AMD Opteron</li>
 </ol>
 <h1 id="Invalidation-based-vs-Update-based"><a href="#Invalidation-based-vs-Update-based" class="headerlink" title="Invalidation-based vs. Update-based"></a>Invalidation-based vs. Update-based</h1><ol>
-<li><p>Invalidation-based protocol: To write to a line, cache must obtain exclusive access to it. All other caches must invalidate their copies</p>
-</li>
-<li><p>Update-based protocol: Can write to shared copy by broadcasting update to all other copies</p>
-</li>
-<li><p>Intuitively, update would seem preferable if other processors<br>sharing data continue to access it after a write occurs</p>
-<p>But updates are overhead if data just sits in caches (and is never read by another processor again) or application performs many writes before the next read</p>
-</li>
-<li><p>Update can reduce cache miss rate since all shared copies remain valid.<br>Update can suffer from high traffic due to multiple writes before the next read by another processor</p>
-</li>
+<li>Invalidation-based protocol: To write to a line, cache must obtain exclusive access to it. All other caches must invalidate their copies</li>
+<li>Update-based protocol: Can write to shared copy by broadcasting update to all other copies</li>
+<li>Intuitively, update would seem preferable if other processors<br>sharing data continue to access it after a write occurs<br>But updates are overhead if data just sits in caches (and is never read by another processor again) or application performs many writes before the next read</li>
+<li>Update can reduce cache miss rate since all shared copies remain valid.<br>Update can suffer from high traffic due to multiple writes before the next read by another processor</li>
 </ol>
 <h1 id="Snoop-for-a-cache-hierarchy"><a href="#Snoop-for-a-cache-hierarchy" class="headerlink" title="Snoop for a cache hierarchy"></a>Snoop for a cache hierarchy</h1><ol>
-<li><p>Challenge: changes made to data at L1 cache may not be visible to L2 cache controller than snoops the interconnect. </p>
-</li>
-<li><p>All lines in closer to processor cache are also in farther from processor cache. Thus, all transactions relevant to L1 are also relevant to L2, so it is sufficient for only the L2 to snoop the interconnect. </p>
-</li>
-<li><p>If line is in owned state (M in MSI/MESI) in L1, it must also be in owned state in L2. Allows L2 to determine if a bus transaction is requesting a modified cache line in L1 without requiring information from L1</p>
-</li>
-<li><p>When line X is invalidated in L2 cache due to BusRdX from another cache. Must also invalidate line X in L1<br>Solution: Each L2 line contains an additional state bit indicating if line also exists in L1. This bit tells the L2 invalidations of the cache line due to coherence traffic need to be propagated to L1. </p>
-</li>
-<li><p>When L1 write is hit, the corresponding line in L2 cache is in modified state in the coherence protocol, but L2 data is stale.<br>When coherence protocol requires X to be flushed from L2, L2 cache must request the data from L1.<br>Add another bit for “modified-but-stale” (flushing a “modified-but-stale” L2 line requires getting the real data from L1 first.)</p>
-</li>
+<li>Challenge: changes made to data at L1 cache may not be visible to L2 cache controller than snoops the interconnect. </li>
+<li>Inclusion property:<br>All lines in closer to processor cache are also in farther from processor cache. Thus, all transactions relevant to L1 are also relevant to L2, so it is sufficient for only the L2 to snoop the interconnect.<br>If line is in owned state (M in MSI/MESI) in L1, it must also be in owned state in L2. Allows L2 to determine if a bus transaction is requesting a modified cache line in L1 without requiring information from L1. </li>
+<li>Even if L2 is larger than L1, the inclusion cannot be maintained automatically. L1 and L2 might choose to evict different lines because the access histories differ. </li>
+<li>When line X is invalidated in L2 cache due to BusRdX from another cache. Must also invalidate line X in L1<br>Solution: Each L2 line contains an additional state bit indicating if line also exists in L1. This bit tells the L2 invalidations of the cache line due to coherence traffic need to be propagated to L1. </li>
+<li>When L1 write is hit, the corresponding line in L2 cache is in modified state in the coherence protocol, but L2 data is stale.<br>When coherence protocol requires X to be flushed from L2, L2 cache must request the data from L1.<br>Add another bit for “modified-but-stale” (flushing a “modified-but-stale” L2 line requires getting the real data from L1 first.)</li>
 </ol>
 <h1 id="False-sharing"><a href="#False-sharing" class="headerlink" title="False sharing"></a>False sharing</h1><ol>
 <li>Fasle sharing is that two processors write to different addresses, but those addresses map to the same cache line. The cache line keeps invalidating and request data from another processor, generating significant amounts of communication due to the coherence protocol. </li>
@@ -1523,131 +1607,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/11/06-Version-Control-git/" class="post-title-link" itemprop="url">06.Version Control (git)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-11 13:35:13" itemprop="dateCreated datePublished" datetime="2022-05-11T13:35:13+08:00">2022-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-12 14:14:50" itemprop="dateModified" datetime="2022-05-12T14:14:50+08:00">2022-05-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Git-Model"><a href="#Git-Model" class="headerlink" title="Git Model"></a>Git Model</h1><ol>
-<li><p>Folders are called <code>trees</code>, and files are called <code>blobs</code>. Trees can have other trees and blobs, while blobs cannot have trees. </p>
-</li>
-<li><p>Git keeps snapshots of the file system, and arrange them in a form of tree according to commits. </p>
-</li>
-<li><p>One snapshot has only one parant snapshot, but may have multiple children. Those children contains different commits, and don’t share their new changes.<br>We can merge snapshots together to get all changes in all snapshots. Sometimes this process is automatically, but there are some cases when it trigues the merge conflict. </p>
-</li>
-<li><p>Actually, git stores versions not by snapshots, but by commits. Each commit contains not only the snapshot of the file system snapshot, but also some metadata, like the author, message and parent of this commit. </p>
-</li>
-<li><p>Git calculates the hash name of a commit through Sha-1 algorithm, which is a 40 character hex code.<br>So references is provided to refer a human-readable name to a hash name. While the human-readable name is changeable, the hash name cannot be changed. </p>
-</li>
-</ol>
-<h1 id="Git-Commands"><a href="#Git-Commands" class="headerlink" title="Git Commands"></a>Git Commands</h1><ol>
-<li><p><code>git init</code> will create a <code>.git</code> folder, and make the current folder into a git folder</p>
-</li>
-<li><p><code>git help &lt;git command&gt;</code> can show the document of that command. Don’t need <code>git</code> in git command. </p>
-</li>
-<li><p><code>git status</code> will show the status of changes compared the current file system with its parent. It will only show blobs or trees, not the details.<br><code>git log</code> will show all the commits in history in a flat form, including author, date and message. <code>git log --all --graph --decorate</code> can show the history more beautiful, and the relations more clear. <code>--oneline</code> will show some more simplified information. </p>
-</li>
-<li><p><code>git add &lt;file path&gt;</code> can add a changed file to the next commit.<br><code>git commit</code> will commit every changes that have been added. </p>
-</li>
-<li><p><code>git cat-file -p &lt;hash name&gt;</code> will show what is in the object with that hash name. The object might be a commit, a snapshot, a tree or a blob. </p>
-</li>
-<li><p><code>HEAD</code> is the current commit you are looking, and <code>master</code> is the up-to-date commit.<br><code>git checkout &lt;hash name&gt;</code> will change the current working space  to that commit, and the <code>HEAD</code> will point to that commit. This will change all the files into the snapshot of the commit.<br>If we want to go to master, we can use <code>master</code> instead of <code>&lt;hash name&gt;</code>. </p>
-</li>
-<li><p><code>git diff</code> will show the differet between the current file system and <code>HEAD</code> commit. It will not only show the file-names, by also what is changed in those files.<br>It can takes some arguments, like <code>git &lt;hash name1&gt; &lt;hash name2&gt; &lt;file name&gt;</code>. In this case, it will only compare the state of that file between that two commits. </p>
-</li>
-<li><p>When the <code>HEAD</code> is pointing to the end of a branch, and we make a commit, <code>HEAD</code> that that branch mark will both point to the new commit.<br><code>git branch</code> will list all the braches we have. <code>Master</code> is a special brach that will be created from the beginning.<br><code>git brach &lt;name&gt;</code> will name the commit <code>HEAD</code> is pointing to that name.<br><code>git checkout &lt;branch name&gt;</code> will point the <code>HEAD</code> to that brach mark. <code>-b</code> flag will create and check out that branck. </p>
-</li>
-<li><p><code>git merge &lt;branch name&gt;</code> will merge the commit that branch mark points to into the <code>HEAD</code> commit.<br>If the <code>HEAD</code> commit is a predecessor of that branch, a fast-forward merging is used, which simply move the <code>HEAD</code> to that branch.<br>Or Git will do its best to auto-merge the changes, but sometimes it might get confused, so a merge conflict is raised. We can manually fix those conflicts, and use <code>git add</code> to add the changed files again, use <code>git merge --continue</code> to finish the merge. </p>
-</li>
-</ol>
-<h1 id="Git-Remote"><a href="#Git-Remote" class="headerlink" title="Git Remote"></a>Git Remote</h1><ol>
-<li><p><code>git remote</code> will print all the remotes that git is aware of for the current repository</p>
-</li>
-<li><p><code>git remote add &lt;name&gt; &lt;url&gt;</code>. The name is <code>origin</code> by convention. </p>
-</li>
-<li><p><code>git push &lt;remote name&gt; &lt;local branch&gt;:&lt;remote branch&gt;</code> will set the branch in the remote to the local branch. If that remote branch doesn’t exist, it will be created.<br>We can use <code>git branch --set-upstream-to=&lt;remote name&gt;/&lt;remote branch&gt;</code> so that we will push the current branch to the set remote branch by default. </p>
-</li>
-<li><p><code>git clone &lt;url&gt; &lt;foler name&gt;</code> will clone the repo into the local folder.<br><code>--shallow</code> will only get the latest snapshot, not the whole history. </p>
-</li>
-<li><p><code>git fetch &lt;remote name&gt;</code> will retrieve the changes in the remote. But it will not change anything we have locally, and the local master branch is still pointing to where it was. We can use <code>git merge</code> to move master branch.<br><code>git pull &lt;remote name&gt;</code> will fetch and merge. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1719,7 +1678,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

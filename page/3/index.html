@@ -191,6 +191,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/11/06-Version-Control-git/" class="post-title-link" itemprop="url">06.Version Control (git)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-11 13:35:13" itemprop="dateCreated datePublished" datetime="2022-05-11T13:35:13+08:00">2022-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-12 14:14:50" itemprop="dateModified" datetime="2022-05-12T14:14:50+08:00">2022-05-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Git-Model"><a href="#Git-Model" class="headerlink" title="Git Model"></a>Git Model</h1><ol>
+<li><p>Folders are called <code>trees</code>, and files are called <code>blobs</code>. Trees can have other trees and blobs, while blobs cannot have trees. </p>
+</li>
+<li><p>Git keeps snapshots of the file system, and arrange them in a form of tree according to commits. </p>
+</li>
+<li><p>One snapshot has only one parant snapshot, but may have multiple children. Those children contains different commits, and don’t share their new changes.<br>We can merge snapshots together to get all changes in all snapshots. Sometimes this process is automatically, but there are some cases when it trigues the merge conflict. </p>
+</li>
+<li><p>Actually, git stores versions not by snapshots, but by commits. Each commit contains not only the snapshot of the file system snapshot, but also some metadata, like the author, message and parent of this commit. </p>
+</li>
+<li><p>Git calculates the hash name of a commit through Sha-1 algorithm, which is a 40 character hex code.<br>So references is provided to refer a human-readable name to a hash name. While the human-readable name is changeable, the hash name cannot be changed. </p>
+</li>
+</ol>
+<h1 id="Git-Commands"><a href="#Git-Commands" class="headerlink" title="Git Commands"></a>Git Commands</h1><ol>
+<li><p><code>git init</code> will create a <code>.git</code> folder, and make the current folder into a git folder</p>
+</li>
+<li><p><code>git help &lt;git command&gt;</code> can show the document of that command. Don’t need <code>git</code> in git command. </p>
+</li>
+<li><p><code>git status</code> will show the status of changes compared the current file system with its parent. It will only show blobs or trees, not the details.<br><code>git log</code> will show all the commits in history in a flat form, including author, date and message. <code>git log --all --graph --decorate</code> can show the history more beautiful, and the relations more clear. <code>--oneline</code> will show some more simplified information. </p>
+</li>
+<li><p><code>git add &lt;file path&gt;</code> can add a changed file to the next commit.<br><code>git commit</code> will commit every changes that have been added. </p>
+</li>
+<li><p><code>git cat-file -p &lt;hash name&gt;</code> will show what is in the object with that hash name. The object might be a commit, a snapshot, a tree or a blob. </p>
+</li>
+<li><p><code>HEAD</code> is the current commit you are looking, and <code>master</code> is the up-to-date commit.<br><code>git checkout &lt;hash name&gt;</code> will change the current working space  to that commit, and the <code>HEAD</code> will point to that commit. This will change all the files into the snapshot of the commit.<br>If we want to go to master, we can use <code>master</code> instead of <code>&lt;hash name&gt;</code>. </p>
+</li>
+<li><p><code>git diff</code> will show the differet between the current file system and <code>HEAD</code> commit. It will not only show the file-names, by also what is changed in those files.<br>It can takes some arguments, like <code>git &lt;hash name1&gt; &lt;hash name2&gt; &lt;file name&gt;</code>. In this case, it will only compare the state of that file between that two commits. </p>
+</li>
+<li><p>When the <code>HEAD</code> is pointing to the end of a branch, and we make a commit, <code>HEAD</code> that that branch mark will both point to the new commit.<br><code>git branch</code> will list all the braches we have. <code>Master</code> is a special brach that will be created from the beginning.<br><code>git brach &lt;name&gt;</code> will name the commit <code>HEAD</code> is pointing to that name.<br><code>git checkout &lt;branch name&gt;</code> will point the <code>HEAD</code> to that brach mark. <code>-b</code> flag will create and check out that branck. </p>
+</li>
+<li><p><code>git merge &lt;branch name&gt;</code> will merge the commit that branch mark points to into the <code>HEAD</code> commit.<br>If the <code>HEAD</code> commit is a predecessor of that branch, a fast-forward merging is used, which simply move the <code>HEAD</code> to that branch.<br>Or Git will do its best to auto-merge the changes, but sometimes it might get confused, so a merge conflict is raised. We can manually fix those conflicts, and use <code>git add</code> to add the changed files again, use <code>git merge --continue</code> to finish the merge. </p>
+</li>
+</ol>
+<h1 id="Git-Remote"><a href="#Git-Remote" class="headerlink" title="Git Remote"></a>Git Remote</h1><ol>
+<li><p><code>git remote</code> will print all the remotes that git is aware of for the current repository</p>
+</li>
+<li><p><code>git remote add &lt;name&gt; &lt;url&gt;</code>. The name is <code>origin</code> by convention. </p>
+</li>
+<li><p><code>git push &lt;remote name&gt; &lt;local branch&gt;:&lt;remote branch&gt;</code> will set the branch in the remote to the local branch. If that remote branch doesn’t exist, it will be created.<br>We can use <code>git branch --set-upstream-to=&lt;remote name&gt;/&lt;remote branch&gt;</code> so that we will push the current branch to the set remote branch by default. </p>
+</li>
+<li><p><code>git clone &lt;url&gt; &lt;foler name&gt;</code> will clone the repo into the local folder.<br><code>--shallow</code> will only get the latest snapshot, not the whole history. </p>
+</li>
+<li><p><code>git fetch &lt;remote name&gt;</code> will retrieve the changes in the remote. But it will not change anything we have locally, and the local master branch is still pointing to where it was. We can use <code>git merge</code> to move master branch.<br><code>git pull &lt;remote name&gt;</code> will fetch and merge. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/10/05-Commandline-Environment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1372,92 +1497,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/03/05/03-Perceptron-Generalized-Linear-Model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/05/03-Perceptron-Generalized-Linear-Model/" class="post-title-link" itemprop="url">03. Perceptron & Generalized Linear Model</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-05 11:09:32 / Modified: 12:16:48" itemprop="dateCreated datePublished" datetime="2022-03-05T11:09:32+08:00">2022-03-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-Stanford-CS229/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习 (Stanford CS229)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h1><ol>
-<li><p>$g(z)=\left\{\begin{matrix}1&amp;z≥0\\0&amp;z&lt;0\end{matrix}\right.$</p>
-</li>
-<li><p>Real - Gaussion</p>
-<p>Binary - Bernoulli</p>
-<p>count - Poisson</p>
-<p>R+ - Gamma, Exponential</p>
-<p>Probability distributions - Beta</p>
-</li>
-<li></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1529,7 +1568,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
