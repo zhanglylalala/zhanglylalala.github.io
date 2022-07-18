@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Fourier series As the continuous-time case, we choose the basic signal to be $\phi_k[n]&#x3D;e^{j\Omega_kn}$. From convolution, we know that its response is $e^{j\Omega_kn}\sum^{+\infty}_{r&#x3D;-\infty}h[r]e^{">
 <meta property="article:published_time" content="2022-06-23T10:01:02.000Z">
-<meta property="article:modified_time" content="2022-06-25T07:03:49.413Z">
+<meta property="article:modified_time" content="2022-07-11T10:14:31.662Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="信号">
 <meta property="article:tag" content="电子">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-25 15:03:49" itemprop="dateModified" datetime="2022-06-25T15:03:49+08:00">2022-06-25</time>
+                <time title="Modified: 2022-07-11 18:14:31" itemprop="dateModified" datetime="2022-07-11T18:14:31+08:00">2022-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,30 +259,19 @@
 
       
         <h1 id="Fourier-series"><a href="#Fourier-series" class="headerlink" title="Fourier series"></a>Fourier series</h1><ol>
-<li><p>As the continuous-time case, we choose the basic signal to be $\phi_k[n]=e^{j\Omega_kn}$. From convolution, we know that its response is $e^{j\Omega_kn}\sum^{+\infty}_{r=-\infty}h[r]e^{-j\Omega_kr}=H(\Omega_k)e^{j\Omega_kn}$</p>
-</li>
-<li><p>If $x[n]$ is periodic with period ans fundamental frequency being $N$ and $\Omega_0=\frac{2\pi}{N}$, then we try to represent $x[n]=\sum_ka_ke^{jk\Omega_0n}$. Give that, in discrete-time complex exponential, $e^{jk\Omega_0n}=e^{j(k+N)\Omega_0n}$, we don’t need $k$ from $-\infty$ to $+\infty$. Instead, we only want $k$ in a period range $N$, like $[0, N-1]$.<br>Thus, the synthesis equation is $x[n]=\sum_{k=<N>}a_ke^{j(k+N)\Omega_0n}$</p>
-</li>
-<li><p>To solve $a_k$, we can actually see it as $N$ equations with $N$ unknowns. And finally the analysis equation is $a_k=\frac1N\sum_{<N>}x[n]e^{jk\Omega_0n}$</p>
-</li>
-<li><p>We need infinity number of coefficients in continuous-time, while only finite number is required in discrete-time. </p>
-</li>
-<li><p>$x[n]$ and $e^{jk\Omega_0n}$ are both periodic in $n$, like in continuous-time.<br>$e^{jk\Omega_0n}$ and $a_k$ are both periodic in $k$, while continuous-time is not the case. </p>
-</li>
-<li><p>In discrete-time, the Fourier serise will always convergent. However, in continuous-time, this is conditional. </p>
-</li>
+<li>As the continuous-time case, we choose the basic signal to be $\phi_k[n]=e^{j\Omega_kn}$. From convolution, we know that its response is $e^{j\Omega_kn}\sum^{+\infty}_{r=-\infty}h[r]e^{-j\Omega_kr}=H(\Omega_k)e^{j\Omega_kn}$</li>
+<li>If $x[n]$ is periodic with period ans fundamental frequency being $N$ and $\Omega_0=\frac{2\pi}{N}$, then we try to represent $x[n]=\sum_ka_ke^{jk\Omega_0n}$. Give that, in discrete-time complex exponential, $e^{jk\Omega_0n}=e^{j(k+N)\Omega_0n}$, we don’t need $k$ from $-\infty$ to $+\infty$. Instead, we only want $k$ in a period range $N$, like $[0, N-1]$.<br>Thus, the synthesis equation is $x[n]=\sum_{k=\lt N\gt}a_ke^{j(k+N)\Omega_0n}$</li>
+<li>To solve $a_k$, we can actually see it as $N$ equations with $N$ unknowns. And finally the analysis equation is $a_k=\frac1N\sum_{\lt N\gt}x[n]e^{jk\Omega_0n}$</li>
+<li>We need infinity number of coefficients in continuous-time, while only finite number is required in discrete-time. </li>
+<li>$x[n]$ and $e^{jk\Omega_0n}$ are both periodic in $n$, like in continuous-time.<br>$e^{jk\Omega_0n}$ and $a_k$ are both periodic in $k$, while continuous-time is not the case. </li>
+<li>In discrete-time, the Fourier serise will always convergent. However, in continuous-time, this is conditional. </li>
 </ol>
 <h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
-<li><p>For an aperiodic singal $x[n]$, we can construct a periodic signal $\tilde{x}[n]$ with period being $N$ and one period being $x[n]$.<br> The Fouier series of $\tilde{x}[n]=\sum_{<N>}\frac{1}{2\pi}X(k\Omega_0)e^{jk\Omega_0n}\Omega_0$ and $X(k\Omega_0)=Na_k=\sum^{N/2}_{k=-N/2}\tilde{x}[n]e^{-jk\Omega_0n}$. </p>
-</li>
-<li><p>As $N\to\infty$, $\Omega_0\to0$ and $\tilde{x}[n]\to x[n]$, the synthesis equation is $x[n]=\frac{1}{2\pi}\int_{2\pi}X(\Omega)e^{j\Omega n}d\Omega$ and the analysis equation is $X(\Omega)=\sum^{+\infty}_{k=-\infty}x[n]e^{-j\Omega n}$<br>$x[n]$ and $X(\Omega)$ are a Fourier transform pair. </p>
-</li>
-<li><p>The discrete-time Fourier transform lacks the duality in continuous-time since $x[n]$ is a discrete-time signal while $X(\Omega)$ is a continous-frequency signal. </p>
-</li>
-<li><p>If $\tilde{x}[n]$ is periodic and $x[n]$ represents a period, then the Fourier series coefficients of $\tilde{x}[n]=\frac{1}{N}\times$ samples of Fourier transform of $x[n]$, namely $a_k=\frac1NX(\Omega)|_{\Omega=\frac{2\pi k}{N}}$. </p>
-</li>
-<li><p>If $\tilde{x}[n]$ is periodic, the Fourier transform of $\tilde{x}[n]$ is defined as impulse train, $\tilde{X}(\Omega)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\Omega-k\Omega_0)$</p>
-</li>
+<li>For an aperiodic singal $x[n]$, we can construct a periodic signal $\tilde{x}[n]$ with period being $N$ and one period being $x[n]$.<br> The Fouier series of $\tilde{x}[n]=\sum_{\lt N\gt}\frac{1}{2\pi}X(k\Omega_0)e^{jk\Omega_0n}\Omega_0$ and $X(k\Omega_0)=Na_k=\sum^{N/2}_{k=-N/2}\tilde{x}[n]e^{-jk\Omega_0n}$. </li>
+<li>As $N\to\infty$, $\Omega_0\to0$ and $\tilde{x}[n]\to x[n]$, the synthesis equation is $x[n]=\frac{1}{2\pi}\int_{2\pi}X(\Omega)e^{j\Omega n}d\Omega$ and the analysis equation is $X(\Omega)=\sum^{+\infty}_{k=-\infty}x[n]e^{-j\Omega n}$<br>$x[n]$ and $X(\Omega)$ are a Fourier transform pair. </li>
+<li>The discrete-time Fourier transform lacks the duality in continuous-time since $x[n]$ is a discrete-time signal while $X(\Omega)$ is a continous-frequency signal. </li>
+<li>If $\tilde{x}[n]$ is periodic and $x[n]$ represents a period, then the Fourier series coefficients of $\tilde{x}[n]=\frac{1}{N}\times$ samples of Fourier transform of $x[n]$, namely $a_k=\frac1NX(\Omega)|_{\Omega=\frac{2\pi k}{N}}$. </li>
+<li>If $\tilde{x}[n]$ is periodic, the Fourier transform of $\tilde{x}[n]$ is defined as impulse train, $\tilde{X}(\Omega)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\Omega-k\Omega_0)$</li>
 </ol>
 <h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
 <li>Periodic: $X(\Omega)=X(\Omega+2\pi m)$</li>
@@ -396,7 +385,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

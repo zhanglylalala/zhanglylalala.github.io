@@ -191,6 +191,458 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/10/03-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">03. 词法分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-10 14:59:42" itemprop="dateCreated datePublished" datetime="2020-05-10T14:59:42+08:00">2020-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:40" itemprop="dateModified" datetime="2020-08-07T19:49:40+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="词法分析程序设计"><a href="#词法分析程序设计" class="headerlink" title="词法分析程序设计"></a>词法分析程序设计</h1><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ol>
+<li>读入源程序字符序列</li>
+<li>对源程序预处理</li>
+<li>识别源程序中的单词，创建符号表并在相应的符号表中登录信息</li>
+<li>把单词和行号关联，以便编译器将错误信息与源程序位置联系起来</li>
+<li>输出单词序列</li>
+<li>组织：<br />&emsp;作为独立的一遍：源程序完整文件转换为单词符号序列文件<br />&emsp;与语法分析器合在一起作为一遍：词法分析是语法分析的子程序，语法分析调用词法分析获得单词符号二元式</li>
+</ol>
+<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><ol>
+<li>单词：具有独立含义的最小语法单位</li>
+<li>分类：标识符 (变量名)、关键字、常数、运算符、分界符、字符串</li>
+<li>词法分析程序根据词类划分源码，输出二元式$&lt;类别,单词属性值&gt;$ (称为单词符号)。一类一码可以把类别省略，但本质还是二元组</li>
+<li>模式：一个单词的可能形式，定义类别为某一个类的单词的形式</li>
+<li>词素：源程序的一个字符序列，是单词符号的实例。单词属性值不一定是词素。比如源码中的变量名就是一个词素，但是在二元组中，单词属性值可能是$1$</li>
+</ol>
+<h2 id="正规表达式"><a href="#正规表达式" class="headerlink" title="正规表达式"></a>正规表达式</h2><ol>
+<li>正规表达式是表示字符串格式的模式，可以用来描述单词的结构</li>
+<li>正规集：正规式$(r)$所匹配的所有字符串的集合，实际上是一个正规语言，记为$L(r)$</li>
+<li>正则表达式定义：<br />&emsp;$\epsilon$是正规式，其匹配语言是$L(\epsilon)=\{\epsilon\}$<br />&emsp;如果$a\in\Sigma$，则$a$是一个正规式，其匹配语言是$L(a)=\{a\}$<br />&emsp;如果$r$和$s$都是正规式，则有：<br />&emsp;&emsp;$(r)|(s)$也是正规式，表示语言$L(r)\displaystyle\cup L(s)$<br />&emsp;&emsp;$(r)(s)$也是正规式，表示语言$L(r)\cdot L(s)$<br />&emsp;&emsp;$(r)^*$也是正规式，表示语言$(L(r))^*$<br />&emsp;&emsp;$(r)$也是正规式，表示语言$L(r)$</li>
+<li>运算符号优先级：$*=+&gt;\cdot&gt;|$</li>
+<li>或运算具有交换律和结合律，连接运算具有结合律和对或运算的分配律</li>
+<li>$\epsilon$是连接运算的单位元</li>
+</ol>
+<h1 id="有限状态自动机"><a href="#有限状态自动机" class="headerlink" title="有限状态自动机"></a>有限状态自动机</h1><ol>
+<li>状态：区分事物的标识</li>
+<li>有限状态自动机是离散状态系统</li>
+<li>定义：具有离散输入与离散输出的一种数学模型，用于识别输入的符号串是否属于某个语言的合法句子</li>
+<li>输入为符号串，输出为是或者否</li>
+<li>分类<br />&emsp;确定性有限自动机 (DFA)：输入符号定，下一动作定<br />&emsp;非确定性有限自动机 (NFA)：输入符号定，下一动作不定</li>
+<li>组成：字母表 (输入符号)、状态 (开始状态、接受或终结状态)、转移函数</li>
+<li>开始状态用一个箭头空指向该状态，也可以再加一个“start”</li>
+<li>接受状态，也称为终结状态，表示该串是可识别串，用两个圆圈表示</li>
+<li>转移函数有两个参数，当前状态和输入符号。输出下一状态</li>
+<li>从开始状态到终结状态之间的输入符号按顺序组成的串就是可识别的串</li>
+</ol>
+<h2 id="确定性有限自动机"><a href="#确定性有限自动机" class="headerlink" title="确定性有限自动机"></a>确定性有限自动机</h2><ol>
+<li>DFS表示为一个五元组$M=(Q,\Sigma,q_0,F,\delta)$<br />&emsp;$Q$表示有限状态集<br />&emsp;$\Sigma$表示字符表<br />&emsp;$q_0$表示初始状态，只能有一个$q_0\in Q$<br />&emsp;$F$表示接受或终止状态集，可以有多个元素$F\subseteq Q$<br />&emsp;$\delta$表示转移函数，$Q\times\Sigma\to Q$</li>
+<li>表示方法：状态转换图和状态转换表</li>
+<li>状态转换表中开始状态加$\to$，终结状态加$*$</li>
+</ol>
+<h2 id="非确定性有限自动机"><a href="#非确定性有限自动机" class="headerlink" title="非确定性有限自动机"></a>非确定性有限自动机</h2><ol>
+<li>NFA也是由五元组表示，但是转移函数的值域不同。</li>
+<li>NFA的转移函数也是一个当前状态+一个输入符号的定义域，但是值域不是一个状态，而是状态的集合。所以对$\delta$有$Q\times(\Sigma\cup\{\epsilon\})\to 2^Q$</li>
+<li>在非确定性有限自动机中，输入符号可以是$\epsilon$，表示两个状态识别的串是同一个串</li>
+<li>NFA的不确定性体现在两个方面<br />&emsp;第一种情况是识别一个符号的时候有两条路径可走<br />&emsp;第二种是$\epsilon$边的存在，使得同一个子串可以由两个不同的状态</li>
+<li>DFA是NFA的一个特例，但两种自动机识别语言的能力是一样的，即如果一个语言可以被DFA识别，则一定存在一个NFA可以识别该语言，反之亦然</li>
+<li>正规表达式直接转化成DFA比较难，一般是先转化为NFA，再把NFA转化为DFA</li>
+</ol>
+<h2 id="NFA到DFA的转换"><a href="#NFA到DFA的转换" class="headerlink" title="NFA到DFA的转换"></a>NFA到DFA的转换</h2><ol>
+<li>将NFA中一个状态输入同一个符号的所有下一状态作为DFA中的一个集合，以消除第一种不确定性</li>
+<li>$\epsilon$闭包：$t$是一个状态，则$\epsilon-closure(t)$是从状态$t$只经过$\epsilon$转换可以到达的状态集；$T$是一个状态集，$\epsilon-closure(T)$是从$T$中任一状态只经过$\epsilon$边就可以达到的状态集<br />$t$本身以及$T$中的所有状态都属于他们的$\epsilon$闭包<br />利用$\epsilon$闭包可以消除第二种不确定性</li>
+<li>定义$move(t,a)$表示从状态$t$经过$a$边能到达的状态集；$move(T,a)$表示从状态集$T$中的状态经非空的$a$转换可达到的状态集</li>
+<li>子集构造法<br />&emsp;DFA的开始状态是$\epsilon-closure(s_0)$，这就是第一个稳定的状态<br />&emsp;其余状态由$\epsilon-closure(move(T,a))$生成<br />&emsp;DFA的终态是包含原来终态的状态</li>
+<li>子集构造算法流程<br />&emsp;先获得开始状态$\epsilon-closure(s_0)$<br />&emsp;对每一个状态，先找到它在每一个输入下的稳定次态，即，枚举$\epsilon-colosure(move(T,a))$，对每一个可能的$a$<br />&emsp;每次找到一个新的状态，就加入DFA的状态集中，并在未来也对这个新状态进行枚举</li>
+</ol>
+<h2 id="从正规式到NFA的转换"><a href="#从正规式到NFA的转换" class="headerlink" title="从正规式到NFA的转换"></a>从正规式到NFA的转换</h2><ol>
+<li>直接从正规式的定义出发来定义正规式对应的NFA</li>
+<li>对$r=\epsilon$<br /><img src="/img/03.词法分析01.png" width="30%"></li>
+<li>对$r=a$<br /><img src="/img/03.词法分析02.png" width="30%"></li>
+<li>对$r=s|t$<br /><img src="/img/03.词法分析03.png" width="30%"></li>
+<li>对$r=st$，$s$和$t$有一个公用节点，表示$s$的接受状态和$t$的开始状态<br /><img src="/img/03.词法分析04.png" width="30%"></li>
+<li>对$r=(s)^*$<br /><img src="/img/03.词法分析05.png" width="30%"></li>
+<li>$r=(s)$的NFA和$r=s$的一样</li>
+<li>得到的NFA的性质<br />&emsp;$N(r)$的状态数最多是$r$中符号和算符总数的两倍<br />&emsp;$N(r)$只有一个开始状态和一个接受状态，接受状态没有向外的转换<br />&emsp;$N(r)$的每个状态有一个不是$\epsilon$边的指向其他状态的边，或者最多只有两条$\epsilon$边</li>
+</ol>
+<h2 id="DFA的化简"><a href="#DFA的化简" class="headerlink" title="DFA的化简"></a>DFA的化简</h2><ol>
+<li>任何DFA或NFA都存在唯一一个最简DFA与之等价，且任何DFA或NFA都可以转换为该最简DFA</li>
+<li>等价状态<br />&emsp;一致性：两个状态必须同为接受状态或非接受状态<br />&emsp;蔓延性：对所有输入符号，两个状态转移到等价状态</li>
+<li>寻找等价状态：隐含表法 (求同法)<br />&emsp;横少尾，纵少头的阶梯表<br />&emsp;可以直接确定等价的打钩，直接确定不等价的画叉<br />&emsp;取决于次态的写上次态，第一轮比完后再一一比较次态，直至全部判断完毕<br />&emsp;如果遇到相互依赖，循环不定的情况，默认他们都等价</li>
+<li>寻找等价状态：求异法<br />&emsp;先将状态划分为接受状态和非接受状态，再逐步划分精细化，最后得到不可在细分的划分<br />&emsp;考察每一个划分，要求其中的每一个元素在所有输入的情况下的次态组成的集合是该划分的子集<br />&emsp;如果有元素存在某一个输入对应的次态不是原划分的元素，就把该元素从原划分中剥离出去，直到没有元素应该被剥离</li>
+<li>在找到了等价状态之后，重新命名各个等效状态集，并把转移函数的输入中的状态改为原输入状态所属的等效状态，把输出状态改为原输出状态所属的等效状态</li>
+</ol>
+<h2 id="有限自动机到正规文法"><a href="#有限自动机到正规文法" class="headerlink" title="有限自动机到正规文法"></a>有限自动机到正规文法</h2><ol>
+<li>任意一个FA识别的语言都能用正规文法来生成</li>
+<li>每一个状态代表一个非终结符号</li>
+<li>如果状态$i$是一个接受状态，则设规则$A_i\to\epsilon$</li>
+<li>如果状态$i$是一个开始状态，则$A_i$是开始符号</li>
+<li>其他情况，如下图，则设规则$A_i\to aA_j$<br /><img src="/img/03.词法分析06.png" width="30%"></li>
+</ol>
+<h1 id="词法分析器的自动构造"><a href="#词法分析器的自动构造" class="headerlink" title="词法分析器的自动构造"></a>词法分析器的自动构造</h1><ol>
+<li>先用正规式表示出单词的结构，再由正规式生成NFA，最后再化简得到最简DFA</li>
+<li>给每个正规式构造相应的NFA，将所有的NFA用或运算并联起来</li>
+<li>当存在多个匹配的时候，可以选择最长匹配，或规定优先顺序</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/07/02-%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95%E4%B8%8E%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/07/02-%E5%BD%A2%E5%BC%8F%E6%96%87%E6%B3%95%E4%B8%8E%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80/" class="post-title-link" itemprop="url">02. 形式文法与形式语言</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-07 22:17:22" itemprop="dateCreated datePublished" datetime="2020-05-07T22:17:22+08:00">2020-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:49:59" itemprop="dateModified" datetime="2020-08-07T19:49:59+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86-HDU-Stanford/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理 (HDU / Stanford)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="符号串和语言"><a href="#符号串和语言" class="headerlink" title="符号串和语言"></a>符号串和语言</h1><h2 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h2><ol>
+<li>符号：可以相互区分的记号或元素</li>
+<li>字母表$\Sigma$：符号的有限集合</li>
+<li>符号串：字母表上的符号的有穷序列</li>
+<li>空符号串$\epsilon$是不包含任何符号的符号串，是任何$\Sigma$上的符号串，相当于符号串这个群的单位元</li>
+<li>连接：符号串$\alpha$、$\beta$的连接，是把$\beta$的符号写在$\alpha$的符号之后得到的符号串$\alpha\beta$。$\epsilon\alpha=\alpha\epsilon=\alpha$。不满足交换律，是偏序关系</li>
+<li>幂：符号串$\alpha$自身连接$n$次得到的符号串，$\alpha^n$。$\alpha^0=\epsilon$，$\alpha^1=\alpha$</li>
+<li>符号串的长度表示符号串中包含符号的个数。$|\epsilon|=0$</li>
+<li>子串：符号串中的连续子序列</li>
+<li>前缀：符号串中从第一位开始的子序列<br />后缀：符号串中以最后一位结尾的子序列<br />真前/后缀：与原串不同的前/后缀</li>
+<li>符号串集合<br />并集：<script type="math/tex">A+B=\{w|w\in A\ or\ w\in B\}</script><br />连接：<script type="math/tex">A\cdot B=\{xy|x\in A\ and\ y\in B\}</script><br />幂次：$A^0=\{\epsilon\}$，$A^n=A^{n-1}A$<br />$Kleene$闭包 (星闭包)：$\Sigma^* $表示由字母表中的符号组成的符号串集合。<br />正闭包：$\Sigma^+=\Sigma^*-\{\epsilon\}$，即长度大于$1$的符号串的集合</li>
+</ol>
+<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><ol>
+<li>定义：某个字母表上的符号串的集合</li>
+<li>任何一个语言都是$\Sigma^*$的一个子集</li>
+<li>描述方法<br />&emsp;有穷：直接列出<br />&emsp;无穷：给出生成方式 (文法)或识别方式 (自动机)</li>
+</ol>
+<h1 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h1><p>主要用到的是上下文无关文法和正规文法 (正则文法)</p>
+<h2 id="文法-1"><a href="#文法-1" class="headerlink" title="文法"></a>文法</h2><ol>
+<li>文法$G$是一个四元组$G=(V_T,V_N,S,P)$<br />&emsp;$V_T$是终结符号集，即最终出现在句子中，在字母表中的单词符号<br />&emsp;$V_N$是非终结符号集，即推导过程中出现，但不在字母表中，不会在最后的句子中出现的符号<br />&emsp;$S$是开始符号，$S\in V_N$，表示最大的语法单位<br />&emsp;$P$是产生式规则集合。$P=\{\alpha\to\beta|\alpha至少包含一个非终结符号\}$</li>
+<li>从文法生成串：从开始符号$S$开始，利用规则$P$重写所有非终结符号，直到每一个符号都是终结符号为止</li>
+<li>$P\to\alpha_1,P\to\alpha_2,…,P\to\alpha_n$缩写为$P\to\alpha_1|\alpha_2|…|\alpha_n$</li>
+<li>只有四个元素都完全一样的两个文法才是相同的文法，否则即使产生的语言一样也不相同</li>
+<li>直接推导：用一条规则把左部的一个非终结符号直接替换为一个终结符号或另一个非终结符号<br />推导：$0$步或多步直接推导，$\alpha\Rightarrow…\Rightarrow\beta$等价于$\alpha\Rightarrow^*\beta$<br />用$\Rightarrow^+$表示至少$1$步的推导</li>
+<li>最左推导：每一步的推导都施加在句型的最左边的非终结符号上，记为$\Rightarrow_{lm}$，生成的句型称为左句型<br />最右推导：施加在最右边的非终结符号上，记为$\Rightarrow_{rm}$，生成的句型称为右句型。也称为规范推导</li>
+<li>归约：用产生式的左部替代右部的过程，是识别串的方式，是推导的逆过程。如果$A\to\gamma$是产生式规则，记为$\alpha\gamma\beta\Leftarrow\alpha A\beta$<br />最左归约：每一步归约都施加在句型最左边的可归约串上，规范归约，是最右推导的逆过程 (因此最右推导是规范推导)<br />最右归约：施加在最右边的可归约串上，是最左推导的逆过程</li>
+<li>文法$G[S]:…$中，$G$是文法的名字，$S$是开始符号，后面跟的是产生式规则集，产生式规则集中左部都是非终结符号，其他的都是终结符号</li>
+<li>乔姆斯基文法的四种类型 ($G=(V_T,V_N,S,P),\alpha\to\beta\in P$)<br />&emsp;0型，短语结构文法 (PSG)：$|\alpha|≠0$，识别系统是图灵机<br />&emsp;1型，上下文有关文法 (CSG)：$|\alpha|≤|\beta|$，识别系统是线性有界自动机<br />&emsp;2型，上下文无关文法 (CFG)：$|\alpha|=1,\alpha\in V_N$，识别系统是下推自动机<br />&emsp;3型，正规文法 (RG)：右部最多一个非终结符号且在所有可选项中非终结符号都在终结符号的同一侧，在左边的是左线性文法，在右边的是右线性文法。识别系统是有限自动机</li>
+</ol>
+<h2 id="语言-1"><a href="#语言-1" class="headerlink" title="语言"></a>语言</h2><ol>
+<li>句型：若存在$S\Rightarrow^*\alpha$，则$\alpha$是一个句型。必须从开始符号出发推导<br />句子：$\alpha$是一个句型，且$\alpha$只包含终结符号</li>
+<li>文法产生的语言$L(G)=\{\alpha|\alpha是G的句子\}$。即语言是文法$G$推导出的所有句子组成的集合。$L(G)=\{\alpha|S\Rightarrow^*\alpha且\alpha\in V_T^*\}$</li>
+<li>文法产生的语言只有一个，但是一个语言可以由多种文法产生。如果两个文法生成同一个语言，则这两个文法等价</li>
+<li>产生式集合、终结符号、非终结符号有限，但是在有递归的情况下可以导出无穷多个句子</li>
+</ol>
+<h2 id="分析树"><a href="#分析树" class="headerlink" title="分析树"></a>分析树</h2><ol>
+<li>一个节点一个符号，用于展示推导过程</li>
+<li>根结点是开始符号</li>
+<li>叶子节点按中序遍历中的相对顺序从左到右构成这一棵推导树的结果句型</li>
+<li>内部结点都是非终结符号。但是非终结符号也可能出现在叶子节点，这棵推导树的结果是句型不是句子</li>
+<li>每一个结点及其所有子节点对应一条产生式规则，其中的父节点是左部，子节点从左到右排列构成右部</li>
+<li>分析树忽略了推导过程中非终结符号的替换顺序，所以一棵树可以对应多个推导。但一棵树只能对应一个最左推导 (上到下，左到右)，以及一个最右推导 (上到下，右到左)</li>
+<li>二义：一个文法的句子有不止一棵的分析树<br />又最左(右)推导与分析树一一对应，故句子二义说明有不止一个最左(右)推导</li>
+<li>如果一个文法包含二义性句子，则这个文法是二义性的<br />产生某上下文无关语言的每一个文法都是二义的，则语言是先天二义的</li>
+<li>文法的无二义性是不可判定的，因为不可能穷举文法的所有句子。只能判断有二义性</li>
+<li>如果产生式集中一个非终结符号既存在左递归，又存在右递归，那该文法就是二义的</li>
+<li>程序设计语言中二义文法的解决方法：<br />&emsp;改写为等价无二义文法<br />&emsp;设定优先顺序，限制可选分析树</li>
+</ol>
+<h2 id="句型分析"><a href="#句型分析" class="headerlink" title="句型分析"></a>句型分析</h2><ol>
+<li>短语：$\alpha\beta\delta$是文法$G[S]$的一个句型，若存在推导$S\Rightarrow^*\alpha A\delta$且$A\Rightarrow^+\beta$，则称$\beta$是句型$\alpha\beta\delta$相对于非终结符号$A$的短语。<br />即，句型中一个可以独立由某个非终结符号生成的子串就是句型相对于非终结符号的短语<br />短语也是分析树中以非终结符号为子树根节点的最右叶子节点序列</li>
+<li>直接短语：一步推导就能得到的短语，在分析树中，子树只有两层，短语是非终结符号的子节点</li>
+<li>句柄：最左边的直接短语</li>
+<li>素短语：至少包含一个终结符，不含更小带终结符的短语的短语</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/06/GTD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/06/GTD/" class="post-title-link" itemprop="url">GTD</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-06 23:37:37" itemprop="dateCreated datePublished" datetime="2020-05-06T23:37:37+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:45:24" itemprop="dateModified" datetime="2020-08-07T19:45:24+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">看过的书</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/img/GTD.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/05/06/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/06/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">如何高效学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-06 23:34:56" itemprop="dateCreated datePublished" datetime="2020-05-06T23:34:56+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 19:44:15" itemprop="dateModified" datetime="2020-08-07T19:44:15+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">看过的书</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/img/如何高效学习.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/26/01-%E7%BC%96%E8%AF%91%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1035,508 +1487,6 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/02-Loss-Functions-and-Optimization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/04/02-Loss-Functions-and-Optimization/" class="post-title-link" itemprop="url">02. Loss Functions and Optimization</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-04 15:30:24" itemprop="dateCreated datePublished" datetime="2020-04-04T15:30:24+08:00">2020-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:31" itemprop="dateModified" datetime="2020-08-07T19:47:31+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><p>A loss function tells how good our current classifier is. </p>
-<h2 id="Data-Loss"><a href="#Data-Loss" class="headerlink" title="Data Loss"></a>Data Loss</h2><ol>
-<li>Given a dataset of examples $\{(x_i,y_i)\}^N_{i=1}$ where $x_i$ is an image and $y_i$ is an integer label. Loss over the dataset is a sum of loss over examples: $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)$. </li>
-<li>There are infinitely many $W$ to make $L=0$. </li>
-</ol>
-<h3 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h3><ol>
-<li>Multiclass SVM loss (Hinge loss): $L_i=\displaystyle\sum_{j≠y_i}max(0,s_j-s_{y_i}+1)$. $s_i$ is the score of the $i$th class. </li>
-<li>The minimum loss of SVM is $0$ when all prediction is correct. The maximum loss is infinity when the prediction is as wrong as possible. </li>
-<li>If at initialization $W$ is small, so all $s\approx 0$, the loss will be <script type="math/tex">the\ number\ of\ class-1</script>. </li>
-</ol>
-<h3 id="Softmax-Classifier-Multinomial-Logistic-Regression"><a href="#Softmax-Classifier-Multinomial-Logistic-Regression" class="headerlink" title="Softmax Classifier (Multinomial Logistic Regression)"></a>Softmax Classifier (Multinomial Logistic Regression)</h3><ol>
-<li>We can use the scores to calculate the probabilities of all labels given the condition of the image is $x_i$. </li>
-<li>We exponentiate scores to make every term positive. So the probability of the actual label being $k$ is $P(Y=k|X=x_i)=\displaystyle\frac{e^{s_k}}{\sum_je^{s_j}}$, which is called the softmax function. </li>
-<li>To maximize the log-likelihood, or to minimize the negative log-likelihood of the correct class. <script type="math/tex">L_i=-log\ P(Y=y_i|X=x_i)=-log\ \displaystyle\frac{e^{s_{y_i}}}{\sum_je^{s_j}}</script>. </li>
-<li>The goal is to maximize the probability of the right label. It is easier to maximize the log function than the raw probability. Also, the loss function is describing how bad the model is, so we take the negative of it. </li>
-<li>Three steps for softmax classifier: exponentiate the scores; normalize them; take the negative log of the correct label. </li>
-<li>The minimum possible loss is $0$ when the model is totally right (the probability of the accurate label is $1$). The maximum is infinity when the model is entirely wrong (the probability of the correct label is $0$). However, these two situations will occur. </li>
-<li>A slight change in a datapoint might when changing the loss of SVM if the label is right, but it will change the loss of softmax in any situation. </li>
-</ol>
-<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><ol>
-<li>The only thing we care about is the performance on the test set. So we need to tell our algorithm more than the performance on the training data. </li>
-<li>To avoid overfitting the training data, we should add regularization to the loss, which will punish when the model is complicated. So the loss becomes $L=\displaystyle\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$. $\lambda$ is a hyperparameter called regularization strength. </li>
-<li>$L2$ regularization: $R(W)=\displaystyle\sum_k\sum_lW_{k,l}^2$<br />$L1$ regularization: $R(W)=\displaystyle\sum_k\sum_l|W_{k,l}|$<br />Elastic net $(L1+L2)$: $R(W)=\displaystyle\sum_k\sum_l\beta W_{k,l}^2+|W_{k,l}|$</li>
-<li>The idea of regularization is to penalize the complexity of model rather than trying to fit the training data. </li>
-<li>$L2$ regularization also corresponds MAP inference using a Gaussian prior on $W$. </li>
-<li>The regularization function is a problem-dependent hyperparameter. </li>
-<li>If at initialization $W$ is small so all $s\approx 0$, the loss will be <script type="math/tex">-log\ c</script>. $c$ is the number of classes. </li>
-</ol>
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><ol>
-<li>The strategy here is to follow the gradient of $f$. The opposite direction of the gradient is the greatest decrease in the function. </li>
-<li>The numerical way to calculate the gradient to increase one component of $W$ a little bit, then use the formula $\displaystyle\frac{df}{dx}=\frac{f(x+h)-f(x)}{h}$ to get the corresponding component in the gradient. </li>
-<li>The faster way to get the gradient is the analytic way. In practice, always use the analytic gradient, but check implementation with numerical gradient. This is called a gradient check. </li>
-<li>Gradient descent: first calculate the gradient, then subtract the multiplication of learning rate and the gradient from the weight. </li>
-<li>Calculation of the gradient can be slow, so in practice, we usually use the stochastic gradient descent, which only calculates the gradient of part of the training set. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/04/04/01-Image-Classification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/04/01-Image-Classification/" class="post-title-link" itemprop="url">01. Image Classification</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-04 12:11:23" itemprop="dateCreated datePublished" datetime="2020-04-04T12:11:23+08:00">2020-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:47:49" itemprop="dateModified" datetime="2020-08-07T19:47:49+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-Stanford-CS231n/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机视觉 (Stanford CS231n)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
-<li>The conventional way to solve image classification problem: <br />Data-driven Approach: <br />&emsp;Collect a dataset of images and labels<br />&emsp;Use Machine Learning to train a classifier<br />&emsp;Evaluate the classifier on new images</li>
-<li>The API has two main functions: <br />&emsp;”Train” function: input images and labels then output a model. <br />&emsp;”Predict” function: input model and images then output predictions. </li>
-</ol>
-<h1 id="Nearest-Neighbor"><a href="#Nearest-Neighbor" class="headerlink" title="Nearest Neighbor"></a>Nearest Neighbor</h1><h2 id="Train-and-Predict"><a href="#Train-and-Predict" class="headerlink" title="Train and Predict"></a>Train and Predict</h2><ol>
-<li>In the training function, we memorize all data and labels. </li>
-<li>In the prediction function, we predict the label of the most similar training image. </li>
-<li>More specific, in prediction, we find the closest image and predict the label of the nearest image. </li>
-<li>With $N$ example, the complexity of training is $O(1)$ and prediction is $O(N)$. This is bad because we want classifiers that are fast at prediction even if the training is slow</li>
-<li>Another problem with this algorithm is the curse of dimensionality. As the data enter the higher dimension, they become sparse. So we need a lot more datas to make space dense, which is possibly out of control. </li>
-</ol>
-<h2 id="Compare-Images"><a href="#Compare-Images" class="headerlink" title="Compare Images"></a>Compare Images</h2><ol>
-<li>In order to select the most similar image, we need to compare each image. So it is necessary to choose a compare function. </li>
-<li>The first choice is the <code>L1 distance</code> or <code>Manhattan distance</code>. $d_1(I_1,I_2)=\displaystyle\sum_p|I_1^p-I_2^p|$. </li>
-<li>Another choice is the <code>L2 distance</code> or <code>Euclidean distance</code>. $d_2(I_1,I_2)=\sqrt{\sum_p(I_1^p-I_2^p)^2}$. </li>
-<li>The difference between the two choices is that $L1$ distance is coordinate-dependent wile $L2$ distance is coordinate-independent. If we rotate the coordinate frame, $L1$ distance will be changed while $L2$ distance remains the same. </li>
-<li>Actually, distance matrices on pixels are not informative. </li>
-</ol>
-<h2 id="K-Nearest-Neighbors"><a href="#K-Nearest-Neighbors" class="headerlink" title="K-Nearest Neighbors"></a>K-Nearest Neighbors</h2><ol>
-<li>The algorithm above determines the result with only one data. Therefore it is easily affected by noise. </li>
-<li>To reduce the affection of noise, we use the more “democratic” way. We take majority vote from $K$-nearest neighbours. </li>
-<li>The algorithm mentioned earlier is a $K=1$ algorithm. </li>
-<li>We often take $K$ some odd number instead of an even number. </li>
-<li>When $K$ is smaller than the number of classes of labels, some image may be unpredictable if the vote of all $K$-nearest neighbours is a tie. So we will make a random guess among the majority winners. </li>
-</ol>
-<h1 id="Hyperparameter"><a href="#Hyperparameter" class="headerlink" title="Hyperparameter"></a>Hyperparameter</h1><ol>
-<li>Hyperparameter is choices about the algorithm that we set rather than learn. As the number of $K$ above, which distance we are using, they are both hyperparameters. </li>
-<li>Hyperparameter is very problem-dependent. We must try them all out and see what works best. </li>
-</ol>
-<h2 id="Setting-Hyperparameters"><a href="#Setting-Hyperparameters" class="headerlink" title="Setting Hyperparameters"></a>Setting Hyperparameters</h2><ol>
-<li>Mark that when setting hyperparameters, we never touch a finger on the test set. The test must be unseen from model and us. </li>
-<li>So we must split data into a training set, a validation set and a test set. Choose hyperparameters on the validation set and evaluate on the test set. </li>
-<li>Furthermore, we can use the cross-validation by splitting data into folds. Try each fold as validation and average the results. This is useful but takes much time. So we mostly use it on small datasets and seldom use it on large datasets. </li>
-<li>In order to avoid bias on each dataset, we usually split data randomly. </li>
-</ol>
-<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><ol>
-<li>The parametric approach takes in the image as a vertical vector $\vec{x}$, and a parameter matrix (weight matrix) $W$ then outputs scores of each class. <br />For $\vec{x}$, we take the numbers in each image out in order and put them into a vertical vector. </li>
-<li>In linear classification, $f(\vec{x},W)=W\vec{x}$. Sometimes, we might want to add a bias vector $\vec{b}$, which makes the function $f(\vec{x}, W)=W\vec{x}+\vec{b}$. </li>
-<li>Each row of $W$ is a template of how each pixel in the image will affect each class. </li>
-<li>The linear classification model splits the space into pieces with linear decision boundaries. Each class takes one piece. </li>
-<li>We predict the label as the label of the highest class score. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/22/15-Classical-Statistical-Inference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/22/15-Classical-Statistical-Inference/" class="post-title-link" itemprop="url">15. Classical Statistical Inference</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-22 10:11:49" itemprop="dateCreated datePublished" datetime="2020-03-22T10:11:49+08:00">2020-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:35:01" itemprop="dateModified" datetime="2020-08-07T19:35:01+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ol>
-<li>In classical statistics, we see the unknowns as constants instead of random variables in Bayesian statistics. </li>
-<li>The distribution of $X$ depends on $\theta$. This is not a conditional distribution $p_{X|\Theta}$ or $f_{X|\Theta}$ in the Bayesian statistics but only a common distribution $p_X(x;\theta)$ or $f_X(x;\theta)$. </li>
-<li>For vectors $X$ and $\theta$: $p_{X_1,…X_2}(x_1,…,x_n;\theta_1,…,\theta_m)$. </li>
-<li>Problem types: <br />&emsp;Hypothesis testing: choose the correct model from several discrete model. Each model contains only one model. <br />&emsp;Composite hypotheses: some models might consist of more than one models. <br />&emsp;Estimation: design an estimator $\hat\Theta$ to keep estimation error $\hat\Theta-\theta$ small. </li>
-</ol>
-<h1 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h1><ol>
-<li>Pick $\theta$ that makes data most likely. <script type="math/tex">\hat\theta_{ML}=arg\ max_\theta\ p_X(x;\theta)</script>. </li>
-<li>In Bayesian MAP estimation, we actually only need to maximize <script type="math/tex">\hat\theta_{MAP}=arg\ max_\theta\ p_{X|\Theta}(x|\theta)p_\Theta(\theta)</script>. If $p_\Theta(\theta)$ is a constant, these two is going to maximize the same thing. </li>
-<li>The estimate $\theta$ is the realized value of estimator $\hat\Theta$. </li>
-<li>In many applications, the observations $X_i$ are assumed to be independent, in which case, the likelihood function is of the form $p_X(x_1,…,x_n;\theta)=\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)$. <br />In this case, it is often use the logarithm form, which is called log-likelihood function, to find the maximum. <br /><script type="math/tex">log\ p_X(x_1,…,x_n;\theta)=log\displaystyle\prod^n_{i=1}p_{X_i}(x_i;\theta)=\sum^n_{i=1}log\ p_{X_i}(x_i;\theta)</script></li>
-</ol>
-<h2 id="Desired-Properties-of-Estimators"><a href="#Desired-Properties-of-Estimators" class="headerlink" title="Desired Properties of Estimators"></a>Desired Properties of Estimators</h2><ol>
-<li>Unbiased: $E_\theta[\hat\Theta]=\displaystyle\int f_{\hat\Theta}(\hat\theta;\theta)\hat\theta d\hat\theta =\theta$. $\theta$ is the true value. </li>
-<li>Consistent: $\hat\Theta_n\to\theta$. </li>
-<li>Small mean squared error: $E_\theta[(\hat\Theta-\theta)^2]=var_\theta(\hat\Theta-\theta)+(E_\theta[\hat\Theta-\theta])^2=var_\theta(\hat\Theta)+(bias_\theta)^2$</li>
-</ol>
-<h1 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h1><ol>
-<li>An estimate $\hat\Theta_n$ may not be informative enough. </li>
-<li>An $(1-\alpha)$ confidence interval is a random interval $[\Theta_n^-,\Theta_n^+]$, such that $P(\Theta^-_n≤\theta≤\Theta^+_n)≥1-\alpha,\forall\alpha$. </li>
-<li>We usually use the normal table to calculate the confidence interval of sample mean. <br />&emsp;According to the central limit theorem, $P\left(\displaystyle\frac{|\hat\Theta_n-\theta|}{\displaystyle\frac{\sigma}{\sqrt{n}}}≤z \right)\approx\Phi(z)$. <br />&emsp;So $P\left(\hat\Theta_n-\displaystyle\frac{z\sigma}{\sqrt{n}}≤\theta≤\hat\Theta_n+\frac{z\sigma}{\sqrt{n}} \right)\approx1-\alpha$<br />&emsp;$\Phi(z)=1-\displaystyle\frac{\alpha}{2}$. </li>
-<li>If we don’t know about $\sigma$. <br />&emsp;Option $1$: use the upper bound on $\sigma$. <br />&emsp;Option $2$: use ad hoc estimate of $\sigma$. <br />&emsp;Option $3$: use the generic estimate of variance<br />&emsp;&emsp;$\sigma^2=E[(X_i-\theta)^2]$, so $\hat\sigma^2=\displaystyle\frac{1}{n}\sum^n_{i=1}(X_i-\theta)^2$. But $\theta$ is still unknown, so we use the estimator instead. <br />&emsp;&emsp;$\hat{S}_n^2=\displaystyle\frac{1}{n-1}\sum^n_{i=1}(X_i-\hat\Theta_n)^2$. And $E[\hat{S}^2_n]=\hat\sigma^2\to\sigma^2$. </li>
-</ol>
-<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><ol>
-<li>Model: $y\approx\theta_0+\theta_1x$ to minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
-<li>Interpretation: $Y_i=\theta_0+\theta_1x_i+W_i$, $W_i\sim N(0,\sigma^2)$. </li>
-<li>Likelihood function $f_{X,Y|\theta}(x,y;\theta)=c\cdot exp\{\displaystyle-\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2\}$. So we need to maximize it. </li>
-<li>Take the logs, maximize <script type="math/tex">-log\ c\cdot\displaystyle\frac{1}{2\sigma^2}\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2</script>. The same as minimize $\displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_i)^2$. </li>
-<li>The solution is $\hat\theta_1=\displaystyle\frac{\displaystyle\sum^n_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum^n_{i=1}(x_i-\bar{x})^2}$ and $\hat\theta_0=\bar{y}-\hat\theta_1\bar{x}$. </li>
-<li>This form can be interpreted as estimates of $\hat\theta_1=\displaystyle\frac{cov(X,Y)}{var(X)}$ and $\hat\theta_0=E[Y]-\hat\theta_1E[X]$. </li>
-<li>Multiple linear regression: <br />&emsp;Model: $y\approx\theta_0+\theta_1x_1+\theta_2x_2+…$. <br />&emsp;Formulation: <script type="math/tex">min_{\theta_0,\theta_1,…}\ \displaystyle\sum^n_{i=1}(y_i-\theta_0-\theta_1x_1-\theta_2x_2-…)^2</script>. </li>
-<li>General method: set the derivative to zero. </li>
-<li>We can also choose different variables $y\approx\theta_0+\theta_1h(x)$. Since $\theta_0$ and $\theta_1$ are the unknowns, this is still a linear function. </li>
-<li>Some concerns: <br />&emsp;noise might affect the result<br />&emsp;multiple variables have different correlation<br />&emsp;the regression function only shows the prediction based on other variables, but says nothing about the causal relations. </li>
-</ol>
-<h1 id="Binary-Hypothesis-Testing"><a href="#Binary-Hypothesis-Testing" class="headerlink" title="Binary Hypothesis Testing"></a>Binary Hypothesis Testing</h1><ol>
-<li>Null hypothesis $H_0$: $X\sim p_X(x;H_0)$ or $X\sim f_X(x;H_0)$<br />Alternative hypothesis $H_1$: $X\sim p_X(x;H_1)$ or $X\sim f_X(x;H_1)$. </li>
-<li>Partition the space of possible data vectors Rejection region R: reject $H_0$ if and only if $x\in R$. </li>
-<li>Types of errors: <br />&emsp;False rejection: $H_0$ is true but rejected: $\alpha(R)=P(X\in R;H_0)$. <br />&emsp;False acceptance: $H_0$ is false but accepted: $\beta(R)=P(X\notin R;H_1)$. <br />&emsp;$\alpha$ and $\beta$ have a trade off relation. When $\alpha$ increases, $\beta$ decreases and vice versa. </li>
-<li>Likelihood ratio test of Bayesian test: choose $H_1$ if <br />$P(H_1|X=x)&gt;P(H_0|X=x)$ or $\displaystyle\frac{P(X=x|H_1)P(H_1)}{P(X=x)}&gt;\frac{P(X=x|H_0)P(H_0)}{P(X=x)}$ or $\displaystyle\frac{P(X=x|H_1)}{P(X=x|H_0)}&gt;\frac{P(H_0)}{P(H_1)}$. </li>
-<li>Likelihood ratio test of Nonbayesian test: choose $H_1$ if <br />$L(x)=\displaystyle\frac{P(X=x;H_1)}{P(X=x;H_0)}&gt;\epsilon$ when $X$ is discrete and if $\displaystyle\frac{f_X(x;H_1)}{f_X(x;H_0)}&gt;\epsilon$ when $X$ is continuous. <br />Normally, we can concise the inequality to $\displaystyle\sum_if(X_i)&gt;\epsilon’$, which is called the statistic. <br />Then fix the false rejection probability $\alpha$, and choose $\epsilon$ so that <script type="math/tex">P(reject\ H_0;H0)=\alpha</script>, or $P\left(\displaystyle\sum_if(X_i)&gt;\epsilon’;H_0\right)=\alpha$. <br />Usually, we can solve the later equation with CLT when statistic is large. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/03/21/14-Bayesian-Statistical-Inference/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/21/14-Bayesian-Statistical-Inference/" class="post-title-link" itemprop="url">14. Bayesian Statistical Inference</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-21 16:38:18" itemprop="dateCreated datePublished" datetime="2020-03-21T16:38:18+08:00">2020-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:34:48" itemprop="dateModified" datetime="2020-08-07T19:34:48+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA-MIT-6-041/" itemprop="url" rel="index">
-                    <span itemprop="name">概率论 (MIT 6.041)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h1><ol>
-<li>In probability, every unambiguous question has a unique correct answer. </li>
-<li>But in statistics, for any particular problem, there may be several reasonable methods, yielding different answers. In general, there is no principled way for selecting the best method, unless one makes several assumptions and imposes additional constraints on the inference problem. </li>
-<li>We can narrow down the search for the right method by requiring certain desirable properties. </li>
-<li>The choice of one method over another usually hinges on several factors: performance guarantees, past experience, common sense, as well as the consensus of the statistics community on the applicability of a particular method on a particular problem type. </li>
-<li>Bayesian statistics treats unknown parameters as random variables with known prior distributions. </li>
-<li>In parameter estimation, we want to generate estimates that are close to the true values of the parameters in some probabilistic sense. </li>
-<li>In hypothesis testing, the unknown parameter takes one of a finite number of values, corresponding to competing hypotheses; we want to choose one of the hypotheses, aiming to achieve a small probability of error. </li>
-</ol>
-<h1 id="Bayesian-Inference-and-the-Posterior-Distribution"><a href="#Bayesian-Inference-and-the-Posterior-Distribution" class="headerlink" title="Bayesian Inference and the Posterior Distribution"></a>Bayesian Inference and the Posterior Distribution</h1><ol>
-<li>In Bayesian inference, the unknown quantity of interest, which we denote by $\Theta$, is modeled as a random variable or as a finite collection of random variables. </li>
-<li>We aim to extract information about $\Theta$, based on observing a collection $X=(X_1,…,X_n)$ of related random variables, called observations, measurements, or an observation vector. </li>
-<li>In Bayesian Inference, we start with a prior distribution $p_\Theta$ or $f_\Theta$ for the unknown random variable $\Theta$. We have a model $p_{X|\Theta}$ or $f_{X|\Theta}$ of the observation vector $X$. After observing the value $x$ of $X$, we form the posterior distribution $p_{\Theta|X}$ or $f_{\Theta|X}$, using the appropriate version of Bayes’s rule. </li>
-<li>Once a particular value $x$ of $X$ has been ovserved, a complete answer to the Bayesian inference problem is provided by the posterior distribution of $\Theta$. </li>
-<li>The case of multiple unknown parameters is entirely similar. </li>
-<li>After getting the posterior distribution, we are certainly to make some decision with it to minimize the probability of error. </li>
-</ol>
-<h1 id="Hypothesis-and-Estimate"><a href="#Hypothesis-and-Estimate" class="headerlink" title="Hypothesis and Estimate"></a>Hypothesis and Estimate</h1><ol>
-<li>An estimator is a random variable of the form $\hat\Theta=g(X)$, for some function $g$. Different choices of $g$ correspond to different estimators. </li>
-<li>An estimate is the value $\hat\theta$ of an estimator, as determined by the realized value $x$ of observation $X$. </li>
-<li>In estimation problem, $\Theta$ is continuous. In hypothesis problem, $\Theta$ is descrete with small sample space. </li>
-</ol>
-<h2 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ol>
-<li>One way to make the decision is to use the Maximum a Posteriori probability (MAP) rule. <br />Given the value $x$ of the observation, we select a value of $\theta$, denoted $\hat\theta$, that maximizes the posterior distribution. Namely: <br /><script type="math/tex">\hat\theta=\left\{\begin{array}{}arg\ max_\theta\ p_{\Theta|X}(\theta|x)&\Theta\ is\ discrete\\arg\ max_\theta\ f_{\Theta|X}(\theta|x)&\Theta\ is\ continuous \end{array}\right.</script></li>
-<li>The denominator of the posterior distribution $p_X$ or $f_X$ which is $\Theta$ independent. Thus, to maximize the posterior, we only need to choose a value of $\theta$ that maximizes the numerator. </li>
-<li>If $\Theta$ takes only a finite number of values, the MAP rule minimizes (over all decision rules) the probability of selecting an incorrect hypothesis. This is true for both the unconditional probability of error and the conditional one, given any observation value $x$. </li>
-<li>In the absence of additional assumptions, a point estimate carries no guarantees on its accuracy. Thus, it’s usually desirable to also report some additional information, such as the conditional mean squared error. </li>
-</ol>
-<h2 id="LMS"><a href="#LMS" class="headerlink" title="LMS"></a>LMS</h2><ol>
-<li>This rule tries to minimize $E[(\Theta-c)^2]$, where $c$ is the estimate. <br />Expand this to get $E[\Theta^2]-2cE[\Theta]+c^2$. The minimum is achieved at $c=E[\Theta]$. </li>
-<li>So the optimal estimate is $E[\Theta]$. And the error is $E[(\Theta-E[\Theta])^2]=var(\Theta)$. </li>
-<li>The conditional case is the same. Minimize $E[(\Theta-c)^2|X=x]$ is minimized by $c=[\Theta|X=x]$. </li>
-<li>$E[\Theta|X]$ minimizes $E[(\Theta-g(X))^2]$ over all estimators $g(\cdot)$. </li>
-<li>If we have multiple observations, $\hat\theta=E[\Theta|X_1,…,X_n]$, $E[(\Theta-E[\Theta|X_1,…,X_n])^2]≤E[(\Theta-g(X_1,…,X_n))^2]$ for all estimators $g(X_1,…,X_n)$. </li>
-<li>If we have multiple parameters, we need to minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$. The result is $\hat\Theta_i=E[\Theta_i|X_1,…,X_n]$. </li>
-</ol>
-<h3 id="Estimation-Error"><a href="#Estimation-Error" class="headerlink" title="Estimation Error"></a>Estimation Error</h3><ol>
-<li>Let $\hat\Theta=E[\Theta|X]$ be the LMS estimator and $\tilde\Theta=\hat\Theta-\Theta$ be the associated estimation error. </li>
-<li>The estimation error $\tilde\Theta$ is unbiased, i.e. it has zero unconditional and conditional mean $E[\tilde\Theta]=0$ and $E[\tilde\Theta|X=x]=0$ for all $x$. </li>
-<li>The estimation error $\tilde\Theta$ is uncorrelated with the estimate $\hat\Theta$: $cov(\hat\Theta, \tilde\Theta)=0$. </li>
-<li>The variance of $\Theta$ can be decomposed as $var(\Theta)=var(\hat\Theta)+var(\tilde\Theta)$. </li>
-</ol>
-<h3 id="Linear-LMS"><a href="#Linear-LMS" class="headerlink" title="Linear LMS"></a>Linear LMS</h3><ol>
-<li>The calculation for multiple observations and multiple parameters might be hard. So we might choose another way to estimate. </li>
-<li>A linear estimator of a random variable $\Theta$, based on observations $X_1,…,X_n$ has form $\hat\Theta=a_1X_1+…+a_nX_n+b$. </li>
-<li>Given a particular choice of the scalars $a_1,…,a_n,b$, the corresponding mean squared error is $E[(\Theta-a_1X_1-…-a_nX_n-b)^2]$. </li>
-</ol>
-<h4 id="Single-Observation"><a href="#Single-Observation" class="headerlink" title="Single Observation"></a>Single Observation</h4><ol>
-<li>Suppose that $a$ has already been chosen. This is the same as choosing a constant $b$ to estimate the random variable $\Theta-aX$. The best choice is $b=E[\Theta-aX]=E[\Theta]-aE[X]$. </li>
-<li>Now we only need to minimize $E[(\Theta-aX-E[\Theta]+aE[X])^2]$. </li>
-<li>Rewrite this expression as $var(\Theta-aX)=\sigma_\Theta^2+a^2\sigma_X^2+2cov(\Theta,-aX)=\sigma_\Theta^2+a^2\sigma_X-2a\cdot cov(\Theta,X)$. </li>
-<li>To minimize $var(\Theta-aX)$, we set its derivative to zero and solve for $a$. This yields $a=\displaystyle\frac{cov(\Theta,X)}{\sigma^2_X}=\frac{\rho\sigma_\Theta\sigma_X}{\sigma^2_X}=\rho\frac{\sigma_\Theta}{\sigma_X}$, where $\rho=\displaystyle\frac{cov(\Theta,X)}{\sigma_\Theta\sigma_X}$. </li>
-<li>The mean squared estimation error of the resulting linear estimator $\hat\Theta$ is given by $var(\Theta-\hat\Theta)=(1-\rho^2)\sigma^2_\Theta$. </li>
-</ol>
-<h4 id="Multiple-Observations-and-Multiple-Parameters"><a href="#Multiple-Observations-and-Multiple-Parameters" class="headerlink" title="Multiple Observations and Multiple Parameters"></a>Multiple Observations and Multiple Parameters</h4><ol>
-<li>To minimize $E[(\Theta_1-\hat\Theta_1)^2]+…+E[(\Theta_m-\hat\Theta_m)^2]$, only need to minmize each $E[(\Theta_1-\hat\Theta_i)^2]$. So we are essentially dealing with $m$ decoupled linear estimation problems, one for each unknown parameter. </li>
-<li>For every observation, we have $X_i=\Theta+W_i$, where the $W_i$ are random variables with mean $0$ and variance $\sigma_i^2$, which represent observation errors. </li>
-<li>The linear LMS estimator of $\Theta$ based on the observations $X_1,…,X_n$ turns out to be $\hat\Theta_i=\displaystyle\frac{\displaystyle\frac{\mu_i}{\sigma_{0i}^2}+\displaystyle\sum^n_{i=1}\frac{X_i}{\sigma^2_i}}{\displaystyle\sum^n_{i=0}\frac{1}{\sigma^2_i}}$. $\mu_i$ is the mean of $\Theta_i$ while $\sigma_{0i}^2$ is the variance of $\Theta_i$. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1608,7 +1558,7 @@ Alternately, if we want to run on CUP, change the “gpu” to “cpu”. </li>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

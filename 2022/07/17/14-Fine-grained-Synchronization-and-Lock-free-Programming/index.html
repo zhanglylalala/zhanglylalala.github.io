@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Fine-grained synchronization and fine-grained lock Data structures are often larger than a single memory location. One solution is to protect the structure with a single lock.It is relatively simple t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14. Fine-grained Synchronization and Lock-free Programming">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/07/17/14-Fine-grained-Synchronization-and-Lock-free-Programming/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Fine-grained synchronization and fine-grained lock Data structures are often larger than a single memory location. One solution is to protect the structure with a single lock.It is relatively simple t">
+<meta property="article:published_time" content="2022-07-17T03:22:54.000Z">
+<meta property="article:modified_time" content="2022-07-18T09:00:51.461Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/07/17/14-Fine-grained-Synchronization-and-Lock-free-Programming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>14. Fine-grained Synchronization and Lock-free Programming | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/17/14-Fine-grained-Synchronization-and-Lock-free-Programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          14. Fine-grained Synchronization and Lock-free Programming
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-07-17 11:22:54" itemprop="dateCreated datePublished" datetime="2022-07-17T11:22:54+08:00">2022-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-07-18 17:00:51" itemprop="dateModified" datetime="2022-07-18T17:00:51+08:00">2022-07-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Fine-grained-synchronization-and-fine-grained-lock"><a href="#Fine-grained-synchronization-and-fine-grained-lock" class="headerlink" title="Fine-grained synchronization and fine-grained lock"></a>Fine-grained synchronization and fine-grained lock</h1><ol>
+<li>Data structures are often larger than a single memory location. One solution is to protect the structure with a single lock.<br>It is relatively simple to implement correct mutual exclusion for data structure operations. But the operations on the data structure are serialized, which may limit parallel application performance. </li>
+<li>Another solution is “hand-over-hand” locking. We set a lock for each elements in the data structure. Each threads only keeps as less as lock they need, and every time a thread move forward, it unlock the locks they don’t need any more and lock the locks they need now. </li>
+<li>The goal of fine-grained lock is to enable parallelism in data structure operations by Reducing contention for global data structure lock.<br>It is tricky to ensure correctness (how to determine when mutual exclusion is required, how to avoid deadlock or livelock). </li>
+<li>It has an overhead of taking a lock each traversal step. There are extra instructions and traversal now involves memory writes. Also, it has extra storage cost, namely a lock per node. </li>
+<li>C++11 has an <code>atomic&lt;T&gt;</code>. It provides atomic read, write, read-modify-write of entire objects. Atomicity may be implemented by mutex or efficiently by processor-supported atomic instructions if <code>T</code> is a basic type.<br>It also provides memory ordering semantics for operations before and after atomic operations. </li>
+</ol>
+<h1 id="Lock-free-programming"><a href="#Lock-free-programming" class="headerlink" title="Lock-free programming"></a>Lock-free programming</h1><ol>
+<li>Single reader, single writer bounded queue: Only two threads (one producer, one consumer) accessing queue at the same time<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Queue</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> data[N];</span><br><span class="line">  <span class="keyword">unsigned</span> head; <span class="comment">// head of queue</span></span><br><span class="line">  <span class="keyword">unsigned</span> tail; <span class="comment">// next free element</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Queue* q)</span> </span>&#123;</span><br><span class="line">  q-&gt;head = q-&gt;tail = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// return false if queue is full</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">push</span><span class="params">(Queue* q, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// queue is full if tail is element before head</span></span><br><span class="line">  <span class="keyword">if</span> (q-&gt;tail == MOD_N(q-&gt;head - <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  q.data[q-&gt;tail] = value;</span><br><span class="line">  q-&gt;tail = MOD_N(q-&gt;tail + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// returns false if queue is empty</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">pop</span><span class="params">(Queue* q, <span class="keyword">int</span>* value)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// if not empty</span></span><br><span class="line">  <span class="keyword">if</span> (q-&gt;head != q-&gt;tail) &#123;</span><br><span class="line">    *value = q-&gt;data[q-&gt;head];</span><br><span class="line">    q-&gt;head = MOD_N(q-&gt;head + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>Single reader, single writer unbounded queue: Only push modifies <code>tail</code> and <code>reclaim</code>; only pop modifies <code>head</code>. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  Node* next;</span><br><span class="line">  <span class="keyword">int</span> value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Queue</span> &#123;</span></span><br><span class="line">  Node* head;    <span class="comment">// the element before head of queue</span></span><br><span class="line">  Node* tail;    <span class="comment">// the last element added</span></span><br><span class="line">  Node* reclaim; <span class="comment">// the head of undeleted nodes</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Queue* q)</span> </span>&#123;</span><br><span class="line">  q-&gt;head = q-&gt;tail = q-&gt;reclaim = <span class="keyword">new</span> Node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(Queue* q, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  Node* n = <span class="keyword">new</span> Node;</span><br><span class="line">  n-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">  n-&gt;value = value;</span><br><span class="line">  q-&gt;tail-&gt;next = n;</span><br><span class="line">  q-&gt;tail = q-&gt;tail-&gt;next;</span><br><span class="line">  <span class="comment">// delete all nodes between reclaim and head</span></span><br><span class="line">  <span class="keyword">while</span> (q-&gt;reclaim != q-&gt;head) &#123;</span><br><span class="line">    Node* tmp = q-&gt;reclaim;</span><br><span class="line">    q-&gt;reclaim = q-&gt;reclaim-&gt;next;</span><br><span class="line">    <span class="keyword">delete</span> tmp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// returns false if queue is empty</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">pop</span><span class="params">(Queue* q, <span class="keyword">int</span>* value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (q-&gt;head != q-&gt;tail) &#123;</span><br><span class="line">    *value = q-&gt;head-&gt;next-&gt;value;</span><br><span class="line">    q-&gt;head = q-&gt;head-&gt;next;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Lock-free stack: the main idea is that as long as no other thread has modified the stack, a thread’s modification can proceed. The <code>compare_and_swap</code> operation is atomic, but doesn’t need to hold any other lock on data structure. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  Node* next;</span><br><span class="line">  <span class="keyword">int</span> value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span></span><br><span class="line">  Node* top;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  s-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(Stack* s, Node* n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    Node* old_top = s-&gt;top;</span><br><span class="line">    n-&gt;next = old_top;</span><br><span class="line">    <span class="comment">// Check whether the current top is the old top, </span></span><br><span class="line">    <span class="comment">// if true, set the current top to n; or get a new top</span></span><br><span class="line">    <span class="keyword">if</span> (compare_and_swap(&amp;s-&gt;top, old_top, n) == old_top)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node* <span class="title">pop</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    Node* old_top = s-&gt;top;</span><br><span class="line">    <span class="keyword">if</span> (old_top == <span class="literal">NULL</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    Node* new_top = old_top-&gt;next;</span><br><span class="line">    <span class="comment">// if the top is still the old top, return old top and set to new top</span></span><br><span class="line">    <span class="comment">// or get a new top</span></span><br><span class="line">    <span class="keyword">if</span> (compare_and_swap(&amp;s-&gt;top, old_top, new_top) == old_top)</span><br><span class="line">      <span class="keyword">return</span> old_top;  <span class="comment">// Assume that consumer then recycles old_top</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The above push operation is fine, but the pop operation may have some error.<br>After thread0 stored the <code>old_top</code>, if thread1 pops the <code>old_top</code> out, modifies the stack, and pushes the <code>old_top</code> into stack again, then the <code>compare_and_swap</code> operation of thread0 will pass. Namely, thread0 cannot realize that the stack has already been modified. </p>
+</li>
+<li><p>One solution is adding a <code>pop_counter</code> to check whether other pop operations happened. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  Node* next;</span><br><span class="line">  <span class="keyword">int</span> value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span></span><br><span class="line">  Node* top;</span><br><span class="line">  <span class="keyword">int</span> pop_count;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  s-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(Stack* s, Node* n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    Node* old_top = s-&gt;top;</span><br><span class="line">    n-&gt;next = old_top;</span><br><span class="line">    <span class="keyword">if</span> (compare_and_swap(&amp;s-&gt;top, old_top, n) == old_top)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node* <span class="title">pop</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">int</span> pop_count = s-&gt;pop_count;</span><br><span class="line">    Node* top = s-&gt;top;</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="literal">NULL</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    Node* new_top = top-&gt;next;</span><br><span class="line">    <span class="keyword">if</span> (double_compare_and_swap(&amp;s-&gt;top, top, new_top,</span><br><span class="line">                                &amp;s-&gt;pop_count, pop_count, pop_count+<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> top;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Another solution of ABA problem is hazard pointers. The ABA problem is caused by the reuse of the <code>old_top</code>. We can use the hazard pointers to track all <code>old_top</code>s, and ode cannot be recycled or reused if matches any hazard pointer. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  Node* next;</span><br><span class="line">  <span class="keyword">int</span> value;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span></span><br><span class="line">  Node* top;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Node *hazard[NUM_THREADS];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  s-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(Stack* s, Node* n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    Node* old_top = s-&gt;top;</span><br><span class="line">    n-&gt;next = old_top;</span><br><span class="line">    <span class="keyword">if</span> (compare_and_swap(&amp;s-&gt;top, old_top, n) == old_top)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Node* <span class="title">pop</span><span class="params">(Stack* s)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    hazard[t] = s-&gt;top;</span><br><span class="line">    Node* top = hazard[t];</span><br><span class="line">    <span class="keyword">if</span> (top == <span class="literal">NULL</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    Node* new_top = top-&gt;next;</span><br><span class="line">    <span class="keyword">if</span> (compare_and_swap(&amp;s-&gt;top, top, new_top))</span><br><span class="line">      <span class="keyword">return</span> top;  <span class="comment">// Caller must clear hazard[t] when it’s done with top</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Lock-free linked list insertion: assumes the only operation on the list is insert. Supporting lock-free deletion significantly complicates data-structure. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> value;</span><br><span class="line">  Node* next;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">List</span> &#123;</span></span><br><span class="line">  Node* head;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// insert new node after specified node</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_after</span><span class="params">(List* <span class="built_in">list</span>, Node* after, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  Node* n = <span class="keyword">new</span> Node;</span><br><span class="line">  n-&gt;value = value;</span><br><span class="line">  <span class="comment">// assume case of insert into empty list handled</span></span><br><span class="line">  <span class="comment">// here (keep code on slide simple for class discussion)</span></span><br><span class="line">  Node* prev = <span class="built_in">list</span>-&gt;head;</span><br><span class="line">  <span class="keyword">while</span> (prev-&gt;next) &#123;</span><br><span class="line">    <span class="keyword">if</span> (prev == after) &#123;</span><br><span class="line">      <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        Node* old_next = prev-&gt;next;</span><br><span class="line">        n-&gt;next = old_next;</span><br><span class="line">        <span class="keyword">if</span> (compare_and_swap(&amp;prev-&gt;next, old_next, n) == old_next)</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    prev = prev-&gt;next;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>If only your program is using the machine, well written code with locks can be as fast (or faster) than lock-free code.<br>But there are situations where code with locks can suffer from tricky performance problems. Like multi-programmed situations where page faults, pre-emption, etc. can occur while thread is in a critical section</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/16/13-Implementing-Synchronization/" rel="prev" title="13. Implementing Synchronization">
+      <i class="fa fa-chevron-left"></i> 13. Implementing Synchronization
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Fine-grained-synchronization-and-fine-grained-lock"><span class="nav-number">1.</span> <span class="nav-text">Fine-grained synchronization and fine-grained lock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lock-free-programming"><span class="nav-number">2.</span> <span class="nav-text">Lock-free programming</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

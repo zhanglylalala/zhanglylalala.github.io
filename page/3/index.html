@@ -191,6 +191,573 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/21/06-Locality-Communication-and-Contention/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/21/06-Locality-Communication-and-Contention/" class="post-title-link" itemprop="url">06. Locality, Communication, and Contention</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-21 13:42:23" itemprop="dateCreated datePublished" datetime="2022-05-21T13:42:23+08:00">2022-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-11 21:43:56" itemprop="dateModified" datetime="2022-06-11T21:43:56+08:00">2022-06-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h1><h2 id="Reduce-communication-time"><a href="#Reduce-communication-time" class="headerlink" title="Reduce communication time"></a>Reduce communication time</h2><ol>
+<li><p>Total communication time = overhead + occupancy + network delay. </p>
+</li>
+<li><p>Overhead is the time spent on the communication by a processor, occupancy is the time for data to pass through slowest component of system, and network delay is everything else. </p>
+</li>
+<li><p>Reduce overhead of communication to sender/receiver:<br>Reassign tasks in a better way that need to send fewer messages.<br>Make messages larger to amortize overhead.<br>Coalesce many small messages into large ones</p>
+</li>
+<li><p>Reduce delay:<br>Application writer can restructure code to exploit locality.<br>Hardware implementor can improve communication architecture. </p>
+</li>
+</ol>
+<h2 id="Reduce-communication-cost"><a href="#Reduce-communication-cost" class="headerlink" title="Reduce communication cost"></a>Reduce communication cost</h2><ol>
+<li><p>Total communication cost = communication time - overlap</p>
+</li>
+<li><p>Overlap: portion of communication performed concurrently with other work (“other work” can be computation or other communication)</p>
+</li>
+<li><p>Cost is the part that your cannot get over with by changing the protocol. The communication time is obviously necessary, and we can hide the overlap part by pipelining. </p>
+</li>
+<li><p>Increase communication/computation overlap:<br>Application writer can use asynchronous communication (e.g., async messages)<br>Hardware implementor can use pipelining, multi-threading, pre-fetching, out-of-order execution<br>Requires additional concurrency in application (more concurrency than number of execution units)</p>
+</li>
+<li><p>Instruction pipeline: Break execution of each instruction down into several smaller steps.<br>Enables higher clock frequency, only a simple, short operation is done by each part of pipeline each clock</p>
+</li>
+<li><p>Non-piplined communication: $T(n)=T_0+\frac{n}{B}$ ($T_0$ is the start-up latency, n is bytes transferred in operation, B is transfer rate or bandwidth)<br>Efficient bandwidth $=\frac{n}{T(n)}$</p>
+</li>
+</ol>
+<h2 id="Improve-arithmetic-intensity"><a href="#Improve-arithmetic-intensity" class="headerlink" title="Improve arithmetic intensity"></a>Improve arithmetic intensity</h2><ol>
+<li><p>Communication-to-computation ratio = amount of communication  / amount of computation<br>The units can be different. If the denominator is the execution time of computation, the ratio gives the average bandwidth requirement</p>
+</li>
+<li><p>Arithmetic intensity = 1 / communication-to-computation ratio</p>
+</li>
+<li><p>Change the traversal order to reduce the time between accesses to same data. We want to do all the calculations related to the accessing data now.<br>This way can improve the utilization of cache by preventing that those data get flushed out when we try to access them again. </p>
+</li>
+<li><p>Fuse loops to reduce the frequency of store operation. </p>
+</li>
+<li><p>Improve arithmetic intensity by sharing data. Co-locate tasks that operate on the same data.  Schedule threads working on the same data structure at the same time on the same processor. Reduces inherent communication</p>
+</li>
+</ol>
+<h2 id="Reduce-artifactual-communication"><a href="#Reduce-artifactual-communication" class="headerlink" title="Reduce artifactual communication"></a>Reduce artifactual communication</h2><ol>
+<li><p>Inherent communication: Communication that must occur in a parallel algorithm. The communication is fundamental to the algorithm.<br>Artifactual communication: all other communication that happens because we want to efficiently use resource.</p>
+</li>
+<li><p>Granularity of communication can be important because it may introduce artifactual communication.<br>Assume that communication granularity is a cache line. </p>
+</li>
+<li><p>If we see data as row-major layout, when the data required is in column, each communication actually only provides one needed data. </p>
+</li>
+<li><p>When Threads access their assigned elements (no inherent communication exists), real machine triggers (artifactual) communication due to the cache line being written to by both processors. </p>
+</li>
+<li><p>Reducing artifactual comm by blocked data layout. Each communication only involves  the data in the same block. If communication granularity is larger than a block row, each communication will transfer multiple rows. </p>
+</li>
+</ol>
+<h1 id="Contention"><a href="#Contention" class="headerlink" title="Contention"></a>Contention</h1><ol>
+<li><p>Contention occurs when many requests to a resource are made within a small window of time. The resource is a hot spot.<br>Contention for shared resource results in longer overall operation times. </p>
+</li>
+<li><p>Distributed work queues serve to reduce contention (contention in access to single shared work queue)</p>
+</li>
+<li><p>One way to reduce contention is to use finer-granularity locks. Instead of locking the whole data structure, we can only lock a part of that structure. </p>
+</li>
+<li><p>Another way is that each CUDA block computes partial results and merges them afterwards. But this requires extra work for merging, and each CUDA block need to store a partial result instead of all of them using the same result. </p>
+</li>
+<li><p>The best way is to stagger access to contended resources. For example, instead of calculate the final result directly, we can calculate several temporal results which has no contention, and get the final result from them. </p>
+</li>
+</ol>
+<h1 id="Understanding-the-performance"><a href="#Understanding-the-performance" class="headerlink" title="Understanding the performance"></a>Understanding the performance</h1><ol>
+<li><p>Always, always, always try the simplest parallel solution first, then measure performance to see where you stand. </p>
+</li>
+<li><p>We should compare parallel program speedup to the best sequential program, instead of parallel algorithm running on one core.<br>The reason is that to allow for parallelism, we might change the algorithm, and make it slower when executed sequentially. </p>
+</li>
+<li><p>Determine if your performance is limited by computation, memory bandwidth (or memory latency), or synchronization?<br>Try and establish “high watermarks”. What’s the best you can do in practice? How close is your implementation to a best-case scenario?</p>
+</li>
+<li><p>Roofline model: Use microbenchmarks to compute peak performance of a machine as a function of arithmetic intensity of application. Then compare application’s performance to known peak values</p>
+</li>
+</ol>
+<h2 id="Establish-high-watermarks"><a href="#Establish-high-watermarks" class="headerlink" title="Establish high watermarks"></a>Establish high watermarks</h2><ol>
+<li><p>Add “math” (non-memory instructions).<br>Does execution time increase linearly with operation count as math is added?<br>If so, this is evidence that code is instruction-rate limited</p>
+</li>
+<li><p>Remove almost all math, but load same data.<br>How much does execution-time decrease?<br>If not much, suspect memory bottleneck</p>
+</li>
+<li><p>Change all array accesses to A[0].<br>How much faster does your code get?<br>This establishes an upper bound on benefit of improving locality of data access</p>
+</li>
+<li><p>Remove all atomic operations or locks.<br>How much faster does your code get? (provided it still does approximately the same amount of work)<br>This establishes an upper bound on benefit of reducing sync overhead. </p>
+</li>
+</ol>
+<h2 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h2><ol>
+<li><p>Arithmetic intensity is determined by both problem size and the processors number. Small problem size or large processor number both yields low arithmetic intensity. </p>
+</li>
+<li><p>If the problem size is too small, it might already execute fast enough on a single core. Scaling the performance of small problem ay not be all that important. </p>
+</li>
+<li><p>If the problem size is too large for a single machine, working set may not fit in memory, and causing thrashing to disk. With enough processors, the key working set fits in per-processor cache.<br>This may get a super-linear speedup and make speedup on a bigger parallel machine with more memory look amazing. </p>
+</li>
+<li><p>Desire to scale problem size as machine sizes grow (buy a bigger machine to compute more, rather than just compute the same problem faster)</p>
+</li>
+<li><p>Problem-constrained scaling focuses on using a parallel computer to solve the same problem faster<br>$Speedup=\frac{time 1 processor}{time P processors}$</p>
+</li>
+<li><p>Time-constrained scaling focuses on completing more work in a fixed amount of time<br>$Speedup = \frac{work done by P processors}{work done by 1 processor}$<br>“Work done” may not be linear function of problem inputs. One approach of defining “work done” is by execution time of same computation on a single processor (but consider effects of thrashing if problem too big)</p>
+</li>
+<li><p>Memory-constrained scaling (wak scaling) focuses on running the largest problem possible without overflowing main memory. Neither work or execution times are held constant.<br>$Speedup = \frac{work (P processors)}{time (P processors)}/\frac{work (1 processor)}{time (1 processor)}=\frac{work per unit time on P processors}{work per unit time on 1 processor}$</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/19/05-Graphic-processing-units-and-CUDA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/19/05-Graphic-processing-units-and-CUDA/" class="post-title-link" itemprop="url">05. Graphic processing units and CUDA</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-19 09:59:09" itemprop="dateCreated datePublished" datetime="2022-05-19T09:59:09+08:00">2022-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-22 17:22:04" itemprop="dateModified" datetime="2022-05-22T17:22:04+08:00">2022-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Graphics"><a href="#Graphics" class="headerlink" title="Graphics"></a>Graphics</h1><ol>
+<li>The first step to draw a graphic in screen is to describe the things (key entities) that are manipulated, whose surface is represented as a 3D triangle mesh.<br>So the input of the calculating system is a list of vertices in 3D space and their connectivity into primitives. </li>
+<li>The operations of system is as following:<br>Given a scene camera position, compute where the vertices lie on screen<br>Group vertices into primitives<br>Generate one fragment for each pixel a primitive overlaps<br>Compute color of primitive for each fragment based on scene lighting and primitive material properties<br>Put color of the “closest fragment” to the camera in the output image</li>
+<li>We can Abstract process of rendering a picture as a sequence of operations on vertices, primitives, fragments, and pixels.<br>GPUs are very fast processors for performing the same computation (shader programs) on large collections of data (streams of vertices, fragments, and pixels), which sounds like data-parallelism. </li>
+<li>To do GPU-based scientific computation, we need to set OpenGL output image size to be output array size, and render 2 triangles that exactly cover screen. </li>
+</ol>
+<h1 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h1><h2 id="Grid-Block-and-Thread"><a href="#Grid-Block-and-Thread" class="headerlink" title="Grid, Block and Thread"></a>Grid, Block and Thread</h2><ol>
+<li><p>CUDA thread IDs can be up to 3-dimensional. Multiple threads make up a block, and multiple blocks make up a grid.<br>Each kernel has a grid. All the the blocks in a grid form a 3D matrix, and all the threads in a block also form a 3D matrix.<br>We can get information about the shape of threads in a block matrix or block in a grid matrix in a block with <code>block_dim</code> and <code>grid_dim</code></p>
+</li>
+<li><p>When launching the CUDA threads, we need to specify the size of blocks and threads with <code>kernel_function&lt;&lt;&lt;block_dim, thread_dim&gt;&gt;&gt;(parameters)</code>.<br>Here <code>block_dim</code> and <code>thread_dim</code> can be either a <code>dim3</code> value or a number of the total number of blocks and threads per-block to make the CUDA compiler figure out how to arrange blocks and threads.</p>
+</li>
+<li><p>So the coordinate to declare or locate a block in a grid, or a thread in a block is 3D. In the CUDA code, we can get the information about current block or thread with <code>blockIdx</code>, <code>threadIdx</code>, and their properties <code>x</code>, <code>y</code>, <code>z</code>. </p>
+</li>
+<li><p>The calculation object of CUDA is usually matrices. So we would prefer to cut matrices into blocks. Each CUDA block calculate one  block in matrices, and each thread calculate one element in matrices. </p>
+</li>
+<li><p>In <code>pthread</code>, there is stack space for thread, and need to allocate control block so OS can schedule thread.<br>Unlike <code>pthread</code>, CUDA control those instances by thread blocks. If control by threads, there will be too many to control.</p>
+</li>
+<li><p>Major CUDA assumption: thread block execution can be carried out in any order (no dependencies between blocks)</p>
+</li>
+</ol>
+<h2 id="Kernel-function"><a href="#Kernel-function" class="headerlink" title="Kernel function"></a>Kernel function</h2><ol>
+<li><p>“Host” code: serial execution runs as part of normal C/C++ application on CPU<br>“CUDA device” code: a kernel function runs on GPU, which is denoted by <code>__global__</code> before the definition of the kernel function.<br>Device function: SPMD execution on GPU, which is denoted by <code>__device__</code>. These functions are called by kernels, and don’t generate new threads.<br>Kernels and device functions only reference device memory. Host code can only reference host memory, but can have pointers to device memory. </p>
+</li>
+<li><p>In kernel function, we need to get the indices of the element a thread calculating. For a 2D matrix, we usually take <code>x</code> as column direction, and <code>y</code> as row direction.<br>So to access <code>A[i][j]</code>, <code>i = blockIdx.y * blockDim * y + threadIdx.y</code> and <code>j = blockIdx.x * blockDim.x + threadIdx.x</code>.</p>
+</li>
+<li><p>Number of kernel invocations is not determined by size of data collection. So normally we want to do a test before accessing the vector values (array values). The overhead of the test can be ignored, although it does cause some threads are not used. </p>
+</li>
+<li><p><code>__syncthreads()</code> is a barrier that wait for all threads in the block to arrive at this point.<br>Atomic operations on both global memory and shared memory variables is also provided, but they are very expensive, should only be used as the last resort.<br>There is an implicit barrier across all threads at return of kernel. </p>
+</li>
+<li><p>A compiled CUDA device binary includes program text (instructions) and information about required resources (how many threads per block, how much space per thread, how much shared space per thread block) </p>
+</li>
+</ol>
+<h2 id="Memory-Model"><a href="#Memory-Model" class="headerlink" title="Memory Model"></a>Memory Model</h2><ol>
+<li><p>Host and device have distinct address spaces, so before the execution, we need to copy data into CUDA memory.<br><code>cudaMalloc(ptr, size)</code> can be used to allocate CUDA memory, and <code>cudaFree(ptr)</code> can free CUDA memory. The pointer in <code>cudaMalloc</code> can just be a host variable, but the pointer in <code>cudaFree</code> must be allocated by <code>cudaMalloc</code>.<br><code>cudaMemcpy(dest, src, size, kind)</code> can copy those data into CUDA memory. <code>kind</code> is the direction of copy, which can be <code>cudaMemcpyHostToDevice</code> or <code>curdaMemcpyDeviceToHost</code>. </p>
+</li>
+<li><p>There are three distinct types of memory visible to kernels, per-thread private memory, per-block shared memory, and device global memory. </p>
+</li>
+<li><p><code>cudaMalloc</code>, <code>cudaMemcpy</code> and <code>cudaFree</code> all operate on device global memory, and those local variables in kernel function are in perthread private memory.<br>We can declare variables in per-block shared memory with <code>__share__</code>. </p>
+</li>
+<li><p>If multiple threads in a block need to access a common memory, they will all read that memory once. And if that memory is in the global memory, it would be really slow. </p>
+</li>
+<li><p>To avoid such efficient decrease, we can copy the common memory into the per-block shared memory. So we only need to access global memory once, and later accesses only in per-block shared memory.<br>We just need to declare a <code>__share__</code> array, and assign it with values in global memory. </p>
+</li>
+<li><p>All threads copy data from global memory to per-block shared memory asynchronous, so we better ass a <code>_syncthread()</code> to  make sure later operations only start when all data have been copied. </p>
+</li>
+</ol>
+<h2 id="Hardware-implementation"><a href="#Hardware-implementation" class="headerlink" title="Hardware implementation"></a>Hardware implementation</h2><ol>
+<li><p>Those synchronization within a warp and scheduling are done by hardware, and programmers don’t need to worry about these things.</p>
+</li>
+<li><p>GPU implementation maps thread blocks (“work”) to cores using a dynamic scheduling policy that respects resource requirements. </p>
+</li>
+<li><p>In GPU implementation (not a CUDA abstraction), each SM has multiple groups of warps. However, the number of warp execution contexts is far more than the number of warps.<br>And there is a warp selector for each warp to choose the instruction to be executed by that warp. Each warp selector usually has two (or more) Fectch/Decoder unit. </p>
+</li>
+<li><p>Shared per-block memory and L1-cache are inside each SM, but L2-cache is shared by all SMs.<br>The devide global memory (GPU memory) only communicates with blocks through L2-cache. </p>
+</li>
+<li><p>Each clock, an SM will choose several warp contexts to fill all warps to use thread-level pallelism, and a warp will choose several instructions to fill all Fetch/Decoder units to use instruction-level pallelism. </p>
+</li>
+<li><p>When running a CUDA program, GPU work schedulor will map one block to multiple warps in the same SM core. CUDA threads numbered within block in row-major order.<br>Inside a single thread block is SPMD shared address space programming. </p>
+</li>
+<li><p>When single warp accesses consecutive memory locations, do block read or write. When single warp accesses separated memory locations, requires gather (read) or scatter(write)</p>
+</li>
+<li><p>One SM core may have multiple blocks, so a SMM core is capable of concurrently executing multiple CUDA thread blocks.<br>When all threads in block complete, block resources (shared memory allocations, warp execution contexts) become available for next block. </p>
+</li>
+<li><p>The CUDA program is not compiled to SIMD instructions like ISPC gangs. GPU hardware is dynamically checking whether 32 independent CUDA threads share an instruction, and if this is true, it executes all 32 threads in a SIMD manner, or performance can suer due to divergent execution. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/17/04-Work-Distribution-and-Scheduling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/17/04-Work-Distribution-and-Scheduling/" class="post-title-link" itemprop="url">04. Work Distribution and Scheduling</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-17 15:35:33" itemprop="dateCreated datePublished" datetime="2022-05-17T15:35:33+08:00">2022-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-18 17:07:58" itemprop="dateModified" datetime="2022-05-18T17:07:58+08:00">2022-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Balancing-the-workload"><a href="#Balancing-the-workload" class="headerlink" title="Balancing the workload"></a>Balancing the workload</h1><p>Always implement the simplest solution first, then measure performance to determine if you need to do better. </p>
+<h2 id="Static-assignment"><a href="#Static-assignment" class="headerlink" title="Static assignment"></a>Static assignment</h2><ol>
+<li>The assignment of work to threads is pre-determined. But not necessarily determined at compile-time, may depend on runtime parameters. </li>
+<li>Benefit: simple, essentially zero runtime overhead</li>
+<li>Applicable situation: When the cost (execution time) of work and the amount of work is predictable. The followings are some most common situations:<br>When it is known up front that all work has the same cost<br>When work is predictable, but not all jobs have same cost<br>When statistics about execution time are known</li>
+<li>Semi-static assignment: When the cost of work is predictable for near-term future, we can periodically profile itself and re-adjust assignment.<br>Assignment is “static” for the interval between re-adjustments</li>
+</ol>
+<h2 id="Dynamic-assignment"><a href="#Dynamic-assignment" class="headerlink" title="Dynamic assignment"></a>Dynamic assignment</h2><ol>
+<li><p>Program determines assignment dynamically at runtime to ensure a well distributed load. Often used when the execution time of tasks, or the total number of tasks, is unpredictable. </p>
+</li>
+<li><p>The ISPC task is implemented dynamically. </p>
+</li>
+</ol>
+<h3 id="With-one-queue"><a href="#With-one-queue" class="headerlink" title="With one queue"></a>With one queue</h3><ol>
+<li><p>The programmers divide the whole problem into sub-problems (or “tasks”, “work”). A queue shared by all threads is a collection of work to do. Whenever a thread finished its task, it will grab another task from the queue. </p>
+</li>
+<li><p>Fine granularity partitioning: each task is small.<br>This is likely to have a good workload balance, but potential for high synchronization cost. </p>
+</li>
+<li><p>Coarse granularity partitioning: each task is larger.<br>This will decrease synchronization cost and the overhead, but may have a worse workload balance. </p>
+</li>
+<li><p>Long tasks should be scheduled first. Thread performing long task performs fewer overall tasks, but approximately the same amount of work as the other threads. This requires some knowledge of workload. </p>
+</li>
+</ol>
+<h3 id="With-a-set-of-queues"><a href="#With-a-set-of-queues" class="headerlink" title="With a set of queues"></a>With a set of queues</h3><ol>
+<li><p>When assign with one queue, all threads have to communicate with each other about the queue. </p>
+</li>
+<li><p>Each thread has their own queue, and they only execute tasks in their queue. So there is no need to communication with other threads. </p>
+</li>
+<li><p>At the beginning, the programmer push tasks into queues arbitarily (a bit like static assignment).<br>The dynamic is that when a queue is empty, that thread can steal from other threads that is  still working.<br>It will steal from a random thread. Every time, it will steal a proportion of the tasks in the target queue, not all of them, and usually more than one task.<br>A thread is terminated when there is no thread for it to steal, namely when a steal is failed, it will try to steal from other threads, util it have tried all of them. </p>
+</li>
+<li><p>Stealing involves communication, but in a lower frequency then one queue method. And in this way, the local queue access is fast. </p>
+</li>
+<li><p>Sometimes it is hard to have fully independent task, but work in task queues need not be independent.<br>A task is not removed from queue and assigned to worker thread until all task dependencies are satisfied. Workers can submit new tasks (with optional explicit dependencies) to task system</p>
+</li>
+</ol>
+<h1 id="Scheduling"><a href="#Scheduling" class="headerlink" title="Scheduling"></a>Scheduling</h1><p>In a divide-and-conquer algorithm, there is both dependencies and independencies. Like in quick-sort, both the divide is dependent on the partition, and those two divide is independent.<br>With Cilk Plus, we can express divide-and-conquer easier. </p>
+<h2 id="cilk-spawn"><a href="#cilk-spawn" class="headerlink" title="cilk_spawn"></a>cilk_spawn</h2><ol>
+<li><p><code>cilk_spawn</code> is labelled before a function call, so that the called function can run with the code after the call concurrently.<br>The call labelled <code>cilk_spawn</code> is the spawned child, and the rest of the code is the continuation.</p>
+</li>
+<li><p>In divide-and-conquer, there is always a time, when the problem size is small enough that overhead of spawn trumps benefits of<br>potential parallelization. And then we will solve those problems sequentially. </p>
+</li>
+<li><p>The main idea is to expose independent work (potential parallelism) to the system using <code>cilk_spawn</code>. </p>
+</li>
+<li><p><code>cilk_spawn</code> is a bit like <code>pthread_create</code>, and <code>cilk_sync</code> is similar to <code>pthread_join</code>. But <code>pthread</code> has some problems when too many threads are spawned.<br>The first is the heavyweight spawn operation. And many more concurrently running threads than cores, which will cause context switching overhead and larger working set than necessary, less cache locality. </p>
+</li>
+<li><p>The Cilk Plus runtime maintains pool of worker threads. All threads created at application launch.  There are exactly as many worker threads as execution contexts in the machine.<br>If we labelled everything <code>cilk_spawn</code>, the main thread has nothing to do. </p>
+</li>
+<li><p>Each thread in the pool will maintain a work queue to store what word needs to be done.<br>When a thread goes idle, it will look in busy thread’s queue for work, and moves work from busy thread’s queue to its own queue.</p>
+</li>
+<li><p>If caller thread runs the continuation first, the queue should record the child for later execution, and child is made available for stealing by other threads.<br>In this method, caller thread will spawn as many child as it could, like BFS. If no stealing, execution order is very different than<br>that of program withcilk_spawnremoved. </p>
+</li>
+<li><p>If caller thread runs the child first, the queue should record continuation for later execution, and continuation is made available for stealing by other threads.<br>In this method, caller thread will only create one item to steal.<br>If no stealing occurs, thread continually pops continuation from work queue, enqueues new continuation (like DFS). The order of execution is the same as for program with spawn removed.<br>If continuation is stolen, stealing thread spawns next child. </p>
+</li>
+<li><p>If the continuation is run first, there will be more items to steal, and thus makes a better advantage of multi-thread.<br>But if the continuation is run first, the work queue storage for system with T threads is no more than T times that of stack storage for single threaded execution, and thus saves more space. </p>
+</li>
+<li><p>Work queue is implemented as a dequeue (double ended queue).<br>Local thread pushes/pops from the “tail” (bottom), while remote threads steal from “head” (top).<br>Reduces contention with local thread: local thread is not accessing same part of dequeue that stealing threads do.<br>Do larger work first: in divide-and-conquer, the top of the queue is usually at the beginning of call tree, and is a larger piece of work.<br>Maximizes locality: in conjunction with run-child-first policy, local thread works on local part of call tree</p>
+</li>
+</ol>
+<h2 id="cilk-sync"><a href="#cilk-sync" class="headerlink" title="cilk_sync"></a>cilk_sync</h2><ol>
+<li><p><code>cilk_sync</code> is used after those <code>cilk_spawn</code> call code. It will return when all calls spawned by current function have completed. </p>
+</li>
+<li><p>There is an implicitcilk_syncat the end of every function that contains a cilk_spawn, so when a Cilk function returns, all work associated with that function is complete. </p>
+</li>
+<li><p>If no work has been stolen by other threads, then there’s nothing to do at the sync point, <code>cilk_sync</code> is a no-op. But this is not a common situation. </p>
+</li>
+<li><p>One way to implement sync is with stalling joint.<br>Thread that initiates the fork must perform the sync. Therefore it waits for all spawned work to be complete.<br>descriptor for block A created<br>When a stealing from the initial thread happens, a descriptor for that stolen work is created to track the number of outstanding spawns for the block, and the number of those spawns that have completed.<br>When all the child spowned for the block is done, this block is considered done, and the descriptor is free. When all the blocks are done, sync is fullfilled. </p>
+</li>
+<li><p>Another way to implement sync is the greedy policy.<br>When thread that initiates the fork goes idle, it can look to steal new work.  Last thread to reach the join point continues execution after sync. This will also create a decriptor for those stolen work.<br>Worker thread that initiated spawn may not be thread that executes logic after <code>cilk_sync</code>. </p>
+</li>
+<li><p>In greedy policy, All threads always attempt to steal if there is nothing to do, and thread only goes idle if no work to steal is present in system. But in stalling policy, the initial thread doesn’t steal, and only waits when its work is done. </p>
+</li>
+<li><p>Overhead of bookkeeping steals and managing sync points only occurs when steals occur. If large pieces of work are stolen, this should occur infrequently. Most of the time, threads are pushing/popping local work from their local dequeue. </p>
+</li>
+<li><p>Cilk uses greedy join scheduling. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/12/08-Metaprogramming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/12/08-Metaprogramming/" class="post-title-link" itemprop="url">08. Metaprogramming</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-12 19:13:47 / Modified: 19:51:22" itemprop="dateCreated datePublished" datetime="2022-05-12T19:13:47+08:00">2022-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p><code>Makefile</code> contains the dependencies and the rules. The rules are commands that described how to go from a complete list of dependencies to the given target.  </p>
+</li>
+<li><p>The depencies can be declared with <code>:</code>. The file in the left if the dependencies of the file in the right. </p>
+</li>
+<li><p>Only if any of the dependencies are changed, the file should be rebuild. And <code>make</code> will only rebuild those changed dependencies. </p>
+</li>
+<li><p>Sematic versioning: It marks the versions with three numbers, <code>major version</code>, <code>minor version</code>, <code>patch version</code>. If a backwards compatible changes is made, only <code>patch version</code> should be changed. If something is added, the <code>minor version</code> will increase, and <code>patch version</code> is set to 0. If a change is not backwards compatible, then <code>major version</code> will be increased. </p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/11/06-Version-Control-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -886,617 +1453,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/02/00-Go-Crash/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/02/00-Go-Crash/" class="post-title-link" itemprop="url">00. Go Crash</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-02 16:23:53" itemprop="dateCreated datePublished" datetime="2022-05-02T16:23:53+08:00">2022-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-03 11:54:47" itemprop="dateModified" datetime="2022-05-03T11:54:47+08:00">2022-05-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97-MIT-6-824/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式计算 (MIT 6.824)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Go-Commands"><a href="#Go-Commands" class="headerlink" title="Go Commands"></a>Go Commands</h1><ol>
-<li><p><code>go run xxx.go</code>: run a go file. </p>
-</li>
-<li><p><code>go install</code>: it will compile and create a executable file with the name being the same as the folder</p>
-</li>
-</ol>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><ol>
-<li><p>Use package in the first line just like Java. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Import only one package with “”</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Every programs begins from a main function like C/C++</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Variables-and-Constants"><a href="#Variables-and-Constants" class="headerlink" title="Variables and Constants"></a>Variables and Constants</h1><ol>
-<li><p>In golang, “declared but not used” is an wrror not a warning</p>
-</li>
-<li><p>Declare a variable with keyword var. Not necessary to write the type when declared, when it can be inferred.<br>Although sometimes the inference can be ambiguous, and we want to specify it. The type of the variable is after the name, seperated by a space</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line"><span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Declare a constant with keyword const. A constant can be declared and not used.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line"><span class="comment">// isCool = false // This line will raise an error</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The shorthand declaration can only be used inside a function.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>You can also declare or assign multiple variables within a line</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"><span class="keyword">var</span> name_var, email_var = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h1><ol>
-<li><p>The package declared in the first line allows us to import the functions implemented below elsewhere. </p>
-</li>
-<li><p>Although the package can have a different name with the directory it is in. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">package</span> main <span class="comment">// this is allowed</span></span><br></pre></td></tr></table></figure>
-<p>But then this package cannot be imported by other files. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in another file</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/main"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//     "package go_crash_course/03_package/main is not in GOROOT"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Only the packages with the same name as their directory can be imported. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/strutil</span></span><br><span class="line"><span class="keyword">package</span> strutil</span><br></pre></td></tr></table></figure>
-<p>When import a local package, the current directory is src so the path starts from something in the src folder. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/strutil"</span></span><br></pre></td></tr></table></figure>
-<p>And you cannot use a relative path to import. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./strutil"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//    "./strutil" is relative, but relative import paths are not supported in module mode</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><ol>
-<li><p>The implement of a function starts with a keyword <code>func</code>. The <code>{</code> must be in the same line as <code>func</code></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The parameters are in the order of (name type). </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Printlln(<span class="string">"Hello "</span> + name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>When we have multiple parameters with the same type, we can write their type only after the last paramater.<br>Some parameter can remain unsed in function. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(num1, num2 <span class="keyword">int</span>, num3 <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Println(num1 + num2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>The type of return value is specified after the parameters. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"Hello "</span> + name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Arrays-and-Slices"><a href="#Arrays-and-Slices" class="headerlink" title="Arrays and Slices"></a>Arrays and Slices</h1><ol>
-<li><p>We can Declare an array similar to C/C++, just move the length before the type. And we can also access the elements with subscript. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitArr [<span class="number">3</span>]<span class="keyword">string</span></span><br><span class="line">fruitArr[<span class="number">0</span>] = <span class="string">"Apple"</span></span><br><span class="line">fruitArr[<span class="number">1</span>] = fruitArr[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<p>We can delcare and assign an array with shorthand declaration</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitArr := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>We can declare a slice when we don’t specify the length of an array. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitSlice []<span class="keyword">string</span></span><br><span class="line">fruitSliceShort := []<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>When we try to access a subscript out of the current length of a slice, an “index out of range” error will raise. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice[<span class="number">0</span>] = <span class="string">"Apple"</span> <span class="comment">// error</span></span><br><span class="line">fruitSliceShort[<span class="number">3</span>] = <span class="string">"Cherry"</span> <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
-<p>However, we can change the length of a slice with <code>append</code> while an array cannot do so. </p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice = <span class="built_in">append</span>(fruitSlice, <span class="string">"Apple"</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Some common operations of array and slice: print, length, access a range like Python</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(fruitArr)</span><br><span class="line">fmt.Println(fruitSlice)</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitArr))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitSlice))</span><br><span class="line"></span><br><span class="line"><span class="comment">// [lo:hi] can access the elements with subscripts in [lo, hi)</span></span><br><span class="line">fmt.Println(fruitArr[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">fmt.Println(fruitSliceShort[<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/20/03-Parallel-Programming-Basics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/20/03-Parallel-Programming-Basics/" class="post-title-link" itemprop="url">03. Parallel Programming Basics</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-20 14:27:45" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-21 19:47:35" itemprop="dateModified" datetime="2022-06-21T19:47:35+08:00">2022-06-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h1><ol>
-<li><p>Decomposition: The problem to solve is usually a chunk of work. So the first step we need to do is to decomposite them into subproblems (a.k.a tasks, work to do)</p>
-</li>
-<li><p>We usually want the number subproblems to be at least as many as processors.</p>
-</li>
-<li><p>The key aspect of decomposition is to identify dependencies. We want subproblems to be independent, so that they can be paralleled. </p>
-</li>
-<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution ≤ 1/S. </p>
-<script type="math/tex; mode=display">speedup \le\frac{t}{st+\frac{(1-s)t}{p}}=\frac1{s+\frac{1-s}{p}}</script></li>
-<li><p>In most cases, the programmer is responsible for performing decomposition. </p>
-</li>
-<li><p>When we are doing the decomposition, it is better to think of partitioning computation instead of data. </p>
-</li>
-</ol>
-<h1 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h1><ol>
-<li><p>Assignment: When the subproblems is more than processors, we then will group them together to form a larger chunk of work, and assign the grouped tasks to parallel threads. </p>
-</li>
-<li><p>One goal is to balance workload, so that each processor finish their work almost at the same time.<br>Another goal is to reduce communication costs. Getting data from another processor is nontrivial expensive, either cache miss or waiting for a message.<br>These two goals are at odds with each other. </p>
-</li>
-<li><p>This step can be performed statically, or dynamically during execution<br>Static way: Before the processors begin to do the work, we have already decide how to divide things up.<br>Dynamic way: We work out the way to divide on the way as processing. </p>
-</li>
-<li><p>We can choose the static way with the programCount and programIndex assignment or pthread</p>
-</li>
-<li><p>We can choose the dynamic way with foreach if the system choose the dynamic way, or the queue<br>In the queue way, we arrange all tasks in a queue, and when a processor has done its job, it will grab another task from the queue. This is a good way for balancing workload, but maintain the queue and acquire task from it might cost some performance. </p>
-</li>
-</ol>
-<h1 id="Orchestration"><a href="#Orchestration" class="headerlink" title="Orchestration"></a>Orchestration</h1><ol>
-<li><p>Orchestration: When parallel threads are running, they may need to coorperate with each other. So we need to let them communicate correctly. </p>
-</li>
-<li><p>There are things that we will worry about, like structure communication, synchronization, orgnizing data structure in memory, and scheduling tasks</p>
-</li>
-<li><p>The goal is to reduce costs of communication/sync, preserve locality of data reference, reduce overhead of synchronization or communication, etc.</p>
-</li>
-<li><p>In shared address space model, lock/unlock is common used for preserving atomicity, and barriers can divide computation into phases. When threads execute to barriers, they will stop and wait. Until enough number of threads hit the barrier, those stalled threads are allowed to execute rest codes. </p>
-</li>
-<li><p>A common used optimization strategy is that try to use less lock/unlock and barriers.<br>Everytime when we operate a shared variable, we need to use the lock/unlock to keep atomicity. But maybe we can operate on partial variable locally and then merge the partial results together.<br>When we use barrier to keep a shared variable valid when it might be changed at the next phase, we can use different shared variable in successive phases. This is to trade off footprint for removing dependencies. </p>
-</li>
-</ol>
-<h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><ol>
-<li><p>Mapping: Finally, we need to map each thread to physical hardware. </p>
-</li>
-<li><p>When we map pthreads to hardware execution context on a CPU core, this is done by the operating system<br>When we map ISPC program instances to vector instruction lanes, this is done by the compiler<br>When we map CUDA thread blocks to GPU cores, this is done by the hardware</p>
-</li>
-<li><p>Place related threads (cooperating threads) on the same processor to maximize locality, data sharing, minimize costs of comm/sync<br>Place unrelated threads on the same processor (one might be bandwidth limited and another might be compute limited) to use machine more efficiently</p>
-</li>
-<li><p>Normally, we just let the OS do the mapping as it want. But sometimes we still want to control the way of mapping.</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/18/02-Parallel-programming-models/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/18/02-Parallel-programming-models/" class="post-title-link" itemprop="url">02. Parallel programming models</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-18 11:53:04" itemprop="dateCreated datePublished" datetime="2022-04-18T11:53:04+08:00">2022-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-03 15:40:40" itemprop="dateModified" datetime="2022-05-03T15:40:40+08:00">2022-05-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ISPC-Intel-SPMD-Program-Compiler"><a href="#ISPC-Intel-SPMD-Program-Compiler" class="headerlink" title="ISPC (Intel SPMD Program Compiler)"></a>ISPC (Intel SPMD Program Compiler)</h1><h2 id="Format-of-ISPC"><a href="#Format-of-ISPC" class="headerlink" title="Format of ISPC"></a>Format of ISPC</h2><ol>
-<li><p>ISPC is an SPMD compiler, not an SIMD. </p>
-</li>
-<li><p>The code that need to be paralleled will be written in a file with surfix of “.ispc” as a function. And we will call that function in the main.cpp.<br>Call to ISPC function spawns gang of ISPC program instances. All instances run ISPC code concurrently. The ISPC function will return when all instances have completed.<br>All code in main.cpp will be executed sequentially. </p>
-</li>
-<li><p><code>programCount</code>: the number of simultaneously executing instances in the gang. It is the same for all instances, thus called “uniform value”. This is not set by programmer, but by the run-time system. programmer can only read it but don’t set that. </p>
-</li>
-<li><p><code>programIndex</code>: the ID of the current instance in the gang. It is a non-uniform value, namely varying.<br>This is used to assign work to each instance. If we don’t use the programIndex to control the work to be done by each instance, they will all do all the work. Thus there will be redundant and have no performance improve. </p>
-</li>
-<li><p><code>uniform</code>: a type modifier. All instances have a copy of the same value for this variable. Its use is purely an optimization. Not needed for correctness.<br>We cannot add a non-uniform value to a uniform value directly, which will cause a compile-time type error. In order to do so, we need a reduce_add function from ISPC library. </p>
-</li>
-<li><p>Those ISPC program instances is not separate threads. The ISPC complier actually generates an SIMD thread. So the programCount is the vector width of the machine.<br>So it can only run on one core. And “task” is used to achieve multi-core execution.</p>
-</li>
-</ol>
-<h2 id="Ways-of-assignment"><a href="#Ways-of-assignment" class="headerlink" title="Ways of assignment"></a>Ways of assignment</h2><ol>
-<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is: </p>
-<script type="math/tex; mode=display">programIndex+i\times programCount,i\in[0,\frac{N-programIndex}{programCount})</script></li>
-<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is: </p>
-<script type="math/tex; mode=display">programIndex\times count+i, i\in[0,count),count=\frac{N}{programCount}</script></li>
-<li><p>When using the block assignment, there might exist some situation when the cost of processing later data is more expensive than processing former data, which will make the assignment uneven. So the interleaved assignment is less risky. </p>
-</li>
-<li><p>Since ISPC only generate one thread, the continuous access of data in block assignment is not more cache-friend then the discontinuous access in interleaved assignment.<br>If there are several threads, than block assignment might be more cache-friend. </p>
-</li>
-<li><p>The data requested by all instances at the same time is a vector. In interleaved assignment, the data in a vector is memory continuous, while it is not in block assignment. So in memory access, interleaved assignment is faster. </p>
-</li>
-<li><p><code>foreach (i = 0 ... N)</code> says that these loop iterations can be paralleled, and ISPC implementation assigns iterations to program instances in gang. Current ISPC implementation will perform a static interleaved assignment</p>
-</li>
-</ol>
-<h2 id="System-layers"><a href="#System-layers" class="headerlink" title="System layers"></a>System layers</h2><ol>
-<li><p>The layers from up to down is that parallel applications, compilers and/or parallel runtime, operating system, Micro-architecture (hardware implementation)</p>
-</li>
-<li><p>Different parallel models can have different combinations of concerned layers. </p>
-</li>
-<li><p>If we express parallelism with pthread, it goes through all layers. First the parallel application calls <code>pthread_create()</code> to access pthread library implementation. Then the pthread library uses <code>System call API</code> to ask OS support: kernel thread management. Finally, the OS uses <code>x86-64</code> to control modern multi-core CPU. </p>
-</li>
-<li><p>If we express parallelism with ISPC without “task”, it doesn’t need the support of OS. The parallel application uses ISPC language to ask for service of ISPC compiler. And the complier will produce machine language of x86-64 including <code>AVX vector instruction</code> to control a single-core of CPU. </p>
-</li>
-</ol>
-<h1 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h1><h2 id="Shared-Address-Space"><a href="#Shared-Address-Space" class="headerlink" title="Shared Address Space"></a>Shared Address Space</h2><ol>
-<li><p>The whole machine has a common space address. When threads aren’t working together, they just access their memory space. They can communicate with each by reading or writing the same data and manipulating synchronization primitives (like locks)</p>
-</li>
-<li><p>This model requires hardware support to implement efficiently. In hardware implementation, any processor can directly reference any memory location</p>
-</li>
-<li><p>Symmetric (shared-memory) multi-processor (SMP): all processors have uniform memory access time, namely the cost of accessing an uncached memory address is the same for all processors<br>This is unscalarable since the access latency will increase fast with more and more processors and memory chips.<br>The cores can share memory through a shared L3 cahce or a crossbar switch with die area of one core</p>
-</li>
-<li><p>Non-uniform memory access (NUMA): All processors can access any memory location, but the cost of memory access (latency and/or bandwidth) is different for different processors. Each processor has a memory chip that is close to it.<br>This is more scalarable since the low latency and high bandwidth to local memory.<br>Cost is the increased programmer effort for performance tuning. Finding, exploiting locality is important to performance (want most memory accesses to be to local memories)</p>
-</li>
-</ol>
-<h2 id="Message-Passing"><a href="#Message-Passing" class="headerlink" title="Message Passing"></a>Message Passing</h2><ol>
-<li><p>Threads operate within their own private address spaces, and they communicate by sending/receiving messages</p>
-</li>
-<li><p>send: specifies recipient, buffer to be transmitted, and optional message identifier (“tag”)<br>receive: sender, specifies buffer to store data, and optional message identifier</p>
-</li>
-<li><p>With this model, we can easily build large scale of parallel machine by just interconnect them together. Hardware need not implement system-wide loads and stores to execute message passing programs, need only be able to communicate messages<br>But the interconnect speed can be the bottleneck of the system. </p>
-</li>
-<li><p>We can implement the message passing model with shared memory space.<br>Sending message is copying memory from message library buffers, while receiving message is copying data from message library buffers</p>
-</li>
-<li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all pages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
-</li>
-<li><p>Synchronous (blocking) send and receive<br>Send(): call returns when sender receives acknowledgement that message data resides in address space of receiver<br>Recv(): call returns when data from received message is copied into address space of receiver and acknowledgement sent back to sender<br>So when using message passing model, we need to be careful for the order of send() and recv() in each threads because it may easily raise a deadlock.<br>If the first call of all threads is send(), then no one is receiving and all is waiting someone to receive what they have sent.<br>One common way to program is to arrage one thread to send first and the receiver of that send to receive first. </p>
-</li>
-<li><p>Non-blocking asynchronous send/recv<br>Send() call returns immediately, while recv() posts intent to receive in the future and returns immediately.<br>We can use checksend(), checkrecv() to determine actual status of send/receipt.<br>Buffer provided to send() cannot be modified by calling thread since message processing occurs concurrently with thread execution</p>
-</li>
-</ol>
-<h2 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h2><ol>
-<li><p>Data parallel has a very rigid computation struture. If it works well, it will work very well. But sometimes it just won’t work. </p>
-</li>
-<li><p>Nowadays, data parallel usually takes the form of SPMD instead of SIMD. Programs perform same function on different data elements in a collection<br><code>map(function, collection)</code>: Synchronization is implicit at the end of the map. Map returns when function has been applied to all elements ofcollection</p>
-</li>
-<li><p>When the function is too complicated, the result might be non-deterministic.<br>Data-parallel model (foreach) provides no specification of order in which iterations occur and no primitives for fine-grained mutual exclusion/synchronization.</p>
-</li>
-<li><p>Streams: collections of elements. Elements can be processed independently.<br>Kernels: side-effect-free functions. Operate element-wise on collections. </p>
-</li>
-<li><p>A stream can be claimed by <code>stream&lt;ElemType&gt; name(N)</code><br>When define the kernel function, its parameters are single elements instead of a whole collection. But when call the kernel function, we pass the streams into the function directly. </p>
-</li>
-<li><p>Benefits of stream programming:<br>Functions really are side-effect free (cannot write a non-deterministic program)<br>Program data flow is known by compiler: Inputs and outputs of each invocation are known in advance and thus prefetching can be employed to hide latency.<br>When there are multiple kernels, and the output of the last kernel is the input of the next kernel, producer-consumer locality is known in advance.<br>Implementation can be structured so outputs of first kernel are immediately processed by second kernel. The values are stored in on-chip buffers/caches and never written to memory, which saves bandwidth.<br>These optimizations are responsibility of stream program compiler. Requires global program analysis.</p>
-</li>
-<li><p>Drawback of stream programming: Need library of operators to describe complex data flows, so it might go wrong. </p>
-</li>
-<li><p><code>stream_gather(input, indices, tmp_input)</code>: Put elements in input to tmp_input according to indices. This is called before the kernel function, and the kernel function will deal with gathered stream.<br><code>stream_scatter(tmp_output, indices, output)</code>: Similar to stream_gather, but it is called after the kernel function, and kernel function will deal with original stream.<br>The parameters of both function are all stream. </p>
-</li>
-</ol>
-<h2 id="Synchronization-and-Communication"><a href="#Synchronization-and-Communication" class="headerlink" title="Synchronization and Communication"></a>Synchronization and Communication</h2><ol>
-<li><p>In shared address space, mutual exclusion is required for shared variables, and barriers are used to express dependencies between phases of computation.<br>They can communicate through implicit loads/stores to shared variables. </p>
-</li>
-<li><p>In message passing model, the synchronizations and communications are both performed by sending and receiving messages. </p>
-</li>
-<li><p>In data parallel model, a single logical thread is in control, but iterations of forall loop may be parallelized by the system. There is an implicit barrier at end offorallloop body.<br>They can also communicate throught implicit loads and stores, like shared address space. There is also some special built-in primitives for more complex communication patterns, e.g., reduce</p>
-</li>
-</ol>
-<h2 id="Modern-practice"><a href="#Modern-practice" class="headerlink" title="Modern practice"></a>Modern practice</h2><ol>
-<li><p>Use shared address space programming within a multi-core chip of a cluster, use message passing between chips<br>Use convenience of shared address space where it can be implemented efficiently (within a chip), require explicit communication elsewhere. </p>
-</li>
-<li><p>Data-parallel-ish programming models support shared-memory style synchronization primitives in kernels. This could permit limited forms of inter-iteration communication. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/13/01-Modern-Multicore-Processors/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/13/01-Modern-Multicore-Processors/" class="post-title-link" itemprop="url">01. Modern Multicore Processors</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-13 15:48:23" itemprop="dateCreated datePublished" datetime="2022-04-13T15:48:23+08:00">2022-04-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-17 15:35:57" itemprop="dateModified" datetime="2022-05-17T15:35:57+08:00">2022-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Speedup"><a href="#Speedup" class="headerlink" title="Speedup"></a>Speedup</h1><ol>
-<li>Speedup (using P processors) = execution time (using 1 processor) / execution time (using P processors)</li>
-<li>When using P processors, we can only get a speedup less than P times.<br>One reason is that although cores are in the same chip, when they want to communicate with each other, they have to transmit information through wires, which takes some time.<br>Another reason is that the imbalance in work assignment, which caused that one core has too heavy assignment while other cores has nothing to do but wait.<br>Communication costs can dominate a parallel computation, severely limiting speedup. Especially when you assign tasks to too many cores, each core gets little computation. </li>
-</ol>
-<h1 id="Parallelism"><a href="#Parallelism" class="headerlink" title="Parallelism"></a>Parallelism</h1><p>Why parallelism?<br>Before 2004, the performance of single-processor grew exponentially. However, in 2004, Intel hit the Power Density Wall. If you get more than 100 watts in a chip, it goes to hot and will melt. And the battery won’t hold long.</p>
-<h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a>ILP</h2><ol>
-<li>Instruction-Level Parallelism. Extract several instructions from the same instruction stream, and multiple ALU performs multiple operations parallel (within a core). This has to be done in a semantics of program. </li>
-<li>Superscalar processor: exploit ILP within an instruction stream. Parallelism automatically and dynamically discovered by the hardware during execution (not programmer visible)</li>
-<li>Example: Pentium 4<br>Its inctruction decoder will yank a whole bunch of instructions out of instruction stream, and map them to a new kind of computation called data flow computation that will track which value is generated and feed which instruction there<br>Decoders map them to independent processing units that can each performs a subset of the whole operations.<br>Control logics try to predict what’s going on and deal with it when it predicts incorrectly. The Branch Target Buffer keeps a record of all the control flow instructions to predict where they will go again. If it predicts wrong, it will back out and doesn’t commit to those results generated, flushes them away<br>Meltdown inspector: This logic leaks informations about what other processors are doing. </li>
-<li>Most available ILP is exploited by a processor capable of issuing four instructions per clock, and only little performance benefit from building a processor that can issue more. </li>
-</ol>
-<h2 id="Multi-Core"><a href="#Multi-Core" class="headerlink" title="Multi-Core"></a>Multi-Core</h2><p>Before multi-core era, Majority of chip transistors used to perform operations that help a single instruction stream run fast.<br>More transistors mean larger cache, smarter out-of-order logic, smarter branch predictor, etc. Also, more transistors get smaller transistors, and thus higher clock frequencies</p>
-<h3 id="Simpler-cores"><a href="#Simpler-cores" class="headerlink" title="Simpler cores"></a>Simpler cores</h3><ol>
-<li>It uses increasing transistor count to add more cores to the processor, rather than use transistors to increase sophistication of processor logic that accelerates a single instruction stream (e.g., out-of-order and speculative operations)</li>
-<li>Each core is slower at running a single instruction stream than our original large core, but the sum performance is faster. With a smaller core, the communication cost inside of a chip will be cheaper. </li>
-<li>However, the original programs express no parallelism and run as one thread on one of the processor cores.</li>
-<li>One way to express paralllelism is by using pthreads. It will create threads to deal with tasks we assigned. </li>
-<li>Another way is called data-parallele expression. The programmer declare loop iterations to be independent, and a compiler might automatically generate parallel threaded code</li>
-</ol>
-<h3 id="SIMD-processing"><a href="#SIMD-processing" class="headerlink" title="SIMD processing"></a>SIMD processing</h3><ol>
-<li>Amortize cost/complexity of managing an instruction stream across many ALUs. Same instruction broadcast to all ALUs, executed in parallel on all ALUs</li>
-<li>Each core has  an independent vector register set different from the regular register set. And Each core has multiple ALUs to execute the same instruction to different data. </li>
-<li>Only a very structual, carefully written code can do an automatical vectorization by compliers. </li>
-<li>When conditional executions are occurred, it will run the condition first, and create a mask according to the result, which is used to disable the ALUs that should not execute current instructions. Those active ALUs will execute the instructions, and a new mask is created. This procession will continue until all ALUs have execute all conditional instructions they should execute, and then they can execute remaining unconditional codes together again.<br>When a core can handle n elements at the same time, the performance in the worst case is 1 / n of the peak performance. </li>
-<li>Instruction stream coherence (“coherent execution”): Same instruction sequence applies to all elements operated upon simultaneously.<br>“Divergent” execution: A lack of instruction stream coherence</li>
-<li>Coherent execution is necessary for efficient use of SIMD processing resources. However, coherent execution is not necessary for efficient parallelization across cores, since each core has the capability to fetch/decode a different instruction stream</li>
-</ol>
-<h4 id="SIMD-on-modern-CPUs"><a href="#SIMD-on-modern-CPUs" class="headerlink" title="SIMD on modern CPUs"></a>SIMD on modern CPUs</h4><ol>
-<li>SSE instructions: 128-bit operations: 4x32 bits or 2x64 bits (4-wide float vectors)<br>AVX instructions: 256 bit operations: 8x32 bits or 4x64 bits (8-wide float vectors)<br>AVX512 instructions: 512 bit operations: 16x32 bits or 8x64 bits (8-wide float vectors)</li>
-<li>Instructions are generated by the complier. Parallelism is explicitly requested by programmer using intrinsics, and conveyed using parallel language semantics. Finally, it is inferred by dependency analysis of loops by “auto-vectorizing” compiler. </li>
-<li>Explicit SIMD: SIMD parallelization is performed at compile time. We can inspect program binary and see SIMD instructions. </li>
-</ol>
-<h4 id="SIMD-on-modern-GPUs"><a href="#SIMD-on-modern-GPUs" class="headerlink" title="SIMD on modern GPUs"></a>SIMD on modern GPUs</h4><ol>
-<li>In GPUs, it usually is SPMD (Single Program Multiple Data), and uses SIMD to implement much of the logic. </li>
-<li>Implicit SIMD: Compiler generates a scalar binary (scalar instructions). But N instances of the program are <em>always run</em> together on the processor. In other words, the interface to the hardware itself is data-parallel. </li>
-<li>Hardware (not compiler) is responsible for simultaneously executing the same instruction from multiple instances on different data on SIMD ALUs</li>
-<li>SIMD width of most modern GPUs ranges from 8 to 32</li>
-</ol>
-<h1 id="Access-Memory"><a href="#Access-Memory" class="headerlink" title="Access Memory"></a>Access Memory</h1><ol>
-<li>Memory latency: The amount of time for a memory request (e.g., load, store) from a processor to be serviced by the memory system. Memory “access time” is a measure of latency. </li>
-<li>Memory bandwidth: The rate at which the memory system can provide data to a processor</li>
-<li>Stall: A processor “stalls” when it cannot run the next instruction in an instruction stream because of a dependency on a previous instruction. Accessing memory is a major source of stalls</li>
-<li>One way to reduce stall is reducing latency.<br>One stratege is cache, which also provides high bandwidth data transfer to CPU. </li>
-<li>Another way is hiding latency, namely the latency of the memory operation is not changed, it just no longer causes reduced processor utilization.<br>One common strategy is the prefetch. All modern CPUs have logic for prefetching data into caches. Prefetching can also reduce performance if the guess is wrong (hogs bandwidth, pollutes caches)<br>The other is using multi-threading. The idea is to interleave processing of multiple threads on the same core to hide stalls.</li>
-</ol>
-<h2 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h2><ol>
-<li>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</li>
-<li>With more storing executiong contexts in the cache, the working set per thread is smaller, and the latency hiding ability is higher.<br>And since the cache space per thread is less, may go to memory more often. Thus relies heavily on memory bandwidth.<br>When the thread is much enough to achieve 100% utilization of the core, additional threads yield no benefit. </li>
-<li>The instruction decoder will choose instructions from multiple threads, and fire them to the execution units the threads shared. And the memory interface unit will detect dependencies automatically.</li>
-<li>Interleaved multi-threading (a.k.a. temporal multi-threading): Each clock, the core chooses a thread, and runs an instruction from the thread on the ALUs</li>
-<li>Simultaneous multi-threading (SMT): Each clock, core chooses instructions from multiple threads to run on ALUs. It is an extension of superscalar CPU design</li>
-<li>The operating system is responsible for mapping your pthreads to the processor’s thread execution contexts</li>
-</ol>
-<h2 id="CPUs-and-GPUs"><a href="#CPUs-and-GPUs" class="headerlink" title="CPUs and GPUs"></a>CPUs and GPUs</h2><ol>
-<li>CPU has big caches, few threads, modest memory BW, and rely mainly on caches and prefetching.<br>GPU has small caches, many threads, huge memory BW, and rely mainly on multi-threading. </li>
-<li>The bandwidth of GPUs is a lot faster than CPUs. </li>
-<li>In GPUs, ALUs run at twice the clock rate of rest of chip. So each decoded instruction runs on 32 pieces of data on the 16 ALUs over two ALU clocks. (but to the programmer, it behaves like a 32-wide SIMD operation)<br>Warp: An instruction operating on a whole vector of data at a time.<br>SM: Streaming Multi-processor. Each SM has multiple warp selector. Each selector has multiple ALUs with different functions. The selectors in the same SM have shared momery and L1 cache. And all selectors can run parallel. </li>
-<li>A core can have multiple scalar ALUs and multiple vector ALUs. Each vector ALU can perform either both MUL and ADD or ADD only.<br>And the maximum number of threads activated in a core is determined by the number of the execution contexts. </li>
-</ol>
-<h2 id="Bandwidth"><a href="#Bandwidth" class="headerlink" title="Bandwidth"></a>Bandwidth</h2><ol>
-<li>If processors request data at too high a rate, the memory system cannot keep up. No amount of latency hiding helps this.</li>
-<li>Organize computation to fetch data from memory less often.<br>Reuse data previously loaded by the same thread (traditional intra-thread temporal locality optimizations).<br>Share data across threads (inter-thread cooperation)</li>
-<li>Request data less often (instead, do more arithmetic: it’s “free”).<br>Arithmetic intensity: Ratio of math operations to data access operations in an instruction stream.<br>The main point is that programs must have high arithmetic intensity to utilize modern processors efficiently.<br>If a data needed can be recalculated in ALUs, than don’t access memory, do the calculation. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1568,7 +1524,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

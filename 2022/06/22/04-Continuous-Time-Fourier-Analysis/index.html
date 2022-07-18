@@ -55,7 +55,7 @@
 <meta property="og:site_name" content="LaughingTree">
 <meta property="og:description" content="Fourier analysis In Fourier analysis, we decompose signals into basic signals of complex exponentials.In continuous-time case, $s_k&#x3D;j\omega_k$, which is pure imaginary, And $\phi_k(t)&#x3D;e^{s_kt}&#x3D;e^{j\om">
 <meta property="article:published_time" content="2022-06-22T05:40:58.000Z">
-<meta property="article:modified_time" content="2022-06-25T07:04:19.362Z">
+<meta property="article:modified_time" content="2022-07-11T11:18:34.951Z">
 <meta property="article:author" content="LiyunZhang">
 <meta property="article:tag" content="信号">
 <meta property="article:tag" content="电子">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-25 15:04:19" itemprop="dateModified" datetime="2022-06-25T15:04:19+08:00">2022-06-25</time>
+                <time title="Modified: 2022-07-11 19:18:34" itemprop="dateModified" datetime="2022-07-11T19:18:34+08:00">2022-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,52 +264,31 @@
 <li>When $x(t)$ is periodic, we can decompose it into Fourier series. When $x(t)$ is aperiodic, we can still perform Fourier transform to represent it through Fourier seirier. </li>
 </ol>
 <h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
-<li><p>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </p>
-</li>
-<li><p>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </p>
-</li>
-<li><p>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</p>
-</li>
-<li><p>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</p>
-</li>
-<li><p>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </p>
-</li>
-<li><p>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </p>
-</li>
-<li><p>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </p>
-</li>
+<li>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </li>
+<li>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </li>
+<li>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</li>
+<li>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</li>
+<li>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </li>
+<li>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </li>
+<li>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </li>
 </ol>
 <h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
-<li><p>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</p>
-</li>
-<li><p>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</p>
-</li>
-<li><p>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </p>
-</li>
-<li><p>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</p>
-</li>
-<li><p>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </p>
-</li>
+<li>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</li>
+<li>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</li>
+<li>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </li>
+<li>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</li>
+<li>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </li>
 </ol>
 <h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
-<li><p>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </p>
-</li>
-<li><p>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</p>
-</li>
-<li><p>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</p>
-</li>
-<li><p>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</p>
-</li>
-<li><p>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </p>
-</li>
-<li><p>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</p>
-</li>
-<li><p>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </p>
-</li>
-<li><p>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </p>
-</li>
-<li><p>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</p>
-</li>
+<li>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </li>
+<li>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</li>
+<li>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</li>
+<li>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</li>
+<li>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </li>
+<li>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</li>
+<li>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </li>
+<li>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </li>
+<li>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</li>
 </ol>
 
     </div>
@@ -412,7 +391,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -191,6 +191,617 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/02/00-Go-Crash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/02/00-Go-Crash/" class="post-title-link" itemprop="url">00. Go Crash</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-02 16:23:53" itemprop="dateCreated datePublished" datetime="2022-05-02T16:23:53+08:00">2022-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-03 11:54:47" itemprop="dateModified" datetime="2022-05-03T11:54:47+08:00">2022-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97-MIT-6-824/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式计算 (MIT 6.824)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Go-Commands"><a href="#Go-Commands" class="headerlink" title="Go Commands"></a>Go Commands</h1><ol>
+<li><p><code>go run xxx.go</code>: run a go file. </p>
+</li>
+<li><p><code>go install</code>: it will compile and create a executable file with the name being the same as the folder</p>
+</li>
+</ol>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><ol>
+<li><p>Use package in the first line just like Java. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Import only one package with “”</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Every programs begins from a main function like C/C++</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Variables-and-Constants"><a href="#Variables-and-Constants" class="headerlink" title="Variables and Constants"></a>Variables and Constants</h1><ol>
+<li><p>In golang, “declared but not used” is an wrror not a warning</p>
+</li>
+<li><p>Declare a variable with keyword var. Not necessary to write the type when declared, when it can be inferred.<br>Although sometimes the inference can be ambiguous, and we want to specify it. The type of the variable is after the name, seperated by a space</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">1984</span> <span class="comment">// int</span></span><br><span class="line"><span class="keyword">var</span> age32 <span class="keyword">int32</span> = <span class="number">1984</span> <span class="comment">// int32</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Declare a constant with keyword const. A constant can be declared and not used.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isCool = <span class="literal">true</span></span><br><span class="line"><span class="comment">// isCool = false // This line will raise an error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The shorthand declaration can only be used inside a function.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size := <span class="number">1.3</span> <span class="comment">// The default type is float64</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>You can also declare or assign multiple variables within a line</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name, email := <span class="string">"Steve"</span>, <span class="string">"Steve@gmain.com"</span></span><br><span class="line">name, email = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br><span class="line"><span class="keyword">var</span> name_var, email_var = <span class="string">"John"</span>, <span class="string">"JohnWatson@yahoo.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h1><ol>
+<li><p>The package declared in the first line allows us to import the functions implemented below elsewhere. </p>
+</li>
+<li><p>Although the package can have a different name with the directory it is in. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">package</span> main <span class="comment">// this is allowed</span></span><br></pre></td></tr></table></figure>
+<p>But then this package cannot be imported by other files. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// in another file</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/main"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//     "package go_crash_course/03_package/main is not in GOROOT"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Only the packages with the same name as their directory can be imported. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/strutil</span></span><br><span class="line"><span class="keyword">package</span> strutil</span><br></pre></td></tr></table></figure>
+<p>When import a local package, the current directory is src so the path starts from something in the src folder. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"go_crash_course/03_package/strutil"</span></span><br></pre></td></tr></table></figure>
+<p>And you cannot use a relative path to import. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/go_crash_course/03_package/</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"./strutil"</span></span><br><span class="line"><span class="comment">// This will raise an error:</span></span><br><span class="line"><span class="comment">//    "./strutil" is relative, but relative import paths are not supported in module mode</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><ol>
+<li><p>The implement of a function starts with a keyword <code>func</code>. The <code>{</code> must be in the same line as <code>func</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The parameters are in the order of (name type). </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Printlln(<span class="string">"Hello "</span> + name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When we have multiple parameters with the same type, we can write their type only after the last paramater.<br>Some parameter can remain unsed in function. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(num1, num2 <span class="keyword">int</span>, num3 <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"> fmt.Println(num1 + num2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The type of return value is specified after the parameters. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">greeting</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"Hello "</span> + name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Arrays-and-Slices"><a href="#Arrays-and-Slices" class="headerlink" title="Arrays and Slices"></a>Arrays and Slices</h1><ol>
+<li><p>We can Declare an array similar to C/C++, just move the length before the type. And we can also access the elements with subscript. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitArr [<span class="number">3</span>]<span class="keyword">string</span></span><br><span class="line">fruitArr[<span class="number">0</span>] = <span class="string">"Apple"</span></span><br><span class="line">fruitArr[<span class="number">1</span>] = fruitArr[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>We can delcare and assign an array with shorthand declaration</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitArr := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>We can declare a slice when we don’t specify the length of an array. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fruitSlice []<span class="keyword">string</span></span><br><span class="line">fruitSliceShort := []<span class="keyword">string</span>&#123;<span class="string">"Apple"</span>, <span class="string">"Orange"</span>, <span class="string">"Grape"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>When we try to access a subscript out of the current length of a slice, an “index out of range” error will raise. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice[<span class="number">0</span>] = <span class="string">"Apple"</span> <span class="comment">// error</span></span><br><span class="line">fruitSliceShort[<span class="number">3</span>] = <span class="string">"Cherry"</span> <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<p>However, we can change the length of a slice with <code>append</code> while an array cannot do so. </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fruitSlice = <span class="built_in">append</span>(fruitSlice, <span class="string">"Apple"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Some common operations of array and slice: print, length, access a range like Python</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(fruitArr)</span><br><span class="line">fmt.Println(fruitSlice)</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitArr))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(fruitSlice))</span><br><span class="line"></span><br><span class="line"><span class="comment">// [lo:hi] can access the elements with subscripts in [lo, hi)</span></span><br><span class="line">fmt.Println(fruitArr[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line">fmt.Println(fruitSliceShort[<span class="number">1</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/20/03-Parallel-Programming-Basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/20/03-Parallel-Programming-Basics/" class="post-title-link" itemprop="url">03. Parallel Programming Basics</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-20 14:27:45" itemprop="dateCreated datePublished" datetime="2022-04-20T14:27:45+08:00">2022-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-21 19:47:35" itemprop="dateModified" datetime="2022-06-21T19:47:35+08:00">2022-06-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h1><ol>
+<li><p>Decomposition: The problem to solve is usually a chunk of work. So the first step we need to do is to decomposite them into subproblems (a.k.a tasks, work to do)</p>
+</li>
+<li><p>We usually want the number subproblems to be at least as many as processors.</p>
+</li>
+<li><p>The key aspect of decomposition is to identify dependencies. We want subproblems to be independent, so that they can be paralleled. </p>
+</li>
+<li><p>Amdahl’s Law: dependencies limit maximum speedup due to parallelism<br>Let S = the fraction of sequential execution that is inherently sequential (dependencies prevent parallel execution). Then maximum speedup due to parallel execution ≤ 1/S. </p>
+<script type="math/tex; mode=display">speedup \le\frac{t}{st+\frac{(1-s)t}{p}}=\frac1{s+\frac{1-s}{p}}</script></li>
+<li><p>In most cases, the programmer is responsible for performing decomposition. </p>
+</li>
+<li><p>When we are doing the decomposition, it is better to think of partitioning computation instead of data. </p>
+</li>
+</ol>
+<h1 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h1><ol>
+<li><p>Assignment: When the subproblems is more than processors, we then will group them together to form a larger chunk of work, and assign the grouped tasks to parallel threads. </p>
+</li>
+<li><p>One goal is to balance workload, so that each processor finish their work almost at the same time.<br>Another goal is to reduce communication costs. Getting data from another processor is nontrivial expensive, either cache miss or waiting for a message.<br>These two goals are at odds with each other. </p>
+</li>
+<li><p>This step can be performed statically, or dynamically during execution<br>Static way: Before the processors begin to do the work, we have already decide how to divide things up.<br>Dynamic way: We work out the way to divide on the way as processing. </p>
+</li>
+<li><p>We can choose the static way with the programCount and programIndex assignment or pthread</p>
+</li>
+<li><p>We can choose the dynamic way with foreach if the system choose the dynamic way, or the queue<br>In the queue way, we arrange all tasks in a queue, and when a processor has done its job, it will grab another task from the queue. This is a good way for balancing workload, but maintain the queue and acquire task from it might cost some performance. </p>
+</li>
+</ol>
+<h1 id="Orchestration"><a href="#Orchestration" class="headerlink" title="Orchestration"></a>Orchestration</h1><ol>
+<li><p>Orchestration: When parallel threads are running, they may need to coorperate with each other. So we need to let them communicate correctly. </p>
+</li>
+<li><p>There are things that we will worry about, like structure communication, synchronization, orgnizing data structure in memory, and scheduling tasks</p>
+</li>
+<li><p>The goal is to reduce costs of communication/sync, preserve locality of data reference, reduce overhead of synchronization or communication, etc.</p>
+</li>
+<li><p>In shared address space model, lock/unlock is common used for preserving atomicity, and barriers can divide computation into phases. When threads execute to barriers, they will stop and wait. Until enough number of threads hit the barrier, those stalled threads are allowed to execute rest codes. </p>
+</li>
+<li><p>A common used optimization strategy is that try to use less lock/unlock and barriers.<br>Everytime when we operate a shared variable, we need to use the lock/unlock to keep atomicity. But maybe we can operate on partial variable locally and then merge the partial results together.<br>When we use barrier to keep a shared variable valid when it might be changed at the next phase, we can use different shared variable in successive phases. This is to trade off footprint for removing dependencies. </p>
+</li>
+</ol>
+<h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><ol>
+<li><p>Mapping: Finally, we need to map each thread to physical hardware. </p>
+</li>
+<li><p>When we map pthreads to hardware execution context on a CPU core, this is done by the operating system<br>When we map ISPC program instances to vector instruction lanes, this is done by the compiler<br>When we map CUDA thread blocks to GPU cores, this is done by the hardware</p>
+</li>
+<li><p>Place related threads (cooperating threads) on the same processor to maximize locality, data sharing, minimize costs of comm/sync<br>Place unrelated threads on the same processor (one might be bandwidth limited and another might be compute limited) to use machine more efficiently</p>
+</li>
+<li><p>Normally, we just let the OS do the mapping as it want. But sometimes we still want to control the way of mapping.</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/18/02-Parallel-programming-models/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/18/02-Parallel-programming-models/" class="post-title-link" itemprop="url">02. Parallel programming models</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-18 11:53:04" itemprop="dateCreated datePublished" datetime="2022-04-18T11:53:04+08:00">2022-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-03 15:40:40" itemprop="dateModified" datetime="2022-05-03T15:40:40+08:00">2022-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ISPC-Intel-SPMD-Program-Compiler"><a href="#ISPC-Intel-SPMD-Program-Compiler" class="headerlink" title="ISPC (Intel SPMD Program Compiler)"></a>ISPC (Intel SPMD Program Compiler)</h1><h2 id="Format-of-ISPC"><a href="#Format-of-ISPC" class="headerlink" title="Format of ISPC"></a>Format of ISPC</h2><ol>
+<li><p>ISPC is an SPMD compiler, not an SIMD. </p>
+</li>
+<li><p>The code that need to be paralleled will be written in a file with surfix of “.ispc” as a function. And we will call that function in the main.cpp.<br>Call to ISPC function spawns gang of ISPC program instances. All instances run ISPC code concurrently. The ISPC function will return when all instances have completed.<br>All code in main.cpp will be executed sequentially. </p>
+</li>
+<li><p><code>programCount</code>: the number of simultaneously executing instances in the gang. It is the same for all instances, thus called “uniform value”. This is not set by programmer, but by the run-time system. programmer can only read it but don’t set that. </p>
+</li>
+<li><p><code>programIndex</code>: the ID of the current instance in the gang. It is a non-uniform value, namely varying.<br>This is used to assign work to each instance. If we don’t use the programIndex to control the work to be done by each instance, they will all do all the work. Thus there will be redundant and have no performance improve. </p>
+</li>
+<li><p><code>uniform</code>: a type modifier. All instances have a copy of the same value for this variable. Its use is purely an optimization. Not needed for correctness.<br>We cannot add a non-uniform value to a uniform value directly, which will cause a compile-time type error. In order to do so, we need a reduce_add function from ISPC library. </p>
+</li>
+<li><p>Those ISPC program instances is not separate threads. The ISPC complier actually generates an SIMD thread. So the programCount is the vector width of the machine.<br>So it can only run on one core. And “task” is used to achieve multi-core execution.</p>
+</li>
+</ol>
+<h2 id="Ways-of-assignment"><a href="#Ways-of-assignment" class="headerlink" title="Ways of assignment"></a>Ways of assignment</h2><ol>
+<li><p>Interleaved assignment: the data processed by each instance is discontinuous, namely the subsctipt is: </p>
+<script type="math/tex; mode=display">programIndex+i\times programCount,i\in[0,\frac{N-programIndex}{programCount})</script></li>
+<li><p>Block assignment: the data is split into several chunks, and each instance process one chunk. So the data is continuous, namely the subscript is: </p>
+<script type="math/tex; mode=display">programIndex\times count+i, i\in[0,count),count=\frac{N}{programCount}</script></li>
+<li><p>When using the block assignment, there might exist some situation when the cost of processing later data is more expensive than processing former data, which will make the assignment uneven. So the interleaved assignment is less risky. </p>
+</li>
+<li><p>Since ISPC only generate one thread, the continuous access of data in block assignment is not more cache-friend then the discontinuous access in interleaved assignment.<br>If there are several threads, than block assignment might be more cache-friend. </p>
+</li>
+<li><p>The data requested by all instances at the same time is a vector. In interleaved assignment, the data in a vector is memory continuous, while it is not in block assignment. So in memory access, interleaved assignment is faster. </p>
+</li>
+<li><p><code>foreach (i = 0 ... N)</code> says that these loop iterations can be paralleled, and ISPC implementation assigns iterations to program instances in gang. Current ISPC implementation will perform a static interleaved assignment</p>
+</li>
+</ol>
+<h2 id="System-layers"><a href="#System-layers" class="headerlink" title="System layers"></a>System layers</h2><ol>
+<li><p>The layers from up to down is that parallel applications, compilers and/or parallel runtime, operating system, Micro-architecture (hardware implementation)</p>
+</li>
+<li><p>Different parallel models can have different combinations of concerned layers. </p>
+</li>
+<li><p>If we express parallelism with pthread, it goes through all layers. First the parallel application calls <code>pthread_create()</code> to access pthread library implementation. Then the pthread library uses <code>System call API</code> to ask OS support: kernel thread management. Finally, the OS uses <code>x86-64</code> to control modern multi-core CPU. </p>
+</li>
+<li><p>If we express parallelism with ISPC without “task”, it doesn’t need the support of OS. The parallel application uses ISPC language to ask for service of ISPC compiler. And the complier will produce machine language of x86-64 including <code>AVX vector instruction</code> to control a single-core of CPU. </p>
+</li>
+</ol>
+<h1 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h1><h2 id="Shared-Address-Space"><a href="#Shared-Address-Space" class="headerlink" title="Shared Address Space"></a>Shared Address Space</h2><ol>
+<li><p>The whole machine has a common space address. When threads aren’t working together, they just access their memory space. They can communicate with each by reading or writing the same data and manipulating synchronization primitives (like locks)</p>
+</li>
+<li><p>This model requires hardware support to implement efficiently. In hardware implementation, any processor can directly reference any memory location</p>
+</li>
+<li><p>Symmetric (shared-memory) multi-processor (SMP): all processors have uniform memory access time, namely the cost of accessing an uncached memory address is the same for all processors<br>This is unscalarable since the access latency will increase fast with more and more processors and memory chips.<br>The cores can share memory through a shared L3 cahce or a crossbar switch with die area of one core</p>
+</li>
+<li><p>Non-uniform memory access (NUMA): All processors can access any memory location, but the cost of memory access (latency and/or bandwidth) is different for different processors. Each processor has a memory chip that is close to it.<br>This is more scalarable since the low latency and high bandwidth to local memory.<br>Cost is the increased programmer effort for performance tuning. Finding, exploiting locality is important to performance (want most memory accesses to be to local memories)</p>
+</li>
+</ol>
+<h2 id="Message-Passing"><a href="#Message-Passing" class="headerlink" title="Message Passing"></a>Message Passing</h2><ol>
+<li><p>Threads operate within their own private address spaces, and they communicate by sending/receiving messages</p>
+</li>
+<li><p>send: specifies recipient, buffer to be transmitted, and optional message identifier (“tag”)<br>receive: sender, specifies buffer to store data, and optional message identifier</p>
+</li>
+<li><p>With this model, we can easily build large scale of parallel machine by just interconnect them together. Hardware need not implement system-wide loads and stores to execute message passing programs, need only be able to communicate messages<br>But the interconnect speed can be the bottleneck of the system. </p>
+</li>
+<li><p>We can implement the message passing model with shared memory space.<br>Sending message is copying memory from message library buffers, while receiving message is copying data from message library buffers</p>
+</li>
+<li><p>We can also implement shared address space abstraction on machines that do not support it in hardware via less efficient software solution.<br>Mark all pages with shared variables as invalid at first, and page-fault handler issues appropriate network requests</p>
+</li>
+<li><p>Synchronous (blocking) send and receive<br>Send(): call returns when sender receives acknowledgement that message data resides in address space of receiver<br>Recv(): call returns when data from received message is copied into address space of receiver and acknowledgement sent back to sender<br>So when using message passing model, we need to be careful for the order of send() and recv() in each threads because it may easily raise a deadlock.<br>If the first call of all threads is send(), then no one is receiving and all is waiting someone to receive what they have sent.<br>One common way to program is to arrage one thread to send first and the receiver of that send to receive first. </p>
+</li>
+<li><p>Non-blocking asynchronous send/recv<br>Send() call returns immediately, while recv() posts intent to receive in the future and returns immediately.<br>We can use checksend(), checkrecv() to determine actual status of send/receipt.<br>Buffer provided to send() cannot be modified by calling thread since message processing occurs concurrently with thread execution</p>
+</li>
+</ol>
+<h2 id="Data-Parallel"><a href="#Data-Parallel" class="headerlink" title="Data Parallel"></a>Data Parallel</h2><ol>
+<li><p>Data parallel has a very rigid computation struture. If it works well, it will work very well. But sometimes it just won’t work. </p>
+</li>
+<li><p>Nowadays, data parallel usually takes the form of SPMD instead of SIMD. Programs perform same function on different data elements in a collection<br><code>map(function, collection)</code>: Synchronization is implicit at the end of the map. Map returns when function has been applied to all elements ofcollection</p>
+</li>
+<li><p>When the function is too complicated, the result might be non-deterministic.<br>Data-parallel model (foreach) provides no specification of order in which iterations occur and no primitives for fine-grained mutual exclusion/synchronization.</p>
+</li>
+<li><p>Streams: collections of elements. Elements can be processed independently.<br>Kernels: side-effect-free functions. Operate element-wise on collections. </p>
+</li>
+<li><p>A stream can be claimed by <code>stream&lt;ElemType&gt; name(N)</code><br>When define the kernel function, its parameters are single elements instead of a whole collection. But when call the kernel function, we pass the streams into the function directly. </p>
+</li>
+<li><p>Benefits of stream programming:<br>Functions really are side-effect free (cannot write a non-deterministic program)<br>Program data flow is known by compiler: Inputs and outputs of each invocation are known in advance and thus prefetching can be employed to hide latency.<br>When there are multiple kernels, and the output of the last kernel is the input of the next kernel, producer-consumer locality is known in advance.<br>Implementation can be structured so outputs of first kernel are immediately processed by second kernel. The values are stored in on-chip buffers/caches and never written to memory, which saves bandwidth.<br>These optimizations are responsibility of stream program compiler. Requires global program analysis.</p>
+</li>
+<li><p>Drawback of stream programming: Need library of operators to describe complex data flows, so it might go wrong. </p>
+</li>
+<li><p><code>stream_gather(input, indices, tmp_input)</code>: Put elements in input to tmp_input according to indices. This is called before the kernel function, and the kernel function will deal with gathered stream.<br><code>stream_scatter(tmp_output, indices, output)</code>: Similar to stream_gather, but it is called after the kernel function, and kernel function will deal with original stream.<br>The parameters of both function are all stream. </p>
+</li>
+</ol>
+<h2 id="Synchronization-and-Communication"><a href="#Synchronization-and-Communication" class="headerlink" title="Synchronization and Communication"></a>Synchronization and Communication</h2><ol>
+<li><p>In shared address space, mutual exclusion is required for shared variables, and barriers are used to express dependencies between phases of computation.<br>They can communicate through implicit loads/stores to shared variables. </p>
+</li>
+<li><p>In message passing model, the synchronizations and communications are both performed by sending and receiving messages. </p>
+</li>
+<li><p>In data parallel model, a single logical thread is in control, but iterations of forall loop may be parallelized by the system. There is an implicit barrier at end offorallloop body.<br>They can also communicate throught implicit loads and stores, like shared address space. There is also some special built-in primitives for more complex communication patterns, e.g., reduce</p>
+</li>
+</ol>
+<h2 id="Modern-practice"><a href="#Modern-practice" class="headerlink" title="Modern practice"></a>Modern practice</h2><ol>
+<li><p>Use shared address space programming within a multi-core chip of a cluster, use message passing between chips<br>Use convenience of shared address space where it can be implemented efficiently (within a chip), require explicit communication elsewhere. </p>
+</li>
+<li><p>Data-parallel-ish programming models support shared-memory style synchronization primitives in kernels. This could permit limited forms of inter-iteration communication. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/04/13/01-Modern-Multicore-Processors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/13/01-Modern-Multicore-Processors/" class="post-title-link" itemprop="url">01. Modern Multicore Processors</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-13 15:48:23" itemprop="dateCreated datePublished" datetime="2022-04-13T15:48:23+08:00">2022-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-17 15:35:57" itemprop="dateModified" datetime="2022-05-17T15:35:57+08:00">2022-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Speedup"><a href="#Speedup" class="headerlink" title="Speedup"></a>Speedup</h1><ol>
+<li>Speedup (using P processors) = execution time (using 1 processor) / execution time (using P processors)</li>
+<li>When using P processors, we can only get a speedup less than P times.<br>One reason is that although cores are in the same chip, when they want to communicate with each other, they have to transmit information through wires, which takes some time.<br>Another reason is that the imbalance in work assignment, which caused that one core has too heavy assignment while other cores has nothing to do but wait.<br>Communication costs can dominate a parallel computation, severely limiting speedup. Especially when you assign tasks to too many cores, each core gets little computation. </li>
+</ol>
+<h1 id="Parallelism"><a href="#Parallelism" class="headerlink" title="Parallelism"></a>Parallelism</h1><p>Why parallelism?<br>Before 2004, the performance of single-processor grew exponentially. However, in 2004, Intel hit the Power Density Wall. If you get more than 100 watts in a chip, it goes to hot and will melt. And the battery won’t hold long.</p>
+<h2 id="ILP"><a href="#ILP" class="headerlink" title="ILP"></a>ILP</h2><ol>
+<li>Instruction-Level Parallelism. Extract several instructions from the same instruction stream, and multiple ALU performs multiple operations parallel (within a core). This has to be done in a semantics of program. </li>
+<li>Superscalar processor: exploit ILP within an instruction stream. Parallelism automatically and dynamically discovered by the hardware during execution (not programmer visible)</li>
+<li>Example: Pentium 4<br>Its inctruction decoder will yank a whole bunch of instructions out of instruction stream, and map them to a new kind of computation called data flow computation that will track which value is generated and feed which instruction there<br>Decoders map them to independent processing units that can each performs a subset of the whole operations.<br>Control logics try to predict what’s going on and deal with it when it predicts incorrectly. The Branch Target Buffer keeps a record of all the control flow instructions to predict where they will go again. If it predicts wrong, it will back out and doesn’t commit to those results generated, flushes them away<br>Meltdown inspector: This logic leaks informations about what other processors are doing. </li>
+<li>Most available ILP is exploited by a processor capable of issuing four instructions per clock, and only little performance benefit from building a processor that can issue more. </li>
+</ol>
+<h2 id="Multi-Core"><a href="#Multi-Core" class="headerlink" title="Multi-Core"></a>Multi-Core</h2><p>Before multi-core era, Majority of chip transistors used to perform operations that help a single instruction stream run fast.<br>More transistors mean larger cache, smarter out-of-order logic, smarter branch predictor, etc. Also, more transistors get smaller transistors, and thus higher clock frequencies</p>
+<h3 id="Simpler-cores"><a href="#Simpler-cores" class="headerlink" title="Simpler cores"></a>Simpler cores</h3><ol>
+<li>It uses increasing transistor count to add more cores to the processor, rather than use transistors to increase sophistication of processor logic that accelerates a single instruction stream (e.g., out-of-order and speculative operations)</li>
+<li>Each core is slower at running a single instruction stream than our original large core, but the sum performance is faster. With a smaller core, the communication cost inside of a chip will be cheaper. </li>
+<li>However, the original programs express no parallelism and run as one thread on one of the processor cores.</li>
+<li>One way to express paralllelism is by using pthreads. It will create threads to deal with tasks we assigned. </li>
+<li>Another way is called data-parallele expression. The programmer declare loop iterations to be independent, and a compiler might automatically generate parallel threaded code</li>
+</ol>
+<h3 id="SIMD-processing"><a href="#SIMD-processing" class="headerlink" title="SIMD processing"></a>SIMD processing</h3><ol>
+<li>Amortize cost/complexity of managing an instruction stream across many ALUs. Same instruction broadcast to all ALUs, executed in parallel on all ALUs</li>
+<li>Each core has  an independent vector register set different from the regular register set. And Each core has multiple ALUs to execute the same instruction to different data. </li>
+<li>Only a very structual, carefully written code can do an automatical vectorization by compliers. </li>
+<li>When conditional executions are occurred, it will run the condition first, and create a mask according to the result, which is used to disable the ALUs that should not execute current instructions. Those active ALUs will execute the instructions, and a new mask is created. This procession will continue until all ALUs have execute all conditional instructions they should execute, and then they can execute remaining unconditional codes together again.<br>When a core can handle n elements at the same time, the performance in the worst case is 1 / n of the peak performance. </li>
+<li>Instruction stream coherence (“coherent execution”): Same instruction sequence applies to all elements operated upon simultaneously.<br>“Divergent” execution: A lack of instruction stream coherence</li>
+<li>Coherent execution is necessary for efficient use of SIMD processing resources. However, coherent execution is not necessary for efficient parallelization across cores, since each core has the capability to fetch/decode a different instruction stream</li>
+</ol>
+<h4 id="SIMD-on-modern-CPUs"><a href="#SIMD-on-modern-CPUs" class="headerlink" title="SIMD on modern CPUs"></a>SIMD on modern CPUs</h4><ol>
+<li>SSE instructions: 128-bit operations: 4x32 bits or 2x64 bits (4-wide float vectors)<br>AVX instructions: 256 bit operations: 8x32 bits or 4x64 bits (8-wide float vectors)<br>AVX512 instructions: 512 bit operations: 16x32 bits or 8x64 bits (8-wide float vectors)</li>
+<li>Instructions are generated by the complier. Parallelism is explicitly requested by programmer using intrinsics, and conveyed using parallel language semantics. Finally, it is inferred by dependency analysis of loops by “auto-vectorizing” compiler. </li>
+<li>Explicit SIMD: SIMD parallelization is performed at compile time. We can inspect program binary and see SIMD instructions. </li>
+</ol>
+<h4 id="SIMD-on-modern-GPUs"><a href="#SIMD-on-modern-GPUs" class="headerlink" title="SIMD on modern GPUs"></a>SIMD on modern GPUs</h4><ol>
+<li>In GPUs, it usually is SPMD (Single Program Multiple Data), and uses SIMD to implement much of the logic. </li>
+<li>Implicit SIMD: Compiler generates a scalar binary (scalar instructions). But N instances of the program are <em>always run</em> together on the processor. In other words, the interface to the hardware itself is data-parallel. </li>
+<li>Hardware (not compiler) is responsible for simultaneously executing the same instruction from multiple instances on different data on SIMD ALUs</li>
+<li>SIMD width of most modern GPUs ranges from 8 to 32</li>
+</ol>
+<h1 id="Access-Memory"><a href="#Access-Memory" class="headerlink" title="Access Memory"></a>Access Memory</h1><ol>
+<li>Memory latency: The amount of time for a memory request (e.g., load, store) from a processor to be serviced by the memory system. Memory “access time” is a measure of latency. </li>
+<li>Memory bandwidth: The rate at which the memory system can provide data to a processor</li>
+<li>Stall: A processor “stalls” when it cannot run the next instruction in an instruction stream because of a dependency on a previous instruction. Accessing memory is a major source of stalls</li>
+<li>One way to reduce stall is reducing latency.<br>One stratege is cache, which also provides high bandwidth data transfer to CPU. </li>
+<li>Another way is hiding latency, namely the latency of the memory operation is not changed, it just no longer causes reduced processor utilization.<br>One common strategy is the prefetch. All modern CPUs have logic for prefetching data into caches. Prefetching can also reduce performance if the guess is wrong (hogs bandwidth, pollutes caches)<br>The other is using multi-threading. The idea is to interleave processing of multiple threads on the same core to hide stalls.</li>
+</ol>
+<h2 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h2><ol>
+<li>Key idea of throughput-oriented systems is that potentially increase time to complete work by any one thread, in order to increase overall system throughput when running multiple threads.<br>There exists some time when one thread is runnable, but it is not being executed by the processor, since the core is running some other thread.</li>
+<li>With more storing executiong contexts in the cache, the working set per thread is smaller, and the latency hiding ability is higher.<br>And since the cache space per thread is less, may go to memory more often. Thus relies heavily on memory bandwidth.<br>When the thread is much enough to achieve 100% utilization of the core, additional threads yield no benefit. </li>
+<li>The instruction decoder will choose instructions from multiple threads, and fire them to the execution units the threads shared. And the memory interface unit will detect dependencies automatically.</li>
+<li>Interleaved multi-threading (a.k.a. temporal multi-threading): Each clock, the core chooses a thread, and runs an instruction from the thread on the ALUs</li>
+<li>Simultaneous multi-threading (SMT): Each clock, core chooses instructions from multiple threads to run on ALUs. It is an extension of superscalar CPU design</li>
+<li>The operating system is responsible for mapping your pthreads to the processor’s thread execution contexts</li>
+</ol>
+<h2 id="CPUs-and-GPUs"><a href="#CPUs-and-GPUs" class="headerlink" title="CPUs and GPUs"></a>CPUs and GPUs</h2><ol>
+<li>CPU has big caches, few threads, modest memory BW, and rely mainly on caches and prefetching.<br>GPU has small caches, many threads, huge memory BW, and rely mainly on multi-threading. </li>
+<li>The bandwidth of GPUs is a lot faster than CPUs. </li>
+<li>In GPUs, ALUs run at twice the clock rate of rest of chip. So each decoded instruction runs on 32 pieces of data on the 16 ALUs over two ALU clocks. (but to the programmer, it behaves like a 32-wide SIMD operation)<br>Warp: An instruction operating on a whole vector of data at a time.<br>SM: Streaming Multi-processor. Each SM has multiple warp selector. Each selector has multiple ALUs with different functions. The selectors in the same SM have shared momery and L1 cache. And all selectors can run parallel. </li>
+<li>A core can have multiple scalar ALUs and multiple vector ALUs. Each vector ALU can perform either both MUL and ADD or ADD only.<br>And the maximum number of threads activated in a core is determined by the number of the execution contexts. </li>
+</ol>
+<h2 id="Bandwidth"><a href="#Bandwidth" class="headerlink" title="Bandwidth"></a>Bandwidth</h2><ol>
+<li>If processors request data at too high a rate, the memory system cannot keep up. No amount of latency hiding helps this.</li>
+<li>Organize computation to fetch data from memory less often.<br>Reuse data previously loaded by the same thread (traditional intra-thread temporal locality optimizations).<br>Share data across threads (inter-thread cooperation)</li>
+<li>Request data less often (instead, do more arithmetic: it’s “free”).<br>Arithmetic intensity: Ratio of math operations to data access operations in an instruction stream.<br>The main point is that programs must have high arithmetic intensity to utilize modern processors efficiently.<br>If a data needed can be recalculated in ALUs, than don’t access memory, do the calculation. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/03/05/03-Perceptron-Generalized-Linear-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -780,2459 +1391,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/10/05/16-How-To-Talk-About-Variery-Of-Personal-Characteristics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/05/16-How-To-Talk-About-Variery-Of-Personal-Characteristics/" class="post-title-link" itemprop="url">16. How To Talk About Variery Of Personal Characteristics</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-05 13:08:51" itemprop="dateCreated datePublished" datetime="2020-10-05T13:08:51+08:00">2020-10-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 13:14:47" itemprop="dateModified" datetime="2020-10-06T13:14:47+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">obsequious</td>
-<td style="text-align:center"><code>Latin sequor: follow</code><br /><code>Latin suffix -ousfull: full of</code><br />of following after<br /><strong><em>whose who follow rather than lead are usualy in a menial, subordinate, or inferior position that have to follow the lead of their customers or emplyers, bending their own wills according to the desires of those they serve</em></strong><br />they are forced, often contrary to their natural temperaments</td>
-</tr>
-<tr>
-<td style="text-align:center">obsequies</td>
-<td style="text-align:center">in a funeral cortege, the mourners follow after the corpse<br /><strong><em>the burial ceremonies, the funeral rites</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">subsequent</td>
-<td style="text-align:center"><strong><em>one that follows another</em></strong><br />a subsequent letter, paragraph, time, etc.</td>
-</tr>
-<tr>
-<td style="text-align:center">sequel</td>
-<td style="text-align:center"><strong><em>a literary work that follows another, continuing the same subject dealing with the same people or village, etc.</em></strong> <br /><strong><em>an occurrence that grows out of or follows another</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">sequence</td>
-<td style="text-align:center"><strong><em>one item following another</em></strong><br /><strong><em>in order</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">querulous</td>
-<td style="text-align:center"><code>latin queror: to complain</code><br /><strong><em>complaining</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supercilious</td>
-<td style="text-align:center"><code>Latin cilium: eyelid</code><br /><code>super: above</code><br />above the eyelid is the eyebrow<br />raising eyebrows in contempt, disdain, and sneering arrogance<br /><strong><em>contemptuous, sneering, overbearingly conceited</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">obstreperous</td>
-<td style="text-align:center"><code>Latin strepo: to make a noise</code><br /><strong><em>noisy and difficult to control</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">impecunious</td>
-<td style="text-align:center"><code>Latin pecus: cattle</code><br /> don’t have any cattle<br /><strong><em>having little or no money, but not necessarily imply iving in reduced circumstances or want, but quite simply being short of cash</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pecuniary</td>
-<td style="text-align:center"><strong><em>pertaining to money</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalrous</td>
-<td style="text-align:center"><code>Latin caballus: in inferior horse</code><br /><code>from caballus, derived French cheval: horse</code><br />in medieval times only gentlemen and knights rode on horses<br /><strong><em>an adjective that describes a knightly attitude to women</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cavalcade</td>
-<td style="text-align:center"><strong><em>a procession of persons on horseback, as in a parade</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cavalier</td>
-<td style="text-align:center"><strong><em>as a noun, a nounted soldier</em></strong><br /><strong><em>as an adjective, describes actions and attitudes that are haughty, unmindful of others’ feelings, too offhand, such attributes often being accociated with people in power</em></strong><br />a cavalier action seems arrogant and makes others feel unimportant</td>
-</tr>
-<tr>
-<td style="text-align:center">cavalry</td>
-<td style="text-align:center"><strong><em>the mounted, or “horsed” part of an army</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalry</td>
-<td style="text-align:center"><strong><em>noun form of chivalrous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">chivalric</td>
-<td style="text-align:center"><strong><em>less commonly used adjective form of chivalrous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equestrian</td>
-<td style="text-align:center"><code>Latin equus: horse</code><br /><strong><em>a horseman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equestrienne</td>
-<td style="text-align:center"><strong><em>a howsewoman</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">equine</td>
-<td style="text-align:center"><strong><em>horselike</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">innocuous</td>
-<td style="text-align:center"><code>Latin noceo: injure</code><br /><strong><em>harmless; inoffensive</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">innocent</td>
-<td style="text-align:center"><strong><em>not guilty of crime or injury</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">noxious</td>
-<td style="text-align:center"><strong><em>harmful, poisonous; unwholesome</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">bibulous</td>
-<td style="text-align:center"><code>Latin bibo: drink</code><br /><strong><em>an adjective to describe one who has an overfondness for drinks with a pronounced alcoholic content</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">imbibe</td>
-<td style="text-align:center"><strong><em>to drink in, soak up, absorb</em></strong><br />without specifying what is drunk, the implication is always liquor<br />it can also be used in other patterns</td>
-</tr>
-<tr>
-<td style="text-align:center">bib</td>
-<td style="text-align:center"><strong><em>upper part of an apron, or an apronlike napkin tied around a child’s neck</em></strong><br />prevents what is drunk or eaten from spilling over, or dribbling down, on the wearer’s clothing</td>
-</tr>
-<tr>
-<td style="text-align:center">cadaverous</td>
-<td style="text-align:center"><code>Latin cado: to fall</code><br />one’s final fall is death<br /><strong><em>pale, gaunt, thin, haggard, eyes deep-sunk, limbs wasted, like a corpse</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadaver</td>
-<td style="text-align:center"><strong><em>a corpse, especially one used for surgical dissection</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">decadent</td>
-<td style="text-align:center">falling down<br /><code>de-: down</code><br /><strong><em>deteriorating, becomming corrupt or demoralized</em></strong><br />generally used figuratively, it refers not to actual physical decay as a dead body, but to moral or spiritual decay</td>
-</tr>
-<tr>
-<td style="text-align:center">decadence</td>
-<td style="text-align:center"><strong><em>a state of decadent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">descend</td>
-<td style="text-align:center">climb down</td>
-</tr>
-<tr>
-<td style="text-align:center">decline</td>
-<td style="text-align:center">turn down</td>
-</tr>
-<tr>
-<td style="text-align:center">dolorous</td>
-<td style="text-align:center"><code>Latin doleo: to suffer or grieve</code><br /><strong><em>mournful and sad because of physical pain or mental distress</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dolor</td>
-<td style="text-align:center"><strong><em>a poetic synonym of grief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">doleful</td>
-<td style="text-align:center"><strong><em>exaggerated dismalness, sadness, or dreariness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">condole</td>
-<td style="text-align:center">to suffer or grieve with<br /><strong><em>less commonly used synonym of commiserate</em></strong><br />you condole with somebody who has sustained a loss, usually by death</td>
-</tr>
-<tr>
-<td style="text-align:center">condolence</td>
-<td style="text-align:center">Let me offer you my condolences</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">non sequitur</td>
-<td style="text-align:center">does not follow<br /><strong><em>a conclusion not based on the evidence</em></strong><br /><strong><em>any statement that appears to have no connection or relevance to what was said before</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">consecutive</td>
-<td style="text-align:center"><code>secutus is the other form of sequor</code><br /><strong><em>following in proper order</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">persecute</td>
-<td style="text-align:center">to follow through and thourght<br /><strong><em>to annoy, harass continually for no good reason</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prosecute</td>
-<td style="text-align:center">to follow before<br /><strong><em>to pursue something diligently or vigorously in order to complete it successfully</em></strong><br /><strong><em>to state, to engage in, legal proceedings against, especially in an official capacity</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superior</td>
-<td style="text-align:center"><strong><em>above others (in quality, position, etc.)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superficial</td>
-<td style="text-align:center"><strong><em>above the surface, not in depth</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superfluous</td>
-<td style="text-align:center"><strong><em>flowing above what is necessary; more than needed</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">superfluity</td>
-<td style="text-align:center"><strong><em>the noun form of superfluous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supernatural</td>
-<td style="text-align:center"><strong><em>above the natural</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">supervise</td>
-<td style="text-align:center"><strong><em>to oversee; be in charge of</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadence</td>
-<td style="text-align:center"><strong><em>fall and rise of the voice in speaking</em></strong><br /><strong><em>inflection, rhythm beat</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cadent</td>
-<td style="text-align:center"><strong><em>the adjective of cadence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">occidental</td>
-<td style="text-align:center">the sun falls in the west<br /><strong><em>the adjective of western countries</em></strong><br /><strong><em>the adjective of a native of such a country</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">occident</td>
-<td style="text-align:center"><strong><em>the noun form of occidental</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">orient</td>
-<td style="text-align:center"><code>Latin orior: to rise</code><br />the sun rises in the east<br /><strong><em>eastern countries</em></strong><br />to turn, or face, east<br /><strong><em>to adjust to a place or situation</em></strong><br /><strong><em>become familiar with, and comfortable in a place, job, situation, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">orientation</td>
-<td style="text-align:center"><strong><em>the noun form of orient</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disorient</td>
-<td style="text-align:center"><strong><em>to remove someone’s orientation, or to confuse or bewilder, especially in reference to locality, direction, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disorientation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">deciduous</td>
-<td style="text-align:center">falling down<br /><strong><em>refers to trees whose leaves fall (down) every autumn</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incident</td>
-<td style="text-align:center"><strong><em>which falls upon, befalls, or happens</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">indolent</td>
-<td style="text-align:center">not suffering<br />idle; lazy; disliking effort or work</td>
-</tr>
-<tr>
-<td style="text-align:center">indolence</td>
-<td style="text-align:center"><strong><em>the noun of indolence</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/10/04/15-How-To-Talk-About-What-Goes-On/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/04/15-How-To-Talk-About-What-Goes-On/" class="post-title-link" itemprop="url">15. How To Talk About What Goes On</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-04 16:18:02" itemprop="dateCreated datePublished" datetime="2020-10-04T16:18:02+08:00">2020-10-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 16:33:48" itemprop="dateModified" datetime="2020-10-06T16:33:48+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">enervate</td>
-</tr>
-<tr>
-<td style="text-align:center">castigate</td>
-</tr>
-<tr>
-<td style="text-align:center">self-abnegate</td>
-</tr>
-<tr>
-<td style="text-align:center">recapitulate</td>
-</tr>
-<tr>
-<td style="text-align:center">vegetate</td>
-</tr>
-<tr>
-<td style="text-align:center">simulate</td>
-</tr>
-<tr>
-<td style="text-align:center">intimate</td>
-</tr>
-<tr>
-<td style="text-align:center">alleviate</td>
-</tr>
-<tr>
-<td style="text-align:center">commiserate</td>
-</tr>
-<tr>
-<td style="text-align:center">vacillate</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="more-than-fatigue"><a href="#more-than-fatigue" class="headerlink" title="more than fatigue"></a>more than fatigue</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">enervate</td>
-<td style="text-align:center"><code>e- (ex-): out</code><br /><code>Latin nervus: nerve</code><br /><strong><em>not just fatigue, but complete devitalization—physical, emotional, mental</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">enervation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">energy</td>
-<td style="text-align:center"><code>Greek prefix en-: in</code><br /><code>ergon: work</code></td>
-</tr>
-<tr>
-<td style="text-align:center">erg</td>
-<td style="text-align:center"><strong><em>the term used in physics for a unit of work or energy</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">synergism</td>
-<td style="text-align:center"><code>prefix syn-: together or with (n might become m when the fist letter of the root is b, m, and p)</code><br /><strong><em>the process by which two or more substances or drugs, by working together, produce a greater effect in combination than the sum total of their individual effects</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">synergistically</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">synergy</td>
-<td style="text-align:center"><strong><em>an alternate form of synergism</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="verbal-punishment"><a href="#verbal-punishment" class="headerlink" title="verbal punishment"></a>verbal punishment</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">castigate</td>
-<td style="text-align:center"><code>Latin castigare: to punish</code><br /><strong><em>verbal punishment, usually harsh and severe</em></strong><br />the strongest word</td>
-</tr>
-<tr>
-<td style="text-align:center">castigation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">scold</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">criticize</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rebuke</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">censure</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">reprimand</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">berate</td>
-<td style="text-align:center"><strong><em>synonym of castigate, but much milder</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rail at</td>
-<td style="text-align:center"><strong><em>synonym of castigate, almost as strong as it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rant at</td>
-<td style="text-align:center"><strong><em>synonym of castigate, almost as strong as it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">slash at</td>
-<td style="text-align:center"><strong><em>synonym of castigate, almost as strong as it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lash out at</td>
-<td style="text-align:center"><strong><em>synonym of castigate, almost as strong as it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">tongue-lash</td>
-<td style="text-align:center"><strong><em>synonym of castigate, almost as strong as it</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="saying-“No-”-to-oneself"><a href="#saying-“No-”-to-oneself" class="headerlink" title="saying “No!” to oneself"></a>saying “No!” to oneself</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">abnegate</td>
-<td style="text-align:center"><code>Latin ab-: away</code><br /><code>nego: to deny</code><br /><strong><em>deny, reject</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">self-abnegate</td>
-<td style="text-align:center">self-denial</td>
-</tr>
-<tr>
-<td style="text-align:center">Latin nego</td>
-<td style="text-align:center"><code>Latin neg-: not, no</code><br /><code>aio: I say</code></td>
-</tr>
-<tr>
-<td style="text-align:center">negate</td>
-<td style="text-align:center"><strong><em>to deny the truth or existence of</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">negation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="heads-and-headings"><a href="#heads-and-headings" class="headerlink" title="heads and headings"></a>heads and headings</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">captain</td>
-<td style="text-align:center"><code>Latin caput, capitis: head</code><br /><strong><em>the head of any group</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">capital</td>
-<td style="text-align:center">the head city</td>
-</tr>
-<tr>
-<td style="text-align:center">decapitate</td>
-<td style="text-align:center"><strong><em>to chop off someone’s head</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">decapitation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">recapitulate</td>
-<td style="text-align:center"><code>Latin capitulum: a little head, the heading, or title, of a chapter</code><br />to go through the chapter headings again<br /><strong><em>to summarize or review the main points</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">recapitulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">recapitulatory</td>
-<td style="text-align:center"><strong><em>the adjection form of recapitulate</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">capitulate</td>
-<td style="text-align:center">to arrange in headings<br /><strong><em>to arrange conditions of surrender</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">capitulation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="not-the-real-McCoy"><a href="#not-the-real-McCoy" class="headerlink" title="not the real McCoy"></a>not the real McCoy</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">simulate</td>
-<td style="text-align:center"><code>Latin similis: like or similar</code><br /><code>form similis, derived Latin simulo: to copy</code><br /><strong><em>to copy the real thing, pretend to be the genuine article by taking on a similar appearance</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">simulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissimulation</td>
-<td style="text-align:center"><strong><em>you hide your true feelings by making a pretense of opposite feelings</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">dissimulator</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">dissemble</td>
-<td style="text-align:center"><strong><em>to hide true feelings by pretending the opposite; or to conceal facts, or one’s true intentions, bydeception; to pretend ignorance of facts you’s rather not admit, when you’re fully aware of them</em></strong><br />pejorative word</td>
-</tr>
-<tr>
-<td style="text-align:center">dissemblance</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="hints-and-helps"><a href="#hints-and-helps" class="headerlink" title="hints and helps"></a>hints and helps</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">intimate</td>
-<td style="text-align:center"><code>Latin intimus: innermost</code></td>
-</tr>
-<tr>
-<td style="text-align:center">intimation</td>
-<td style="text-align:center"><strong><em>contains a significance buried deep in the innermost core, only a hint showing</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intimacy</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">alleviate</td>
-<td style="text-align:center"><code>Latin levis: light</code><br /><code>prefix ad-: to</code><br /><strong><em>to relieve only temporarily, not to cure or do away with</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">alleviation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">alleviative</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">elevate</td>
-<td style="text-align:center"><strong><em>to raise out, to raise up</em></strong><br />anything light will rise<br /><code>e-: out</code></td>
-</tr>
-<tr>
-<td style="text-align:center">levitation</td>
-<td style="text-align:center"><strong><em>rising through no visible means</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">levitate</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">levity</td>
-<td style="text-align:center"><strong><em>lightness in the sense of frivolity, flippancy, joking, or lack of seriousness, especially when solemnity, dignity, or formality is required or more appropriate</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="sharing-someone’s-misery"><a href="#sharing-someone’s-misery" class="headerlink" title="sharing someone’s misery"></a>sharing someone’s misery</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">commiserate</td>
-<td style="text-align:center"><code>Latin miser: wretched</code><br /><code>prefix con-: together or with</code><br />wretched with someone, share someone’s misery</td>
-</tr>
-<tr>
-<td style="text-align:center">commiseration</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">miser</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">miserly</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">miserable</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">misery</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="swing-and-sway"><a href="#swing-and-sway" class="headerlink" title="swing and sway"></a>swing and sway</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">vacillate</td>
-<td style="text-align:center"><code>Latin vacillo: to swing back and forth</code><br /><strong><em>swing back and forth mentally in indecision, irresolute</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vacillation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vacillatory</td>
-<td style="text-align:center"><strong><em>the vacillating people</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">oscillate</td>
-<td style="text-align:center"><strong><em>to sway back and forth physically</em></strong><br /><code>Latin oscillum: a swing</code></td>
-</tr>
-<tr>
-<td style="text-align:center">oscillation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">synagogue</td>
-<td style="text-align:center"><strong><em>the temple or place of worship of Jews</em></strong><br /><code>agogos: leading</code><br />Jews are “led together” in a house of worship</td>
-</tr>
-<tr>
-<td style="text-align:center">symbiosis</td>
-<td style="text-align:center"><strong><em>each depending on the other for important services, emotional needs, etc.; each also providing these for the others</em></strong><br /><code>bios: life</code></td>
-</tr>
-<tr>
-<td style="text-align:center">symbiotic</td>
-<td style="text-align:center"><strong><em>the adjective form of symbiosis</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">symphony</td>
-<td style="text-align:center"><strong><em>a musical composition in which the sounds of all instruments are in harmony together</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">symphonic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">symmetry</td>
-<td style="text-align:center"><strong><em>similarity of shape on both sides</em></strong><br />measurement together</td>
-</tr>
-<tr>
-<td style="text-align:center">symmetrical</td>
-<td style="text-align:center"><strong><em>the adjective form of symmetry</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">symmetric</td>
-<td style="text-align:center"><strong><em>the adjective form of symmetry</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">syndrome</td>
-<td style="text-align:center"><code>dromos: a running</code><br /><strong><em>a group of symptoms that occur together in certain diseases</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hippodrome</td>
-<td style="text-align:center"><code>Greek hippos: horse</code><br /><strong><em>a place in ancient Greece in which horse and chariot races were run</em></strong><br /><strong><em>now used as the name of a movie theater or other place of entertainment</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">hippopotamus</td>
-<td style="text-align:center"><code>Greek potamos: river</code><br />one of the three pachyderms</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/10/03/14-How-To-Talk-About-Common-Phenomena-and-Occurrences/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/03/14-How-To-Talk-About-Common-Phenomena-and-Occurrences/" class="post-title-link" itemprop="url">14. How To Talk About Common Phenomena and Occurrences</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-03 17:35:03" itemprop="dateCreated datePublished" datetime="2020-10-03T17:35:03+08:00">2020-10-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 16:35:45" itemprop="dateModified" datetime="2020-10-06T16:35:45+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">penury</td>
-</tr>
-<tr>
-<td style="text-align:center">vicarious</td>
-</tr>
-<tr>
-<td style="text-align:center">ephemeral</td>
-</tr>
-<tr>
-<td style="text-align:center">euphemisms</td>
-</tr>
-<tr>
-<td style="text-align:center">badinage</td>
-</tr>
-<tr>
-<td style="text-align:center">bovine</td>
-</tr>
-<tr>
-<td style="text-align:center">nostalgia</td>
-</tr>
-<tr>
-<td style="text-align:center">cacophonous</td>
-</tr>
-<tr>
-<td style="text-align:center">carnivorous</td>
-</tr>
-<tr>
-<td style="text-align:center">clandestine</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="poverty-and-wealth"><a href="#poverty-and-wealth" class="headerlink" title="poverty and wealth"></a>poverty and wealth</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">penury</td>
-<td style="text-align:center"><code>Latin penuria: need, neediness</code><br /><strong><em>dire, abject poverty, complete lack of financial resources</em></strong><br />one of two strongest English words there are to denote absence of money</td>
-</tr>
-<tr>
-<td style="text-align:center">penurious</td>
-<td style="text-align:center"><strong><em>adjective of penury</em></strong><br /><strong><em>stingy, close-fisted, niggardly (sparing in the use of money as to give the appearance of penury)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">penurousness</td>
-<td style="text-align:center"><strong><em>stinginess, excessive frugality</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">parsimonious</td>
-<td style="text-align:center"><strong><em>stingy, but milder than penurious</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">parsimony</td>
-<td style="text-align:center"><strong><em>the noun form of parsimonious</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">indigence</td>
-<td style="text-align:center"><strong><em>poverty, milder than penury</em></strong><br />not absolutely penniless, simply living in a reduced circumstances</td>
-</tr>
-<tr>
-<td style="text-align:center">indigent</td>
-<td style="text-align:center"><strong><em>the adjective form of destitution</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">destitution</td>
-<td style="text-align:center"><strong><em>poverty, as strong as penury</em></strong><br />do not even have the means for mere subsistence</td>
-</tr>
-<tr>
-<td style="text-align:center">destitute</td>
-<td style="text-align:center"><strong><em>the adjective form of destitution</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">affluence</td>
-<td style="text-align:center"><strong><em>more than comfortable; there is the implication that their wealth is increasing</em></strong><br /><code>Latin fluo: to flow</code><br /><code>prefix ad-: changing to af- before a root beginning with f</code><br />money keeps flowing to us</td>
-</tr>
-<tr>
-<td style="text-align:center">affluent</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">confluence</td>
-<td style="text-align:center">a flowing together</td>
-</tr>
-<tr>
-<td style="text-align:center">opulence</td>
-<td style="text-align:center"><strong><em>not only implies much greater wealth than affluence, but in addition suggests lavish expeditures and ostentatiously luxurious surroundings</em></strong><br /><code>Latin opulentus: wealthy</code></td>
-</tr>
-<tr>
-<td style="text-align:center">opulent</td>
-<td style="text-align:center"><strong><em>the adjective form of opulence, may describe people, surroundings, styles of life, or the like</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="short-time"><a href="#short-time" class="headerlink" title="short time"></a>short time</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ephemera</td>
-<td style="text-align:center"><strong><em>anything so short-lived, so unenduring that it scarcely seems to outlast the day</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">evanescent</td>
-<td style="text-align:center">synonym of ephemeral<br />something intagible, like a feeling, may be called evanescent<br /><code>prefix e-: out</code><br /><code>vanesco: to vanish</code><br /><code>suffix -ent: adjective</code><br /><code>suffix -escent: becoming or beginning to</code><br />begnin to vanish</td>
-</tr>
-<tr>
-<td style="text-align:center">evanescence</td>
-<td style="text-align:center"><code>suffix -ence: begin to</code></td>
-</tr>
-<tr>
-<td style="text-align:center">evanesce</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">adolescent</td>
-<td style="text-align:center"><strong><em>beginning to become an adult</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">convalesce</td>
-<td style="text-align:center"><strong><em>begin to get well after illness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">putrescent</td>
-<td style="text-align:center"><strong><em>beginning to rot; beginning to become putrid</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">obsolescent</td>
-<td style="text-align:center"><strong><em>becoming obsolete</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fleeting</td>
-<td style="text-align:center">synonym of evanescent</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="good"><a href="#good" class="headerlink" title="good"></a>good</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">euphemism</td>
-<td style="text-align:center"><strong><em>a word or expression that has been substituted for another that is likely to offend</em></strong><br /><code>Greek prefix eu-: good</code><br /><code>pheme: voice</code><br /><code>suffix -ism: noun</code><br />something said in a good voice</td>
-</tr>
-<tr>
-<td style="text-align:center">euphemistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">euphony</td>
-<td style="text-align:center"><strong><em>good ound, pleasant lilt or rhythm</em></strong><br /><code>phone: sound</code></td>
-</tr>
-<tr>
-<td style="text-align:center">euphonic<br />euphonious</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eulogy</td>
-<td style="text-align:center">good speech<br /><strong><em>a formal speech of praise, usually delivered as a funeral oration</em></strong><br /><code>logos: word or speech</code></td>
-</tr>
-<tr>
-<td style="text-align:center">monologue</td>
-<td style="text-align:center">only one man is speaking</td>
-</tr>
-<tr>
-<td style="text-align:center">epilogue</td>
-<td style="text-align:center"><strong><em>words upon the other words, or “after-words”</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prologue</td>
-<td style="text-align:center"><em>words before the main part, “before-words”</em></td>
-</tr>
-<tr>
-<td style="text-align:center">eulogistic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eulogize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">eulogist</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">euphoria</td>
-<td style="text-align:center"><strong><em>good feeling, a sense of mental buoyancy and physical well-being</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">euphoric</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">euthanasia</td>
-<td style="text-align:center">good death<br /><strong><em>method of painless death inflicted on people suffering from incurable diseases</em></strong><br /><code>Greek thanatos: death</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="expression"><a href="#expression" class="headerlink" title="expression"></a>expression</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">badinage</td>
-<td style="text-align:center"><strong><em>a half-teasing, non-malicious, frivolous banter, intended to amuse rather than wound</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">persiflage</td>
-<td style="text-align:center">synonym of badinage<br /> a little more derisive, a trifle mroe indicative of contempt or mockery, but still totally unmalicious</td>
-</tr>
-<tr>
-<td style="text-align:center">cliché</td>
-<td style="text-align:center"><strong><em>a pattern of words which was once new and fresh, but which now is so old, worn, and threadbare that only banal, unimaginative speakers and writers ever use it</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">bromide</td>
-<td style="text-align:center"><strong><em>any trite, dull, and probably fallacious remark that shows little evidence of original thinking, and that therefore convinces a listener of the total absence of perspicacity on the part of the speaker</em></strong><br /><strong><em>a drug, formerly used as a sedative</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">bromidic</td>
-<td style="text-align:center"><strong><em>the adjective form of bromide</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">platitude</td>
-<td style="text-align:center"><strong><em>a dull, trite, hackneyed, unimaginative pattern of words, but, to add insult to injury, the speaker uses it with an air of novelty — as if he just made it up and isn’t he the brilliant fellow</em></strong><br /><code>Greek platys: broad or flat</code><br /><code>suffix -tude: noun</code></td>
-</tr>
-<tr>
-<td style="text-align:center">platitudicous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">plateau</td>
-<td style="text-align:center"><strong><em>flat land</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">platter</td>
-<td style="text-align:center"><strong><em>flat dishes</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">platypus</td>
-<td style="text-align:center"><strong><em>flat foot</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">anodyne</td>
-<td style="text-align:center"><strong><em>in the medical sense, is a drug that allays pain without curing an illness</em></strong><br /><strong><em>figuratively, an anodyne is a statement made to allay someone’s fears or anxienties, not believed by the speaker, but intended to be believed by the listener</em></strong><br /><code>prefix an-: negative</code><br /><code>Greek odyne: pain</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="animals"><a href="#animals" class="headerlink" title="animals"></a>animals</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">bovine</td>
-<td style="text-align:center"><code>Latin bovis: ox or cow</code><br /><code>suffix -ine: like, similar to, characteristic of</code><br />far from complimentary, implies a certain mild contempt on the part of the speaker</td>
-</tr>
-<tr>
-<td style="text-align:center">phlegmatic</td>
-<td style="text-align:center"><strong><em>self-controlled</em></strong><br />milder than bovine</td>
-</tr>
-<tr>
-<td style="text-align:center">leonine</td>
-<td style="text-align:center"><strong><em>like a lion in appearance or temperament</em></strong><br /><code>Latin leo: lion</code></td>
-</tr>
-<tr>
-<td style="text-align:center">canine</td>
-<td style="text-align:center"><strong><em>as an adejctive, like a dog</em></strong><br /><strong><em>as a noun, the species to which dogs belong</em></strong><br /><code>Latin canis: dog</code></td>
-</tr>
-<tr>
-<td style="text-align:center">feline</td>
-<td style="text-align:center"><strong><em>catlike</em></strong><br /><code>Latin felis: cat</code></td>
-</tr>
-<tr>
-<td style="text-align:center">porcine</td>
-<td style="text-align:center"><strong><em>piglike</em></strong><br /><code>Latin porcus: pig</code></td>
-</tr>
-<tr>
-<td style="text-align:center">vulpine</td>
-<td style="text-align:center"><strong><em>foxlike in appearance or temperament. When applied to people , this adjective usually indicates the shrewdness of a fox</em></strong><br /><code>Latin vulpus: fox</code></td>
-</tr>
-<tr>
-<td style="text-align:center">ursine</td>
-<td style="text-align:center"><strong><em>bearlike</em></strong><br /><code>Latin ursus: bear</code></td>
-</tr>
-<tr>
-<td style="text-align:center">lupine</td>
-<td style="text-align:center"><strong><em>wolflike</em></strong><br /><code>Latin lupus: wolf</code></td>
-</tr>
-<tr>
-<td style="text-align:center">equine</td>
-<td style="text-align:center"><strong><em>horselike</em></strong><br /><code>Latin equus: horse</code></td>
-</tr>
-<tr>
-<td style="text-align:center">piscine</td>
-<td style="text-align:center"><strong><em>fishlike</em></strong><br /><code>Latin piscis: fish</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="pain"><a href="#pain" class="headerlink" title="pain"></a>pain</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">nostalgia</td>
-<td style="text-align:center"><code>Greek nostos: a return</code><br /><code>Greek algos: pain</code></td>
-</tr>
-<tr>
-<td style="text-align:center">neuralgia</td>
-<td style="text-align:center"><strong><em>pain along the course of nerve</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">cardialgia</td>
-<td style="text-align:center"><em>heartburn</em></td>
-</tr>
-<tr>
-<td style="text-align:center">nostalgic</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="sounds"><a href="#sounds" class="headerlink" title="sounds"></a>sounds</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">cacophony</td>
-<td style="text-align:center"><code>Greek kakos: bad, harsh, or uly</code></td>
-</tr>
-<tr>
-<td style="text-align:center">cacophonous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">phonograph</td>
-<td style="text-align:center">writer of sound</td>
-</tr>
-<tr>
-<td style="text-align:center">saxophone</td>
-<td style="text-align:center"><strong><em>a musical instrument invented by Adolphe Sax</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">xylophone</td>
-<td style="text-align:center"><strong><em>a musical instrument</em></strong><br /><code>Greek xylon: wood</code><br />sounds through wood</td>
-</tr>
-<tr>
-<td style="text-align:center">phonetics</td>
-<td style="text-align:center"><strong><em>the science of the sounds of language</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">phonetic</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">phonetician</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">phonics</td>
-<td style="text-align:center"><strong><em>the science of sound</em></strong><br /><strong><em>the method of teaching reading by drilling the sounds of letters and syllables</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="flesh-and-devour"><a href="#flesh-and-devour" class="headerlink" title="flesh and devour"></a>flesh and devour</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">carnivorous</td>
-<td style="text-align:center"><code>carnis: flesh</code><br /><code>voro: to devour</code><br /><strong><em>the main diet of a carnivorous animal is meat</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">carnivore</td>
-<td style="text-align:center"><strong><em>carnivorous animal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">herbivorous</td>
-<td style="text-align:center"><strong><em>subsisting on grains, grasses, and other vegetation</em></strong><br /><code>Latin herba: herb</code></td>
-</tr>
-<tr>
-<td style="text-align:center">herbivore</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">omnivorous</td>
-<td style="text-align:center"><strong><em>eating everything</em></strong><br /><code>Latin omnis: all</code><br />omnivorous reader reads everything in great quantities</td>
-</tr>
-<tr>
-<td style="text-align:center">omnipotent</td>
-<td style="text-align:center"><strong><em>all-powerful</em></strong><br />an adjective usually applied to God; also to any ruler whose governing powers are unlimited<br /><code>Latin potens, potentis: powerful</code></td>
-</tr>
-<tr>
-<td style="text-align:center">omnipotence</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">potentate</td>
-<td style="text-align:center"><strong><em>a powerful ruler</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">impotent</td>
-<td style="text-align:center"><strong><em>powerless</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">potent</td>
-<td style="text-align:center"><strong><em>powerful</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">potential</td>
-<td style="text-align:center"><strong><em>possessing power or ability not yet exercised</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">omniscient</td>
-<td style="text-align:center"><strong><em>all-knowing, infinitely wise</em></strong><br /><code>sciens: knowing</code></td>
-</tr>
-<tr>
-<td style="text-align:center">omniscience</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">omnipresent</td>
-<td style="text-align:center"><strong><em>present in all places at onece</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ubiquitous</td>
-<td style="text-align:center"><code>Latin ubique: everywhere</code><br />synonym of omnipresent</td>
-</tr>
-<tr>
-<td style="text-align:center">ubiquity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">omnibus</td>
-<td style="text-align:center"><strong><em>for all, including all</em></strong><br /><strong><em>bus</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">voracious</td>
-<td style="text-align:center"><strong><em>greedy or gluttonnous</em></strong><br />may refer to either food or any other habits</td>
-</tr>
-<tr>
-<td style="text-align:center">voracity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">carnelian</td>
-<td style="text-align:center">a reddish color, the color of red flesh</td>
-</tr>
-<tr>
-<td style="text-align:center">carnival</td>
-<td style="text-align:center"><strong><em>a kind of outdoor entertainment with games, rides, side sows, lots of food</em></strong><br />flesh farwell</td>
-</tr>
-<tr>
-<td style="text-align:center">carnal</td>
-<td style="text-align:center"><strong><em>signify pleasures or appetites of the flesh rather than of the spirit</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">carnality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">carnage</td>
-<td style="text-align:center"><strong><em>great destruction of life (of human flesh), as in war or mass murders</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">reincarnation</td>
-<td style="text-align:center"><strong><em>a rebirth or reappearancereincarnate</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incarnate</td>
-<td style="text-align:center"><strong><em>in the flesh</em></strong><br />the devil incarnate; evil incarnate<br /><strong><em>to embody, give bodily form to, or make real</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="secret"><a href="#secret" class="headerlink" title="secret"></a>secret</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">clandestine</td>
-<td style="text-align:center"><code>Latin clam: secretly</code><br /><strong><em>implies secrecy or concealment in the working out of a plan that is dangerous or illegal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">surreptitious</td>
-<td style="text-align:center"><strong><em>stealthy, sneaky, furtive, generally because of fear of detection</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">surreptitiousness</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">thanatology</td>
-<td style="text-align:center"><strong><em>the science of death and dying</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prophesy</td>
-<td style="text-align:center"><strong><em>to say beforehand; to foretell an occurrence before it actually happens</em></strong><br /><code>Greek verb phanai: to speak, also spelled as phet-, phec-</code></td>
-</tr>
-<tr>
-<td style="text-align:center">prophecy</td>
-<td style="text-align:center"><strong><em>the foretelling of such an occurrence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">phophet</td>
-<td style="text-align:center"><strong><em>the person who foretells</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">predict</td>
-<td style="text-align:center"><strong><em>to foretell</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">prediction</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">nostophathy</td>
-<td style="text-align:center"><strong><em>disease on returning home</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vulpicide</td>
-<td style="text-align:center"><strong><em>the killing of foxes</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">lupicide</td>
-<td style="text-align:center"><strong><em>the killing of wolves</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">felicide</td>
-<td style="text-align:center"><strong><em>the killing of lions, tigers, and other cats</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ursicide</td>
-<td style="text-align:center"><strong><em>the killing of bears</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">piscivorous</td>
-<td style="text-align:center"><strong><em>fish-eating</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">insectivorous</td>
-<td style="text-align:center"><strong><em>insect-eating</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">potentiate</td>
-<td style="text-align:center"><strong><em>to make more effective or powerful; to augment the effect of another drug</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/09/22/12-How-To-Flatter-Your-Friends/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/22/12-How-To-Flatter-Your-Friends/" class="post-title-link" itemprop="url">12. How To Flatter Your Friends</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-22 17:17:06" itemprop="dateCreated datePublished" datetime="2020-09-22T17:17:06+08:00">2020-09-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-06 16:35:56" itemprop="dateModified" datetime="2020-10-06T16:35:56+08:00">2020-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index">
-                    <span itemprop="name">英语</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%8B%B1%E8%AF%AD/Word-Power-Made-Easy/" itemprop="url" rel="index">
-                    <span itemprop="name">Word Power Made Easy</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <style>
-table th:first-of-type {
-    width: 150px;
-}
-</style>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">convivial</td>
-</tr>
-<tr>
-<td style="text-align:center">indefatigable</td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuous</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacious</td>
-</tr>
-<tr>
-<td style="text-align:center">magnanimous</td>
-</tr>
-<tr>
-<td style="text-align:center">versatile</td>
-</tr>
-<tr>
-<td style="text-align:center">stoical</td>
-</tr>
-<tr>
-<td style="text-align:center">intrepid</td>
-</tr>
-<tr>
-<td style="text-align:center">scintillating</td>
-</tr>
-<tr>
-<td style="text-align:center">urbane</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="vivo-to-live-vita-life"><a href="#vivo-to-live-vita-life" class="headerlink" title="vivo: to live; vita: life"></a>vivo: to live; vita: life</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">convivial</td>
-<td style="text-align:center"><code>convivo is the Latin verb to live together</code><br /><code>from convivo, convivum meant a feast or banquet</code><br /><code>from convivum, we get convivial</code><br /><strong><em>an adjective that describes the kind of person who likes to attend feasts and banquets, enjoying (and supplying the) jovial good fellowship characteristic of such getherings</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">conviviality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vevacious</td>
-<td style="text-align:center"><strong><em>full of the joy of living; animated; peppy</em></strong><br />a vevacious personality</td>
-</tr>
-<tr>
-<td style="text-align:center">vivacity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivid</td>
-<td style="text-align:center"><strong><em>possessing the freshness of life; strong; sharp</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vividness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">revive</td>
-<td style="text-align:center"><strong><em>bring back to life</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revival</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivisection</td>
-<td style="text-align:center"><strong><em>operating on a live animal</em></strong><br /><code>Latin sect: to cut</code></td>
-</tr>
-<tr>
-<td style="text-align:center">antivivisectionist</td>
-<td style="text-align:center"><strong><em>ones who object to the procedure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">viviparous</td>
-<td style="text-align:center"><strong><em>producing live babies</em></strong><br /><code>Latin pareo: to give birth (parent)</code></td>
-</tr>
-<tr>
-<td style="text-align:center">oviparous</td>
-<td style="text-align:center"><strong><em>producing yong from eggs</em></strong><br /><code>Latin ovum: egg</code></td>
-</tr>
-<tr>
-<td style="text-align:center">oval</td>
-<td style="text-align:center"><strong><em>egg-shaped</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovoid</td>
-<td style="text-align:center"><strong><em>egg-shaped</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovary</td>
-<td style="text-align:center"><strong><em>a female reproductive organ in which ova or eggs are produced</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovarian</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ovulate</td>
-<td style="text-align:center"><strong><em>to release an egg from the ovary</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ovulation</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ovum</td>
-<td style="text-align:center"><strong><em>the female germ cell which, when fertilized by a sperm, develops into an embryo</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fetus</td>
-<td style="text-align:center"><strong><em>developed from an embryo, an unborn offspring of a mammal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fetal</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vital</td>
-<td style="text-align:center"><strong><em>essential to life; of crucial importance; full of life, strength, vigor, etc.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">vitality</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitalize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">revitalize</td>
-<td style="text-align:center"><strong><em>re-energize</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">revitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">devitalize</td>
-<td style="text-align:center"><code>de-: essentially negative</code><br /><strong><em>to rob of life, to take life from</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">devitalization</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">Vitamin</td>
-<td style="text-align:center"><strong><em>one of the many nutritional elements on which life is dependent</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="food"><a href="#food" class="headerlink" title="food"></a>food</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">gourmand</td>
-<td style="text-align:center"><strong><em>one who enjoys food with a sensual pleasure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">gourmandize</td>
-<td style="text-align:center"><strong><em>the verb form of gourmand</em></strong><br /><code>to stuff oneself like a pig</code></td>
-</tr>
-<tr>
-<td style="text-align:center">gourmet</td>
-<td style="text-align:center"><strong><em>one who has a keen interest in food and liquor, but is much more fastidious, is more of a connoisseur</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">glutton</td>
-<td style="text-align:center"><strong><em>one who eats voraciously, with no discernment whatever, but merely for the purpose of stuffing himself</em></strong><br />a highly derogatory term</td>
-</tr>
-<tr>
-<td style="text-align:center">gluttonize</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gluttonous</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="fatigue"><a href="#fatigue" class="headerlink" title="fatigue"></a>fatigue</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">indefatigable</td>
-<td style="text-align:center"><strong><em>unable to be fatigued</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">fatigue</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">indefatigability</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="simple"><a href="#simple" class="headerlink" title="simple"></a>simple</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ingenuous</td>
-<td style="text-align:center">a complimentary term<br /><strong><em>frank, open, artless, not likely to try to put anything over on you, nor apt to hide feelings or thoughts that more sophisticated persons would consider it wise, tackful, or expedient to conceal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">disingenuous</td>
-<td style="text-align:center"><strong><em>not frank or open, crafty, cunning, dishonest, artful, insincere, untrustworthy. And they are all of these while making a pretense of being simple, frank, and aboveboard.</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenious</td>
-<td style="text-align:center"><strong><em>shrewd, clever, inventive</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuousness</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">ingenuity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">naïve</td>
-<td style="text-align:center"><em>a derogatory term<br /><strong>to imply that they have not learned the ways of the world, and are thereforeidealistic and trusting beyond the point of safety; such idealism and trust have probably come from ignorance or inexperience</strong></em></td>
-</tr>
-<tr>
-<td style="text-align:center">naïveté</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">credulous</td>
-<td style="text-align:center">a derogatory term<br /><strong><em>a willingness to believe almost anything, no matter how fantastic</em></strong><br />usually results from ignorance or inexperience, or perhaps from an inability to believe that human beings are capable of lying<br /><code>Latin credo: to believe</code></td>
-</tr>
-<tr>
-<td style="text-align:center">credulity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">gullible</td>
-<td style="text-align:center">a derogatory term<br /><strong><em>easily tricked, easily fooled, easily imposed on</em></strong><br />stronger than credulous, and is more derogatory<br />results more from stupidity than from ignorance or inexperience</td>
-</tr>
-<tr>
-<td style="text-align:center">gullibility</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-credo-to-believe"><a href="#Latin-credo-to-believe" class="headerlink" title="Latin credo: to believe"></a>Latin credo: to believe</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">credit</td>
-<td style="text-align:center">if people believe in your honesty they will extend credit to you; they will credit what you say</td>
-</tr>
-<tr>
-<td style="text-align:center">credible</td>
-<td style="text-align:center"><code>suffix -ible: can be</code><br /><strong><em>something credible can be believed</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credibility</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incredulous</td>
-<td style="text-align:center"><strong><em>skepticism, of non-belief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incredulity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">incredible</td>
-<td style="text-align:center"><strong><em>cannot be believed</em></strong><br /><strong><em>persons who are so unique that you can scarecely believe they exist</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">incredibility</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">credo</td>
-<td style="text-align:center"><strong><em>personal belief, code of ethics; the principles by which people guide their actions</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">creed</td>
-<td style="text-align:center"><strong><em>a close synonym of credo</em></strong><br /><strong><em>a religious belief</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credence</td>
-<td style="text-align:center"><strong><em>belief of something as true</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">credentials</td>
-<td style="text-align:center"><strong><em>a document or documents proving a person’s right to a title or privilege</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-specto-to-look"><a href="#Latin-specto-to-look" class="headerlink" title="Latin specto: to look"></a>Latin specto: to look</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">spectacle</td>
-<td style="text-align:center"><strong><em>something to look at; eyeglasses (spectacles)</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">spectator</td>
-<td style="text-align:center"><strong><em>one who looks at what’s happening</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">inspect</td>
-<td style="text-align:center">look into something</td>
-</tr>
-<tr>
-<td style="text-align:center">retrospect</td>
-<td style="text-align:center">a backward look<br />preceeded by the preposition in</td>
-</tr>
-<tr>
-<td style="text-align:center">prospect</td>
-<td style="text-align:center">a forward look</td>
-</tr>
-<tr>
-<td style="text-align:center">prospective</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">conspicuous</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacious</td>
-<td style="text-align:center"><strong><em>smart, sharp, able to look through and understand quickly, keen-minded, mentally sharp, astute</em></strong><br />applies to persons, their reasoning, mind<br /><code>prefix per-: through</code><br />looking through keenly, intellegently</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicuous</td>
-<td style="text-align:center"><strong><em>easily understood from one look</em></strong><br />applies to writing, style, books, and like things that have to be understood. <br />synonym of clear, simple, lucid</td>
-</tr>
-<tr>
-<td style="text-align:center">perspicuity</td>
-<td style="text-align:center"><strong><em>the noun form of perspicuous</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">perspicacity</td>
-<td style="text-align:center"><strong><em>noun form of perspicacious</em></strong><br />synonym of acumen</td>
-</tr>
-<tr>
-<td style="text-align:center">acumen</td>
-<td style="text-align:center"><strong><em>mental keenness, sharpness, quickness; keen insight</em></strong><br />Latin acuo: to sharpen</td>
-</tr>
-<tr>
-<td style="text-align:center">acute</td>
-<td style="text-align:center"><strong><em>sharp, sudden</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">acuity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">acupuncture</td>
-<td style="text-align:center"><strong><em>the insertion of a needle into the body for medical purposes</em></strong><br /><strong><em>punctus: point</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">punctuate</td>
-<td style="text-align:center"><strong><em>When you punctuate a sentence, you put various points (pediods, commas, etc.)where needed</em></strong><br /><strong><em>When lightning punctuates the storm, or when the silence is punctuated by the wailing of police sirens, points interrupt the atmosphere, the quiet</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">punctual</td>
-<td style="text-align:center">right on the point of time</td>
-</tr>
-<tr>
-<td style="text-align:center">punctuality</td>
-<td style="text-align:center">the noun form of punctual</td>
-</tr>
-<tr>
-<td style="text-align:center">punctilious</td>
-<td style="text-align:center"><strong><em>exact, scrupulous, very careful to observe the proper points of behavior, procedure</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">puncture</td>
-<td style="text-align:center"><strong><em>to make a hole in it with a sharp point</em></strong><br /><strong><em>figuratively, to break illusions, fantasies, or ego, tire</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungent</td>
-<td style="text-align:center"><code>another form of the root punctus (pungo, to pierce sharply)</code><br /><strong><em>having a sharp, spicy smell or taste or wit</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungence</td>
-<td style="text-align:center"><strong><em>the noun form of pungent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pungency</td>
-<td style="text-align:center"><strong><em>the noun form of pungent</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">introspect</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">introspection</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">circumspect</td>
-<td style="text-align:center">to look around most carefully<br /><strong><em>care; watchfulness, caution</em></strong><br /><code>circum-: around</code></td>
-</tr>
-<tr>
-<td style="text-align:center">circumspection</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">specious</td>
-<td style="text-align:center"><strong><em>something looks good or sensible, but actually is not</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">speciousness</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-animus-mind"><a href="#Latin-animus-mind" class="headerlink" title="Latin animus: mind"></a>Latin animus: mind</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">magnanimous</td>
-<td style="text-align:center"><code>magnus: large, great</code><br /><strong><em>magnanimous people have such great, noble minds or souls  that they are beyong seeking petty revenge</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">magnanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">pusillanimous</td>
-<td style="text-align:center"><code>Latin pusillus: tiny</code><br /><strong><em>petty and mean</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">pusillanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">unanimous</td>
-<td style="text-align:center"><strong><em>of one mind</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unanimity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">equanimity</td>
-<td style="text-align:center">equal mind<br /><strong><em>evenness or calmness of mind; composure</em></strong><br /><code>Latin aequus: equal</code></td>
-</tr>
-<tr>
-<td style="text-align:center">animus</td>
-<td style="text-align:center"><strong><em>hostility, ill will, malevolence</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">animosity</td>
-<td style="text-align:center"><strong><em>synonym of animus</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="verto-versus-to-turn"><a href="#verto-versus-to-turn" class="headerlink" title="verto, versus: to turn"></a>verto, versus: to turn</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">versatile</td>
-<td style="text-align:center"><strong><em>versatile people can turn their hand to many things successfully</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">versatility</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Greek-stoa-porch"><a href="#Greek-stoa-porch" class="headerlink" title="Greek stoa: porch"></a>Greek stoa: porch</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">stoical</td>
-<td style="text-align:center"><strong><em>bear their pain or sorrow without complaint</em></strong><br />Zeno stood on a porch and told his students people should free themselves from intense emotion, be unmoved by both joy and sorrow, and submit without complaint to unavoidable necesity</td>
-</tr>
-<tr>
-<td style="text-align:center">stoicism</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-trepio-to-tremble"><a href="#Latin-trepio-to-tremble" class="headerlink" title="Latin trepio: to tremble"></a>Latin trepio: to tremble</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">intrepid</td>
-<td style="text-align:center"><strong><em>fearless and not a single tremble when confronted by dangers</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrepidity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">trepidation</td>
-<td style="text-align:center"><strong><em>great fear, trembling, or alarm</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-scintilla-a-quick-bright-spark"><a href="#Latin-scintilla-a-quick-bright-spark" class="headerlink" title="Latin scintilla: a quick, bright spark"></a>Latin scintilla: a quick, bright spark</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">scintilla</td>
-<td style="text-align:center"><strong><em>a spark</em></strong><br /><strong><em>a very small partical</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">scintillate</td>
-<td style="text-align:center"><strong><em>someone who scintillates sparkles with charm and with</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">scintillation</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Latin-urbs-city"><a href="#Latin-urbs-city" class="headerlink" title="Latin urbs: city"></a>Latin urbs: city</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">urbane</td>
-<td style="text-align:center">people live in the city<br /><strong><em>urbane people are gracious, affable, cultivated, suave, tactful</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">urban</td>
-<td style="text-align:center"><strong><em>an adjective refers to cities</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">urbanity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">suburb</td>
-<td style="text-align:center"><code>prefix sub: under, near, close to</code><br />near the city<br /><strong><em>an outlying district of a city, especially a residential one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburban</td>
-<td style="text-align:center"><strong><em>the adjective of suburb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburbanite</td>
-<td style="text-align:center"><strong><em>suburban resident</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">suburbia</td>
-<td style="text-align:center"><strong><em>suburbs or suburbanites as a group</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">interurban</td>
-<td style="text-align:center"><strong><em>between cities</em></strong><br /><code>inter: between</code></td>
-</tr>
-<tr>
-<td style="text-align:center">intraurban</td>
-<td style="text-align:center"><strong><em>within a city</em></strong><br /><code>intra-: inside, within</code></td>
-</tr>
-<tr>
-<td style="text-align:center">exurb</td>
-<td style="text-align:center">out of the city<br /><code>ex-: out</code><br /><strong><em>lies weel beyond, way outside, a large city, and generally refers to region inhabited by well-to-do families</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurban</td>
-<td style="text-align:center"><strong><em>the adjective of exurb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurbanite</td>
-<td style="text-align:center"><strong><em>the resident of exurb</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">exurbia</td>
-<td style="text-align:center"><strong><em>as a group; manners, customs</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rural</td>
-<td style="text-align:center"><code>Latin rus, ruris: country</code><br /><strong><em>country or farm regions, agriculture</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rustic</td>
-<td style="text-align:center"><strong><em>furniture or dwellings made of roughhwen wood, or furnishings suitable to a farmhouse; or, when applied to a person, is an antonym of urbane</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">rusticity</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">rusticate</td>
-<td style="text-align:center"><strong><em>to spend time in the country</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="Amateur-Etymologist"><a href="#Amateur-Etymologist" class="headerlink" title="Amateur Etymologist"></a>Amateur Etymologist</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Word</th>
-<th style="text-align:center">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">survive</td>
-<td style="text-align:center"><strong><em>to live on</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">survival</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">vivarium</td>
-<td style="text-align:center"><strong><em>enclosed area in which plants and small animals live in conditions resembling their natural habitat</em></strong><br /><code>suffix -ium: place where</code></td>
-</tr>
-<tr>
-<td style="text-align:center">solarium</td>
-<td style="text-align:center"><strong><em>a place for the sun to enter, or where one can sunbathe</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">aquarium</td>
-<td style="text-align:center"><strong><em>a place for water, or fish tank</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">podium</td>
-<td style="text-align:center"><strong><em>a place for the feet, or speaker’s platform</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">auditorium</td>
-<td style="text-align:center"><em>a place for hearing concerts, plays</em></td>
-</tr>
-<tr>
-<td style="text-align:center">vita</td>
-<td style="text-align:center">life<br /><strong><em>one’s professional or career résumé</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unicorn</td>
-<td style="text-align:center"><strong><em>animal with one horn</em></strong><br /><code>Latin unus: one</code><br /><code>Latin cornu: horn</code></td>
-</tr>
-<tr>
-<td style="text-align:center">uniform</td>
-<td style="text-align:center"><strong><em>of one form</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unify</td>
-<td style="text-align:center"><strong><em>to make one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unity</td>
-<td style="text-align:center"><strong><em>oneness</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">unicycle</td>
-<td style="text-align:center"><strong><em>one-wheeled vehicle</em></strong><br /><code>Greek kyklos: circle, wheel</code></td>
-</tr>
-<tr>
-<td style="text-align:center">anniversary</td>
-<td style="text-align:center"><strong><em>a year has turned</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">universe</td>
-<td style="text-align:center"><strong><em>every turning as one</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">university</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">interstate</td>
-<td style="text-align:center"><strong><em>between states</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">international</td>
-<td style="text-align:center"><strong><em>between nations</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intermediate</td>
-<td style="text-align:center"><strong><em>in the middle between elementary and advanced</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">interrupt</td>
-<td style="text-align:center"><strong><em>to break in (between people conversing)</em></strong><br /><code>Latin rumpo, ruptus: to break</code></td>
-</tr>
-<tr>
-<td style="text-align:center">interpersonal</td>
-<td style="text-align:center"><strong><em>between persons</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrastate</td>
-<td style="text-align:center"><strong><em>within one state</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intranational</td>
-<td style="text-align:center"><strong><em>within one nation</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrapersonal</td>
-<td style="text-align:center"><strong><em>within one’s own person or mind</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intrapsychic</td>
-<td style="text-align:center"><strong><em>synonym of intrapersonal</em></strong></td>
-</tr>
-<tr>
-<td style="text-align:center">intramuscular</td>
-<td style="text-align:center"><strong><em>within the muscles</em></strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -3304,7 +1462,7 @@ table th:first-of-type {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

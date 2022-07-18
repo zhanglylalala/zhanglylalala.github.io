@@ -191,6 +191,441 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/28/08-Sampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/28/08-Sampling/" class="post-title-link" itemprop="url">08. Sampling</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-28 11:01:03 / Modified: 16:44:19" itemprop="dateCreated datePublished" datetime="2022-06-28T11:01:03+08:00">2022-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Continuous-time-sampling"><a href="#Continuous-time-sampling" class="headerlink" title="Continuous-time sampling"></a>Continuous-time sampling</h1><ol>
+<li><p>With $p(t)$ being impulse train, $x(t)p(t)$ is samples of $x(t)$.<br>Sampling theorem: given equally spaced samples of $x(t)$ and $x(t)$ is band limited ($X(\omega)=0$ for $|\omega|&gt;\omega_M$), if the sampling frequency $\omega_s=\frac{2\pi}{T}&gt;2\omega_M$, then $x(t)$ is uniquely recoverable with lowpass filter.<br>We can process continuous-time signal in the discrete-time way. </p>
+</li>
+<li><p>The condition $\omega_s&gt;2\omega_M$ is to avoid overlap in frequency domain. If $\omega_s&lt;2\omega_M$, aliasing will cause errors in reconstructing signals. Aliasing will reconstruct a low frequency signal instead of the real high frequency signal. </p>
+</li>
+<li><p>The signal after sampling is $x_p(t)=x(t)p(t)=x(t)\sum^{+\infty}_{n=-\infty}\delta(t-nT)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $.<br> $P(\omega)=\frac{2\pi}{T}\sum^{+\infty}_{k=-\infty}\delta(\omega-k\frac{2\pi}{T}) $, and $X_p(\omega)=\frac{1}{2\pi}[X(\omega)\ast P(\omega)]=\frac{1}{T}\sum^{+\infty}_{k=-\infty}X(\omega-k\frac{2\pi}{T}) $. </p>
+</li>
+</ol>
+<h2 id="Reconstruct-signal"><a href="#Reconstruct-signal" class="headerlink" title="Reconstruct signal"></a>Reconstruct signal</h2><ol>
+<li>The sampling signal is $x_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $, which can be seen as the linear combination of $\delta(t-nT)$ with coefficients being $x(nT)$.<br>If $h(t)$ is the filter impulse response, then the reconstructed signal should be $x_r(t)=x_p(t)\ast h(t)=\sum^{+\infty}_{n=-\infty}x(nT)h(t-nT) $. For an ideal lowpass filter with cutoff frequency $\omega_c$, $h(t)=T\frac{\omega_c}{\pi}sinc(\frac{\omega_ct}{\pi})=T\frac{\omega_c}{\pi}\frac{sin(\omega_ct)}{\omega_ct} $<br>Hence the reconstructed signal is linear combination of $h(t-nT)$ with coefficients being $x(nT)$</li>
+<li>Zero-order hold: held the sample value until the next sampling to form a staircase curve. Its impulse response is $h(t)=\left\{\begin{matrix}1&amp;0&lt;t&lt;T\\0&amp;otherwise \end{matrix} \right.$</li>
+<li>First-order hold: fit an interpolated curve between two sample values, which is a straight line. Its impulse response is a triangular signal with height of $1$ and bottom in $[-T,T]$. </li>
+</ol>
+<h2 id="Conversion-between-continuous-time-and-discrete-time"><a href="#Conversion-between-continuous-time-and-discrete-time" class="headerlink" title="Conversion between continuous-time and discrete-time"></a>Conversion between continuous-time and discrete-time</h2><ol>
+<li><p>After sampling, we acquire a sampled signal of impulse train. But that is still not a discrete-time signal, and a conversion of impulse train to discrete-time sequence is needed. </p>
+</li>
+<li><p>The sampled signal is $x_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)\delta(t-nT) $, and its Fourier transform is $X_p(t)=\sum^{+\infty}_{n=-\infty}x(nT)e^{-j\omega nT} $.<br>If we want the discrete-time signal to be $x[n]=x(nT)$, then its Fourier transform is $X(\Omega)=\sum^{+\infty}_{n=-\infty}x[n]e^{-j\Omega n} $. </p>
+</li>
+<li><p>Compare the two Fourier transform equation, we know that if $\Omega=\omega T$, then $X_p(t)=X(\Omega)$. Thus, we have $X(\Omega)=X(\omega)|_{\omega=\Omega/ T}=X(\Omega/T)$. </p>
+</li>
+<li><p>In the time domain, this step is only relabelling the impulses to discrete-time sequence, namely dividing the time-axis by $T$.<br>In the frequency domain, sampling will replicate the original frequency and this step will multiply the frequency-axis by $T$. </p>
+</li>
+<li><p>If we want to convert from discrete-time to continuous-time, we only need to undo all the operations aforementioned.<br>In the frequency domain, first divide the frequency-axis by $T$, then use a lowpass filter to remove replicated frequency. </p>
+</li>
+<li><p>Even the discrete-time filter cutoff is fixed, changing the sampling frequency will still change the cutoff frequency of the equivalent continuous-time filter. </p>
+</li>
+</ol>
+<h1 id="Discrete-time-sampling"><a href="#Discrete-time-sampling" class="headerlink" title="Discrete-time sampling"></a>Discrete-time sampling</h1><ol>
+<li>The sampling impulse sequence is $p[n]=\sum^{+\infty}_{k=-\infty}\delta(n-kN)$ and its Fourier transform is $P(\Omega)=\frac{2\pi}{N}\sum^{+\infty}_{k=-\infty}\delta(\Omega-k\frac{2\pi}{N})$.<br>The sampled signal is $x_p[n]=x[n]p[n]$, and its Fourier transform is $X_p(\Omega)=\frac1{2\pi}\int_{2\pi}P(\theta)X(\Omega-\theta)d\theta=\frac1N\sum^{N-1}_{k=0}X(\Omega-k\frac{2\pi}{N})$</li>
+<li>The sampling theorem also applies to discrete-time sampling. In the aformentioned equations, the sampling frequency is $\Omega_s=\frac{2\pi}{N}$. </li>
+<li>The discrete-time sample will set some values to zero. And storing those zeros is inefficient since we can easily insert them back given sampling frequency.<br>A decimated sequence removes those zeros and only keeps the values associated with the original sequence. Decimating is to pick out every $n^{th}$ sample and end up with a collaped sequence. </li>
+<li>Define the decimated sequence $x_d[n]=x[nN]=x_p[nN]$. Substitute $n=mN$ into the Fourier transform $X_p(\Omega)=\sum^{+\infty}_{n=-\infty}x_p[n]e^{-j\Omega n}=\sum^{+\infty}_{m=-\infty}x_p[mN]e^{-j\Omega mN}$. Given the Fourier transform of $x_d[n]$ is $X_d(\Omega)=\sum^{+\infty}_{m=-\infty}x_d[m]e^{-j\Omega m}$, compare the two equations to get that $X_d(\Omega)=X_p(\Omega/N)$.<br>So, in frequency domain, decimating will scale the frequency-axis by $N$, namely multiply the frequency-axis by $N$. </li>
+<li>Downsampling is to decrease the sampling rate (sampling frequency). In time domain, t simply removes some values from the sampled sequence. In frequency domain, it<br>Upsampling is to recovering a signal after it has been decimated. To do so, must convert the decimated sequency to sampled sequence, and then use a lowpass filter to acquire the signal before decimating. </li>
+<li>If we want to decrease the sampling rate by an integer $k$, namely $T_2=2T_1$ we need to downsample and decimate by $1:k$. If we want to increate the sampling rate by an integer $k$, namely $T_2=\frac12T_1$, we need to upsample and interpolate by $k:1$.<br>If we want to change the sampling rate by $T_2=\frac{P}QT_1$, we need to upsample and interpolate by $Q:1$, then downsample and decimate by $1:P$. </li>
+</ol>
+<h1 id="Frequency-domain-sampling"><a href="#Frequency-domain-sampling" class="headerlink" title="Frequency domain sampling"></a>Frequency domain sampling</h1><ol>
+<li>Similar to time domain sampling, frequency domain sampling also multiplies the frequency function $X(\omega)$ by a sample function $P(\omega)=\sum^{+\infty}_{k=-\infty}\delta(\omega-k\omega_0)$. The sampled frequency function is $\tilde{X}(\omega)=X(\omega)P(\omega)=\sum^{+\infty}_{k=-\infty}X(k\omega_0)\delta(\omega-k\omega_0)$. </li>
+<li>In frequency domain, $\tilde{X}(\omega)$ is a train of impulse response.<br>In time domain, it replicates $x(t)$ with period of $\frac{2\pi}{\omega_0}$ and scale by $\frac{1}{\omega_0}$. </li>
+<li>To recover the original signal, we just multiply $\tilde{x}(t)$ with a time window to retain only one period. </li>
+<li>The aformentioned operations also apply to discrete-time signals. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/25/07-Modulation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/25/07-Modulation/" class="post-title-link" itemprop="url">07. Modulation</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-25 14:56:13" itemprop="dateCreated datePublished" datetime="2022-06-25T14:56:13+08:00">2022-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-28 11:22:18" itemprop="dateModified" datetime="2022-06-28T11:22:18+08:00">2022-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Continuous-time-modulation"><a href="#Continuous-time-modulation" class="headerlink" title="Continuous-time modulation"></a>Continuous-time modulation</h1><h2 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h2><ol>
+<li>In the modulation property, $x(t)c(t)$ and $\frac{1}{2\pi}[X(\omega)\ast C(\Omega)]$ are a Fourier transform pair. We call $x(t)$ the modulating signal, $c(t)$ the carrier, and $y(t)=x(t)c(t)$ the modulated signal. </li>
+<li>The complex exponential carrier is $c(t)=e^{j(\omega_ct+\theta_c)}$. It will shift $X(\omega)$ by $\omega_c$. If we want to recover $x(t)$ from $y(t)$, we only need to divide $y(t)$ by $c(t)$ or multiply $y(t)$ with $e^{-j(\omega_ct+\theta_c)}$. </li>
+<li>One practical usage of complex exponential carrier is to combine with filters. We can build a filter with fixed center frequency. Modulate the input signal before passing through the filter to shift the desired frequency to the passband, and demodulate the output of filter to recover the original frequency position.<br>Building a fixed center frequency filter and modulators is easier and cheaper than building a bandpass filter with varying center frequency. </li>
+<li>The sinusoidal carrier is $c(t)=cos(\omega_ct+\theta_c)$. $c(t)=cos(\omega_ct+\theta_c)=\frac12e^{j(\omega_ct+\theta)}+\frac12e^{-j(\omega_ct+\theta_c)}$, so we can know that this carrier will replicate $X(\omega)$, and shift one by $\omega_c$ and the other by $-\omega_c$.<br>To demodulate, we need to modulate the output with the same carrier again and pass through a filter with scaling. </li>
+<li>Multiplexing: Use modulation to shift spectra to different frequency band without overlapping, and then add them together.<br>Demultiplexing: When we have received the multiplexing signal and want to separate the one signal we need, we can demultiplex with bandpass filter, and demodulate according to the carrier. </li>
+<li>The aformentioned modulations are all synchronization modultaion, namely the modulator and demodulator have a synchronization in both frequency and phase. </li>
+</ol>
+<h2 id="Asynchronization"><a href="#Asynchronization" class="headerlink" title="Asynchronization"></a>Asynchronization</h2><ol>
+<li><p>However, building a synchronization demodulator can be expensive, and we would want a cheap asynchronization demodulator. </p>
+</li>
+<li><p>Normally, we can achieve a pretty good effect with a simple diode RC circuit. </p>
+</li>
+<li><p>Assume that the envelope of signal $y(t)$ is the desired demodulated signal $x(t)$. The demodulator tends to generate a full-wave rectified version of the signal (rectifies the negative component of input).<br>The simple solution is to make sure that $x(t)$ is always positive, namely we add a large enough constant $A$ to $x(t)$, so that $x(t)+A$ is always positive.<br>So in the modulation part, we need to add a $Ac(t)$ to $x(t)c(t)$ to form the modulated signal. The carrier is injected to the modulated signal. </p>
+</li>
+<li><p>With larger $A$, the demodulated signal tends to be flat, and easy to track it with circuit.<br>Yet, with larger $A$, the part of injection of carrier is larger, and it is not an information carrying part of the signal. So it represents some inefficiency in transmission.<br>The injection of a carrier is simply to make the demodulation for an asynchronous demodulator to make the demodulation easier. So the tradeoff is that if the transmission is simpler, then the demodulator is more complicated, and if the demodulator is more simpler, the transmission is more inefficient and takes more energy. </p>
+</li>
+<li><p>Another issue is that after modulated by a sinusoidal carrier, the frequency signal is replicated, and we might want to remove the redundence.<br>The solution is that we can use a highpass filter to obtain a single-sideband signal which only the upper sidebands are retained or use a lowpass filter to obtain a single-sideband signal which only the lower sidebands are retained. </p>
+</li>
+</ol>
+<h1 id="Discrete-Time-Modulation"><a href="#Discrete-Time-Modulation" class="headerlink" title="Discrete-Time Modulation"></a>Discrete-Time Modulation</h1><ol>
+<li><p>Complex exponential carrier is $c[n]=e^{j(\Omega_cn+\theta_c)}$. It will shift the frequency by $\Omega_c$. </p>
+</li>
+<li><p>Simusoidal carrier is $c[n]=cos \Omega_cn=\frac12e^{j\Omega_cn}+\frac12e^{-j\Omega_cn}$. It will replicate the frequency, and shift one by $\Omega_c$ another one by $-\Omega_c$. </p>
+</li>
+<li><p>The demodulation of simusoidal carrier is to modulate the output with the same carrier again and pass through a filter with scaling. </p>
+</li>
+<li><p>Another common used carrier is $c[n]=(-1)^n=e^{j\pi n}$. It will shift the frequency by $\pi$, which actually interchanges the low frequency and the high frequency.<br>Its demodulator is itself. We can use it to implement a highpass filter with a lowpass filter. Before the filter, we modulate the signal with $c[n]$, and demodulate it after the filter. </p>
+</li>
+<li><p>Pulse carrier of continuous-time is $p(t)$ has non-zero values of width $\Delta$ in every period $T$. In discrete-time case, $p[n]$ has non-zero values of width $M$ in every period $N$.<br>In time domain perspective, the output only keep the part where $p(t)$ or $p[n]$ is non-zero. In frequency domain perspective, the frequency is replicated and scaled.<br>If the original frequency is band limited, to demodulate a pulse carrier, we only need to pass the signal through a low frequency filter and scale it. </p>
+</li>
+<li><p>In time division multiplexing, it is required that the time slopts are not overlapped. Every $\Delta$ or $M$ is a time slot, and we can transmit different signal with different pulse carrier.<br>Luckily, the bandwidth of frequency after modulated is not limited by $\Delta$. Hence, theoretically, we can set $\Delta$ as small as possible to maximum the number of signals we can transmit at the same time.<br>However, the height in the frequency domain is proportional to $\Delta$. So with smaller $\Delta$, the less energy there is and noise problem might be worse. </p>
+</li>
+<li><p>To solve the problem, we can fix the area of each time slot, namly that each time slot has width of $\Delta$ and height of $\frac1\Delta$. As $\Delta\to 0$, $p(t)$ becomes an impulse train. </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/24/06-Filtering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/24/06-Filtering/" class="post-title-link" itemprop="url">06. Filtering</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-24 18:29:49" itemprop="dateCreated datePublished" datetime="2022-06-24T18:29:49+08:00">2022-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-25 15:03:35" itemprop="dateModified" datetime="2022-06-25T15:03:35+08:00">2022-06-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>According to the convolution property, if $H(\omega)$ or $H(\Omega)$ is nonzero, that frequency is passed to the output. If $H(\omega)$ or $H(\Omega)$ is zero, that frequency will not contribute to the output.<br>Then band of nonzero part is called passband, while the band of zero part is called stopband. </p>
+</li>
+<li><p>For continuous-times case, if the passband is around zero, that filter is a lowpass filter. If the stopband is around zero, that filter is a highpass filter. Combine a lowpass filter and a highpass filter to get a bandpass filter which passes the frequency in the middle. </p>
+</li>
+<li><p>For discrete-time case, if the passband is around $2\pi m$, that filter is a lowpass filter. If the passband is around $(2m+1)\pi$, that filter is a highpass filter. Also combine a lowpass filter and a highpass filter can get a bandpass filter whose pass band is between $2m\pi$ and $(2m+1)\pi$. </p>
+</li>
+<li><p>The amplitudes of ideal filters are either 1 or 0.<br>Their impulse response and the step response both have an oscillation which might be undesirable.<br>Furthermore, their impulse responses are even, and have tails that go off to $+\infty$ and $-\infty$, namely the ideal filters are non-causal. Thus we cannot build an ideal filter that restrictly operates on real time. </p>
+</li>
+<li><p>In a non-ideal filter, instead of a very rapid transition from passband to stopband, there would be a more gradual transition with a passband cutoff frequency and a stopband cutoff frequency.<br>Also instead of having an exactly flat characteristic in the stopband and passband, a certain amount of ripple is allowed.<br>Normally, the sharper you attempt to make the cutoff, the more expensive the filter becomes. </p>
+</li>
+<li><p>Non-recursive (moving average) filter: $y[n]=\frac{1}{N+M+1}\sum^{M}_{k=-N}x[n-k]$<br>Recursive filter: $\sum^N_{k=0}a_ky[n-k]=\sum^M_{k=0}b_kx[n-k]$</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/23/05-Discrete-Time-Fourier-Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/23/05-Discrete-Time-Fourier-Analysis/" class="post-title-link" itemprop="url">05. Discrete-Time Fourier Analysis</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-06-23 18:01:02" itemprop="dateCreated datePublished" datetime="2022-06-23T18:01:02+08:00">2022-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-07-11 18:14:31" itemprop="dateModified" datetime="2022-07-11T18:14:31+08:00">2022-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F-MIT-6-007/" itemprop="url" rel="index">
+                    <span itemprop="name">信号与系统 (MIT 6.007)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Fourier-series"><a href="#Fourier-series" class="headerlink" title="Fourier series"></a>Fourier series</h1><ol>
+<li>As the continuous-time case, we choose the basic signal to be $\phi_k[n]=e^{j\Omega_kn}$. From convolution, we know that its response is $e^{j\Omega_kn}\sum^{+\infty}_{r=-\infty}h[r]e^{-j\Omega_kr}=H(\Omega_k)e^{j\Omega_kn}$</li>
+<li>If $x[n]$ is periodic with period ans fundamental frequency being $N$ and $\Omega_0=\frac{2\pi}{N}$, then we try to represent $x[n]=\sum_ka_ke^{jk\Omega_0n}$. Give that, in discrete-time complex exponential, $e^{jk\Omega_0n}=e^{j(k+N)\Omega_0n}$, we don’t need $k$ from $-\infty$ to $+\infty$. Instead, we only want $k$ in a period range $N$, like $[0, N-1]$.<br>Thus, the synthesis equation is $x[n]=\sum_{k=\lt N\gt}a_ke^{j(k+N)\Omega_0n}$</li>
+<li>To solve $a_k$, we can actually see it as $N$ equations with $N$ unknowns. And finally the analysis equation is $a_k=\frac1N\sum_{\lt N\gt}x[n]e^{jk\Omega_0n}$</li>
+<li>We need infinity number of coefficients in continuous-time, while only finite number is required in discrete-time. </li>
+<li>$x[n]$ and $e^{jk\Omega_0n}$ are both periodic in $n$, like in continuous-time.<br>$e^{jk\Omega_0n}$ and $a_k$ are both periodic in $k$, while continuous-time is not the case. </li>
+<li>In discrete-time, the Fourier serise will always convergent. However, in continuous-time, this is conditional. </li>
+</ol>
+<h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
+<li>For an aperiodic singal $x[n]$, we can construct a periodic signal $\tilde{x}[n]$ with period being $N$ and one period being $x[n]$.<br> The Fouier series of $\tilde{x}[n]=\sum_{\lt N\gt}\frac{1}{2\pi}X(k\Omega_0)e^{jk\Omega_0n}\Omega_0$ and $X(k\Omega_0)=Na_k=\sum^{N/2}_{k=-N/2}\tilde{x}[n]e^{-jk\Omega_0n}$. </li>
+<li>As $N\to\infty$, $\Omega_0\to0$ and $\tilde{x}[n]\to x[n]$, the synthesis equation is $x[n]=\frac{1}{2\pi}\int_{2\pi}X(\Omega)e^{j\Omega n}d\Omega$ and the analysis equation is $X(\Omega)=\sum^{+\infty}_{k=-\infty}x[n]e^{-j\Omega n}$<br>$x[n]$ and $X(\Omega)$ are a Fourier transform pair. </li>
+<li>The discrete-time Fourier transform lacks the duality in continuous-time since $x[n]$ is a discrete-time signal while $X(\Omega)$ is a continous-frequency signal. </li>
+<li>If $\tilde{x}[n]$ is periodic and $x[n]$ represents a period, then the Fourier series coefficients of $\tilde{x}[n]=\frac{1}{N}\times$ samples of Fourier transform of $x[n]$, namely $a_k=\frac1NX(\Omega)|_{\Omega=\frac{2\pi k}{N}}$. </li>
+<li>If $\tilde{x}[n]$ is periodic, the Fourier transform of $\tilde{x}[n]$ is defined as impulse train, $\tilde{X}(\Omega)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\Omega-k\Omega_0)$</li>
+</ol>
+<h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
+<li>Periodic: $X(\Omega)=X(\Omega+2\pi m)$</li>
+<li>Symmetry:<br>If $x[n]$ is real, then $X(-\Omega)=X^*(\Omega)$<br>The real part of $X(\Omega)$ and its amplitude is an even function, while the imaginary part $X(\Omega)$ and its phase is an odd function. </li>
+<li>Time shifting in time function corresponds in phase change in Fourier transform, $x[n-n_0]$ and $e^{-j\Omega n_0}X(\Omega)$ are a Fourier transform pair. </li>
+<li>Phase shifting in time function corresponds in frequency shifting in Fourier transform, $e^{j\Omega_0n}x[n]$ and $X(\Omega-\Omega_0)$ are a Fourier transform pair. </li>
+<li>Linearity: $ax_1[n]+bx_2[n]$ and $aX_1[n]+bX_2[n]$ are a Fourier transform pair. </li>
+<li>Parseval’s relation: $\sum^{+\infty}_{k=-\infty}|x[n]|^2=\frac1{2\pi}\int_{2\pi}|X(\Omega)|^2d\Omega $</li>
+<li>Convolution: $h[n]\ast x[n]$ and $H(\Omega)X(\Omega)$ are a Fourier transform pair. $H(\Omega)$ is the frequency response and the Fourier transform of impulse response $h[n]$<br>If the input signal is $e^{j\Omega_0n}$, the output should be $e^{j\Omega_0n}H(\Omega_0)$</li>
+<li>The lowpass filter $H(\Omega)$ should have nonzero values not only around $0$, but also around $2\pi m$.<br>The highpass filter $H(\Omega)$ should have nonzero values around every $(2k+1)\pi$.<br>The frequency of input is in $[-\pi, \pi]$</li>
+<li>Modulation: $x_1[n]x_2[n]$ and $\frac{1}{2\pi}\int_{2\pi}X_1(\theta)X_2(\Omega-\theta)d\theta$</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/06/22/04-Continuous-Time-Fourier-Analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +657,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-25 15:04:19" itemprop="dateModified" datetime="2022-06-25T15:04:19+08:00">2022-06-25</time>
+                <time title="Modified: 2022-07-11 19:18:34" itemprop="dateModified" datetime="2022-07-11T19:18:34+08:00">2022-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,52 +694,31 @@
 <li>When $x(t)$ is periodic, we can decompose it into Fourier series. When $x(t)$ is aperiodic, we can still perform Fourier transform to represent it through Fourier seirier. </li>
 </ol>
 <h1 id="Fourier-Series"><a href="#Fourier-Series" class="headerlink" title="Fourier Series"></a>Fourier Series</h1><ol>
-<li><p>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </p>
-</li>
-<li><p>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </p>
-</li>
-<li><p>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</p>
-</li>
-<li><p>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</p>
-</li>
-<li><p>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </p>
-</li>
-<li><p>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </p>
-</li>
-<li><p>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </p>
-</li>
+<li>$e^{j\omega_0t}$ with $T_0=\frac{2\pi}{\omega_0}$ and $e^{jk\omega_0t}$ with $T_0=\frac{2\pi}{k\omega_0}$ are harmonically related exponentials. </li>
+<li>For a periodic signal $x(t)$ with period being $T_0$, we can represent it  by linear combinations of harmonically related exponentials $x(t)=\displaystyle\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t} $, which is called the synthesis equation with $\omega_0=\frac{2\pi}{T_0}$ and $a_k$ are complex coefficient. </li>
+<li>Or we can write it as the trigonometric form which expands $a_k=A_ke^{j\theta_k}$ in the polor form or $a_k=B_k+jC_k$ in the rectangle form, and $e^{jk\omega_0t}=cos(k\omega_0t)+jsin(k\omega_0t) $. $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}A_kcos(k\omega_0t+\theta_k) $ or $x(t)=a_0+2\displaystyle\sum^{+\infty}_{k=-\infty}[B_kcos(k\omega_0t)-C_ksin(k\omega_0t)] $</li>
+<li>$\int_{T_0}e^{jm\omega_0t}dt=\int_{T_0}cos(m\omega_0t)+j\int_{T_0}sin(m\omega_0t)dt=\left\{\begin{matrix}0+0&amp;m≠0\\T_0+0&amp;m=0 \end{matrix}\right. $<br>To calculate $a_k$, $\int_{T_0}x(t)e^{-jn\omega_0t}dt=\int_{T_0}e^{-n\omega_0t}\sum^{+\infty}_{k=-\infty}a_ke^{jk\omega_0t}=\sum^{+\infty}_{k=-\infty}a_k\int_{T_0}e^{j(k-n)\omega_0t}dt=a_nT_0$. Thus the analysis equation $ a_n=\frac1{T_0}\int_{T_0}x(t)e^{-jn\omega_0t}dt $</li>
+<li>The coefficients of an odd signal are odd harmonic (all even indexed terms are zero). And odd signals can be represented by sums of $sin$.<br>The coefficients of an even signal are even harmonic (all odd indexed terms are zero). And even signals can be represented by sums of cos. </li>
+<li>It is the low-frequency terms that represent the broad time behavior, and it is the high-frequency terms that areused to build up the sharp transitions in the time domain. </li>
+<li>We define the partial sum as $x_N(t)=\sum^N_{k=-N}a_ke^{jk\omega_0t}$ and the error function $e_N(t)=x(t)-x_N(t)$.<br>If $\int_{T_0}|x(t)|^2dt&lt;\infty $, then $\int_{T_0}|e_N(t)|^2dt\to0$ as $N\to\infty$.<br>Dirichlet conditions: If $\int_{T_0}|x(t)|dt&lt;\infty$ and $x(t)$ has limited maximum or minimum point at a period, then $e_N(T)\to0$ as $N\to0$ except at discontinuous. </li>
 </ol>
 <h1 id="Fourier-transform"><a href="#Fourier-transform" class="headerlink" title="Fourier transform"></a>Fourier transform</h1><ol>
-<li><p>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</p>
-</li>
-<li><p>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</p>
-</li>
-<li><p>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </p>
-</li>
-<li><p>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</p>
-</li>
-<li><p>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </p>
-</li>
+<li>For an aperiodic signal $x(t)$, we can take it and repeat it at multiples of some period $T_0$ to get $\tilde{x}(t)$. As $T_0\to\infty$, $\tilde{x}(t)\to x(t)$.<br>Now, we use Fourier series to represent $\tilde{x}(t)$, then let $T\to\infty$ to represent $x(t)$</li>
+<li>The Fourier series of $\tilde{x}(t)$ is $a_k=\frac{1}{T_0}\int^{T_0/2}_{-T_0/2}\tilde{x}(t)e^{-jk\omega_0t}dt$. As $T_0\to\infty$, we can modify the integral to $a_k=\frac{1}{T_0}\int^{+\infty}_{-\infty}x(t)e^{-jk\omega_0t}dt$. If we define $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$, then $T_0a_k=X(\omega)|_{\omega=k\omega_0}$. Namely $X(\omega)$ is the envelope of $T_0a_k$. And we can see $a_k$ as samples on $\frac{1}{T_0}X(\omega)$<br>$\tilde{x}(t)=\sum^{+\infty}_{k=-\infty}\frac{1}{T_0}X(k\omega_0)e^{jk\omega_0t}=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}X(k\omega_0)e^{jk\omega_0t}\omega_0 $.<br>As $T_0\to\infty$, $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega $</li>
+<li>Define the envelope $X(\omega)=\int^{+\infty}_{-\infty}x(t)e^{-j\omega t}dt$ as the Fourier transform of $x(t)$ or the analysis equation. $x(t)$ and $X(\omega)$ is a Fourier transform pair.<br>Define $x(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}X(\omega)e^{j\omega t}\omega d\omega$ as the inverse Fourier transform or the synthesis equation. </li>
+<li>To apply Fourier tranform to a periodic signal $\tilde{x}(t)$, we can define its Fourer tranform as $\tilde{X}(t)=\sum^{+\infty}_{k=-\infty}2\pi a_k\delta(\omega-k\omega_0) $, where $a_k$ are the Fourier series coefficients.<br>Substitude to the systhesis equation of Fourier transform, $\tilde{x}(t)=\frac{1}{2\pi}\int^{+\infty}_{-\infty}\tilde{X}(t)e^{j\omega t}d\omega=\frac{1}{2\pi}\sum^{+\infty}_{k=-\infty}2\pi a_k\int^{+\infty}_{-\infty}\delta(\omega-k\omega_0)e^{j\omega t}d\omega=\sum^{+\infty}_{k=-\infty}a_ke^{-jk\omega_0} $</li>
+<li>When $x(t)$ is aperiodic, we can construct periodic signal $\tilde{x}(t)$ for<br>which one period is $x(t)$. As the period of $\tilde{x}(t)$ increases, $\tilde{x}(t)\to x(t)$, and Fourier series of $\tilde{x}(t)\to$ Fourier transform of $x(t)$.<br>If $\tilde{x}(t)$ is periodic, $x(t)$ represents one period, Fourier series coefficients of $x(t)=\frac{1}{T_0}\times$ samples of Fourier transform of $x(t)$<br>If $\tilde{x}(t)$ is periodic, Fourier transform of $\tilde{x}(t)$ defined as impulse train $\tilde{X}(t)$. </li>
 </ol>
 <h1 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h1><ol>
-<li><p>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </p>
-</li>
-<li><p>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</p>
-</li>
-<li><p>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</p>
-</li>
-<li><p>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</p>
-</li>
-<li><p>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </p>
-</li>
-<li><p>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</p>
-</li>
-<li><p>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </p>
-</li>
-<li><p>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </p>
-</li>
-<li><p>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</p>
-</li>
+<li>Symmetry:<br>$x(t)$ is real $\Rightarrow$ $X(-\omega)=X^*(\omega)$<br>The real part of $X(\omega)$ is an even function, $Re\{X(-\omega)\}=Re\{X(\omega)\}$<br>The amplitude of $X(\omega)$ is an even function, $|X(-\omega)|=|X(\omega)|$<br>The imaginary part of $X(\omega)$ is an odd function, $Im\{X(-\omega)\}=-Im\{X(\omega)\}$.<br>The phase of $X(\omega)$ is an odd function. </li>
+<li>The linear scaling at time results in the inverse scaling at frequency. Namely, $x(at)$ is paired with $\frac{1}{|a|}X(\frac{\omega}{a})$</li>
+<li>Duality: If $x(t)$ and $X(\omega)$ are a Fourier transform pair, the Fourier transform of $X(t)$ is $2\pi x(-\omega)$</li>
+<li>Parseval’s relation:<br>The energe of an aperiodic time signal is proportional to its Fourier transform, $\int^{+\infty}_{-\infty}|x(t)|^2dt=\frac{1}{2\pi}\int^{+\infty}_{-\infty}|X(\omega)|^2d\omega $<br>The energe of a periodic time signal in a period is proportional to its Fourier series, $\frac{1}{T_0}\int_{T_0}|\tilde{x}(t)|^2dt=\sum^{+\infty}_{k=-\infty}|a_k|^2$</li>
+<li>Time shifting: $x(t-t_0)$ and $e^{-j\omega t_0}X(\omega)$ are a Fourier transform pair. A time shift correspond to a linear change in phase and frequency. </li>
+<li>Differentiation: $\frac{dx(t)}{dt}$ and $j\omega X(\omega)$ are a Fourier transform pair. A differentiation correspond to a linear change on the amplitude.<br>Integration: $\int^t_{-\infty}x(\tau)d\tau$ and $\frac{1}{j\omega}X(\omega)+\pi X(0)\delta(\omega)$</li>
+<li>Linearity: $ax_1(t)+bx_2(t)$ and $aX_1(t)+bX_2(t)$ are a Fourier transform pair. The Fourier transfm of a linear combination is the linear combination of their Fourier transform. </li>
+<li>Convolution property: The Fourier transform of $x(t)\ast h(t)$ is $H(\omega)X(\omega)$, where the frequency response $H(\omega)$ is the Fourier transform of impulse response $h(t)$.<br>The idea lowpass filter only keep the signals with frequency between $-\omega_0$ and $\omega_0$. Thus its frequency response is $H(\omega)=\left\{\begin{matrix}1&amp; -\omega_0≤\omega≤\omega_0\\0&amp;otherwise \end{matrix}\right.$<br>From the differentiation property, we can know that the frequency response is $H(\omega)=j\omega$. It amplifies high frequencies and attenuates low frequencies. </li>
+<li>Modulation property: The Fourier transform of $s(t)p(t)$ is $\frac{1}{2\pi}[S(\omega)\ast P(\omega)]$</li>
 </ol>
 
       
@@ -1040,573 +1454,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/21/06-Locality-Communication-and-Contention/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/21/06-Locality-Communication-and-Contention/" class="post-title-link" itemprop="url">06. Locality, Communication, and Contention</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-21 13:42:23" itemprop="dateCreated datePublished" datetime="2022-05-21T13:42:23+08:00">2022-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-06-11 21:43:56" itemprop="dateModified" datetime="2022-06-11T21:43:56+08:00">2022-06-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h1><h2 id="Reduce-communication-time"><a href="#Reduce-communication-time" class="headerlink" title="Reduce communication time"></a>Reduce communication time</h2><ol>
-<li><p>Total communication time = overhead + occupancy + network delay. </p>
-</li>
-<li><p>Overhead is the time spent on the communication by a processor, occupancy is the time for data to pass through slowest component of system, and network delay is everything else. </p>
-</li>
-<li><p>Reduce overhead of communication to sender/receiver:<br>Reassign tasks in a better way that need to send fewer messages.<br>Make messages larger to amortize overhead.<br>Coalesce many small messages into large ones</p>
-</li>
-<li><p>Reduce delay:<br>Application writer can restructure code to exploit locality.<br>Hardware implementor can improve communication architecture. </p>
-</li>
-</ol>
-<h2 id="Reduce-communication-cost"><a href="#Reduce-communication-cost" class="headerlink" title="Reduce communication cost"></a>Reduce communication cost</h2><ol>
-<li><p>Total communication cost = communication time - overlap</p>
-</li>
-<li><p>Overlap: portion of communication performed concurrently with other work (“other work” can be computation or other communication)</p>
-</li>
-<li><p>Cost is the part that your cannot get over with by changing the protocol. The communication time is obviously necessary, and we can hide the overlap part by pipelining. </p>
-</li>
-<li><p>Increase communication/computation overlap:<br>Application writer can use asynchronous communication (e.g., async messages)<br>Hardware implementor can use pipelining, multi-threading, pre-fetching, out-of-order execution<br>Requires additional concurrency in application (more concurrency than number of execution units)</p>
-</li>
-<li><p>Instruction pipeline: Break execution of each instruction down into several smaller steps.<br>Enables higher clock frequency, only a simple, short operation is done by each part of pipeline each clock</p>
-</li>
-<li><p>Non-piplined communication: $T(n)=T_0+\frac{n}{B}$ ($T_0$ is the start-up latency, n is bytes transferred in operation, B is transfer rate or bandwidth)<br>Efficient bandwidth $=\frac{n}{T(n)}$</p>
-</li>
-</ol>
-<h2 id="Improve-arithmetic-intensity"><a href="#Improve-arithmetic-intensity" class="headerlink" title="Improve arithmetic intensity"></a>Improve arithmetic intensity</h2><ol>
-<li><p>Communication-to-computation ratio = amount of communication  / amount of computation<br>The units can be different. If the denominator is the execution time of computation, the ratio gives the average bandwidth requirement</p>
-</li>
-<li><p>Arithmetic intensity = 1 / communication-to-computation ratio</p>
-</li>
-<li><p>Change the traversal order to reduce the time between accesses to same data. We want to do all the calculations related to the accessing data now.<br>This way can improve the utilization of cache by preventing that those data get flushed out when we try to access them again. </p>
-</li>
-<li><p>Fuse loops to reduce the frequency of store operation. </p>
-</li>
-<li><p>Improve arithmetic intensity by sharing data. Co-locate tasks that operate on the same data.  Schedule threads working on the same data structure at the same time on the same processor. Reduces inherent communication</p>
-</li>
-</ol>
-<h2 id="Reduce-artifactual-communication"><a href="#Reduce-artifactual-communication" class="headerlink" title="Reduce artifactual communication"></a>Reduce artifactual communication</h2><ol>
-<li><p>Inherent communication: Communication that must occur in a parallel algorithm. The communication is fundamental to the algorithm.<br>Artifactual communication: all other communication that happens because we want to efficiently use resource.</p>
-</li>
-<li><p>Granularity of communication can be important because it may introduce artifactual communication.<br>Assume that communication granularity is a cache line. </p>
-</li>
-<li><p>If we see data as row-major layout, when the data required is in column, each communication actually only provides one needed data. </p>
-</li>
-<li><p>When Threads access their assigned elements (no inherent communication exists), real machine triggers (artifactual) communication due to the cache line being written to by both processors. </p>
-</li>
-<li><p>Reducing artifactual comm by blocked data layout. Each communication only involves  the data in the same block. If communication granularity is larger than a block row, each communication will transfer multiple rows. </p>
-</li>
-</ol>
-<h1 id="Contention"><a href="#Contention" class="headerlink" title="Contention"></a>Contention</h1><ol>
-<li><p>Contention occurs when many requests to a resource are made within a small window of time. The resource is a hot spot.<br>Contention for shared resource results in longer overall operation times. </p>
-</li>
-<li><p>Distributed work queues serve to reduce contention (contention in access to single shared work queue)</p>
-</li>
-<li><p>One way to reduce contention is to use finer-granularity locks. Instead of locking the whole data structure, we can only lock a part of that structure. </p>
-</li>
-<li><p>Another way is that each CUDA block computes partial results and merges them afterwards. But this requires extra work for merging, and each CUDA block need to store a partial result instead of all of them using the same result. </p>
-</li>
-<li><p>The best way is to stagger access to contended resources. For example, instead of calculate the final result directly, we can calculate several temporal results which has no contention, and get the final result from them. </p>
-</li>
-</ol>
-<h1 id="Understanding-the-performance"><a href="#Understanding-the-performance" class="headerlink" title="Understanding the performance"></a>Understanding the performance</h1><ol>
-<li><p>Always, always, always try the simplest parallel solution first, then measure performance to see where you stand. </p>
-</li>
-<li><p>We should compare parallel program speedup to the best sequential program, instead of parallel algorithm running on one core.<br>The reason is that to allow for parallelism, we might change the algorithm, and make it slower when executed sequentially. </p>
-</li>
-<li><p>Determine if your performance is limited by computation, memory bandwidth (or memory latency), or synchronization?<br>Try and establish “high watermarks”. What’s the best you can do in practice? How close is your implementation to a best-case scenario?</p>
-</li>
-<li><p>Roofline model: Use microbenchmarks to compute peak performance of a machine as a function of arithmetic intensity of application. Then compare application’s performance to known peak values</p>
-</li>
-</ol>
-<h2 id="Establish-high-watermarks"><a href="#Establish-high-watermarks" class="headerlink" title="Establish high watermarks"></a>Establish high watermarks</h2><ol>
-<li><p>Add “math” (non-memory instructions).<br>Does execution time increase linearly with operation count as math is added?<br>If so, this is evidence that code is instruction-rate limited</p>
-</li>
-<li><p>Remove almost all math, but load same data.<br>How much does execution-time decrease?<br>If not much, suspect memory bottleneck</p>
-</li>
-<li><p>Change all array accesses to A[0].<br>How much faster does your code get?<br>This establishes an upper bound on benefit of improving locality of data access</p>
-</li>
-<li><p>Remove all atomic operations or locks.<br>How much faster does your code get? (provided it still does approximately the same amount of work)<br>This establishes an upper bound on benefit of reducing sync overhead. </p>
-</li>
-</ol>
-<h2 id="Scaling"><a href="#Scaling" class="headerlink" title="Scaling"></a>Scaling</h2><ol>
-<li><p>Arithmetic intensity is determined by both problem size and the processors number. Small problem size or large processor number both yields low arithmetic intensity. </p>
-</li>
-<li><p>If the problem size is too small, it might already execute fast enough on a single core. Scaling the performance of small problem ay not be all that important. </p>
-</li>
-<li><p>If the problem size is too large for a single machine, working set may not fit in memory, and causing thrashing to disk. With enough processors, the key working set fits in per-processor cache.<br>This may get a super-linear speedup and make speedup on a bigger parallel machine with more memory look amazing. </p>
-</li>
-<li><p>Desire to scale problem size as machine sizes grow (buy a bigger machine to compute more, rather than just compute the same problem faster)</p>
-</li>
-<li><p>Problem-constrained scaling focuses on using a parallel computer to solve the same problem faster<br>$Speedup=\frac{time 1 processor}{time P processors}$</p>
-</li>
-<li><p>Time-constrained scaling focuses on completing more work in a fixed amount of time<br>$Speedup = \frac{work done by P processors}{work done by 1 processor}$<br>“Work done” may not be linear function of problem inputs. One approach of defining “work done” is by execution time of same computation on a single processor (but consider effects of thrashing if problem too big)</p>
-</li>
-<li><p>Memory-constrained scaling (wak scaling) focuses on running the largest problem possible without overflowing main memory. Neither work or execution times are held constant.<br>$Speedup = \frac{work (P processors)}{time (P processors)}/\frac{work (1 processor)}{time (1 processor)}=\frac{work per unit time on P processors}{work per unit time on 1 processor}$</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/19/05-Graphic-processing-units-and-CUDA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/19/05-Graphic-processing-units-and-CUDA/" class="post-title-link" itemprop="url">05. Graphic processing units and CUDA</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-19 09:59:09" itemprop="dateCreated datePublished" datetime="2022-05-19T09:59:09+08:00">2022-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-22 17:22:04" itemprop="dateModified" datetime="2022-05-22T17:22:04+08:00">2022-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Graphics"><a href="#Graphics" class="headerlink" title="Graphics"></a>Graphics</h1><ol>
-<li>The first step to draw a graphic in screen is to describe the things (key entities) that are manipulated, whose surface is represented as a 3D triangle mesh.<br>So the input of the calculating system is a list of vertices in 3D space and their connectivity into primitives. </li>
-<li>The operations of system is as following:<br>Given a scene camera position, compute where the vertices lie on screen<br>Group vertices into primitives<br>Generate one fragment for each pixel a primitive overlaps<br>Compute color of primitive for each fragment based on scene lighting and primitive material properties<br>Put color of the “closest fragment” to the camera in the output image</li>
-<li>We can Abstract process of rendering a picture as a sequence of operations on vertices, primitives, fragments, and pixels.<br>GPUs are very fast processors for performing the same computation (shader programs) on large collections of data (streams of vertices, fragments, and pixels), which sounds like data-parallelism. </li>
-<li>To do GPU-based scientific computation, we need to set OpenGL output image size to be output array size, and render 2 triangles that exactly cover screen. </li>
-</ol>
-<h1 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h1><h2 id="Grid-Block-and-Thread"><a href="#Grid-Block-and-Thread" class="headerlink" title="Grid, Block and Thread"></a>Grid, Block and Thread</h2><ol>
-<li><p>CUDA thread IDs can be up to 3-dimensional. Multiple threads make up a block, and multiple blocks make up a grid.<br>Each kernel has a grid. All the the blocks in a grid form a 3D matrix, and all the threads in a block also form a 3D matrix.<br>We can get information about the shape of threads in a block matrix or block in a grid matrix in a block with <code>block_dim</code> and <code>grid_dim</code></p>
-</li>
-<li><p>When launching the CUDA threads, we need to specify the size of blocks and threads with <code>kernel_function&lt;&lt;&lt;block_dim, thread_dim&gt;&gt;&gt;(parameters)</code>.<br>Here <code>block_dim</code> and <code>thread_dim</code> can be either a <code>dim3</code> value or a number of the total number of blocks and threads per-block to make the CUDA compiler figure out how to arrange blocks and threads.</p>
-</li>
-<li><p>So the coordinate to declare or locate a block in a grid, or a thread in a block is 3D. In the CUDA code, we can get the information about current block or thread with <code>blockIdx</code>, <code>threadIdx</code>, and their properties <code>x</code>, <code>y</code>, <code>z</code>. </p>
-</li>
-<li><p>The calculation object of CUDA is usually matrices. So we would prefer to cut matrices into blocks. Each CUDA block calculate one  block in matrices, and each thread calculate one element in matrices. </p>
-</li>
-<li><p>In <code>pthread</code>, there is stack space for thread, and need to allocate control block so OS can schedule thread.<br>Unlike <code>pthread</code>, CUDA control those instances by thread blocks. If control by threads, there will be too many to control.</p>
-</li>
-<li><p>Major CUDA assumption: thread block execution can be carried out in any order (no dependencies between blocks)</p>
-</li>
-</ol>
-<h2 id="Kernel-function"><a href="#Kernel-function" class="headerlink" title="Kernel function"></a>Kernel function</h2><ol>
-<li><p>“Host” code: serial execution runs as part of normal C/C++ application on CPU<br>“CUDA device” code: a kernel function runs on GPU, which is denoted by <code>__global__</code> before the definition of the kernel function.<br>Device function: SPMD execution on GPU, which is denoted by <code>__device__</code>. These functions are called by kernels, and don’t generate new threads.<br>Kernels and device functions only reference device memory. Host code can only reference host memory, but can have pointers to device memory. </p>
-</li>
-<li><p>In kernel function, we need to get the indices of the element a thread calculating. For a 2D matrix, we usually take <code>x</code> as column direction, and <code>y</code> as row direction.<br>So to access <code>A[i][j]</code>, <code>i = blockIdx.y * blockDim * y + threadIdx.y</code> and <code>j = blockIdx.x * blockDim.x + threadIdx.x</code>.</p>
-</li>
-<li><p>Number of kernel invocations is not determined by size of data collection. So normally we want to do a test before accessing the vector values (array values). The overhead of the test can be ignored, although it does cause some threads are not used. </p>
-</li>
-<li><p><code>__syncthreads()</code> is a barrier that wait for all threads in the block to arrive at this point.<br>Atomic operations on both global memory and shared memory variables is also provided, but they are very expensive, should only be used as the last resort.<br>There is an implicit barrier across all threads at return of kernel. </p>
-</li>
-<li><p>A compiled CUDA device binary includes program text (instructions) and information about required resources (how many threads per block, how much space per thread, how much shared space per thread block) </p>
-</li>
-</ol>
-<h2 id="Memory-Model"><a href="#Memory-Model" class="headerlink" title="Memory Model"></a>Memory Model</h2><ol>
-<li><p>Host and device have distinct address spaces, so before the execution, we need to copy data into CUDA memory.<br><code>cudaMalloc(ptr, size)</code> can be used to allocate CUDA memory, and <code>cudaFree(ptr)</code> can free CUDA memory. The pointer in <code>cudaMalloc</code> can just be a host variable, but the pointer in <code>cudaFree</code> must be allocated by <code>cudaMalloc</code>.<br><code>cudaMemcpy(dest, src, size, kind)</code> can copy those data into CUDA memory. <code>kind</code> is the direction of copy, which can be <code>cudaMemcpyHostToDevice</code> or <code>curdaMemcpyDeviceToHost</code>. </p>
-</li>
-<li><p>There are three distinct types of memory visible to kernels, per-thread private memory, per-block shared memory, and device global memory. </p>
-</li>
-<li><p><code>cudaMalloc</code>, <code>cudaMemcpy</code> and <code>cudaFree</code> all operate on device global memory, and those local variables in kernel function are in perthread private memory.<br>We can declare variables in per-block shared memory with <code>__share__</code>. </p>
-</li>
-<li><p>If multiple threads in a block need to access a common memory, they will all read that memory once. And if that memory is in the global memory, it would be really slow. </p>
-</li>
-<li><p>To avoid such efficient decrease, we can copy the common memory into the per-block shared memory. So we only need to access global memory once, and later accesses only in per-block shared memory.<br>We just need to declare a <code>__share__</code> array, and assign it with values in global memory. </p>
-</li>
-<li><p>All threads copy data from global memory to per-block shared memory asynchronous, so we better ass a <code>_syncthread()</code> to  make sure later operations only start when all data have been copied. </p>
-</li>
-</ol>
-<h2 id="Hardware-implementation"><a href="#Hardware-implementation" class="headerlink" title="Hardware implementation"></a>Hardware implementation</h2><ol>
-<li><p>Those synchronization within a warp and scheduling are done by hardware, and programmers don’t need to worry about these things.</p>
-</li>
-<li><p>GPU implementation maps thread blocks (“work”) to cores using a dynamic scheduling policy that respects resource requirements. </p>
-</li>
-<li><p>In GPU implementation (not a CUDA abstraction), each SM has multiple groups of warps. However, the number of warp execution contexts is far more than the number of warps.<br>And there is a warp selector for each warp to choose the instruction to be executed by that warp. Each warp selector usually has two (or more) Fectch/Decoder unit. </p>
-</li>
-<li><p>Shared per-block memory and L1-cache are inside each SM, but L2-cache is shared by all SMs.<br>The devide global memory (GPU memory) only communicates with blocks through L2-cache. </p>
-</li>
-<li><p>Each clock, an SM will choose several warp contexts to fill all warps to use thread-level pallelism, and a warp will choose several instructions to fill all Fetch/Decoder units to use instruction-level pallelism. </p>
-</li>
-<li><p>When running a CUDA program, GPU work schedulor will map one block to multiple warps in the same SM core. CUDA threads numbered within block in row-major order.<br>Inside a single thread block is SPMD shared address space programming. </p>
-</li>
-<li><p>When single warp accesses consecutive memory locations, do block read or write. When single warp accesses separated memory locations, requires gather (read) or scatter(write)</p>
-</li>
-<li><p>One SM core may have multiple blocks, so a SMM core is capable of concurrently executing multiple CUDA thread blocks.<br>When all threads in block complete, block resources (shared memory allocations, warp execution contexts) become available for next block. </p>
-</li>
-<li><p>The CUDA program is not compiled to SIMD instructions like ISPC gangs. GPU hardware is dynamically checking whether 32 independent CUDA threads share an instruction, and if this is true, it executes all 32 threads in a SIMD manner, or performance can suer due to divergent execution. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/17/04-Work-Distribution-and-Scheduling/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/04-Work-Distribution-and-Scheduling/" class="post-title-link" itemprop="url">04. Work Distribution and Scheduling</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-17 15:35:33" itemprop="dateCreated datePublished" datetime="2022-05-17T15:35:33+08:00">2022-05-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-18 17:07:58" itemprop="dateModified" datetime="2022-05-18T17:07:58+08:00">2022-05-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
-                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Balancing-the-workload"><a href="#Balancing-the-workload" class="headerlink" title="Balancing the workload"></a>Balancing the workload</h1><p>Always implement the simplest solution first, then measure performance to determine if you need to do better. </p>
-<h2 id="Static-assignment"><a href="#Static-assignment" class="headerlink" title="Static assignment"></a>Static assignment</h2><ol>
-<li>The assignment of work to threads is pre-determined. But not necessarily determined at compile-time, may depend on runtime parameters. </li>
-<li>Benefit: simple, essentially zero runtime overhead</li>
-<li>Applicable situation: When the cost (execution time) of work and the amount of work is predictable. The followings are some most common situations:<br>When it is known up front that all work has the same cost<br>When work is predictable, but not all jobs have same cost<br>When statistics about execution time are known</li>
-<li>Semi-static assignment: When the cost of work is predictable for near-term future, we can periodically profile itself and re-adjust assignment.<br>Assignment is “static” for the interval between re-adjustments</li>
-</ol>
-<h2 id="Dynamic-assignment"><a href="#Dynamic-assignment" class="headerlink" title="Dynamic assignment"></a>Dynamic assignment</h2><ol>
-<li><p>Program determines assignment dynamically at runtime to ensure a well distributed load. Often used when the execution time of tasks, or the total number of tasks, is unpredictable. </p>
-</li>
-<li><p>The ISPC task is implemented dynamically. </p>
-</li>
-</ol>
-<h3 id="With-one-queue"><a href="#With-one-queue" class="headerlink" title="With one queue"></a>With one queue</h3><ol>
-<li><p>The programmers divide the whole problem into sub-problems (or “tasks”, “work”). A queue shared by all threads is a collection of work to do. Whenever a thread finished its task, it will grab another task from the queue. </p>
-</li>
-<li><p>Fine granularity partitioning: each task is small.<br>This is likely to have a good workload balance, but potential for high synchronization cost. </p>
-</li>
-<li><p>Coarse granularity partitioning: each task is larger.<br>This will decrease synchronization cost and the overhead, but may have a worse workload balance. </p>
-</li>
-<li><p>Long tasks should be scheduled first. Thread performing long task performs fewer overall tasks, but approximately the same amount of work as the other threads. This requires some knowledge of workload. </p>
-</li>
-</ol>
-<h3 id="With-a-set-of-queues"><a href="#With-a-set-of-queues" class="headerlink" title="With a set of queues"></a>With a set of queues</h3><ol>
-<li><p>When assign with one queue, all threads have to communicate with each other about the queue. </p>
-</li>
-<li><p>Each thread has their own queue, and they only execute tasks in their queue. So there is no need to communication with other threads. </p>
-</li>
-<li><p>At the beginning, the programmer push tasks into queues arbitarily (a bit like static assignment).<br>The dynamic is that when a queue is empty, that thread can steal from other threads that is  still working.<br>It will steal from a random thread. Every time, it will steal a proportion of the tasks in the target queue, not all of them, and usually more than one task.<br>A thread is terminated when there is no thread for it to steal, namely when a steal is failed, it will try to steal from other threads, util it have tried all of them. </p>
-</li>
-<li><p>Stealing involves communication, but in a lower frequency then one queue method. And in this way, the local queue access is fast. </p>
-</li>
-<li><p>Sometimes it is hard to have fully independent task, but work in task queues need not be independent.<br>A task is not removed from queue and assigned to worker thread until all task dependencies are satisfied. Workers can submit new tasks (with optional explicit dependencies) to task system</p>
-</li>
-</ol>
-<h1 id="Scheduling"><a href="#Scheduling" class="headerlink" title="Scheduling"></a>Scheduling</h1><p>In a divide-and-conquer algorithm, there is both dependencies and independencies. Like in quick-sort, both the divide is dependent on the partition, and those two divide is independent.<br>With Cilk Plus, we can express divide-and-conquer easier. </p>
-<h2 id="cilk-spawn"><a href="#cilk-spawn" class="headerlink" title="cilk_spawn"></a>cilk_spawn</h2><ol>
-<li><p><code>cilk_spawn</code> is labelled before a function call, so that the called function can run with the code after the call concurrently.<br>The call labelled <code>cilk_spawn</code> is the spawned child, and the rest of the code is the continuation.</p>
-</li>
-<li><p>In divide-and-conquer, there is always a time, when the problem size is small enough that overhead of spawn trumps benefits of<br>potential parallelization. And then we will solve those problems sequentially. </p>
-</li>
-<li><p>The main idea is to expose independent work (potential parallelism) to the system using <code>cilk_spawn</code>. </p>
-</li>
-<li><p><code>cilk_spawn</code> is a bit like <code>pthread_create</code>, and <code>cilk_sync</code> is similar to <code>pthread_join</code>. But <code>pthread</code> has some problems when too many threads are spawned.<br>The first is the heavyweight spawn operation. And many more concurrently running threads than cores, which will cause context switching overhead and larger working set than necessary, less cache locality. </p>
-</li>
-<li><p>The Cilk Plus runtime maintains pool of worker threads. All threads created at application launch.  There are exactly as many worker threads as execution contexts in the machine.<br>If we labelled everything <code>cilk_spawn</code>, the main thread has nothing to do. </p>
-</li>
-<li><p>Each thread in the pool will maintain a work queue to store what word needs to be done.<br>When a thread goes idle, it will look in busy thread’s queue for work, and moves work from busy thread’s queue to its own queue.</p>
-</li>
-<li><p>If caller thread runs the continuation first, the queue should record the child for later execution, and child is made available for stealing by other threads.<br>In this method, caller thread will spawn as many child as it could, like BFS. If no stealing, execution order is very different than<br>that of program withcilk_spawnremoved. </p>
-</li>
-<li><p>If caller thread runs the child first, the queue should record continuation for later execution, and continuation is made available for stealing by other threads.<br>In this method, caller thread will only create one item to steal.<br>If no stealing occurs, thread continually pops continuation from work queue, enqueues new continuation (like DFS). The order of execution is the same as for program with spawn removed.<br>If continuation is stolen, stealing thread spawns next child. </p>
-</li>
-<li><p>If the continuation is run first, there will be more items to steal, and thus makes a better advantage of multi-thread.<br>But if the continuation is run first, the work queue storage for system with T threads is no more than T times that of stack storage for single threaded execution, and thus saves more space. </p>
-</li>
-<li><p>Work queue is implemented as a dequeue (double ended queue).<br>Local thread pushes/pops from the “tail” (bottom), while remote threads steal from “head” (top).<br>Reduces contention with local thread: local thread is not accessing same part of dequeue that stealing threads do.<br>Do larger work first: in divide-and-conquer, the top of the queue is usually at the beginning of call tree, and is a larger piece of work.<br>Maximizes locality: in conjunction with run-child-first policy, local thread works on local part of call tree</p>
-</li>
-</ol>
-<h2 id="cilk-sync"><a href="#cilk-sync" class="headerlink" title="cilk_sync"></a>cilk_sync</h2><ol>
-<li><p><code>cilk_sync</code> is used after those <code>cilk_spawn</code> call code. It will return when all calls spawned by current function have completed. </p>
-</li>
-<li><p>There is an implicitcilk_syncat the end of every function that contains a cilk_spawn, so when a Cilk function returns, all work associated with that function is complete. </p>
-</li>
-<li><p>If no work has been stolen by other threads, then there’s nothing to do at the sync point, <code>cilk_sync</code> is a no-op. But this is not a common situation. </p>
-</li>
-<li><p>One way to implement sync is with stalling joint.<br>Thread that initiates the fork must perform the sync. Therefore it waits for all spawned work to be complete.<br>descriptor for block A created<br>When a stealing from the initial thread happens, a descriptor for that stolen work is created to track the number of outstanding spawns for the block, and the number of those spawns that have completed.<br>When all the child spowned for the block is done, this block is considered done, and the descriptor is free. When all the blocks are done, sync is fullfilled. </p>
-</li>
-<li><p>Another way to implement sync is the greedy policy.<br>When thread that initiates the fork goes idle, it can look to steal new work.  Last thread to reach the join point continues execution after sync. This will also create a decriptor for those stolen work.<br>Worker thread that initiated spawn may not be thread that executes logic after <code>cilk_sync</code>. </p>
-</li>
-<li><p>In greedy policy, All threads always attempt to steal if there is nothing to do, and thread only goes idle if no work to steal is present in system. But in stalling policy, the initial thread doesn’t steal, and only waits when its work is done. </p>
-</li>
-<li><p>Overhead of bookkeeping steals and managing sync points only occurs when steals occur. If large pieces of work are stolen, this should occur infrequently. Most of the time, threads are pushing/popping local work from their local dequeue. </p>
-</li>
-<li><p>Cilk uses greedy join scheduling. </p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/05/12/08-Metaprogramming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/12/08-Metaprogramming/" class="post-title-link" itemprop="url">08. Metaprogramming</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-05-12 19:13:47 / Modified: 19:51:22" itemprop="dateCreated datePublished" datetime="2022-05-12T19:13:47+08:00">2022-05-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学与技术</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/MIT-The-Missing-Semester-of-You-CS-Education/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT The Missing Semester of You CS Education</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p><code>Makefile</code> contains the dependencies and the rules. The rules are commands that described how to go from a complete list of dependencies to the given target.  </p>
-</li>
-<li><p>The depencies can be declared with <code>:</code>. The file in the left if the dependencies of the file in the right. </p>
-</li>
-<li><p>Only if any of the dependencies are changed, the file should be rebuild. And <code>make</code> will only rebuild those changed dependencies. </p>
-</li>
-<li><p>Sematic versioning: It marks the versions with three numbers, <code>major version</code>, <code>minor version</code>, <code>patch version</code>. If a backwards compatible changes is made, only <code>patch version</code> should be changed. If something is added, the <code>minor version</code> will increase, and <code>patch version</code> is set to 0. If a change is not backwards compatible, then <code>major version</code> will be increased. </p>
-</li>
-<li></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1678,7 +1525,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

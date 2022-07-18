@@ -191,6 +191,397 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/29/08-Gradient%20Field/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/29/08-Gradient%20Field/" class="post-title-link" itemprop="url">08. Gradient Field</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-29 20:34:47" itemprop="dateCreated datePublished" datetime="2020-02-29T20:34:47+08:00">2020-02-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:36:23" itemprop="dateModified" datetime="2020-08-07T22:36:23+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h1><ol>
+<li>Gradient field: <script type="math/tex">\vec{F}=\triangledown f</script> (<script type="math/tex">f(x,y)</script> is called potential). </li>
+<li>Fundamental theorem of calculus for line integrals: <script type="math/tex">\displaystyle\int_C\triangledown f\cdot d\vec{r}=f(P_1)-f(P_0)</script> (<script type="math/tex">C</script> starts from <script type="math/tex">P_0</script> ends at <script type="math/tex">P_1</script>)<br />Proof: <script type="math/tex">\begin{equation}\begin{split}\displaystyle\int_C\triangledown f\cdot d\vec{r}&=\int_C\triangledown f\cdot\frac{d\vec{r}}{dt}dt=\int_C<f_x,f_y>\cdot<\frac{dx}{dt},\frac{dy}{dt}>dt\\&=\int_C(f_x\frac{dx}{dt}+f_y\frac{dy}{dt})dt=\int^{t_2}_{t_1}\frac{df}{dt}dt\ \ \ (chain\ rule)\\&=\int^{t_2}_{t_1}df=f(P_1)-f(P_2) \end{split}\end{equation}</script></li>
+<li>Path independence: The integral doesn’t depend on the path we take. As long as the start and end points are the same, integrals are the same. <br /><script type="math/tex">\displaystyle\int_{C_1}\triangledown fd\vec{r}=\int_{C_2}\triangledown fd\vec{r}</script></li>
+<li><script type="math/tex">\triangledown f</script> Is conservative. If <script type="math/tex">C</script> is any closed curve, the work along <script type="math/tex">C</script> is zero. </li>
+<li>Not every field is a gradient field. </li>
+<li>Conservativeness means no energy can be extracted from the field for free. </li>
+<li><script type="math/tex">Mdx+Ndy</script> is an exact differential which equals to <script type="math/tex">df</script>. </li>
+<li>If <script type="math/tex">\vec{F}=\triangledown f</script>, then <script type="math/tex">M=f_x</script> and <script type="math/tex">N=f_y</script>. Also <script type="math/tex">f_{xy}=f_{yx}</script>. So if <script type="math/tex">\vec{F}</script> is a gradient field, <script type="math/tex">M_y=N_x</script>. <br />If <script type="math/tex">M_y=N_x</script> and <script type="math/tex">\vec{F}</script> is defined in entire plane (or simply concrete region), we can know <script type="math/tex">\vec{F}</script> is a gradient field. </li>
+<li>When <script type="math/tex">\vec{F}</script> is a gradient field, we can find the potential: <br />&emsp;The first method is computing the line integral from the known point to the target. <br />&emsp;The second method is antiderivatives. With <script type="math/tex">f_x</script>, we can know <script type="math/tex">f=F(x)+G(y)</script> (<script type="math/tex">F(x)</script> is the main answer of antiderivative which may contain <script type="math/tex">y</script> while <script type="math/tex">G(y)</script> is the optional term of antiderivative which becomes zero when derivative with respect to <script type="math/tex">x</script>). <br />Now derivative the <script type="math/tex">f</script> with respect to <script type="math/tex">y</script> to get <script type="math/tex">f_y=F_y+G'(y)</script>. After compared to the known <script type="math/tex">f_y</script>, we can get the expression of <script type="math/tex">G'(y)</script>. Then calculate <script type="math/tex">G(y)</script> ans substitute to <script type="math/tex">f</script>. </li>
+</ol>
+<h1 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h1><ol>
+<li><script type="math/tex; mode=display">curl(\vec{F})=N_x-M_y$$. Test for conservativeness is $$curl\ \vec{F}=0</script></li>
+<li>Curl measures twice angular velocity of rotation component of velocity field and torque exerted on a test object in the field. </li>
+<li><script type="math/tex; mode=display">\displaystyle\frac{torque}{moment\ of\ inertia}=\frac{d}{dt}(angular\ velocity)</script></li>
+<li>If force <script type="math/tex">\vec{F}</script> derives from a potential, <script type="math/tex">curl\ \vec{F}=0</script> means <script type="math/tex">\vec{F}</script> doesn’t induce any rotation motion. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/28/07-Change-of-Variables-and-Vector-Fields/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/28/07-Change-of-Variables-and-Vector-Fields/" class="post-title-link" itemprop="url">07. Change of Variables and Vector Fields</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-28 23:13:59" itemprop="dateCreated datePublished" datetime="2020-02-28T23:13:59+08:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:35:31" itemprop="dateModified" datetime="2020-08-07T22:35:31+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Change-of-Variables"><a href="#Change-of-Variables" class="headerlink" title="Change of Variables"></a>Change of Variables</h1><ol>
+<li>Let <script type="math/tex">u=u(x,y)</script> and <script type="math/tex">v=v(x,y)</script>. <br />Approximation: <script type="math/tex">\left\{\begin{array}{}\Delta u\approx u_x\Delta x+u_y\Delta y\\\Delta v\approx v_x\Delta x+v_y\Delta y\end{array}\right.</script><br />Linear tranformation: <script type="math/tex">\left[\begin{matrix}\Delta u\\\Delta v\end{matrix}\right]\approx\left[\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right]\left[\begin{matrix}\Delta x\\\Delta y\end{matrix}\right]</script><br />So new area is <script type="math/tex">\Delta A'=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|\Delta x\Delta y</script>. <br /><code>Jacobbian</code>: <script type="math/tex">J=\displaystyle\frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{matrix}u_x&u_y\\v_x&v_y\end{matrix}\right|</script><br />So <script type="math/tex">dA'=du\ dv=|J|dx\ dy=|J|dA</script></li>
+<li>Mark that <script type="math/tex">\displaystyle\frac{\partial(u,v)}{\partial(x,y)}\cdot\frac{\partial(x,y)}{\partial(u,v)}=1</script>. So <script type="math/tex">J_{(u,v)/(x,y)}=\displaystyle\frac{1}{J_{(x,y)/(u,v)}}</script>, namely their determinants are inverse, which implies their matrices are inverse. </li>
+<li>We also need to change the bounds from <script type="math/tex">x,y</script> to <script type="math/tex">u,v</script>. Draw the original region <script type="math/tex">x-y</script>. Then try to change each sides in that region to <script type="math/tex">u-v</script> graph to get the <script type="math/tex">u-v</script> region. </li>
+</ol>
+<h1 id="Vector-Fields"><a href="#Vector-Fields" class="headerlink" title="Vector Fields"></a>Vector Fields</h1><ol>
+<li>At each point <script type="math/tex">(x,y)</script> in a plane, we have <script type="math/tex">\vec{F}</script> a vector that depends on <script type="math/tex">(x,y)</script>. </li>
+<li><script type="math/tex">\vec{F}=M\vec{i}+N\vec{j}</script> Where <script type="math/tex">M</script> and <script type="math/tex">N</script> are function of <script type="math/tex">x,y</script>.  </li>
+<li>Each <script type="math/tex">\vec{F}</script> is a vector which starts from point <script type="math/tex">(x,y)</script> and points to a certain direction. For example, <script type="math/tex">\vec{F}=x\vec{i}+y\vec{j}</script> starts from <script type="math/tex">(x,y)</script> and points to <script type="math/tex">(2x,2y)</script>. </li>
+<li>Work (line integral): <script type="math/tex">W=\vec{F}\cdot\vec{\Delta r}</script>. Along a trajectory <script type="math/tex">C</script>, work adds up to <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}</script>. <script type="math/tex">W=\displaystyle\lim_{|\vec{\Delta r}|\to 0}\sum\vec{F}\cdot\vec{\Delta r_i}=\lim_{\Delta t\to 0}\sum\vec{F}\cdot(\displaystyle\frac{\vec{\Delta r}}{\Delta t}\Delta t)</script>. <br />So <script type="math/tex">W=\displaystyle\int_{t_1}^{t_2}\vec{F}\cdot\frac{d\vec{r}}{dt}dt=\int^{t_2}_{t_1}\vec{F}\cdot\vec{v}\ dt</script></li>
+<li>Another way to calculate work: <script type="math/tex">W=\displaystyle\int_C\vec{F}\cdot d\vec{r}=\int_C<M,N>\cdot<dx,dy>=\int_cMdx+Ndy</script>. Then express <script type="math/tex">x</script> and <script type="math/tex">y</script> in terms of the same thing. Normally we’ll use parametric equation of <script type="math/tex">C</script>. </li>
+<li>Geometric approach: <script type="math/tex">\vec{\Delta r}</script> is in the direction of <script type="math/tex">\vec{T}</script> with size of <script type="math/tex">ds</script>. So <script type="math/tex">\displaystyle\frac{d\vec{r}}{dt}=\vec{v}=\vec{T}\frac{ds}{dt}</script>. <script type="math/tex">\vec{T}</script> is the direction of velocity and <script type="math/tex">\displaystyle\frac{ds}{dt}</script> is its size. <br /><script type="math/tex">W =\displaystyle\int_C\vec{F}\cdot\vec{T}ds</script>. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/27/06-Double-Integrals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/06-Double-Integrals/" class="post-title-link" itemprop="url">06. Double Integrals</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-27 16:11:44" itemprop="dateCreated datePublished" datetime="2020-02-27T16:11:44+08:00">2020-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:35:51" itemprop="dateModified" datetime="2020-08-07T22:35:51+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Double-Integral"><a href="#Double-Integral" class="headerlink" title="Double Integral"></a>Double Integral</h1><ol>
+<li>Double integral is calculating the volumn below graph of <script type="math/tex">f</script> on a certain region <script type="math/tex">R</script>. It’s denoted by <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>. <script type="math/tex">dA</script> stands for area. </li>
+<li>Like in the one variable integral, we cut <script type="math/tex">R</script> into small pieces of area <script type="math/tex">\Delta A</script>. Mark each pieces with its center <script type="math/tex">(x_i,y_i)</script>. <br />Then answer is <script type="math/tex">\displaystyle\lim_{\Delta A\to 0}\sum f(x_i,y_i)\Delta A</script>. </li>
+<li>To compute <script type="math/tex">\displaystyle\iint_Rf(x,y)dA</script>, take slices let <script type="math/tex">S(x)</script> is area of slice by plane parallel to <script type="math/tex">yoz</script> plane. Then the volumn is <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}} S(x)dx</script>. For given <script type="math/tex">x</script>, <script type="math/tex">S(x)=\displaystyle\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy</script>. <br />Conclusion, <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{x_{max}}_{x_{min}}\bigg[\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\bigg]dx</script></li>
+<li>The bounds of outer integral are pure constants while the bounds of inner integral may contain <script type="math/tex">x</script>. However in inner integrals <script type="math/tex">x</script> is set constant. </li>
+<li>When exchanging order of integration, remember to change the bounds. Draw <script type="math/tex">y_{max}(x)</script> and <script type="math/tex">y_{min}(x)</script> in the inteval <script type="math/tex">[x_{min},x_{max}]</script> to find the new bounds. Normally <script type="math/tex">\displaystyle\int^{x_{max}}_{x_{min}}\int^{y_{max}(x)}_{y_{min}(x)}f(x,y)dy\ dx</script> becomes <script type="math/tex">\displaystyle\int^{y_{max}}_{x_{min}}\int^{x_{max}(y)}_{x_{min}(y)}f(x,y)dx\ dy</script> (<script type="math/tex">x_{max}(y)\ is\ y^{-1}_{min}(x)</script> and <script type="math/tex">x_{min}(y)\ is\ y^{-1}_{max}(x)</script>). </li>
+</ol>
+<h1 id="Polar-Coordination"><a href="#Polar-Coordination" class="headerlink" title="Polar Coordination"></a>Polar Coordination</h1><ol>
+<li>In polar coordination, we substitute <script type="math/tex">\left\{\begin{array}{}x=rcos\ \theta\\y=rsin\ \theta\end{array}\right.</script> to get the function <script type="math/tex">f(r,\theta)</script>. </li>
+<li>In perpendicular coordination, we can do all those things because <script type="math/tex">\Delta A=\Delta x\cdot \Delta y</script>. But in polar coordination, cut <script type="math/tex">R</script> into small pieces of fan-shaped area with straight lines from origin and circles. So <script type="math/tex">\Delta A=width\ between\ rings\cdot\ arclength=\Delta r\cdot r\Delta\theta</script>, namely <script type="math/tex">da=rdr\ d\theta</script></li>
+<li>So <script type="math/tex">\displaystyle\iint_Rf(x,y)dA=\int^{\theta_{max}}_{\theta_{min}}\int^{r_{max}(\theta)}_{r_{min}(\theta)}f(r,\theta)rdr\ d\theta</script></li>
+</ol>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><ol>
+<li>The area of given region <script type="math/tex">R</script> in two dimension is <script type="math/tex">\displaystyle Area(R)=\iint_R1\ dA</script>. </li>
+<li>The density of a flat matter in a unit area is <script type="math/tex">\delta</script>, then the mass is <script type="math/tex">m=\displaystyle\iint_R\delta\ dA</script>. </li>
+<li>Average value of <script type="math/tex">f</script> in <script type="math/tex">R</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{Area(R)}\iint_RfdA</script><br />Weighted average of <script type="math/tex">f</script>: <script type="math/tex">\overline f=\displaystyle\frac{1}{\iint_R\delta dA}\iint_Rf\delta dA</script>. </li>
+<li>Center of mass of a planer object with density <script type="math/tex">\delta</script>: <script type="math/tex">\left\{\begin{array}{}\overline{x}=\displaystyle\frac{1}{mass}\iint_Rx\delta\ dA\\\overline y= \displaystyle\frac{1}{mass}\iint_Ry\delta\ dA\end{array}\right.</script></li>
+<li>Moment of inertia about an axis: <script type="math/tex">I=\displaystyle\iint_Rr^2\delta\ dA</script> (<script type="math/tex">r</script> is the spin radius)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/26/05-Lagrange-Multipliers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/26/05-Lagrange-Multipliers/" class="post-title-link" itemprop="url">05. Lagrange Multipliers</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-26 13:22:31" itemprop="dateCreated datePublished" datetime="2020-02-26T13:22:31+08:00">2020-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-07 22:36:16" itemprop="dateModified" datetime="2020-08-07T22:36:16+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%A4%9A%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-02/" itemprop="url" rel="index">
+                    <span itemprop="name">多变量微积分 (MIT 18.02)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lagrange-Multipliers"><a href="#Lagrange-Multipliers" class="headerlink" title="Lagrange Multipliers"></a>Lagrange Multipliers</h1><ol>
+<li>The goal is to minize of maximize a function <script type="math/tex">f(x,y,z)</script> where <script type="math/tex">x,y,z</script> are not independent, namely <script type="math/tex">g(x,y,z)=c</script>. </li>
+<li>At the minimum/maximum, the level curve of <script type="math/tex">f</script> is tangent to the hyperbola <script type="math/tex">g</script>. </li>
+<li>Find the tangent point: If the two curves are tangent at that point, the two curves share the same tangent line, namely their normal vectors are parallel. So <script type="math/tex">\triangledown f \parallel \triangledown g</script>, i.e. <script type="math/tex">\triangledown f=\lambda\triangledown g</script>. </li>
+<li><script type="math/tex">\left\{\begin{array}{}f_x=\lambda g_x\\f_y=\lambda g_y\\\dots\\g=c\end{array}\right.</script> is the <code>Lagrange equations</code> to solve all the variables and <script type="math/tex">\lambda</script>. </li>
+<li>The partial derivative equations can form <script type="math/tex">A\vec{x}=\vec{0}</script> (<script type="math/tex">A</script> contains constants and <script type="math/tex">\lambda</script> and <script type="math/tex">\vec{x}</script> is the vector of variables). Normally <script type="math/tex">\vec{x}</script> will not be a solution to <script type="math/tex">g=c</script>, so <script type="math/tex">A\vec{x}=\vec{0}</script> must has at least one nontrivial solution. So the determinant of <script type="math/tex">A</script> is zero, which allows us to solve <script type="math/tex">\lambda</script>. </li>
+<li>At constrained min/max, in any direction along level <script type="math/tex">g=c</script> the rate of change of <script type="math/tex">f</script> must be <script type="math/tex">0</script>. <br />For any <script type="math/tex">\vec{u}</script> tangent of <script type="math/tex">g=c</script>, we must have <script type="math/tex">\displaystyle\frac{df}{ds}\Big|_\vec{u}=0</script>. So any such <script type="math/tex">\vec{u}</script> is perpendicular to <script type="math/tex">\triangledown f</script>. <br /><script type="math/tex">\triangledown f</script> is perpendicular to level set of <script type="math/tex">g</script>. Since <script type="math/tex">\triangledown g</script> is perpendicular to level set of <script type="math/tex">f</script>, <script type="math/tex">\triangledown f\parallel\triangledown g</script>. </li>
+<li>We cannot use second derivatives to distinguish if the point is minimum or maximum. To find out about that ,we can only compare values of <script type="math/tex">f</script> at various solution to Lagrange equations. </li>
+</ol>
+<h1 id="Non-independent-Variables"><a href="#Non-independent-Variables" class="headerlink" title="Non-independent Variables"></a>Non-independent Variables</h1><ol>
+<li>If <script type="math/tex">g(x,y,z)=c</script>, how to find <script type="math/tex">\displaystyle\frac{\partial z}{\partial x},\frac{\partial z}{\partial y}</script>? </li>
+<li><script type="math/tex">dg=\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz</script>. Since <script type="math/tex">g=c</script>, <script type="math/tex">dg=0</script>, <script type="math/tex">\displaystyle\frac{\partial g}{\partial x}dx+\frac{\partial g}{\partial y}dy+\frac{\partial g}{\partial z}dz=0</script>. Plug in the point <script type="math/tex">(x,y,z)</script>, we can have a relationship of <script type="math/tex">a_0dx+a_1dy+a_2dz=0</script> which contains among the change of <script type="math/tex">x, y</script> and <script type="math/tex">z</script>. </li>
+<li>Separate <script type="math/tex">dx, dy</script> or <script type="math/tex">dz</script> and compare to the equation <script type="math/tex">dz=\displaystyle\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy</script>, we can have <script type="math/tex">\displaystyle\frac{\partial g}{\partial x},\frac{\partial g}{\partial y}</script>. Or we can set <script type="math/tex">y</script> constant by setting <script type="math/tex">dy=0</script>. </li>
+<li>So in general, <script type="math/tex">\displaystyle\frac{\partial z}{\partial x}=-\frac{g_x}{g_z}</script> and <script type="math/tex">\displaystyle\frac{\partial z}{\partial y}=-\frac{g_y}{g_z}</script>. </li>
+<li><script type="math/tex">(\displaystyle\frac{\partial g}{\partial x})_y</script> means when calculating the partial derivative, we set <script type="math/tex">y</script> constant. Normally when <script type="math/tex">x=u</script>, <script type="math/tex">\displaystyle(\frac{\partial g}{\partial x})_y≠(\frac{\partial g}{\partial x})_v=(\frac{\partial  g}{\partial u})_v</script>. </li>
+<li>In the function <script type="math/tex">w=f(x,y,z)</script>, <script type="math/tex">dw=f_xdx+f_ydy+f_zdz</script>. <br />One variable is set constant (<script type="math/tex">x</script> for example), and from above we can solve <script type="math/tex">dy</script> in terms of <script type="math/tex">dz</script>. <br />Then substitute <script type="math/tex">dx=0</script> and <script type="math/tex">dy</script> into the differential equation, to get <script type="math/tex">(\displaystyle\frac{dw}{dz})_x</script>. </li>
+<li>Another way: <br />In the chain rule: <script type="math/tex">(\displaystyle\frac{\partial w}{\partial z})_x=f_z(\frac{\partial z}{\partial z})_x+f_x(\frac{\partial x}{\partial z})_x+f_y(\frac{\partial y}{\partial z})_x</script>. <br /><script type="math/tex">(\displaystyle\frac{\partial z}{\partial z})_x=1</script> and <script type="math/tex">(\displaystyle\frac{\partial x}{\partial z})_x=0</script>. We can also find <script type="math/tex">(\displaystyle\frac{\partial y}{\partial z})</script> in the constrain. <br />Substitute all the three into the differential equation to find the solution. </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/25/04-Differentials-and-Gradient/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -774,394 +1165,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/17/14-Geometric-problems-and-Polar-Coordinates/" class="post-title-link" itemprop="url">14. Geometric problems and Polar Coordinates</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-17 19:07:04" itemprop="dateCreated datePublished" datetime="2020-02-17T19:07:04+08:00">2020-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:42" itemprop="dateModified" datetime="2020-08-07T19:22:42+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a>Geometry</h1><ol>
-<li>The arclength in the interval <script type="math/tex">[a,b]</script>. <br />Just like what we did at integral, divide the interval into small pieces. <br />So <script type="math/tex">ds^2=dx^2+dy^2</script>. So <script type="math/tex">ds=\sqrt{dx^2+dy^2}=\sqrt{1+(\displaystyle\frac{dy}{dx})^2}dx</script>. <br />Integrate both side, <script type="math/tex">S=\displaystyle\int^{s_n}_{s_0}ds=\int^b_a\sqrt{1+(\frac{dy}{dx})^2}dx</script>. </li>
-<li>Surface area of rotation. <br />Divide the graph into small piece. The width of each piece is <script type="math/tex">ds</script> (arclength) and the length is <script type="math/tex">2\pi y</script> or <script type="math/tex">2\pi x</script>. <br /><br />And <script type="math/tex">ds=\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script><br />So <script type="math/tex">A=\displaystyle\int dA=\int(2\pi y)ds=\int(2\pi y)\displaystyle\sqrt{1+(\frac{dy}{dx})^2}dx</script></li>
-<li>If parametric function is involved, <script type="math/tex">\left\{\begin{array}{}x=f(t)\\y=g(x)\end{array}\right.</script>. <br />In the arclength, <script type="math/tex">ds=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}dt</script>. <br />The speed is <script type="math/tex">\displaystyle\frac{ds}{dt}=\sqrt{(\displaystyle\frac{dx}{dt})^2+(\frac{dy}{dt})^2}</script></li>
-</ol>
-<h1 id="Polar-Coordinates"><a href="#Polar-Coordinates" class="headerlink" title="Polar Coordinates"></a>Polar Coordinates</h1><ol>
-<li>Any points in the plane will be represented by <strong>the distance to origin</strong> <script type="math/tex">r</script> and <strong>angle of ray from origin with horizontal axis</strong> <script type="math/tex">\theta</script>. </li>
-<li><script type="math/tex">x=rcos\ \theta</script> and <script type="math/tex">y=rsin\ \theta</script>. These formulas are always true. </li>
-<li><script type="math/tex">r=\pm\sqrt{x^2+y^2}</script> and <script type="math/tex">\theta=tan^{-1}\displaystyle\frac{y}{x}</script>. These formulas are a bit ambiguous. We also need the graph to know the exact value of <script type="math/tex">r</script> and <script type="math/tex">\theta</script>. </li>
-<li>Typical conventions: <script type="math/tex">0≤r<\infty</script> and <script type="math/tex">-\pi<\theta≤\pi</script> or <script type="math/tex">0≤\theta<2\pi</script>. These are just typical conventions not always necessary. </li>
-<li>When transform a rectangular equation into a polar equation, remember to check the range of <script type="math/tex">\theta</script> and <script type="math/tex">r</script>. </li>
-<li>The area of <script type="math/tex">r=r(\theta)</script>: Divide the whole area into small pieces of fan-shape with center in origin. Then <script type="math/tex">dA=\displaystyle\frac{1}{2}r^2d\theta</script>. So the whole area is <script type="math/tex">A=\displaystyle\int^{\theta_2}_{\theta_1}\frac{1}{2}r^2d\theta</script>. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/17/13-Partial-Fractions-Integration-by-Parts/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/17/13-Partial-Fractions-Integration-by-Parts/" class="post-title-link" itemprop="url">13. Partial Fractions and Integration by Parts</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-17 10:18:43" itemprop="dateCreated datePublished" datetime="2020-02-17T10:18:43+08:00">2020-02-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:22:48" itemprop="dateModified" datetime="2020-08-07T19:22:48+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Partial-Fractions"><a href="#Partial-Fractions" class="headerlink" title="Partial Fractions"></a>Partial Fractions</h1><ol>
-<li>This kind of problem has form <script type="math/tex">\displaystyle\frac{P(x)}{Q(x)}</script> where <script type="math/tex">P(x)</script> and <script type="math/tex">Q(x)</script> are polynomials with only whole powers. </li>
-<li>If <script type="math/tex">Q(x)</script> can be factored into distinct linear terms and degree of <script type="math/tex">P(x)</script> is smaller than <script type="math/tex">Q(x)</script> the strategy here is: <br />&emsp;<code>Factor</code>: Factor the denominator <script type="math/tex">Q(x)</script> in to <script type="math/tex">(a_1x+b_1)(a_2x+b_2)…</script><br />&emsp;<code>Set-up</code>: Assume the original equation is equal to <script type="math/tex">\displaystyle\frac{A}{a_1x+b_1}+\frac{B}{a_2x+b_2}+…</script><br />&emsp;<code>Cover-up</code>: Solve the unknowns <script type="math/tex">A,B,…</script><br />&emsp;&emsp;When solving the unknowns, a quicker way is to multiply <script type="math/tex">a_ix+b_i</script> and then plug in <script type="math/tex">x=-\displaystyle\frac{b_i}{a_i}</script> to make all other terms <script type="math/tex">0</script>. </li>
-<li>If <script type="math/tex">Q(x)</script> has repeated linear terms, in set-up step, we need to contain all terms with power from <script type="math/tex">1</script> to <script type="math/tex">n</script> for all terms <script type="math/tex">(a_ix+b_i)^n</script> in <script type="math/tex">Q(x)</script>. And in the cover-up step, all the lower order term needs some special number. </li>
-<li>If <script type="math/tex">Q(x)</script> has nonlinear terms, in set-up step, the numerators are <script type="math/tex">Ax^{n-1}+Bx^{n-2}+…Cx+D</script> for all terms <script type="math/tex">a_ix^n+b_ix^{n-1}+…+c_ix+d_i</script>. And we can use the cover-up to solution the ordinary terms, but for the higher order terms, we must compare the coefficients of the two sides after multiplied the denominator. </li>
-<li>If the dgree of <script type="math/tex">P(x)</script> is larger than <script type="math/tex">Q(x)</script>, we use the long-division to factor <script type="math/tex">P(x)</script> into <script type="math/tex">quotient\cdot Q(x)+remainder</script>. So the original equation is <script type="math/tex">quotient+\displaystyle\frac{remainder}{Q(x)}</script>. The first part is easy and the second part is one of the aforementioned situations. </li>
-<li>After all those steps, when integrating, we split all terms into terms with only one term in the numerators. </li>
-</ol>
-<h1 id="Integration-by-Parts"><a href="#Integration-by-Parts" class="headerlink" title="Integration by Parts"></a>Integration by Parts</h1><ol>
-<li>In derivative, <script type="math/tex">(uv)'=u'v+uv'</script>. Rewrite it to <script type="math/tex">uv'=(uv)'-u'v</script>. Integrate both sides of euqation, <script type="math/tex">\displaystyle\int uv'dx= uv-\int u'vdx</script>. </li>
-<li>Use the substitution to the equation, <script type="math/tex">\displaystyle\int udv=uv-\int vdu</script></li>
-<li><code>Reduction formula</code>: <br />If <script type="math/tex">F_n(x)=\displaystyle\int(ln\ x)^ndx</script>, then <script type="math/tex">F_n=x(ln\ x)^n-nF_{n-1}(x)</script>. <br />If <script type="math/tex">G_n(x)=\displaystyle\int x^ne^xdx</script>, then <script type="math/tex">G_n(x)=x^ne^x-nG_{n-1}(x)</script>. </li>
-<li>We usually choose the function with easier differentiation to be <script type="math/tex">u</script> and others to be <script type="math/tex">v</script>, or the difficult integral to be <script type="math/tex">u</script>. </li>
-<li>To use this technique to solve a problem, we must make sure that <script type="math/tex">du</script> did make the problem easier instead of the same or even harder. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/16/12-Trigonometric-Integrals-and-substitution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/16/12-Trigonometric-Integrals-and-substitution/" class="post-title-link" itemprop="url">12. Trigonometric Integrals and Substitution</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-16 09:58:21" itemprop="dateCreated datePublished" datetime="2020-02-16T09:58:21+08:00">2020-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:19:29" itemprop="dateModified" datetime="2020-08-07T19:19:29+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Trigonometric-Integrals"><a href="#Trigonometric-Integrals" class="headerlink" title="Trigonometric Integrals"></a>Trigonometric Integrals</h1><ol>
-<li>Trigonomatric formulas: <br />&emsp;Double Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}cos (2\theta)=cos^2\ \theta-sin^2\ \theta\\sin(2\theta)=2sin\ \theta\ cos\ \theta\end{array}\right.</script><br />&emsp;Half Angle Formula: <br />&emsp;&emsp;<script type="math/tex">\left\{\begin{array}{}\displaystyle cos^2\theta=\frac{1+cos\ (2\theta)}{2}\\sin^2\theta=\displaystyle\frac{1-cos\ (2\theta)}{2}\end{array}\right.</script><br />&emsp;<script type="math/tex">sec\ \theta=\displaystyle\frac{1}{cos\ \theta}</script><br />&emsp;<script type="math/tex">csc\ \theta=\displaystyle\frac{1}{sin\ \theta}</script><br />&emsp;<script type="math/tex">cot\ \theta=\displaystyle\frac{cos\ \theta}{sin\ \theta}</script><br />&emsp;<script type="math/tex">sec^2\ \theta=1+tan^2\ \theta</script><br />&emsp;<script type="math/tex">(tan\ \theta)'=sec^2\ \theta</script><br />&emsp;<script type="math/tex">(sec\ \theta)'=sec\ \theta\ tan\ \theta</script><br />&emsp;<script type="math/tex">\displaystyle\int tan\ x\ dx=-ln\ |cos(x)|+c</script></li>
-<li><script type="math/tex; mode=display">\displaystyle\int sec\ x\ dx$$<br />&emsp;Add the derivative of $$sec\ x$$ and $$tan\ x$$ together to get $$(sec\ x+tan\ x)'=(sec\ x+tan\ x)sec\ x$$. <br />&emsp;Assign $$u=sec\ x+tan\ x$$. $$sec\ x=\displaystyle\frac{u'}{u}=\frac{d}{dx}ln(u)$$. <br />&emsp;So $$\displaystyle\int sec\ x\ dx=\int\frac{d}{dx}ln\ (u)dx=ln\ (u)+c=ln\ (sec\ x+tan\ x)+c</script></li>
-<li><script type="math/tex">\displaystyle\int sin^n(x)cos^m(x)dx</script><br />If at least one exponent is odd. <br />&emsp;Use <script type="math/tex">sin^2x+cos^2x=1</script> to eliminate the odd exponent to <script type="math/tex">1</script>. <br />&emsp;Then we can assign <script type="math/tex">u</script> to the other one and use the substitution. <br />If both exponents are even. <br />&emsp;Use the half angle formulas to eliminate both <script type="math/tex">sin</script> and <script type="math/tex">cos</script>. <br />&emsp;If after elimination we are still in this case, just do it again until the situation becomes the the aforementioned case. </li>
-<li><script type="math/tex; mode=display">\displaystyle\int \sqrt{a^2-y^2}dy$$. Assign $$y=asin\ \theta$$. <br />$$\begin{equation}\begin{split}\displaystyle\int acos\ \theta\ (acos\ \theta)d\theta&=a^2\int cos^2\theta\ d\theta\\&=a^2\int \frac{1+cos(2\theta)}{2}d\theta\\&=a^2(\frac{\theta}{2}+\frac{sin\ (2\theta)}{4})+c\\&=a^2(\frac{\theta}{2}+\frac{sin\ \theta\ cos\ \theta}{2})+c\\&=\frac{a^2\ \theta}{2}+\frac{(a\ sin\ \theta)(a\ cos\ \theta)}{2}+c\\&= \frac{a^2\ arcsin(\frac{y}{a})}{2}+\frac{y\sqrt{a^2-y^2}}{2}+c\end{split}\end{equation}</script></li>
-<li>When involve <script type="math/tex">a^2-x^2</script>, we can think about making <script type="math/tex">x=acos\ \theta</script> or <script type="math/tex">x=asin\ \theta</script>. <script type="math/tex">a^2-x^2=a^2sin^2\theta</script> and <script type="math/tex">dx=-asin\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">a^2+x^2</script>, we can think about <script type="math/tex">x=atan\ \theta</script>, then <script type="math/tex">a^2+x^2=sec^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ d\theta</script>. <br />When involve <script type="math/tex">x^2-a^2</script>, we can think about <script type="math/tex">x=asec\ \theta</script>, then <script type="math/tex">x^2-a^2=tan^2\ \theta</script> and <script type="math/tex">dx=asec\ \theta\ tan\ \theta</script></li>
-<li>In the form of <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{x^2+2ax}}</script> or similar forms, we can complete the square to <script type="math/tex">(x+a)^2-a^2</script>, and use substitution <script type="math/tex">u=x+a</script> to change the original form to <script type="math/tex">f(x)=\displaystyle\frac{1}{\sqrt{u^2-a^2}}</script>. Now the problem returns to the trigonometric substitution. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2020/02/14/11-Application-of-Integrals/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="LiyunZhang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LaughingTree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/14/11-Application-of-Integrals/" class="post-title-link" itemprop="url">11. Application of Integrals</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-02-14 19:39:22" itemprop="dateCreated datePublished" datetime="2020-02-14T19:39:22+08:00">2020-02-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-07 19:23:26" itemprop="dateModified" datetime="2020-08-07T19:23:26+08:00">2020-08-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%8D%95%E5%8F%98%E9%87%8F%E5%BE%AE%E7%A7%AF%E5%88%86-MIT-18-01/" itemprop="url" rel="index">
-                    <span itemprop="name">单变量微积分 (MIT 18.01)</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Areas-Between-Curves"><a href="#Areas-Between-Curves" class="headerlink" title="Areas Between Curves"></a>Areas Between Curves</h1><ol>
-<li>The area between <script type="math/tex">f(x)</script> and <script type="math/tex">g(x)</script> (<script type="math/tex">f(x) > g(x)</script>) is <script type="math/tex">\displaystyle\int^b_a(f(x)-g(x))dx</script>. </li>
-<li>When calculating this kind of question, always draw a picture to figure out the order. </li>
-<li>Sometimes we can also integrate on y-axis instead of x-axis. </li>
-</ol>
-<h1 id="Volumn"><a href="#Volumn" class="headerlink" title="Volumn"></a>Volumn</h1><ol>
-<li>Slice the object and the function of its area is <script type="math/tex">A(x)</script>, then <script type="math/tex">\Delta V=A(x)\Delta X</script>. So <script type="math/tex">V=\displaystyle\int A(x)dx</script>. </li>
-<li>Solids of revolution: graph of function <script type="math/tex">y=f(x)</script> revolve around x-axis to form a solid object. Slice the object into disks, then we can get <script type="math/tex">V=\displaystyle\int\pi y^2dx</script>. </li>
-<li>The volumn of portion of width <script type="math/tex">x\ (0≤x≤a)</script> of a ball is <script type="math/tex">V(x)=\pi(a^3-\displaystyle\frac{x^3}{3})</script></li>
-<li>Another way to calculate the volumn of revolution instead of disks is shells. See the volumn as thin column shells, the volumn is the sum of areas of columns. </li>
-<li>When calculate the volumn, beware of the limits of integrals. Remember the symmetric of revolution. Don’t over calculate the volumns. </li>
-<li><strong>Beaware of the units!!!!!</strong> The x and y values has to be both the same. In <script type="math/tex">y=x^2</script>, <script type="math/tex">x=100\ cm</script> and <script type="math/tex">x=1\ m</script> is different since the first has <script type="math/tex">y=10000\ cm</script> while the second has <script type="math/tex">y=1\ m</script>. </li>
-</ol>
-<h1 id="Average-Value"><a href="#Average-Value" class="headerlink" title="Average Value"></a>Average Value</h1><ol>
-<li><code>Continuous average Ave(f)</code>: <script type="math/tex">\displaystyle\frac{1}{b-a}\int^b_af(x)dx</script>. </li>
-<li>Riemann sum: <script type="math/tex">\begin{equation}(y_1+\dots+y_n)\Delta x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\int^b_af(x)dx\end{equation}</script>. <br />Divide by <script type="math/tex">b-a</script>, <script type="math/tex">\begin{equation}\displaystyle\frac{(y_1+…+y_n)\Delta x}{b-a}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script>. <br />And <script type="math/tex">\Delta x=\displaystyle\frac{b-a}{n}</script>. So <script type="math/tex">\begin{equation}\displaystyle\frac{y_1+…+y_n}{n}x\stackrel{\Delta x\to0}\longrightarrow\displaystyle\frac{1}{b-a}\int^b_af(x)dx\end{equation}</script></li>
-<li>Even calculate the same thing, if we respect to different variables, the result can be different. </li>
-<li>Weighted average: <script type="math/tex">\displaystyle\frac{\int^b_af(x)w(x)dx}{\int^b_aw(x)dx}</script>. <script type="math/tex">w(x)</script> is the weigh function</li>
-<li>Probability: <script type="math/tex">a<x_1<x_2<b</script>, <script type="math/tex">P(x_1<x<x_2)=\displaystyle\frac{\int^{x_2}_{x_1}w(x)dx}{\int^b_aw(x)dx}</script>. </li>
-</ol>
-<h1 id="Numerical-Integration"><a href="#Numerical-Integration" class="headerlink" title="Numerical Integration"></a>Numerical Integration</h1><ol>
-<li>Riemann sums: Add up rectangulars. The sum is <script type="math/tex">\Delta x(y_0+y_1+\dots+y_{n-1})</script>. </li>
-<li>Trapezoidal rule: Add up trapezoids. The upper base is <script type="math/tex">y_i</script>, lower base is <script type="math/tex">y_{i-1}</script>, the height is <script type="math/tex">\Delta x</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\Delta x(\displaystyle\frac{y_0+y_1}{2}+\frac{y_1+y_2}{2}+\dots+\frac{y_{n-1}+y_{n}}{2})\\=&\Delta x(\frac{y_0}{2}+y_2+\dots+y_{n-1}+\frac{y_n}{2})\end{split}\end{equation}</script></li>
-<li>The trapezoidal rule is <script type="math/tex">\displaystyle\frac{left\ Riemann\ sum(y_0\ to\ y_{n-1})+right\ Riemann\ sum(y_n\ to\ y_1)}{2}</script></li>
-<li>Simpson’s rule: Deal with two chunks one time. Add up parabolas cover two chunks together. The area is base times average height. The average heights turn out to be <script type="math/tex">\displaystyle\frac{y_{n-1}+4y_n+y_{n+1}}{6}</script>. So the sum is <br /><script type="math/tex">\begin{equation}\begin{split}&\displaystyle\frac{2\Delta x}{6}((y_0+4y_1+y2)+(y_2+4y_3+y_4)+…+(y_{n-2}+4y_{n-1}+y_n))\\=&\frac{\Delta x}{3}(y_0+4y_1+2y_2+4y_3+2y_4+…+2y_{n-2}+4y_{n-1}+y_n)\end{split}\end{equation}</script> </li>
-<li>Simpson’s rule is amazingly accuracy, <script type="math/tex">|Simpson's\ rule-Exact\ answer|\approx(\Delta x)^4</script></li>
-<li>Simpson’s rule is derived using the exact answer for all degree <script type="math/tex">2</script> polynomials. </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1233,7 +1236,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Interconnection All parallel processors are connected and form an interconnection network.  The interconnection network are used to connect processor cores with other cores, processors and memories, p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12. Interconnection Network">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/07/13/12-Interconnection-Network/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Interconnection All parallel processors are connected and form an interconnection network.  The interconnection network are used to connect processor cores with other cores, processors and memories, p">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/1.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/2.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/3.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/4.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/5.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/6.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/7.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/8.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/9.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/10.png">
+<meta property="og:image" content="http://http/img/12-Interconnection-Network/11.png">
+<meta property="article:published_time" content="2022-07-13T02:50:56.000Z">
+<meta property="article:modified_time" content="2022-07-16T03:06:00.051Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://http/img/12-Interconnection-Network/1.png">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/07/13/12-Interconnection-Network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>12. Interconnection Network | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/13/12-Interconnection-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          12. Interconnection Network
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-07-13 10:50:56" itemprop="dateCreated datePublished" datetime="2022-07-13T10:50:56+08:00">2022-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-07-16 11:06:00" itemprop="dateModified" datetime="2022-07-16T11:06:00+08:00">2022-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Interconnection"><a href="#Interconnection" class="headerlink" title="Interconnection"></a>Interconnection</h1><ol>
+<li>All parallel processors are connected and form an interconnection network. </li>
+<li>The interconnection network are used to connect processor cores with other cores, processors and memories, processor cores and caches, caches and caches, I/O devices. </li>
+<li>The design of the interconnection network has an important impact on system scalability (How large of a system can be built? How easy is it to add more nodes?), system performance and energy efficiency (How fast can cores, caches, memory communicate? How long is latency to memory? How much energy is spent on communication?)</li>
+</ol>
+<h2 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h2><ol>
+<li><strong>Network node</strong>: a network endpoint connected to a router/switch, like the processor, the cache controller, or the memory controller</li>
+<li><strong>Network interface</strong>: Connects nodes to the network</li>
+<li><strong>Switch/router</strong>: Connects a fixed number of input links to a fixed number of output links</li>
+<li><strong>Link</strong>: A bundle of wires carrying a signal<br><img src="/img/12-Interconnection-Network/1.png" width="40%"></li>
+</ol>
+<h2 id="Design-issues"><a href="#Design-issues" class="headerlink" title="Design issues"></a>Design issues</h2><ol>
+<li><strong>Topology</strong>: How switches are connected via links. Affects routing, throughput, latency, complexity/cost of implementation. </li>
+<li><strong>Routing</strong>: How a message gets from its source to its destination in the network. Can be static (messages take a predetermined path) or adaptive based on load. </li>
+<li><strong>Buffering and flow control</strong>: What data are stored in the network? packets, partial packets? etc. How does the network manage buffer space?</li>
+</ol>
+<h2 id="Properties-of-interconnect-topology"><a href="#Properties-of-interconnect-topology" class="headerlink" title="Properties of interconnect topology"></a>Properties of interconnect topology</h2><ol>
+<li><strong>Routing distance</strong>: Number of links (“hops”) along a route between two nodes</li>
+<li><strong>Diameter</strong>: the maximum routing distance</li>
+<li><strong>Average distance</strong>: average routing distance over all valid routes</li>
+<li><strong>Direct network</strong>: The switches and nodes are one in the same. The logic of the switch is built into the node itself. </li>
+<li><strong>Indirect network</strong>: The switches are distinct from the nodes that form a chain from one node to the other. </li>
+<li><strong>Blocking or non-blocking</strong>: If connecting any pairing of node simultaneously won’t cause conflict (using the same link or the same switch, assuming that one switch can only handle on message at one time), the network is non-blocking. Otherwise, it is blocking. </li>
+<li><strong>Bisection bandwidth</strong>: A measure of how much connectivity in the network. If we cut the network in half, it is the connection between those two halves, namely the sum bandwidth of all severed links.<br>The low bisection bandwidth will be the choke point of the network. </li>
+<li>Latency increases with load (throughput).<br>The topology, routing algorithm and flow control each has their own min latency. The zero load or idle latency is the sum of the three min latencies.<br>Also, the topology, routing algorithm and flow control each has their own throughput limit. The overall throughput limit is the min of the three limits. </li>
+</ol>
+<h1 id="Interconnect-topologies"><a href="#Interconnect-topologies" class="headerlink" title="Interconnect topologies"></a>Interconnect topologies</h1><h2 id="Bus"><a href="#Bus" class="headerlink" title="Bus"></a>Bus</h2><ol>
+<li><p>Physically, a bus is a wire. But from graph point of view, a bus is a switch. </p>
+</li>
+<li><p>It is simple to design. It costs effective for a small number of nodes. It is easy to implement coherence via snooping</p>
+</li>
+<li><p>Contention: all nodes contend for shared bus</p>
+</li>
+<li><p>Limited bandwidth: all nodes communicate over same wires, and only one communication is allowed at a time. </p>
+</li>
+<li><p>There has a scalibility problem. It is expensive to drive wires across the whole chips. There is quite a lot of power in driving signals on the bus. </p>
+<p><img src="/img/12-Interconnection-Network/2.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Crossbar"><a href="#Crossbar" class="headerlink" title="Crossbar"></a>Crossbar</h2><ol>
+<li><p>Every node is connected to every other node by a direct connection. The network is non-blocking and indirect (the network is indirect, but the nodes are connected directly). </p>
+</li>
+<li><p>It has $O(1)$ latency and high bandwidth. </p>
+</li>
+<li><p>It also has a scalability problem since $O(N^2)$ switches are required. Also it has high cost and is difficult to arbitrate at scale. </p>
+</li>
+<li><p>Crossbars were used in recent multi-core processing from Oracle. In a multi-core chip, the crossbar (CCX) occupies about the same chip area as a core. </p>
+<p><img src="/img/12-Interconnection-Network/3.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Ring"><a href="#Ring" class="headerlink" title="Ring"></a>Ring</h2><ol>
+<li><p>It lets the message to circle around. </p>
+</li>
+<li><p>It is simple enough and quite cheap with only $O(N)$ cost. </p>
+</li>
+<li><p>But the latency is $O(N)$, which is very high. And the bisection bandwidth remains constant as nodes are added, which will cause the scalibility problem. </p>
+</li>
+<li><p>It is used in recent Intel architectures, Core i7, and in IBM CELL Broadband Engine. This is usually used on the scale of 4 or 8 elements on the ring. </p>
+</li>
+<li><p>The Intel’s ring interconnect has four rings (request, snoop, ack, 32 bytes of data) and six interconnect nodes (four “slices” of L3 cache, system agent, graphics). Each bank of L3 connected to ring bus twice. </p>
+<p><img src="/img/12-Interconnection-Network/4.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Mesh"><a href="#Mesh" class="headerlink" title="Mesh"></a>Mesh</h2><ol>
+<li><p>This is a direct network. It echoes locality in grid-based applications. </p>
+</li>
+<li><p>The cost is $O(N)$, and the average latency is $O(\sqrt{N})$. </p>
+</li>
+<li><p>It is easy to lay out on chip since all links have a fixed-length. </p>
+</li>
+<li><p>Path diversity: many ways for message to travel from one node to another</p>
+<p><img src="/img/12-Interconnection-Network/5.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Torus"><a href="#Torus" class="headerlink" title="Torus"></a>Torus</h2><ol>
+<li><p>Characteristics of node in mesh topology are different based on whether node is near edge or middle of network. Torus topology introduces new links to avoid this problem. </p>
+</li>
+<li><p>In torus topology, each row or each column forms a ring by adding a new link to connect the two nodes on the edge. </p>
+</li>
+<li><p>Its cost is still $O(N)$, but higher than 2D mesh. It also has higher path diversity and bisection bandwidth than mesh. </p>
+</li>
+<li><p>However, it has higher complexity and is difficult to layout on chip since its unequal link lengths. </p>
+</li>
+<li><p>Folded torus interleaving rows and columns to eliminate need for long connections. All connections are doubled in length. </p>
+<p><img src="/img/12-Interconnection-Network/6.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><ol>
+<li><p>This is a planar, hierarchical topology. Like mesh/torus, it performs good when traffic has locality. </p>
+</li>
+<li><p>The latency is $O(logN)$</p>
+</li>
+<li><p>In tree routing, if the signal need to go upward, there is only one option. If the signal need to go downward, we can use $0$ to mark go left while $1$ to mark go right.<br>Everytime, the signal will go upward first until have a common ancestor, then it will go downward.<br>If the tree is a complete tree and we assign numbers to the nodes accroding to their inorder traversal starting from zero, then the way to each node from root node is the binary code of the number. </p>
+</li>
+<li><p>Fat tree increases bandwidth between nodes as move upward. It can alleviate root bandwidth problem with higher bandwidth links near root. </p>
+</li>
+<li><p>The number of wires is the same to the height of the subtree. So the bisection bandwidth of fat tree is $O(N)$. </p>
+</li>
+<li><p>The fat tree routing is similar to tree routing, but randomly choose when multiple links possible. </p>
+</li>
+<li><p>Constant-width fat tree (folded clos network): All nodes fixed degree, which makes the hardware design simpler. This is used in Infiniband networks. </p>
+<p><img src="/img/12-Interconnection-Network/7.png" width="30%"><img src="/img/12-Interconnection-Network/8.png" width="30%"><img src="/img/12-Interconnection-Network/9.png" width="30%"></p>
+</li>
+</ol>
+<h2 id="Hypercube"><a href="#Hypercube" class="headerlink" title="Hypercube"></a>Hypercube</h2><ol>
+<li><p>It has a low latency of $O(logN)$. Its number of links is $O(NlogN)$. </p>
+</li>
+<li><p>6D hypercube used in 64-core Cosmic Cube computer developed at Caltech in the 80s. </p>
+</li>
+<li><p>If the address of two nodes only differs by one bit, then there is a link connecting them.<br>So is we want to go from address A to address B, we just do it one bit a time. </p>
+</li>
+<li><p>The problem is that we cannot pack more dimensions to 3D that exists. To implement a higher dimension cube, we need to put enough wires in to make it work. But as we scale up more and more, the wires becomes so much that doesn’t layout well. </p>
+<p><img src="/img/12-Interconnection-Network/10.png" width="40%"></p>
+</li>
+</ol>
+<h2 id="Multi-stage-logarithmic"><a href="#Multi-stage-logarithmic" class="headerlink" title="Multi-stage logarithmic"></a>Multi-stage logarithmic</h2><ol>
+<li><p>It is an indirect network with multiple switches between terminals. </p>
+</li>
+<li><p>The cost is $O(NlogN)$ while the latency is $O(logN)$. </p>
+</li>
+<li><p>It has many variations: Omega, butterfly, Clos networks, etc. </p>
+</li>
+<li><p>In the topology shown below, each switch has two output wires. In the routing, if 0 stands for up and 1 for down, we can also routing according to the binary code of the number of targeting node.<br>Here up means that we will take the upper wire, and down means that we will take the lower wire. They don’t always means going up or going down. </p>
+<p><img src="/img/12-Interconnection-Network/11.png" width="40%"></p>
+</li>
+</ol>
+<h1 id="Buffering-and-flow-control"><a href="#Buffering-and-flow-control" class="headerlink" title="Buffering and flow control"></a>Buffering and flow control</h1><ol>
+<li>Circuit switching sets up a full path (acquires all resources) between sender and receiver prior to sending a message. It has higher bandwidth transmission.<br>It has no per-packet link management overhead, but does incur overhead to set up/tear down path. And reserving links can result in low utilization. </li>
+<li>Packet switching makes routing decisions per packet. It has an opportunity to use link for a packet whenever link is idle.<br>It has overhead due to dynamic switching logic during transmission, but no setup/tear down overhead. </li>
+<li>The granularity of communication from larger to miner is message, packet and flit<br>Message is the unit of transfer between network clients, and can be transmitted using many packets.<br>Packet is the unit of transfer for network, and can be transmitted using multiple flits.<br>Flit (flow control digit) is a unit of flow control in the network. Packets broken into flits. </li>
+<li>A packet consists of header, payload/body and tail.<br>Header contains routing and control information, and is at start of packet to router can start forwarding early.<br>Payload/body contains the data to be sent.<br>Tail contains control information, like error code, and is generally located at end of packet so it can be generated “on the way out”. </li>
+<li>When two packets need to be routed onto the same outbound link at the same time, contention is occurred. There are three options buffer one packet and send it over link later, drop one packet, or reroute one packet (deflection). </li>
+</ol>
+<h2 id="Circuit-switched-routing"><a href="#Circuit-switched-routing" class="headerlink" title="Circuit-switched routing"></a>Circuit-switched routing</h2><ol>
+<li>Main idea: pre-allocate all resources (links across multiple switches) along entire network path for a message (“setup a flow”)</li>
+<li>Costs:<br>Needs setup phase (“probe”) to set up the path (and to tear it down and release<br>the resources when message complete)<br>Lower link utilization. Transmission of two messages cannot share same link (even if some resources on a preallocated path are no longer utilized during a transmission)</li>
+<li>Benefits:<br>No contention during transmission due to preallocation, so no need for buffering<br>Arbitrary message sizes (once path is set up, send data until done)</li>
+</ol>
+<h2 id="Packet-based-flow-control"><a href="#Packet-based-flow-control" class="headerlink" title="Packet-based flow control"></a>Packet-based flow control</h2><ol>
+<li>Store-and-forward: Packet copied entirely into network switch before moving to next node, which requires buffering for entire packet in each router</li>
+<li>Flow control unit is an entire packet. Different packets from the same message can take different routes, but all data in a packet is transmitted over the same route</li>
+<li>Store-and-forward has high per-packet latency. Its latency $=$ packet transmission time on link $\times$ network distance)</li>
+<li>Cut-through flow control: Switch starts forwarding data on next link as soon as packet header is received, since header determines how much link bandwidth packet requires and where to route. </li>
+<li>Cut-through flow control reduces transmission latency and reduces to store-and-forward under high contention. </li>
+<li>The latency of cut-through flow control is header transmission time $\times$ network distance $+$ rest packet transmission time on one link $\simeq$ network distance $+$ number of packets. </li>
+<li>The difference between store-and-forward and cut-through is whether we parallel the transmission of header and the rest of the packet. </li>
+<li>In cut-through flow control, if output link is blocked (cannot transmit head), transmission of tail can continue. So the switch need to store more data before it can transmit and delete them, which requires switches to have buffering for entire packet, just like store-and-forward.<br>The worst case is that entire message is absorbed into a buffer in a switch, namely cut-through flow control degenerates to store-and-forward in this case. </li>
+</ol>
+<h2 id="Wormhole-flow-contorl"><a href="#Wormhole-flow-contorl" class="headerlink" title="Wormhole flow contorl"></a>Wormhole flow contorl</h2><ol>
+<li>Routing information only in head flit, body flits follows head, and tail flit flows body. It looks like that all flits moves to their next switch simultaneously. If head flit blocks, rest of packet stops. </li>
+<li>Its latency $=$ header transmission time $\times$</li>
+<li>Head-of-line blocking problem: The route of the head flit of one packet is free, but blocked behind flit of another packet in buffer while that packet is blocked waiting for a busy link. </li>
+<li>Virtual channel flow control: Multiplex multiple operations over single physical channel, and divide switch’s input buffer into multiple buffers sharing a single physical channel. </li>
+<li>Virtual channel reduces head-of-line blocking.<br>It can break cyclic dependency of resources by ensuring requests and responses use different virtual channels to avoid deadlock.<br>Also, it provided quality-of-service guarantees. Some virtual channels have higher priority than others</li>
+<li>“Escape” virtual channels: retain at least one virtual channel that uses deadlock-free routing</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/10/11-Memory-Consistency/" rel="prev" title="11. Memory Consistency">
+      <i class="fa fa-chevron-left"></i> 11. Memory Consistency
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/16/13-Implementing-Synchronization/" rel="next" title="13. Implementing Synchronization">
+      13. Implementing Synchronization <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Interconnection"><span class="nav-number">1.</span> <span class="nav-text">Interconnection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminology"><span class="nav-number">1.1.</span> <span class="nav-text">Terminology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-issues"><span class="nav-number">1.2.</span> <span class="nav-text">Design issues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties-of-interconnect-topology"><span class="nav-number">1.3.</span> <span class="nav-text">Properties of interconnect topology</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interconnect-topologies"><span class="nav-number">2.</span> <span class="nav-text">Interconnect topologies</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bus"><span class="nav-number">2.1.</span> <span class="nav-text">Bus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crossbar"><span class="nav-number">2.2.</span> <span class="nav-text">Crossbar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ring"><span class="nav-number">2.3.</span> <span class="nav-text">Ring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mesh"><span class="nav-number">2.4.</span> <span class="nav-text">Mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Torus"><span class="nav-number">2.5.</span> <span class="nav-text">Torus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">2.6.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hypercube"><span class="nav-number">2.7.</span> <span class="nav-text">Hypercube</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-stage-logarithmic"><span class="nav-number">2.8.</span> <span class="nav-text">Multi-stage logarithmic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Buffering-and-flow-control"><span class="nav-number">3.</span> <span class="nav-text">Buffering and flow control</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Circuit-switched-routing"><span class="nav-number">3.1.</span> <span class="nav-text">Circuit-switched routing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Packet-based-flow-control"><span class="nav-number">3.2.</span> <span class="nav-text">Packet-based flow control</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wormhole-flow-contorl"><span class="nav-number">3.3.</span> <span class="nav-text">Wormhole flow contorl</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>

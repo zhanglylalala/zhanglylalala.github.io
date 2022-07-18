@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://http://www.laughingtree.cn').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Implementing locks Three phases of a synchronization event：Acquire method: How a thread attempts to gain access to protected resource?Waiting algorithm: How a thread waits for access to be granted to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13. Implementing Synchronization">
+<meta property="og:url" content="http://http//www.laughingtree.cn/2022/07/16/13-Implementing-Synchronization/index.html">
+<meta property="og:site_name" content="LaughingTree">
+<meta property="og:description" content="Implementing locks Three phases of a synchronization event：Acquire method: How a thread attempts to gain access to protected resource?Waiting algorithm: How a thread waits for access to be granted to">
+<meta property="article:published_time" content="2022-07-16T03:05:13.000Z">
+<meta property="article:modified_time" content="2022-07-17T03:21:32.365Z">
+<meta property="article:author" content="LiyunZhang">
+<meta property="article:tag" content="并行计算与分布式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://http//www.laughingtree.cn/2022/07/16/13-Implementing-Synchronization/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>13. Implementing Synchronization | LaughingTree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LaughingTree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">33</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://http//www.laughingtree.cn/2022/07/16/13-Implementing-Synchronization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiyunZhang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LaughingTree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          13. Implementing Synchronization
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-07-16 11:05:13" itemprop="dateCreated datePublished" datetime="2022-07-16T11:05:13+08:00">2022-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-07-17 11:21:32" itemprop="dateModified" datetime="2022-07-17T11:21:32+08:00">2022-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学与技术</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-CMU-15-418-Stanford-CS149/" itemprop="url" rel="index">
+                    <span itemprop="name">并行计算 (CMU 15-418 / Stanford CS149)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Implementing-locks"><a href="#Implementing-locks" class="headerlink" title="Implementing locks"></a>Implementing locks</h1><ol>
+<li>Three phases of a synchronization event：<br>Acquire method: How a thread attempts to gain access to protected resource?<br>Waiting algorithm: How a thread waits for access to be granted to shared resource?<br>Release method: How thread enables other threads to gain resource when its work in the synchronized region is complete? </li>
+<li>Busy waiting (spinning): <code>while (condition X not true) ;</code></li>
+<li>Blocking synchronization: <code>if (condition X not true) block until true;</code><br>If progress cannot be made because a resource cannot be acquired, it is desirable to free up execution resources for another thread and preempt the running thread.</li>
+<li>Busy-waiting can be preferable to blocking if scheduling overhead is larger than expected wait time or processor’s resources are not needed for other tasks.<br>The later situation is often the case in a parallel program since we usually don’t oversubscribe a system when running a performance-critical parallel app</li>
+<li>Desirable lock performance characteristics:<br><strong>Low latency</strong>: If lock is free and no other processors are trying to acquire it, a processor should be able to acquire the lock quickly<br><strong>Low interconnect traffic</strong>: If all processors are trying to acquire lock at once, they should acquire the lock in succession with as little traffic as possible<br><strong>Scalability</strong>: Latency / traffic should scale reasonably with number of processors<br><strong>Low storage cost</strong><br><strong>Fairness</strong>: Avoid starvation or substantial unfairness. One ideal is that processors should acquire lock in the order they request access to it</li>
+</ol>
+<h2 id="Test-and-set-lock"><a href="#Test-and-set-lock" class="headerlink" title="Test-and-set lock"></a>Test-and-set lock</h2><h3 id="Simple-test-and-set-lock"><a href="#Simple-test-and-set-lock" class="headerlink" title="Simple test-and-set lock"></a>Simple test-and-set lock</h3><ol>
+<li>The following spin lock has data race because LOAD-TEST-STORE is not atomic. <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Lock</span><br><span class="line">ld   R0, mem[addr]  &#x2F;&#x2F; load word into R0</span><br><span class="line">cmp  R0, #0          &#x2F;&#x2F; compare R0 to 0</span><br><span class="line">bnz  lock            &#x2F;&#x2F; if nonzero jump to top</span><br><span class="line">st   mem[addr], #1  &#x2F;&#x2F; set lock to 1</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Unlock</span><br><span class="line">st   mem[addr], #0  &#x2F;&#x2F; set lock to 0</span><br></pre></td></tr></table></figure></li>
+<li>So we need an atomic test-and-set instruction<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ts R0, mem[addr]  &#x2F;&#x2F; load mem[addr] into R0</span><br><span class="line">                  &#x2F;&#x2F; if mem[addr] is 0, set mem[addr] to 1</span><br><span class="line">                  </span><br><span class="line">&#x2F;&#x2F; Lock</span><br><span class="line">ts   R0, mem[addr]  &#x2F;&#x2F; load word into R0</span><br><span class="line">bnz  R0, lock        &#x2F;&#x2F; if nonzero jump to top</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Unlock</span><br><span class="line">st   mem[addr], #0  &#x2F;&#x2F; store 0 to address</span><br></pre></td></tr></table></figure></li>
+<li>Everytime a processor execute the <code>ts</code> instruction will send a BusRdX signal and invalidate the lock in all other processor’s cache. When there are many processors trying to execute on the same lock, the coherence traffic may be heavy.<br>This lock generates one invalidation per waiting processor per test. </li>
+<li>Bus contention increases amount of time to transfer lock since lock holder must wait to acquire bus to release. Bus contention also slows down execution of critical section. </li>
+<li>In x86, we can do the atomic compare and exchange by <code>lock cmpxchg src, dst</code> instruction. The <code>lock</code> prefix makes the operation atomic. The logic of the instruction is as followed: <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (dst == %eax)  <span class="comment">// eax is the x86 accumulator register</span></span><br><span class="line">  ZF = <span class="number">1</span>          <span class="comment">// ZF is a flag registor</span></span><br><span class="line">dst = src <span class="keyword">else</span></span><br><span class="line">  ZF = <span class="number">0</span></span><br><span class="line">  %eax = dst</span><br></pre></td></tr></table></figure></li>
+<li>Simple test-and-set lock has low latency (under low contention), high traffic, poor scaling, low storage cost (one int), no provisions for fairness. </li>
+</ol>
+<h3 id="Test-and-set-lock-with-back-off"><a href="#Test-and-set-lock-with-back-off" class="headerlink" title="Test-and-set lock with back off"></a>Test-and-set lock with back off</h3><ol>
+<li><p>Upon failure to acquire lock, delay for awhile before retrying. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Lock</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* lock)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> amount = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (test_and_set(lock) == <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    delay(amount);</span><br><span class="line">    amount *= <span class="number">2</span>;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>It has the same uncontended latency as test-and-set, but potentially higher latency under contention due to that the waiting processor may be still in delaying even when the lock is available. </p>
+</li>
+<li><p>It Generates less traffic than test-and-set since it is not continually attempting to acquire lock. It improves scalability due to less traffic. </p>
+</li>
+<li><p>Storage cost unchanged (still one int for lock)</p>
+</li>
+<li><p>Exponential back-off can cause severe unfairness. Newer requesters back off for shorter intervals</p>
+</li>
+</ol>
+<h3 id="Test-and-test-and-set-lock"><a href="#Test-and-test-and-set-lock" class="headerlink" title="Test-and-test-and-set lock"></a>Test-and-test-and-set lock</h3><ol>
+<li><p>To prevent the coherence traffic problem, we can test first and do the test-and-set only if the earlier test has passed. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Lock</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* lock)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (*lock != <span class="number">0</span>) ;</span><br><span class="line">    <span class="keyword">if</span> (test_and_set(lock) == <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Unlock</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span>* lock)</span> </span>&#123;</span><br><span class="line">  *lock = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>This lock has slightly higher latency than test-and-set in uncontended case, but generates much less interconnect traffic. Only One invalidation is generated per waiting processor per lock release.<br>Namely, only $O(P)$ invalidation and $O(P^2)$ interconnect traffic. </p>
+</li>
+<li><p>It is more scalable due to less traffic, storage cost unchanged (still one int), and still no provisions for fairness. </p>
+</li>
+</ol>
+<h2 id="Ticket-lock"><a href="#Ticket-lock" class="headerlink" title="Ticket lock"></a>Ticket lock</h2><ol>
+<li>The test-and-set style locks cannot provide for fairness because all waiting processors attempt to acquire lock using test-and-set upon release. </li>
+<li>We can assign each thread a number when they try to acquire the lock. And everytime, we give the lock to the waiting thread with smallest number. <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lock</span> &#123;</span></span><br><span class="line">  <span class="keyword">volatile</span> <span class="keyword">int</span> next_ticket;</span><br><span class="line">  <span class="keyword">volatile</span> <span class="keyword">int</span> now_serving;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Lock</span><span class="params">(lock* lock)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> my_ticket = atomic_increment(&amp;lock-&gt;next_ticket);  <span class="comment">// take a “ticket”</span></span><br><span class="line">  <span class="keyword">while</span> (my_ticket != lock-&gt;now_serving);                <span class="comment">//wait for number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">(lock* lock)</span> </span>&#123;</span><br><span class="line">  lock-&gt;now_serving++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>There is no atomic operation needed to acquire the lock. Only a read is needed when acquiring the lock, and write only happens when the lock is released. So only one invalidation is generated per lock release, namely $O(P)$ interconnect traffic. </li>
+</ol>
+<h2 id="Array-based-lock"><a href="#Array-based-lock" class="headerlink" title="Array-based lock"></a>Array-based lock</h2><ol>
+<li><p>Each processor spins on a different memory address. And utilizes atomic operation to assign address on attempt to acquire.<br>If there are two barriers, after some threads passed the first barrier, they might set the <code>flag</code> to 0 even if some other threads haven’t passed the first barrier yet causing those slower threads waiting. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lock</span> &#123;</span></span><br><span class="line">  <span class="keyword">volatile</span> padded_int status[P];  <span class="comment">// padded to keep off same cache line</span></span><br><span class="line">  <span class="keyword">volatile</span> <span class="keyword">int</span> head;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> my_element;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Lock</span><span class="params">(lock* lock)</span> </span>&#123;</span><br><span class="line">  my_element = atomic_circ_increment(&amp;lock-&gt;head);  <span class="comment">// assume modular increment </span></span><br><span class="line">  <span class="keyword">while</span> (lock-&gt;status[my_element] == <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">(lock* lock)</span> </span>&#123;</span><br><span class="line">  lock-&gt;status[my_element] = <span class="number">1</span>;</span><br><span class="line">  lock-&gt;status[circ_next(my_element)] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>The lock only requires $O(1)$ interconnect traffic per release, but requires space linear in $O(P)$. </p>
+</li>
+<li>The atomic circular increment is a more complex operation. So the lock has a higher overhead. </li>
+<li>Queue-based Lock (MCS lock): Create a queue of waiters. Each thread allocates a local space on which to wait. </li>
+</ol>
+<h1 id="Implementing-barrier"><a href="#Implementing-barrier" class="headerlink" title="Implementing barrier"></a>Implementing barrier</h1><ol>
+<li>The following code uses <code>counter</code> to count how many threads have hit the barrier. The last thread hit the barrier wil release all of them. <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Barrier_t</span> &#123;</span></span><br><span class="line">   LOCK lock;</span><br><span class="line">  <span class="keyword">int</span> counter;  <span class="comment">// initialize to 0</span></span><br><span class="line">  <span class="keyword">int</span> flag;      <span class="comment">// the flag field should probably be padded to </span></span><br><span class="line">                <span class="comment">// sit on its own cache line. </span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// barrier for p processors</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Barrier</span><span class="params">(Barrier_t* b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">  lock(b-&gt;lock);</span><br><span class="line">  <span class="keyword">if</span> (b-&gt;counter == <span class="number">0</span>) &#123;</span><br><span class="line">    b-&gt;flag = <span class="number">0</span>; <span class="comment">// first thread arriving at barrier clears flag </span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> num_arrived = ++(b-&gt;counter);</span><br><span class="line">  unlock(b-&gt;lock);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (num_arrived == p) &#123; <span class="comment">// last arriver sets flag b-&gt;counter = 0;</span></span><br><span class="line">    b-&gt;flag = <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (b-&gt;flag == <span class="number">0</span>); <span class="comment">// wait for flag</span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>To solve the problem, we should wait for all processes to leave first barrier, before clearing flag for entry into the second<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Centralized barrier</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Barrier_t</span> &#123;</span></span><br><span class="line">  LOCK lock;</span><br><span class="line">  <span class="keyword">int</span> arrive_counter;  <span class="comment">// initialize to 0 (number of threads that have arrived)</span></span><br><span class="line">  <span class="keyword">int</span> leave_counter;  <span class="comment">// initialize to P (number of threads that have left barrier)</span></span><br><span class="line">  <span class="keyword">int</span> flag;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// barrier for p processors</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Barrier</span><span class="params">(Barrier_t* b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">  lock(b-&gt;lock);</span><br><span class="line">  <span class="keyword">if</span> (b-&gt;arrive_counter == <span class="number">0</span>) &#123;   <span class="comment">// if first to arrive...</span></span><br><span class="line">    <span class="keyword">if</span> (b-&gt;leave_counter == P) &#123;  <span class="comment">// check to make sure no other threads “still in barrier”</span></span><br><span class="line">      b-&gt;flag = <span class="number">0</span>;               <span class="comment">// first arriving thread clears flag</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      unlock(lock);</span><br><span class="line">      <span class="keyword">while</span> (b-&gt;leave_counter != P);  <span class="comment">// wait for all threads to leave before clearing</span></span><br><span class="line">      lock(lock);</span><br><span class="line">      b-&gt;flag = <span class="number">0</span>;                <span class="comment">// first arriving thread clears flag</span></span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> num_arrived = ++(b-&gt;arrive_counter);</span><br><span class="line">  unlock(b-&gt;lock);</span><br><span class="line">  <span class="keyword">if</span> (num_arrived == p) &#123;  <span class="comment">// last arriver sets flag</span></span><br><span class="line">    b-&gt;arrive_counter = <span class="number">0</span>;</span><br><span class="line">    b-&gt;leave_counter = <span class="number">1</span>;</span><br><span class="line">    b-&gt;flag = <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (b-&gt;flag == <span class="number">0</span>);  <span class="comment">// wait for flag</span></span><br><span class="line">    lock(b-&gt;lock);</span><br><span class="line">    b-&gt;leave_counter++;</span><br><span class="line">    unlock(b-&gt;lock);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>We can save one variable by sense reversal. Processors wait for flag to be equal to local sense. <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Barrier_t</span> &#123;</span></span><br><span class="line">  LOCK lock;</span><br><span class="line">  <span class="keyword">int</span> counter; <span class="comment">// initialize to 0</span></span><br><span class="line">  <span class="keyword">int</span> flag; <span class="comment">// initialize to 0</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> local_sense = <span class="number">0</span>;  <span class="comment">// private per processor</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// barrier for p processors</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Barrier</span><span class="params">(Barrier_t* b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">  local_sense = (local_sense == <span class="number">0</span>) ? <span class="number">1</span> : <span class="number">0</span>; lock(b-&gt;lock);</span><br><span class="line">  <span class="keyword">int</span> num_arrived = ++(b-&gt;counter);</span><br><span class="line">  <span class="keyword">if</span> (b-&gt;counter == p) &#123; <span class="comment">// last arriver sets flag</span></span><br><span class="line">    unlock(b-&gt;lock);</span><br><span class="line">    b-&gt;counter = <span class="number">0</span>;</span><br><span class="line">    b-&gt;flag = local_sense;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    unlock(b-&gt;lock);</span><br><span class="line">    <span class="keyword">while</span> (b-&gt;flag != local_sense); <span class="comment">// wait for flag</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>There are $O(P)$ traffic on interconnect per barrier.<br>All threads have $2P$ write transactions to obtain barrier lock and update counter. $O(P)$ traffic assuming lock acquisition is implemented in $O(1)$ manner<br>Last thread has $2$ write transactions to write to the flag and reset the counter. $O(P)$ traffic since there are many sharers of the flag<br>$P-1$ transactions to read updated flag</li>
+<li>In centralized barrier, all threads share single barrier lock and counter, which causes high contention. </li>
+<li>Combining trees make better use of parallelism in interconnect topologies, which has $logP$ span (latency). This strategy makes less sense on a bus where all traffic still serialized on single shared bus.<br>Barrier acquire: when processor arrives at barrier, performs increment of parent counter. Process recurses to root.<br>Barrier release: beginning from root, notify children of release</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 并行计算与分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/13/12-Interconnection-Network/" rel="prev" title="12. Interconnection Network">
+      <i class="fa fa-chevron-left"></i> 12. Interconnection Network
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/17/14-Fine-grained-Synchronization-and-Lock-free-Programming/" rel="next" title="14. Fine-grained Synchronization and Lock-free Programming">
+      14. Fine-grained Synchronization and Lock-free Programming <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementing-locks"><span class="nav-number">1.</span> <span class="nav-text">Implementing locks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-and-set-lock"><span class="nav-number">1.1.</span> <span class="nav-text">Test-and-set lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simple-test-and-set-lock"><span class="nav-number">1.1.1.</span> <span class="nav-text">Simple test-and-set lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-set-lock-with-back-off"><span class="nav-number">1.1.2.</span> <span class="nav-text">Test-and-set lock with back off</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-test-and-set-lock"><span class="nav-number">1.1.3.</span> <span class="nav-text">Test-and-test-and-set lock</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ticket-lock"><span class="nav-number">1.2.</span> <span class="nav-text">Ticket lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-based-lock"><span class="nav-number">1.3.</span> <span class="nav-text">Array-based lock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementing-barrier"><span class="nav-number">2.</span> <span class="nav-text">Implementing barrier</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiyunZhang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">LiyunZhang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyun Zhang</span>
+</div>
+<div class="BbeiAn-info">
+       浙ICP备 -
+    <a target="_blank" href="http://www.miitbeian.gov.cn/" style="color:#ffffff"  rel="nofollow">19047088号-1</a> <!--a标签中增加nofollow属性，避免爬虫出站。-->|
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011802001835" style="color:#ffffff;text-decoration:none;padding-left:30px;background:url(https://s1.ax1x.com/2018/09/29/ilmwIH.png) no-repeat left center" rel="nofollow">浙公网安备 33011802001835号</a>      <!--这里将图标作为了背景，以使得能和后面的文字在同一行-->
+
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
